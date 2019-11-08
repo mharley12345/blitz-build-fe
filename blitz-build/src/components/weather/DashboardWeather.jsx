@@ -28,16 +28,35 @@ const WeatherIcon = styled.div`
 `;
 function DashboardWeather() {
   const [weatherData, setWeatherData] = useState();
+  const [currentPosition, setCurrentPosition] = useState({latitude:0,longitude:0});
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position)
+        setCurrentPosition({latitude: position.coords.latitude, longitude:position.coords.longitude})
+      })
+    } else {
+      console.log("geolocation is not supported");
+    }
+  },[])
+
+
   useEffect(() => {
     const api_key = "425ccdff13ee9871b8d3b2ad4fb9632f";
-    axios
-      .get(
-        `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${api_key}/37.8267,-122.4233`
-      )
-      .then(res => {
-        setWeatherData(res.data);
-      });
-  }, []);
+    if (currentPosition.latitude!==0) {
+     axios
+        .get(
+          `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${api_key}/${currentPosition.latitude},${currentPosition.longitude}`
+        )
+        .then(res => {
+          setWeatherData(res.data);
+        }).catch(err => {
+          console.log(err)
+        })
+  }
+  }, [currentPosition]);
+
   console.log(weatherData);
 
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
