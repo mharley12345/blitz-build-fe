@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
+
 const WeatherContainer = styled.div`
   width: 380px;
   height: 239px;
@@ -26,6 +27,12 @@ font-size:60px;
 const WeatherIcon = styled.div`
   width: 50%;
 `;
+
+const IconImage = styled.img`
+width:100px;
+height:100px;
+
+`
 function DashboardWeather() {
   const [weatherData, setWeatherData] = useState();
   const [currentPosition, setCurrentPosition] = useState({latitude:0,longitude:0});
@@ -34,7 +41,8 @@ function DashboardWeather() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position)
-        setCurrentPosition({latitude: position.coords.latitude, longitude:position.coords.longitude})
+        setCurrentPosition({ latitude: position.coords.latitude, longitude: position.coords.longitude })
+       
       })
     } else {
       console.log("geolocation is not supported");
@@ -43,8 +51,8 @@ function DashboardWeather() {
 
 
   useEffect(() => {
-    const api_key = "425ccdff13ee9871b8d3b2ad4fb9632f";
-    if (currentPosition.latitude!==0) {
+    const api_key = process.env.REACT_APP_DARKSKY_WEATHER_SECRET_KEY;
+    if (currentPosition.latitude !== 0) {
      axios
         .get(
           `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${api_key}/${currentPosition.latitude},${currentPosition.longitude}`
@@ -58,7 +66,7 @@ function DashboardWeather() {
   }, [currentPosition]);
 
   console.log(weatherData);
-
+  function setTime() {
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const d = new Date();
   const day = days[d.getDay()];
@@ -70,12 +78,22 @@ function DashboardWeather() {
     ampm='pm'
   }
 
-  const minute = d.getMinutes();
+    const minute = d.getMinutes();
+    return `${day}, ${hour}:${("0" +minute).slice(-2)} ${ampm}`
+  }
+  
+  function getWeatherIcon() {
+    var weatherIcon = <IconImage src="weatherIcons/streamline-icon-weather-clouds@24x24.png" alt="cloudy"/>
+    return weatherIcon
+  }
+
+
   return (
     <WeatherContainer>
+      
       <WeatherLocationInfo>
-        <h2>Location</h2>
-        <p>{day}, {hour}:{minute} {ampm}</p>
+        <h2>Current Location</h2>
+        <p>{setTime()}</p>
       </WeatherLocationInfo>
 
       {weatherData ? (
@@ -90,7 +108,10 @@ function DashboardWeather() {
               <span>&#37;</span>
             </p>
           </WeatherData>
-          <WeatherIcon>{weatherData.currently.icon}</WeatherIcon>{" "}
+          <WeatherIcon>
+            {/* {weatherData.currently.icon} */}
+            {getWeatherIcon()}
+          </WeatherIcon>
         </WeatherInfo>
       ) : null}
     </WeatherContainer>
