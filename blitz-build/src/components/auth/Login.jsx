@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom"
 
+import DashboardWeater from '../weather/DashboardWeather.jsx'
+
 function Login() {
   return (
     <div>
@@ -13,6 +15,7 @@ function Login() {
         <input placeholder="••••••••" />
         <button>Log in</button>
       </form>
+      <DashboardWeater />
     </div>
   );
 }
