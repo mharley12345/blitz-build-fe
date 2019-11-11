@@ -9,7 +9,7 @@ const Login = props => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      props.history.push("/dashboard");
+      props.history.push("/projects");
     } else {
       console.log("no token");
     }
@@ -30,7 +30,7 @@ const Login = props => {
         localStorage.setItem("uid", res.data.userObj.user.uid);
         localStorage.setItem("token", res.data.token);
 
-        props.history.push("/dashboard");
+        props.history.push("/projects");
       })
       .catch(err => {
         console.log(err);
