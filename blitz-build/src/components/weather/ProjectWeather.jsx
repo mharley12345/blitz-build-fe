@@ -36,6 +36,7 @@ const IconImage = styled.img`
   width: 100px;
   height: 100px;
 `;
+
 function ProjectWeather(props) {
   const [weatherData, setWeatherData] = useState();
   const [projectPosition, setProjectPosition] = useState({latitude: props.latitude,longitude:props.longitude});
