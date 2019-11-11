@@ -5,6 +5,8 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import NavBar from "./components/NavBar";
 import Dashboard from "./components/dashboard/index";
+import Tasks from './views/tasks/Tasks'
+
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 function App() {
@@ -57,6 +59,7 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/tasks" component={Tasks} />
       </Switch>
     </Router>
   );
