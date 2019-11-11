@@ -14,8 +14,8 @@ const Projects = props => {
         project
       )
       .then(res => {
-        console.log(res);
         const projectArray = Object.values(res.data.projects);
+        console.log(projectArray);
         setProject(projectArray);
       });
   }, []);
