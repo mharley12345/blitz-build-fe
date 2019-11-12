@@ -3,7 +3,7 @@ import React, { useState} from 'react'
 //components
 import SortBtn from './SortBtn'
 import Modal from '../../global/Modal'
-import AddTask from '../AddTask'
+import AddTask from '../TaskForm'
 
 //styles
 import styled from 'styled-components'
@@ -30,7 +30,11 @@ export default function TaskNav() {
         <taskNavStyle>
             <SortBtn/>
             <button onClick ={ handleModalOpen }>add</button>
-            <Modal visible={ modalStatus } dismiss={ handleModalClose } component={ <AddTask closeModal={handleModalClose}/> }/>
+            <Modal 
+                visible={ modalStatus } 
+                dismiss={ handleModalClose } 
+                component={ <AddTask closeModal={handleModalClose}/> }
+            />
         </taskNavStyle>
     )
 }
