@@ -1,7 +1,6 @@
-/* this is a comment */
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import AddProject from "../modal/AddProject";
 
 const Projects = props => {
   const [project, setProject] = useState([]);
@@ -14,9 +13,13 @@ const Projects = props => {
         project
       )
       .then(res => {
+        console.log(res);
         const projectArray = Object.values(res.data.projects);
         console.log(projectArray);
         setProject(projectArray);
+      })
+      .catch(err => {
+        console.log(err);
       });
   }, []);
 
@@ -33,6 +36,8 @@ const Projects = props => {
           <p>{project.project_name}</p>
         </div>
       ))}
+
+      <AddProject />
     </div>
   );
 };

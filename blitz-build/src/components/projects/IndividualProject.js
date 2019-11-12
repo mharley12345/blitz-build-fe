@@ -7,12 +7,14 @@ const IndividualProject = props => {
   useEffect(() => {
     const uid = localStorage.getItem("uid");
     const projectID = props.match.params.id;
+    localStorage.setItem("project_id", props.match.params.id);
     axios
       .get(
-        `https://api-blitz-build-dev.herokuapp.com/api/auth/${uid}/projects/${projectID}/tasks`,
+        `https://api-blitz-build-dev.herokuapp.com/api/auth/${projectID}/tasks`,
         projectTasks
       )
       .then(res => {
+        console.log(res);
         const tasksArray = Object.values(res.data);
         console.log(tasksArray);
         setProjectTasks(tasksArray);
