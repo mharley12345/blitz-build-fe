@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import NavBar from "./components/NavBar";
-import Dashboard from "./components/dashboard/index";
+import Dashboard from "./components/dashboard/Dashboard";
 import Projects from "./components/projects/Projects";
 import IndividualProject from "./components/projects/IndividualProject";
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
