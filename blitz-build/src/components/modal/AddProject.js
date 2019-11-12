@@ -8,11 +8,16 @@ import axios from "axios";
 
 export default function FormDialog() {
   const [form, setForm] = useState({
-    Project_Name: "",
-    Project_Address: "",
-    Beds: 0,
-    Baths: 0,
-    Square_Footage: 0,
+    projectID: "",
+    project_name: "",
+    street_address: "",
+    city: "",
+    state: "",
+    zip_code: "",
+    status: "",
+    beds: 0,
+    baths: 0,
+    square_ft: 0,
     Assign_Template: undefined,
     Project_Thumbnail: ""
   });
