@@ -53,19 +53,19 @@ const IconImage = styled.img`
   height: 100px;
 `;
 
-// for dashboard import <ProjectWeather usage="dashboard"/>
-// for project page import <ProjectWeather usage="project" location={} latitude={} longitude={} />
+// for dashboard import <Weather usage="dashboard" uid={}/>
+// for project page import <Weather usage="project" uid={} city={} latitude={} longitude={} />
 
-function ProjectWeather(props) {
+function Weather(props) {
   const [weatherData, setWeatherData] = useState();
-  const [projectPosition, setProjectPosition] = useState({
+  const [weatherPosition, setWeatherPosition] = useState({
     latitude: 0,
     longitude: 0
   });
 
   // get the latitude and longitude from the project page or navigator.geolocation.
   if (props.usage === "project") {
-    setProjectPosition({
+    setWeatherPosition({
       latitude: props.latitude,
       longitude: props.longitude
     });
@@ -73,7 +73,7 @@ function ProjectWeather(props) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         console.log(position);
-        setProjectPosition({
+        setWeatherPosition({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
         });
@@ -85,11 +85,11 @@ function ProjectWeather(props) {
 
   // get the weather data from backend.
   useEffect(() => {
-    if (projectPosition.latitude !== 0) {
+    if (weatherPosition.latitude !== 0) {
       axios
         .get(
           `http://api-blitz-build-dev.herokuapp.com/api/auth/${props.uid}/projects/${props.projectID}/weather`,
-          projectPosition
+          weatherPosition
         )
         .then(res => {
           setWeatherData(res.data);
@@ -98,7 +98,7 @@ function ProjectWeather(props) {
           console.log(err);
         });
     }
-  }, [projectPosition]);
+  }, [weatherPosition]);
 
   console.log(weatherData);
 
@@ -140,7 +140,7 @@ function ProjectWeather(props) {
         // display in project page
         <WeatherContainerP>
           <WeatherLocationInfo>
-            <h2>{props.location}</h2>
+            <h2>{props.city}</h2>
             <p>{setTime()}</p>
           </WeatherLocationInfo>
 
@@ -162,7 +162,7 @@ function ProjectWeather(props) {
         </WeatherContainerP>
       ) : (
           // display in dashboard
-          
+
         <WeatherContainerD>
           <WeatherLocationInfo>
             <h2>Current Location</h2>
@@ -190,4 +190,4 @@ function ProjectWeather(props) {
   );
 }
 
-export default ProjectWeather;
+export default Weather;
