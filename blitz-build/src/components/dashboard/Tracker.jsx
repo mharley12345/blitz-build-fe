@@ -3,13 +3,9 @@ import Circle from "react-circle";
 import styled from "styled-components";
 
 const ProgressContainer = styled.div`
-  position: absolute;
   width: 280px;
   height: 280px;
-  left: 1044px;
-  top: 338px;
-
-  background: #f1f1f1;
+  background: #fff;
 `;
 
 function Tracker(props) {
@@ -22,7 +18,7 @@ function Tracker(props) {
           lineWidth={14} // Number: Defines the thickness of the circle's stroke.
           progress={props.percentage} // Number: Update to change the progress and percentage.
           progressColor="#282828" // String: Color of "progress" portion of circle.
-          bgColor="#f1f1f1" // String: Color of "empty" portion of circle.
+          bgColor="#fff" // String: Color of "empty" portion of circle.
           textColor="#282828" // String: Color of percentage text color.
           textStyle={{
             font: "bold 60px Roboto" // CSSProperties: Custom styling for percentage.

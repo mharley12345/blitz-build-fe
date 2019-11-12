@@ -3,30 +3,33 @@
 import React from "react";
 import styled from "styled-components";
 
-import Global from './Global'
-import ActivityCard from './ActivityCard'
-import TasksCard from './TasksCard'
-import Weather from '../weather/Weather'
-import Tracker from './Tracker'
+// import NavBar from "../NavBar";
+import Global from "./Global";
+import ActivityCard from "./ActivityCard";
+import TasksCard from "./TasksCard";
+import Weather from "../weather/Weather";
+import Tracker from "./Tracker";
 
 function Dashboard() {
   return (
     <Container>
       <Global />
-      <Greeting>
-        <Title>Good morning Jameson,</Title>
-        <Subheading>Let's get building.</Subheading>
-      </Greeting>
-      <Columns>
-        <Column1>
-          <ActivityCard />
-          <TasksCard />
-        </Column1>
-        <Column2>
+
+        <Greeting>
+          <Title>Good morning Jameson,</Title>
+          <Subheading>Let's get building.</Subheading>
+        </Greeting>
+        <Columns>
+          <Column1>
+            <ActivityCard />
+            <TasksCard />
+          </Column1>
+          <Column2>
             <Tracker percentage={"95"} />
-            <Weather usage="dashboard"  uid={'iTSHTnTwLvPXtPlVdMo87AR1KXZ2'} />
-        </Column2>
-      </Columns>
+            <Weather usage="dashboard" uid={"iTSHTnTwLvPXtPlVdMo87AR1KXZ2"} />
+          </Column2>
+        </Columns>
+
     </Container>
   );
 }
@@ -37,12 +40,7 @@ const Container = styled.div`
   max-height: 100vh;
   display: flex;
   flex-direction: column;
-`;
-
-const Box = styled.div`
-  background: red;
-  display: flex;
-  justify-content: space-between;
+  margin-left: 225px;
 `;
 
 const Title = styled.h1`
