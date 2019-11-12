@@ -88,7 +88,7 @@ function Weather(props) {
     if (weatherPosition.latitude !== 0) {
       axios
         .get(
-          `http://api-blitz-build-dev.herokuapp.com/api/auth/${props.uid}/projects/${props.projectID}/weather`,
+          `http://api-blitz-build-dev.herokuapp.com/api/auth/${props.uid}/weather`,
           weatherPosition
         )
         .then(res => {
