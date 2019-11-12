@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Circle from "react-circle";
 import styled from "styled-components";
 
@@ -12,7 +12,7 @@ const ProgressContainer = styled.div`
   background: #f1f1f1;
 `;
 
-function ProgressBar(props) {
+function Tracker(props) {
     return (
       <ProgressContainer>
         <Circle
@@ -36,4 +36,4 @@ function ProgressBar(props) {
     );
 }
 
-export default ProgressBar
+export default Tracker
