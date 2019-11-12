@@ -2,16 +2,32 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-const WeatherContainer = styled.div`
+// css of the weather container in the dashboard
+const WeatherContainerD = styled.div`
   position: absolute;
-  width: 518px;
-  height: 252px;
-  left: 324px;
-  top: 750px;
-  border: 1px solid #d6d6d6;
-  background: #ffffff;
+  width: 444px;
+  height: 292px;
+  left: 961px;
+  top: 685px;
+
+  background: #fefefe;
+  border: 0.5px solid #282828;
   box-sizing: border-box;
-  border-radius: 3px;
+  border-radius: 1px;
+`;
+
+// css of the weather container in the project page
+const WeatherContainerP = styled.div`
+  position: absolute;
+  width: 400px;
+  height: 300px;
+  left: 936px;
+  top: 124px;
+
+  background: #fefefe;
+  border: 0.5px solid #282828;
+  box-sizing: border-box;
+  border-radius: 1px;
 `;
 const WeatherLocationInfo = styled.div`
   margin: 15px 35px;
@@ -37,28 +53,56 @@ const IconImage = styled.img`
   height: 100px;
 `;
 
+// for dashboard import <ProjectWeather usage="dashboard"/>
+// for project page import <ProjectWeather usage="project" location={} latitude={} longitude={} />
+
 function ProjectWeather(props) {
   const [weatherData, setWeatherData] = useState();
-  const [projectPosition, setProjectPosition] = useState({latitude: props.latitude,longitude:props.longitude});
+  const [projectPosition, setProjectPosition] = useState({
+    latitude: 0,
+    longitude: 0
+  });
 
-
-  useEffect(() => {
-    
-    axios
-      .get(
-        `http://api-blitz-build-dev.herokuapp.com/api/auth/${props.uid}/projects/${props.projectID}/weather`, projectPosition
-      )
-      .then(res => {
-        console.log(res);
-        setWeatherData(res.data);
-      })
-      .catch(err => {
-        console.log(err);
+  // get the latitude and longitude from the project page or navigator.geolocation.
+  if (props.usage === "project") {
+    setProjectPosition({
+      latitude: props.latitude,
+      longitude: props.longitude
+    });
+  } else if (props.usage === "dashboard") {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position);
+        setProjectPosition({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        });
       });
-    
-  }, []);
+    } else {
+      console.log("geolocation is not supported");
+    }
+  }
+
+  // get the weather data from backend.
+  useEffect(() => {
+    if (projectPosition.latitude !== 0) {
+      axios
+        .get(
+          `http://api-blitz-build-dev.herokuapp.com/api/auth/${props.uid}/projects/${props.projectID}/weather`,
+          projectPosition
+        )
+        .then(res => {
+          setWeatherData(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }, [projectPosition]);
 
   console.log(weatherData);
+
+  // get time
   function setTime() {
     const days = [
       "Sunday",
@@ -83,6 +127,7 @@ function ProjectWeather(props) {
     return `${day}, ${hour}:${("0" + minute).slice(-2)} ${ampm}`;
   }
 
+  // convert weather info to weather icon - not finish!
   function getWeatherIcon() {
     var weatherIcon = weatherData.currently.icon;
     //var weatherIcon = <IconImage src="weatherIcons/streamline-icon-weather-clouds@24x24.png" alt="cloudy"/>
@@ -90,28 +135,58 @@ function ProjectWeather(props) {
   }
 
   return (
-    <WeatherContainer>
-      <WeatherLocationInfo>
-        <h2>{props.location}</h2>
-        <p>{setTime()}</p>
-      </WeatherLocationInfo>
+    <>
+      {props.usage === "project" ? (
+        // display in project page
+        <WeatherContainerP>
+          <WeatherLocationInfo>
+            <h2>{props.location}</h2>
+            <p>{setTime()}</p>
+          </WeatherLocationInfo>
 
-      {weatherData ? (
-        <WeatherInfo>
-          <WeatherData>
-            <WeatherTem>
-              {weatherData.currently.apparentTemperature.toFixed(0)}
-              <span>&#176;</span>
-            </WeatherTem>
-            <p>
-              Humidity {weatherData.currently.humidity * 100}
-              <span>&#37;</span>
-            </p>
-          </WeatherData>
-          <WeatherIcon>{getWeatherIcon()}</WeatherIcon>
-        </WeatherInfo>
-      ) : null}
-    </WeatherContainer>
+          {weatherData ? (
+            <WeatherInfo>
+              <WeatherData>
+                <WeatherTem>
+                  {weatherData.currently.apparentTemperature.toFixed(0)}
+                  <span>&#176;</span>
+                </WeatherTem>
+                <p>
+                  Humidity {weatherData.currently.humidity * 100}
+                  <span>&#37;</span>
+                </p>
+              </WeatherData>
+              <WeatherIcon>{getWeatherIcon()}</WeatherIcon>
+            </WeatherInfo>
+          ) : null}
+        </WeatherContainerP>
+      ) : (
+          // display in dashboard
+          
+        <WeatherContainerD>
+          <WeatherLocationInfo>
+            <h2>Current Location</h2>
+            <p>{setTime()}</p>
+          </WeatherLocationInfo>
+
+          {weatherData ? (
+            <WeatherInfo>
+              <WeatherData>
+                <WeatherTem>
+                  {weatherData.currently.apparentTemperature.toFixed(0)}
+                  <span>&#176;</span>
+                </WeatherTem>
+                <p>
+                  Humidity {weatherData.currently.humidity * 100}
+                  <span>&#37;</span>
+                </p>
+              </WeatherData>
+              <WeatherIcon>{getWeatherIcon()}</WeatherIcon>
+            </WeatherInfo>
+          ) : null}
+        </WeatherContainerD>
+      )}
+    </>
   );
 }
 
