@@ -7,6 +7,7 @@ import Global from './Global'
 import ActivityCard from './ActivityCard'
 import TasksCard from './TasksCard'
 import Weather from '../weather/Weather'
+import Tracker from './Tracker'
 
 function Dashboard() {
   return (
@@ -22,7 +23,8 @@ function Dashboard() {
           <TasksCard />
         </Column1>
         <Column2>
-            <Weather usage="dashboard"  uid={'MFhS8YlE0YdtP8QyZ8FQQ7OaEJo1'} />
+            <Tracker percentage={"95"} />
+            <Weather usage="dashboard"  uid={'iTSHTnTwLvPXtPlVdMo87AR1KXZ2'} />
         </Column2>
       </Columns>
     </Container>
