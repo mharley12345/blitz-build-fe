@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const ProjectContainer = styled.div`
   display: flex;
-  height: 1200px;
+  height: 80em;
   align-items: center;
   flex-direction: column;
   box-shadow: 2px 2px 2px #ccc;
@@ -13,7 +13,7 @@ const ProjectContainer = styled.div`
 const ProjectTopContainer = styled.div`
      display: flex;
      width: 80%;
-     height: 60px
+     height: 4em
      background-color: rgb(34, 58, 77);
      justify-content: space-between;
      align-items: center;
@@ -21,47 +21,48 @@ const ProjectTopContainer = styled.div`
 `;
 const ProjectCategories = styled.div`
   display: flex;
-  width: 700px;
+  width: 50em;
 `;
 
 const ProjectCategoriesSecond = styled.div`
   display: flex;
-  width: 500px;
-  margin-right: 50px;
+  width: 30em;
+  margin-right: 3em;
 `;
 const ProjectUl = styled.div`
   display: flex;
-  width: 500px;
-  margin-left: -45px;
+  width: 30em;
+  margin-left: -2em;
   justify-content: space-around;
 `;
 
 const ProjectLi = styled.div`
-  font-size: 18px;
+  font-size: 1.1em;
   color: white;
 `;
 
 const ProjectList = styled.div`
-  display: flex;
-  width: 80%;
-  height: 5%;
-  background-color: lightgrey;
-  justify-content: space-between;
-  align-items: center;
+     display: flex;
+     width: 80%;
+     height: 4em
+     background-color: lightgrey;
+     justify-content: space-between;
+     align-items: center;
+     
 `;
 const ProjectListLi = styled.div`
   display: flex;
   justify-content: start;
 
-  font-size: 18px;
+  font-size: 1.1em;
   color: black;
 `;
 
 const ProjectListUl = styled.div`
   display: flex;
-  width: 7050px;
+  width: 46em;
   justify-content: space-around;
-  margin-left: -50px;
+  margin-left: -3em;
 `;
 
 const Projects = props => {
@@ -88,7 +89,6 @@ const Projects = props => {
   return (
     <div>
       <h1> HERE ARE THE PROJECTS </h1>
-
       <ProjectContainer>
         <ProjectTopContainer>
           <ProjectCategories>
@@ -106,33 +106,36 @@ const Projects = props => {
           </ProjectCategoriesSecond>
         </ProjectTopContainer>
 
-        {project.map(project => {
-          return (
-            <ProjectList
-              key={project.projectID}
-              onClick={() => {
-                props.history.push(`/project/${project.projectID}`);
-              }}
-            >
-              <ProjectCategories>
-                <ProjectListUl>
-                  <ProjectListLi> {project.project_name} </ProjectListLi>
-                  <ProjectListLi>
-                    {" "}
-                    12 Fairview Lane, Moorhead MN 56560-1543
-                  </ProjectListLi>
-                </ProjectListUl>
-              </ProjectCategories>
-              <ProjectCategoriesSecond>
-                <ProjectListUl>
-                  <ProjectListLi> 05/10/2019</ProjectListLi>
-                  <ProjectListLi> 08/18/2019 </ProjectListLi>
-                  <ProjectListLi> Complete </ProjectListLi>
-                </ProjectListUl>
-              </ProjectCategoriesSecond>
-            </ProjectList>
-          );
-        })}
+        <ProjectList>
+          <ProjectCategories>
+            <ProjectListUl>
+              <ProjectListLi> 12 FairView (4 bed unit) </ProjectListLi>
+              <ProjectListLi>
+                {" "}
+                12 Fairview Lane, Moorhead MN 56560-1543
+              </ProjectListLi>
+            </ProjectListUl>
+          </ProjectCategories>
+          <ProjectCategoriesSecond>
+            <ProjectListUl>
+              <ProjectListLi> 05/10/2019</ProjectListLi>
+              <ProjectListLi> 08/18/2019 </ProjectListLi>
+              <ProjectListLi> Complete </ProjectListLi>
+            </ProjectListUl>
+          </ProjectCategoriesSecond>
+        </ProjectList>
+
+        {project.map(project => (
+          <div
+            key={project.projectID}
+            onClick={() => {
+              props.history.push(`/project/${project.projectID}`);
+            }}
+          >
+            <p>{project.project_name}</p>
+          </div>
+        ))}
+
         <AddProject />
       </ProjectContainer>
     </div>
