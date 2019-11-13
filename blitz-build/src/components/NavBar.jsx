@@ -9,10 +9,10 @@ import styled from 'styled-components'
 const NavBarContainer = styled.div`
 
     height: 100%;
-    width: 200px;
+    width: 12em;
     position: fixed;
-    margin-top: -25px;
-    margin-left: -20px;
+    margin-top: -2em;
+    margin-left: -1.5em;
     box-shadow: 2px 2px 2px #ccc;
 `;
     const NavBarUl = styled.ul`
@@ -26,7 +26,7 @@ const NavBarContainer = styled.div`
         align-items: center;
         flex-direction: column;
        
-        top: 60px;
+        top: 4em;
         box-shadow: 2px 2px 2px #ccc;
         transition: 300ms ease all;
        
@@ -54,16 +54,16 @@ const NavBarContainer = styled.div`
             flexDirection: 'row-reverse',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginLeft: '40px',
-            marginRight: '25px',
+            marginLeft: '2.6em',
+            marginRight: '1.5em',
           } ;
 
             const NavBarP = styled.p`
-                width:80px;
+                width:4.8em;
             `;
              const NavBarI = styled.i`
            align-items: center;
-            font-size: 25px;
+            font-size: 1.8em;
         `;
 
        
