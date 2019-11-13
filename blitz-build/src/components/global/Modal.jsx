@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import styled from "styled-components";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 
 export const ModalWrapper = styled.div`
@@ -17,7 +17,7 @@ export const ModalBoxSetup = styled.div`
 position: absolute;
 left: 0;
 right: 0;
-width: ${props => props.width || "32%"}
+width: 50%;
 overflow:hidden;
 padding:16px;
 margin: 50px auto;
@@ -39,10 +39,10 @@ visible: boolean,
 dismiss: function on click on Close.
 */
 export default class ModalSetup extends Component {
-     static propTypes = {
-         visible: PropTypes.bool.isRequired,
-         dismiss: PropTypes.func.isRequired
-      };
+    //  static propTypes = {
+    //      visible: PropTypes.bool.isRequired,
+    //      dismiss: PropTypes.func.isRequired
+    //   };
 render() {
  const { visible, dismiss, component, client } = this.props;
    return (
