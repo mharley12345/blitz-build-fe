@@ -5,8 +5,36 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
+import styled from "styled-components";
 
-export default function FormDialog() {
+const ModalContainer = styled.div``;
+
+const ModalTitle = styled.div`
+  display: flex
+  padding: 16px 24px;
+  width: 92%
+  background-color: rgb(34, 58, 77);
+  color: white;
+  justify-content: center;
+`;
+
+const H3 = styled.div`
+  font-size: 1.5em;
+  display:flex
+  justify-content:center
+`;
+
+const Input = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const TopContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+export default function AddProject() {
   const [form, setForm] = useState({
     projectID: "",
     project_name: "",
@@ -21,7 +49,7 @@ export default function FormDialog() {
     Assign_Template: undefined,
     Project_Thumbnail: ""
   });
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -39,6 +67,7 @@ export default function FormDialog() {
     e.preventDefault();
     const uid = localStorage.getItem("uid");
 
+    console.log("im here");
     axios
       .post(
         `https://api-blitz-build-dev.herokuapp.com/api/auth/${uid}/projects`,
@@ -62,21 +91,30 @@ export default function FormDialog() {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <ModalTitle>
+          {/* <DialogTitle id="form-dialog-title">Subscribe</DialogTitle> */}
+          <H3>Add Project</H3>
+        </ModalTitle>
         <DialogContent>
           <form onSubmit={submitForm}>
+            {/* <TopContainer> */}
+            {/* top container is project name and address */}
+            Project Name:
             <input
               name="Project_Name"
               placeholder="Project Name"
               onChange={changeHandler}
               value={form.Project_Name}
             />
+            Project Address
             <input
               name="Project_Address"
               placeholder="Project Address"
               onChange={changeHandler}
               value={form.Project_Address}
             />
+            {/* </TopContainer> */}
+            {/* second container includes beds and baths */}
             <input
               name="Beds"
               placeholder="Beds"
@@ -89,27 +127,28 @@ export default function FormDialog() {
               onChange={changeHandler}
               value={form.Baths}
             />
+            {/* square footage on its own */}
             <input
               name="Square_Footage"
               placeholder="Square Footage"
               onChange={changeHandler}
               value={form.Square_Footage}
             />
+            {/* templates on its own and its a drop down */}
             <input
               name="Assign_Template"
               placeholder="Assign Template"
               onChange={changeHandler}
               value={form.Assign_Template}
             />
+            {/* thumbnail on its own and it will have to be uploaded */}
             <input
               name="Project_Thumbnail"
               placeholder="Project Thumbnail"
               onChange={changeHandler}
               value={form.Project_Thumbnail}
             />
-            <Button type="submit" color="primary">
-              Add Project
-            </Button>
+            <button type="submit"> Add Project </button>
           </form>
         </DialogContent>
         <DialogActions>
