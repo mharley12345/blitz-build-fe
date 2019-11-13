@@ -11,13 +11,12 @@ const ProjectContainer = styled.div`
   box-shadow: 2px 2px 2px #ccc;
 `;
 const ProjectTopContainer = styled.div`
-     display: flex;
-     width: 80%;
-     height: 4em
-     background-color: rgb(34, 58, 77);
-     justify-content: space-between;
-     align-items: center;
-    
+  display: flex;
+  width: 80%;
+  height: 4em;
+  background-color: rgb(34, 58, 77);
+  justify-content: space-between;
+  align-items: center;
 `;
 const ProjectCategories = styled.div`
   display: flex;
@@ -42,13 +41,12 @@ const ProjectLi = styled.div`
 `;
 
 const ProjectList = styled.div`
-     display: flex;
-     width: 80%;
-     height: 4em
-     background-color: lightgrey;
-     justify-content: space-between;
-     align-items: center;
-     
+  display: flex;
+  width: 80%;
+  height: 4em;
+  background-color: lightgrey;
+  justify-content: space-between;
+  align-items: center;
 `;
 const ProjectListLi = styled.div`
   display: flex;
@@ -106,35 +104,33 @@ const Projects = props => {
           </ProjectCategoriesSecond>
         </ProjectTopContainer>
 
-        <ProjectList>
-          <ProjectCategories>
-            <ProjectListUl>
-              <ProjectListLi> 12 FairView (4 bed unit) </ProjectListLi>
-              <ProjectListLi>
-                {" "}
-                12 Fairview Lane, Moorhead MN 56560-1543
-              </ProjectListLi>
-            </ProjectListUl>
-          </ProjectCategories>
-          <ProjectCategoriesSecond>
-            <ProjectListUl>
-              <ProjectListLi> 05/10/2019</ProjectListLi>
-              <ProjectListLi> 08/18/2019 </ProjectListLi>
-              <ProjectListLi> Complete </ProjectListLi>
-            </ProjectListUl>
-          </ProjectCategoriesSecond>
-        </ProjectList>
-
-        {project.map(project => (
-          <div
-            key={project.projectID}
-            onClick={() => {
-              props.history.push(`/project/${project.projectID}`);
-            }}
-          >
-            <p>{project.project_name}</p>
-          </div>
-        ))}
+        {project.map(project => {
+          return (
+            <ProjectList
+              key={project.projectID}
+              onClick={() => {
+                props.history.push(`/project/${project.projectID}`);
+              }}
+            >
+              <ProjectCategories>
+                <ProjectListUl>
+                  <ProjectListLi> {project.project_name} </ProjectListLi>
+                  <ProjectListLi>
+                    {" "}
+                    12 Fairview Lane, Moorhead MN 56560-1543
+                  </ProjectListLi>
+                </ProjectListUl>
+              </ProjectCategories>
+              <ProjectCategoriesSecond>
+                <ProjectListUl>
+                  <ProjectListLi> 05/10/2019</ProjectListLi>
+                  <ProjectListLi> 08/18/2019 </ProjectListLi>
+                  <ProjectListLi> Complete </ProjectListLi>
+                </ProjectListUl>
+              </ProjectCategoriesSecond>
+            </ProjectList>
+          );
+        })}
 
         <AddProject />
       </ProjectContainer>
