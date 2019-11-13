@@ -20,7 +20,13 @@ export default function EditTask() {
       <Modal
         visible={modalStatus}
         dismiss={handleModalClose}
-        component={<TaskForm closeModal={handleModalClose} />}
+        component={
+            <TaskForm 
+                closeModal={handleModalClose} 
+                // handleFunction={ }
+                // editFields={}
+            />
+        }
       />
     </>
   );
