@@ -1,39 +1,37 @@
 import React, { useState } from "react";
-import DatePicker from 'react-datepicker'
-
+import DatePicker from "react-datepicker";
 
 //hooks
-import { useInput } from '../../customHooks/useInput'
+import { useInput } from "../../customHooks/useInput";
 
-// import "react-datepicker/dist/react-datepicker.css";
 
-export default function TaskForm({ closeModal,handleFunction, editFields }) {
+export default function TaskForm({ closeModal, handleFunction, editFields }) {
   const [dueDate, setDueDate] = useState(new Date());
 
-    let initialState
-    
-    if(editFields){
-        initialState = editFields
-    }else {
+  let initialState;
+
+  if (editFields) {
+    initialState = editFields;
+  } else {
     initialState = {
-        taskName: "",
-        taskDescription: "",
-        dueDate: "",
-        project: ""
-        };
-    }
+      taskName: "",
+      taskDescription: "",
+      dueDate: "",
+      project: ""
+    };
+  }
 
   const [task, setTask, handleChanges] = useInput(initialState);
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(task)
+    console.log(task);
     handleFunction(task);
     setTask(initialState);
-    closeModal()
+    closeModal();
   };
   return (
-    <form style={{height: '500px', width: '800px',}}>
+    <form style={{ height: "500px", width: "800px" }}>
       <button onClick={closeModal}>x</button>
 
       <label>Task Name</label>
