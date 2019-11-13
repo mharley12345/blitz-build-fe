@@ -17,7 +17,7 @@ const taskNavStyle = styled.div`
 
 `
 
-export default function TaskNav({ addTask}) {
+export default function TaskNav({ addTask }) {
     const [modalStatus, setModalStatus] = useState(false)
     const handleModalOpen = ()=> {
         setModalStatus(true)

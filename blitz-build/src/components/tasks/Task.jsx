@@ -6,7 +6,7 @@ import TaskStatus from "./TaskStatus";
 import EditTask from "./EditTask"
 import DeleteTask from './DeleteTask'
 
-export default function Task({tasks, task, setTasks }) {
+export default function Task({ task, editTask, deleteTask }) {
   return (
     <>
       <div>

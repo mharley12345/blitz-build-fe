@@ -21,11 +21,12 @@ const StyledTask = styled.div`
   align-items: center;
 `;
 
-
 export default function Tasks() {
-	const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([])
+  console.log(tasks)
 
 	const addTask = (newTask) => {
+    console.log(newTask)
 		setTasks([...tasks, newTask])
 	}
 
@@ -33,7 +34,7 @@ export default function Tasks() {
 		
 	}
 	
-	const editTask = (taskId) => {
+	const editTask = (task) => {
 		
 	}
 
@@ -43,7 +44,7 @@ export default function Tasks() {
       {tasks.map(task => {
         return (
           <StyledTask>
-            <Task editTask={editTask} deleteTask={deleteTask}/>
+            <Task task={task} editTask={editTask} deleteTask={deleteTask}/>
           </StyledTask>
         );
       })}

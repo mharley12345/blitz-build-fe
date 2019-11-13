@@ -1,12 +1,26 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 
 //hooks
 import { useInput } from "../../customHooks/useInput";
 
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200
+  }
+}));
+
 
 export default function TaskForm({ closeModal, handleFunction, editFields }) {
-  const [dueDate, setDueDate] = useState(new Date());
+  // const [dueDate, setDueDate] = useState(new Date());
 
   let initialState;
 
@@ -14,8 +28,8 @@ export default function TaskForm({ closeModal, handleFunction, editFields }) {
     initialState = editFields;
   } else {
     initialState = {
-      taskName: "",
-      taskDescription: "",
+      name: "",
+      description: "",
       dueDate: "",
       project: ""
     };
@@ -25,33 +39,54 @@ export default function TaskForm({ closeModal, handleFunction, editFields }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(task);
     handleFunction(task);
     setTask(initialState);
     closeModal();
   };
+
   return (
-    <form style={{ height: "500px", width: "800px" }}>
+    <form onSubmit={handleSubmit}>
       <button onClick={closeModal}>x</button>
 
       <label>Task Name</label>
       <input
         type="text"
-        name="taskName"
-        value={task.taskName}
+        name="name"
+        value={task.name}
         onChange={handleChanges}
       />
 
       <label>Task Decription</label>
       <input
         type="text"
-        name="taskDescription"
-        value={task.taskDescription}
+        name="description"
+        value={task.description}
         onChange={handleChanges}
       />
 
-      <label>Due Date</label>
-      <DatePicker selected={dueDate} onChange={date => setDueDate(date)} />
+      {/* <label>Due Date</label>
+      <DatePicker selected={dueDate} onChange={date => setDueDate(date)} /> */}
+
+      <TextField
+        id="date"
+        label="Due Date"
+        type="date"
+        defaultValue="2017-05-24"
+        name='dueDate'
+        onChange={handleChanges}
+        value={task.dueDate}
+        InputLabelProps={{
+          shrink: true
+        }}
+      />
+
+      {/* <label>Due Date</label>
+      <input
+        type="text"
+        name="dueDate"
+        value={task.dueDate}
+        onChange={handleChanges}
+      /> */}
 
       <label>Assign Project</label>
       <input
@@ -62,7 +97,7 @@ export default function TaskForm({ closeModal, handleFunction, editFields }) {
       />
 
       <button onClick={closeModal}>cancel</button>
-      <button onclick={handleSubmit}>add task</button>
+      <button>add task</button>
     </form>
   );
 }
