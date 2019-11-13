@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 //components
 import TaskNav from "../../components/tasks/TaskNav/TaskNav";
@@ -21,29 +21,29 @@ const StyledTask = styled.div`
   align-items: center;
 `;
 
-const tasks = [
-  {
-    name: "stuff",
-    description: "lots of stuff"
-  },
-  {
-    name: "stuff",
-    description: "lots of stuff"
-  },
-  {
-    name: "stuff",
-    description: "lots of stuff"
-  }
-];
 
 export default function Tasks() {
-  return (
+	const [tasks, setTasks] = useState([])
+
+	const addTask = (newTask) => {
+		setTasks([...tasks, newTask])
+	}
+
+	const deleteTask = (taskId) => {
+		
+	}
+	
+	const editTask = (taskId) => {
+		
+	}
+
+	return (
     <StyledTasks>
-      <TaskNav />
+      <TaskNav addTask={addTask}/>
       {tasks.map(task => {
         return (
           <StyledTask>
-            <Task task={task} />
+            <Task editTask={editTask} deleteTask={deleteTask}/>
           </StyledTask>
         );
       })}

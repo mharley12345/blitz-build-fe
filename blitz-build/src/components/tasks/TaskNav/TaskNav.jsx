@@ -3,7 +3,7 @@ import React, { useState} from 'react'
 //components
 import SortBtn from './SortBtn'
 import Modal from '../../global/Modal'
-import AddTask from '../TaskForm'
+import TaskForm from '../TaskForm'
 
 //styles
 import styled from 'styled-components'
@@ -17,7 +17,7 @@ const taskNavStyle = styled.div`
 
 `
 
-export default function TaskNav() {
+export default function TaskNav({ addTask}) {
     const [modalStatus, setModalStatus] = useState(false)
     const handleModalOpen = ()=> {
         setModalStatus(true)
@@ -33,7 +33,7 @@ export default function TaskNav() {
             <Modal 
                 visible={ modalStatus } 
                 dismiss={ handleModalClose } 
-                component={ <AddTask closeModal={handleModalClose}/> }
+                component={ <TaskForm closeModal={handleModalClose} handleFunction={ addTask }/> }
             />
         </taskNavStyle>
     )
