@@ -7,12 +7,12 @@ import styled from 'styled-components'
 
 
 const NavBarContainer = styled.div`
-   
+
     height: 100%;
     width: 200px;
     position: fixed;
-    margin-top: -10px;
-    margin-left: -10px;
+    margin-top: -22px;
+    margin-left: -20px;
     box-shadow: 2px 2px 2px #ccc;
 `;
     const NavBarUl = styled.ul`
