@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function TaskForm({ closeModal, handleFunction, editFields }) {
+export default function TaskForm({ closeModal, handleFunction, editFields, text }) {
   // const [dueDate, setDueDate] = useState(new Date());
 
   let initialState;
@@ -97,7 +97,7 @@ export default function TaskForm({ closeModal, handleFunction, editFields }) {
       />
 
       <button onClick={closeModal}>cancel</button>
-      <button>add task</button>
+      <button>{text}</button>
     </form>
   );
 }
