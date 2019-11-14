@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+import  TaskContext  from "../../contexts/TaskContext"
+
+
 //components
 import TaskNav from "../../components/tasks/TaskNav/TaskNav";
 import Task from "../../components/tasks/Task";
@@ -18,7 +21,7 @@ const StyledTask = styled.div`
   width: 750px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-tasks: center;
 `;
 
 export default function Tasks() {
@@ -27,27 +30,40 @@ export default function Tasks() {
 
 	const addTask = (newTask) => {
     console.log(newTask)
+    newTask.id = Date.now() 
 		setTasks([...tasks, newTask])
 	}
 
-	const deleteTask = (taskId) => {
-		
+	const deleteTask = (deletedTask) => {
+		const newTasks = tasks.filter(task => {
+			return task.name != deletedTask.name
+		})
+		setTasks([...newTasks ])
 	}
 	
-	const editTask = (task) => {
-		
+	const editTask = (editedTask) => {
+    const newTasks = tasks.map(task => {
+      if(task.id === editedTask.id){
+        return editedTask
+      } else {
+        return task
+      }
+		})
+		setTasks([...newTasks ])
 	}
 
 	return (
-    <StyledTasks>
-      <TaskNav addTask={addTask}/>
-      {tasks.map(task => {
-        return (
-          <StyledTask>
-            <Task task={task} editTask={editTask} deleteTask={deleteTask}/>
-          </StyledTask>
-        );
-      })}
-    </StyledTasks>
+    <TaskContext.Provider value={{ tasks, addTask, deleteTask, editTask }}>
+      <StyledTasks>
+        <TaskNav addTask={addTask}/>
+        {tasks.map(task => {
+          return (
+            <StyledTask>
+              <Task task={task}/>
+            </StyledTask>
+          );
+        })}
+      </StyledTasks>
+    </TaskContext.Provider>
   );
 }

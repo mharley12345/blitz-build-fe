@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 //components
 import Modal from "../global/Modal";
 import TaskForm from "./TaskForm";
 
-export default function EditTask() {
+//context
+import TasksContext from "../../contexts/TaskContext";
+
+export default function EditTask({ task }) {
+  const { editTask } = useContext(TasksContext);
+
   const [modalStatus, setModalStatus] = useState(false);
 
   const handleModalOpen = () => {
@@ -18,14 +23,15 @@ export default function EditTask() {
     <>
       <button onClick={ handleModalOpen }>Edit</button>
       <Modal
-        visible={modalStatus}
-        dismiss={handleModalClose}
+        visible={ modalStatus }
+        dismiss={ handleModalClose }
         component={
-            <TaskForm 
-                closeModal={handleModalClose} 
-                // handleFunction={ }
-                // editFields={}
-            />
+          <TaskForm
+            closeModal={ handleModalClose }
+            handleFunction={ editTask }
+            editFields={ task }
+            text={ 'Edit Task' }
+          />
         }
       />
     </>
