@@ -34,7 +34,10 @@ const TopContainer = styled.div`
   justify-content: space-evenly;
 `;
 
-export default function AddProject() {
+//START OF FUNCTIONAL COMPONENT
+
+const AddProject = props => {
+  console.log("props", props);
   const [form, setForm] = useState({
     project_name: "",
     street_address: "",
@@ -63,7 +66,6 @@ export default function AddProject() {
   };
 
   const submitForm = e => {
-    e.preventDefault();
     const uid = localStorage.getItem("uid");
 
     console.log("im here");
@@ -77,6 +79,7 @@ export default function AddProject() {
       .post("https://blitz-build.herokuapp.com/projects", form)
       .then(res => {
         console.log(res);
+        props.history.push("/projects");
       })
       .catch(err => {
         console.log(err);
@@ -164,4 +167,6 @@ export default function AddProject() {
       </Dialog>
     </div>
   );
-}
+};
+
+export default AddProject;
