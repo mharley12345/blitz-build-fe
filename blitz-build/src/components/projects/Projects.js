@@ -69,13 +69,10 @@ const Projects = props => {
   useEffect(() => {
     const uid = localStorage.getItem("uid");
     axios
-      .get(
-        `https://api-blitz-build-dev.herokuapp.com/api/auth/${uid}/projects`,
-        project
-      )
+      .get(`https://blitz-build.herokuapp.com/projects`, project)
       .then(res => {
         console.log(res);
-        const projectArray = Object.values(res.data.projects);
+        const projectArray = Object.values(res.data);
         console.log(projectArray);
         setProject(projectArray);
       })
