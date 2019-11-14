@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import Dashboard from "./components/dashboard/index";
 import Projects from "./components/projects/Projects";
 import IndividualProject from "./components/projects/IndividualProject";
+import Logout from './components/auth/Logout'
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/projects" component={Projects} />
         <Route exact path="/project/:id" component={IndividualProject} />
+        <Route exact path="/log-out" component={Logout} />
       </Switch>
     </Router>
   );

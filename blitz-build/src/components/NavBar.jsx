@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-
+import media from '../styles/sizes'
 
 
 
 
 const NavBarContainer = styled.div`
-
-    height: 100%;
-    width: 12em;
     position: fixed;
-    margin-top: -2em;
-    margin-left: -1.5em;
+    height: 1000px;
+    width: 10%;
+    margin-top: -20px;
+    margin-left: -1%;
     box-shadow: 2px 2px 2px #ccc;
+    margin-right: 10%;
+    background-color: lightgrey;
 `;
     const NavBarUl = styled.ul`
         background: #d1d0d0;
@@ -25,8 +26,6 @@ const NavBarContainer = styled.div`
         width: 100%;
         align-items: center;
         flex-direction: column;
-       
-        top: 4em;
         box-shadow: 2px 2px 2px #ccc;
         transition: 300ms ease all;
        
@@ -35,9 +34,12 @@ const NavBarContainer = styled.div`
        const NavBarFigure = styled.figure`
             margin-block-start: 0;
             margin-block-end: 0;
-            margin-inline-start: 2px;
+            margin-inline-start: .1%;
             margin-inline-end: 0;
             cursor: pointer;
+            ${media.extraLarge`
+            display: none;
+`}
         `;
 
         const NavBarLi = styled.li` 
@@ -60,10 +62,17 @@ const NavBarContainer = styled.div`
 
             const NavBarP = styled.p`
                 width:4.8em;
+                ${media.extraLarge`
+               display: none;
+                                 `}
             `;
              const NavBarI = styled.i`
            align-items: center;
             font-size: 1.8em;
+            ${media.extraLarge`
+              margin-top: 40%;
+              margin-right: 35%;
+                            `}
         `;
 
        
@@ -101,12 +110,11 @@ function NavBar ({navLinks, background, hoverBackground, linkColor, logo }) {
                             { link.text } 
                             </NavBarP>
                             <NavBarI className = {link.icon}/>
-                            
                               </Link>
                            
                       </NavBarLi>
                    )}
-               
+                  
            </NavBarUl>
 
 
