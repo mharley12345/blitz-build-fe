@@ -62,7 +62,7 @@ function Weather(props) {
     latitude: 0,
     longitude: 0
   });
-
+  useEffect(() => {
   // get the latitude and longitude from the project page or navigator.geolocation.
   if (props.usage === "project") {
     setWeatherPosition({
@@ -82,14 +82,18 @@ function Weather(props) {
       console.log("geolocation is not supported");
     }
   }
+},[])
+  
 
   // get the weather data from backend.
   useEffect(() => {
     if (weatherPosition.latitude !== 0) {
+      console.log(weatherPosition)
       axios
-        .get(
-          `http://api-blitz-build-dev.herokuapp.com/api/auth/${props.uid}/weather`,
+        .post(
+          `https://api-blitz-build-dev.herokuapp.com/api/auth/${props.uid}/weather`,
           weatherPosition
+          
         )
         .then(res => {
           setWeatherData(res.data);
