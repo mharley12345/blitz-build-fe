@@ -27,7 +27,7 @@ const Login = props => {
       .then(res => {
         console.log(res);
 
-        localStorage.setItem("uid", res.data.userObj.user.uid);
+        // localStorage.setItem("uid", res.data.userObj.user.uid);
         localStorage.setItem("token", res.data.token);
 
         props.history.push("/projects");

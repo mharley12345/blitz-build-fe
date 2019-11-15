@@ -4,12 +4,9 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import NavBar from "./components/NavBar";
-<<<<<<< HEAD
 // import Layout from "./components/dashboard/Layout";
-=======
-import Dashboard from "./components/dashboard/index";
+// import Dashboard from "./components/dashboard/Dashboard";
 import Tasks from './views/tasks/Tasks'
->>>>>>> e0d23d6d1684dd43536f5dacdb3b336b3aeddae9
 import Projects from "./components/projects/Projects";
 import IndividualProject from "./components/projects/IndividualProject";
 
@@ -21,7 +18,7 @@ function App() {
   const navLinks = [
     {
       text: "Home",
-      path: "/",
+      path: "/dashboard",
       icon: "ion-ios-home"
     },
     {
@@ -58,37 +55,22 @@ function App() {
 
   return (
     <Router>
-<<<<<<< HEAD
-      {/*    <NavBar
+      <NavBar
         navLinks={navLinks}
         //  logo={ logo }
-      />   */}
+      />  
       <Layout>
         <Switch>
-          {/* <Route exact path="/" component={Login} />
-        <Route exact path="/signup" component={Signup} /> */}
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
 
           {/*   */}
           <Route exact path="/dashboard" component={TaskCard} />
+          <Route exact path="/tasks" component={Tasks} />
           <Route exact path="/projects" component={Projects} />
           <Route exact path="/project/:id" component={IndividualProject} />
         </Switch>
       </Layout>
-=======
-      <NavBar
-        navLinks={navLinks}
-        //  logo={ logo }
-      />
-
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/tasks" component={Tasks} />
-        <Route exact path="/projects" component={Projects} />
-        <Route exact path="/project/:id" component={IndividualProject} />
-      </Switch>
->>>>>>> e0d23d6d1684dd43536f5dacdb3b336b3aeddae9
     </Router>
   );
 }

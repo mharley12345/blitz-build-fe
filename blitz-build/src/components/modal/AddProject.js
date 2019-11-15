@@ -10,9 +10,9 @@ import styled from "styled-components";
 const ModalContainer = styled.div``;
 
 const ModalTitle = styled.div`
-  display: flex
+  display: flex;
   padding: 16px 24px;
-  width: 92%
+  width: 92%;
   background-color: rgb(34, 58, 77);
   color: white;
   justify-content: center;
@@ -20,8 +20,8 @@ const ModalTitle = styled.div`
 
 const H3 = styled.div`
   font-size: 1.5em;
-  display:flex
-  justify-content:center
+  display: flex;
+  justify-content: center;
 `;
 
 const Input = styled.div`
@@ -37,7 +37,7 @@ const TopContainer = styled.div`
 export default function AddProject() {
   const [form, setForm] = useState({
     projectID: "",
-    project_name: "",
+    Project_Name: "",
     street_address: "",
     city: "",
     state: "",
