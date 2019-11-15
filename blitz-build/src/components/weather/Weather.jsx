@@ -4,12 +4,9 @@ import styled from "styled-components";
 
 // css of the weather container in the dashboard
 const WeatherContainerD = styled.div`
-  position: absolute;
   width: 444px;
   height: 292px;
-  left: 961px;
-  top: 685px;
-
+ 
   background: #fefefe;
   border: 0.5px solid #282828;
   box-sizing: border-box;

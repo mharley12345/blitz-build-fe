@@ -4,29 +4,30 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import NavBar from "./components/NavBar";
-import Dashboard from "./components/dashboard/index";
-import Tasks from './views/tasks/Tasks'
+// import Layout from "./components/dashboard/Layout";
 import Projects from "./components/projects/Projects";
 import IndividualProject from "./components/projects/IndividualProject";
 import Logout from './components/auth/Logout'
+import Layout from './layouts/Layout'
+import TaskCard from './components/dashboard/TaskCard'
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 function App() {
   const navLinks = [
     {
       text: "Home",
-      path: "/",
+      path: "/dashboard",
       icon: "ion-ios-home"
     },
     {
       text: "Projects",
       path: "/projects",
-      icon: "ion-ios-build"
+      icon: "ion-ios-construct"
     },
     {
       text: "Tasks",
       path: "/tasks",
-      icon: "ion-ios-checkbox"
+      icon: "ion-ios-notifications"
     },
     {
       text: "Documents",
@@ -41,37 +42,38 @@ function App() {
     {
       text: "Delay Log",
       path: "/delay-log",
-      icon: "ion-ios-calendar"
+      icon: "ion-ios-hourglass"
     },
    {
       text: "Settings",
       path: "/log-out",
-      icon: "ion-ios-power"
+      icon: "ion-ios-cog"
     },
     {
       text: "Help",
       path: "/log-out",
-      icon: "ion-ios-power"
+      icon: "ion-ios-help-circle-outline"
     },
 
   ];
   
   return (
     <Router>
-      <NavBar
+         <NavBar
         navLinks={navLinks}
         //  logo={ logo }
-      />
+      />  
+      <Layout>
+        <Switch>
+          {/* <Route exact path="/" component={Login} />
+        <Route exact path="/signup" component={Signup} /> */}
 
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/tasks" component={Tasks} />
-        <Route exact path="/projects" component={Projects} />
-        <Route exact path="/project/:id" component={IndividualProject} />
-        <Route exact path="/log-out" component={Logout} />
-      </Switch>
+          {/*   */}
+          <Route exact path="/dashboard" component={TaskCard} />
+          <Route exact path="/projects" component={Projects} />
+          <Route exact path="/project/:id" component={IndividualProject} />
+        </Switch>
+      </Layout>
     </Router>
   );
 }

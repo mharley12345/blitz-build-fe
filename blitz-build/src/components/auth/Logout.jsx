@@ -42,7 +42,7 @@ const Logout = (props) => {
         e.preventDefault();
         localStorage.removeItem("token");
       localStorage.removeItem('uid');
-        props.history.push("/");
+        props.history.push("/dashboard");
       };
 
       return (

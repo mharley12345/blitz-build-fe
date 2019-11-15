@@ -7,23 +7,22 @@ import media from '../styles/sizes'
 
 
 const NavBarContainer = styled.div`
+    margin-top: 180px;
     position: fixed;
-    height: 1000px;
-    width: 10%;
-    margin-top: -20px;
-    margin-left: -1%;
-    box-shadow: 2px 2px 2px #ccc;
-    margin-right: 10%;
-    background-color: lightgrey;
+    width: 296px;
+    height: 1574px;
+    left: 0px;
+    top: 0px;
+    background: #3F3A36;
 `;
     const NavBarUl = styled.ul`
+       
         background: #3F3A36;
         display: flex;
         margin-block-start: 0;
         margin-block-end: 0;
         padding-inline-start: 0;
-        height: 110%;
-        width: 100%;
+        height: 1574px;
         align-items: center;
         flex-direction: column;
         box-shadow: 2px 2px 2px #ccc;
@@ -37,33 +36,20 @@ const NavBarContainer = styled.div`
             margin-inline-start: .1%;
             margin-inline-end: 0;
             cursor: pointer;
-            ${media.extraLarge`
-            display: none;
-`}
+           
         `;
 
         const NavBarLi = styled.li` 
             list-style-type: none;
-            padding: 10px 0px;
-            width: 100%;
-            margin: 7px 0px;
+            height: 70px;
             align-items: center;
+            width: 90%;
+          :nth-child(8) {
+            border-top: 1px solid white;
+            margin-top: 40px;
+          }
         `;
-        const DividedNavBarLi = styled.li` 
-        list-style-type: none;
-        padding: 10px 0px;
-        width: 100%;
-        margin: 7px 0px;
-        align-items: center;
-    `;
-        const DividedLinks = styled.li` 
-        border-top: 1px solid white;
-        list-style-type: none;
-        padding: 10px 0px;
-        width: 100%;
-        margin: 7px 0px;
-        align-items: center;
-    `;
+        
 
        const NavBarLink = {
             color: '#FFFFFF',
@@ -71,10 +57,12 @@ const NavBarContainer = styled.div`
             display: 'flex',
             flexDirection: 'row-reverse',
             alignItems: 'center',
-            marginRight: '1.5em',
-            fontSize: '.8em',
+            fontSize: '16px',
             height: '20px',
-         
+            width:'120px',
+            marginTop: '30px',
+            marginLeft: '50px',
+           
           } ;
        const NavLinkHover = (hoverIndex, index) => {
            if(hoverIndex === index)
@@ -83,23 +71,19 @@ const NavBarContainer = styled.div`
 
        const HoverStyles = {
            backgroundColor: '#27221F',
-           borderRadius: '3px',
-           borderLeft: '#DD6B20',
+           borderRadius: '3px', 
+           borderLeft: ' 4px solid #DD6B20',
+           
         }
             const NavBarP = styled.p`
-                width: 60%;
-                margin-left: 20px;
-                ${media.extraLarge`
-               display: none;
-                                 `}
+                width: 80px;
+                margin-left: 15px;
+           
             `;
              const NavBarI = styled.i`
            align-items: center;
             font-size: 1.4em;
-            ${media.extraLarge`
-              margin-top: 40%;
-              margin-right: 35%;
-                            `}
+           
         `;
 
        
@@ -119,7 +103,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
 
             <NavBarFigure onClick={() => setNavOpen(!navOpen)}>
           
-                <h1>Blitz Build</h1>
+               
 
             </NavBarFigure>
                    {navLinks.map((link, index) => 

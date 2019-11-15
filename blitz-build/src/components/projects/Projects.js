@@ -1,20 +1,38 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AddProject from "../modal/AddProject";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
+
+
+
+const Section = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+
+  p {
+    font-family: "Roboto";
+    font-size: 16px;
+    line-height: 19px;
+    color: #8a827d;
+    font-weight: 500;
+  }
+`;
+
 
 const ProjectContainer = styled.div`
+  width: 1090px;
   display: flex;
-  height: 900px;
   align-items: center;
   flex-direction: column;
-  margin-left: 2%;
+ 
 `;
 const ProjectTopContainer = styled.div`
   display: flex;
-  width: 80%;
-  height: 6%;
-  background-color: rgb(34, 58, 77);
+  width: 1080px;
+  height: 51px;
+  background-color: #FFFFFF;;
   justify-content: space-between;
   align-items: center;
 `;
@@ -40,16 +58,27 @@ const ProjectUlSecond = styled.div`
 `;
 
 const ProjectLi = styled.div`
-  font-size: 1.1em;
-  color: white;
+color: #DD6B20;
+height: 19px;
+left: 307px;
+top: 75px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 19px;
 `;
 
 const ProjectListContainer = styled.div`
   display: flex;
-  width: 80%;
-  height: 6%;
-  background-color: lightgrey;
-  align-items: center;
+  width: 1080px;
+  height: 100px;
+  background-color: white;
+  
+  :nth-child(odd) {
+    background: #FBFAF9;
+  }
  
 `;
 
@@ -57,12 +86,14 @@ const ProjectListCategories = styled.div`
   display: flex;
   width: 62.8%
   
+  line-height: 50px;
 `;
 const ProjectListCategoriesSecond = styled.div`
   display: flex; 
-   
    justify-content: space-between;
   width: 27%;
+  line-height: 50px;
+ 
 `;
 
 const ProjectListIcons = styled.div`
@@ -81,8 +112,18 @@ const ProjectListName = styled.div`
   
 `;
 const Name = styled.div`
-  font-size: 1.1em;
-  color: black;
+
+/* Heading 4 */
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+
+
+/* 500 Gray */
+
+color: #3F3A36;
   
 `;
 
@@ -95,7 +136,18 @@ const ProjectListAddress = styled.div`
 `;
 const Address = styled.div`
 font-size: 1.1em;
-color: black;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+/* identical to box height, or 171% */
+
+
+/* 500 Gray */
+
+color: #3F3A36;
+
 `;
 const ProjectListDateCreated = styled.div`
 display: flex;
@@ -104,18 +156,39 @@ justify-content: start;
 
 `;
 const DateCreated =styled.div`
-font-size: 1.1em;
-color: black;
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+
+/* identical to box height, or 171% */
+
+text-align: right;
+
+/* 500 Gray */
+
+color: #3F3A36;
 `;
 const ProjectListDateModified = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: start;
 margin-left: -30px;
+
 `;
 const DateModified=styled.div`
-font-size: 1.1em;
-color: black;
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+
+/* identical to box height, or 171% */
+
+text-align: right;
+
+/* 500 Gray */
+
+color: #3F3A36;
 `;
 const ProjectListStatus = styled.div`
 display: flex;
@@ -125,8 +198,18 @@ margin-right:-20px;
 
 `;
 const Status=styled.div`
-font-size: 1.1em;
-color: black;
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+
+/* identical to box height */
+
+text-align: right;
+
+/* 500 Gray */
+
+color: #3F3A36;
 `;
 const ProjectListCreate= styled.div`
 display: flex;
@@ -171,11 +254,13 @@ const Projects = props => {
   }, []);
 
   return (
+ 
+  
     <div>
-   
-      <ProjectContainer>   
-        <h1> HERE ARE THE PROJECTS </h1>
+       <Section> <p> Your Project List  </p></Section>
+       <ProjectContainer>
         <ProjectTopContainer>
+          
           <ProjectCategories>
             <ProjectUl>
               <ProjectLi> Project Name </ProjectLi>
@@ -205,7 +290,7 @@ const Projects = props => {
                </ProjectListName> 
 
                 <ProjectListAddress>
-                  <Address>  {" "} 12 Fairview Lane, Moorhead MN 56560-1543</Address>
+                  <Address> {" "} 12 Fairview Lane, Moorhead MN 56560-1543</Address>
                  </ProjectListAddress>
               </ProjectListCategories>
               <ProjectListCategoriesSecond>
@@ -221,21 +306,23 @@ const Projects = props => {
                     <Status>Complete</Status>
                    </ProjectListStatus>
              </ProjectListCategoriesSecond>
-             <ProjectListIcons>
+             {/* <ProjectListIcons>
                <ProjectListCreate>
                  <Create className = "ion-ios-create"></Create>
                </ProjectListCreate>
                <ProjectListDestroy>
                  <Destroy className = "ion-ios-trash"></Destroy>
                </ProjectListDestroy>
-             </ProjectListIcons>
+             </ProjectListIcons> */}
             </ProjectListContainer>
           );
         })}
 
-        <AddProject />
-      </ProjectContainer>
-    </div>
+        {/* <AddProject />  */}
+        </ProjectContainer>
+     </div>
+     
+   
   );
 };
 
