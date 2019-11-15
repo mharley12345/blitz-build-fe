@@ -1,35 +1,24 @@
-// CODE IS MESSY, PLEASE READ AT YOUR OWN RISK
-
 import React from "react";
 import styled from "styled-components";
 
 // import NavBar from "../NavBar";
 import Global from "./Global";
-import ActivityCard from "./ActivityCard";
-import TasksCard from "./TasksCard";
-import Weather from "../weather/Weather";
-import Tracker from "./Tracker";
+import TaskCard2 from './TaskCard2';
 
 function Dashboard() {
   return (
     <Container>
       <Global />
-
-        <Greeting>
-          <Title>Good morning Jameson,</Title>
-          <Subheading>Let's get building.</Subheading>
-        </Greeting>
-        <Columns>
-          <Column1>
-            <ActivityCard />
-            <TasksCard />
-          </Column1>
-          <Column2>
-            <Tracker percentage={"95"} />
-            <Weather usage="dashboard" uid={"iTSHTnTwLvPXtPlVdMo87AR1KXZ2"} />
-          </Column2>
-        </Columns>
-
+      <Nav />
+      <Main>
+        <Header />
+        <Content>
+          <TaskCard2 />
+        </Content>
+        <Footer>
+          <p>2019 © BlitzBuild, Inc. All Rights Reserved.</p>
+        </Footer>
+      </Main>
     </Container>
   );
 }
@@ -39,44 +28,44 @@ export default Dashboard;
 const Container = styled.div`
   max-height: 100vh;
   display: flex;
-  flex-direction: column;
-  margin-left: 225px;
 `;
 
-const Title = styled.h1`
-  font-size: 56px;
-  line-height: 92px;
-  font-family: "Oswald";
-  color: #282828;
-  text-transform: uppercase;
-  font-weight: 500;
-  margin: 0px; /* Remove when CSS reset */
+const Nav = styled.div`
+  min-width: 296px;
+  height: 100vh;
+  background: #3f3a36;
 `;
 
-const Subheading = styled.h2`
-  font-size: 24px;
-  line-height: 36px;
-  font-family: "Oswald";
-  color: #282828;
-  font-weight: 400;
-  padding-left: 3px;
-  margin: 0px; /* Remove when CSS reset */
-`;
-
-const Greeting = styled.div`
-  margin: 36px 0px 68px 37px;
-`;
-
-const Columns = styled.div`
-  display: flex;
-`;
-
-const Column1 = styled.div`
+const Main = styled.div`
   display: flex;
   flex-direction: column;
+  background: #ebe9e7;
   width: 100%;
 `;
 
-const Column2 = styled.div`
+const Header = styled.div`
+  background: #fff;
   width: 100%;
+  height: 96px;
+`;
+
+const Content = styled.div`
+  background: #ebe9e7;
+  height: 100%;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Footer = styled.div`
+  padding: 16px 32px;
+  position: fixed;
+  bottom: 0;
+  
+  p {
+    color: #8a827d;
+    font-family: "Roboto";
+    font-size: 14px;
+    line-height: 16px;
+  }
 `;

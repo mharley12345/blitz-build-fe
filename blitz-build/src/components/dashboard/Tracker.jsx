@@ -6,6 +6,7 @@ const ProgressContainer = styled.div`
   width: 280px;
   height: 280px;
   background: #fff;
+  margin-bottom: 55px;
 `;
 
 function Tracker(props) {
