@@ -23,7 +23,6 @@ const WeatherContainerP = styled.div`
   height: 184px;
   left: 878px;
   top: 208px;
-  border: 0.5px solid #282828;
   background: #ffffff;
 `;
 const Weathertitle = styled.div`
