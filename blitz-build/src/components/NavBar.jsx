@@ -17,7 +17,7 @@ const NavBarContainer = styled.div`
     background-color: lightgrey;
 `;
     const NavBarUl = styled.ul`
-        background: #d1d0d0;
+        background: #3F3A36;
         display: flex;
         margin-block-start: 0;
         margin-block-end: 0;
@@ -46,29 +46,56 @@ const NavBarContainer = styled.div`
             list-style-type: none;
             padding: 10px 0px;
             width: 100%;
-            margin: 10px 0px;
+            margin: 7px 0px;
             align-items: center;
         `;
+        const DividedNavBarLi = styled.li` 
+        list-style-type: none;
+        padding: 10px 0px;
+        width: 100%;
+        margin: 7px 0px;
+        align-items: center;
+    `;
+        const DividedLinks = styled.li` 
+        border-top: 1px solid white;
+        list-style-type: none;
+        padding: 10px 0px;
+        width: 100%;
+        margin: 7px 0px;
+        align-items: center;
+    `;
+
        const NavBarLink = {
-            color: 'rgb(0, 0, 0)',
+            color: '#FFFFFF',
             textDecoration: 'none',
             display: 'flex',
             flexDirection: 'row-reverse',
-            justifyContent: 'space-between',
             alignItems: 'center',
-            marginLeft: '2.6em',
             marginRight: '1.5em',
+            fontSize: '.8em',
+            height: '20px',
+         
           } ;
+       const NavLinkHover = (hoverIndex, index) => {
+           if(hoverIndex === index)
+           return HoverStyles
+       }   
 
+       const HoverStyles = {
+           backgroundColor: '#27221F',
+           borderRadius: '3px',
+           borderLeft: '#DD6B20',
+        }
             const NavBarP = styled.p`
-                width:4.8em;
+                width: 60%;
+                margin-left: 20px;
                 ${media.extraLarge`
                display: none;
                                  `}
             `;
              const NavBarI = styled.i`
            align-items: center;
-            font-size: 1.8em;
+            font-size: 1.4em;
             ${media.extraLarge`
               margin-top: 40%;
               margin-right: 35%;
@@ -77,7 +104,7 @@ const NavBarContainer = styled.div`
 
        
 
-function NavBar ({navLinks, background, hoverBackground, linkColor, logo }) {
+function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, }) {
    const [ hoverIndex, setHoverIndex ] = useState(-1)
    const [navOpen, setNavOpen ] = useState(false)
 //    console.log(navLinks, background, hoverBackground, linkColor, logo)
@@ -102,7 +129,7 @@ function NavBar ({navLinks, background, hoverBackground, linkColor, logo }) {
                        <NavBarLi
                        onMouseEnter={() => setHoverIndex(index)}
                        onMouseLeave={() => setHoverIndex(-1) }
-                       style={{ background: hoverIndex === index ? ( hoverBackground || '#999') : '' }}
+                       style={NavLinkHover(hoverIndex, index)}
                        >
                            
                           <Link to= {link.path}  style = {NavBarLink} > 
@@ -111,14 +138,18 @@ function NavBar ({navLinks, background, hoverBackground, linkColor, logo }) {
                             </NavBarP>
                             <NavBarI className = {link.icon}/>
                               </Link>
+
                            
                       </NavBarLi>
-                   )}
-                  
+                   )} 
+             
+                   
+      
            </NavBarUl>
 
-
        </NavBarContainer>
+       
+      
    )
 
 }

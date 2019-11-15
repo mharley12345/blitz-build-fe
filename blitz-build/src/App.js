@@ -39,17 +39,23 @@ function App() {
       icon: "ion-ios-menu"
     },
     {
-      text: "Calendar",
-      path: "/calendar",
+      text: "Delay Log",
+      path: "/delay-log",
       icon: "ion-ios-calendar"
     },
-    {
-      text: "Log Out",
+   {
+      text: "Settings",
       path: "/log-out",
       icon: "ion-ios-power"
-    }
-  ];
+    },
+    {
+      text: "Help",
+      path: "/log-out",
+      icon: "ion-ios-power"
+    },
 
+  ];
+  
   return (
     <Router>
       <NavBar
