@@ -4,9 +4,12 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import NavBar from "./components/NavBar";
-import Dashboard from "./components/dashboard/Dashboard";
+// import Layout from "./components/dashboard/Layout";
 import Projects from "./components/projects/Projects";
 import IndividualProject from "./components/projects/IndividualProject";
+
+import Layout from "./layouts/Layout"
+import TaskCard from './components/dashboard/TaskCard'
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 function App() {
@@ -50,18 +53,21 @@ function App() {
 
   return (
     <Router>
-{/*    <NavBar
+      {/*    <NavBar
         navLinks={navLinks}
         //  logo={ logo }
       />   */}
+      <Layout>
+        <Switch>
+          {/* <Route exact path="/" component={Login} />
+        <Route exact path="/signup" component={Signup} /> */}
 
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/projects" component={Projects} />
-        <Route exact path="/project/:id" component={IndividualProject} />
-      </Switch>
+          {/*   */}
+          <Route exact path="/dashboard" component={TaskCard} />
+          <Route exact path="/projects" component={Projects} />
+          <Route exact path="/project/:id" component={IndividualProject} />
+        </Switch>
+      </Layout>
     </Router>
   );
 }

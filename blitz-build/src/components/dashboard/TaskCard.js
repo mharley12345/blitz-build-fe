@@ -1,23 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 
-import Task2 from "./Task2";
+import Task from "./Task";
 
-function TaskCard2() {
+function TaskCard() {
   return (
     <Container>
       <Section>
         <p>Your Task List</p>
         <p>View All</p>
       </Section>
-      <Task2 />
-      <Task2 />
-      <Task2 />
+      <Card>
+        <Task content="hello" status="Urgent" />
+        <Task />
+        <Task />
+      </Card>
     </Container>
   );
 }
 
-export default TaskCard2;
+export default TaskCard;
 
 const Section = styled.div`
   width: 100%;
@@ -36,4 +38,8 @@ const Section = styled.div`
 
 const Container = styled.div`
   margin-bottom: 48px;
+`;
+
+const Card = styled.div`
+  border: 1px solid #dcd9d5;
 `;

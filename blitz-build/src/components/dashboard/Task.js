@@ -1,12 +1,18 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-function Task2() {
+function Task({ content, status }) {
+  
+  
   return (
-    <Container>
+    <Container
+      red={true}
+      status={status}
+    >
+
       <Inner>
         <Address>
-          <Text>32 Washington Street</Text>
+          <Text>32 Washington Street {status} </Text>
         </Address>
 
         <DueDate>
@@ -23,7 +29,7 @@ function Task2() {
   );
 }
 
-export default Task2;
+export default Task;
 
 const Container = styled.div`
   width: 100%;
@@ -33,6 +39,10 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+
+  :nth-child(odd) {
+    background: #FBFAF9;
+  }
 `;
 
 const Address = styled.div`
@@ -65,13 +75,24 @@ const Date = styled.p`
 `;
 
 const Status = styled.div`
-  padding: 4px 16px;
+  padding: 5px 16px 3px;
   background-color: #ffbfbf;
   color: #9c0e0e;
   border-radius: 30px;
   p {
     font-family: "Roboto";
+    font-size: 14px;
+    line-height: 16px;
   }
+
+  ${props =>
+    props.status === "Urgent" &&
+    css`
+      background-color: red;
+      color: #fff;
+    `};
+
+
 `;
 
 const Inner = styled.div`
