@@ -4,12 +4,9 @@ import styled from "styled-components";
 
 // css of the weather container in the dashboard
 const WeatherContainerD = styled.div`
-  position: absolute;
   width: 444px;
   height: 292px;
-  left: 961px;
-  top: 685px;
-
+ 
   background: #fefefe;
   border: 0.5px solid #282828;
   box-sizing: border-box;
@@ -19,15 +16,35 @@ const WeatherContainerD = styled.div`
 // css of the weather container in the project page
 const WeatherContainerP = styled.div`
   position: absolute;
-  width: 400px;
-  height: 300px;
-  left: 936px;
-  top: 124px;
+  width: 530px;
+  height: 184px;
+  left: 878px;
+  top: 208px;
+  background: #ffffff;
+`;
+const Weathertitle = styled.div`
+  
+  width: 530px;
+  height: 40px;
+  left: 878px;
+  top: 168px;
 
-  background: #fefefe;
-  border: 0.5px solid #282828;
-  box-sizing: border-box;
-  border-radius: 1px;
+  background: #3f3a36;
+
+  font-family: Roboto;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #fbfaf9;
+`;
+const WeatherTitleText = styled.div`
+  padding: 12px 16px 12px 16px;
+  
+  font-family: Roboto;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #fbfaf9;
 `;
 const WeatherLocationInfo = styled.div`
   margin: 15px 35px;
@@ -143,11 +160,13 @@ function Weather(props) {
       {props.usage === "project" ? (
         // display in project page
         <WeatherContainerP>
+          <Weathertitle>
+            <WeatherTitleText>Weather</WeatherTitleText>
+          </Weathertitle>
           <WeatherLocationInfo>
-            <h2>{props.city}</h2>
+            <h5>{props.city}</h5>
             <p>{setTime()}</p>
           </WeatherLocationInfo>
-
           {weatherData ? (
             <WeatherInfo>
               <WeatherData>
@@ -165,7 +184,7 @@ function Weather(props) {
           ) : null}
         </WeatherContainerP>
       ) : (
-          // display in dashboard
+        // display in dashboard
 
         <WeatherContainerD>
           <WeatherLocationInfo>
