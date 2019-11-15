@@ -5,6 +5,8 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import NavBar from "./components/NavBar";
 // import Layout from "./components/dashboard/Layout";
+// import Dashboard from "./components/dashboard/Dashboard";
+import Tasks from './views/tasks/Tasks'
 import Projects from "./components/projects/Projects";
 import IndividualProject from "./components/projects/IndividualProject";
 import Logout from './components/auth/Logout'
@@ -59,17 +61,18 @@ function App() {
   
   return (
     <Router>
-         <NavBar
+      <NavBar
         navLinks={navLinks}
         //  logo={ logo }
       />  
       <Layout>
         <Switch>
-          {/* <Route exact path="/" component={Login} />
-        <Route exact path="/signup" component={Signup} /> */}
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
 
           {/*   */}
           <Route exact path="/dashboard" component={TaskCard} />
+          <Route exact path="/tasks" component={Tasks} />
           <Route exact path="/projects" component={Projects} />
           <Route exact path="/project/:id" component={IndividualProject} />
         </Switch>
