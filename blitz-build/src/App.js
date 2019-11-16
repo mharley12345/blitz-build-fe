@@ -9,8 +9,8 @@ import NavBar from "./components/NavBar";
 import Tasks from './views/tasks/Tasks'
 import Projects from "./components/projects/Projects";
 import IndividualProject from "./components/projects/IndividualProject";
-
-import Layout from "./layouts/Layout"
+import Logout from './components/auth/Logout'
+import Layout from './layouts/Layout'
 import TaskCard from './components/dashboard/TaskCard'
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
@@ -24,12 +24,12 @@ function App() {
     {
       text: "Projects",
       path: "/projects",
-      icon: "ion-ios-build"
+      icon: "ion-ios-construct"
     },
     {
       text: "Tasks",
       path: "/tasks",
-      icon: "ion-ios-checkbox"
+      icon: "ion-ios-notifications"
     },
     {
       text: "Documents",
@@ -42,17 +42,23 @@ function App() {
       icon: "ion-ios-menu"
     },
     {
-      text: "Calendar",
-      path: "/calendar",
-      icon: "ion-ios-calendar"
+      text: "Delay Log",
+      path: "/delay-log",
+      icon: "ion-ios-hourglass"
+    },
+   {
+      text: "Settings",
+      path: "/log-out",
+      icon: "ion-ios-cog"
     },
     {
-      text: "Log Out",
+      text: "Help",
       path: "/log-out",
-      icon: "ion-ios-power"
-    }
-  ];
+      icon: "ion-ios-help-circle-outline"
+    },
 
+  ];
+  
   return (
     <Router>
       <NavBar

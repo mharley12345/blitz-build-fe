@@ -1,32 +1,30 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-
+import media from '../styles/sizes'
 
 
 
 
 const NavBarContainer = styled.div`
-
-    height: 100%;
-    width: 12em;
+    margin-top: 180px;
     position: fixed;
-    margin-top: -2em;
-    margin-left: -1.5em;
-    box-shadow: 2px 2px 2px #ccc;
+    width: 296px;
+    height: 1574px;
+    left: 0px;
+    top: 0px;
+    background: #3F3A36;
 `;
     const NavBarUl = styled.ul`
-        background: #d1d0d0;
+       
+        background: #3F3A36;
         display: flex;
         margin-block-start: 0;
         margin-block-end: 0;
         padding-inline-start: 0;
-        height: 110%;
-        width: 100%;
+        height: 1574px;
         align-items: center;
         flex-direction: column;
-       
-        top: 4em;
         box-shadow: 2px 2px 2px #ccc;
         transition: 300ms ease all;
        
@@ -35,40 +33,62 @@ const NavBarContainer = styled.div`
        const NavBarFigure = styled.figure`
             margin-block-start: 0;
             margin-block-end: 0;
-            margin-inline-start: 2px;
+            margin-inline-start: .1%;
             margin-inline-end: 0;
             cursor: pointer;
+           
         `;
 
         const NavBarLi = styled.li` 
             list-style-type: none;
-            padding: 10px 0px;
-            width: 100%;
-            margin: 10px 0px;
+            height: 70px;
             align-items: center;
+            width: 90%;
+          :nth-child(8) {
+            border-top: 1px solid white;
+            margin-top: 40px;
+          }
         `;
+        
+
        const NavBarLink = {
-            color: 'rgb(0, 0, 0)',
+            color: '#FFFFFF',
             textDecoration: 'none',
             display: 'flex',
             flexDirection: 'row-reverse',
-            justifyContent: 'space-between',
             alignItems: 'center',
-            marginLeft: '2.6em',
-            marginRight: '1.5em',
+            fontSize: '16px',
+            height: '20px',
+            width:'120px',
+            marginTop: '30px',
+            marginLeft: '50px',
+           
           } ;
+       const NavLinkHover = (hoverIndex, index) => {
+           if(hoverIndex === index)
+           return HoverStyles
+       }   
 
+       const HoverStyles = {
+           backgroundColor: '#27221F',
+           borderRadius: '3px', 
+           borderLeft: ' 4px solid #DD6B20',
+           
+        }
             const NavBarP = styled.p`
-                width:4.8em;
+                width: 80px;
+                margin-left: 15px;
+           
             `;
              const NavBarI = styled.i`
            align-items: center;
-            font-size: 1.8em;
+            font-size: 1.4em;
+           
         `;
 
        
 
-function NavBar ({navLinks, background, hoverBackground, linkColor, logo }) {
+function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, }) {
    const [ hoverIndex, setHoverIndex ] = useState(-1)
    const [navOpen, setNavOpen ] = useState(false)
 //    console.log(navLinks, background, hoverBackground, linkColor, logo)
@@ -83,7 +103,7 @@ function NavBar ({navLinks, background, hoverBackground, linkColor, logo }) {
 
             <NavBarFigure onClick={() => setNavOpen(!navOpen)}>
           
-                <h1>Blitz Build</h1>
+               
 
             </NavBarFigure>
                    {navLinks.map((link, index) => 
@@ -93,7 +113,7 @@ function NavBar ({navLinks, background, hoverBackground, linkColor, logo }) {
                        <NavBarLi
                        onMouseEnter={() => setHoverIndex(index)}
                        onMouseLeave={() => setHoverIndex(-1) }
-                       style={{ background: hoverIndex === index ? ( hoverBackground || '#999') : '' }}
+                       style={NavLinkHover(hoverIndex, index)}
                        >
                            
                           <Link to= {link.path}  style = {NavBarLink} > 
@@ -101,16 +121,20 @@ function NavBar ({navLinks, background, hoverBackground, linkColor, logo }) {
                             { link.text } 
                             </NavBarP>
                             <NavBarI className = {link.icon}/>
-                            
                               </Link>
+
+                           
                            
                       </NavBarLi>
-                   )}
-               
+                   )} 
+             
+                   
+      
            </NavBarUl>
 
-
        </NavBarContainer>
+       
+      
    )
 
 }

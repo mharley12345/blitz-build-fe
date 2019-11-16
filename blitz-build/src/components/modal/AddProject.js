@@ -70,7 +70,7 @@ export default function AddProject() {
     console.log("im here");
     axios
       .post(
-        `https://api-blitz-build-dev.herokuapp.com/api/auth/${uid}/projects`,
+        `https://blitz-build.herokuapp.com/projects`,
         form
       )
       .then(res => {
