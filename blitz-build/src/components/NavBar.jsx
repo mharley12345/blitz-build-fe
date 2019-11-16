@@ -124,6 +124,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
                               </Link>
 
                            
+                           
                       </NavBarLi>
                    )} 
              
