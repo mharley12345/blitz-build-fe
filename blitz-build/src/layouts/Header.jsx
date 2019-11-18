@@ -18,10 +18,10 @@ const SearchContainer= styled.div`
 `
 const ButtonContainer=styled.div`
 display: flex;
-margin: 24px 28px;
+margin-top: 24px;
 width: 400px;
 justify-content: center;
-
+margin-left: 100px;
 `
 
 const ButtonDocument = styled.div`
@@ -51,7 +51,7 @@ const SoloDocument = {
    height: '48px',
    justifyContent: 'center',
    alignItems: 'center',
-  marginLeft: '200px'
+  marginLeft: '160px'
 }
 const ButtonProject = styled.div `
 display: flex;
