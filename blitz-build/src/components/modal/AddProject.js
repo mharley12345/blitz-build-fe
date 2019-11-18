@@ -66,20 +66,20 @@ const AddProject = props => {
   };
 
   const submitForm = e => {
+    e.preventDefault();
     const uid = localStorage.getItem("uid");
 
     console.log("im here");
-    // axios
-    //   .post(
-    //     `https://api-blitz-build-dev.herokuapp.com/api/auth/${uid}/projects`,
-    //     form
-    //   )
-
     axios
-      .post("https://blitz-build.herokuapp.com/projects", form)
+      .post(
+        `https://api-blitz-build-dev.herokuapp.com/api/auth/${uid}/projects`,
+        form
+      )
+
+      // axios
+      //   .post("https://blitz-build.herokuapp.com/projects", form)
       .then(res => {
         console.log(res);
-        props.history.push("/projects");
       })
       .catch(err => {
         console.log(err);
@@ -104,14 +104,24 @@ const AddProject = props => {
           <form onSubmit={submitForm}>
             {/* <TopContainer> */}
             {/* top container is project name and address */}
-            Project Name:
             <input
               name="project_name"
               placeholder="Project Name"
               onChange={changeHandler}
               value={form.project_name}
             />
-            Project Address
+            <input
+              name="city"
+              placeholder="City"
+              onChange={changeHandler}
+              value={form.city}
+            />
+            <input
+              name="state"
+              placeholder="state"
+              onChange={changeHandler}
+              value={form.state}
+            />
             <input
               name="street_address"
               placeholder="Project Address"

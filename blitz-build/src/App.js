@@ -50,10 +50,10 @@ function App() {
 
   return (
     <Router>
-      <NavBar
+      {/* <NavBar
         navLinks={navLinks}
         //  logo={ logo }
-      />
+      /> */}
 
       <Switch>
         <Route exact path="/" component={Login} />

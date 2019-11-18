@@ -22,13 +22,16 @@ const Login = props => {
   const submitForm = e => {
     e.preventDefault();
 
+    // axios
+    //   .post("https://api-blitz-build-dev.herokuapp.com/api/login", form)
+
     axios
-      .post("https://api-blitz-build-dev.herokuapp.com/api/login", form)
+      .post("https://blitz-build.herokuapp.com/users/login", form)
       .then(res => {
         console.log(res);
 
-        localStorage.setItem("uid", res.data.userObj.user.uid);
-        localStorage.setItem("token", res.data.token);
+        // localStorage.setItem("uid", res.data.userObj.user.uid);
+        // localStorage.setItem("token", res.data.accessToken);
 
         props.history.push("/projects");
       })
