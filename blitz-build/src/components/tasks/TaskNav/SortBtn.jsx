@@ -1,7 +1,12 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import React from "react";
+
+//mui
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+
+//styles
+import { SortButton } from "../../../styles/tasks";
 
 export default function SimpleMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -15,10 +20,14 @@ export default function SimpleMenu() {
   };
 
   return (
-    <div>
-      <button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-        Sort By
-      </button>
+    <>
+      <SortButton
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        Sort By &#8595;
+      </SortButton>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -26,10 +35,9 @@ export default function SimpleMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>Projects</MenuItem>
+        <MenuItem onClick={handleClose}>Urgency</MenuItem>
       </Menu>
-    </div>
+    </>
   );
 }
