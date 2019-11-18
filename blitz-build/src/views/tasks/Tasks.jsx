@@ -28,7 +28,12 @@ const StyledTask = styled.div`
 `;
 
 export default function Tasks() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([{
+    task_name: "",
+    task_description: "",
+    due_date: "",
+    projectID: ""
+  }]);
 
   useEffect(() => {
     const uid = localStorage.getItem("uid");
