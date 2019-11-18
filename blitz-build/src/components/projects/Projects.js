@@ -1,67 +1,236 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AddProject from "../modal/AddProject";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
+
+
+
+const Section = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+
+  p {
+    font-family: "Roboto";
+    font-size: 16px;
+    line-height: 19px;
+    color: #8a827d;
+    font-weight: 500;
+  }
+`;
+
 
 const ProjectContainer = styled.div`
+  width: 1090px;
   display: flex;
-  height: 80em;
   align-items: center;
   flex-direction: column;
-  box-shadow: 2px 2px 2px #ccc;
+ 
 `;
 const ProjectTopContainer = styled.div`
   display: flex;
-  width: 80%;
-  height: 4em;
-  background-color: rgb(34, 58, 77);
+  width: 1080px;
+  height: 51px;
+  background-color: #FFFFFF;;
   justify-content: space-between;
   align-items: center;
 `;
 const ProjectCategories = styled.div`
   display: flex;
-  width: 50em;
+  width: 50%;
 `;
 
 const ProjectCategoriesSecond = styled.div`
   display: flex;
-  width: 30em;
-  margin-right: 3em;
+  width: 40%;
+
 `;
 const ProjectUl = styled.div`
   display: flex;
-  width: 30em;
-  margin-left: -2em;
+  width: 55%;
+  justify-content: space-around;
+`;
+const ProjectUlSecond = styled.div`
+  display: flex;
+  width: 80%;
   justify-content: space-around;
 `;
 
 const ProjectLi = styled.div`
-  font-size: 1.1em;
-  color: white;
+color: #DD6B20;
+height: 19px;
+left: 307px;
+top: 75px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 19px;
 `;
 
-const ProjectList = styled.div`
+const ProjectListContainer = styled.div`
   display: flex;
-  width: 80%;
-  height: 4em;
-  background-color: lightgrey;
-  justify-content: space-between;
-  align-items: center;
+  width: 1080px;
+  height: 100px;
+  background-color: white;
+  
+  :nth-child(odd) {
+    background: #FBFAF9;
+  }
+ 
 `;
-const ProjectListLi = styled.div`
+
+const ProjectListCategories = styled.div`
   display: flex;
+  width: 62.8%
+  
+  line-height: 50px;
+`;
+const ProjectListCategoriesSecond = styled.div`
+  display: flex; 
+   justify-content: space-between;
+  width: 27%;
+  line-height: 50px;
+ 
+`;
+
+const ProjectListIcons = styled.div`
+display: flex; 
+ justify-content: space-between;
+width: 3%;
+margin-left: 4%;
+`;
+
+const ProjectListName = styled.div`
+  display: flex;
+  flex-direction: column;
   justify-content: start;
+  margin-left: 7%;
+  width: 12%;
+  
+`;
+const Name = styled.div`
 
-  font-size: 1.1em;
-  color: black;
+/* Heading 4 */
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+
+
+/* 500 Gray */
+
+color: #3F3A36;
+  
 `;
 
-const ProjectListUl = styled.div`
+const ProjectListAddress = styled.div`
   display: flex;
-  width: 46em;
-  justify-content: space-around;
-  margin-left: -3em;
+  flex-direction: column;
+  justify-content: start;
+  margin-left: 12%;
+ 
 `;
+const Address = styled.div`
+font-size: 1.1em;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+/* identical to box height, or 171% */
+
+
+/* 500 Gray */
+
+color: #3F3A36;
+
+`;
+const ProjectListDateCreated = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: start;
+
+`;
+const DateCreated =styled.div`
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+
+/* identical to box height, or 171% */
+
+text-align: right;
+
+/* 500 Gray */
+
+color: #3F3A36;
+`;
+const ProjectListDateModified = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: start;
+margin-left: -30px;
+
+`;
+const DateModified=styled.div`
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+
+/* identical to box height, or 171% */
+
+text-align: right;
+
+/* 500 Gray */
+
+color: #3F3A36;
+`;
+const ProjectListStatus = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: start;
+margin-right:-20px;
+
+`;
+const Status=styled.div`
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+
+/* identical to box height */
+
+text-align: right;
+
+/* 500 Gray */
+
+color: #3F3A36;
+`;
+const ProjectListCreate= styled.div`
+display: flex;
+flex-direction: column;
+justify-content: start;
+`;
+const Create=styled.div`
+font-size: 1.1em;
+color: rgb(50, 129, 168);
+`;
+const ProjectListDestroy= styled.div`
+display: flex;
+flex-direction: column;
+justify-content: start;
+`;
+const Destroy= styled.div`
+font-size: 1.1em;
+color: rgb(50, 129, 168);
+`;
+
+
 
 const Projects = props => {
   const [project, setProject] = useState([]);
@@ -69,7 +238,14 @@ const Projects = props => {
   useEffect(() => {
     const uid = localStorage.getItem("uid");
     axios
+<<<<<<< HEAD
       .get(`https://blitz-build.herokuapp.com/projects`, project)
+=======
+      .get(
+        `https://blitz-build.herokuapp.com/projects`,
+        project
+      )
+>>>>>>> 3801a4afc7366b6c07a49f99e0655671a3d498ba
       .then(res => {
         console.log(res);
         const projectArray = Object.values(res.data);
@@ -82,10 +258,13 @@ const Projects = props => {
   }, []);
 
   return (
+ 
+  
     <div>
-      <h1> HERE ARE THE PROJECTS </h1>
-      <ProjectContainer>
+       <Section> <p> Your Project List  </p></Section>
+       <ProjectContainer>
         <ProjectTopContainer>
+          
           <ProjectCategories>
             <ProjectUl>
               <ProjectLi> Project Name </ProjectLi>
@@ -93,45 +272,61 @@ const Projects = props => {
             </ProjectUl>
           </ProjectCategories>
           <ProjectCategoriesSecond>
-            <ProjectUl>
+            <ProjectUlSecond>
               <ProjectLi> Date Created </ProjectLi>
               <ProjectLi> Date Last Modified </ProjectLi>
               <ProjectLi> Status </ProjectLi>
-            </ProjectUl>
+            </ProjectUlSecond>
           </ProjectCategoriesSecond>
         </ProjectTopContainer>
 
         {project.map(project => {
           return (
-            <ProjectList
-              key={project.projectID}
+            <ProjectListContainer
+             key={project.projectID}
               onClick={() => {
                 props.history.push(`/project/${project.projectID}`);
               }}
             >
-              <ProjectCategories>
-                <ProjectListUl>
-                  <ProjectListLi> {project.project_name} </ProjectListLi>
-                  <ProjectListLi>
-                    {" "}
-                    12 Fairview Lane, Moorhead MN 56560-1543
-                  </ProjectListLi>
-                </ProjectListUl>
-              </ProjectCategories>
-              <ProjectCategoriesSecond>
-                <ProjectListUl>
-                  <ProjectListLi> 05/10/2019</ProjectListLi>
-                  <ProjectListLi> 08/18/2019 </ProjectListLi>
-                  <ProjectListLi> Complete </ProjectListLi>
-                </ProjectListUl>
-              </ProjectCategoriesSecond>
-            </ProjectList>
+             <ProjectListCategories>
+                <ProjectListName >
+                  <Name  > {project.project_name} </Name>
+               </ProjectListName> 
+
+                <ProjectListAddress>
+                  <Address> {" "} 12 Fairview Lane, Moorhead MN 56560-1543</Address>
+                 </ProjectListAddress>
+              </ProjectListCategories>
+              <ProjectListCategoriesSecond>
+                <ProjectListDateCreated>
+                  <DateCreated> 05/10/2019</DateCreated>
+                  </ProjectListDateCreated>
+
+                  <ProjectListDateModified>
+                    <DateModified> 08/18/2019 </DateModified>
+                   </ProjectListDateModified>
+
+                  <ProjectListStatus> 
+                    <Status>Complete</Status>
+                   </ProjectListStatus>
+             </ProjectListCategoriesSecond>
+             {/* <ProjectListIcons>
+               <ProjectListCreate>
+                 <Create className = "ion-ios-create"></Create>
+               </ProjectListCreate>
+               <ProjectListDestroy>
+                 <Destroy className = "ion-ios-trash"></Destroy>
+               </ProjectListDestroy>
+             </ProjectListIcons> */}
+            </ProjectListContainer>
           );
         })}
 
-        <AddProject />
-      </ProjectContainer>
-    </div>
+        {/* <AddProject />  */}
+        </ProjectContainer>
+     </div>
+     
+   
   );
 };
 

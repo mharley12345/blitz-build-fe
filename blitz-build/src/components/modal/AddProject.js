@@ -10,9 +10,9 @@ import styled from "styled-components";
 const ModalContainer = styled.div``;
 
 const ModalTitle = styled.div`
-  display: flex
+  display: flex;
   padding: 16px 24px;
-  width: 92%
+  width: 92%;
   background-color: rgb(34, 58, 77);
   color: white;
   justify-content: center;
@@ -20,8 +20,8 @@ const ModalTitle = styled.div`
 
 const H3 = styled.div`
   font-size: 1.5em;
-  display:flex
-  justify-content:center
+  display: flex;
+  justify-content: center;
 `;
 
 const Input = styled.div`
@@ -39,7 +39,12 @@ const TopContainer = styled.div`
 const AddProject = props => {
   console.log("props", props);
   const [form, setForm] = useState({
+<<<<<<< HEAD
     project_name: "",
+=======
+    projectID: "",
+    Project_Name: "",
+>>>>>>> 3801a4afc7366b6c07a49f99e0655671a3d498ba
     street_address: "",
     city: "",
     state: "",
@@ -72,7 +77,7 @@ const AddProject = props => {
     console.log("im here");
     axios
       .post(
-        `https://api-blitz-build-dev.herokuapp.com/api/auth/${uid}/projects`,
+        `https://blitz-build.herokuapp.com/projects`,
         form
       )
 
