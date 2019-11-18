@@ -33,6 +33,7 @@ export default function TaskNav() {
       <Modal
         visible={ modalStatus }
         dismiss={ handleModalClose }
+        client={'50%'}
         component={
           <TaskForm 
           closeModal={ handleModalClose } 
