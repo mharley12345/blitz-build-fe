@@ -108,9 +108,9 @@ function Weather(props) {
       console.log(weatherPosition)
       axios
         .post(
-          `https://api-blitz-build-dev.herokuapp.com/api/auth/${props.uid}/weather`,
-          weatherPosition,{headers:{token:localStorage.getItem('token')}}
-          
+          ` https://api-blitz-build-dev.herokuapp.com/api/auth/R3fE6DP3UgP8hQSWbGubsHb7lOw2/weather`,
+          weatherPosition,
+          { headers: { token: localStorage.getItem("token") } }
         )
         .then(res => {
           setWeatherData(res.data);
