@@ -31,11 +31,7 @@ const Login = props => {
         console.log(res);
 
         // localStorage.setItem("uid", res.data.userObj.user.uid);
-<<<<<<< HEAD
         // localStorage.setItem("token", res.data.accessToken);
-=======
-        localStorage.setItem("token", res.data.token);
->>>>>>> 3801a4afc7366b6c07a49f99e0655671a3d498ba
 
         props.history.push("/projects");
       })

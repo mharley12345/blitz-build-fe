@@ -39,12 +39,7 @@ const TopContainer = styled.div`
 const AddProject = props => {
   console.log("props", props);
   const [form, setForm] = useState({
-<<<<<<< HEAD
     project_name: "",
-=======
-    projectID: "",
-    Project_Name: "",
->>>>>>> 3801a4afc7366b6c07a49f99e0655671a3d498ba
     street_address: "",
     city: "",
     state: "",
@@ -76,10 +71,7 @@ const AddProject = props => {
 
     console.log("im here");
     axios
-      .post(
-        `https://blitz-build.herokuapp.com/projects`,
-        form
-      )
+      .post(`https://blitz-build.herokuapp.com/projects`, form)
 
       // axios
       //   .post("https://blitz-build.herokuapp.com/projects", form)
