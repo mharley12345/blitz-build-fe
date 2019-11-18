@@ -5,19 +5,13 @@ import SortBtn from "./SortBtn";
 import Modal from "../../global/Modal";
 import TaskForm from "../TaskForm";
 
-//styles
-import styled from "styled-components";
 
 //context
-import TasksContext from "../../../contexts/TaskContext";
+import TasksContext from "../../../contexts/tasks/TaskContext";
 
-const taskNavStyle = styled.div`
-  margin-left: 200px;
-  width: 750px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
+//styles
+import { AddButton, TaskNavStyle } from "../../../styles/tasks";
+
 
 export default function TaskNav() {
   const { addTask } = useContext(TasksContext);
@@ -31,12 +25,13 @@ export default function TaskNav() {
   };
 
   return (
-    <taskNavStyle>
+    <TaskNavStyle>
       <SortBtn />
-      <button onClick={ handleModalOpen }>add</button>
+      <AddButton onClick={ handleModalOpen }>+ Add Task</AddButton>
       <Modal
         visible={ modalStatus }
         dismiss={ handleModalClose }
+        client={'50%'}
         component={
           <TaskForm 
           closeModal={ handleModalClose } 
@@ -45,6 +40,6 @@ export default function TaskNav() {
         />
         }
       />
-    </taskNavStyle>
+    </TaskNavStyle>
   );
 }

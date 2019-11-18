@@ -5,6 +5,7 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import NavBar from "./components/NavBar";
 // import Layout from "./components/dashboard/Layout";
+// import Dashboard from "./components/dashboard/index";
 // import Dashboard from "./components/dashboard/Dashboard";
 import Tasks from "./views/tasks/Tasks";
 import Projects from "./components/projects/Projects";
@@ -14,6 +15,9 @@ import Layout from "./layouts/Layout";
 import TaskCard from "./components/dashboard/TaskCard";
 import DelayLog from "./components/delayLog/DelayLog";
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
+
+//context
+import TaskProvider from './contexts/tasks/TaskProvider'
 
 function App() {
   const navLinks = [
@@ -61,21 +65,25 @@ function App() {
 
   return (
     <Router>
-      {/* <NavBar
-        navLinks={navLinks}
-        //  logo={ logo }
-      /> */}
-      <Layout>
-        <Switch>
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/dashboard" component={TaskCard} />
-          <Route exact path="/tasks" component={Tasks} />
-          <Route exact path="/projects" component={Projects} />
-          <Route exact path="/project/:id" component={IndividualProject} />
-          <Route exact path="/delay-log" component={DelayLog} />
-        </Switch>
-      </Layout>
+      <TaskProvider>
+        <NavBar
+          navLinks={navLinks}
+          //  logo={ logo }
+        />
+        <Layout>
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+
+            {/*   */}
+            <Route exact path="/dashboard" component={TaskCard} />
+            <Route exact path="/tasks" component={Tasks} />
+            <Route exact path="/projects" component={Projects} />
+            <Route exact path="/project/:id" component={IndividualProject} />
+            <Route exact path="/delay-log" component={DelayLog} />
+          </Switch>
+        </Layout>
+      </TaskProvider>
     </Router>
   );
 }

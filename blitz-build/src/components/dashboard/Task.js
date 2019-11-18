@@ -1,17 +1,17 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-function Task({ address, type, current, status }) {
+function Task({ address, type, current, status, content }) {
   return (
     <Container>
       <Inner>
         <Address>
-          <Text>{address}</Text>
+          <Text>Task Project{status} </Text>
         </Address>
 
         <DueDate>
-          <Text>{type}</Text>
-          <Date>{current}</Date>
+          <Text>{content.task_name}</Text>
+          <Date>{content.due_date} 3 days past due</Date>
         </DueDate>
       </Inner>
       <div>

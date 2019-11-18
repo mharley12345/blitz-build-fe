@@ -5,7 +5,7 @@ import Modal from "../global/Modal";
 import TaskForm from "./TaskForm";
 
 //context
-import TasksContext from "../../contexts/TaskContext";
+import TasksContext from "../../contexts/tasks/TaskContext";
 
 export default function EditTask({ task }) {
   const { editTask } = useContext(TasksContext);
@@ -25,6 +25,7 @@ export default function EditTask({ task }) {
       <Modal
         visible={ modalStatus }
         dismiss={ handleModalClose }
+        client={'50%'}
         component={
           <TaskForm
             closeModal={ handleModalClose }
