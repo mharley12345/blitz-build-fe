@@ -12,12 +12,12 @@ function Task({ content, status }) {
 
       <Inner>
         <Address>
-          <Text>32 Washington Street {status} </Text>
+          <Text>Task Project{status} </Text>
         </Address>
 
         <DueDate>
-          <Text>Building Inspection</Text>
-          <Date>3 days past due</Date>
+          <Text>{content.task_name}</Text>
+          <Date>{content.due_date} 3 days past due</Date>
         </DueDate>
       </Inner>
       <div>
