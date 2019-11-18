@@ -1,28 +1,22 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-function Task({ content, status }) {
-  
-  
+function Task({ address, type, current, status }) {
   return (
-    <Container
-      red={true}
-      status={status}
-    >
-
+    <Container>
       <Inner>
         <Address>
-          <Text>32 Washington Street {status} </Text>
+          <Text>{address}</Text>
         </Address>
 
         <DueDate>
-          <Text>Building Inspection</Text>
-          <Date>3 days past due</Date>
+          <Text>{type}</Text>
+          <Date>{current}</Date>
         </DueDate>
       </Inner>
       <div>
-        <Status>
-          <p>Overdue</p>
+        <Status status={status}>
+          <p>{status}</p>
         </Status>
       </div>
     </Container>
@@ -41,7 +35,7 @@ const Container = styled.div`
   justify-content: space-between;
 
   :nth-child(odd) {
-    background: #FBFAF9;
+    background: #fbfaf9;
   }
 `;
 
@@ -76,9 +70,10 @@ const Date = styled.p`
 
 const Status = styled.div`
   padding: 5px 16px 3px;
-  background-color: #ffbfbf;
-  color: #9c0e0e;
+  background-color: grey;
+  color: black;
   border-radius: 30px;
+
   p {
     font-family: "Roboto";
     font-size: 14px;
@@ -88,11 +83,23 @@ const Status = styled.div`
   ${props =>
     props.status === "Urgent" &&
     css`
-      background-color: red;
-      color: #fff;
+      background-color: #FFBFBF;
+      color: #9C0E0E;
     `};
 
+  ${props =>
+    props.status === "Pending" &&
+    css`
+      background-color: #FFF3B3;
+      color: #8B4708;
+    `};
 
+  ${props =>
+    props.status === "Overdue" &&
+    css`
+      background-color: #D2FAC4;
+      color: #326021;
+    `};
 `;
 
 const Inner = styled.div`
