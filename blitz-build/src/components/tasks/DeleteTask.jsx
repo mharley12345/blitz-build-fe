@@ -5,7 +5,7 @@ import Modal from "../global/Modal";
 import Confirm from "../global/Confirm";
 
 //context
-import TasksContext from "../../contexts/TaskContext";
+import TasksContext from "../../contexts/tasks/TaskContext";
 
 export default function DeleteTask({ task }) {
   const { deleteTask } = useContext(TasksContext);

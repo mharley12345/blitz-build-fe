@@ -7,7 +7,7 @@ import TaskForm from "../TaskForm";
 
 
 //context
-import TasksContext from "../../../contexts/TaskContext";
+import TasksContext from "../../../contexts/tasks/TaskContext";
 
 //styles
 import { AddButton, TaskNavStyle } from "../../../styles/tasks";

@@ -16,6 +16,9 @@ import TaskCard from './components/dashboard/TaskCard'
 import DelayLog from './components/delayLog/DelayLog'
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
+//context
+import TaskProvider from './contexts/tasks/TaskProvider'
+
 function App() {
   const navLinks = [
     {
@@ -58,28 +61,29 @@ function App() {
       path: "/log-out",
       icon: "ion-ios-help-circle-outline"
     },
-
   ];
   
   return (
     <Router>
-      <NavBar
-        navLinks={navLinks}
-        //  logo={ logo }
-      />
-      <Layout>
-        <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
+      <TaskProvider>
+        <NavBar
+          navLinks={navLinks}
+          //  logo={ logo }
+        />
+        <Layout>
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
 
-          {/*   */}
-          <Route exact path="/dashboard" component={TaskCard} />
-          <Route exact path="/tasks" component={Tasks} />
-          <Route exact path="/projects" component={Projects} />
-          <Route exact path="/project/:id" component={IndividualProject} />
-          <Route exact path="/delay-log" component={DelayLog} />
-        </Switch>
-      </Layout>
+            {/*   */}
+            <Route exact path="/dashboard" component={TaskCard} />
+            <Route exact path="/tasks" component={Tasks} />
+            <Route exact path="/projects" component={Projects} />
+            <Route exact path="/project/:id" component={IndividualProject} />
+            <Route exact path="/delay-log" component={DelayLog} />
+          </Switch>
+        </Layout>
+      </TaskProvider>
     </Router>
   );
 }

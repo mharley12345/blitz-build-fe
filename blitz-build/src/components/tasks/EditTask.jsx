@@ -5,7 +5,7 @@ import Modal from "../global/Modal";
 import TaskForm from "./TaskForm";
 
 //context
-import TasksContext from "../../contexts/TaskContext";
+import TasksContext from "../../contexts/tasks/TaskContext";
 
 export default function EditTask({ task }) {
   const { editTask } = useContext(TasksContext);
