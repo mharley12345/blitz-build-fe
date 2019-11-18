@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
@@ -15,6 +15,9 @@ import TaskCard from './components/dashboard/TaskCard'
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 function App() {
+
+  const [ pathname, setPathname ] = useState();
+
   const navLinks = [
     {
       text: "Home",
@@ -61,11 +64,11 @@ function App() {
   
   return (
     <Router>
-      <NavBar
+      <NavBar setPathname= {setPathname}
         navLinks={navLinks}
         //  logo={ logo }
       />  
-      <Layout>
+      <Layout pathname={pathname} >
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />

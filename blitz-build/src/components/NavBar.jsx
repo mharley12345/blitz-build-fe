@@ -87,13 +87,15 @@ const NavBarContainer = styled.div`
 
        
 
-function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, }) {
+           
+function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, setPathname }) {
    const [ hoverIndex, setHoverIndex ] = useState(-1)
    const [navOpen, setNavOpen ] = useState(false)
+  
 //    console.log(navLinks, background, hoverBackground, linkColor, logo)
 
    return (
-       <NavBarContainer
+       <NavBarContainer 
        style={{ background }}>
         <NavBarUl style = {{ background }}
             className= { navOpen ? 'active' : '' }                
@@ -109,13 +111,14 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
 
          //// links recieve their text and icons through app.js          
 
-                       <NavBarLi
+                       <NavBarLi onClick={()=> (setPathname(window.location.pathname))}
                        onMouseEnter={() => setHoverIndex(index)}
-                       onMouseLeave={() => setHoverIndex(-1) }
+                       onMouseLeave={() => setHoverIndex(-1)}
+                      
                        style={NavLinkHover(hoverIndex, index)}
                        >
                            
-                          <Link to= {link.path}  style = {NavBarLink} > 
+                          <Link   to= {link.path}  style = {NavBarLink}  > 
                               <NavBarP>
                             { link.text } 
                             </NavBarP>
