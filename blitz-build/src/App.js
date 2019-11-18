@@ -67,6 +67,8 @@ function App() {
       /> */}
       <Layout>
         <Switch>
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/dashboard" component={TaskCard} />
           <Route exact path="/tasks" component={Tasks} />
           <Route exact path="/projects" component={Projects} />
