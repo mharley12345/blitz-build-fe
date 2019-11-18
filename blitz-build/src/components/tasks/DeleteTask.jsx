@@ -24,6 +24,7 @@ export default function DeleteTask({ task }) {
       <Modal
         visible={modalStatus}
         dismiss={handleModalClose}
+        client={'35%'}
         component={
           <Confirm
             closeModal={handleModalClose}

@@ -17,8 +17,7 @@ export const ModalBoxSetup = styled.div`
 position: absolute;
 left: 0;
 right: 0;
-width: 50%;
-overflow:hidden;
+width: ${props => props.width}
 padding:16px;
 margin: 50px auto;
 box-sizing:border-box;
