@@ -11,9 +11,24 @@ function TaskCard() {
         <p>View All</p>
       </Section>
       <Card>
-        <Task content="hello" status="Urgent" />
-        <Task />
-        <Task />
+        <Task
+          status="Urgent"
+          address={"1640 Riverside Drive"}
+          current={"3 days past due"}
+          type={"Building Inspection"}
+        />
+        <Task
+          status="Overdue"
+          address={"12 Grimmauld Place"}
+          current={"3 days past due"}
+          type={"Building Inspection"}
+        />
+        <Task
+          status="Pending"
+          address={"Apartment 5A, 129 West"}
+          current={"3 days past due"}
+          type={"Building Inspection"}
+        />
       </Card>
     </Container>
   );
