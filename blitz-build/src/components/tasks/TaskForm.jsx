@@ -46,6 +46,20 @@ padding: 6px 8px;
 border-width: 1px;
 border-style: solid;
 border-color: ${props => props.error ? 'red' : 'black'};
+border-radius: 3px;
+margin: 0;
+`
+
+const StyledSelect = styled.select`
+width: 77%;
+font-size: 14px;
+padding: 6px 8px;
+text-decoration: none;
+border-top: none;
+border-left: none;
+border-right: none;
+outline: none;
+border-color: ${props => props.error ? 'red' : 'black'};
 margin: 0;
 `
 
@@ -100,7 +114,9 @@ export default function TaskForm({
         <XButton onClick={closeModal}>X</XButton> 
       </div>
 
-      <header>{text}</header>
+      <header>
+        <h1 style={{fontSize: '3rem'}}>{text}</h1>
+      </header>
 
       <StyledLabel>Task Name</StyledLabel>
       <StyledInput
@@ -124,7 +140,7 @@ export default function TaskForm({
       <TextField
         style={{
           width: '77%', 
-          marginTop: '20px'
+          marginTop: '20px',
         }}
         id="date"
         label="Due Date"
@@ -146,13 +162,13 @@ export default function TaskForm({
       /> */}
 
       <StyledLabel>Assign Project</StyledLabel>
-      <select name="projectID" onChange={handleChanges} value={task.projectID}>
+      <StyledSelect name="projectID" onChange={handleChanges} value={task.projectID}>
         <option>Choose Poject</option>
 
         {projects.map(project => {
           return <option value={project.projectID}>{project.projectID}</option>;
         })}
-      </select>
+      </StyledSelect>
 
       <button onClick={closeModal}>cancel</button>
       <button>{text}</button>
