@@ -42,7 +42,7 @@ export default function Tasks() {
       .then(res => {
         console.log(res)
 
-        // //tasks unique task id keys and turns them into an array
+        // //takes unique task id keys and turns them into an array
         // const tasksId = Object.keys(res.data)
         // console.log('task ids', tasksId)
 

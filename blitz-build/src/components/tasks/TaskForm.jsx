@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 // import DatePicker from "react-datepicker";
+
+//styles
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import styled from "styled-components";
+import { XButton } from "../../styles/tasks";
 
 //hooks
 import { useInput } from "../../customHooks/useInput";
@@ -12,14 +16,38 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    width: '75%'
   },
   textField: {
+    width: '75%',
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 200
   }
 }));
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+const StyledLabel = styled.label`
+  margin-top: 20px;
+  margin-bottom: 4px;
+  width: 75%;
+
+`
+
+const StyledInput = styled.input`
+width: 75%;
+font-size: 14px;
+padding: 6px 8px;
+border-width: 1px;
+border-style: solid;
+border-color: ${props => props.error ? 'red' : 'black'};
+margin: 0;
+`
 
 export default function TaskForm({
   closeModal,
@@ -34,9 +62,10 @@ export default function TaskForm({
     axiosWithAuth()
       .get(`/${uid}/projects`)
       .then(res => {
-        const projectArray = Object.values(res.data.projects);
+        // console.log('from get projects in TaskForm', res);
+        const projectArray = Object.values(res.data);
         setProjects(projectArray);
-        console.log(projects);
+        // console.log('from get projects in TaskForm', projects);
       })
       .catch(err => console.log(err));
   }, []);
@@ -66,29 +95,37 @@ export default function TaskForm({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button onClick={closeModal}>x</button>
+    <StyledForm onSubmit={handleSubmit}>
+      <div style={{width: '100%', textAlign: 'right'}}>
+        <XButton onClick={closeModal}>X</XButton> 
+      </div>
 
-      <label>Task Name</label>
-      <input
+      <header>{text}</header>
+
+      <StyledLabel>Task Name</StyledLabel>
+      <StyledInput
         type="text"
         name="task_name"
         value={task.task_name}
         onChange={handleChanges}
       />
 
-      <label>Task Decription</label>
-      <input
+      <StyledLabel>Task Decription</StyledLabel>
+      <StyledInput
         type="text"
         name="task_description"
         value={task.task_description}
         onChange={handleChanges}
       />
 
-      {/* <label>Due Date</label>
+      {/* <StyledLabel>Due Date</StyledLabel>
       <DatePicker selected={dueDate} onChange={date => setDueDate(date)} /> */}
 
       <TextField
+        style={{
+          width: '77%', 
+          marginTop: '20px'
+        }}
         id="date"
         label="Due Date"
         type="date"
@@ -100,7 +137,7 @@ export default function TaskForm({
         }}
       />
 
-      {/* <label>Due Date</label>
+      {/* <StyledLabel>Due Date</StyledLabel>
       <input
         type="text"
         name="dueDate"
@@ -108,7 +145,7 @@ export default function TaskForm({
         onChange={handleChanges}
       /> */}
 
-      <label>Assign Project</label>
+      <StyledLabel>Assign Project</StyledLabel>
       <select name="projectID" onChange={handleChanges} value={task.projectID}>
         <option>Choose Poject</option>
 
@@ -119,6 +156,6 @@ export default function TaskForm({
 
       <button onClick={closeModal}>cancel</button>
       <button>{text}</button>
-    </form>
+    </StyledForm>
   );
 }

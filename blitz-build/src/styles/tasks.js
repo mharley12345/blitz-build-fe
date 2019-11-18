@@ -34,3 +34,16 @@ export const TaskNavStyle = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+export const XButton = styled.button`
+font-size: 25px;
+background-color: white;
+border: none;
+color: black;
+padding: 10px 10px;
+text-align: right;
+text-decoration: none;
+display: inline-block;
+margin: 4px 2px;
+cursor: pointer;
+`

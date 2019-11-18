@@ -25,6 +25,7 @@ export default function EditTask({ task }) {
       <Modal
         visible={ modalStatus }
         dismiss={ handleModalClose }
+        client={'50%'}
         component={
           <TaskForm
             closeModal={ handleModalClose }

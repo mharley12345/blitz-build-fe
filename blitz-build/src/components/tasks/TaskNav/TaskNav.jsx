@@ -5,8 +5,6 @@ import SortBtn from "./SortBtn";
 import Modal from "../../global/Modal";
 import TaskForm from "../TaskForm";
 
-//styles
-import styled from "styled-components";
 
 //context
 import TasksContext from "../../../contexts/TaskContext";
