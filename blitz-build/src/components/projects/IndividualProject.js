@@ -6,11 +6,11 @@ const IndividualProject = props => {
 
   useEffect(() => {
     const uid = localStorage.getItem("uid");
-    const projectID = props.match.params.id;
+    const project_id = props.match.params.id;
     localStorage.setItem("project_id", props.match.params.id);
     axios
       .get(
-        `https://api-blitz-build-pro.herokuapp.com/api/auth/${uid}/projects/${projectID}`,
+        `https://api-blitz-build-pro.herokuapp.com/api/auth/${uid}/projects/${project_id}`,
         project
       )
       .then(res => {

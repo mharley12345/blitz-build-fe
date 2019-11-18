@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AddProject from "../modal/AddProject";
 import styled, {css} from "styled-components";
-
+import axiosWithAuth from '../auth/axiosWithAuth'
 
 
 const Section = styled.div`
@@ -237,16 +237,22 @@ const Projects = props => {
 
   useEffect(() => {
     const uid = localStorage.getItem("uid");
-    axios
+
+    const project_id = props.match.params.id;
+    localStorage.setItem("project_id", props.match.params.id);
+    axiosWithAuth()
       .get(
-        `https://api-blitz-build-pro.herokuapp.com/api/auth/${uid}/projects`,
+        // `https://api-blitz-build-pro.herokuapp.com/api/auth/${uid}/projects`,
+        `http://localhost:4000/api/auth/${uid}/projects`,
         project
       )
       .then(res => {
         console.log(res);
+    
         const projectArray = Object.values(res.data);
         console.log(projectArray);
         setProject(projectArray);
+
       })
       .catch(err => {
         console.log(err);

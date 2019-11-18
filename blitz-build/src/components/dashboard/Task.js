@@ -1,9 +1,25 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import styled, { css } from "styled-components";
-
+import axiosWithAuth from '../auth/axiosWithAuth';
+let uid = localStorage.getItem('uid')
 function Task({ content, status }) {
+  const[tasks,setTasks] =useState( '' )
+
+   useEffect(()=>{
+    axiosWithAuth()
+    .get(`http://localhost:4000/api/auth/${uid}/tasks`)
+    .then(res=>{ setTasks(Object.entries(res.data))})
   
+      
+
+   },[])
+    
+console.log(tasks)
+
+   
   
+
+
   return (
     <Container
       red={true}
@@ -12,12 +28,12 @@ function Task({ content, status }) {
 
       <Inner>
         <Address>
-          <Text>32 Washington Street {status} </Text>
+          <Text> {tasks.description}</Text>
         </Address>
 
         <DueDate>
-          <Text>Building Inspection</Text>
-          <Date>3 days past due</Date>
+          <Text>{tasks.task_name}</Text>
+          <Date>{tasks.due_date}</Date>
         </DueDate>
       </Inner>
       <div>
@@ -27,6 +43,7 @@ function Task({ content, status }) {
       </div>
     </Container>
   );
+   
 }
 
 export default Task;

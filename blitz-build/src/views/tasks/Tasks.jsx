@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axiosWithAuth from "../../components/auth/axiosWithAuth"
 import  TaskContext  from "../../contexts/TaskContext"
 
 
@@ -9,7 +9,8 @@ import Task from "../../components/tasks/Task";
 
 //styles
 import styled from "styled-components";
-
+let uid = localStorage.getItem('uid')
+let projectID = localStorage.getItem('projectID')
 const StyledTasks = styled.div`
   margin-left: 200px;
   width: 100%;
@@ -29,6 +30,7 @@ export default function Tasks() {
   console.log(tasks)
 
 	const addTask = (newTask) => {
+    axiosWithAuth().post(`http://localhost4000/api/auth/${uid}/projects/${projectID}/tasks`,newTask)
     console.log(newTask)
     newTask.id = Date.now() 
 		setTasks([...tasks, newTask])

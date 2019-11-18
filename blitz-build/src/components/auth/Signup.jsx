@@ -17,6 +17,9 @@ function Signup() {
         <input placeholder="••••••••" />
         <label>Confirm password</label>
         <input placeholder="••••••••" />
+        <label>Phone
+        <input type="text" placeholder="Phone"/>
+        </label>
         <button>Sign up</button>
       </form>
     </div>

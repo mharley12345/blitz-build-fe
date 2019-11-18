@@ -6,7 +6,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import styled from "styled-components";
-
+import axiosWithAuth from '../auth/axiosWithAuth'
 const ModalContainer = styled.div``;
 
 const ModalTitle = styled.div`
@@ -54,9 +54,9 @@ export default function AddProject() {
 
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
-     e.resetForm()
+     
   };
-console.log(form)
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -70,9 +70,10 @@ console.log(form)
     const uid = localStorage.getItem("uid");
 
     
-    axios
+    axiosWithAuth()
       .post(
-        `https://api-blitz-build-pro.herokuapp.com/api/auth/${uid}/projects`,
+        // `https://api-blitz-build-pro.herokuapp.com/api/auth/${uid}/projects`,
+         `http://localhost:4000/api/auth/${uid}/projects`,
         form
       )
       .then(res => {
@@ -81,6 +82,7 @@ console.log(form)
       .catch(err => {
         console.log(err);
       });
+       setOpen(false)
   };
 
   return (
@@ -176,7 +178,7 @@ console.log(form)
               onChange={changeHandler}
               value={form.image_url}
             /> */}
-            <button type="submit"> Add Project </button>
+            <button onSubmit={submitForm} type="submit"> Add Project </button>
           </form>
         </DialogContent>
         <DialogActions>

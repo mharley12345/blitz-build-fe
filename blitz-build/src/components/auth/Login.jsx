@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
+import axios from 'axios'
 const Login = props => {
   const [form, setForm] = useState({ email: "", password: "" });
 
@@ -21,20 +21,28 @@ const Login = props => {
 
   const submitForm = e => {
     e.preventDefault();
-
-    axios
-      .post("https://api-blitz-build-pro.herokuapp.com/api/login", form)
+//https://api-blitz-build-pro.herokuapp.com/api/login
+      axios
+      .post("http://localhost:4000/api/login", form)
       .then(res => {
-        console.log(res);
-
-        localStorage.setItem("uid", res.data.userObj.user.uid);
-        localStorage.setItem("token", res.data.token);
+         
+         console.log(res)
+        localStorage.setItem("uid", res.data.uid);
+        localStorage.setItem("token", res.data.accessToken);
+         
+        localStorage.setItem("refeshToken",res.data.refreshToken)
 
         props.history.push("/projects");
+        if(res){
+          console.log(res)
+        
+        }
+   
       })
       .catch(err => {
         console.log(err);
       });
+    
   };
 
   return (
