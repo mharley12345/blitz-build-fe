@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Global from "./Global";
 import Nav from "./Nav";
-
+import Header from './Header'
 function Layout({ children }) {
   return (
     <Container>
@@ -35,11 +35,7 @@ const Main = styled.div`
   width: 100%;
 `;
 
-const Header = styled.div`
-  background: #fff;
-  width: 100%;
-  height: 96px;
-`;
+
 
 const Content = styled.div`
   background: #ebe9e7;
