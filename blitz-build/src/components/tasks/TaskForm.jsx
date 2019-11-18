@@ -41,13 +41,14 @@ const StyledLabel = styled.label`
 
 const StyledInput = styled.input`
 width: 75%;
+margin: 0;
 font-size: 14px;
 padding: 6px 8px;
+background: #FBFAF9;
 border-width: 1px;
 border-style: solid;
 border-color: ${props => props.error ? 'red' : 'black'};
 border-radius: 3px;
-margin: 0;
 `
 
 const StyledSelect = styled.select`
@@ -61,6 +62,15 @@ border-right: none;
 outline: none;
 border-color: ${props => props.error ? 'red' : 'black'};
 margin: 0;
+`
+
+const StyledBtn = styled.button`
+margin-top: 73px;
+padding: 10px 50px;
+border-radius: 3px;
+border: 1px solid #8A827D;
+background: #DA552F;
+color: white;
 `
 
 export default function TaskForm({
@@ -115,7 +125,7 @@ export default function TaskForm({
       </div>
 
       <header>
-        <h1 style={{fontSize: '3rem'}}>{text}</h1>
+        <h1 style={{fontSize: '3rem', fontFamily: 'roboto',}}>{text}</h1>
       </header>
 
       <StyledLabel>Task Name</StyledLabel>
@@ -169,9 +179,7 @@ export default function TaskForm({
           return <option value={project.projectID}>{project.projectID}</option>;
         })}
       </StyledSelect>
-
-      <button onClick={closeModal}>cancel</button>
-      <button>{text}</button>
+      <StyledBtn>Save</StyledBtn>
     </StyledForm>
   );
 }
