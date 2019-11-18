@@ -13,6 +13,7 @@ import IndividualProject from "./components/projects/IndividualProject";
 import Logout from './components/auth/Logout'
 import Layout from './layouts/Layout'
 import TaskCard from './components/dashboard/TaskCard'
+import DelayLog from './components/delayLog/DelayLog'
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 function App() {
@@ -65,7 +66,7 @@ function App() {
       <NavBar
         navLinks={navLinks}
         //  logo={ logo }
-      />  
+      />
       <Layout>
         <Switch>
           <Route exact path="/login" component={Login} />
@@ -76,7 +77,7 @@ function App() {
           <Route exact path="/tasks" component={Tasks} />
           <Route exact path="/projects" component={Projects} />
           <Route exact path="/project/:id" component={IndividualProject} />
-          <Route exact path="/tasks" component={Tasks} />   
+          <Route exact path="/delay-log" component={DelayLog} />
         </Switch>
       </Layout>
     </Router>

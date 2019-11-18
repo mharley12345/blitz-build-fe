@@ -5,7 +5,6 @@ import media from '../styles/sizes'
 
 
 
-
 const NavBarContainer = styled.div`
     margin-top: 180px;
     position: fixed;
@@ -43,7 +42,7 @@ const NavBarContainer = styled.div`
             list-style-type: none;
             height: 70px;
             align-items: center;
-            width: 90%;
+            width: 85%;
           :nth-child(8) {
             border-top: 1px solid white;
             margin-top: 40px;
