@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import DatePicker from "react-datepicker";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
 //hooks
 import { useInput } from "../../customHooks/useInput";
+
+//axios
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -18,20 +21,38 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+export default function TaskForm({
+  closeModal,
+  handleFunction,
+  editFields,
+  text
+}) {
+  const [projects, setProjects] = useState([]);
 
-export default function TaskForm({ closeModal, handleFunction, editFields, text }) {
-  // const [dueDate, setDueDate] = useState(new Date());
+  useEffect(() => {
+    const uid = localStorage.getItem("uid");
+    axiosWithAuth()
+      .get(`/${uid}/projects`)
+      .then(res => {
+        const projectArray = Object.values(res.data.projects);
+        setProjects(projectArray);
+        console.log(projects);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   let initialState;
 
+  //sets the fields if the editFields prop is passed down
+  //else they are empty
   if (editFields) {
     initialState = editFields;
   } else {
     initialState = {
-      name: "",
-      description: "",
-      dueDate: "",
-      project: ""
+      task_name: "",
+      task_description: "",
+      due_date: "",
+      projectID: ""
     };
   }
 
@@ -51,16 +72,16 @@ export default function TaskForm({ closeModal, handleFunction, editFields, text 
       <label>Task Name</label>
       <input
         type="text"
-        name="name"
-        value={task.name}
+        name="task_name"
+        value={task.task_name}
         onChange={handleChanges}
       />
 
       <label>Task Decription</label>
       <input
         type="text"
-        name="description"
-        value={task.description}
+        name="task_description"
+        value={task.task_description}
         onChange={handleChanges}
       />
 
@@ -71,10 +92,9 @@ export default function TaskForm({ closeModal, handleFunction, editFields, text 
         id="date"
         label="Due Date"
         type="date"
-        defaultValue="2017-05-24"
-        name='dueDate'
+        name="due_date"
         onChange={handleChanges}
-        value={task.dueDate}
+        value={task.due_date}
         InputLabelProps={{
           shrink: true
         }}
@@ -89,12 +109,13 @@ export default function TaskForm({ closeModal, handleFunction, editFields, text 
       /> */}
 
       <label>Assign Project</label>
-      <input
-        type="text"
-        name="project"
-        value={task.project}
-        onChange={handleChanges}
-      />
+      <select name="projectID" onChange={handleChanges} value={task.projectID}>
+        <option>Choose Poject</option>
+
+        {projects.map(project => {
+          return <option value={project.projectID}>{project.projectID}</option>;
+        })}
+      </select>
 
       <button onClick={closeModal}>cancel</button>
       <button>{text}</button>
