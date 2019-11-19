@@ -32,7 +32,7 @@ const Login = props => {
     // })
 
     axios
-      .post("https://blitz-build.herokuapp.com/users/login", form)
+      .post(" https://api-blitz-build-dev.herokuapp.com/api/login", form)
       .then(res => {
         console.log(res);
 

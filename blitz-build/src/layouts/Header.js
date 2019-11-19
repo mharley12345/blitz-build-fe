@@ -6,7 +6,8 @@ import Search from '../styles/Search/Search.png'
 function Header() {
     return (
         <HeaderContainer>
-            <SearchContainer>
+          <SearchContainer>
+            
            <img  src={Search} alt="Blitz-Build-Search"/>
            </SearchContainer>
          

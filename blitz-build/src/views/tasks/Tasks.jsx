@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
-import  TaskContext  from "../../contexts/TaskContext"
-
+//context
+import TaskContext from "../../contexts/tasks/TaskContext";
 
 //components
 import TaskNav from "../../components/tasks/TaskNav/TaskNav";
-import Task from "../../components/tasks/Task";
+import Task from "../../components/dashboard/Task"
+import EditTask from "../../components/tasks/EditTask"
+import DeleteTask from "../../components/tasks/DeleteTask"
 
 //styles
 import styled from "styled-components";
+import taskContext from "../../contexts/tasks/TaskContext";
 
 const StyledTasks = styled.div`
   margin-left: 200px;
-  width: 100%;
+  width: 750px;
   display: flex;
   flex-direction: column;
 `;
@@ -25,45 +29,20 @@ const StyledTask = styled.div`
 `;
 
 export default function Tasks() {
-  const [tasks, setTasks] = useState([])
-  console.log(tasks)
-
-	const addTask = (newTask) => {
-    console.log(newTask)
-    newTask.id = Date.now() 
-		setTasks([...tasks, newTask])
-	}
-
-	const deleteTask = (deletedTask) => {
-		const newTasks = tasks.filter(task => {
-			return task.name != deletedTask.name
-		})
-		setTasks([...newTasks ])
-	}
-	
-	const editTask = (editedTask) => {
-    const newTasks = tasks.map(task => {
-      if(task.id === editedTask.id){
-        return editedTask
-      } else {
-        return task
-      }
-		})
-		setTasks([...newTasks ])
-	}
-
-	return (
-    <TaskContext.Provider value={{ tasks, addTask, deleteTask, editTask }}>
+  const {addTask, tasks}  = useContext(taskContext)
+  
+  return (
       <StyledTasks>
-        <TaskNav addTask={addTask}/>
+        <TaskNav addTask={addTask} />
         {tasks.map(task => {
           return (
-            <StyledTask>
-              <Task task={task}/>
-            </StyledTask>
+            <>
+              <Task content={task} />
+              <EditTask task={ task }/>
+              <DeleteTask task={ task }/>
+            </>
           );
         })}
       </StyledTasks>
-    </TaskContext.Provider>
   );
 }
