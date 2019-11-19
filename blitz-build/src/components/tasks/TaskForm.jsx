@@ -17,10 +17,10 @@ const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
-    width: '75%'
+    width: "75%"
   },
   textField: {
-    width: '75%',
+    width: "75%",
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 200
@@ -31,47 +31,46 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 const StyledLabel = styled.label`
   margin-top: 20px;
   margin-bottom: 4px;
   width: 75%;
-
-`
+`;
 
 const StyledInput = styled.input`
-width: 75%;
-margin: 0;
-font-size: 14px;
-padding: 6px 8px;
-background: #FBFAF9;
-border-width: 1px;
-border-style: solid;
-border-color: ${props => props.error ? 'red' : 'black'};
-border-radius: 3px;
-`
+  width: 75%;
+  margin: 0;
+  font-size: 14px;
+  padding: 6px 8px;
+  background: #fbfaf9;
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${props => (props.error ? "red" : "black")};
+  border-radius: 3px;
+`;
 
 const StyledSelect = styled.select`
-width: 77%;
-font-size: 14px;
-padding: 6px 8px;
-text-decoration: none;
-border-top: none;
-border-left: none;
-border-right: none;
-outline: none;
-border-color: ${props => props.error ? 'red' : 'black'};
-margin: 0;
-`
+  width: 77%;
+  font-size: 14px;
+  padding: 6px 8px;
+  text-decoration: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  border-color: ${props => (props.error ? "red" : "black")};
+  margin: 0;
+`;
 
 const StyledBtn = styled.button`
-margin-top: 73px;
-padding: 10px 50px;
-border-radius: 3px;
-border: 1px solid #8A827D;
-background: #DA552F;
-color: white;
-`
+  margin-top: 73px;
+  padding: 10px 50px;
+  border-radius: 3px;
+  border: 1px solid #8a827d;
+  background: #da552f;
+  color: white;
+`;
 
 export default function TaskForm({
   closeModal,
@@ -82,13 +81,14 @@ export default function TaskForm({
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    const uid = localStorage.getItem("uid");
+    // const uid = localStorage.getItem("uid");
     axiosWithAuth()
-      .get(`/${uid}/projects`)
+      .get(`/projects`)
       .then(res => {
         // console.log('from get projects in TaskForm', res);
-        const projectArray = Object.values(res.data);
-        setProjects(projectArray);
+        // const projectArray = Object.values(res.data);
+        console.log("from get projects in TaskForm", res);
+        setProjects(res.data);
         // console.log('from get projects in TaskForm', projects);
       })
       .catch(err => console.log(err));
@@ -105,7 +105,7 @@ export default function TaskForm({
       task_name: "",
       task_description: "",
       due_date: "",
-      projectID: ""
+      project_name: ""
     };
   }
 
@@ -113,6 +113,16 @@ export default function TaskForm({
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    //finds the the project that the user picked
+    const chosenProject = projects.filter(project => {
+      return project.project_name === task.project_name;
+    });
+    console.log("from handleSubmit in addTask", chosenProject);
+
+    //asigns the project id to the new task
+    task.project_id = chosenProject[0].id;
+
     handleFunction(task);
     setTask(initialState);
     closeModal();
@@ -120,12 +130,12 @@ export default function TaskForm({
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <div style={{width: '100%', textAlign: 'right'}}>
-        <XButton onClick={closeModal}>X</XButton> 
+      <div style={{ width: "100%", textAlign: "right" }}>
+        <XButton onClick={closeModal}>X</XButton>
       </div>
 
       <header>
-        <h1 style={{fontSize: '3rem', fontFamily: 'roboto',}}>{text}</h1>
+        <h1 style={{ fontSize: "3rem", fontFamily: "roboto" }}>{text}</h1>
       </header>
 
       <StyledLabel>Task Name</StyledLabel>
@@ -149,8 +159,8 @@ export default function TaskForm({
 
       <TextField
         style={{
-          width: '77%', 
-          marginTop: '20px',
+          width: "77%",
+          marginTop: "20px"
         }}
         id="date"
         label="Due Date"
@@ -172,11 +182,17 @@ export default function TaskForm({
       /> */}
 
       <StyledLabel>Assign Project</StyledLabel>
-      <StyledSelect name="projectID" onChange={handleChanges} value={task.projectID}>
+      <StyledSelect
+        name="project_name"
+        onChange={handleChanges}
+        value={task.project_name}
+      >
         <option>Choose Poject</option>
 
         {projects.map(project => {
-          return <option value={project.projectID}>{project.projectID}</option>;
+          return (
+            <option value={project.project_name}>{project.project_name}</option>
+          );
         })}
       </StyledSelect>
       <StyledBtn>Save</StyledBtn>
