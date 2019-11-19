@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
@@ -21,6 +21,9 @@ import TaskProvider from "./contexts/tasks/TaskProvider";
 // import ProjectProvider from "./contexts/projects/ProjectsProvider";
 
 function App() {
+
+  const [ pathname, setPathname ] = useState();
+
   const navLinks = [
     {
       text: "Home",
@@ -68,11 +71,11 @@ function App() {
     <Router>
       {/* <ProjectProvider> */}
       <TaskProvider>
-        <NavBar
+        <NavBar setPathname= {setPathname}
           navLinks={navLinks}
           //  logo={ logo }
         />
-        <Layout>
+        <Layout pathname={pathname}>
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
