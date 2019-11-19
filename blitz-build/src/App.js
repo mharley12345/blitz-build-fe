@@ -17,7 +17,8 @@ import DelayLog from "./components/delayLog/DelayLog";
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
-import TaskProvider from './contexts/tasks/TaskProvider'
+import TaskProvider from "./contexts/tasks/TaskProvider";
+// import ProjectProvider from "./contexts/projects/ProjectsProvider";
 
 function App() {
   const navLinks = [
@@ -65,6 +66,7 @@ function App() {
 
   return (
     <Router>
+      {/* <ProjectProvider> */}
       <TaskProvider>
         <NavBar
           navLinks={navLinks}
@@ -84,6 +86,7 @@ function App() {
           </Switch>
         </Layout>
       </TaskProvider>
+      {/* </ProjectProvider> */}
     </Router>
   );
 }
