@@ -6,16 +6,23 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import TaskContext from "./TaskContext";
 
 export default function TaskProvider({ children }) {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([{    
+    task_name: "Demo Test",
+    task_description: "Demo Build",
+    due_date: "11/19/2019",
+    project_name: "Meeves Demo",
+    project_id: 1
+    }]);
 
   useEffect(() => {
-    const uid = localStorage.getItem("uid");
-    axiosWithAuth()
+      axiosWithAuth()
       .get(`/projects/tasks`)
       .then(res => {
-        console.log("get tasks", res);
-
-        /*  firbase BE logic
+          console.log("get tasks", res);
+          
+        /*  
+            firbase BE logic
+            // const uid = localStorage.getItem("uid");
             //takes unique task id keys and turns them into an array
             const tasksId = Object.keys(res.data)
             console.log('task ids', tasksId)
@@ -28,6 +35,7 @@ export default function TaskProvider({ children }) {
               tasksArr[i].id = tasksId[i]
             }
         */
+       
         setTasks(res.data);
       })
       .catch(err => {
@@ -38,14 +46,14 @@ export default function TaskProvider({ children }) {
   const addTask = newTask => {
     // const uid = localStorage.getItem("uid");
     // console.log(`/${uid}/projects/${newTask.projectID}/tasks`)
-    axiosWithAuth()
-      .post(`/projects/tasks`, newTask)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
+    // axiosWithAuth()
+    //   .post(`/projects/tasks`, newTask)
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => console.log(err));
 
-    console.log(newTask);
+    // console.log(newTask);
     newTask.id = Date.now();
     setTasks([...tasks, newTask]);
   };
