@@ -67,14 +67,11 @@ const AddProject = props => {
 
   const submitForm = e => {
     e.preventDefault();
-    const uid = localStorage.getItem("uid");
 
     console.log("im here");
     axios
       .post(`https://blitz-build.herokuapp.com/projects`, form)
 
-      // axios
-      //   .post("https://blitz-build.herokuapp.com/projects", form)
       .then(res => {
         console.log(res);
       })
