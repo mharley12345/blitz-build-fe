@@ -218,21 +218,21 @@ const Projects = props => {
 
   useEffect(() => {
     const uid = localStorage.getItem("uid");
-    // axios
-    //   .get(`https://api-blitz-build-dev.herokuapp.com/api/auth/${uid}/projects`, project)
-    //   .then(res => {
-    //     console.log(res);
-    //     const projectArray = Object.values(res.data);
-    //     console.log(projectArray);
-    //     setProject(projectArray);
-    //   })
-
     axios
-      .get("https://blitz-build.herokuapp.com/projects", project)
+      .get(`https://api-blitz-build-dev.herokuapp.com/api/auth/${uid}/projects`)
       .then(res => {
         console.log(res);
-        setProject(res.data);
+        const projectArray = Object.values(res.data);
+        console.log(projectArray);
+        setProject(projectArray);
       })
+
+      // axios
+      //   .get("https://blitz-build.herokuapp.com/projects", project)
+      //   .then(res => {
+      //     console.log(res);
+      //     setProject(res.data);
+      //   })
       .catch(err => {
         console.log(err);
       });
@@ -264,14 +264,14 @@ const Projects = props => {
         {project.map(project => {
           return (
             <ProjectListContainer
-              // key={project.projectID}
-              // onClick={() => {
-              //   props.history.push(`/project/${project.projectID}`);
-              // }}
-              key={project.id}
+              key={project.projectID}
               onClick={() => {
-                props.history.push(`/project/${project.id}`);
+                props.history.push(`/project/${project.projectID}`);
               }}
+              // key={project.id}
+              // onClick={() => {
+              //   props.history.push(`/project/${project.id}`);
+              // }}
             >
               <ProjectListCategories>
                 <ProjectListName>

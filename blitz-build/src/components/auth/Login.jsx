@@ -23,13 +23,13 @@ const Login = props => {
     e.preventDefault();
 
     // axios
-    //   .post("https://api-blitz-build-dev.herokuapp.com/api/login", form)
-    //   .then(res => {
-    //     console.log(res);
+    // .post("https://api-blitz-build-dev.herokuapp.com/api/login", form)
+    // .then(res => {
+    //   console.log(res);
 
-    // localStorage.setItem("uid", res.data.uid);
-    // localStorage.setItem("token", res.data.accessToken);
-    //   })
+    //   localStorage.setItem("uid", res.data.uid);
+    //   localStorage.setItem("token", res.data.accessToken);
+    // })
 
     axios
       .post("https://blitz-build.herokuapp.com/users/login", form)
