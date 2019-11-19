@@ -34,7 +34,6 @@ const IndividualProject = props => {
       ))}
       <Weather
         usage="project"
-        uid={"R3fE6DP3UgP8hQSWbGubsHb7lOw2"}
         city={"City"}
         latitude={47.3099}
         longitude={-122.2653}
