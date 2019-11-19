@@ -69,10 +69,9 @@ const NavBarContainer = styled.div`
        }   
 
        const HoverStyles = {
-           backgroundColor: '#27221F',
-           borderRadius: '3px', 
-           borderLeft: ' 4px solid #DD6B20',
-           marginLeft: '-4px'
+           backgroundColor: '#4f4843',
+           borderRadius: '5px', 
+           
            
         }
             const NavBarP = styled.p`
