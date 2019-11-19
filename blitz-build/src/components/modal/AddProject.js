@@ -94,9 +94,9 @@ const AddProject = props => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Add Project
-      </Button>
+      </Button> */}
       <Dialog
         open={open}
         onClose={handleClose}
