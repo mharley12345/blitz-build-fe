@@ -113,7 +113,7 @@ export default function TaskForm({
 
   const handleSubmit = e => {
     e.preventDefault();
-
+    
     //finds the the project that the user picked
     const chosenProject = projects.filter(project => {
       return project.project_name === task.project_name;

@@ -10,7 +10,7 @@ import TaskForm from "../TaskForm";
 import TasksContext from "../../../contexts/tasks/TaskContext";
 
 //styles
-import { AddButton, TaskNavStyle } from "../../../styles/tasks";
+import { TaskNavStyle } from "../../../styles/tasks";
 
 
 export default function TaskNav() {
@@ -27,19 +27,6 @@ export default function TaskNav() {
   return (
     <TaskNavStyle>
       <SortBtn />
-      <AddButton onClick={ handleModalOpen }>+ Add Task</AddButton>
-      <Modal
-        visible={ modalStatus }
-        dismiss={ handleModalClose }
-        client={'50%'}
-        component={
-          <TaskForm 
-          closeModal={ handleModalClose } 
-          handleFunction={ addTask }
-          text={ 'Add Task' }
-        />
-        }
-      />
     </TaskNavStyle>
   );
 }
