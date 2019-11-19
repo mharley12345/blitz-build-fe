@@ -62,7 +62,7 @@ function App() {
     },
     {
       text: "Help",
-      path: "/log-out",
+      path: "/help",
       icon: "ion-ios-help-circle-outline"
     }
   ];
