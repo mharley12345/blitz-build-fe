@@ -6,6 +6,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import styled from "styled-components";
+import zipcodes from "zipcodes";
 
 const ModalContainer = styled.div``;
 
@@ -43,13 +44,15 @@ const AddProject = props => {
     street_address: "",
     city: "",
     state: "",
-    zip_code: "",
+    zip_code: 0,
     status: "",
     beds: 0,
     baths: 0,
     square_ft: 0,
     // assign_template: undefined,
-    imageURL: ""
+    imageURL: "",
+    latitude: 0,
+    longitude: 0
   });
   const [open, setOpen] = useState(false);
 
@@ -68,7 +71,15 @@ const AddProject = props => {
   const submitForm = e => {
     e.preventDefault();
 
-    console.log("im here");
+    console.log(form);
+    console.log(form.zip_code);
+    const gps = zipcodes.lookup(form.zip_code);
+    console.log(gps);
+    form.latitude = gps.latitude;
+    form.longitude = gps.longitude;
+    console.log("form", form);
+    // setForm({ ...form, latitude: gps.latitude, longitude: gps.longitude });
+    // console.log(form);
     axios
       .post(`https://blitz-build.herokuapp.com/projects`, form)
 
@@ -156,6 +167,12 @@ const AddProject = props => {
               placeholder="Project Thumbnail"
               onChange={changeHandler}
               value={form.imageURL}
+            />
+            <input
+              name="zip_code"
+              placeholder="Zip Code "
+              onChange={changeHandler}
+              value={form.zip_code}
             />
             <button type="submit"> Add Project </button>
           </form>
