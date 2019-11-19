@@ -42,9 +42,12 @@ const NavBarContainer = styled.div`
             list-style-type: none;
             height: 70px;
             align-items: center;
+            border-radius: 5px;
             width: 85%;
+            margin: 5px;
           :nth-child(8) {
             border-top: 1px solid white;
+            border-radius: 0px;
             margin-top: 40px;
           }
         `;
@@ -60,6 +63,7 @@ const NavBarContainer = styled.div`
             fontSize: '16px',
             height: '100%',
             width:'100%',
+           
         
            
           } ;
@@ -70,7 +74,7 @@ const NavBarContainer = styled.div`
 
        const HoverStyles = {
            backgroundColor: '#4f4843',
-           borderRadius: '5px', 
+          
            
            
         }
