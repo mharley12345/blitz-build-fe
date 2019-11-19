@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import  Search from '../styles/Search/Search.png'
+import TasksContext from '../contexts/tasks/TaskContext'
+import Modal from '../components/global/Modal'
+import TaskForm from '../components/tasks/TaskForm'
 
 const HeaderContainer = styled.div`
   background: #fff;
@@ -106,7 +109,18 @@ display: 'none',
 
 
 function Header({pathname}) {
-  
+
+  const { addTask } = useContext(TasksContext);
+
+  const [modalStatus, setModalStatus] = useState(false);
+
+  const handleModalOpen = () => {
+    setModalStatus(true);
+  };
+  const handleModalClose = () => {
+    setModalStatus(false);
+  };
+
   const HideTheProjectButton = (pathname) => {
   
  if(pathname === '/projects' || pathname === '/dashboard' || pathname === '/tasks') {
@@ -151,7 +165,19 @@ const HideTheTaskButton = (pathname) => {
             <ButtonContainer>
           <ButtonDocument style= {HideTheDocumentButton(pathname)}> <ButtonI className = 'ion-ios-add-circle'/> <ButtonText>New Document</ButtonText></ButtonDocument>
           <ButtonProject style = {HideTheProjectButton(pathname)}>  <ButtonI className = 'ion-ios-add-circle'/><ButtonText>New Project</ButtonText></ButtonProject>
-          <ButtonTask style = {HideTheTaskButton(pathname)}>  <ButtonI className = 'ion-ios-add-circle'/><ButtonText>New Task</ButtonText></ButtonTask>
+          <ButtonTask style = {HideTheTaskButton(pathname)} onClick={ handleModalOpen }>  <ButtonI className = 'ion-ios-add-circle'/><ButtonText>New Task</ButtonText></ButtonTask>
+          <Modal
+        visible={ modalStatus }
+        dismiss={ handleModalClose }
+        client={'50%'}
+        component={
+          <TaskForm 
+          closeModal={ handleModalClose } 
+          handleFunction={ addTask }
+          text={ 'Add Task' }
+        />
+        }
+      />
           </ButtonContainer>
         </HeaderContainer>
          

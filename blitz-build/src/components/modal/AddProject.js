@@ -34,10 +34,12 @@ const TopContainer = styled.div`
   justify-content: space-evenly;
 `;
 
-export default function AddProject() {
+//START OF FUNCTIONAL COMPONENT
+
+const AddProject = props => {
+  console.log("props", props);
   const [form, setForm] = useState({
-    projectID: "",
-    Project_Name: "",
+    project_name: "",
     street_address: "",
     city: "",
     state: "",
@@ -46,8 +48,8 @@ export default function AddProject() {
     beds: 0,
     baths: 0,
     square_ft: 0,
-    Assign_Template: undefined,
-    Project_Thumbnail: ""
+    // assign_template: undefined,
+    imageURL: ""
   });
   const [open, setOpen] = useState(false);
 
@@ -69,10 +71,10 @@ export default function AddProject() {
 
     console.log("im here");
     axios
-      .post(
-        `https://blitz-build.herokuapp.com/projects`,
-        form
-      )
+      .post(`https://blitz-build.herokuapp.com/projects`, form)
+
+      // axios
+      //   .post("https://blitz-build.herokuapp.com/projects", form)
       .then(res => {
         console.log(res);
       })
@@ -99,54 +101,64 @@ export default function AddProject() {
           <form onSubmit={submitForm}>
             {/* <TopContainer> */}
             {/* top container is project name and address */}
-            Project Name:
             <input
-              name="Project_Name"
+              name="project_name"
               placeholder="Project Name"
               onChange={changeHandler}
-              value={form.Project_Name}
+              value={form.project_name}
             />
-            Project Address
             <input
-              name="Project_Address"
+              name="city"
+              placeholder="City"
+              onChange={changeHandler}
+              value={form.city}
+            />
+            <input
+              name="state"
+              placeholder="state"
+              onChange={changeHandler}
+              value={form.state}
+            />
+            <input
+              name="street_address"
               placeholder="Project Address"
               onChange={changeHandler}
-              value={form.Project_Address}
+              value={form.street_address}
             />
             {/* </TopContainer> */}
             {/* second container includes beds and baths */}
             <input
-              name="Beds"
+              name="beds"
               placeholder="Beds"
               onChange={changeHandler}
-              value={form.Beds}
+              value={form.beds}
             />
             <input
-              name="Baths"
+              name="baths"
               placeholder="Baths"
               onChange={changeHandler}
-              value={form.Baths}
+              value={form.baths}
             />
             {/* square footage on its own */}
             <input
-              name="Square_Footage"
+              name="square_ft"
               placeholder="Square Footage"
               onChange={changeHandler}
-              value={form.Square_Footage}
+              value={form.square_ft}
             />
             {/* templates on its own and its a drop down */}
-            <input
-              name="Assign_Template"
+            {/* <input
+              name="assign_template"
               placeholder="Assign Template"
               onChange={changeHandler}
-              value={form.Assign_Template}
-            />
+              value={form.assign_template}
+            /> */}
             {/* thumbnail on its own and it will have to be uploaded */}
             <input
-              name="Project_Thumbnail"
+              name="imageURL"
               placeholder="Project Thumbnail"
               onChange={changeHandler}
-              value={form.Project_Thumbnail}
+              value={form.imageURL}
             />
             <button type="submit"> Add Project </button>
           </form>
@@ -162,4 +174,6 @@ export default function AddProject() {
       </Dialog>
     </div>
   );
-}
+};
+
+export default AddProject;

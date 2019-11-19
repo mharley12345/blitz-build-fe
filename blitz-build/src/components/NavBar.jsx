@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import media from '../styles/sizes'
 
@@ -119,12 +119,15 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
                        style={NavLinkHover(hoverIndex, index)}
                        >
                            
-                          <Link to={link.path}   style = {NavBarLink}  > 
+                          <NavLink to={link.path}  activeStyle={{ backgroundColor: '#27221F',
+           borderRadius: '3px', 
+           borderLeft: ' 4px solid #DD6B20', marginLeft: '-4px'
+  }} style = {NavBarLink}  > 
                               <NavBarP>
                             { link.text } 
                             </NavBarP>
                             <NavBarI className = {link.icon}/>
-                              </Link>
+                              </NavLink>
 
                            
                            
