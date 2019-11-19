@@ -298,7 +298,7 @@ const Projects = props => {
           );
         })}
 
-        {/* <AddProject />  */}
+        <AddProject /> 
       </ProjectContainer>
     </div>
   );
