@@ -5,6 +5,7 @@ import TasksContext from '../contexts/tasks/TaskContext'
 import Modal from '../components/global/Modal'
 import TaskForm from '../components/tasks/TaskForm'
 import { NavLink } from 'react-router-dom'
+import OpenContext from '../contexts/projects/OpenContext'
 const HeaderContainer = styled.div`
   background: #fff;
   width: 1144px;
@@ -134,13 +135,13 @@ const HoverStyle = {
 
 
 function Header({pathname}) {
-
+  
   const [ TaskHover, setTaskHover ] = useState(false)
   const [ ProjectHover, setProjectHover ] = useState(false)
   const [ DocumentHover, setDocumentHover ] = useState(false)
 
   const { addTask } = useContext(TasksContext);
-
+  const { open, setOpen } = useContext(OpenContext)
   const [TaskModalStatus, setTaskModalStatus] = useState(false);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
@@ -191,13 +192,22 @@ const HoverTaskStyleFunction = () => {
   }
 }
 const HoverProjectStyleFunction = () => {
-  if (ProjectHover === true || ProjectModalStatus === true) {
+  if (ProjectHover === true || open === true) {
     return HoverStyle
   }
 }
 const HoverDocumentStyleFunction = () => {
   if (DocumentHover === true || DocumentModalStatus === true) {
     return HoverStyle
+  }
+}
+
+const OpenToggle = () => {
+  if(open !== false) {
+    setOpen(false)
+  }
+  else if (open === false) {
+    setOpen(true)
   }
 }
 
@@ -213,7 +223,7 @@ const HoverDocumentStyleFunction = () => {
           <ButtonDocument  onMouseEnter={() => setDocumentHover(true)}
                        onMouseLeave={() =>  setDocumentHover(false) }style= {HideTheDocumentButton(pathname)}> <ButtonI className = 'ion-ios-add-circle' style={HoverDocumentStyleFunction()}/> <ButtonText style={HoverDocumentStyleFunction()}>New Document</ButtonText></ButtonDocument>
           <ButtonProject  onMouseEnter={() => setProjectHover(true)}
-                       onMouseLeave={() =>  setProjectHover(false) }style = {HideTheProjectButton(pathname)}>  <ButtonI className = 'ion-ios-add-circle'style={HoverProjectStyleFunction()}/><ButtonText style={HoverProjectStyleFunction()}>New Project</ButtonText></ButtonProject>
+                       onMouseLeave={() =>  setProjectHover(false) }style = {HideTheProjectButton(pathname)} onClick={OpenToggle}>  <ButtonI className = 'ion-ios-add-circle'style={HoverProjectStyleFunction()}/><ButtonText style={HoverProjectStyleFunction()}>New Project</ButtonText></ButtonProject>
           <ButtonTask  onMouseEnter={() => setTaskHover(true)}
                        onMouseLeave={() =>  setTaskHover(false) } style = {HideTheTaskButton(pathname)} onClick={ handleTaskModalOpen }>  <ButtonI className = 'ion-ios-add-circle' style={HoverTaskStyleFunction()}/><ButtonText style={HoverTaskStyleFunction()}>New Task</ButtonText></ButtonTask>
           <Modal
