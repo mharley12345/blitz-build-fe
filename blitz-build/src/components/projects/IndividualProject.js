@@ -7,6 +7,7 @@ import Global from "../../styles/Global";
 import Page_icon from "../../styles/icons_project/page_icon.png";
 import Edit_icon from "../../styles/icons_project/edit_icon.png";
 import Delete_icon from "../../styles/icons_project/delete_icon.png";
+import Project_icon from "../../styles/icons_project/project_icon.png";
 
 const IndividualProjectContainer = styled.div`
   position: absolute;
@@ -17,8 +18,10 @@ const IndividualProjectContainer = styled.div`
 `;
 const IndividualProjectTitleContainer = styled.div`
   position: absolute;
+  display:flex;
+  
   width: 250px;
-  height: 19px;
+  height: 24px;
   left: 328px;
   top: 128px;
 
@@ -26,6 +29,7 @@ const IndividualProjectTitleContainer = styled.div`
     font-family: Roboto;
     font-size: 16px;
     color: #8a827d;
+    padding-top:5px
   }
 `;
 const IndividualProjectImgContainer = styled.div`
@@ -171,7 +175,8 @@ const IndividualProject = props => {
     <>
       <Global />
       <IndividualProjectTitleContainer>
-        <p>Projects / {projectTasks.project_name}</p>
+        <img src={Project_icon} alt="project_icon" />
+        <p>&nbsp;&nbsp;Projects / {projectTasks.project_name}</p>
       </IndividualProjectTitleContainer>
       <IndividualProjectContainer></IndividualProjectContainer>
       <IndividualProjectImgContainer></IndividualProjectImgContainer>
