@@ -19,7 +19,7 @@ const IndividualProjectContainer = styled.div`
 const IndividualProjectTitleContainer = styled.div`
   position: absolute;
   display:flex;
-  width: 250px;
+  width: 530px;
   height: 24px;
   left: 328px;
   top: 128px;
