@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import media from '../styles/sizes'
 
@@ -42,13 +42,16 @@ const NavBarContainer = styled.div`
             list-style-type: none;
             height: 70px;
             align-items: center;
+            border-radius: 5px;
             width: 85%;
+            margin: 5px;
           :nth-child(8) {
             border-top: 1px solid white;
+            border-radius: 0px;
             margin-top: 40px;
           }
         `;
-        
+      
 
        const NavBarLink = {
             color: '#FFFFFF',
@@ -56,11 +59,12 @@ const NavBarContainer = styled.div`
             display: 'flex',
             flexDirection: 'row-reverse',
             alignItems: 'center',
+            justifyContent: 'center',
             fontSize: '16px',
-            height: '20px',
-            width:'120px',
-            marginTop: '30px',
-            marginLeft: '50px',
+            height: '100%',
+            width:'100%',
+           
+        
            
           } ;
        const NavLinkHover = (hoverIndex, index) => {
@@ -69,9 +73,9 @@ const NavBarContainer = styled.div`
        }   
 
        const HoverStyles = {
-           backgroundColor: '#27221F',
-           borderRadius: '3px', 
-           borderLeft: ' 4px solid #DD6B20',
+           backgroundColor: '#4f4843',
+          
+           
            
         }
             const NavBarP = styled.p`
@@ -87,13 +91,15 @@ const NavBarContainer = styled.div`
 
        
 
-function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, }) {
-   const [ hoverIndex, setHoverIndex ] = useState(-1)
+           
+function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, setPathname }) {
+   const [ hoverIndex, setHoverIndex ] = useState(0)
    const [navOpen, setNavOpen ] = useState(false)
+  
 //    console.log(navLinks, background, hoverBackground, linkColor, logo)
 
    return (
-       <NavBarContainer
+       <NavBarContainer 
        style={{ background }}>
         <NavBarUl style = {{ background }}
             className= { navOpen ? 'active' : '' }                
@@ -108,23 +114,28 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
                    {navLinks.map((link, index) => 
 
          //// links recieve their text and icons through app.js          
-
-                       <NavBarLi
+ 
+     <NavBarLi onClick={()=> (setPathname(window.location.pathname))}
                        onMouseEnter={() => setHoverIndex(index)}
-                       onMouseLeave={() => setHoverIndex(-1) }
+                       onMouseLeave={() => setHoverIndex(-1)}
+                      
                        style={NavLinkHover(hoverIndex, index)}
                        >
                            
-                          <Link to= {link.path}  style = {NavBarLink} > 
+                          <NavLink to={link.path}  activeStyle={{ backgroundColor: '#27221F',
+           borderRadius: '3px', 
+           borderLeft: ' 4px solid #DD6B20', marginLeft: '-4px'
+  }} style = {NavBarLink}  > 
                               <NavBarP>
                             { link.text } 
                             </NavBarP>
                             <NavBarI className = {link.icon}/>
-                              </Link>
+                              </NavLink>
 
                            
                            
                       </NavBarLi>
+                      
                    )} 
              
                    

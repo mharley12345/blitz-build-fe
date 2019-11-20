@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -7,6 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import styled from "styled-components";
 import zipcodes from "zipcodes";
+import OpenContext from "../../contexts/projects/OpenContext";
 
 const ModalContainer = styled.div``;
 
@@ -54,7 +55,7 @@ const AddProject = props => {
     latitude: 0,
     longitude: 0
   });
-  const [open, setOpen] = useState(false);
+  const {open, setOpen} = useContext(OpenContext);
 
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -89,9 +90,9 @@ const AddProject = props => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Add Project
-      </Button>
+      </Button> */}
       <Dialog
         open={open}
         onClose={handleClose}

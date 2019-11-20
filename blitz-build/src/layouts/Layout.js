@@ -3,14 +3,15 @@ import styled from "styled-components";
 
 import Global from "./Global";
 import Nav from "./Nav";
-import Header from './Header'
-function Layout({ children }) {
+import Header from "./Header.jsx"
+
+function Layout({ children, pathname }) {
   return (
     <Container>
       <Global />
       <Nav />
       <Main>
-        <Header />
+        <Header pathname = {pathname}/>
         <Content>{children}</Content>
         <Footer>
           <p>2019 © BlitzBuild, Inc. All Rights Reserved.</p>
@@ -21,6 +22,7 @@ function Layout({ children }) {
 }
 
 export default Layout;
+
 
 const Container = styled.div`
   max-height: 100vh;

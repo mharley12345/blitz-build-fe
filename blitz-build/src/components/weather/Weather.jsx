@@ -19,7 +19,7 @@ const WeatherContainerP = styled.div`
   width: 530px;
   height: 184px;
   left: 878px;
-  top: 208px;
+  top: 168px;
   background: #ffffff;
 `;
 const Weathertitle = styled.div`
@@ -83,8 +83,8 @@ function Weather(props) {
   // get the latitude and longitude from the project page or navigator.geolocation.
   if (props.usage === "project") {
     setWeatherPosition({
-      latitude: props.latitude,
-      longitude: props.longitude
+      latitude: 37.7202,
+      longitude: -122.4099
     });
   } else if (props.usage === "dashboard") {
     if (navigator.geolocation) {
@@ -107,10 +107,7 @@ function Weather(props) {
     if (weatherPosition.latitude !== 0) {
       console.log(weatherPosition)
       axios
-        .post(
-          ` https://api-blitz-build-dev.herokuapp.com/api/auth/R3fE6DP3UgP8hQSWbGubsHb7lOw2/weather`,
-          weatherPosition,
-          { headers: { token: localStorage.getItem("token") } }
+        .post(` https://blitz-build.herokuapp.com/weather`, weatherPosition
         )
         .then(res => {
           setWeatherData(res.data);
