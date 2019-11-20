@@ -19,8 +19,7 @@ const IndividualProjectContainer = styled.div`
 const IndividualProjectTitleContainer = styled.div`
   position: absolute;
   display:flex;
-  
-  width: 250px;
+  width: 530px;
   height: 24px;
   left: 328px;
   top: 128px;
@@ -72,7 +71,8 @@ const ContentAddress = styled.div`
 `;
 const ContentSize = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction:column;
+  align-items:flex-end;
   width: 120px;
   height: 56px;
   margin-top: 16px;
@@ -195,7 +195,7 @@ const IndividualProject = props => {
               {projectTasks.baths} Baths
             </p>
             <p>
-              &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              
               {projectTasks.square_ft} sq.ft.
             </p>
           </ContentSize>
