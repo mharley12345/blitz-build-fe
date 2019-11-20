@@ -79,52 +79,60 @@ export default function TaskForm({
   text
 }) {
   const [projects, setProjects] = useState([]);
+  const [task, setTask, handleChanges] = useInput({
+    task_name: "",
+    task_description: "",
+    due_date: "",
+    project_name: ""
+  });
 
   useEffect(() => {
     // const uid = localStorage.getItem("uid");
+    console.log("edit fields in task form", editFields);
     axiosWithAuth()
       .get(`/projects`)
       .then(res => {
+        console.log("from get projects in TaskForm", editFields);
         // console.log('from get projects in TaskForm', res);
         // const projectArray = Object.values(res.data);
-        console.log("from get projects in TaskForm", res);
+        console.log("from get projects axios .then", res);
         setProjects(res.data);
-        // console.log('from get projects in TaskForm', projects);
       })
       .catch(err => console.log(err));
+      if(editFields){
+        setTask(editFields)
+      }
   }, []);
-
-  let initialState;
-
+    
   //sets the fields if the editFields prop is passed down
   //else they are empty
-  if (editFields) {
-    initialState = editFields;
-  } else {
-    initialState = {
-      task_name: "",
-      task_description: "",
-      due_date: "",
-      project_name: ""
-    };
-  }
-
-  const [task, setTask, handleChanges] = useInput(initialState);
 
   const handleSubmit = e => {
     e.preventDefault();
-    
+
     //finds the the project that the user picked
     const chosenProject = projects.filter(project => {
       return project.project_name === task.project_name;
     });
-    console.log("from handleSubmit in addTask", chosenProject);
-
+    console.log("from handleSubmit in TaskForm", chosenProject);
+    
     //asigns the project id to the new task
-    task.project_id = chosenProject[0].id;
-
-    handleFunction(task);
-    setTask(initialState);
+    const newTask = {
+      project_name: chosenProject[0].project_name,
+      id: task.id,
+      task_name: task.task_name,
+      task_description: task.task_description,
+      due_date: task.due_date,
+      project_id: chosenProject[0].id
+    };
+    console.log('from taskform submit',task)
+    handleFunction(newTask);
+    setTask({   
+      task_name: "",
+      task_description: "",
+      due_date: "",
+      project_name: ""
+    });
     closeModal();
   };
 
@@ -191,7 +199,9 @@ export default function TaskForm({
 
         {projects.map(project => {
           return (
-            <option value={project.project_name}>{project.project_name}</option>
+            <option key={project.id} value={project.project_name}>
+              {project.project_name}
+            </option>
           );
         })}
       </StyledSelect>
