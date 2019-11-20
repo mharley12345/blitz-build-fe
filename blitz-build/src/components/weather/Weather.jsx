@@ -4,13 +4,19 @@ import styled from "styled-components";
 
 // css of the weather container in the dashboard
 const WeatherContainerD = styled.div`
-  width: 444px;
-  height: 292px;
- 
-  background: #fefefe;
-  border: 0.5px solid #282828;
+  position: absolute;
+  width: 524pxpx;
+  height: 384px;
+  left: 884px;
+  top: 155px;
+  /* 000 White */
+
+  background: #ffffff;
+  /* 250 - Borders */
+
+  border: 1px solid #dcd9d5;
   box-sizing: border-box;
-  border-radius: 1px;
+  border-radius: 3px;
 `;
 
 // css of the weather container in the project page
@@ -107,7 +113,8 @@ function Weather(props) {
     if (weatherPosition.latitude !== 0) {
       console.log(weatherPosition)
       axios
-        .post(` https://blitz-build.herokuapp.com/weather`, weatherPosition
+        .get(
+          ` https://blitz-build-weather.herokuapp.com/forecast/${weatherPosition.latitude},${weatherPosition.longitude}`
         )
         .then(res => {
           setWeatherData(res.data);
@@ -115,6 +122,7 @@ function Weather(props) {
         .catch(err => {
           console.log(err);
         });
+      
     }
   }, [weatherPosition]);
 
@@ -168,7 +176,7 @@ function Weather(props) {
             <WeatherInfo>
               <WeatherData>
                 <WeatherTem>
-                  {weatherData.currently.apparentTemperature.toFixed(0)}
+                  {(weatherData.currently.temperature*9/5+32).toFixed(0)}
                   <span>&#176;</span>
                 </WeatherTem>
                 <p>
