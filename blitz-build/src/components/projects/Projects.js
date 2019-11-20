@@ -105,7 +105,7 @@ const ProjectListName = styled.div`
 `;
 const Name = styled.div`
   /* Heading 4 */
-
+  width: 100px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;

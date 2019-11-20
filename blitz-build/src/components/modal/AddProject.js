@@ -9,32 +9,97 @@ import styled from "styled-components";
 import zipcodes from "zipcodes";
 import OpenContext from "../../contexts/projects/OpenContext";
 
-const ModalContainer = styled.div``;
+
+
+const ModalContainer = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+width: 800px;
+height: 1078px;
+background: #FFFFFF;
+border: 1px solid #8A827D;
+border-radius: 3px;
+`;
 
 const ModalTitle = styled.div`
   display: flex;
-  padding: 16px 24px;
-  width: 92%;
-  background-color: rgb(34, 58, 77);
-  color: white;
-  justify-content: center;
-`;
-
-const H3 = styled.div`
-  font-size: 1.5em;
-  display: flex;
-  justify-content: center;
-`;
-
-const Input = styled.div`
-  display: flex;
   flex-direction: column;
+  width: 656px;
+  height: 400px;
+  justify-content: center;
 `;
 
-const TopContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
+const TitleText = styled.div`
+
+font-style: normal;
+font-weight: 500;
+font-size: 36px;
+line-height: 42px;
+color: #3B3B3B;
 `;
+const ImgDrop = styled.div`
+display: flex;
+justify-content: center;
+align-content: center;
+width: 656px;
+height: 295px;
+background: #FAFAFA;
+border: 1px solid #8A827D;
+border-radius: 3px;
+`;
+const DropTextContainer = styled.div`
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
+`
+const DropText = styled.p`
+
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 28px;
+color: #3B3B3B;
+width: 256px;
+height: 28px;
+`
+
+const DropTextSmall = styled.p`
+width: 183px;
+height: 24px;
+font-size: 16px;
+line-height: 24px;
+color: #3B3B3B;
+`
+
+const formStyle = {
+display: 'flex',
+justifyContent: 'center',
+width: '656px',
+height: '500px',
+flexDirection: 'column',
+alignItems: 'center'
+}
+const inputStyle = {
+display: 'flex',
+width: '656px',
+height: '72px',
+margin: '15px 0px',
+flexDirection: 'column',
+
+}
+const buttonStyle = {
+  width: '163px',
+  height: '48px',
+  fontSize: '16px',
+  color: '#FFFFFF',
+  lineHeight: '19px',
+  backgroundColor: '#DA552F',
+  borderRadius: '3px'
+}
+
+
 
 //START OF FUNCTIONAL COMPONENT
 
@@ -93,42 +158,49 @@ const AddProject = props => {
   };
 
   return (
-    <div>
-      {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add Project
-      </Button> */}
+    
+       
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
+      <ModalContainer>
         <ModalTitle>
+          
           {/* <DialogTitle id="form-dialog-title">Subscribe</DialogTitle> */}
-          <H3>Add Project</H3>
+          <TitleText>Create a New Project</TitleText>
+          <ImgDrop>
+          <DropTextContainer>
+             <DropText>Drag and drop an image</DropText>
+             <DropTextSmall>or browse to choose a file</DropTextSmall>
+         </DropTextContainer>
+          </ImgDrop>
         </ModalTitle>
         <DialogContent>
-          <form onSubmit={submitForm}>
+          
+          <form onSubmit={submitForm} style={formStyle}>
             {/* <TopContainer> */}
             {/* top container is project name and address */}
-            <input
+            <input style={inputStyle}
               name="project_name"
               placeholder="Project Name"
               onChange={changeHandler}
               value={form.project_name}
             />
-            <input
+            <input  style={inputStyle}
               name="city"
               placeholder="City"
               onChange={changeHandler}
               value={form.city}
             />
-            <input
+            <input  style={inputStyle}
               name="state"
               placeholder="state"
               onChange={changeHandler}
               value={form.state}
             />
-            <input
+            <input  style={inputStyle}
               name="street_address"
               placeholder="Project Address"
               onChange={changeHandler}
@@ -136,20 +208,20 @@ const AddProject = props => {
             />
             {/* </TopContainer> */}
             {/* second container includes beds and baths */}
-            <input
+            <input  style={inputStyle}
               name="beds"
               placeholder="Beds"
               onChange={changeHandler}
               value={form.beds}
             />
-            <input
+            <input  style={inputStyle}
               name="baths"
               placeholder="Baths"
               onChange={changeHandler}
               value={form.baths}
             />
             {/* square footage on its own */}
-            <input
+            <input  style={inputStyle}
               name="square_ft"
               placeholder="Square Footage"
               onChange={changeHandler}
@@ -163,20 +235,21 @@ const AddProject = props => {
               value={form.assign_template}
             /> */}
             {/* thumbnail on its own and it will have to be uploaded */}
-            <input
+            <input  style={inputStyle}
               name="imageURL"
               placeholder="Project Thumbnail"
               onChange={changeHandler}
               value={form.imageURL}
             />
-            <input
+            <input  style={inputStyle}
               name="zip_code"
               placeholder="Zip Code "
               onChange={changeHandler}
               value={form.zip_code}
             />
-            <button type="submit"> Add Project </button>
+            <button type="submit" style= {buttonStyle}> Add Project </button>
           </form>
+         
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -186,8 +259,9 @@ const AddProject = props => {
             Add Project
           </Button> */}
         </DialogActions>
+       </ModalContainer>
       </Dialog>
-    </div>
+      
   );
 };
 
