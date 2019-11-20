@@ -113,8 +113,8 @@ function Weather(props) {
     if (weatherPosition.latitude !== 0) {
       console.log(weatherPosition)
       axios
-        .post(
-          ` https://weather-api-testing.herokuapp.com/weather`,weatherPosition
+        .get(
+          ` https://blitz-build-weather.herokuapp.com/forecast/${weatherPosition.latitude},${weatherPosition.longitude}`
         )
         .then(res => {
           setWeatherData(res.data);
@@ -176,7 +176,7 @@ function Weather(props) {
             <WeatherInfo>
               <WeatherData>
                 <WeatherTem>
-                  {weatherData.currently.apparentTemperature.toFixed(0)}
+                  {(weatherData.currently.temperature*9/5+32).toFixed(0)}
                   <span>&#176;</span>
                 </WeatherTem>
                 <p>
