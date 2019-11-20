@@ -18,12 +18,13 @@ import DelayLog from "./components/delayLog/DelayLog";
 
 //context
 import TaskProvider from "./contexts/tasks/TaskProvider";
+import OpenContext from './contexts/projects/OpenContext'
 // import ProjectProvider from "./contexts/projects/ProjectsProvider";
 
 function App() {
 
   const [ pathname, setPathname ] = useState();
-
+  const [open, setOpen] = useState(false);
   const navLinks = [
     {
       text: "Home",
@@ -62,7 +63,7 @@ function App() {
     },
     {
       text: "Help",
-      path: "/log-out",
+      path: "/help",
       icon: "ion-ios-help-circle-outline"
     }
   ];
@@ -71,6 +72,7 @@ function App() {
     <Router>
       {/* <ProjectProvider> */}
       <TaskProvider>
+       <OpenContext.Provider value={{open, setOpen }}>
         <NavBar setPathname= {setPathname}
           navLinks={navLinks}
           //  logo={ logo }
@@ -88,7 +90,9 @@ function App() {
             <Route exact path="/delay-log" component={DelayLog} />
           </Switch>
         </Layout>
+         </OpenContext.Provider>
       </TaskProvider>
+     
       {/* </ProjectProvider> */}
     </Router>
   );

@@ -105,12 +105,14 @@ const ProjectListName = styled.div`
 `;
 const Name = styled.div`
   /* Heading 4 */
-
+  width: 100px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
-
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   /* 500 Gray */
 
   color: #3f3a36;
@@ -298,7 +300,7 @@ const Projects = props => {
           );
         })}
 
-        {/* <AddProject />  */}
+        <AddProject /> 
       </ProjectContainer>
     </div>
   );

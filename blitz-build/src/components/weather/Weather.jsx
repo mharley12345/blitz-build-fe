@@ -4,13 +4,19 @@ import styled from "styled-components";
 
 // css of the weather container in the dashboard
 const WeatherContainerD = styled.div`
-  width: 444px;
-  height: 292px;
- 
-  background: #fefefe;
-  border: 0.5px solid #282828;
+  position: absolute;
+  width: 524pxpx;
+  height: 384px;
+  left: 884px;
+  top: 155px;
+  /* 000 White */
+
+  background: #ffffff;
+  /* 250 - Borders */
+
+  border: 1px solid #dcd9d5;
   box-sizing: border-box;
-  border-radius: 1px;
+  border-radius: 3px;
 `;
 
 // css of the weather container in the project page
@@ -19,7 +25,7 @@ const WeatherContainerP = styled.div`
   width: 530px;
   height: 184px;
   left: 878px;
-  top: 208px;
+  top: 168px;
   background: #ffffff;
 `;
 const Weathertitle = styled.div`
@@ -83,8 +89,8 @@ function Weather(props) {
   // get the latitude and longitude from the project page or navigator.geolocation.
   if (props.usage === "project") {
     setWeatherPosition({
-      latitude: props.latitude,
-      longitude: props.longitude
+      latitude: 37.7202,
+      longitude: -122.4099
     });
   } else if (props.usage === "dashboard") {
     if (navigator.geolocation) {
@@ -107,10 +113,8 @@ function Weather(props) {
     if (weatherPosition.latitude !== 0) {
       console.log(weatherPosition)
       axios
-        .post(
-          ` https://api-blitz-build-dev.herokuapp.com/api/auth/R3fE6DP3UgP8hQSWbGubsHb7lOw2/weather`,
-          weatherPosition,
-          { headers: { token: localStorage.getItem("token") } }
+        .get(
+          ` https://blitz-build-weather.herokuapp.com/forecast/${weatherPosition.latitude},${weatherPosition.longitude}`
         )
         .then(res => {
           setWeatherData(res.data);
@@ -118,6 +122,7 @@ function Weather(props) {
         .catch(err => {
           console.log(err);
         });
+      
     }
   }, [weatherPosition]);
 
@@ -171,7 +176,7 @@ function Weather(props) {
             <WeatherInfo>
               <WeatherData>
                 <WeatherTem>
-                  {weatherData.currently.apparentTemperature.toFixed(0)}
+                  {(weatherData.currently.temperature*9/5+32).toFixed(0)}
                   <span>&#176;</span>
                 </WeatherTem>
                 <p>
