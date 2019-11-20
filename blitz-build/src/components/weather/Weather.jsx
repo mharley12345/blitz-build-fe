@@ -113,7 +113,9 @@ function Weather(props) {
     if (weatherPosition.latitude !== 0) {
       console.log(weatherPosition)
       axios
-        .post(` https://blitz-build.herokuapp.com/weather`, weatherPosition
+        .post(
+          ` https://weather-api-testing.herokuapp.com/weather`,
+          weatherPosition
         )
         .then(res => {
           setWeatherData(res.data);
@@ -121,6 +123,7 @@ function Weather(props) {
         .catch(err => {
           console.log(err);
         });
+      
     }
   }, [weatherPosition]);
 
