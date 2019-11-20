@@ -195,7 +195,7 @@ const IndividualProject = props => {
               {projectTasks.baths} Baths
             </p>
             <p>
-              &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              
               {projectTasks.square_ft} sq.ft.
             </p>
           </ContentSize>
