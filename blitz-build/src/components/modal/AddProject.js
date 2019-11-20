@@ -164,6 +164,7 @@ const AddProject = props => {
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        
       >
       <ModalContainer>
         <ModalTitle>
