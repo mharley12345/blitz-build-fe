@@ -15,8 +15,7 @@ export const SortButton = styled.button`
 `;
 
 export const TaskNavStyle = styled.div`
-  margin-left: 200px;
-  width: 750px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,6 +25,18 @@ export const XButton = styled.button`
 font-size: 25px;
 background-color: white;
 border: none;
+color: black;
+padding: 10px 10px;
+text-align: right;
+text-decoration: none;
+display: inline-block;
+margin: 4px 2px;
+cursor: pointer;
+`
+export const TaskBtn = styled.button`
+border: 1px solid black;
+background-color: #fbfaf9;
+outline: none
 color: black;
 padding: 10px 10px;
 text-align: right;
