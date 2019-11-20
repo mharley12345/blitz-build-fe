@@ -71,7 +71,8 @@ const ContentAddress = styled.div`
 `;
 const ContentSize = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction:column;
+  align-items:flex-end;
   width: 120px;
   height: 56px;
   margin-top: 16px;
