@@ -4,13 +4,19 @@ import styled from "styled-components";
 
 // css of the weather container in the dashboard
 const WeatherContainerD = styled.div`
-  width: 444px;
-  height: 292px;
- 
-  background: #fefefe;
-  border: 0.5px solid #282828;
+  position: absolute;
+  width: 524pxpx;
+  height: 384px;
+  left: 884px;
+  top: 155px;
+  /* 000 White */
+
+  background: #ffffff;
+  /* 250 - Borders */
+
+  border: 1px solid #dcd9d5;
   box-sizing: border-box;
-  border-radius: 1px;
+  border-radius: 3px;
 `;
 
 // css of the weather container in the project page
