@@ -83,8 +83,8 @@ function Weather(props) {
   // get the latitude and longitude from the project page or navigator.geolocation.
   if (props.usage === "project") {
     setWeatherPosition({
-      latitude: props.latitude,
-      longitude: props.longitude
+      latitude: 37.7202,
+      longitude: -122.4099
     });
   } else if (props.usage === "dashboard") {
     if (navigator.geolocation) {
@@ -107,7 +107,7 @@ function Weather(props) {
     if (weatherPosition.latitude !== 0) {
       console.log(weatherPosition)
       axios
-        .get(` https://blitz-build.herokuapp.com/weather/94134`
+        .post(` https://blitz-build.herokuapp.com/weather`, weatherPosition
         )
         .then(res => {
           setWeatherData(res.data);
