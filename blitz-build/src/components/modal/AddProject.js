@@ -122,6 +122,7 @@ flexDirection: 'column',
 
 }
 const buttonStyle = {
+  margin: '10px',
   border: 'none',
   textDecoration: 'none',
   width: '163px',
