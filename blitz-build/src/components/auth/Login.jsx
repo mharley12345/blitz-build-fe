@@ -23,7 +23,7 @@ const Login = props => {
     e.preventDefault();
 
     axios
-      .post(" https://blitz-build.herokuapp.com/users/login", form)
+      .post("https://blitz-build.herokuapp.com/users/login", form)
       .then(res => {
         console.log(res);
 

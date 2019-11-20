@@ -13,19 +13,28 @@ import DeleteTask from "../../components/tasks/DeleteTask"
 //styles
 import styled from "styled-components";
 import taskContext from "../../contexts/tasks/TaskContext";
+import { TaskBtn } from '../../styles/tasks'
 
 const StyledTasks = styled.div`
-  margin-left: 200px;
-  width: 750px;
+  width: 100%;
   display: flex;
   flex-direction: column;
+
 `;
 
-const StyledTask = styled.div`
-  width: 750px;
+const ButtonDiv = styled.div`
+  background: #fbfaf9;
+  width: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-content: flex-end
+  align-items: center;
+`;
+
+const TaskWrapper = styled.div`
+  width: 95%;
   display: flex;
   justify-content: space-between;
-  align-tasks: center;
 `;
 
 export default function Tasks() {
@@ -36,11 +45,18 @@ export default function Tasks() {
         <TaskNav addTask={addTask} />
         {tasks.map(task => {
           return (
-            <>
-              <Task content={task} />
-              <EditTask task={ task }/>
-              <DeleteTask task={ task }/>
-            </>
+            <TaskWrapper>
+              <Task content={task} status={'Urgent'} />
+              <ButtonDiv>
+                <TaskBtn>
+                <ion-icon ios="ios-more" md="md-more" style={{
+                  color: 'black'
+                }}></ion-icon>
+                </TaskBtn>
+                <EditTask task={ task }/>
+                <DeleteTask task={ task }/>
+              </ButtonDiv>
+            </TaskWrapper>
           );
         })}
       </StyledTasks>
