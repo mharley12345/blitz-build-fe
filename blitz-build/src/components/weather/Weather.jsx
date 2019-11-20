@@ -114,8 +114,7 @@ function Weather(props) {
       console.log(weatherPosition)
       axios
         .post(
-          ` https://weather-api-testing.herokuapp.com/weather`,
-          weatherPosition
+          ` https://weather-api-testing.herokuapp.com/weather`,weatherPosition
         )
         .then(res => {
           setWeatherData(res.data);
