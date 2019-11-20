@@ -71,15 +71,11 @@ const AddProject = props => {
   const submitForm = e => {
     e.preventDefault();
 
-    console.log(form);
-    console.log(form.zip_code);
     const gps = zipcodes.lookup(form.zip_code);
-    console.log(gps);
+
     form.latitude = gps.latitude;
     form.longitude = gps.longitude;
-    console.log("form", form);
-    // setForm({ ...form, latitude: gps.latitude, longitude: gps.longitude });
-    // console.log(form);
+
     axios
       .post(`https://blitz-build.herokuapp.com/projects`, form)
 
