@@ -22,7 +22,7 @@ const Projects = props => {
   }, []);
 
   return (
-    <div>
+    <OverallContainer>
       <Section>
         {" "}
         <p> Your Project List </p>
@@ -92,12 +92,15 @@ const Projects = props => {
 
         <AddProject /> 
       </ProjectContainer>
-    </div>
+    </OverallContainer>
   );
 };
 
 export default Projects;
 
+const OverallContainer = styled.div`
+
+`
 const Section = styled.div`
   width: 100%;
   display: flex;
@@ -114,14 +117,14 @@ const Section = styled.div`
 `;
 
 const ProjectContainer = styled.div`
-  width: 1090px;
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
 `;
 const ProjectTopContainer = styled.div`
   display: flex;
-  width: 1080px;
+  width: 100%;
   height: 51px;
   background-color: #ffffff;
   justify-content: space-between;
@@ -162,7 +165,7 @@ const ProjectLi = styled.div`
 
 const ProjectListContainer = styled.div`
   display: flex;
-  width: 1080px;
+  width: 100%;
   height: 100px;
   background-color: white;
 

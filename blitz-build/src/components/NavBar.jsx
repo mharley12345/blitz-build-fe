@@ -130,7 +130,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
    return (
        <NavBarContainer 
        style={{ background }}>
-        <NavScrollableContainer>
+      
        <LogoAvatarContainer>
            <LogoContainer>
            <img  src={Logo} alt="Blitz-Build-Logo"/>
@@ -139,7 +139,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
                <img src={Avatar} alt="Blitz-Build-Avatar"/>
            </UserProfile>
         </LogoAvatarContainer>
-
+  <NavScrollableContainer>
         <NavBarUl style = {{ background }}
             className= { navOpen ? 'active' : '' }                
         >
