@@ -8,32 +8,20 @@ import Confirm from "../global/Confirm";
 import TasksContext from "../../contexts/tasks/TaskContext";
 
 // styles
-import { TaskI } from "../../styles/tasks"
+import { TaskI, StyledLi } from "../../styles/Tasks/tasks"
 
-export default function DeleteTask({ task }) {
+export default function DeleteTask({ task, closeDrop, deleteStatus, handleDeleteClose }) {
   const { deleteTask } = useContext(TasksContext);
-  const [modalStatus, setModalStatus] = useState(false);
-
-  const handleModalOpen = () => {
-    setModalStatus(true);
-  };
-  const handleModalClose = () => {
-    setModalStatus(false);
-  };
-
   return (
     <>
-      <TaskI 
-        onClick={handleModalOpen}
-        className='ion-md-trash'
-      />
+
       <Modal
-        visible={modalStatus}
-        dismiss={handleModalClose}
+        visible={deleteStatus}
+        dismiss={handleDeleteClose}
         client={'30%'}
         component={
           <Confirm
-            closeModal={handleModalClose}
+            closeModal={handleDeleteClose}
             text={"Delete Task"}
             deleteFunction={deleteTask}
             deleteItem={task}
