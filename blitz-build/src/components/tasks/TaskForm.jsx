@@ -5,7 +5,14 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import styled from "styled-components";
-import { XButton } from "../../styles/tasks";
+import { XButton } from "../../styles/Tasks/tasks";
+import {
+  StyledForm,
+  StyledLabel,
+  StyledInput,
+  StyledSelect,
+  StyledBtn
+} from "../../styles/Tasks/taskForm";
 
 //hooks
 import { useInput } from "../../customHooks/useInput";
@@ -26,51 +33,6 @@ const useStyles = makeStyles(theme => ({
     width: 200
   }
 }));
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-const StyledLabel = styled.label`
-  margin-top: 20px;
-  margin-bottom: 4px;
-  width: 75%;
-`;
-
-const StyledInput = styled.input`
-  width: 75%;
-  margin: 0;
-  font-size: 14px;
-  padding: 6px 8px;
-  background: #fbfaf9;
-  border-width: 1px;
-  border-style: solid;
-  border-color: ${props => (props.error ? "red" : "black")};
-  border-radius: 3px;
-`;
-
-const StyledSelect = styled.select`
-  width: 77%;
-  font-size: 14px;
-  padding: 6px 8px;
-  text-decoration: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  outline: none;
-  border-color: ${props => (props.error ? "red" : "black")};
-  margin: 0;
-`;
-
-const StyledBtn = styled.button`
-  margin-top: 73px;
-  padding: 10px 50px;
-  border-radius: 3px;
-  border: 1px solid #8a827d;
-  background: #da552f;
-  color: white;
-`;
 
 export default function TaskForm({
   closeModal,
@@ -99,11 +61,11 @@ export default function TaskForm({
         setProjects(res.data);
       })
       .catch(err => console.log(err));
-      if(editFields){
-        setTask(editFields)
-      }
+    if (editFields) {
+      setTask(editFields);
+    }
   }, []);
-    
+
   //sets the fields if the editFields prop is passed down
   //else they are empty
 
@@ -115,7 +77,7 @@ export default function TaskForm({
       return project.project_name === task.project_name;
     });
     console.log("from handleSubmit in TaskForm", chosenProject);
-    
+
     //asigns the project id to the new task
     const newTask = {
       project_name: chosenProject[0].project_name,
@@ -125,9 +87,9 @@ export default function TaskForm({
       due_date: task.due_date,
       project_id: chosenProject[0].id
     };
-    console.log('from taskform submit',task)
+    console.log("from taskform submit", task);
     handleFunction(newTask);
-    setTask({   
+    setTask({
       task_name: "",
       task_description: "",
       due_date: "",
