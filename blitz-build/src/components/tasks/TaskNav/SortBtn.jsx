@@ -1,12 +1,11 @@
 import React from "react";
 
 //mui
-import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
 //styles
-import { SortButton } from "../../../styles/tasks";
+import { SortButton } from "../../../styles/Tasks/tasks";
 
 export default function SimpleMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);

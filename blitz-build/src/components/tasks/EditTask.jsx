@@ -7,35 +7,22 @@ import TaskForm from "./TaskForm";
 //context
 import TasksContext from "../../contexts/tasks/TaskContext";
 
-//edit button png
-import editPng from "../../styles/edit button/editBtn.png"
-
 // styles
-import { TaskBtn } from "../../styles/tasks"
+import { TaskI, StyledLi } from "../../styles/Tasks/tasks"
 
 
-export default function EditTask({ task }) {
+export default function EditTask({ task, closeDrop, editStatus, handleEditClose }) {
   const { editTask } = useContext(TasksContext);
-
-  const [modalStatus, setModalStatus] = useState(false);
-
-  const handleModalOpen = () => {
-    setModalStatus(true);
-  };
-  const handleModalClose = () => {
-    setModalStatus(false);
-  };
 
   return (
     <>
-      <TaskBtn onClick={ handleModalOpen }><img src={editPng}/></TaskBtn>
       <Modal
-        visible={ modalStatus }
-        dismiss={ handleModalClose }
+        visible={ editStatus }
+        dismiss={ handleEditClose }
         client={'50%'}
         component={
           <TaskForm
-            closeModal={ handleModalClose }
+            closeModal={ handleEditClose }
             handleFunction={ editTask }
             editFields={ task }
             text={ 'Edit Task' }
