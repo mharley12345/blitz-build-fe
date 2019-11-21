@@ -6,47 +6,7 @@ import Global from "../../styles/Global";
 
 import DelayLogCard from "./DelayLogCard";
 
-const delayLogDummyData = [
-  {
-    projectId: "orc",
-    projectName: "orc",
-    reason: "i don't know",
-    taskId: "-LtkXMRfFmz3tdS9U34Z",
-    taskName: "finish the flooring",
-    timestamp: "November 15, 2019 11:36 AM",
-    uid: "R3fE6DP3UgP8hQSWbGubsHb7lOw2",
-    username: "joe@smith.com"
-  },
-  {
-    projectId: "orc2",
-    projectName: "orc2",
-    reason: "i don't know",
-    taskId: "-LtkXMRfFmz3tdS9U34Z",
-    taskName: "finish painting",
-    timestamp: "November 15, 2019 11:36 AM",
-    uid: "R3fE6DP3UgP8hQSWbGubsHb7lOw2",
-    username: "joe@smith.com"
-  },
-  {
-    projectId: "orc2",
-    projectName: "orc2",
-    reason: "i don't know",
-    taskId: "-LtkXMRfFmz3tdS9U34Z",
-    taskName: "finish painting",
-    timestamp: "November 15, 2019 11:36 AM",
-    uid: "R3fE6DP3UgP8hQSWbGubsHb7lOw2",
-    username: "joe@smith.com"
-  }
-];
 
-// const DelayLogTop = styled.div`
-//   position: absolute;
-//   width: 1144px;
-//   height: 96px;
-//   left: 296px;
-//   background: #ffffff;
-//   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
-// `;
 const DelayLogContent = styled.div`
   position: absolute;
 
