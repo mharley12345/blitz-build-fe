@@ -28,6 +28,7 @@ const ButtonContainer=styled.div`
 display: flex;
 margin-top: 24px;
 margin-bottom: 24px;
+margin-right: 25px;
 width: 400px;
 justify-content: center;
 
