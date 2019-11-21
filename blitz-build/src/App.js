@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
@@ -18,12 +18,16 @@ import DelayLog from "./components/delayLog/DelayLog";
 
 //context
 import TaskProvider from "./contexts/tasks/TaskProvider";
-import OpenContext from './contexts/projects/OpenContext'
+import OpenContext from "./contexts/projects/OpenContext";
 // import ProjectProvider from "./contexts/projects/ProjectsProvider";
 
-function App() {
+//AUTH0
+import Auth from "./components/auth/auth";
+import AuthNavBar from "./components/auth/authNavBar";
+import Callback from "./components/auth/callback";
 
-  const [ pathname, setPathname ] = useState(window.location.pathname);
+function App() {
+  const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
   const navLinks = [
     {
@@ -72,28 +76,28 @@ function App() {
     <Router>
       {/* <ProjectProvider> */}
       <TaskProvider>
-       <OpenContext.Provider value={{open, setOpen }}>
-        <NavBar setPathname= {setPathname}
-          navLinks={navLinks}
-          //  logo={ logo }
-        />
-        <Layout pathname={pathname}>
+        <OpenContext.Provider value={{ open, setOpen }}>
           <Switch>
+            <Route exact path="/auth" component={Auth} />
+            <Route exact path="/navbar" component={AuthNavBar} />
+            <Route exact path="/callback" component={Callback} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/log-out" component={Logout} />
 
             {/*   */}
-            <Route exact path="/dashboard" component={TaskCard} />
-            <Route exact path="/tasks" component={Tasks} />
-            <Route exact path="/projects" component={Projects} />
-            <Route exact path="/project/:id" component={IndividualProject} />
-            <Route exact path="/delay-log" component={DelayLog} />
+            <NavBar setPathname={setPathname} navLinks={navLinks} />
+            <Layout pathname={pathname}>
+              <Route exact path="/dashboard" component={TaskCard} />
+              <Route exact path="/tasks" component={Tasks} />
+              <Route exact path="/projects" component={Projects} />
+              <Route exact path="/project/:id" component={IndividualProject} />
+              <Route exact path="/delay-log" component={DelayLog} />
+            </Layout>
           </Switch>
-        </Layout>
-         </OpenContext.Provider>
+        </OpenContext.Provider>
       </TaskProvider>
-     
+
       {/* </ProjectProvider> */}
     </Router>
   );
