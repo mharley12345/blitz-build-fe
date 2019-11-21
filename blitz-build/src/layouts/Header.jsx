@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom'
 import OpenContext from '../contexts/projects/OpenContext'
 const HeaderContainer = styled.div`
   background: #fff;
-  width: 1144px;
+  width: 100%;
   height: 96px;
   display: flex;
   justify-content: space-between;
@@ -25,7 +25,7 @@ display: flex;
 margin-top: 24px;
 width: 400px;
 justify-content: center;
-margin-left: 100px;
+
 `
 
 const ButtonDocument = styled.div`
