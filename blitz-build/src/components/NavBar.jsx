@@ -7,19 +7,20 @@ import Avatar from '../styles/Avatar/Avatar.png'
 
 
 const NavBarContainer = styled.div`
+   margin-top: 20px;
     display: flex;
     flex-direction: column;
     background-color: red;
-    margin-top: 30px;
     position: fixed;
     width: 296px;
     height: 1574px;
-    left: 0px;
-    top: 0px;
+    left: 0;
+    top: 0;
     background: #3F3A36;
+    
 `;
     const NavBarUl = styled.ul`
-       
+        
         background: #3F3A36;
         display: flex;
         margin-block-start: 0;
@@ -30,6 +31,7 @@ const NavBarContainer = styled.div`
         flex-direction: column;
         box-shadow: 2px 2px 2px #ccc;
         transition: 300ms ease all;
+        
        
         `;
 
@@ -43,6 +45,7 @@ const NavBarContainer = styled.div`
         `;
 
         const NavBarLi = styled.li` 
+        
             list-style-type: none;
             height: 70px;
             align-items: center;
@@ -55,7 +58,12 @@ const NavBarContainer = styled.div`
             margin-top: 40px;
           }
         `;
-      
+      const NavScrollableContainer = styled.div`
+        overflow: scroll;
+        ::-webkit-scrollbar { 
+            display: none; 
+        }
+      `
 
        const NavBarLink = {
             color: '#FFFFFF',
@@ -102,8 +110,8 @@ const NavBarContainer = styled.div`
     
       `
       const LogoAvatarContainer = styled.div`
-      height: 190px
-      margin-bottom: 60px;
+      height: 160px
+      margin-bottom: 40px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -122,7 +130,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
    return (
        <NavBarContainer 
        style={{ background }}>
-
+        <NavScrollableContainer>
        <LogoAvatarContainer>
            <LogoContainer>
            <img  src={Logo} alt="Blitz-Build-Logo"/>
@@ -172,7 +180,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
                    
       
            </NavBarUl>
-
+           </NavScrollableContainer>
        </NavBarContainer>
        
       

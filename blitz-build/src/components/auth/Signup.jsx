@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styled, { css } from "styled-components";
 
 function Signup() {
   return (
     <div>
       <h1>Sign up</h1>
       <p>
-        Don't have an account? <Link to="/">Login</Link>
+        Have an account already? <Link to="/login">Login</Link>
       </p>
       <form>
         <label>Name</label>
