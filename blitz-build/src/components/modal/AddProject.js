@@ -11,7 +11,7 @@ import OpenContext from "../../contexts/projects/OpenContext";
 import { Hidden } from "@material-ui/core";
 
 const ModalContainer =styled.div`
-overflow-y: visible;
+
 width: '750px',
 height: '1000px',
 background: '#FFFFFF',
@@ -20,6 +20,11 @@ display:'flex',
 flex-direction: 'column',
 justify-Content: 'center',
 align-items: 'center',
+overflow: scroll;
+::-webkit-scrollbar { 
+  display: none; 
+}
+
 `
 
 const DialogStyle = {
