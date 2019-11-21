@@ -140,7 +140,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
            <img  src={Logo} alt="Blitz-Build-Logo"/>
            </LogoContainer>
            <UserProfile>
-               <img src={Avatar} alt="Blitz-Build-Avatar"/>
+              
            </UserProfile>
         </LogoAvatarContainer>
   
