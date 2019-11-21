@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 function Task({ item }) {
   const today = new window.Date().toISOString().slice(0, 10);
-  const project_date = "2019-11-21";
+  const project_date = "{item.due_date}";
 
   function DateCalc(today, project_date) {
     if (today === project_date) {
