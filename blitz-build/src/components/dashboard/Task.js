@@ -31,7 +31,7 @@ function Task({ item }) {
     } else if (status === "Past") {
       return `${diff} days past due`;
     } else if (status === "Upcoming") {
-      return `In ${diff} days`;
+      return `Due in ${diff} days`;
     }
   }
 
