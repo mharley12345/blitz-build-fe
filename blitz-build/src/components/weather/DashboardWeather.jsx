@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Sun from "../../styles/icons_weather/sun.png";
+
 // css of the weather container in the dashboard
 const WeatherContainerD = styled.div`
   width: 524pxpx;
@@ -75,16 +77,18 @@ function DashboardWeather({ weatherData, time, icon }) {
         <p>{time}</p>
       </WeatherLocationInfo>
 
-        <WeatherInfo>
-          <WeatherData>
-            <WeatherTem>
-              {weatherData.currently.apparentTemperature.toFixed(0)}
-              <span>&#176;</span>
-            </WeatherTem>
-            <p>{weatherData.currently.summary}</p>
-          </WeatherData>
-          <WeatherIcon>{icon}</WeatherIcon>
-        </WeatherInfo>
+      <WeatherInfo>
+        <WeatherData>
+          <WeatherTem>
+            {weatherData.currently.apparentTemperature.toFixed(0)}
+            <span>&#176;</span>
+          </WeatherTem>
+          <p>{weatherData.currently.summary}</p>
+        </WeatherData>
+        <WeatherIcon>
+          <img src={Sun} alt="sun" />
+        </WeatherIcon>
+      </WeatherInfo>
     </WeatherContainerD>
   );
 }
