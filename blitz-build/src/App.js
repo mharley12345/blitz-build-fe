@@ -3,6 +3,7 @@ import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
+import PrivateRoute from './components/auth/PrivateRoute'
 import NavBar from "./components/NavBar";
 // import Layout from "./components/dashboard/Layout";
 // import Dashboard from "./components/dashboard/index";
@@ -75,7 +76,7 @@ function App() {
        <OpenContext.Provider value={{open, setOpen }}>
         <NavBar setPathname= {setPathname}
           navLinks={navLinks}
-          //  logo={ logo }
+         
         />
         <Layout pathname={pathname}>
           <Switch>
@@ -84,11 +85,11 @@ function App() {
             <Route exact path="/log-out" component={Logout} />
 
             {/*   */}
-            <Route exact path="/dashboard" component={TaskCard} />
-            <Route exact path="/tasks" component={Tasks} />
-            <Route exact path="/projects" component={Projects} />
-            <Route exact path="/project/:id" component={IndividualProject} />
-            <Route exact path="/delay-log" component={DelayLog} />
+            <PrivateRoute exact path="/dashboard" component={TaskCard} />
+            <PrivateRoute exact path="/tasks" component={Tasks} />
+            <PrivateRoute exact path="/projects" component={Projects} />
+            <PrivateRoute exact path="/project/:id" component={IndividualProject} />
+            <PrivateRoute exact path="/delay-log" component={DelayLog} />
           </Switch>
         </Layout>
          </OpenContext.Provider>
