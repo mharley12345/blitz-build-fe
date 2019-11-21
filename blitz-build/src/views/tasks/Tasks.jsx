@@ -13,7 +13,8 @@ import DeleteTask from "../../components/tasks/DeleteTask"
 //styles
 import styled from "styled-components";
 import taskContext from "../../contexts/tasks/TaskContext";
-import { TaskBtn } from '../../styles/tasks'
+import { TaskI } from '../../styles/tasks'
+
 
 const StyledTasks = styled.div`
   width: 100%;
@@ -23,12 +24,14 @@ const StyledTasks = styled.div`
 `;
 
 const ButtonDiv = styled.div`
+  position: relative;
   background: #fbfaf9;
   width: 100px;
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap-reverse;
+  justify-content: flex-end;
   align-content: flex-end
-  align-items: center;
+  align-items: flex-end;
 `;
 
 const TaskWrapper = styled.div`
@@ -37,24 +40,34 @@ const TaskWrapper = styled.div`
   justify-content: space-between;
 `;
 
+const DropDown = styled.div`
+display: flex;
+flex-direction: column;
+position: absolute;
+top: 100%;
+left: 0;
+width: 100px;
+z-index: 2;
+border: 1px solid rgba(0, 0, 0, 0.04);
+box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
+`
+
 export default function Tasks() {
-  const {addTask, tasks}  = useContext(taskContext)
+  const { tasks}  = useContext(taskContext)
   
   return (
       <StyledTasks>
-        <TaskNav addTask={addTask} />
+        {/* <TaskNav addTask={addTask} /> */}
         {tasks.map(task => {
           return (
             <TaskWrapper>
               <Task content={task} status={'Urgent'} />
               <ButtonDiv>
-                <TaskBtn>
-                <ion-icon ios="ios-more" md="md-more" style={{
-                  color: 'black'
-                }}></ion-icon>
-                </TaskBtn>
-                <EditTask task={ task }/>
-                <DeleteTask task={ task }/>
+                <TaskI className= "ion-ios-more"/>
+                {/* <DropDown> */}
+                  <EditTask task={ task }/>
+                  <DeleteTask task={ task }/>
+                {/* </DropDown> */}
               </ButtonDiv>
             </TaskWrapper>
           );

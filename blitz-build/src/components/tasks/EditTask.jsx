@@ -11,7 +11,7 @@ import TasksContext from "../../contexts/tasks/TaskContext";
 import editPng from "../../styles/edit button/editBtn.png"
 
 // styles
-import { TaskBtn } from "../../styles/tasks"
+import { TaskI } from "../../styles/tasks"
 
 
 export default function EditTask({ task }) {
@@ -28,7 +28,10 @@ export default function EditTask({ task }) {
 
   return (
     <>
-      <TaskBtn onClick={ handleModalOpen }><img src={editPng}/></TaskBtn>
+      <TaskI 
+      onClick={ handleModalOpen }
+      className='ion-md-create'
+      />
       <Modal
         visible={ modalStatus }
         dismiss={ handleModalClose }

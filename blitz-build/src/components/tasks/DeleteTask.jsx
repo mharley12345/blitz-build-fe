@@ -7,11 +7,8 @@ import Confirm from "../global/Confirm";
 //context
 import TasksContext from "../../contexts/tasks/TaskContext";
 
-//delete png
-import deleteSvg from "../../styles/delete button/DeleteBtn.svg"
-
 // styles
-import { TaskBtn } from "../../styles/tasks"
+import { TaskI } from "../../styles/tasks"
 
 export default function DeleteTask({ task }) {
   const { deleteTask } = useContext(TasksContext);
@@ -26,16 +23,10 @@ export default function DeleteTask({ task }) {
 
   return (
     <>
-      <TaskBtn 
+      <TaskI 
         onClick={handleModalOpen}
-      >
-        <img 
-        style={{
-          objectFit: 'cover',
-        }}
-        src={deleteSvg}
-        />
-      </TaskBtn>
+        className='ion-md-trash'
+      />
       <Modal
         visible={modalStatus}
         dismiss={handleModalClose}

@@ -33,11 +33,13 @@ display: inline-block;
 margin: 4px 2px;
 cursor: pointer;
 `
-export const TaskBtn = styled.button`
-border: 1px solid black;
+export const TaskI = styled.i`
+width: 18px;
+height: 18px;
+font-size: 1.4rem;
 background-color: #fbfaf9;
 outline: none
-color: black;
+color: #B5AFAB;
 padding: 10px 10px;
 text-align: right;
 text-decoration: none;
