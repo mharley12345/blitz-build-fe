@@ -13,7 +13,6 @@ import Project_img from "../../styles/icons_project/project_img.png";
 
 
 
-
 const IndividualProject = props => {
   const [projectTasks, setProjectTasks] = useState([]);
 
@@ -39,7 +38,6 @@ const IndividualProject = props => {
   return (
     <>
       <Global />
-
       <IndividualProjectTitleContainer>
         <img src={Project_icon} alt="project_icon" />
         <p>&nbsp;&nbsp;Projects / {projectTasks.project_name}</p>
@@ -48,7 +46,7 @@ const IndividualProject = props => {
         <IndividualProjectContainer>
           <IndividualProjectImgContainer>
             {/* It will changed to the real project img in the future */}
-            <img src={Project_img} alt="project_img" /> 
+            <img src={Project_img} alt="project_img" />
           </IndividualProjectImgContainer>
           <IndividualProjectcontentContainer>
             <Contenth2>{projectTasks.project_name}</Contenth2>
@@ -91,6 +89,7 @@ const IndividualProject = props => {
             latitude={projectTasks.latitude}
             longitude={projectTasks.longitude}
           />
+          
           <DocumentsContainer>
             <Documents />
           </DocumentsContainer>

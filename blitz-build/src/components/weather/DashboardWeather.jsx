@@ -58,11 +58,10 @@ const WeatherTem = styled.div`
 const WeatherIcon = styled.div`
   width: 50%;
 `;
-const Title = styled.img`
+const Title = styled.div`
   font-size: 16px;
-  /* 400 Gray */
-
-  color: #8a827d;
+ 
+color: #8A827D;
 `;
 const IconImage = styled.img`
   width: 100px;
@@ -81,9 +80,9 @@ function DashboardWeather({ weatherData, time, icon }) {
       <WeatherLocationInfo>
         <h2>Denver, Colorado</h2>
         <p>{time}</p>
-      </WeatherLocationInfo>
+      </WeatherLocationInfo> 
 
-      <WeatherInfo>
+       <WeatherInfo>
         <WeatherData>
           <WeatherTem>
             {weatherData.currently.apparentTemperature.toFixed(0)}

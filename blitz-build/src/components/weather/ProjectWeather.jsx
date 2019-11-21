@@ -1,21 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import styled from "styled-components";
 
-// css of the weather container in the dashboard
-const WeatherContainerD = styled.div`
-  width: 524pxpx;
-  height: 384px;
-
-  /* 000 White */
-
-  background: #ffffff;
-  /* 250 - Borders */
-
-  border: 1px solid #dcd9d5;
-  box-sizing: border-box;
-  border-radius: 3px;
-`;
 
 // css of the weather container in the project page
 const WeatherContainerP = styled.div`

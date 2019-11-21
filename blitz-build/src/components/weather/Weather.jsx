@@ -84,7 +84,7 @@ function Weather(props) {
     //var weatherIcon = <IconImage src="weatherIcons/streamline-icon-weather-clouds@24x24.png" alt="cloudy"/>
     return weatherIcon;
   }
-
+console.log(weatherData)
   return (
     <>
       {props.usage === "project" ? (
