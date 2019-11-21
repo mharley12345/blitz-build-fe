@@ -9,9 +9,9 @@ import styled from "styled-components";
 import { height } from "@material-ui/system";
 
 const ModalContainer = styled.div`
-   width: 450px;
-   height: 250px;
-  `;
+  width: 450px;
+  height: 250px;
+`;
 
 const ModalTitle = styled.div`
   display: flex
@@ -29,62 +29,68 @@ const H3 = styled.div`
   height: 50px;
 `;
 
-const ButtonStyles = styled.div `
+const ButtonStyles = styled.div`
   display: flex;
   justify-content: center;
   height: 90px;
-
 `;
 const ButtonStyle = {
-cursor: 'pointer',
-backgroundColor: '#DA552F',
-color: 'white',
-borderRadius: '1px',
-width: '30px',
-height: '35px'
-
-}
+  cursor: "pointer",
+  backgroundColor: "#DA552F",
+  color: "white",
+  borderRadius: "1px",
+  width: "30px",
+  height: "35px"
+};
 const Pstyle = styled.p`
   font-size: 25px;
   margin: 25px 0 0 40px;
-`
+`;
 
-
-
-const Logout = (props) => {
+const Logout = props => {
   const [open, setOpen] = useState(true);
-    const handleClose = () => {
+  const handleClose = () => {
     setOpen(false);
     props.history.push("/projects");
   };
-    const SignOut = e => {
-        e.preventDefault();
-        localStorage.removeItem("token");
-      localStorage.removeItem('uid');
-        props.history.push("/dashboard");
-      };
+  const SignOut = e => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.removeItem("uid");
+    props.history.push("/login");
+  };
 
-      return (
-       
-       <Dialog  open={open}
-       onClose={handleClose}
-        aria-labelledby="form-dialog-title">
-           <ModalContainer>
+  return (
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+    >
+      <ModalContainer>
+        <ModalTitle>
+          {" "}
+          <H3>Log Out</H3>
+        </ModalTitle>
 
-          <ModalTitle> <H3>Log Out</H3></ModalTitle>
+        <DialogContent>
+          {" "}
+          <Pstyle> Are you sure you want to logout?</Pstyle>
+        </DialogContent>
 
-              <DialogContent> <Pstyle> Are you sure you want to logout?</Pstyle></DialogContent>
-
-            <ButtonStyles><DialogActions>
-               
-              <Button onClick={()=> SignOut} style={ButtonStyle}>yes</Button>
-              <Button onClick={handleClose} style={ButtonStyle} > No </Button>
-                
-           </DialogActions></ButtonStyles>
-           </ModalContainer>
-       </Dialog>
-       
-      )
-}
+        <ButtonStyles>
+          <DialogActions>
+            <Button onClick={() => SignOut} style={ButtonStyle}>
+              yes
+            </Button>
+            <Button onClick={handleClose} style={ButtonStyle}>
+              {" "}
+              No{" "}
+            </Button>
+          </DialogActions>
+        </ButtonStyles>
+      </ModalContainer>
+    </Dialog>
+  );
+};
 
 export default Logout;

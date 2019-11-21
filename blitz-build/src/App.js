@@ -21,13 +21,13 @@ import TaskProvider from "./contexts/tasks/TaskProvider";
 import OpenContext from "./contexts/projects/OpenContext";
 // import ProjectProvider from "./contexts/projects/ProjectsProvider";
 
-function App() {
-<<<<<<< HEAD
-  const [pathname, setPathname] = useState();
-=======
+//AUTH0
+import Auth from "./components/auth/auth";
+import AuthNavBar from "./components/auth/authNavBar";
+import Callback from "./components/auth/callback";
 
-  const [ pathname, setPathname ] = useState(window.location.pathname);
->>>>>>> 8545e0de8f923f29287187f09d8eb6d5cd869a8d
+function App() {
+  const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
   const navLinks = [
     {
@@ -77,37 +77,24 @@ function App() {
       {/* <ProjectProvider> */}
       <TaskProvider>
         <OpenContext.Provider value={{ open, setOpen }}>
-          {/* <NavBar setPathname= {setPathname}
-          navLinks={navLinks}
-          //  logo={ logo }
-<<<<<<< HEAD
-        /> */}
-          <Layout pathname={pathname}>
-            <Switch>
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-=======
-        />
-        <Layout pathname={pathname}>
           <Switch>
+            <Route exact path="/auth" component={Auth} />
+            <Route exact path="/navbar" component={AuthNavBar} />
+            <Route exact path="/callback" component={Callback} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/log-out" component={Logout} />
->>>>>>> 8545e0de8f923f29287187f09d8eb6d5cd869a8d
 
-              {/*   */}
-              <NavBar
-                setPathname={setPathname}
-                navLinks={navLinks}
-                //  logo={ logo }
-              />
+            {/*   */}
+            <NavBar setPathname={setPathname} navLinks={navLinks} />
+            <Layout pathname={pathname}>
               <Route exact path="/dashboard" component={TaskCard} />
               <Route exact path="/tasks" component={Tasks} />
               <Route exact path="/projects" component={Projects} />
               <Route exact path="/project/:id" component={IndividualProject} />
               <Route exact path="/delay-log" component={DelayLog} />
-            </Switch>
-          </Layout>
+            </Layout>
+          </Switch>
         </OpenContext.Provider>
       </TaskProvider>
 
