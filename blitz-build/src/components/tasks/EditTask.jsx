@@ -7,6 +7,13 @@ import TaskForm from "./TaskForm";
 //context
 import TasksContext from "../../contexts/tasks/TaskContext";
 
+//edit button png
+import editPng from "../../styles/edit button/editBtn.png"
+
+// styles
+import { TaskBtn } from "../../styles/tasks"
+
+
 export default function EditTask({ task }) {
   const { editTask } = useContext(TasksContext);
 
@@ -21,7 +28,7 @@ export default function EditTask({ task }) {
 
   return (
     <>
-      <button onClick={ handleModalOpen }>Edit</button>
+      <TaskBtn onClick={ handleModalOpen }><img src={editPng}/></TaskBtn>
       <Modal
         visible={ modalStatus }
         dismiss={ handleModalClose }

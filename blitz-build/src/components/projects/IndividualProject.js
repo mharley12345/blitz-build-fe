@@ -9,20 +9,21 @@ import Edit_icon from "../../styles/icons_project/edit_icon.png";
 import Delete_icon from "../../styles/icons_project/delete_icon.png";
 import Project_icon from "../../styles/icons_project/project_icon.png";
 
+
 const IndividualProjectContainer = styled.div`
-  position: absolute;
+  
   width: 530px;
   height: 649px;
   left: 328px;
   top: 168px;
 `;
 const IndividualProjectTitleContainer = styled.div`
-  position: absolute;
+  
   display:flex;
   width: 530px;
   height: 24px;
   left: 328px;
-  top: 128px;
+  
 
   p {
     font-family: Roboto;
@@ -32,27 +33,27 @@ const IndividualProjectTitleContainer = styled.div`
   }
 `;
 const IndividualProjectImgContainer = styled.div`
-  position: absolute;
+  
   width: 530px;
   height: 328px;
-  left: 328px;
-  top: 168px;
+  margin-top:16px;
+  
   background: lightblue;
 `;
 const IndividualProjectcontentContainer = styled.div`
-  position: absolute;
+  
   width: 530px;
   height: 321px;
-  left: 328px;
-  top: 496px;
+  
   background: #ffffff;
-  h2 {
-    margin-top: 24px;
-    margin-left: 32px;
-    font-size: 36px;
-    font-weight: bold;
-    color: #3b3b3b;
-  }
+ 
+`;
+const Contenth2 = styled.h2`
+  padding-top: 24px;
+  padding-left: 32px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #3b3b3b;
 `;
 const ContentInfo = styled.div`
   display: flex;
@@ -178,43 +179,42 @@ const IndividualProject = props => {
         <img src={Project_icon} alt="project_icon" />
         <p>&nbsp;&nbsp;Projects / {projectTasks.project_name}</p>
       </IndividualProjectTitleContainer>
-      <IndividualProjectContainer></IndividualProjectContainer>
-      <IndividualProjectImgContainer></IndividualProjectImgContainer>
-      <IndividualProjectcontentContainer>
-        <h2>{projectTasks.project_name}</h2>
-        <ContentInfo>
-          <ContentAddress>
-            <p>{projectTasks.street_address}</p>
-            <p>
-              {projectTasks.city}, {projectTasks.state} {projectTasks.zip_code}
-            </p>
-          </ContentAddress>
-          <ContentSize>
-            <p>
-              {projectTasks.beds} Beds&nbsp;&nbsp;&nbsp;
-              {projectTasks.baths} Baths
-            </p>
-            <p>
-              
-              {projectTasks.square_ft} sq.ft.
-            </p>
-          </ContentSize>
-        </ContentInfo>
-        <Contentbottom>
-          <ContentbottomTemplate>
-            <img src={Page_icon} alt="page_icon" />
-            <p>&nbsp;&nbsp;90-Day Template in Use</p>
-          </ContentbottomTemplate>
-          <EditIcon>
-            <img src={Edit_icon} alt="edit_icon" />
-            <p>Edit</p>
-          </EditIcon>
-          <DeleteIcon>
-            <img src={Delete_icon} alt="delete_icon" />
-            <p>Delete</p>
-          </DeleteIcon>
-        </Contentbottom>
-      </IndividualProjectcontentContainer>
+      <IndividualProjectContainer>
+        <IndividualProjectImgContainer></IndividualProjectImgContainer>
+        <IndividualProjectcontentContainer>
+          <Contenth2>{projectTasks.project_name}</Contenth2>
+          <ContentInfo>
+            <ContentAddress>
+              <p>{projectTasks.street_address}</p>
+              <p>
+                {projectTasks.city}, {projectTasks.state}{" "}
+                {projectTasks.zip_code}
+              </p>
+            </ContentAddress>
+            <ContentSize>
+              <p>
+                {projectTasks.beds} Beds&nbsp;&nbsp;&nbsp;
+                {projectTasks.baths} Baths
+              </p>
+              <p>{projectTasks.square_ft} sq.ft.</p>
+            </ContentSize>
+          </ContentInfo>
+          <Contentbottom>
+            <ContentbottomTemplate>
+              <img src={Page_icon} alt="page_icon" />
+              <p>&nbsp;&nbsp;90-Day Template in Use</p>
+            </ContentbottomTemplate>
+            <EditIcon>
+              <img src={Edit_icon} alt="edit_icon" />
+              <p>Edit</p>
+            </EditIcon>
+            <DeleteIcon>
+              <img src={Delete_icon} alt="delete_icon" />
+              <p>Delete</p>
+            </DeleteIcon>
+          </Contentbottom>
+        </IndividualProjectcontentContainer>
+      </IndividualProjectContainer>
       <Weather
         usage="project"
         city={`${projectTasks.city}, ${projectTasks.state}`}
@@ -226,6 +226,7 @@ const IndividualProject = props => {
           <DocumentsTitleText>Documents</DocumentsTitleText>
         </Documentstitle>
       </DocumentsContainer>
+      <TaskCard />
     </>
   );
 };

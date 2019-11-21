@@ -7,6 +7,12 @@ import Confirm from "../global/Confirm";
 //context
 import TasksContext from "../../contexts/tasks/TaskContext";
 
+//delete png
+import deleteSvg from "../../styles/delete button/DeleteBtn.svg"
+
+// styles
+import { TaskBtn } from "../../styles/tasks"
+
 export default function DeleteTask({ task }) {
   const { deleteTask } = useContext(TasksContext);
   const [modalStatus, setModalStatus] = useState(false);
@@ -20,7 +26,16 @@ export default function DeleteTask({ task }) {
 
   return (
     <>
-      <button onClick={handleModalOpen}>Delete</button>
+      <TaskBtn 
+        onClick={handleModalOpen}
+      >
+        <img 
+        style={{
+          objectFit: 'cover',
+        }}
+        src={deleteSvg}
+        />
+      </TaskBtn>
       <Modal
         visible={modalStatus}
         dismiss={handleModalClose}

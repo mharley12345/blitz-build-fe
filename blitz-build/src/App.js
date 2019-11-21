@@ -22,7 +22,12 @@ import OpenContext from "./contexts/projects/OpenContext";
 // import ProjectProvider from "./contexts/projects/ProjectsProvider";
 
 function App() {
+<<<<<<< HEAD
   const [pathname, setPathname] = useState();
+=======
+
+  const [ pathname, setPathname ] = useState(window.location.pathname);
+>>>>>>> 8545e0de8f923f29287187f09d8eb6d5cd869a8d
   const [open, setOpen] = useState(false);
   const navLinks = [
     {
@@ -56,7 +61,7 @@ function App() {
       icon: "ion-ios-hourglass"
     },
     {
-      text: "Settings",
+      text: "Log Out",
       path: "/log-out",
       icon: "ion-ios-cog"
     },
@@ -75,11 +80,20 @@ function App() {
           {/* <NavBar setPathname= {setPathname}
           navLinks={navLinks}
           //  logo={ logo }
+<<<<<<< HEAD
         /> */}
           <Layout pathname={pathname}>
             <Switch>
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
+=======
+        />
+        <Layout pathname={pathname}>
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/log-out" component={Logout} />
+>>>>>>> 8545e0de8f923f29287187f09d8eb6d5cd869a8d
 
               {/*   */}
               <NavBar
