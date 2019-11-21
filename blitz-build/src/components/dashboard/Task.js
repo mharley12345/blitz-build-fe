@@ -3,21 +3,39 @@ import styled, { css } from "styled-components";
 
 function Task({ item }) {
   const today = new window.Date().toISOString().slice(0, 10);
-  const project_date = "{item.due_date}";
-
+// This value is hardcoded now because the server don't send back a date
+// It should be {item.due_date}
+  const project_date = "2019-10-21";
 
   function DateCalc(today, project_date) {
     if (today === project_date) {
       return "Pending";
     } else if (today > project_date) {
-      return "Overdue";
+      return "Past";
     } else if (today < project_date) {
       return "Upcoming";
     }
   }
 
-
   const status = DateCalc(today, project_date);
+
+  const todayDate = new window.Date(today);
+  const projectDate = new window.Date(project_date);
+  const oneDay = 24 * 60 * 60 * 1000;
+
+  const diffDays = Math.round(Math.abs((todayDate - projectDate) / oneDay));
+
+  function DueDateLogic(diff, status) {
+    if (status === "Pending") {
+      return "Due today";
+    } else if (status === "Past") {
+      return `${diff} days past due`;
+    } else if (status === "Upcoming") {
+      return `In ${diff} days`;
+    }
+  }
+
+  const dueDateText = DueDateLogic(diffDays, status);
 
   return (
     <Container>
@@ -28,7 +46,7 @@ function Task({ item }) {
 
         <DueDate>
           <Text>{item.street_address}</Text>
-          <Date>{item.due_date}</Date>
+          <Date>{dueDateText}</Date>
         </DueDate>
       </Inner>
       <div>

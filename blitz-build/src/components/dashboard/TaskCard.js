@@ -25,7 +25,7 @@ function TaskCard() {
       </Section>
       <Card>
         {task.map((item) => (
-          <Task item={item} />
+          <Task key={item.id} item={item} />
         ))}
       </Card>
     </Container>
