@@ -5,15 +5,17 @@ function Task({ item }) {
   const today = new window.Date().toISOString().slice(0, 10);
   const project_date = "{item.due_date}";
 
+
   function DateCalc(today, project_date) {
     if (today === project_date) {
       return "Pending";
     } else if (today > project_date) {
-      return "Past";
+      return "Overdue";
     } else if (today < project_date) {
       return "Upcoming";
     }
   }
+
 
   const status = DateCalc(today, project_date);
 
@@ -96,7 +98,7 @@ const Status = styled.div`
   }
 
   ${props =>
-    props.status === "Urgent" &&
+    props.status === "Overdue" &&
     css`
       background-color: #ffbfbf;
       color: #9c0e0e;
@@ -110,7 +112,7 @@ const Status = styled.div`
     `};
 
   ${props =>
-    props.status === "Overdue" &&
+    props.status === "Upcoming" &&
     css`
       background-color: #d2fac4;
       color: #326021;
