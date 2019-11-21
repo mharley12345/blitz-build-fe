@@ -46,7 +46,7 @@ export default function Tasks() {
         {tasks.map(task => {
           return (
             <TaskWrapper>
-              <Task content={task} status={'Urgent'} />
+              <Task item={task} status={'Urgent'} />
               <ButtonDiv>
                 <TaskBtn>
                 <ion-icon ios="ios-more" md="md-more" style={{
