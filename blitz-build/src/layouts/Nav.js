@@ -6,12 +6,12 @@ import Avatar from '../styles/Avatar/Avatar.png'
 function Nav() {
     return (
         <Container>
-            <LogoContainer>
+            {/* <LogoContainer>
            <img  src={Logo} alt="Blitz-Build-Logo"/>
            </LogoContainer>
            <UserProfile>
                <img src={Avatar} alt="Blitz-Build-Avatar"/>
-           </UserProfile>
+           </UserProfile> */}
         </Container>
     )
 }
@@ -19,6 +19,7 @@ function Nav() {
 export default Nav
 
 const Container = styled.div`
+
   min-width: 296px;
   height: 100vh;
   background: #3f3a36;
@@ -28,9 +29,10 @@ const Container = styled.div`
 `;
 const LogoContainer = styled.div`
   margin: 29.25px 108px 35px 74.8px;
+  postion: fixed;
 `
 const UserProfile = styled.div`
-
+postion: fixed;
 width: 155px;
 height: 48px;
 `
