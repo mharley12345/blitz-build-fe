@@ -77,24 +77,26 @@ function App() {
       {/* <ProjectProvider> */}
       <TaskProvider>
         <OpenContext.Provider value={{ open, setOpen }}>
-          <Switch>
-            {/* <Route exact path="/auth" component={Auth} />
+          <NavBar setPathname={setPathname} navLinks={navLinks} />
+          <Layout pathname={pathname}>
+            <Switch>
+              {/* <Route exact path="/auth" component={Auth} />
             <Route exact path="/navbar" component={AuthNavBar} />
             <Route exact path="/callback" component={Callback} /> */}
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/log-out" component={Logout} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+              <Route exact path="/log-out" component={Logout} />
 
-            {/*   */}
-            <NavBar setPathname={setPathname} navLinks={navLinks} />
-            <Layout pathname={pathname}>
+              {/*   */}
+              {/* <NavBar setPathname={setPathname} navLinks={navLinks} />
+            <Layout pathname={pathname}> */}
               <Route exact path="/dashboard" component={TaskCard} />
               <Route exact path="/tasks" component={Tasks} />
               <Route exact path="/projects" component={Projects} />
               <Route exact path="/project/:id" component={IndividualProject} />
               <Route exact path="/delay-log" component={DelayLog} />
-            </Layout>
-          </Switch>
+            </Switch>
+          </Layout>
         </OpenContext.Provider>
       </TaskProvider>
 
