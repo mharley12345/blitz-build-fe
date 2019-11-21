@@ -6,7 +6,7 @@ import Sun from "../../styles/icons_weather/sun.png";
 const WeatherContainerD = styled.div`
   width: 524pxpx;
   height: 384px;
-
+  margin-top: 8px;
   /* 000 White */
 
   background: #ffffff;
@@ -58,7 +58,12 @@ const WeatherTem = styled.div`
 const WeatherIcon = styled.div`
   width: 50%;
 `;
+const Title = styled.img`
+  font-size: 16px;
+  /* 400 Gray */
 
+  color: #8a827d;
+`;
 const IconImage = styled.img`
   width: 100px;
   height: 100px;
@@ -70,10 +75,11 @@ const IconImage = styled.img`
 function DashboardWeather({ weatherData, time, icon }) {
   return (
     // display in dashboard
-
+      <>
+          <Title>Weather</Title>
     <WeatherContainerD>
       <WeatherLocationInfo>
-        <h2>Current Location</h2>
+        <h2>Denver, Colorado</h2>
         <p>{time}</p>
       </WeatherLocationInfo>
 
@@ -89,7 +95,8 @@ function DashboardWeather({ weatherData, time, icon }) {
           <img src={Sun} alt="sun" />
         </WeatherIcon>
       </WeatherInfo>
-    </WeatherContainerD>
+          </WeatherContainerD>
+          </>
   );
 }
 
