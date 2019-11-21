@@ -92,11 +92,11 @@ function App() {
             <Route exact path="/log-out" component={Logout} />
 
             {/*   */}
-            <PrivateRoute exact path="/dashboard" component={TaskCard} />
-            <PrivateRoute exact path="/tasks" component={Tasks} />
-            <PrivateRoute exact path="/projects" component={Projects} />
-            <PrivateRoute exact path="/project/:id" component={IndividualProject} />
-            <PrivateRoute exact path="/delay-log" component={DelayLog} />
+            <Route exact path="/dashboard" component={TaskCard} />
+            <Route exact path="/tasks" component={Tasks} />
+            <Route exact path="/projects" component={Projects} />
+            <Route exact path="/project/:id" component={IndividualProject} />
+            <Route exact path="/delay-log" component={DelayLog} />
           </Switch>
           </Layout>
         </OpenContext.Provider>
