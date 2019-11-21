@@ -9,6 +9,7 @@ import Page_icon from "../../styles/icons_project/page_icon.png";
 import Edit_icon from "../../styles/icons_project/edit_icon.png";
 import Delete_icon from "../../styles/icons_project/delete_icon.png";
 import Project_icon from "../../styles/icons_project/project_icon.png";
+import Project_img from "../../styles/icons_project/project_img.png";
 
 
 
@@ -37,60 +38,63 @@ const IndividualProject = props => {
   return (
     <>
       <Global />
-      
       <IndividualProjectTitleContainer>
         <img src={Project_icon} alt="project_icon" />
         <p>&nbsp;&nbsp;Projects / {projectTasks.project_name}</p>
-        </IndividualProjectTitleContainer>
-        <Top>
-      <IndividualProjectContainer>
-        <IndividualProjectImgContainer></IndividualProjectImgContainer>
-        <IndividualProjectcontentContainer>
-          <Contenth2>{projectTasks.project_name}</Contenth2>
-          <ContentInfo>
-            <ContentAddress>
-              <p>{projectTasks.street_address}</p>
-              <p>
-                {projectTasks.city}, {projectTasks.state}{" "}
-                {projectTasks.zip_code}
-              </p>
-            </ContentAddress>
-            <ContentSize>
-              <p>
-                {projectTasks.beds} Beds&nbsp;&nbsp;&nbsp;
-                {projectTasks.baths} Baths
-              </p>
-              <p>{projectTasks.square_ft} sq.ft.</p>
-            </ContentSize>
-          </ContentInfo>
-          <Contentbottom>
-            <ContentbottomTemplate>
-              <img src={Page_icon} alt="page_icon" />
-              <p>&nbsp;&nbsp;90-Day Template in Use</p>
-            </ContentbottomTemplate>
-            <EditIcon>
-              <img src={Edit_icon} alt="edit_icon" />
-              <p>Edit</p>
-            </EditIcon>
-            <DeleteIcon>
-              <img src={Delete_icon} alt="delete_icon" />
-              <p>Delete</p>
-            </DeleteIcon>
-          </Contentbottom>
-        </IndividualProjectcontentContainer>
+      </IndividualProjectTitleContainer>
+      <Top>
+        <IndividualProjectContainer>
+          <IndividualProjectImgContainer>
+            {/* It will changed to the real project img in the future */}
+            <img src={Project_img} alt="project_img" />
+          </IndividualProjectImgContainer>
+          <IndividualProjectcontentContainer>
+            <Contenth2>{projectTasks.project_name}</Contenth2>
+            <ContentInfo>
+              <ContentAddress>
+                <p>{projectTasks.street_address}</p>
+                <p>
+                  {projectTasks.city}, {projectTasks.state}{" "}
+                  {projectTasks.zip_code}
+                </p>
+              </ContentAddress>
+              <ContentSize>
+                <p>
+                  {projectTasks.beds} Beds&nbsp;&nbsp;&nbsp;
+                  {projectTasks.baths} Baths
+                </p>
+                <p>{projectTasks.square_ft} sq.ft.</p>
+              </ContentSize>
+            </ContentInfo>
+            <Contentbottom>
+              <ContentbottomTemplate>
+                <img src={Page_icon} alt="page_icon" />
+                <p>&nbsp;&nbsp;90-Day Template in Use</p>
+              </ContentbottomTemplate>
+              <EditIcon>
+                <img src={Edit_icon} alt="edit_icon" />
+                <p>Edit</p>
+              </EditIcon>
+              <DeleteIcon>
+                <img src={Delete_icon} alt="delete_icon" />
+                <p>Delete</p>
+              </DeleteIcon>
+            </Contentbottom>
+          </IndividualProjectcontentContainer>
         </IndividualProjectContainer>
         <Right>
-      <Weather
-        usage="project"
-        city={`${projectTasks.city}, ${projectTasks.state}`}
-        latitude={projectTasks.latitude}
-        longitude={projectTasks.longitude}
-      />
-      <DocumentsContainer>
-        <Documents />
+          <Weather
+            usage="project"
+            city={`${projectTasks.city}, ${projectTasks.state}`}
+            latitude={projectTasks.latitude}
+            longitude={projectTasks.longitude}
+          />
+          
+          <DocumentsContainer>
+            <Documents />
           </DocumentsContainer>
-          </Right>
-        </Top>
+        </Right>
+      </Top>
       <TasksContainer>
         <TaskCard />
       </TasksContainer>

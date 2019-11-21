@@ -11,7 +11,7 @@ function Task({ item, children }) {
     if (today === project_date) {
       return "Pending";
     } else if (today > project_date) {
-      return "Past";
+      return "Overdue";
     } else if (today < project_date) {
       return "Upcoming";
     }
@@ -28,7 +28,7 @@ function Task({ item, children }) {
   function DueDateLogic(diff, status) {
     if (status === "Pending") {
       return "Due today";
-    } else if (status === "Past") {
+    } else if (status === "Overdue") {
       return `${diff} days past due`;
     } else if (status === "Upcoming") {
       return `Due in ${diff} days`;
