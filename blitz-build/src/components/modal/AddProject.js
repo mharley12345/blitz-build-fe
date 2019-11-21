@@ -50,7 +50,7 @@ const ModalTitle = styled.div`
   display: flex;
   flex-direction: column;
   width: 400px;
-  height: 300px;
+  height: 320px;
   justify-content: center;
   align-Items: center;
   margin: 0 auto;
@@ -70,8 +70,8 @@ const ImgDrop = styled.div`
 display: flex;
 justify-content: center;
 align-content: center;
-width: 350px;
-height: 200px;
+width: 390px;
+height: 240px;
 background: #FAFAFA;
 border: 1px solid #8A827D;
 border-radius: 3px;
@@ -122,6 +122,7 @@ flexDirection: 'column',
 
 }
 const buttonStyle = {
+  margin: '10px',
   border: 'none',
   textDecoration: 'none',
   width: '163px',
