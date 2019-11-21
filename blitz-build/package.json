@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.6.0",
+    "auth0-js": "^9.11.3",
     "axios": "^0.19.0",
     "export-to-csv": "^0.2.1",
     "formik": "^2.0.3",
