@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import axios from "axios";
 import Task from "./Task";
 
 function TaskCard() {
+  const [task, setTask] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`https://blitz-build.herokuapp.com/tasks/project/1`, task)
+      .then(res => {
+        setTask(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <Container>
       <Section>
@@ -11,24 +24,9 @@ function TaskCard() {
         <p>View All</p>
       </Section>
       <Card>
-        <Task
-          status="Urgent"
-          address={"1640 Riverside Drive"}
-          current={"3 days past due"}
-          type={"Building Inspection"}
-        />
-        <Task
-          status="Overdue"
-          address={"12 Grimmauld Place"}
-          current={"3 days past due"}
-          type={"Building Inspection"}
-        />
-        <Task
-          status="Pending"
-          address={"Apartment 5A, 129 West"}
-          current={"3 days past due"}
-          type={"Building Inspection"}
-        />
+        {task.map((item) => (
+          <Task item={item} />
+        ))}
       </Card>
     </Container>
   );

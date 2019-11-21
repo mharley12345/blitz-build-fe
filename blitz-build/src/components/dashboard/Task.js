@@ -1,17 +1,32 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-function Task({ address, type, current, status, content }) {
+function Task({ item }) {
+  const today = new window.Date().toISOString().slice(0, 10);
+  const project_date = "{item.due_date}";
+
+  function DateCalc(today, project_date) {
+    if (today === project_date) {
+      return "Pending";
+    } else if (today > project_date) {
+      return "Past";
+    } else if (today < project_date) {
+      return "Upcoming";
+    }
+  }
+
+  const status = DateCalc(today, project_date);
+
   return (
     <Container>
       <Inner>
         <Address>
-          <Text>Task Project{status} </Text>
+          <Text>{item.project_name}</Text>
         </Address>
 
         <DueDate>
-          <Text>{content.task_name}</Text>
-          <Date>{content.due_date} 3 days past due</Date>
+          <Text>{item.street_address}</Text>
+          <Date>{item.due_date}</Date>
         </DueDate>
       </Inner>
       <div>
@@ -83,21 +98,21 @@ const Status = styled.div`
   ${props =>
     props.status === "Urgent" &&
     css`
-      background-color: #FFBFBF;
-      color: #9C0E0E;
+      background-color: #ffbfbf;
+      color: #9c0e0e;
     `};
 
   ${props =>
     props.status === "Pending" &&
     css`
-      background-color: #FFF3B3;
-      color: #8B4708;
+      background-color: #fff3b3;
+      color: #8b4708;
     `};
 
   ${props =>
     props.status === "Overdue" &&
     css`
-      background-color: #D2FAC4;
+      background-color: #d2fac4;
       color: #326021;
     `};
 `;
