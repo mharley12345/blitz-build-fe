@@ -84,9 +84,9 @@ function App() {
         />
         <Layout pathname={pathname}>
           <Switch>
-            <Route exact path="/auth" component={Auth} />
+            {/* <Route exact path="/auth" component={Auth} />
             <Route exact path="/navbar" component={AuthNavBar} />
-            <Route exact path="/callback" component={Callback} />
+            <Route exact path="/callback" component={Callback} /> */}
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/log-out" component={Logout} />
