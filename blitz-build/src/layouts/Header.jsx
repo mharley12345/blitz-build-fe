@@ -8,11 +8,14 @@ import { NavLink } from 'react-router-dom'
 import OpenContext from '../contexts/projects/OpenContext'
 import AddProject from  '../components/modal/AddProject'
 const HeaderContainer = styled.div`
+
   background: #fff;
   width: 100%;
   height: 96px;
   display: flex;
   justify-content: space-between;
+  position: sticky;
+  top: 0px;
 
 `;
 

@@ -9,9 +9,9 @@ function Layout({ children, pathname }) {
   return (
     <Container>
       <Global />
-      <Nav />
+      <Nav />  
       <Main>
-        <Header pathname = {pathname}/>
+      <Header pathname = {pathname}  />
         <Content>{children}</Content>
         <Footer>
           <p>2019 © BlitzBuild, Inc. All Rights Reserved.</p>
@@ -35,6 +35,7 @@ const Main = styled.div`
   flex-direction: column;
   background: #ebe9e7;
   width: 100%;
+  
 `;
 
 
