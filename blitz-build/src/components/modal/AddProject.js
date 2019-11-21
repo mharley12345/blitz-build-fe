@@ -11,7 +11,7 @@ import OpenContext from "../../contexts/projects/OpenContext";
 import { Hidden } from "@material-ui/core";
 
 const ModalContainer =styled.div`
-overflow-y: visible;
+
 width: '750px',
 height: '1000px',
 background: '#FFFFFF',
@@ -20,6 +20,11 @@ display:'flex',
 flex-direction: 'column',
 justify-Content: 'center',
 align-items: 'center',
+overflow: scroll;
+::-webkit-scrollbar { 
+  display: none; 
+}
+
 `
 
 const DialogStyle = {
@@ -174,15 +179,11 @@ const AddProject = props => {
   const submitForm = e => {
     e.preventDefault();
 
-    console.log(form);
-    console.log(form.zip_code);
     const gps = zipcodes.lookup(form.zip_code);
-    console.log(gps);
+
     form.latitude = gps.latitude;
     form.longitude = gps.longitude;
-    console.log("form", form);
-    // setForm({ ...form, latitude: gps.latitude, longitude: gps.longitude });
-    // console.log(form);
+
     axios
       .post(`https://blitz-build.herokuapp.com/projects`, form)
 

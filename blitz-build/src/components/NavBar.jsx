@@ -2,20 +2,25 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import media from '../styles/sizes'
-
+import Logo from '../styles/Logo/Logo.png'
+import Avatar from '../styles/Avatar/Avatar.png'
 
 
 const NavBarContainer = styled.div`
-    margin-top: 180px;
+   margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: red;
     position: fixed;
     width: 296px;
     height: 1574px;
-    left: 0px;
-    top: 0px;
+    left: 0;
+    top: 0;
     background: #3F3A36;
+    
 `;
     const NavBarUl = styled.ul`
-       
+        
         background: #3F3A36;
         display: flex;
         margin-block-start: 0;
@@ -26,6 +31,7 @@ const NavBarContainer = styled.div`
         flex-direction: column;
         box-shadow: 2px 2px 2px #ccc;
         transition: 300ms ease all;
+        
        
         `;
 
@@ -39,6 +45,7 @@ const NavBarContainer = styled.div`
         `;
 
         const NavBarLi = styled.li` 
+        
             list-style-type: none;
             height: 70px;
             align-items: center;
@@ -51,7 +58,12 @@ const NavBarContainer = styled.div`
             margin-top: 40px;
           }
         `;
-      
+      const NavScrollableContainer = styled.div`
+        overflow: scroll;
+        ::-webkit-scrollbar { 
+            display: none; 
+        }
+      `
 
        const NavBarLink = {
             color: '#FFFFFF',
@@ -89,8 +101,25 @@ const NavBarContainer = styled.div`
            
         `;
 
+      const LogoContainer = styled.div`
+     
+     
+      `
+      const UserProfile = styled.div`
+      
+    
+      `
+      const LogoAvatarContainer = styled.div`
+      height: 160px
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      justify-content: space-between;
+      
+      align-items: center;
+      `
        
-
            
 function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, setPathname }) {
    const [ hoverIndex, setHoverIndex ] = useState(0)
@@ -101,11 +130,21 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
    return (
        <NavBarContainer 
        style={{ background }}>
+      
+       <LogoAvatarContainer>
+           <LogoContainer>
+           <img  src={Logo} alt="Blitz-Build-Logo"/>
+           </LogoContainer>
+           <UserProfile>
+               <img src={Avatar} alt="Blitz-Build-Avatar"/>
+           </UserProfile>
+        </LogoAvatarContainer>
+  <NavScrollableContainer>
         <NavBarUl style = {{ background }}
             className= { navOpen ? 'active' : '' }                
         >
         {/* functionality for opening and closing the nav */}
-
+ 
             <NavBarFigure onClick={() => setNavOpen(!navOpen)}>
           
                
@@ -141,7 +180,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
                    
       
            </NavBarUl>
-
+           </NavScrollableContainer>
        </NavBarContainer>
        
       
