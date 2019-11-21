@@ -59,10 +59,14 @@ const NavBarContainer = styled.div`
           }
         `;
       const NavScrollableContainer = styled.div`
-        overflow: scroll;
+      
+      @media only screen and (max-height: 900px) {
+       overflow: scroll;
         ::-webkit-scrollbar { 
             display: none; 
         }
+      }
+        
       `
 
        const NavBarLink = {
@@ -130,7 +134,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
    return (
        <NavBarContainer 
        style={{ background }}>
-      
+      <NavScrollableContainer>
        <LogoAvatarContainer>
            <LogoContainer>
            <img  src={Logo} alt="Blitz-Build-Logo"/>
@@ -139,7 +143,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
                <img src={Avatar} alt="Blitz-Build-Avatar"/>
            </UserProfile>
         </LogoAvatarContainer>
-  <NavScrollableContainer>
+  
         <NavBarUl style = {{ background }}
             className= { navOpen ? 'active' : '' }                
         >
