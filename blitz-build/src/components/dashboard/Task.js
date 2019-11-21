@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-function Task({ item }) {
+function Task({ item, children }) {
   const today = new window.Date().toISOString().slice(0, 10);
 // This value is hardcoded now because the server don't send back a date
 // It should be {item.due_date}
@@ -43,7 +43,6 @@ function Task({ item }) {
         <Address>
           <Text>{item.project_name}</Text>
         </Address>
-
         <DueDate>
           <Text>{item.street_address}</Text>
           <Date>{dueDateText}</Date>
@@ -53,6 +52,7 @@ function Task({ item }) {
         <Status status={status}>
           <p>{status}</p>
         </Status>
+          {children}
       </div>
     </Container>
   );

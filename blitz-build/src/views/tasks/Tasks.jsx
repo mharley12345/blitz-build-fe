@@ -44,12 +44,13 @@ export default function Tasks() {
       {/* <TaskNav addTask={addTask} /> */}
       {tasks.map(task => {
         return (
-          <TaskWrapper>
-            <Task item={task} />
-            {/* <ButtonDiv> */}
+          <>
+            <Task item={task} >
               <MeatBallsDrop task={task}/>
+            </Task>
+            {/* <ButtonDiv> */}
             {/* </ButtonDiv> */} 
-          </TaskWrapper>
+          </>
         );
       })}
     </StyledTasks>
