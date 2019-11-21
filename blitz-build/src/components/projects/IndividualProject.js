@@ -9,6 +9,7 @@ import Edit_icon from "../../styles/icons_project/edit_icon.png";
 import Delete_icon from "../../styles/icons_project/delete_icon.png";
 import Project_icon from "../../styles/icons_project/project_icon.png";
 
+
 const IndividualProjectContainer = styled.div`
   
   width: 530px;
@@ -225,6 +226,7 @@ const IndividualProject = props => {
           <DocumentsTitleText>Documents</DocumentsTitleText>
         </Documentstitle>
       </DocumentsContainer>
+      <TaskCard />
     </>
   );
 };
