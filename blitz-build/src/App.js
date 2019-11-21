@@ -23,7 +23,7 @@ import OpenContext from './contexts/projects/OpenContext'
 
 function App() {
 
-  const [ pathname, setPathname ] = useState();
+  const [ pathname, setPathname ] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
   const navLinks = [
     {
@@ -57,7 +57,7 @@ function App() {
       icon: "ion-ios-hourglass"
     },
     {
-      text: "Settings",
+      text: "Log Out",
       path: "/log-out",
       icon: "ion-ios-cog"
     },
@@ -81,6 +81,7 @@ function App() {
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path="/log-out" component={Logout} />
 
             {/*   */}
             <Route exact path="/dashboard" component={TaskCard} />
