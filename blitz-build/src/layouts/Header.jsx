@@ -27,6 +27,8 @@ const SearchContainer= styled.div`
 const ButtonContainer=styled.div`
 display: flex;
 margin-top: 24px;
+margin-bottom: 24px;
+margin-right: 25px;
 width: 400px;
 justify-content: center;
 
@@ -220,7 +222,7 @@ const OpenToggle = () => {
         <HeaderContainer >
             <SearchContainer>
                 
-           <img  src={Search} alt="Blitz-Build-Search"/>
+           {/* <img  src={Search} alt="Blitz-Build-Search"/> */}
                 
            </SearchContainer>
             <ButtonContainer>

@@ -18,7 +18,6 @@ const IndividualProject = props => {
 
   useEffect(() => {
     const projectID = props.match.params.id;
-
     axios
       .get(
         `https://blitz-build.herokuapp.com/projects/${projectID}`,

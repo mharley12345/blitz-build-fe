@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import PrivateRoute from './components/auth/PrivateRoute'
 import NavBar from "./components/NavBar";
+import axios from 'axios'
 // import Layout from "./components/dashboard/Layout";
 // import Dashboard from "./components/dashboard/index";
 // import Dashboard from "./components/dashboard/Dashboard";
@@ -15,6 +16,7 @@ import Logout from "./components/auth/Logout";
 import Layout from "./layouts/Layout";
 import TaskCard from "./components/dashboard/TaskCard";
 import DelayLog from "./components/delayLog/DelayLog";
+import UserContext from './contexts/UserContext'
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
@@ -30,6 +32,18 @@ import Callback from "./components/auth/callback";
 function App() {
   const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState([])
+  useEffect(() => {
+    getData();
+  }, []);
+  const getData = () => {
+  axios
+      .get('https://blitz-build.herokuapp.com/users')
+      .then(res => setUserInfo(res))
+      .catch(error => console.log(error));
+  }
+  console.log(userInfo)
+
   const navLinks = [
     {
       text: "Home",
@@ -78,6 +92,7 @@ function App() {
       {/* <ProjectProvider> */}
       <TaskProvider>
        <OpenContext.Provider value={{open, setOpen }}>
+         <UserContext.Provider value={{userInfo, setUserInfo}}>
         <NavBar setPathname= {setPathname}
           navLinks={navLinks}
          
@@ -99,6 +114,7 @@ function App() {
             <PrivateRoute exact path="/delay-log" component={DelayLog} />
           </Switch>
           </Layout>
+          </UserContext.Provider>
         </OpenContext.Provider>
       </TaskProvider>
 
