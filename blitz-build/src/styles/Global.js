@@ -47,6 +47,9 @@ const Global = createGlobalStyle`
         border-collapse: collapse;
         border-spacing: 0;
     }
+    a, a:-webkit-any-link {
+        text-decoration: none;
+    }
  `;
 
 export default Global;

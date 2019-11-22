@@ -12,20 +12,20 @@ import { Hidden } from "@material-ui/core";
 
 const ModalContainer =styled.div`
 
-width: '750px',
-height: '1000px',
-background: '#FFFFFF',
-border-radius: '3px',
-display:'flex',
-flex-direction: 'column',
-justify-Content: 'center',
-align-items: 'center',
-overflow: scroll;
-::-webkit-scrollbar { 
-  display: none; 
-}
+  width: '750px',
+  height: '1000px',
+  background-color: '#FFFFFF',
+  border-radius: '3px',
+  display:'flex',
+  flex-direction: 'column',
+  justify-Content: 'center',
+  align-items: 'center',
+  overflow: scroll;
+  ::-webkit-scrollbar { 
+    display: none; 
+  }
 
-`
+`;
 
 const DialogStyle = {
 // overflowY: 'visible',
