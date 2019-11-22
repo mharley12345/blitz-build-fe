@@ -19,6 +19,8 @@ export default function ProjectsProvider({ children }) {
       });
   }, []);
 
+    
+    
   return (
     <ProjectContext.Provider value={{ projects }}>
       {children}
