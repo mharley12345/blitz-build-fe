@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import media from '../styles/sizes'
 import Logo from '../styles/Logo/Logo.png'
 import Avatar from '../styles/Avatar/Avatar.png'
+import UserContext from '../contexts/UserContext'
+import userContext from '../contexts/UserContext'
 
 
 const NavBarContainer = styled.div`
@@ -110,6 +112,9 @@ const NavBarContainer = styled.div`
      
       `
       const UserProfile = styled.div`
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       
     
       `
@@ -123,12 +128,21 @@ const NavBarContainer = styled.div`
       
       align-items: center;
       `
-       
+      const UserName = styled.p`
+      font-size: 16px;
+      color: #FFFFFF;
+      margin-bottom: 5px;
+       `
+       const UserTitle = styled.p`
+       font-size: 14px
+       color: #B5AFAB;
+       `
            
 function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, setPathname }) {
    const [ hoverIndex, setHoverIndex ] = useState(0)
    const [navOpen, setNavOpen ] = useState(false)
-  
+   const {userInfo, setUserInfo} = useContext(UserContext)
+   console.log(userInfo)
 //    console.log(navLinks, background, hoverBackground, linkColor, logo)
 
    return (
@@ -140,7 +154,10 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
            <img  src={Logo} alt="Blitz-Build-Logo"/>
            </LogoContainer>
            <UserProfile>
-              
+               {userInfo.map(user => 
+             <UserName> {user.name}</UserName>
+             )}  
+             <UserTitle>  Super Intendent  </UserTitle>
            </UserProfile>
         </LogoAvatarContainer>
   

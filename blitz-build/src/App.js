@@ -39,8 +39,8 @@ function App() {
   }, []);
   const getData = () => {
   axios
-      .get('https://blitz-build.herokuapp.com/users')
-      .then(res => setUserInfo(res))
+      .get('https://blitz-build.herokuapp.com/users/1')
+      .then(res => setUserInfo(res.data))
       .catch(error => console.log(error));
   }
   console.log(userInfo)
