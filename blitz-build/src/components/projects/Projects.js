@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import projectContext from "../../contexts/projects/ProjectContext";
 import AddProject from "../modal/AddProject";
@@ -6,96 +6,7 @@ import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
 
 const Projects = props => {
-<<<<<<< HEAD
-  const [project, setProject] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://blitz-build.herokuapp.com/projects", project)
-      .then(res => {
-        console.log(res);
-        setProject(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
-
-  return (
-    <OverallContainer>
-      <Section>
-        {" "}
-        <p> Your Project List </p>
-      </Section>
-      <ProjectContainer>
-        <ProjectTopContainer>
-          <ProjectCategories>
-            <ProjectUl>
-              <ProjectLi> Project Name </ProjectLi>
-              <ProjectLi> Address </ProjectLi>
-            </ProjectUl>
-          </ProjectCategories>
-          <ProjectCategoriesSecond>
-            <ProjectUlSecond>
-              <ProjectLi> Date Created </ProjectLi>
-              <ProjectLi> Date Last Modified </ProjectLi>
-              <ProjectLi> Status </ProjectLi>
-            </ProjectUlSecond>
-          </ProjectCategoriesSecond>
-        </ProjectTopContainer>
-
-        {project.map(project => {
-          return (
-            <ProjectListContainer
-              // key={project.projectID}
-              // onClick={() => {
-              //   props.history.push(`/project/${project.projectID}`);
-              // }}
-              key={project.id}
-              onClick={() => {
-                props.history.push(`/project/${project.id}`);
-              }}
-            >
-              <ProjectListCategories>
-                <ProjectListName>
-                  <Name> {project.project_name} </Name>
-                </ProjectListName>
-
-                <ProjectListAddress>
-                  <Address> 12 Fairview Lane, Moorhead MN 56560-1543</Address>
-                </ProjectListAddress>
-              </ProjectListCategories>
-              <ProjectListCategoriesSecond>
-                <ProjectListDateCreated>
-                  <DateCreated> 05/10/2019</DateCreated>
-                </ProjectListDateCreated>
-
-                <ProjectListDateModified>
-                  <DateModified> 08/18/2019 </DateModified>
-                </ProjectListDateModified>
-
-                <ProjectListStatus>
-                  <Status>Complete</Status>
-                </ProjectListStatus>
-              </ProjectListCategoriesSecond>
-              {/* <ProjectListIcons>
-               <ProjectListCreate>
-                 <Create className = "ion-ios-create"></Create>
-               </ProjectListCreate>
-               <ProjectListDestroy>
-                 <Destroy className = "ion-ios-trash"></Destroy>
-               </ProjectListDestroy>
-             </ProjectListIcons> */}
-            </ProjectListContainer>
-          );
-        })}
-
-        <AddProject />
-      </ProjectContainer>
-    </OverallContainer>
-=======
-    const { projects } = useContext(projectContext);
-
+  const { projects } = useContext(projectContext);
 
   return (
     <>
@@ -141,7 +52,10 @@ const Projects = props => {
                     </ProjectListName>
 
                     <ProjectListAddress>
-                      <Address> 12 Fairview Lane, Moorhead MN 56560-1543</Address>
+                      <Address>
+                        {" "}
+                        12 Fairview Lane, Moorhead MN 56560-1543
+                      </Address>
                     </ProjectListAddress>
                   </ProjectListCategories>
                   <ProjectListCategoriesSecond>
@@ -174,7 +88,6 @@ const Projects = props => {
         </ProjectContainer>
       </OverallContainer>
     </>
->>>>>>> 3d970d6064dd457ccd1480a68d0d6616871e8ea8
   );
 };
 
