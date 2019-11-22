@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import projectContext from "../../contexts/projects/ProjectContext";
 import AddProject from "../modal/AddProject";
@@ -6,7 +6,9 @@ import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
 
 const Projects = props => {
-    const { projects } = useContext(projectContext);
+
+
+  const { projects } = useContext(projectContext);
 
 
   return (
@@ -53,7 +55,10 @@ const Projects = props => {
                     </ProjectListName>
 
                     <ProjectListAddress>
-                      <Address> 12 Fairview Lane, Moorhead MN 56560-1543</Address>
+                      <Address>
+                        {" "}
+                        12 Fairview Lane, Moorhead MN 56560-1543
+                      </Address>
                     </ProjectListAddress>
                   </ProjectListCategories>
                   <ProjectListCategoriesSecond>
