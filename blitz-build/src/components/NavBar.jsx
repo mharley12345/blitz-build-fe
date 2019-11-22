@@ -142,7 +142,6 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
    const [ hoverIndex, setHoverIndex ] = useState(0)
    const [navOpen, setNavOpen ] = useState(false)
    const {userInfo, setUserInfo} = useContext(UserContext)
-   console.log(userInfo)
 //    console.log(navLinks, background, hoverBackground, linkColor, logo)
 
    return (
