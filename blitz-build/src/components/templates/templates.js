@@ -6,7 +6,7 @@ const Templates = () => {
 
   useEffect(() => {
     axios
-      .get("https://blitz-build.herokuapp.com/projects", templates)
+      .get("https://blitz-build.herokuapp.com/templates", templates)
       .then(res => {
         console.log(res);
         setTemplates(res.data);
