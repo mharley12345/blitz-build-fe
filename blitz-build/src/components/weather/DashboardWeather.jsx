@@ -74,7 +74,7 @@ const IconImage = styled.img`
 function DashboardWeather({ weatherData, time, icon }) {
   return (
     // display in dashboard
-      <>
+      <div>
           <Title>Weather</Title>
     <WeatherContainerD>
       <WeatherLocationInfo>
@@ -95,7 +95,7 @@ function DashboardWeather({ weatherData, time, icon }) {
         </WeatherIcon>
       </WeatherInfo>
           </WeatherContainerD>
-          </>
+          </div>
   );
 }
 

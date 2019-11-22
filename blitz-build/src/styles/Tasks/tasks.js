@@ -54,7 +54,6 @@ export const MeatBalls = styled.i`
   width: 18px;
   height: 18px;
   font-size: 1.4rem;
-  background-color: #fbfaf9;
   outline: none
   color: #B5AFAB;
   padding: 10px 10px;
@@ -63,6 +62,11 @@ export const MeatBalls = styled.i`
   display: inline-block;
   margin: 4px 2px;
   cursor: pointer;
+  :hover {
+    color: #DD6B20;
+    cursor: pointer;
+  }
+
 `;
 
 export const StyledLi = styled.li`
@@ -71,6 +75,11 @@ export const StyledLi = styled.li`
   color: #B5AFAB;
   border: 1px solid #B5AFAB;
   text-align: center;
+  :hover {
+    border: 1px solid #DD6B20 ;
+    color: #DD6B20;
+    cursor: pointer;
+  }
 
 `;
 

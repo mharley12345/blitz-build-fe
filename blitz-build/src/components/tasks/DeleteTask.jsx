@@ -14,7 +14,6 @@ export default function DeleteTask({ task, closeDrop, deleteStatus, handleDelete
   const { deleteTask } = useContext(TasksContext);
   return (
     <>
-
       <Modal
         visible={deleteStatus}
         dismiss={handleDeleteClose}
