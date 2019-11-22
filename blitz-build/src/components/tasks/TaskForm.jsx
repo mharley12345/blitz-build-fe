@@ -50,14 +50,14 @@ export default function TaskForm({
 
   useEffect(() => {
     // const uid = localStorage.getItem("uid");
-    console.log("edit fields in task form", editFields);
+    // console.log("edit fields in task form", editFields);
     axiosWithAuth()
       .get(`/projects`)
       .then(res => {
-        console.log("from get projects in TaskForm", editFields);
+        // console.log("from get projects in TaskForm", editFields);
         // console.log('from get projects in TaskForm', res);
         // const projectArray = Object.values(res.data);
-        console.log("from get projects axios .then", res);
+        // console.log("from get projects axios .then", res);
         setProjects(res.data);
       })
       .catch(err => console.log(err));
@@ -76,7 +76,7 @@ export default function TaskForm({
     const chosenProject = projects.filter(project => {
       return project.project_name === task.project_name;
     });
-    console.log("from handleSubmit in TaskForm", chosenProject);
+    // console.log("from handleSubmit in TaskForm", chosenProject);
 
     //asigns the project id to the new task
     const newTask = {
