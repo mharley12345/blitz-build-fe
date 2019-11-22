@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
 //components
 import Modal from "../global/Modal";
@@ -7,11 +7,7 @@ import TaskForm from "./TaskForm";
 //context
 import TasksContext from "../../contexts/tasks/TaskContext";
 
-// styles
-import { TaskI, StyledLi } from "../../styles/Tasks/tasks"
-
-
-export default function EditTask({ task, closeDrop, editStatus, handleEditClose }) {
+export default function EditTask({ task, editStatus, handleEditClose }) {
   const { editTask } = useContext(TasksContext);
 
   return (

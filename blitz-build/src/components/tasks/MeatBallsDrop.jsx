@@ -5,17 +5,24 @@ import DeleteTask from "./DeleteTask";
 
 //styles
 import styled from "styled-components";
-import { TaskI, StyledLi, MeatBalls, DropDown } from "../../styles/Tasks/tasks";
+import {
+  TaskI,
+  StyledLi,
+  MeatBalls,
+  DropDown,
+  DropP
+} from "../../styles/Tasks/tasks";
+
+const Geo = styled.div``;
 
 export default function MeatBallsDrop({ task }) {
   const [dropStatus, setDropStatus] = useState(false);
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
 
-//   useEffect(() => {
-//     document.addEventListener("mousedown", );
-//   }, [])
-
+  //   useEffect(() => {
+  //     document.addEventListener("mousedown", );
+  //   }, [])
 
   const toggleDrop = e => {
     e.stopPropagation();
@@ -50,24 +57,28 @@ export default function MeatBallsDrop({ task }) {
     <>
       <MeatBalls className="ion-ios-more" onClick={toggleDrop}>
         {dropStatus && (
-          <DropDown>
-            <StyledLi>
-              Complete
-              <TaskI className="ion-md-checkmark-circle" />
-            </StyledLi>
-            <StyledLi onClick={handleEditOpen}>
-              Edit
-              <TaskI className="ion-md-create" />
-            </StyledLi>
-            <StyledLi>
-              Delay
-              <TaskI className="ion-md-clock" />
-            </StyledLi>
-            <StyledLi onClick={handleDeleteOpen}>
-              <p style={{ width: "75%" }}>Delete </p>
-              <TaskI className="ion-md-trash" />
-            </StyledLi>
-          </DropDown>
+          <>
+            {/* <Geo></Geo> */}
+            <DropDown>
+              {/* <Geo></Geo> */}
+              <StyledLi>
+                <DropP>Complete</DropP>
+                <TaskI className="ion-md-checkmark-circle" />
+              </StyledLi>
+              <StyledLi onClick={handleEditOpen}>
+                <DropP>Edit</DropP>
+                <TaskI className="ion-md-create" />
+              </StyledLi>
+              <StyledLi>
+                <DropP>Delay</DropP>
+                <TaskI className="ion-md-clock" />
+              </StyledLi>
+              <StyledLi onClick={handleDeleteOpen}>
+                <DropP>Delete</DropP>
+                <TaskI className="ion-md-trash" />
+              </StyledLi>
+            </DropDown>
+          </>
         )}
       </MeatBalls>
       <EditTask
@@ -76,7 +87,7 @@ export default function MeatBallsDrop({ task }) {
         editStatus={editStatus}
         handleEditClose={handleEditClose}
       />
-      <DeleteTask 
+      <DeleteTask
         task={task}
         closeDrop={closeDrop}
         deleteStatus={deleteStatus}

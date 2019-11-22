@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
+import React, { useContext } from "react";
 
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
 
 //components
-import TaskNav from "../../components/tasks/TaskNav/TaskNav";
 import Task from "../../components/dashboard/Task";
 import MeatBallsDrop from "../../components/tasks/MeatBallsDrop"
 
@@ -17,24 +15,6 @@ const StyledTasks = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-const ButtonDiv = styled.div`
-  background: #fbfaf9;
-  width: 100px;
-  display: flex;
-  flex-wrap: wrap-reverse;
-  justify-content: flex-end;
-  aStyledLign-content: flex-end
-  aStyledLign-items: flex-end;
-`;
-
-const TaskWrapper = styled.div`
-  width: 95%;
-  display: flex;
-  justify-content: space-between;
-`;
-
-
 
 export default function Tasks() {
   const { tasks } = useContext(taskContext);
