@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import projectContext from "../../contexts/projects/ProjectContext";
 import AddProject from "../modal/AddProject";
 import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
 
 const Projects = props => {
-  console.log(props)
-  const [project, setProject] = useState([]);
+    const { projects } = useContext(projectContext);
 
-  useEffect(() => {
-    axios
-      .get("https://blitz-build.herokuapp.com/projects", project)
-      .then(res => {
-        // console.log(res);
-        setProject(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <>
@@ -46,7 +34,7 @@ const Projects = props => {
             </ProjectCategoriesSecond>
           </ProjectTopContainer>
 
-          {project.map(project => {
+          {projects.map(project => {
             return (
               <Link to={`/project/${project.id}`}>
                 <ProjectListContainer

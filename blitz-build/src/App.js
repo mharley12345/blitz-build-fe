@@ -23,7 +23,7 @@ import UserContext from './contexts/UserContext'
 //context
 import TaskProvider from "./contexts/tasks/TaskProvider";
 import OpenContext from "./contexts/projects/OpenContext";
-// import ProjectProvider from "./contexts/projects/ProjectsProvider";
+import ProjectsProvider from "./contexts/projects/ProjectsProvider";
 
 //AUTH0
 import Auth from "./components/auth/auth";
@@ -90,36 +90,37 @@ function App() {
 
   return (
     <Router>
-      {/* <ProjectProvider> */}
+      <ProjectsProvider> 
       <TaskProvider>
-       <OpenContext.Provider value={{open, setOpen }}>
-         <UserContext.Provider value={{userInfo, setUserInfo}}>
-        <NavBar setPathname= {setPathname}
-          navLinks={navLinks}
-         
-        />
-        <Layout pathname={pathname}>
-          <Switch>
-            {/* <Route exact path="/auth" component={Auth} />
+        <OpenContext.Provider value={{ open, setOpen }}>
+          <UserContext.Provider value={{ userInfo, setUserInfo }}>
+            <NavBar setPathname={setPathname} navLinks={navLinks} />
+            <Layout pathname={pathname}>
+              <Switch>
+                {/* <Route exact path="/auth" component={Auth} />
             <Route exact path="/navbar" component={AuthNavBar} />
             <Route exact path="/callback" component={Callback} /> */}
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/log-out" component={Logout} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/log-out" component={Logout} />
 
-            {/*   */}
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <PrivateRoute exact path="/tasks" component={Tasks} />
-            <PrivateRoute exact path="/projects" component={Projects} />
-            <PrivateRoute exact path="/project/:id" component={IndividualProject} />
-            <PrivateRoute exact path="/delay-log" component={DelayLog} />
-          </Switch>
-          </Layout>
+                {/*   */}
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                <PrivateRoute exact path="/tasks" component={Tasks} />
+                <PrivateRoute exact path="/projects" component={Projects} />
+                <PrivateRoute
+                  exact
+                  path="/project/:id"
+                  component={IndividualProject}
+                />
+                <PrivateRoute exact path="/delay-log" component={DelayLog} />
+              </Switch>
+            </Layout>
           </UserContext.Provider>
         </OpenContext.Provider>
       </TaskProvider>
 
-      {/* </ProjectProvider> */}
+      </ProjectsProvider> 
     </Router>
   );
 }
