@@ -14,11 +14,10 @@ export default function DeleteTask({ task, closeDrop, deleteStatus, handleDelete
       <Modal
         visible={deleteStatus}
         dismiss={handleDeleteClose}
-        client={'30%'}
+        client={'40%'}
         component={
           <Confirm
             closeModal={handleDeleteClose}
-            text={"Delete Task"}
             deleteFunction={deleteTask}
             deleteItem={task}
           />
