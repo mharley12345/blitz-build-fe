@@ -10,11 +10,12 @@ import axios from 'axios'
 // import Dashboard from "./components/dashboard/index";
 // import Dashboard from "./components/dashboard/Dashboard";
 import Tasks from "./views/tasks/Tasks";
+
 import Projects from "./components/projects/Projects";
 import IndividualProject from "./components/projects/IndividualProject";
 import Logout from "./components/auth/Logout";
 import Layout from "./layouts/Layout";
-import TaskCard from "./components/dashboard/TaskCard";
+import Dashboard from "./components/dashboard/Dashboard";
 import DelayLog from "./components/delayLog/DelayLog";
 import UserContext from './contexts/UserContext'
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
@@ -107,7 +108,7 @@ function App() {
             <Route exact path="/log-out" component={Logout} />
 
             {/*   */}
-            <PrivateRoute exact path="/dashboard" component={TaskCard} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path="/tasks" component={Tasks} />
             <PrivateRoute exact path="/projects" component={Projects} />
             <PrivateRoute exact path="/project/:id" component={IndividualProject} />
