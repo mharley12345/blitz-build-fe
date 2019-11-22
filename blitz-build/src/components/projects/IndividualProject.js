@@ -100,7 +100,7 @@ const IndividualProject = props => {
         </Right>
       </Top>
       <TasksContainer>
-        <TaskCard />
+        <TaskCard projectID={props.match.params.id}/>
       </TasksContainer>
     </>
   );
