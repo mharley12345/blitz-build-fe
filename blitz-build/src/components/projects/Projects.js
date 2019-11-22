@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import projectContext from "../../contexts/projects/ProjectContext";
 import AddProject from "../modal/AddProject";
 import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
 
 const Projects = props => {
-  console.log(props)
-  const [project, setProject] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://blitz-build.herokuapp.com/projects", project)
-      .then(res => {
-        // console.log(res);
-        setProject(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
+  const { projects } = useContext(projectContext);
 
   return (
     <>
@@ -46,7 +33,7 @@ const Projects = props => {
             </ProjectCategoriesSecond>
           </ProjectTopContainer>
 
-          {project.map(project => {
+          {projects.map(project => {
             return (
               <Link to={`/project/${project.id}`}>
                 <ProjectListContainer
@@ -65,7 +52,10 @@ const Projects = props => {
                     </ProjectListName>
 
                     <ProjectListAddress>
-                      <Address> 12 Fairview Lane, Moorhead MN 56560-1543</Address>
+                      <Address>
+                        {" "}
+                        12 Fairview Lane, Moorhead MN 56560-1543
+                      </Address>
                     </ProjectListAddress>
                   </ProjectListCategories>
                   <ProjectListCategoriesSecond>
