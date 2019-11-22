@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import MeatBallsDrop from "../tasks/MeatBallsDrop"
 
 function Task({ item, children }) {
   const today = new window.Date().toISOString().slice(0, 10);
@@ -53,7 +54,7 @@ function Task({ item, children }) {
           <p>{status}</p>
         </Status>
       </div>
-          {children}
+        <MeatBallsDrop task={item}/>
     </Container>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
 // components
 import Modal from "../global/Modal";
@@ -7,9 +7,6 @@ import Confirm from "../global/Confirm";
 //context
 import TasksContext from "../../contexts/tasks/TaskContext";
 
-// styles
-import { TaskI, StyledLi } from "../../styles/Tasks/tasks"
-
 export default function DeleteTask({ task, closeDrop, deleteStatus, handleDeleteClose }) {
   const { deleteTask } = useContext(TasksContext);
   return (
@@ -17,11 +14,10 @@ export default function DeleteTask({ task, closeDrop, deleteStatus, handleDelete
       <Modal
         visible={deleteStatus}
         dismiss={handleDeleteClose}
-        client={'30%'}
+        client={'40%'}
         component={
           <Confirm
             closeModal={handleDeleteClose}
-            text={"Delete Task"}
             deleteFunction={deleteTask}
             deleteItem={task}
           />

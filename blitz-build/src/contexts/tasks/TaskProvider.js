@@ -6,14 +6,7 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import TaskContext from "./TaskContext";
 
 export default function TaskProvider({ children }) {
-  const [tasks, setTasks] = useState([  {
-    "project_name": "testing1",
-    "id": 7,
-    "task_name": "example111",
-    "task_description": "example111",
-    "due_date": "example111",
-    "project_id": 1
-  }]);
+  const [tasks, setTasks] = useState([ ]);
 
   useEffect(() => {
     axiosWithAuth()

@@ -1,21 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Task from "./Task";
 
-function TaskCard() {
-  const [task, setTask] = useState([]);
+//context 
+import taskContext from '../../contexts/tasks/TaskContext'
 
-  useEffect(() => {
-    axios
-      .get(`https://blitz-build.herokuapp.com/tasks/project/1`, task)
-      .then(res => {
-        setTask(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
+function TaskCard({ projectID }) {
+  const { tasks } = useContext(taskContext);
+  const [projectTasks, setProjectTasks] = useState([]);
+  let renderedTasks
+  
+  if(projectID){
+      axiosWithAuth()
+        .get(`https://blitz-build.herokuapp.com/tasks/project/${projectID}`)
+        .then(res => {
+          setProjectTasks(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    renderedTasks  = projectTasks
+  } else {
+    renderedTasks = tasks
+  }
+
 
   return (
     <Container>
@@ -24,9 +33,8 @@ function TaskCard() {
         <p>View All</p>
       </Section>
       <Card>
-        {task.map((item) => (
-          <Task key={item.id} item={item} />
-        ))}
+        {renderedTasks.slice(0, 3).map(item => {
+          return <Task item={item} key={item.id} />})}
       </Card>
     </Container>
   );
