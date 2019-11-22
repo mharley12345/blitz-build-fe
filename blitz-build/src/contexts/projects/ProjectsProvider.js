@@ -5,11 +5,11 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import ProjectContext from "./ProjectContext";
 
 export default function ProjectsProvider({ children }) {
-  const [projects, setProjects] = useState();
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     axiosWithAuth()
-      .get("https://blitz-build.herokuapp.com/projects")
+      .get("/projects")
       .then(res => {
         console.log("get projects", res.data);
         setProjects(res.data);
