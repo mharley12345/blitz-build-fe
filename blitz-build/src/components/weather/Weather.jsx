@@ -21,11 +21,10 @@ const WeatherContainerD = styled.div`
 
 // css of the weather container in the project page
 const WeatherContainerP = styled.div`
-  position: absolute;
+  
   width: 530px;
-  height: 184px;
-  left: 878px;
-  top: 168px;
+  height: 224px;
+  
   background: #ffffff;
 `;
 const Weathertitle = styled.div`
@@ -176,11 +175,13 @@ function Weather(props) {
             <WeatherInfo>
               <WeatherData>
                 <WeatherTem>
-                  {(weatherData.currently.temperature*9/5+32).toFixed(0)}
+                  {((weatherData.currently.temperature * 9) / 5 + 32).toFixed(
+                    0
+                  )}
                   <span>&#176;</span>
                 </WeatherTem>
                 <p>
-                  Humidity {weatherData.currently.humidity * 100}
+                  Humidity {(weatherData.currently.humidity * 100).toFixed(2)}
                   <span>&#37;</span>
                 </p>
               </WeatherData>
@@ -205,7 +206,7 @@ function Weather(props) {
                   <span>&#176;</span>
                 </WeatherTem>
                 <p>
-                  Humidity {weatherData.currently.humidity * 100}
+                  Humidity {(weatherData.currently.humidity * 100).toFixed(2)}
                   <span>&#37;</span>
                 </p>
               </WeatherData>
