@@ -106,9 +106,10 @@ console.log(weatherData)
         <>
           {weatherData ? (
             <DashboardWeather
-              weatherData={weatherData}
-              time={getTime()}
-              icon={getWeatherIcon()}
+                weatherData={weatherData}
+                time={getTime()}
+                icon={getWeatherIcon()}
+                weatherPosition={weatherPosition}
             />
           ) : (
             <p>Weather Loading...</p>

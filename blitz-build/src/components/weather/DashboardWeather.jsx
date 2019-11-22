@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import reverseGeocode from "reverse-geocode";
+
 import Sun from "../../styles/icons_weather/sun.png";
 
 // css of the weather container in the dashboard
@@ -71,31 +73,32 @@ const IconImage = styled.img`
 // for dashboard import <Weather usage="dashboard"/>
 // for project page import <Weather usage="project" city={} latitude={} longitude={} />
 
-function DashboardWeather({ weatherData, time, icon }) {
+function DashboardWeather({ weatherData, time, icon, weatherPosition }) {
+  const cityInfo = reverseGeocode.lookup(weatherPosition.latitude, weatherPosition.longitude, "us");
   return (
     // display in dashboard
-      <div>
-          <Title>Weather</Title>
-    <WeatherContainerD>
-      <WeatherLocationInfo>
-        <h2>Denver, Colorado</h2>
-        <p>{time}</p>
-      </WeatherLocationInfo> 
+    <div>
+      <Title>Weather</Title>
+      <WeatherContainerD>
+        <WeatherLocationInfo>
+          <h2>{cityInfo.city}, {cityInfo.state}</h2>
+          <p>{time}</p>
+        </WeatherLocationInfo>
 
-       <WeatherInfo>
-        <WeatherData>
-          <WeatherTem>
-            {weatherData.currently.apparentTemperature.toFixed(0)}
-            <span>&#176;</span>
-          </WeatherTem>
-          <p>{weatherData.currently.summary}</p>
-        </WeatherData>
-        <WeatherIcon>
-          <img src={Sun} alt="sun" />
-        </WeatherIcon>
-      </WeatherInfo>
-          </WeatherContainerD>
-          </div>
+        <WeatherInfo>
+          <WeatherData>
+            <WeatherTem>
+              {((weatherData.currently.temperature * 9) / 5 + 32).toFixed(0)}
+              <span>&#176;</span>
+            </WeatherTem>
+            <p>{weatherData.currently.summary}</p>
+          </WeatherData>
+          <WeatherIcon>
+            <img src={Sun} alt="sun" />
+          </WeatherIcon>
+        </WeatherInfo>
+      </WeatherContainerD>
+    </div>
   );
 }
 
