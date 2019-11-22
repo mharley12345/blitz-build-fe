@@ -6,6 +6,7 @@ import styled, { css } from "styled-components";
 
 
 const Projects = props => {
+  console.log(props)
   const [project, setProject] = useState([]);
 
   useEffect(() => {
