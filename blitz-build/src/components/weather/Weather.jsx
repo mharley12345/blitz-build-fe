@@ -97,7 +97,9 @@ console.log(weatherData)
               icon={getWeatherIcon()}
               city={props.city}
             />
-          ) : null}
+          ) : (
+            <p>Weather Loading....</p>
+          )}
         </>
       ) : (
         // display in dashboard
@@ -108,7 +110,9 @@ console.log(weatherData)
               time={getTime()}
               icon={getWeatherIcon()}
             />
-          ) : null}
+          ) : (
+            <p>Weather Loading...</p>
+          )}
         </>
       )}
     </>

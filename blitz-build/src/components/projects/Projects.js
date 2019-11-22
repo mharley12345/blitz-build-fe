@@ -6,7 +6,8 @@ import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
 
 const Projects = props => {
-  const [ project, setProject ] = useState([]);
+  console.log(props)
+  const [project, setProject] = useState([]);
 
   useEffect(() => {
     axios
@@ -142,13 +143,9 @@ const ProjectListContainer = styled.div`
 `;
 const ProjectListCategories = styled.div`
   display: flex;
-  width: 62.8%
-  
+  width: 62.8%;
   line-height: 50px;
 `;
-
-
-
 
 const ProjectTopContainer = styled.div`
   display: flex;
