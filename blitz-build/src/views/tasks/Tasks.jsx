@@ -45,7 +45,7 @@ export default function Tasks() {
       {tasks.map(task => {
         return (
           <>
-            <Task item={task} >
+            <Task item={task} key={task.id} >
               <MeatBallsDrop task={task}/>
             </Task>
             {/* <ButtonDiv> */}
