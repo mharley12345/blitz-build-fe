@@ -5,7 +5,7 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import ProjectContext from "./ProjectContext";
 
 export default function ProjectsProvider({ children }) {
-  const [projects, setProjects] = useState();
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     axiosWithAuth()
