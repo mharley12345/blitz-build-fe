@@ -27,6 +27,8 @@ const SearchContainer= styled.div`
 const ButtonContainer=styled.div`
 display: flex;
 margin-top: 24px;
+margin-bottom: 24px;
+margin-right: 25px;
 width: 400px;
 justify-content: center;
 
@@ -220,16 +222,20 @@ const OpenToggle = () => {
         <HeaderContainer >
             <SearchContainer>
                 
-           <img  src={Search} alt="Blitz-Build-Search"/>
+           {/* <img  src={Search} alt="Blitz-Build-Search"/> */}
                 
            </SearchContainer>
             <ButtonContainer>
-          <ButtonDocument  onMouseEnter={() => setDocumentHover(true)}
+
+      <ButtonDocument  onMouseEnter={() => setDocumentHover(true)}
                        onMouseLeave={() =>  setDocumentHover(false) }style= {HideTheDocumentButton(pathname)}> <ButtonI className = 'ion-ios-add-circle' style={HoverDocumentStyleFunction()}/> <ButtonText style={HoverDocumentStyleFunction()}>New Document</ButtonText></ButtonDocument>
-          <ButtonProject  onMouseEnter={() => setProjectHover(true)}
-                       onMouseLeave={() =>  setProjectHover(false) }style = {HideTheProjectButton(pathname)} onClick={OpenToggle}>  <ButtonI className = 'ion-ios-add-circle'style={HoverProjectStyleFunction()}/><ButtonText style={HoverProjectStyleFunction()}>New Project</ButtonText></ButtonProject>
-          <ButtonTask  onMouseEnter={() => setTaskHover(true)}
+
+      <ButtonTask  onMouseEnter={() => setTaskHover(true)}
                        onMouseLeave={() =>  setTaskHover(false) } style = {HideTheTaskButton(pathname)} onClick={ handleTaskModalOpen }>  <ButtonI className = 'ion-ios-add-circle' style={HoverTaskStyleFunction()}/><ButtonText style={HoverTaskStyleFunction()}>New Task</ButtonText></ButtonTask>
+
+      <ButtonProject  onMouseEnter={() => setProjectHover(true)}
+                       onMouseLeave={() =>  setProjectHover(false) }style = {HideTheProjectButton(pathname)} onClick={OpenToggle}>  <ButtonI className = 'ion-ios-add-circle'style={HoverProjectStyleFunction()}/><ButtonText style={HoverProjectStyleFunction()}>New Project</ButtonText></ButtonProject>
+                       
           <Modal
         visible={ TaskModalStatus }
         dismiss={ handleTaskModalClose }

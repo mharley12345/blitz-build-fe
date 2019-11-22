@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect,useContext } from "react";
+import { Link } from "react-router-dom";
+import projectContext from "../../contexts/projects/ProjectContext";
 import AddProject from "../modal/AddProject";
+import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
 
 const Projects = props => {
+<<<<<<< HEAD
   const [project, setProject] = useState([]);
 
   useEffect(() => {
@@ -90,6 +93,88 @@ const Projects = props => {
         <AddProject />
       </ProjectContainer>
     </OverallContainer>
+=======
+    const { projects } = useContext(projectContext);
+
+
+  return (
+    <>
+      <Global />
+      <OverallContainer>
+        <Section>
+          {" "}
+          <p> Your Project List </p>
+        </Section>
+        <ProjectContainer>
+          <ProjectTopContainer>
+            <ProjectCategories>
+              <ProjectUl>
+                <ProjectLi> Project Name </ProjectLi>
+                <ProjectLi> Address </ProjectLi>
+              </ProjectUl>
+            </ProjectCategories>
+            <ProjectCategoriesSecond>
+              <ProjectUlSecond>
+                <ProjectLi> Date Created </ProjectLi>
+                <ProjectLi> Date Last Modified </ProjectLi>
+                <ProjectLi> Status </ProjectLi>
+              </ProjectUlSecond>
+            </ProjectCategoriesSecond>
+          </ProjectTopContainer>
+
+          {projects.map(project => {
+            return (
+              <Link to={`/project/${project.id}`}>
+                <ProjectListContainer
+                // key={project.projectID}
+                // onClick={() => {
+                //   props.history.push(`/project/${project.projectID}`);
+                // }}
+                // key={project.id}
+                // onClick={() => {
+                //   props.history.push(`/project/${project.id}`);
+                // }}
+                >
+                  <ProjectListCategories>
+                    <ProjectListName>
+                      <Name> {project.project_name} </Name>
+                    </ProjectListName>
+
+                    <ProjectListAddress>
+                      <Address> 12 Fairview Lane, Moorhead MN 56560-1543</Address>
+                    </ProjectListAddress>
+                  </ProjectListCategories>
+                  <ProjectListCategoriesSecond>
+                    <ProjectListDateCreated>
+                      <DateCreated> 05/10/2019</DateCreated>
+                    </ProjectListDateCreated>
+
+                    <ProjectListDateModified>
+                      <DateModified> 08/18/2019 </DateModified>
+                    </ProjectListDateModified>
+
+                    <ProjectListStatus>
+                      <Status>Complete</Status>
+                    </ProjectListStatus>
+                  </ProjectListCategoriesSecond>
+                  {/* <ProjectListIcons>
+                  <ProjectListCreate>
+                    <Create className = "ion-ios-create"></Create>
+                  </ProjectListCreate>
+                  <ProjectListDestroy>
+                    <Destroy className = "ion-ios-trash"></Destroy>
+                  </ProjectListDestroy>
+                </ProjectListIcons> */}
+                </ProjectListContainer>
+              </Link>
+            );
+          })}
+
+          <AddProject />
+        </ProjectContainer>
+      </OverallContainer>
+    </>
+>>>>>>> 3d970d6064dd457ccd1480a68d0d6616871e8ea8
   );
 };
 
@@ -116,7 +201,29 @@ const ProjectContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  a {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
 `;
+const ProjectListContainer = styled.div`
+  background-color: white;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  :nth-child(odd) {
+    background: #fbfaf9;
+  }
+`;
+const ProjectListCategories = styled.div`
+  display: flex;
+  width: 62.8%;
+  line-height: 50px;
+`;
+
 const ProjectTopContainer = styled.div`
   display: flex;
   width: 100%;
@@ -156,24 +263,6 @@ const ProjectLi = styled.div`
   font-weight: normal;
   font-size: 16px;
   line-height: 19px;
-`;
-
-const ProjectListContainer = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100px;
-  background-color: white;
-
-  :nth-child(odd) {
-    background: #fbfaf9;
-  }
-`;
-
-const ProjectListCategories = styled.div`
-  display: flex;
-  width: 62.8%
-  
-  line-height: 50px;
 `;
 const ProjectListCategoriesSecond = styled.div`
   display: flex;

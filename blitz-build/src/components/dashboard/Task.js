@@ -1,17 +1,17 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-function Task({ item }) {
+function Task({ item, children }) {
   const today = new window.Date().toISOString().slice(0, 10);
 // This value is hardcoded now because the server don't send back a date
 // It should be {item.due_date}
-  const project_date = "2019-10-21";
+  const project_date = item.due_date
 
   function DateCalc(today, project_date) {
     if (today === project_date) {
       return "Pending";
     } else if (today > project_date) {
-      return "Past";
+      return "Overdue";
     } else if (today < project_date) {
       return "Upcoming";
     }
@@ -28,7 +28,7 @@ function Task({ item }) {
   function DueDateLogic(diff, status) {
     if (status === "Pending") {
       return "Due today";
-    } else if (status === "Past") {
+    } else if (status === "Overdue") {
       return `${diff} days past due`;
     } else if (status === "Upcoming") {
       return `Due in ${diff} days`;
@@ -43,7 +43,6 @@ function Task({ item }) {
         <Address>
           <Text>{item.project_name}</Text>
         </Address>
-
         <DueDate>
           <Text>{item.street_address}</Text>
           <Date>{dueDateText}</Date>
@@ -54,6 +53,7 @@ function Task({ item }) {
           <p>{status}</p>
         </Status>
       </div>
+          {children}
     </Container>
   );
 }

@@ -12,20 +12,20 @@ import { Hidden } from "@material-ui/core";
 
 const ModalContainer =styled.div`
 
-width: '750px',
-height: '1000px',
-background: '#FFFFFF',
-border-radius: '3px',
-display:'flex',
-flex-direction: 'column',
-justify-Content: 'center',
-align-items: 'center',
-overflow: scroll;
-::-webkit-scrollbar { 
-  display: none; 
-}
+  width: '750px',
+  height: '1000px',
+  background-color: '#FFFFFF',
+  border-radius: '3px',
+  display:'flex',
+  flex-direction: 'column',
+  justify-Content: 'center',
+  align-items: 'center',
+  overflow: scroll;
+  ::-webkit-scrollbar { 
+    display: none; 
+  }
 
-`
+`;
 
 const DialogStyle = {
 // overflowY: 'visible',
@@ -43,19 +43,19 @@ const DialogStyle = {
 
 const DialogActionsStyle = {
   height: '25px',
-  width: '550px'
+  width: '580px'
 }
 const CancelButtonStyle = {
  marginTop: '10px',
-  fontSize: '30px',
-  color: '#000000'
+ fontSize: '30px',
+ color: '#000000'
 }
 const ModalTitle = styled.div`
    
   display: flex;
   flex-direction: column;
   width: 400px;
-  height: 320px;
+  height: 100px;
   justify-content: center;
   align-Items: center;
   margin: 0 auto;
@@ -111,8 +111,8 @@ const formStyle = {
   margin: '0 auto',
 display: 'flex',
 justifyContent: 'center',
-width: '500px',
-height: '500px',
+width: '550px',
+height: '700px',
 flexDirection: 'column',
 alignItems: 'center',
 overflow: 'hidden',
@@ -131,7 +131,7 @@ const buttonStyle = {
   border: 'none',
   textDecoration: 'none',
   width: '163px',
-  height: '60px',
+  height: '80px',
   fontSize: '16px',
   color: '#FFFFFF',
   lineHeight: '19px',
@@ -143,6 +143,15 @@ const buttonStyle = {
 const DialogContentStyle = {
 }
 
+const InputLabel = styled.p`
+
+width: 390px;
+font-size: 16px;
+color: #3B3B3B;
+margin-bottom: -12px;
+margin-left: -5px;
+`
+
 //START OF FUNCTIONAL COMPONENT
 
 const AddProject = props => {
@@ -152,15 +161,15 @@ const AddProject = props => {
     street_address: "",
     city: "",
     state: "",
-    zip_code: 0,
+    zip_code: null,
     status: "",
-    beds: 0,
-    baths: 0,
-    square_ft: 0,
+    beds: null,
+    baths: null,
+    square_ft: null,
     // assign_template: undefined,
     imageURL: "",
-    latitude: 0,
-    longitude: 0
+    latitude: null,
+    longitude: null
   });
   const {open, setOpen} = useContext(OpenContext);
 
@@ -215,60 +224,54 @@ const AddProject = props => {
           
           {/* <DialogTitle id="form-dialog-title">Subscribe</DialogTitle> */}
           <TitleText>Create a New Project</TitleText>
-          <ImgDrop>
-          <DropTextContainer>
-             <DropText>Drag and drop an image</DropText>
-             <DropTextSmall>or browse to choose a file</DropTextSmall>
-         </DropTextContainer>
-          </ImgDrop>
         </ModalTitle>
-        <DialogContent style= {DialogContentStyle}>
+        <DialogContent style={DialogContentStyle}>
           
           <form onSubmit={submitForm} style={formStyle}>
             {/* <TopContainer> */}
             {/* top container is project name and address */}
+            <InputLabel>Project Name</InputLabel>
             <input style={inputStyle}
               name="project_name"
-              placeholder="Project Name"
               onChange={changeHandler}
               value={form.project_name}
             />
+             <InputLabel>City</InputLabel>
             <input  style={inputStyle}
               name="city"
-              placeholder="City"
               onChange={changeHandler}
               value={form.city}
             />
+             <InputLabel>State</InputLabel>
             <input  style={inputStyle}
               name="state"
-              placeholder="state"
               onChange={changeHandler}
               value={form.state}
             />
+             <InputLabel>Street Address</InputLabel>
             <input  style={inputStyle}
               name="street_address"
-              placeholder="Project Address"
               onChange={changeHandler}
               value={form.street_address}
             />
             {/* </TopContainer> */}
             {/* second container includes beds and baths */}
+            <InputLabel>Beds</InputLabel>
             <input  style={inputStyle}
               name="beds"
-              placeholder="Beds"
               onChange={changeHandler}
               value={form.beds}
             />
+             <InputLabel>Baths</InputLabel>
             <input  style={inputStyle}
               name="baths"
-              placeholder="Baths"
               onChange={changeHandler}
               value={form.baths}
             />
+             <InputLabel>Square Footage</InputLabel>
             {/* square footage on its own */}
             <input  style={inputStyle}
               name="square_ft"
-              placeholder="Square Footage"
               onChange={changeHandler}
               value={form.square_ft}
             />
@@ -280,19 +283,19 @@ const AddProject = props => {
               value={form.assign_template}
             /> */}
             {/* thumbnail on its own and it will have to be uploaded */}
+            <InputLabel>Project Thumbnail</InputLabel>
             <input  style={inputStyle}
               name="imageURL"
-              placeholder="Project Thumbnail"
               onChange={changeHandler}
               value={form.imageURL}
             />
+             <InputLabel>Zip Code</InputLabel>
             <input  style={inputStyle}
               name="zip_code"
-              placeholder="Zip Code "
               onChange={changeHandler}
               value={form.zip_code}
             />
-            <button type="submit" style= {buttonStyle}> Add Project </button>
+            <button type="submit" style= {buttonStyle}> Save </button>
           </form>
          
         </DialogContent>

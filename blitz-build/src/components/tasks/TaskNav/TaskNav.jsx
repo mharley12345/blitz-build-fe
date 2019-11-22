@@ -10,7 +10,7 @@ import TaskForm from "../TaskForm";
 import TasksContext from "../../../contexts/tasks/TaskContext";
 
 //styles
-import { TaskNavStyle } from "../../../styles/tasks";
+import { TaskNavStyle } from "../../../styles/Tasks/tasks";
 
 
 export default function TaskNav() {

@@ -7,42 +7,20 @@ import Confirm from "../global/Confirm";
 //context
 import TasksContext from "../../contexts/tasks/TaskContext";
 
-//delete png
-import deleteSvg from "../../styles/delete button/DeleteBtn.svg"
-
 // styles
-import { TaskBtn } from "../../styles/tasks"
+import { TaskI, StyledLi } from "../../styles/Tasks/tasks"
 
-export default function DeleteTask({ task }) {
+export default function DeleteTask({ task, closeDrop, deleteStatus, handleDeleteClose }) {
   const { deleteTask } = useContext(TasksContext);
-  const [modalStatus, setModalStatus] = useState(false);
-
-  const handleModalOpen = () => {
-    setModalStatus(true);
-  };
-  const handleModalClose = () => {
-    setModalStatus(false);
-  };
-
   return (
     <>
-      <TaskBtn 
-        onClick={handleModalOpen}
-      >
-        <img 
-        style={{
-          objectFit: 'cover',
-        }}
-        src={deleteSvg}
-        />
-      </TaskBtn>
       <Modal
-        visible={modalStatus}
-        dismiss={handleModalClose}
+        visible={deleteStatus}
+        dismiss={handleDeleteClose}
         client={'30%'}
         component={
           <Confirm
-            closeModal={handleModalClose}
+            closeModal={handleDeleteClose}
             text={"Delete Task"}
             deleteFunction={deleteTask}
             deleteItem={task}

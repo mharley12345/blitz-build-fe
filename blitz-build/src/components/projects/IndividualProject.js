@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 import Weather from "../weather/Weather";
 import Documents from './Documents'
@@ -9,88 +10,95 @@ import Page_icon from "../../styles/icons_project/page_icon.png";
 import Edit_icon from "../../styles/icons_project/edit_icon.png";
 import Delete_icon from "../../styles/icons_project/delete_icon.png";
 import Project_icon from "../../styles/icons_project/project_icon.png";
+import Project_img from "../../styles/icons_project/project_img.png";
 
 
 
 const IndividualProject = props => {
-  const [projectTasks, setProjectTasks] = useState([]);
+  const [projectState, setProjectState] = useState([]);
+
 
   useEffect(() => {
     const projectID = props.match.params.id;
-
     axios
-      .get(
-        `https://blitz-build.herokuapp.com/projects/${projectID}`,
-        projectTasks
-      )
-      .then(res => {
-        console.log("res", res.data);
-        // const tasksObject = Object.assign({}, [res.data]);
-        // console.log("tasks object", tasksObject);
-        setProjectTasks(res.data[0]);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
+    .get(
+      `https://blitz-build.herokuapp.com/projects/${projectID}`,
+      projectState
+    )
+    .then(res => {
+      console.log("res", res.data);
+      // const tasksObject = Object.assign({}, [res.data]);
+      // console.log("tasks object", tasksObject);
+      setProjectState(res.data[0]);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }, [props]);
+  
+  
+  
 
   return (
     <>
       <Global />
-      
       <IndividualProjectTitleContainer>
         <img src={Project_icon} alt="project_icon" />
-        <p>&nbsp;&nbsp;Projects / {projectTasks.project_name}</p>
-        </IndividualProjectTitleContainer>
-        <Top>
-      <IndividualProjectContainer>
-        <IndividualProjectImgContainer></IndividualProjectImgContainer>
-        <IndividualProjectcontentContainer>
-          <Contenth2>{projectTasks.project_name}</Contenth2>
-          <ContentInfo>
-            <ContentAddress>
-              <p>{projectTasks.street_address}</p>
-              <p>
-                {projectTasks.city}, {projectTasks.state}{" "}
-                {projectTasks.zip_code}
-              </p>
-            </ContentAddress>
-            <ContentSize>
-              <p>
-                {projectTasks.beds} Beds&nbsp;&nbsp;&nbsp;
-                {projectTasks.baths} Baths
-              </p>
-              <p>{projectTasks.square_ft} sq.ft.</p>
-            </ContentSize>
-          </ContentInfo>
-          <Contentbottom>
-            <ContentbottomTemplate>
-              <img src={Page_icon} alt="page_icon" />
-              <p>&nbsp;&nbsp;90-Day Template in Use</p>
-            </ContentbottomTemplate>
-            <EditIcon>
-              <img src={Edit_icon} alt="edit_icon" />
-              <p>Edit</p>
-            </EditIcon>
-            <DeleteIcon>
-              <img src={Delete_icon} alt="delete_icon" />
-              <p>Delete</p>
-            </DeleteIcon>
-          </Contentbottom>
-        </IndividualProjectcontentContainer>
+        <p>&nbsp;&nbsp;Projects / {projectState.project_name}</p>
+      </IndividualProjectTitleContainer>
+      <Top>
+        <IndividualProjectContainer>
+          <IndividualProjectImgContainer>
+            {/* It will changed to the real project img in the future */}
+            <img src={Project_img} alt="project_img" />
+          </IndividualProjectImgContainer>
+          <IndividualProjectcontentContainer>
+            <Contenth2>{projectState.project_name}</Contenth2>
+            <ContentInfo>
+              <ContentAddress>
+                <p>{projectState.street_address}</p>
+                <p>
+                  {projectState.city}, {projectState.state}{" "}
+                  {projectState.zip_code}
+                </p>
+              </ContentAddress>
+              <ContentSize>
+                <p>
+                  {projectState.beds} Beds&nbsp;&nbsp;&nbsp;
+                  {projectState.baths} Baths
+                </p>
+                <p>{projectState.square_ft} sq.ft.</p>
+              </ContentSize>
+            </ContentInfo>
+            <Contentbottom>
+              <ContentbottomTemplate>
+                <img src={Page_icon} alt="page_icon" />
+                <p>&nbsp;&nbsp;90-Day Template in Use</p>
+              </ContentbottomTemplate>
+              <EditIcon>
+                <img src={Edit_icon} alt="edit_icon" />
+                <p>Edit</p>
+              </EditIcon>
+              <DeleteIcon>
+                <img src={Delete_icon} alt="delete_icon" />
+                <p>Delete</p>
+              </DeleteIcon>
+            </Contentbottom>
+          </IndividualProjectcontentContainer>
         </IndividualProjectContainer>
         <Right>
-      <Weather
-        usage="project"
-        city={`${projectTasks.city}, ${projectTasks.state}`}
-        latitude={projectTasks.latitude}
-        longitude={projectTasks.longitude}
-      />
-      <DocumentsContainer>
-        <Documents />
+          <Weather
+            usage="project"
+            city={`${projectState.city}, ${projectState.state}`}
+            latitude={projectState.latitude}
+            longitude={projectState.longitude}
+          />
+          
+          <DocumentsContainer>
+            <Documents />
           </DocumentsContainer>
-          </Right>
-        </Top>
+        </Right>
+      </Top>
       <TasksContainer>
         <TaskCard />
       </TasksContainer>
@@ -98,7 +106,7 @@ const IndividualProject = props => {
   );
 };
 
-export default IndividualProject;
+export default withRouter(IndividualProject);
 
 
 const Top = styled.div`
