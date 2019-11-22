@@ -5,7 +5,7 @@ import taskContext from "../../contexts/tasks/TaskContext";
 
 //components
 import Task from "../../components/dashboard/Task";
-import MeatBallsDrop from "../../components/tasks/MeatBallsDrop"
+
 
 //styles
 import styled from "styled-components";
@@ -26,7 +26,7 @@ export default function Tasks() {
         return (
           <>
             <Task item={task} key={task.id} >
-              <MeatBallsDrop task={task}/>
+             
             </Task>
             {/* <ButtonDiv> */}
             {/* </ButtonDiv> */} 
