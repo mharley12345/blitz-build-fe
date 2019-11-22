@@ -4,30 +4,30 @@ import DocumentCard from './DocumentCard'
 
 const documents = [
   {
-    documentName: "Kitchen_sink.pdf",
+    documentName: "Upcoming",
     date: "11/9/19",
     time: "3:24 pm"
   },
   {
-    documentName: "Kitchen_sink.pdf",
+    documentName: "Upcoming",
     date: "11/9/19",
     time: "3:24 pm"
   },
   {
-    documentName: "Kitchen_sink.pdf",
+    documentName: "Upcoming",
     date: "11/9/19",
     time: "3:24 pm"
   },
   {
-    documentName: "Kitchen_sink.pdf",
+    documentName: "Upcoming",
     date: "11/9/19",
     time: "3:24 pm"
   },
-   {
-    documentName: "Kitchen_sink.pdf",
+  {
+    documentName: "Upcoming",
     date: "11/9/19",
     time: "3:24 pm"
-  },
+  }
 ];
 
 const Documents = props => {

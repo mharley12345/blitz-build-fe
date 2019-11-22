@@ -6,7 +6,10 @@ import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
 
 const Projects = props => {
+
+
   const { projects } = useContext(projectContext);
+
 
   return (
     <>

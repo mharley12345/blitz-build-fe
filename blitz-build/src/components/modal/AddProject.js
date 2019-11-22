@@ -9,6 +9,7 @@ import styled from "styled-components";
 import zipcodes from "zipcodes";
 import OpenContext from "../../contexts/projects/OpenContext";
 import { Hidden } from "@material-ui/core";
+import projectContext from "../../contexts/projects/ProjectContext";
 
 const ModalContainer =styled.div`
 
@@ -155,6 +156,7 @@ margin-left: -5px;
 //START OF FUNCTIONAL COMPONENT
 
 const AddProject = props => {
+  const { addProject } = useContext(projectContext);
   console.log("props", props);
   const [form, setForm] = useState({
     project_name: "",
@@ -193,15 +195,8 @@ const AddProject = props => {
     form.latitude = gps.latitude;
     form.longitude = gps.longitude;
 
-    axios
-      .post(`https://blitz-build.herokuapp.com/projects`, form)
-
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    addProject(form);
+    handleClose()
   };
 
   return (
