@@ -129,7 +129,7 @@ function DelayLog() {
   useEffect(() => {
     axios
       .get(
-        ` https://api-blitz-build-dev.herokuapp.com/api/auth/R3fE6DP3UgP8hQSWbGubsHb7lOw2/delay_logs`,
+        ` https://staging-blitz-build.herokuapp.com/`,
         { headers: { token: localStorage.getItem("token") } }
       )
       .then(res => {

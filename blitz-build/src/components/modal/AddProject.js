@@ -165,9 +165,9 @@ const AddProject = props => {
     state: "",
     zip_code: null,
     status: "",
-    beds: null,
-    baths: null,
-    square_ft: null,
+    beds: 0 ,
+    baths: 0 ,
+    square_ft: 0 ,
     // assign_template: undefined,
     imageURL: "",
     latitude: null,
@@ -177,7 +177,7 @@ const AddProject = props => {
 
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
-     
+    
   };
 
   const handleClickOpen = () => {

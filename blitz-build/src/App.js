@@ -38,8 +38,9 @@ function App() {
     getData();
   }, []);
   const getData = () => {
+    const id = localStorage.getItem("id")
     axios
-      .get("https://blitz-build.herokuapp.com/users/1")
+      .get(`https://staging-blitz-build.herokuapp.com/users/${id}`)
       .then(res => setUserInfo(res.data))
       .catch(error => console.log(error));
   };
@@ -100,8 +101,8 @@ function App() {
                   <Route exact path="/auth" component={Auth} />
                   <Route exact path="/navbar" component={AuthNavBar} />
                   <Route exact path="/callback" component={Callback} />
-                  {/* <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={Signup} />
+                  {/* <Route exact path="/login" component={Login} /> */}
+                {/* <Route exact path="/signup" component={Signup} />
                 <Route exact path="/log-out" component={Logout} /> */}
 
                   {/*   */}

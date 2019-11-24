@@ -40,14 +40,14 @@ const Projects = props => {
             return (
               <Link to={`/project/${project.id}`}>
                 <ProjectListContainer
-                // key={project.projectID}
-                // onClick={() => {
-                //   props.history.push(`/project/${project.projectID}`);
-                // }}
-                // key={project.id}
-                // onClick={() => {
-                //   props.history.push(`/project/${project.id}`);
-                // }}
+                key={project.projectID}
+                onClick={() => {
+                  props.history.push(`/project/${project.projectID}`);
+                }}
+                key={project.id}
+                onClick={() => {
+                  props.history.push(`/project/${project.id}`);
+                }}
                 >
                   <ProjectListCategories>
                     <ProjectListName>

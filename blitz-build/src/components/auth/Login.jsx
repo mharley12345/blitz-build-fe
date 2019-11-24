@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import styled, { css } from "styled-components";
 
-import axios from 'axios'
+
 const Login = props => {
   const [form, setForm] = useState({ email: "", password: "" });
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("Authorization");
 
     if (token) {
       props.history.push("/projects");
@@ -25,12 +25,13 @@ const Login = props => {
     e.preventDefault();
 
     axios
-      .post("https://blitz-build.herokuapp.com/users/login", form)
+      .post("https://staging-blitz-build.herokuapp.com/users/login", form)
       .then(res => {
+  
         console.log(res);
 
-        localStorage.setItem("token", res.data.token);
-
+        localStorage.setItem("Authorization", res.data.token);
+        localStorage.setItem("id",res.data.id)
         props.history.push("/projects");
         if(res){
           console.log(res)

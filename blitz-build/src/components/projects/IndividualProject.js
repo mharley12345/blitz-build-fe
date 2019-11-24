@@ -22,7 +22,7 @@ const IndividualProject = props => {
     const projectID = props.match.params.id;
     axios
     .get(
-      `https://blitz-build.herokuapp.com/projects/${projectID}`,
+      `https://staging-blitz-build.herokuapp.com/projects/${projectID}`,
       projectState
     )
     .then(res => {
