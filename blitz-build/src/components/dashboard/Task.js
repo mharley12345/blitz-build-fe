@@ -1,46 +1,60 @@
 import React,{useState,useEffect} from "react";
 import styled, { css } from "styled-components";
-import axiosWithAuth from '../auth/axiosWithAuth';
-let uid = localStorage.getItem('uid')
-function Task({ content, status }) {
-  const[tasks,setTasks] =useState( '' )
+import MeatBallsDrop from "../tasks/MeatBallsDrop"
 
-   useEffect(()=>{
-    axiosWithAuth()
-    .get(`http://localhost:4000/api/auth/${uid}/tasks`)
-    .then(res=>{ setTasks(Object.entries(res.data))})
-  
-      
+function Task({ item, children }) {
+  const today = new window.Date().toISOString().slice(0, 10);
+// This value is hardcoded now because the server don't send back a date
+// It should be {item.due_date}
+  const project_date = item.due_date
 
-   },[])
-    
-console.log(tasks)
+  function DateCalc(today, project_date) {
+    if (today === project_date) {
+      return "Pending";
+    } else if (today > project_date) {
+      return "Overdue";
+    } else if (today < project_date) {
+      return "Upcoming";
+    }
+  }
 
-   
-  
+  const status = DateCalc(today, project_date);
 
+  const todayDate = new window.Date(today);
+  const projectDate = new window.Date(project_date);
+  const oneDay = 24 * 60 * 60 * 1000;
+
+  const diffDays = Math.round(Math.abs((todayDate - projectDate) / oneDay));
+
+  function DueDateLogic(diff, status) {
+    if (status === "Pending") {
+      return "Due today";
+    } else if (status === "Overdue") {
+      return `${diff} days past due`;
+    } else if (status === "Upcoming") {
+      return `Due in ${diff} days`;
+    }
+  }
+
+  const dueDateText = DueDateLogic(diffDays, status);
 
   return (
-    <Container
-      red={true}
-      status={status}
-    >
-
+    <Container>
       <Inner>
         <Address>
-          <Text> {tasks.description}</Text>
+          <Text>{item.project_name}</Text>
         </Address>
-
         <DueDate>
-          <Text>{tasks.task_name}</Text>
-          <Date>{tasks.due_date}</Date>
+          <Text>{item.street_address}</Text>
+          <Date>{dueDateText}</Date>
         </DueDate>
       </Inner>
       <div>
-        <Status>
-          <p>Overdue</p>
+        <Status status={status}>
+          <p>{status}</p>
         </Status>
       </div>
+        <MeatBallsDrop task={item}/>
     </Container>
   );
    
@@ -58,7 +72,7 @@ const Container = styled.div`
   justify-content: space-between;
 
   :nth-child(odd) {
-    background: #FBFAF9;
+    background: #fbfaf9;
   }
 `;
 
@@ -93,9 +107,10 @@ const Date = styled.p`
 
 const Status = styled.div`
   padding: 5px 16px 3px;
-  background-color: #ffbfbf;
-  color: #9c0e0e;
+  background-color: grey;
+  color: black;
   border-radius: 30px;
+
   p {
     font-family: "Roboto";
     font-size: 14px;
@@ -103,13 +118,25 @@ const Status = styled.div`
   }
 
   ${props =>
-    props.status === "Urgent" &&
+    props.status === "Overdue" &&
     css`
-      background-color: red;
-      color: #fff;
+      background-color: #ffbfbf;
+      color: #9c0e0e;
     `};
 
+  ${props =>
+    props.status === "Pending" &&
+    css`
+      background-color: #fff3b3;
+      color: #8b4708;
+    `};
 
+  ${props =>
+    props.status === "Upcoming" &&
+    css`
+      background-color: #d2fac4;
+      color: #326021;
+    `};
 `;
 
 const Inner = styled.div`

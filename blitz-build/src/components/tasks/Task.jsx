@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 
 //components
 import TaskStatus from "./TaskStatus";
@@ -10,10 +10,10 @@ export default function Task({ task }) {
   return (
     <>
       <div>
-        <h1 style={{ margin: 0 }}> {task.name}</h1>
-        <p style={{ margin: 0 }}>{task.description}</p>
-        <TaskStatus status={"today"} />
+        <h2 style={{ margin: 0 }}>{task.task_name}</h2>
+        <p style={{ margin: 0 }}>{task.task_description}</p>
       </div>
+      <TaskStatus status={"today"} />
       <EditTask task={ task }/>
 			<DeleteTask task={ task }/>
     </>

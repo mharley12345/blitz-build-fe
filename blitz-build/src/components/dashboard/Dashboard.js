@@ -1,21 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-// import NavBar from "../NavBar";
-import Global from "../../layouts/Global";
-import TaskCard2 from "./TaskCard";
-
-import Navbar from "../dashboard/Nav";
+import TaskCard from "./TaskCard";
+import Weather from "../weather/Weather.jsx";
 
 function Dashboard() {
   return (
     <Container>
-      <Content>
-        <TaskCard2 />
-      </Content>
+      <Weather usage="dashboard" />
+      <TaskCard />
     </Container>
   );
 }
 
 export default Dashboard;
 
+const Container = styled.div``;

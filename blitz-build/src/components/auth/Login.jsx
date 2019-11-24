@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import styled, { css } from "styled-components";
 
 import axios from 'axios'
 const Login = props => {
@@ -21,16 +23,13 @@ const Login = props => {
 
   const submitForm = e => {
     e.preventDefault();
-//https://api-blitz-build-pro.herokuapp.com/api/login
-      axios
-      .post("http://localhost:4000/api/login", form)
+
+    axios
+      .post("https://blitz-build.herokuapp.com/users/login", form)
       .then(res => {
-         
-         console.log(res)
-        localStorage.setItem("uid", res.data.uid);
-        localStorage.setItem("token", res.data.accessToken);
-         
-        localStorage.setItem("refeshToken",res.data.refreshToken)
+        console.log(res);
+
+        localStorage.setItem("token", res.data.token);
 
         props.history.push("/projects");
         if(res){

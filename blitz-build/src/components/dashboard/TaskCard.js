@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
-
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Task from "./Task";
 
-function TaskCard() {
+//context 
+import taskContext from '../../contexts/tasks/TaskContext'
+
+function TaskCard({ projectID }) {
+  const { tasks } = useContext(taskContext);
+  const [projectTasks, setProjectTasks] = useState([]);
+  let renderedTasks
+  
+  if(projectID){
+      axiosWithAuth()
+        .get(`https://blitz-build.herokuapp.com/tasks/project/${projectID}`)
+        .then(res => {
+          setProjectTasks(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    renderedTasks  = projectTasks
+  } else {
+    renderedTasks = tasks
+  }
+
+
   return (
     <Container>
       <Section>
@@ -11,9 +33,8 @@ function TaskCard() {
         <p>View All</p>
       </Section>
       <Card>
-        <Task content="hello" status="Urgent" />
-        <Task />
-        <Task />
+        {renderedTasks.slice(0, 3).map(item => {
+          return <Task item={item} key={item.id} />})}
       </Card>
     </Container>
   );
@@ -37,6 +58,7 @@ const Section = styled.div`
 `;
 
 const Container = styled.div`
+margin-top: 20px;
   margin-bottom: 48px;
 `;
 

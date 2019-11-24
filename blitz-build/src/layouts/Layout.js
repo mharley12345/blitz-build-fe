@@ -3,14 +3,15 @@ import styled from "styled-components";
 
 import Global from "./Global";
 import Nav from "./Nav";
+import Header from "./Header.jsx"
 
-function Layout({ children }) {
+function Layout({ children, pathname }) {
   return (
     <Container>
       <Global />
-      <Nav />
+      <Nav />  
       <Main>
-        <Header />
+      <Header pathname = {pathname}  />
         <Content>{children}</Content>
         <Footer>
           <p>2019 © BlitzBuild, Inc. All Rights Reserved.</p>
@@ -21,6 +22,7 @@ function Layout({ children }) {
 }
 
 export default Layout;
+
 
 const Container = styled.div`
   max-height: 100vh;
@@ -33,13 +35,10 @@ const Main = styled.div`
   flex-direction: column;
   background: #ebe9e7;
   width: 100%;
+  
 `;
 
-const Header = styled.div`
-  background: #fff;
-  width: 100%;
-  height: 96px;
-`;
+
 
 const Content = styled.div`
   background: #ebe9e7;

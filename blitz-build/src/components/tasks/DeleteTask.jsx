@@ -1,33 +1,23 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
 // components
 import Modal from "../global/Modal";
 import Confirm from "../global/Confirm";
 
 //context
-import TasksContext from "../../contexts/TaskContext";
+import TasksContext from "../../contexts/tasks/TaskContext";
 
-export default function DeleteTask({ task }) {
+export default function DeleteTask({ task, closeDrop, deleteStatus, handleDeleteClose }) {
   const { deleteTask } = useContext(TasksContext);
-  const [modalStatus, setModalStatus] = useState(false);
-
-  const handleModalOpen = () => {
-    setModalStatus(true);
-  };
-  const handleModalClose = () => {
-    setModalStatus(false);
-  };
-
   return (
     <>
-      <button onClick={handleModalOpen}>Delete</button>
       <Modal
-        visible={modalStatus}
-        dismiss={handleModalClose}
+        visible={deleteStatus}
+        dismiss={handleDeleteClose}
+        client={'40%'}
         component={
           <Confirm
-            closeModal={handleModalClose}
-            text={"Delete Task"}
+            closeModal={handleDeleteClose}
             deleteFunction={deleteTask}
             deleteItem={task}
           />

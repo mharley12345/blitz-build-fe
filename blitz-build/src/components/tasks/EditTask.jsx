@@ -1,33 +1,24 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
 //components
 import Modal from "../global/Modal";
 import TaskForm from "./TaskForm";
 
 //context
-import TasksContext from "../../contexts/TaskContext";
+import TasksContext from "../../contexts/tasks/TaskContext";
 
-export default function EditTask({ task }) {
+export default function EditTask({ task, editStatus, handleEditClose }) {
   const { editTask } = useContext(TasksContext);
-
-  const [modalStatus, setModalStatus] = useState(false);
-
-  const handleModalOpen = () => {
-    setModalStatus(true);
-  };
-  const handleModalClose = () => {
-    setModalStatus(false);
-  };
 
   return (
     <>
-      <button onClick={ handleModalOpen }>Edit</button>
       <Modal
-        visible={ modalStatus }
-        dismiss={ handleModalClose }
+        visible={ editStatus }
+        dismiss={ handleEditClose }
+        client={'50%'}
         component={
           <TaskForm
-            closeModal={ handleModalClose }
+            closeModal={ handleEditClose }
             handleFunction={ editTask }
             editFields={ task }
             text={ 'Edit Task' }
