@@ -6,7 +6,109 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import TaskContext from "./TaskContext";
 
 export default function TaskProvider({ children }) {
-  const [tasks, setTasks] = useState([ ]);
+  const [tasks, setTasks] = useState([
+    {
+    id: 1,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },
+  {
+    id: 2,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },    {
+    id: 3,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },    {
+    id: 4,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },    {
+    id: 5,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },    {
+    id: 6,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },    {
+    id: 7,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },    {
+    id: 8,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },    {
+    id: 9,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },    {
+    id: 10,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },    {
+    id: 11,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },    {
+    id: 12,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },    {
+    id: 13,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },    {
+    id: 14,
+    due_date: '11-26-2019',
+    task_name: 'Build house 1',
+    task_description: 'make an awesome house ',
+    project_id: 1,
+    project_name: 'Blitz Build'
+  },
+  
+  ]);
 
   useEffect(() => {
     axiosWithAuth()
