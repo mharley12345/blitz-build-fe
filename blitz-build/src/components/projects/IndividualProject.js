@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Weather from "../weather/Weather";
-import Documents from './Documents'
+import Documents from "./Documents";
 import TaskCard from "../dashboard/TaskCard";
 import styled from "styled-components";
 import Global from "../../styles/Global";
@@ -12,32 +12,22 @@ import Delete_icon from "../../styles/icons_project/delete_icon.png";
 import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
 
-
-
 const IndividualProject = props => {
   const [projectState, setProjectState] = useState([]);
 
-
   useEffect(() => {
     const projectID = props.match.params.id;
-    axios
-    .get(
-      `https://blitz-build.herokuapp.com/projects/${projectID}`,
-      projectState
-    )
-    .then(res => {
-      console.log("res", res.data);
-      // const tasksObject = Object.assign({}, [res.data]);
-      // console.log("tasks object", tasksObject);
-      setProjectState(res.data[0]);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    axiosWithAuth()
+      .get(`/project/${projectID}`)
+      .then(res => {
+        console.log("res", res.data);
+
+        setProjectState(res.data[0]);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }, [props]);
-  
-  
-  
 
   return (
     <>
@@ -93,7 +83,7 @@ const IndividualProject = props => {
             latitude={projectState.latitude}
             longitude={projectState.longitude}
           />
-          
+
           <DocumentsContainer>
             <Documents />
           </DocumentsContainer>
@@ -108,9 +98,8 @@ const IndividualProject = props => {
 
 export default withRouter(IndividualProject);
 
-
 const Top = styled.div`
-  display:flex;
+  display: flex;
 `;
 const Right = styled.div`
   display: flex;
@@ -119,7 +108,6 @@ const Right = styled.div`
   height: 649px;
   margin-top: 16px;
   margin-left: 20px;
-  
 `;
 const IndividualProjectContainer = styled.div`
   width: 530px;
@@ -221,10 +209,9 @@ const DeleteIcon = styled.div`
   margin-left: 20px;
 `;
 const DocumentsContainer = styled.div`
-  margin-top:25px;
+  margin-top: 25px;
 `;
 
-
 const TasksContainer = styled.div`
-  margin-top:24px;
+  margin-top: 24px;
 `;
