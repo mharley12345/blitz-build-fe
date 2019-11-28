@@ -8,10 +8,10 @@ function DocumentCard(props) {
   return (
     <DocumentCardContainer>
       <Name>{props.document.documentName}</Name>
-      <Right>
+      {/* <Right>
         <Time>{props.document.date}</Time>
         <Time>{props.document.time}</Time>
-      </Right>
+      </Right> */}
     </DocumentCardContainer>
   );
 }
