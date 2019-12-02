@@ -165,9 +165,9 @@ const AddProject = props => {
     state: "",
     zip_code: null,
     status: "",
-    beds: null,
-    baths: null,
-    square_ft: null,
+    beds: 0 ,
+    baths: 0 ,
+    square_ft: 0 ,
     // assign_template: undefined,
     imageURL: "",
     latitude: null,
@@ -177,6 +177,7 @@ const AddProject = props => {
 
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    
   };
 
   const handleClickOpen = () => {
@@ -249,6 +250,14 @@ const AddProject = props => {
               onChange={changeHandler}
               value={form.street_address}
             />
+            Zip Code
+            <input
+              name="zip_code"
+              placeholder="Zip Code"
+              onChange={changeHandler}
+              value={form.zip_code}
+            />
+
             {/* </TopContainer> */}
             {/* second container includes beds and baths */}
             <InputLabel>Beds</InputLabel>

@@ -129,19 +129,20 @@ function DelayLog() {
   useEffect(() => {
     axios
       .get(
-        ` https://api-blitz-build-dev.herokuapp.com/api/auth/R3fE6DP3UgP8hQSWbGubsHb7lOw2/delay_logs`,
+        ` https://blitz-build-production.herokuapp.com/delay_logs/1`,
         { headers: { token: localStorage.getItem("token") } }
       )
       .then(res => {
-        console.log(res);
-        const delayLogsArray = Object.values(res.data);
-        setDelayLogs(delayLogsArray);
+      
+       let logs = res.data 
+        setDelayLogs(logs);
+         console.log(delayLogs)
       })
       .catch(err => {
         console.log(err);
       });
-  }, []);
-
+  },[]);
+  console.log(delayLogs.delay_logs)
   function handleExportCSV() {
     const options = {
       fieldSeparator: ",",
@@ -165,7 +166,7 @@ function DelayLog() {
     if (delayLogs.length === 0) {
       return <DelayLogGray>You do not have DelayLog</DelayLogGray>;
     } else {
-      return delayLogs.map(data => {
+      return delayLogs.delay_logs.map((data) => {
         return (
           <DelayLogListContainer>
            

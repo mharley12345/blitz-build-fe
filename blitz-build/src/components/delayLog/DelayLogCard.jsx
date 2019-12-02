@@ -48,9 +48,9 @@ function DelayLogCard(props) {
   console.log(props);
   return (
     <LogCardContainer>
-      <LogCardTask>{props.data.taskName}</LogCardTask>
+      <LogCardTask>{props.data.task_name}</LogCardTask>
       <LogCardReason>{props.data.reason}</LogCardReason>
-      <LogCardCreated>{props.data.timestamp}</LogCardCreated>
+      <LogCardCreated>{props.data.createdAt}</LogCardCreated>
     </LogCardContainer>
   );
 }

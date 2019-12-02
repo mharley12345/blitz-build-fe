@@ -9,7 +9,8 @@ import Task from "../../components/dashboard/Task";
 
 //styles
 import styled from "styled-components";
-
+let uid = localStorage.getItem('uid')
+let projectID = localStorage.getItem('projectID')
 const StyledTasks = styled.div`
   width: 100%;
   display: flex;
