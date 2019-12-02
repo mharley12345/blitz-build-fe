@@ -6,109 +6,7 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import TaskContext from "./TaskContext";
 
 export default function TaskProvider({ children }) {
-  const [tasks, setTasks] = useState([
-    {
-    id: 1,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },
-  {
-    id: 2,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },    {
-    id: 3,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },    {
-    id: 4,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },    {
-    id: 5,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },    {
-    id: 6,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },    {
-    id: 7,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },    {
-    id: 8,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },    {
-    id: 9,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },    {
-    id: 10,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },    {
-    id: 11,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },    {
-    id: 12,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },    {
-    id: 13,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },    {
-    id: 14,
-    due_date: '11-26-2019',
-    task_name: 'Build house 1',
-    task_description: 'make an awesome house ',
-    project_id: 1,
-    project_name: 'Blitz Build'
-  },
-  
-  ]);
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
   //   axiosWithAuth()
@@ -144,15 +42,15 @@ export default function TaskProvider({ children }) {
       project_id: newTask.project_id
     }
     console.log('task const from addTask', task)
-    // axiosWithAuth()
-    //   .post(`/tasks`, task)
-    //   .then(res => {
-    //     console.log("from addtask in taskProvider", res);
-    //     newTask.id = res.data[0];
-    //     setTasks([...tasks, newTask]);
-    //   })
-    //   .catch(err => console.log(err));
-    // console.log(newTask);
+    axiosWithAuth()
+      .post(`/projects/tasks`, task)
+      .then(res => {
+        console.log("from addtask in taskProvider", res);
+        newTask.id = res.data[0];
+        setTasks([...tasks, newTask]);
+      })
+      .catch(err => console.log(err));
+    console.log(newTask);
   };
 
   const deleteTask = deletedTask => {
@@ -177,7 +75,7 @@ export default function TaskProvider({ children }) {
       project_id: editedTask.project_id
     };
     axiosWithAuth()
-      .put(`project/tasks/${editedTask.id}`, dbTask)
+      .put(`projects/tasks/${editedTask.id}`, dbTask)
       .then(res => {
         console.log("from edit task", editedTask);
         console.log("from edit task", res);
