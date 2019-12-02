@@ -5,9 +5,9 @@ import { XButton } from "../../styles/Tasks/tasks";
 import TaskContext from '../../contexts/tasks/TaskContext';
 
 const ConfirmStyle = styled.div`
-padding: 30px;
-
-`
+  padding-left: 30px;
+  padding-bottom: 30px;
+`;
 
 const BtnDiv = styled.div`
 display: flex;
@@ -32,6 +32,7 @@ height: 40px;
 justify-content: center;
 align-items: center;
 margin-right: 10px;
+margin-top:36px;
 :hover {
 
 `
