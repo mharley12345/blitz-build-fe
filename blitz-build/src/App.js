@@ -34,15 +34,15 @@ function App() {
   const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
-  useEffect(() => {
-    getData();
-  }, []);
-  const getData = () => {
-    axios
-      .get("https://blitz-build.herokuapp.com/users/1")
-      .then(res => setUserInfo(res.data))
-      .catch(error => console.log(error));
-  };
+  // useEffect(() => {
+  //   getData();
+  // }, []);
+  // const getData = () => {
+  //   axios
+  //     .get("https://blitz-build.herokuapp.com/users/1")
+  //     .then(res => setUserInfo(res.data))
+  //     .catch(error => console.log(error));
+  // };
   console.log(userInfo);
 
   const navLinks = [
@@ -100,9 +100,9 @@ function App() {
                   <Route exact path="/auth" component={Auth} />
                   <Route exact path="/navbar" component={AuthNavBar} />
                   <Route exact path="/callback" component={Callback} />
-                  {/* <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={Signup} />
-                <Route exact path="/log-out" component={Logout} /> */}
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/signup" component={Signup} />
+                  <Route exact path="/log-out" component={Logout} />
 
                   {/*   */}
                   <PrivateRoute exact path="/dashboard" component={Dashboard} />

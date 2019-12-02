@@ -30,7 +30,7 @@ export default function Tasks() {
       {tasks.map((task, i) => {
         return (
           <>
-            <Task item={task} key={task.id} style={{div}}/>
+            <Task item={task} key={task.id}/>
           </>
         );
       })}

@@ -110,33 +110,33 @@ export default function TaskProvider({ children }) {
   
   ]);
 
-  useEffect(() => {
-    axiosWithAuth()
-      .get(`/tasks`)
-      .then(res => {
-        console.log("get tasks", res);
-        setTasks(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  // useEffect(() => {
+  //   axiosWithAuth()
+  //     .get(`/tasks`)
+  //     .then(res => {
+  //       console.log("get tasks", res);
+  //       setTasks(res.data);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
 
-    /*  
-          firbase BE logic
-          // const uid = localStorage.getItem("uid");
-          //takes unique task id keys and turns them into an array
-          const tasksId = Object.keys(res.data)
-          console.log('task ids', tasksId)
+  //   /*  
+  //         firbase BE logic
+  //         // const uid = localStorage.getItem("uid");
+  //         //takes unique task id keys and turns them into an array
+  //         const tasksId = Object.keys(res.data)
+  //         console.log('task ids', tasksId)
   
-          //takes the object of objects and turns it into an array of objects
-          const tasksArr = Object.values(res.data);
+  //         //takes the object of objects and turns it into an array of objects
+  //         const tasksArr = Object.values(res.data);
   
-          //converts unique task key into a id key value in that object
-          for(let i = 0; i < tasksArr.length; i++){
-            tasksArr[i].id = tasksId[i]
-          }
-        */
-  }, []);
+  //         //converts unique task key into a id key value in that object
+  //         for(let i = 0; i < tasksArr.length; i++){
+  //           tasksArr[i].id = tasksId[i]
+  //         }
+  //       */
+  // }, []);
 
   const addTask = newTask => {
     console.log("new task", newTask);
