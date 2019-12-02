@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import styled, { css } from "styled-components";
 import MeatBallsDrop from "../tasks/MeatBallsDrop"
 
@@ -6,8 +6,8 @@ function Task({ item, children }) {
   const today = new window.Date().toISOString().slice(0, 10);
 // This value is hardcoded now because the server don't send back a date
 // It should be {item.due_date}
-  const project_date = item.due_date
-
+  const project_date = item.due_date;
+   
   function DateCalc(today, project_date) {
     if (today === project_date) {
       return "Pending";
@@ -18,13 +18,13 @@ function Task({ item, children }) {
     }
   }
 
-  const status = DateCalc(today, project_date);
+  const status = DateCalc(today, item);
 
   const todayDate = new window.Date(today);
-  const projectDate = new window.Date(project_date);
+  const projectDate = new window.Date(item.due_date);
   const oneDay = 24 * 60 * 60 * 1000;
 
-  const diffDays = Math.round(Math.abs((todayDate - projectDate) / oneDay));
+  const diffDays = Math.round(Math.abs((todayDate - item.due_date) / oneDay));
 
   function DueDateLogic(diff, status) {
     if (status === "Pending") {
@@ -42,11 +42,11 @@ function Task({ item, children }) {
     <Container>
       <Inner>
         <Address>
-          <Text>{item.project_name}</Text>
+          <Text>{item.task_name}</Text>
         </Address>
         <DueDate>
           <Text>{item.street_address}</Text>
-          <Date>{dueDateText}</Date>
+          <Date>{item.due_date}</Date>
         </DueDate>
       </Inner>
       <div>
@@ -57,6 +57,7 @@ function Task({ item, children }) {
         <MeatBallsDrop task={item}/>
     </Container>
   );
+   
 }
 
 export default Task;

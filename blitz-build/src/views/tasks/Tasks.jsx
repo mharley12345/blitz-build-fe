@@ -9,7 +9,8 @@ import Task from "../../components/dashboard/Task";
 
 //styles
 import styled from "styled-components";
-
+let uid = localStorage.getItem('uid')
+let projectID = localStorage.getItem('projectID')
 const StyledTasks = styled.div`
   max-height: 100%
   overflow-y: auto;
@@ -29,11 +30,7 @@ export default function Tasks() {
       {tasks.map((task, i) => {
         return (
           <>
-<<<<<<< HEAD
-            <Task item={task} key={task.id}/>
-=======
             <Task item={task} key={task.id} />
->>>>>>> 8a32ea886441abbd92c4fc97857b0d0a0ce94ef5
           </>
         );
       })}

@@ -13,7 +13,7 @@ function TaskCard({ projectID, numberOfTasks }) {
   
   if(projectID){
       axiosWithAuth()
-        .get(`https://blitz-build.herokuapp.com/tasks/project/${projectID}`)
+        .get(`projects/tasks/byProject/1`)
         .then(res => {
           setProjectTasks(res.data);
         })
