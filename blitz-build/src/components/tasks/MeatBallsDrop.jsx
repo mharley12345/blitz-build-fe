@@ -97,6 +97,7 @@ export default function MeatBallsDrop({ task }) {
         closeDrop={closeDrop}
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
+        
       />
     </>
   );

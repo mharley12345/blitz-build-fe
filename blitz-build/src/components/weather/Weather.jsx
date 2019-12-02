@@ -17,8 +17,8 @@ function Weather(props) {
     // get the latitude and longitude from the project page or navigator.geolocation.
     if (props.usage === "project") {
       setWeatherPosition({
-        latitude: 37.7202,
-        longitude: -122.4099
+        latitude: props.latitude,
+        longitude:props.longitude
       });
     } else if (props.usage === "dashboard") {
       if (navigator.geolocation) {
@@ -33,18 +33,19 @@ function Weather(props) {
         console.log("geolocation is not supported");
       }
     }
-  }, []);
+  }, [props]);
 
   // get the weather data from backend.
   useEffect(() => {
     if (weatherPosition.latitude !== 0) {
-      console.log(weatherPosition);
       axios
         .get(
           ` https://blitz-build-weather.herokuapp.com/forecast/${weatherPosition.latitude},${weatherPosition.longitude}`
         )
         .then(res => {
           setWeatherData(res.data);
+          console.log("get weather data", res.data);
+
         })
         .catch(err => {
           console.log(err);
@@ -84,7 +85,6 @@ function Weather(props) {
     //var weatherIcon = <IconImage src="weatherIcons/streamline-icon-weather-clouds@24x24.png" alt="cloudy"/>
     return weatherIcon;
   }
-console.log(weatherData)
   return (
     <>
       {props.usage === "project" ? (
