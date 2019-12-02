@@ -193,7 +193,7 @@ const EditProject = props => {
     form.latitude = gps.latitude;
     form.longitude = gps.longitude;
 
-    editProject(form);
+    editProject(form, props.project.id);
     handleClose();
   };
 
@@ -211,6 +211,7 @@ const EditProject = props => {
           </Button>
         </DialogActions>
 
+              
         <ModalTitle>
           {/* <DialogTitle id="form-dialog-title">Subscribe</DialogTitle> */}
           <TitleText>Edit Project</TitleText>
@@ -300,10 +301,7 @@ const EditProject = props => {
               onChange={changeHandler}
               value={form.zip_code}
             />
-            <button type="submit" style={buttonStyle}>
-              {" "}
-             Edit{" "}
-            </button>
+            <button type="submit" style={buttonStyle}>Edit</button>
           </form>
         </DialogContent>
       </ModalContainer>

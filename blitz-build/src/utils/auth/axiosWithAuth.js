@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const axiosWithAuth = () => {
     const token = localStorage.getItem("token");
-    const user_id = 3
+    const user_id = 1
     return axios.create({
         baseURL:"https://blitz-build-production.herokuapp.com",
         headers: {
