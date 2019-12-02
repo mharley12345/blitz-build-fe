@@ -35,8 +35,7 @@ const Projects = props => {
               </ProjectUlSecond>
             </ProjectCategoriesSecond>
           </ProjectTopContainer>
-
-          {projects.map(project => {
+          {projects.length ?  projects.map(project => {
             return (
               <Link to={`/project/${project.id}`}>
                 <ProjectListContainer
@@ -84,7 +83,10 @@ const Projects = props => {
                 </ProjectListContainer>
               </Link>
             );
-          })}
+          }):null}
+
+          
+         
 
           <AddProject />
         </ProjectContainer>

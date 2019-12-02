@@ -13,13 +13,14 @@ import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import DeleteProject from "../modal/DeleteProject";
+import EditProject from "../modal/EditProject";
 
 
 
 const IndividualProject = props => {
   const [projectState, setProjectState] = useState([]);
 const [deleteStatus, setDeleteStatus] = useState(false);
-
+const { open, setOpen } = useState(false);
   useEffect(() => {
     const projectID = props.match.params.id;
     axiosWithAuth()
@@ -44,7 +45,13 @@ const [deleteStatus, setDeleteStatus] = useState(false);
 const handleDeleteClose = e => {
   setDeleteStatus(false);
   props.history.push(`/projects`);
-};
+  };
+  
+  const OpenToggle = () => {
+   
+      setOpen(!open);
+   
+  };
   return (
     <>
       <Global />
@@ -81,7 +88,7 @@ const handleDeleteClose = e => {
                 <img src={Page_icon} alt="page_icon" />
                 <p>&nbsp;&nbsp;90-Day Template in Use</p>
               </ContentbottomTemplate>
-              <EditIcon>
+              <EditIcon onClick={OpenToggle}>
                 <img src={Edit_icon} alt="edit_icon" />
                 <p>Edit</p>
               </EditIcon>
@@ -112,8 +119,8 @@ const handleDeleteClose = e => {
         project={projectState}
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
-       
       />
+      <EditProject />
     </>
   );
 };
