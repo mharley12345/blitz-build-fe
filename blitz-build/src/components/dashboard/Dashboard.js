@@ -8,7 +8,7 @@ function Dashboard() {
   return (
     <Container>
       <Weather usage="dashboard" />
-      <TaskCard />
+      <TaskCard numberOfTasks={3} />
     </Container>
   );
 }

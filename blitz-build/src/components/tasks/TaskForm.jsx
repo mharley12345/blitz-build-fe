@@ -49,22 +49,20 @@ export default function TaskForm({
   });
 
   useEffect(() => {
-    // const uid = localStorage.getItem("uid");
-    // console.log("edit fields in task form", editFields);
+ 
     axiosWithAuth()
       .get(`/projects`)
       .then(res => {
-        // console.log("from get projects in TaskForm", editFields);
-        // console.log('from get projects in TaskForm', res);
-        // const projectArray = Object.values(res.data);
-        // console.log("from get projects axios .then", res);
+        console.log('from taskForm',res)
         setProjects(res.data);
       })
       .catch(err => console.log(err));
     if (editFields) {
+      console.log('editFields', editFields)
       setTask(editFields);
+      console.log('project_name', )
     }
-  }, []);
+  },[]);
 
   //sets the fields if the editFields prop is passed down
   //else they are empty
@@ -157,7 +155,7 @@ export default function TaskForm({
         onChange={handleChanges}
         value={task.project_name}
       >
-        <option>Choose Poject</option>
+        <option>Choose Project</option>
 
         {projects.map(project => {
           return (

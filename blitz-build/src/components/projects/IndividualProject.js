@@ -18,15 +18,19 @@ const IndividualProject = props => {
   useEffect(() => {
     const projectID = props.match.params.id;
     axiosWithAuth()
-      .get(`/project/${projectID}`)
-      .then(res => {
-        console.log("res", res.data);
-
-        setProjectState(res.data[0]);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    .get(
+      `projects/${projectID}`,
+      projectState
+    )
+    .then(res => {
+      console.log("res", res.data);
+      // const tasksObject = Object.assign({}, [res.data]);
+      // console.log("tasks object", tasksObject);
+      setProjectState(res.data[0]);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }, [props]);
 
   return (

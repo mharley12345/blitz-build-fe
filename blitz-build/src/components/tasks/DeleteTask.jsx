@@ -20,6 +20,7 @@ export default function DeleteTask({ task, closeDrop, deleteStatus, handleDelete
             closeModal={handleDeleteClose}
             deleteFunction={deleteTask}
             deleteItem={task}
+            text={task.task_name}
           />
         }
       />
