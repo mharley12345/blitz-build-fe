@@ -94,7 +94,7 @@ function App() {
         <TaskProvider>
           <OpenContext.Provider value={{ open, setOpen }}>
             <UserContext.Provider value={{ userInfo, setUserInfo }}>
-              <NavBar setPathname={setPathname} navLinks={navLinks} />
+              {/* <NavBar setPathname={setPathname} navLinks={navLinks} /> */}
               <Layout pathname={pathname}>
                 <Switch>
                   <Route exact path="/auth" component={Auth} />
