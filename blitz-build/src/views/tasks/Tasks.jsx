@@ -5,7 +5,6 @@ import taskContext from "../../contexts/tasks/TaskContext";
 
 //components
 import Task from "../../components/dashboard/Task";
-import TaskCard from "../../components/dashboard/TaskCard"
 
 
 //styles
@@ -30,7 +29,11 @@ export default function Tasks() {
       {tasks.map((task, i) => {
         return (
           <>
+<<<<<<< HEAD
             <Task item={task} key={task.id}/>
+=======
+            <Task item={task} key={task.id} />
+>>>>>>> 8a32ea886441abbd92c4fc97857b0d0a0ce94ef5
           </>
         );
       })}
