@@ -12,9 +12,13 @@ import styled from "styled-components";
 let uid = localStorage.getItem('uid')
 let projectID = localStorage.getItem('projectID')
 const StyledTasks = styled.div`
+  max-height: 100%
+  overflow-y: auto;
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 48px;
 `;
 
 export default function Tasks() {
@@ -23,14 +27,10 @@ export default function Tasks() {
   return (
     <StyledTasks>
       {/* <TaskNav addTask={addTask} /> */}
-      {tasks.map(task => {
+      {tasks.map((task, i) => {
         return (
           <>
-            <Task item={task} key={task.id} >
-             
-            </Task>
-            {/* <ButtonDiv> */}
-            {/* </ButtonDiv> */} 
+            <Task item={task} key={task.id} />
           </>
         );
       })}

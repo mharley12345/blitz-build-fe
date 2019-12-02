@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -149,24 +149,30 @@ const InputLabel = styled.p`
 
 const EditProject = props => {
   const { editProject } = useContext(projectContext);
-  console.log("props", props);
+  
   const [form, setForm] = useState({
-    project_name: props.project_name,
-    street_address: props.street_address,
-    city: props.city,
-    state: props.state,
-    zip_code: props.zip_code,
-    status: props.status,
-    beds: props.beds,
-    baths: props.baths,
-    square_ft: props.square_ft,
-    // assign_template: undefined,
-    imageURL: "",
-    latitude: null,
-    longitude: null
+    
   });
   const { open, setOpen } = useContext(OpenContext);
 
+    useEffect(() => {
+        setForm({
+          project_name: props.project.project_name,
+          street_address: props.project.street_address,
+          city: props.project.city,
+          state: props.project.state,
+          zip_code: props.project.zip_code,
+          status: props.project.status,
+          beds: props.project.beds,
+          baths: props.project.baths,
+          square_ft: props.project.square_ft,
+          // assign_template: undefined,
+          imageURL: props.project.imageURL,
+          latitude: null,
+          longitude: null
+        });
+    }, [props]);
+    console.log("props", form);
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -241,13 +247,13 @@ const EditProject = props => {
               onChange={changeHandler}
               value={form.street_address}
             />
-            Zip Code
+            {/* Zip Code
             <input
               name="zip_code"
               placeholder="Zip Code"
               onChange={changeHandler}
               value={form.zip_code}
-            />
+            /> */}
             {/* </TopContainer> */}
             {/* second container includes beds and baths */}
             <InputLabel>Beds</InputLabel>

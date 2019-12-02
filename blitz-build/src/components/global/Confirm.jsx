@@ -44,7 +44,9 @@ export default function Confirm({ closeModal, text, deleteFunction, deleteItem }
             <div style={{textAlign: 'right', height: '50px'}}>
                 <XButton onClick={ closeModal }>X</XButton>
             </div>
-            <H1 style={{ fontSize: '30px', fontFamily: 'roboto', fontWeight: 600 }}>Delete {text}</H1>
+
+            <H1 style={{fontSize: '30px', fontWeight: 600}}>Delete {text}</H1>
+
             <p>Are you sure you want to delete?</p>
             <BtnDiv>
                 <ConfirmBtn onClick={ closeModal }>Cancel</ConfirmBtn>

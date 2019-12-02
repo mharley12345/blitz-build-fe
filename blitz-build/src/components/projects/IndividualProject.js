@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Weather from "../weather/Weather";
-import Documents from './Documents'
+import Documents from "./Documents";
 import TaskCard from "../dashboard/TaskCard";
 import styled from "styled-components";
 import Global from "../../styles/Global";
@@ -11,16 +11,17 @@ import Edit_icon from "../../styles/icons_project/edit_icon.png";
 import Delete_icon from "../../styles/icons_project/delete_icon.png";
 import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
-import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
+
+
 import DeleteProject from "../modal/DeleteProject";
 import EditProject from "../modal/EditProject";
-
+import OpenContext from '../../contexts/projects/OpenContext'
 
 
 const IndividualProject = props => {
-  const [projectState, setProjectState] = useState([]);
+  const [projectState, setProjectState] = useState({});
 const [deleteStatus, setDeleteStatus] = useState(false);
-const { open, setOpen } = useState(false);
+  const { open, setOpen } = useContext(OpenContext);
   useEffect(() => {
     const projectID = props.match.params.id;
     axiosWithAuth()
@@ -36,6 +37,7 @@ const { open, setOpen } = useState(false);
       console.log(err);
     });
   }, [props]);
+
   console.log(projectState);
   
   const handleDeleteOpen = e => {
@@ -47,8 +49,8 @@ const handleDeleteClose = e => {
   props.history.push(`/projects`);
   };
   
-  const OpenToggle = () => {
-   
+  const OpenToggle = (e) => {
+    e.stopPropagation();
       setOpen(!open);
    
   };
@@ -120,16 +122,15 @@ const handleDeleteClose = e => {
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
       />
-      <EditProject />
+      <EditProject project={projectState} />
     </>
   );
 };
 
 export default withRouter(IndividualProject);
 
-
 const Top = styled.div`
-  display:flex;
+  display: flex;
 `;
 const Right = styled.div`
   display: flex;
@@ -138,7 +139,6 @@ const Right = styled.div`
   height: 649px;
   margin-top: 16px;
   margin-left: 20px;
-  
 `;
 const IndividualProjectContainer = styled.div`
   width: 530px;
@@ -240,10 +240,9 @@ const DeleteIcon = styled.div`
   margin-left: 20px;
 `;
 const DocumentsContainer = styled.div`
-  margin-top:25px;
+  margin-top: 25px;
 `;
 
-
 const TasksContainer = styled.div`
-  margin-top:24px;
+  margin-top: 24px;
 `;
