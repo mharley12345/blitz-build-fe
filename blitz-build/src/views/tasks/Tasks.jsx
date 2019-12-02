@@ -1,40 +1,25 @@
-import React, { useState, useEffect, useContext } from "react";
-import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
+import React, { useContext } from "react";
 
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
 
 //components
-import TaskNav from "../../components/tasks/TaskNav/TaskNav";
 import Task from "../../components/dashboard/Task";
-import MeatBallsDrop from "../../components/tasks/MeatBallsDrop"
+
 
 //styles
 import styled from "styled-components";
-
+let uid = localStorage.getItem('uid')
+let projectID = localStorage.getItem('projectID')
 const StyledTasks = styled.div`
+  max-height: 100%
+  overflow-y: auto;
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 48px;
 `;
-
-const ButtonDiv = styled.div`
-  background: #fbfaf9;
-  width: 100px;
-  display: flex;
-  flex-wrap: wrap-reverse;
-  justify-content: flex-end;
-  aStyledLign-content: flex-end
-  aStyledLign-items: flex-end;
-`;
-
-const TaskWrapper = styled.div`
-  width: 95%;
-  display: flex;
-  justify-content: space-between;
-`;
-
-
 
 export default function Tasks() {
   const { tasks } = useContext(taskContext);
@@ -42,14 +27,10 @@ export default function Tasks() {
   return (
     <StyledTasks>
       {/* <TaskNav addTask={addTask} /> */}
-      {tasks.map(task => {
+      {tasks.map((task, i) => {
         return (
           <>
-            <Task item={task} key={task.id} >
-              <MeatBallsDrop task={task}/>
-            </Task>
-            {/* <ButtonDiv> */}
-            {/* </ButtonDiv> */} 
+            <Task item={task} key={task.id} />
           </>
         );
       })}

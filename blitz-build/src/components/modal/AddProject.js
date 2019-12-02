@@ -9,6 +9,7 @@ import styled from "styled-components";
 import zipcodes from "zipcodes";
 import OpenContext from "../../contexts/projects/OpenContext";
 import { Hidden } from "@material-ui/core";
+import projectContext from "../../contexts/projects/ProjectContext";
 
 const ModalContainer =styled.div`
 
@@ -155,6 +156,7 @@ margin-left: -5px;
 //START OF FUNCTIONAL COMPONENT
 
 const AddProject = props => {
+  const { addProject } = useContext(projectContext);
   console.log("props", props);
   const [form, setForm] = useState({
     project_name: "",
@@ -163,9 +165,9 @@ const AddProject = props => {
     state: "",
     zip_code: null,
     status: "",
-    beds: null,
-    baths: null,
-    square_ft: null,
+    beds: 0 ,
+    baths: 0 ,
+    square_ft: 0 ,
     // assign_template: undefined,
     imageURL: "",
     latitude: null,
@@ -175,6 +177,7 @@ const AddProject = props => {
 
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    
   };
 
   const handleClickOpen = () => {
@@ -193,15 +196,8 @@ const AddProject = props => {
     form.latitude = gps.latitude;
     form.longitude = gps.longitude;
 
-    axios
-      .post(`https://blitz-build.herokuapp.com/projects`, form)
-
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    addProject(form);
+    handleClose()
   };
 
   return (
@@ -254,6 +250,14 @@ const AddProject = props => {
               onChange={changeHandler}
               value={form.street_address}
             />
+            Zip Code
+            <input
+              name="zip_code"
+              placeholder="Zip Code"
+              onChange={changeHandler}
+              value={form.zip_code}
+            />
+
             {/* </TopContainer> */}
             {/* second container includes beds and baths */}
             <InputLabel>Beds</InputLabel>

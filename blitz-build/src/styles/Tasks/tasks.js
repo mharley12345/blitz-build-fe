@@ -40,7 +40,6 @@ export const TaskI = styled.i`
   font-size: 1.4rem;
   background-color: #fbfaf9;
   outline: none
-  color: #B5AFAB;
   padding: 10px 10px;
   text-align: right;
   text-decoration: none;
@@ -70,11 +69,15 @@ export const MeatBalls = styled.i`
 `;
 
 export const StyledLi = styled.li`
+  padding: 0px 8px;
   height: 50px;
   display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  align-items: center;
   color: #B5AFAB;
   border: 1px solid #B5AFAB;
-  text-align: center;
+  border-top: 0
   :hover {
     border: 1px solid #DD6B20 ;
     color: #DD6B20;
@@ -94,3 +97,17 @@ right: 0;
 width: 175px;
 z-index: 2;
 `;
+
+export const DropP = styled.p`
+width: 75%;
+`
+
+// const ButtonDiv = styled.div`
+//   background: #fbfaf9;
+//   width: 100px;
+//   display: flex;
+//   flex-wrap: wrap-reverse;
+//   justify-content: flex-end;
+//   aStyledLign-content: flex-end
+//   aStyledLign-items: flex-end;
+// `;

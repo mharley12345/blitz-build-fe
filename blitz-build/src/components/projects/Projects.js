@@ -6,7 +6,10 @@ import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
 
 const Projects = props => {
+
+
   const { projects } = useContext(projectContext);
+
 
   return (
     <>
@@ -37,14 +40,14 @@ const Projects = props => {
             return (
               <Link to={`/project/${project.id}`}>
                 <ProjectListContainer
-                // key={project.projectID}
-                // onClick={() => {
-                //   props.history.push(`/project/${project.projectID}`);
-                // }}
-                // key={project.id}
-                // onClick={() => {
-                //   props.history.push(`/project/${project.id}`);
-                // }}
+                key={project.projectID}
+                onClick={() => {
+                  props.history.push(`/project/${project.projectID}`);
+                }}
+                key={project.id}
+                onClick={() => {
+                  props.history.push(`/project/${project.id}`);
+                }}
                 >
                   <ProjectListCategories>
                     <ProjectListName>
@@ -53,22 +56,21 @@ const Projects = props => {
 
                     <ProjectListAddress>
                       <Address>
-                        {" "}
-                        12 Fairview Lane, Moorhead MN 56560-1543
+                    {project.street_address},{project.city},{project.state},{project.zip_code}
                       </Address>
                     </ProjectListAddress>
                   </ProjectListCategories>
                   <ProjectListCategoriesSecond>
                     <ProjectListDateCreated>
-                      <DateCreated> 05/10/2019</DateCreated>
+                      <DateCreated> {project.createdAt}</DateCreated>
                     </ProjectListDateCreated>
 
                     <ProjectListDateModified>
-                      <DateModified> 08/18/2019 </DateModified>
+                      <DateModified> {project.due_date} </DateModified>
                     </ProjectListDateModified>
 
                     <ProjectListStatus>
-                      <Status>Complete</Status>
+                      <Status>{project.status}</Status>
                     </ProjectListStatus>
                   </ProjectListCategoriesSecond>
                   {/* <ProjectListIcons>

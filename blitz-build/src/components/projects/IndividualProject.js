@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Weather from "../weather/Weather";
-import Documents from './Documents'
+import Documents from "./Documents";
 import TaskCard from "../dashboard/TaskCard";
 import styled from "styled-components";
 import Global from "../../styles/Global";
@@ -13,31 +13,41 @@ import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
 
 
+import DeleteProject from "../modal/DeleteProject";
+
+
 
 const IndividualProject = props => {
   const [projectState, setProjectState] = useState([]);
+const [deleteStatus, setDeleteStatus] = useState(false);
 
 
   useEffect(() => {
     const projectID = props.match.params.id;
-    axios
+    axiosWithAuth()
     .get(
-      `https://blitz-build.herokuapp.com/projects/${projectID}`,
-      projectState
+      `projects/${projectID}`
     )
     .then(res => {
       console.log("res", res.data);
-      // const tasksObject = Object.assign({}, [res.data]);
-      // console.log("tasks object", tasksObject);
+      
       setProjectState(res.data[0]);
     })
     .catch(err => {
       console.log(err);
     });
   }, [props]);
+
+  console.log(projectState);
   
-  
-  
+  const handleDeleteOpen = e => {
+    e.stopPropagation();
+    setDeleteStatus(true);
+  };
+const handleDeleteClose = e => {
+  setDeleteStatus(false);
+  props.history.push(`/projects`);
+};
 
   return (
     <>
@@ -79,7 +89,7 @@ const IndividualProject = props => {
                 <img src={Edit_icon} alt="edit_icon" />
                 <p>Edit</p>
               </EditIcon>
-              <DeleteIcon>
+              <DeleteIcon onClick={handleDeleteOpen}>
                 <img src={Delete_icon} alt="delete_icon" />
                 <p>Delete</p>
               </DeleteIcon>
@@ -93,24 +103,29 @@ const IndividualProject = props => {
             latitude={projectState.latitude}
             longitude={projectState.longitude}
           />
-          
+
           <DocumentsContainer>
             <Documents />
           </DocumentsContainer>
         </Right>
       </Top>
       <TasksContainer>
-        <TaskCard />
+        <TaskCard projectID={props.match.params.id} />
       </TasksContainer>
+      <DeleteProject
+        project={projectState}
+        deleteStatus={deleteStatus}
+        handleDeleteClose={handleDeleteClose}
+       
+      />
     </>
   );
 };
 
 export default withRouter(IndividualProject);
 
-
 const Top = styled.div`
-  display:flex;
+  display: flex;
 `;
 const Right = styled.div`
   display: flex;
@@ -119,7 +134,6 @@ const Right = styled.div`
   height: 649px;
   margin-top: 16px;
   margin-left: 20px;
-  
 `;
 const IndividualProjectContainer = styled.div`
   width: 530px;
@@ -179,10 +193,10 @@ const ContentSize = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 120px;
+  width: 170px;
   height: 56px;
   margin-top: 16px;
-  margin-left: 200px;
+  margin-left: 150px;
 
   p {
     font-size: 16px;
@@ -221,10 +235,9 @@ const DeleteIcon = styled.div`
   margin-left: 20px;
 `;
 const DocumentsContainer = styled.div`
-  margin-top:25px;
+  margin-top: 25px;
 `;
 
-
 const TasksContainer = styled.div`
-  margin-top:24px;
+  margin-top: 24px;
 `;
