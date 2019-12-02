@@ -56,22 +56,21 @@ const Projects = props => {
 
                     <ProjectListAddress>
                       <Address>
-                        {" "}
-                        12 Fairview Lane, Moorhead MN 56560-1543
+                    {project.street_address},{project.city},{project.state},{project.zip_code}
                       </Address>
                     </ProjectListAddress>
                   </ProjectListCategories>
                   <ProjectListCategoriesSecond>
                     <ProjectListDateCreated>
-                      <DateCreated> 05/10/2019</DateCreated>
+                      <DateCreated> {project.createdAt}</DateCreated>
                     </ProjectListDateCreated>
 
                     <ProjectListDateModified>
-                      <DateModified> 08/18/2019 </DateModified>
+                      <DateModified> {project.due_date} </DateModified>
                     </ProjectListDateModified>
 
                     <ProjectListStatus>
-                      <Status>Complete</Status>
+                      <Status>{project.status}</Status>
                     </ProjectListStatus>
                   </ProjectListCategoriesSecond>
                   {/* <ProjectListIcons>

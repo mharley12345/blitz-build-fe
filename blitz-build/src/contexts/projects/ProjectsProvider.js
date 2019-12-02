@@ -21,9 +21,9 @@ export default function ProjectsProvider({ children }) {
 
   const addProject = newProject => {
     console.log("new project", newProject);
-
+    localStorage.setItem("user_id",1)
     axiosWithAuth()
-      .post(`/projects`, newProject)
+      .get(`/projects`, newProject)
       .then(res => {
         console.log("from addProject in projectsProvider", res);
         newProject.id = res.data[0];

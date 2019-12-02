@@ -9,8 +9,10 @@ export default function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([ ]);
 
   useEffect(() => {
+    localStorage.setItem("project_id",1)
     axiosWithAuth()
-      .get(`/tasks`)
+    
+      .get(`/projects/tasks/byProject/1`)
       .then(res => {
         console.log("get tasks", res);
         setTasks(res.data);

@@ -11,6 +11,7 @@ import Edit_icon from "../../styles/icons_project/edit_icon.png";
 import Delete_icon from "../../styles/icons_project/delete_icon.png";
 import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 
 
@@ -20,9 +21,9 @@ const IndividualProject = props => {
 
   useEffect(() => {
     const projectID = props.match.params.id;
-    axios
+    axiosWithAuth()
     .get(
-      `https://staging-blitz-build.herokuapp.com/projects/${projectID}`,
+      `projects/${projectID}`,
       projectState
     )
     .then(res => {
