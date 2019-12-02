@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Weather from "../weather/Weather";
-import Documents from './Documents'
+import Documents from "./Documents";
 import TaskCard from "../dashboard/TaskCard";
 import styled from "styled-components";
 import Global from "../../styles/Global";
@@ -11,7 +11,8 @@ import Edit_icon from "../../styles/icons_project/edit_icon.png";
 import Delete_icon from "../../styles/icons_project/delete_icon.png";
 import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
-import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
+
+
 import DeleteProject from "../modal/DeleteProject";
 
 
@@ -19,6 +20,7 @@ import DeleteProject from "../modal/DeleteProject";
 const IndividualProject = props => {
   const [projectState, setProjectState] = useState([]);
 const [deleteStatus, setDeleteStatus] = useState(false);
+
 
   useEffect(() => {
     const projectID = props.match.params.id;
@@ -35,6 +37,7 @@ const [deleteStatus, setDeleteStatus] = useState(false);
       console.log(err);
     });
   }, [props]);
+
   console.log(projectState);
   
   const handleDeleteOpen = e => {
@@ -45,6 +48,7 @@ const handleDeleteClose = e => {
   setDeleteStatus(false);
   props.history.push(`/projects`);
 };
+
   return (
     <>
       <Global />
@@ -120,9 +124,8 @@ const handleDeleteClose = e => {
 
 export default withRouter(IndividualProject);
 
-
 const Top = styled.div`
-  display:flex;
+  display: flex;
 `;
 const Right = styled.div`
   display: flex;
@@ -131,7 +134,6 @@ const Right = styled.div`
   height: 649px;
   margin-top: 16px;
   margin-left: 20px;
-  
 `;
 const IndividualProjectContainer = styled.div`
   width: 530px;
@@ -233,10 +235,9 @@ const DeleteIcon = styled.div`
   margin-left: 20px;
 `;
 const DocumentsContainer = styled.div`
-  margin-top:25px;
+  margin-top: 25px;
 `;
 
-
 const TasksContainer = styled.div`
-  margin-top:24px;
+  margin-top: 24px;
 `;
