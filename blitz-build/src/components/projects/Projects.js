@@ -4,16 +4,35 @@ import projectContext from "../../contexts/projects/ProjectContext";
 import AddProject from "../modal/AddProject";
 import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
-
+import searchTermContext from '../../contexts/searching/searchTerm'
 const Projects = props => {
 
 
   const { projects } = useContext(projectContext);
+  const { searchTerm } = useContext(searchTermContext);
+  const projectSearchInput = searchTerm.toLowerCase();
+  const [projectSearchResults, setProjectSearchResults] = useState([]);
 
+
+useEffect(() => {
+   const results= projects.filter(project =>
+    project.project_name.toLowerCase().includes(projectSearchInput)
+    
+    ) 
+console.log("RESULTS:", results);
+    setProjectSearchResults(results);
+  }, [projectSearchInput]);
+   
+
+
+  
+
+  
 
   return (
-    <>
-      <Global />
+    <>  
+      <Global /> 
+       
       <OverallContainer>
         <Section>
           {" "}
@@ -36,8 +55,16 @@ const Projects = props => {
             </ProjectCategoriesSecond>
           </ProjectTopContainer>
 
-          {projects.map(project => {
+        
+         { projects.map(project => {
+         if(projectSearchResults.length > 0) {
+           return (
+             <div>
+             </div>
+           )
+         } else {
             return (
+
               <Link to={`/project/${project.id}`}>
                 <ProjectListContainer
                 key={project.projectID}
@@ -84,16 +111,87 @@ const Projects = props => {
                 </ProjectListContainer>
               </Link>
             );
+}
+           
+
+            
+      
           })}
+
+            { projectSearchResults.length > 0 ?
+            projectSearchResults.map(result => (
+               <Link to={`/project/${result.id}`}>
+               <ProjectListContainer
+               key={result.projectID}
+               onClick={() => {
+                 props.history.push(`/project/${result.projectID}`);
+               }}
+               key={result.id}
+               onClick={() => {
+                 props.history.push(`/project/${result.id}`);
+               }}
+               >
+                 <ProjectListCategories>
+                   <ProjectListName>
+                     <Name> {result.project_name} </Name>
+                   </ProjectListName>
+         
+                   <ProjectListAddress>
+                     <Address>
+                   {result.street_address},{result.city},{result.state},{result.zip_code}
+                     </Address>
+                   </ProjectListAddress>
+                 </ProjectListCategories>
+                 <ProjectListCategoriesSecond>
+                   <ProjectListDateCreated>
+                     <DateCreated> {result.createdAt}</DateCreated>
+                   </ProjectListDateCreated>
+         
+                   <ProjectListDateModified>
+                     <DateModified> {result.due_date} </DateModified>
+                   </ProjectListDateModified>
+         
+                   <ProjectListStatus>
+                     <Status>{result.status}</Status>
+                   </ProjectListStatus>
+                 </ProjectListCategoriesSecond>
+                 {/* <ProjectListIcons>
+                 <ProjectListCreate>
+                   <Create className = "ion-ios-create"></Create>
+                 </ProjectListCreate>
+                 <ProjectListDestroy>
+                   <Destroy className = "ion-ios-trash"></Destroy>
+                 </ProjectListDestroy>
+               </ProjectListIcons> */}
+               </ProjectListContainer>
+             </Link>
+             )) : <FailedSearch> <FailedSearchText></FailedSearchText></FailedSearch>
+            }
+
+            
+        
+          
+          
 
           <AddProject />
         </ProjectContainer>
       </OverallContainer>
+
     </>
   );
 };
 
 export default Projects;
+
+const FailedSearch =styled.div`
+background: #FAFAFA;
+border-radius: 3px;
+
+`
+const FailedSearchText = styled.p`
+font-size: 24px;
+color: #3B3B3B;
+`
 
 const OverallContainer = styled.div``;
 const Section = styled.div`

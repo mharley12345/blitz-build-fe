@@ -7,6 +7,7 @@ import TaskForm from '../components/tasks/TaskForm'
 import { NavLink } from 'react-router-dom'
 import OpenContext from '../contexts/projects/OpenContext'
 import AddProject from  '../components/modal/AddProject'
+import searchTermContext from '../contexts/searching/searchTerm'
 const HeaderContainer = styled.div`
 
   background: #fff;
@@ -120,7 +121,7 @@ margin-top: 3px;
 
 `
 const ButtonText = styled.p`
-font-size: 19px
+font-size: 19px;
 margin-left: 10px;
 color: #8A827D
 
@@ -134,6 +135,19 @@ const HoverStyle = {
   color: '#DD6B20'
 }
 
+const SearchInput = styled.input`
+  height: 48px;
+  width: 464px;
+  padding-left: 30px;
+  border: 1px solid #DCD9D5;
+  border-radius: 3px;
+  background: #FAFAFA;
+  ::placeholder {
+    font-size: 16px;
+    color: #B0B0B0;
+   
+  }
+`
 
 
 
@@ -141,7 +155,7 @@ const HoverStyle = {
 
 
 function Header({pathname}) {
-  
+  const {searchTerm, setSearchTerm} =  useContext(searchTermContext);
   const [ TaskHover, setTaskHover ] = useState(false)
   const [ ProjectHover, setProjectHover ] = useState(false)
   const [ DocumentHover, setDocumentHover ] = useState(false)
@@ -216,13 +230,25 @@ const OpenToggle = () => {
     setOpen(true)
   }
 }
+//// search function 
+
+const handleChange = e => {
+  setSearchTerm(e.target.value);
+  // console.log("search term", searchTerm);
+};
 
     return (
         
         <HeaderContainer >
             <SearchContainer>
-                
-           {/* <img  src={Search} alt="Blitz-Build-Search"/> */}
+
+            <SearchInput
+        type="text"
+        placeholder= 'Search'
+        value={searchTerm}
+        onChange={handleChange}
+      />
+         
                 
            </SearchContainer>
             <ButtonContainer>

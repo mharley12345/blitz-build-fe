@@ -17,10 +17,12 @@ import Logout from "./components/auth/Logout";
 import Layout from "./layouts/Layout";
 import Dashboard from "./components/dashboard/Dashboard";
 import DelayLog from "./components/delayLog/DelayLog";
-import UserContext from "./contexts/UserContext";
+
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
+import UserContext from "./contexts/UserContext";
+import SearchTermContext from './contexts/searching/searchTerm'
 import TaskProvider from "./contexts/tasks/TaskProvider";
 import OpenContext from "./contexts/projects/OpenContext";
 import ProjectsProvider from "./contexts/projects/ProjectsProvider";
@@ -32,6 +34,7 @@ import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 // import Callback from "./components/auth/callback";
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
   const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
@@ -96,6 +99,7 @@ function App() {
     <Router>
       <ProjectsProvider>
         <TaskProvider>
+          <SearchTermContext.Provider value={{searchTerm, setSearchTerm}}>
           <OpenContext.Provider value={{ open, setOpen }}>
             <UserContext.Provider value={{ userInfo, setUserInfo }}>
               <NavBar setPathname={setPathname} navLinks={navLinks} />
@@ -122,6 +126,7 @@ function App() {
               </Layout>
             </UserContext.Provider>
           </OpenContext.Provider>
+          </SearchTermContext.Provider>
         </TaskProvider>
       </ProjectsProvider>
     </Router>
