@@ -61,7 +61,8 @@ export default function ProjectsProvider({ children }) {
         return project;
       }
     });
-    setProjects(newProjectsList);
+        setProjects(newProjectsList);
+        window.location.reload();
       })
       .catch(err => console.log(err));
     
