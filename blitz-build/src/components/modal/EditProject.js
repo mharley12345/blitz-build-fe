@@ -148,14 +148,14 @@ const InputLabel = styled.p`
 //START OF FUNCTIONAL COMPONENT
 
 const EditProject = props => {
+    console.log(props)
   const {  editProject } = useContext(projectContext);
   const [form, setForm] = useState({
-    
   });
   const [ open, setOpen ] = useState();
     useEffect(() => {
       setOpen(props.open)
-    if (props.usage === "edit") {
+    
       setForm({
         project_name: props.project.project_name,
         street_address: props.project.street_address,
@@ -171,7 +171,7 @@ const EditProject = props => {
         latitude: null,
         longitude: null
       });
-    }
+    
   }, [props]);
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
