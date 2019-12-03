@@ -14,14 +14,13 @@ import Project_img from "../../styles/icons_project/project_img.png";
 
 
 import DeleteProject from "../modal/DeleteProject";
-import AddOrEditProject from "../modal/AddOrEditProject";
-import OpenContext from '../../contexts/projects/OpenContext'
+import EditProject from "../modal/EditProject";
 
 
 const IndividualProject = props => {
   const [projectState, setProjectState] = useState({});
 const [deleteStatus, setDeleteStatus] = useState(false);
-  const { open, setOpen } = useContext(OpenContext);
+  const [ open, setOpen ] = useState(false);
   useEffect(() => {
     const projectID = props.match.params.id;
     axiosWithAuth()
@@ -121,7 +120,7 @@ const handleDeleteClose = e => {
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
       />
-      <AddOrEditProject project={projectState} usage="edit"/>
+      <EditProject project={projectState} open={open} />
     </>
   );
 };
