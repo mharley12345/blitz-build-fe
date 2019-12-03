@@ -26,7 +26,7 @@ export default function ProjectsProvider({ children }) {
       .post(`/projects`, newProject)
       .then(res => {
         console.log("from addProject in projectsProvider", res);
-        newProject.id = res.data[0];
+        newProject.id = res.data.project_id;
         setProjects([...projects, newProject]);
       })
       .catch(err => console.log(err));
