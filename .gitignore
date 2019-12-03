@@ -1,0 +1,9 @@
+# Local Netlify folder
+.netlify
+
+# Don't add a node_modules folder in the event someone does an install 
+# in the root of the directory
+node_modules
+/node_modules
+
+

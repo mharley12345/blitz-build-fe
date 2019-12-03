@@ -1,4 +1,4 @@
-  import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from "styled-components";
 
 const Global = createGlobalStyle`
     html, body, div, span, applet, object, iframe,
@@ -30,7 +30,7 @@ const Global = createGlobalStyle`
     }
     body {
         line-height: 1;
-        font-family: 'Roboto Mono', monospace;
+       
     }
     ol, ul {
         list-style: none;
@@ -47,6 +47,9 @@ const Global = createGlobalStyle`
         border-collapse: collapse;
         border-spacing: 0;
     }
- `
+    a, a:-webkit-any-link {
+        text-decoration: none;
+    }
+ `;
 
- export default Global;
+export default Global;
