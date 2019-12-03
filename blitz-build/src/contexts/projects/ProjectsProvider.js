@@ -62,7 +62,7 @@ export default function ProjectsProvider({ children }) {
       }
     });
         setProjects(newProjectsList);
-        window.location.reload();
+       
       })
       .catch(err => console.log(err));
     
