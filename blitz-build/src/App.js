@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-// import Login from "./components/auth/Login";
+import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import NavBar from "./components/NavBar";
@@ -26,7 +26,7 @@ import OpenContext from "./contexts/projects/OpenContext";
 import ProjectsProvider from "./contexts/projects/ProjectsProvider";
 import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 
-// AUTH0
+//AUTH0
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
@@ -35,14 +35,12 @@ function App() {
   const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
-   localStorage.setItem("user_id",1)
+  localStorage.setItem("user_id", 1);
   useEffect(() => {
     getData();
   }, []);
   const getData = () => {
-
     axiosWithAuth()
-      
       .get("/projects")
       .then(res => setUserInfo(res.data))
       .catch(error => console.log(error));
@@ -104,10 +102,9 @@ function App() {
                   <Route exact path="/auth" component={Auth} />
                   <Route exact path="/navbar" component={AuthNavBar} />
                   <Route exact path="/callback" component={Callback} />
-                  {/* <Route exact path="/login" component={Login} /> */}
-                {/* <Route exact path="/signup" component={Signup} />
-                <Route exact path="/log-out" component={Logout} /> */}
-
+                  <Route exact path="/login" component={Login} />
+                  {/* <Route exact path="/signup" component={Signup} /> */}
+                  <Route exact path="/log-out" component={Logout} />
                   {/*   */}
                   <Route exact path="/dashboard" component={Dashboard} />
                   <Route exact path="/tasks" component={Tasks} />

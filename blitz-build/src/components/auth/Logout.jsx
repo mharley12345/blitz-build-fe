@@ -7,6 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import styled from "styled-components";
 import { height } from "@material-ui/system";
+import auth0Client from "./auth";
 
 const ModalContainer = styled.div`
   width: 450px;
@@ -54,10 +55,14 @@ const Logout = props => {
     props.history.push("/projects");
   };
   const SignOut = e => {
-    e.preventDefault();
-    localStorage.removeItem("token");
-    localStorage.removeItem("uid");
-    props.history.push("/login");
+    // e.preventDefault();
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("uid");
+    console.log("im here");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("expires_at");
+    props.history.push("/navbar");
   };
 
   return (
@@ -79,7 +84,7 @@ const Logout = props => {
 
         <ButtonStyles>
           <DialogActions>
-            <Button onClick={() => SignOut} style={ButtonStyle}>
+            <Button onClick={SignOut} style={ButtonStyle}>
               yes
             </Button>
             <Button onClick={handleClose} style={ButtonStyle}>
