@@ -14,7 +14,7 @@ import Project_img from "../../styles/icons_project/project_img.png";
 
 
 import DeleteProject from "../modal/DeleteProject";
-import EditProject from "../modal/EditProject";
+import AddOrEditProject from "../modal/AddOrEditProject";
 import OpenContext from '../../contexts/projects/OpenContext'
 
 
@@ -122,7 +122,7 @@ const handleDeleteClose = e => {
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
       />
-      <EditProject project={projectState} />
+      <AddOrEditProject project={projectState} usage="edit"/>
     </>
   );
 };

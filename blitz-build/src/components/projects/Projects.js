@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import projectContext from "../../contexts/projects/ProjectContext";
-import AddProject from "../modal/AddProject";
+import AddProject from "../modal/AddOrEditProject";
 import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
 

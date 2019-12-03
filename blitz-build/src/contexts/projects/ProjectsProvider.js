@@ -31,6 +31,8 @@ export default function ProjectsProvider({ children }) {
       })
       .catch(err => console.log(err));
   };
+
+
   const deleteProject = deleteProject => {
     axiosWithAuth()
       .delete(`/projects/${deleteProject.id}`)
@@ -43,6 +45,8 @@ export default function ProjectsProvider({ children }) {
     });
     setProjects(newProjectsList);
   };
+
+  
   const editProject = (editedProject, editedProjectId) => {
     console.log("edited project", editedProject, "id:", editedProjectId);
 
@@ -50,16 +54,17 @@ export default function ProjectsProvider({ children }) {
       .put(`/projects/${editedProjectId}`, editedProject)
       .then(res => {
         console.log("from editProject in projectsProvider", res);
-      })
-      .catch(err => console.log(err));
-    const newProjectsList = projects.map(project => {
+        const newProjectsList = projects.map(project => {
       if (project.id === editedProjectId) {
-        return editedProject;
+        return res[0];
       } else {
         return project;
       }
     });
     setProjects(newProjectsList);
+      })
+      .catch(err => console.log(err));
+    
   };
   return (
     <ProjectContext.Provider
