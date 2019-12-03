@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 
 function DocumentCard(props) {
-  console.log(props);
   return (
     <DocumentCardContainer>
       <Name>{props.document.documentName}</Name>

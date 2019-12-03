@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import projectContext from "../../contexts/projects/ProjectContext";
-import AddProject from "../modal/AddProject";
+import AddProject from "../modal/AddOrEditProject";
 import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
 
@@ -35,8 +35,7 @@ const Projects = props => {
               </ProjectUlSecond>
             </ProjectCategoriesSecond>
           </ProjectTopContainer>
-
-          {projects.map(project => {
+          {projects.length ?  projects.map(project => {
             return (
               <Link to={`/project/${project.id}`}>
                 <ProjectListContainer
@@ -84,7 +83,10 @@ const Projects = props => {
                 </ProjectListContainer>
               </Link>
             );
-          })}
+          }):null}
+
+          
+         
 
           <AddProject />
         </ProjectContainer>
