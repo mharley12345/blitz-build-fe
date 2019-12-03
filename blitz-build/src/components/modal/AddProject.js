@@ -250,13 +250,13 @@ const AddProject = props => {
               onChange={changeHandler}
               value={form.street_address}
             />
-            Zip Code
+            {/* Zip Code
             <input
               name="zip_code"
               placeholder="Zip Code"
               onChange={changeHandler}
               value={form.zip_code}
-            />
+            /> */}
 
             {/* </TopContainer> */}
             {/* second container includes beds and baths */}
