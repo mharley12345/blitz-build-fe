@@ -148,7 +148,6 @@ const InputLabel = styled.p`
 //START OF FUNCTIONAL COMPONENT
 
 const EditProject = props => {
-    console.log(props)
   const {  editProject } = useContext(projectContext);
   const [form, setForm] = useState({
   });
