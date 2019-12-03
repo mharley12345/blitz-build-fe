@@ -29,7 +29,7 @@ const [deleteStatus, setDeleteStatus] = useState(false);
       `projects/${projectID}`
     )
     .then(res => {
-      console.log("res", res.data);
+      console.log("get single project: ", res.data);
       
       setProjectState(res.data[0]);
     })
@@ -38,7 +38,6 @@ const [deleteStatus, setDeleteStatus] = useState(false);
     });
   }, [props]);
 
-  console.log(projectState);
   
   const handleDeleteOpen = e => {
     e.stopPropagation();
