@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Weather from "../weather/Weather";
@@ -14,14 +14,14 @@ import Project_img from "../../styles/icons_project/project_img.png";
 
 
 import DeleteProject from "../modal/DeleteProject";
-
+import AddOrEditProject from "../modal/AddOrEditProject";
+import OpenContext from '../../contexts/projects/OpenContext'
 
 
 const IndividualProject = props => {
-  const [projectState, setProjectState] = useState([]);
+  const [projectState, setProjectState] = useState({});
 const [deleteStatus, setDeleteStatus] = useState(false);
-
-
+  const { open, setOpen } = useContext(OpenContext);
   useEffect(() => {
     const projectID = props.match.params.id;
     axiosWithAuth()
@@ -29,7 +29,7 @@ const [deleteStatus, setDeleteStatus] = useState(false);
       `projects/${projectID}`
     )
     .then(res => {
-      console.log("res", res.data);
+      console.log("get single project: ", res.data);
       
       setProjectState(res.data[0]);
     })
@@ -38,7 +38,6 @@ const [deleteStatus, setDeleteStatus] = useState(false);
     });
   }, [props]);
 
-  console.log(projectState);
   
   const handleDeleteOpen = e => {
     e.stopPropagation();
@@ -47,8 +46,13 @@ const [deleteStatus, setDeleteStatus] = useState(false);
 const handleDeleteClose = e => {
   setDeleteStatus(false);
   props.history.push(`/projects`);
-};
-
+  };
+  
+  const OpenToggle = (e) => {
+    e.stopPropagation();
+      setOpen(!open);
+   
+  };
   return (
     <>
       <Global />
@@ -85,7 +89,7 @@ const handleDeleteClose = e => {
                 <img src={Page_icon} alt="page_icon" />
                 <p>&nbsp;&nbsp;90-Day Template in Use</p>
               </ContentbottomTemplate>
-              <EditIcon>
+              <EditIcon onClick={OpenToggle}>
                 <img src={Edit_icon} alt="edit_icon" />
                 <p>Edit</p>
               </EditIcon>
@@ -110,14 +114,14 @@ const handleDeleteClose = e => {
         </Right>
       </Top>
       <TasksContainer>
-        <TaskCard projectID={props.match.params.id} />
+        <TaskCard projectID={props.match.params.id} numberOfTasks={3}/>
       </TasksContainer>
       <DeleteProject
         project={projectState}
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
-       
       />
+      <AddOrEditProject project={projectState} usage="edit"/>
     </>
   );
 };

@@ -13,7 +13,7 @@ function TaskCard({ projectID, numberOfTasks }) {
   
   if(projectID){
       axiosWithAuth()
-        .get(`projects/tasks/byProject/1`)
+        .get(`projects/tasks/byProject/${projectID}`)
         .then(res => {
           setProjectTasks(res.data);
         })

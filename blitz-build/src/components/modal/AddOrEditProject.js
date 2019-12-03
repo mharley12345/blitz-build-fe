@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -147,9 +147,8 @@ const InputLabel = styled.p`
 
 //START OF FUNCTIONAL COMPONENT
 
-const AddProject = props => {
-  const { addProject } = useContext(projectContext);
-  console.log("props", props);
+const AddOrEditProject = props => {
+  const { addProject, editProject } = useContext(projectContext);
   const [form, setForm] = useState({
     project_name: "",
     street_address: "",
@@ -166,7 +165,25 @@ const AddProject = props => {
     longitude: null
   });
   const { open, setOpen } = useContext(OpenContext);
-
+  useEffect(() => {
+    if (props.usage === "edit") {
+      setForm({
+        project_name: props.project.project_name,
+        street_address: props.project.street_address,
+        city: props.project.city,
+        state: props.project.state,
+        zip_code: props.project.zip_code,
+        status: props.project.status,
+        beds: props.project.beds,
+        baths: props.project.baths,
+        square_ft: props.project.square_ft,
+        // assign_template: undefined,
+        imageURL: props.project.imageURL,
+        latitude: null,
+        longitude: null
+      });
+    }
+  }, [props]);
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -186,8 +203,12 @@ const AddProject = props => {
 
     form.latitude = gps.latitude;
     form.longitude = gps.longitude;
+    if (props.usage === "edit") {
+      editProject(form, props.project.id);
+    } else {
+      addProject(form);
+    }
 
-    addProject(form);
     handleClose();
   };
 
@@ -207,7 +228,11 @@ const AddProject = props => {
 
         <ModalTitle>
           {/* <DialogTitle id="form-dialog-title">Subscribe</DialogTitle> */}
-          <TitleText>Create a New Project</TitleText>
+          {props.usage === "edit" ? (
+            <TitleText>Edit Project</TitleText>
+          ) : (
+            <TitleText>Create a New Project</TitleText>
+          )}
         </ModalTitle>
         <DialogContent style={DialogContentStyle}>
           <form onSubmit={submitForm} style={formStyle}>
@@ -295,10 +320,15 @@ const AddProject = props => {
               onChange={changeHandler}
               value={form.zip_code}
             />
-            <button type="submit" style={buttonStyle}>
-              {" "}
-              Save{" "}
-            </button>
+            {props.usage === "edit" ? (
+              <button type="submit" style={buttonStyle}>
+                Edit
+              </button>
+            ) : (
+              <button type="submit" style={buttonStyle}>
+                Save
+              </button>
+            )}
           </form>
         </DialogContent>
       </ModalContainer>
@@ -306,4 +336,4 @@ const AddProject = props => {
   );
 };
 
-export default AddProject;
+export default AddOrEditProject;
