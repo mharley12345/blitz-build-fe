@@ -4,12 +4,12 @@ class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth({
       // the following three lines MUST be updated
-      // domain: "gannondarcy2.auth0.com",
-      // audience: "https://gannondarcy2.auth0.com/userinfo",
-      // clientID: "OzMg1e7JDNF7DogxPEPvGzpG7fvvDHNe",
-      // redirectUri: "http://localhost:3000/callback",
-      // responseType: "id_token",
-      // scope: "openid profile"
+      domain: "gannondarcy2.auth0.com",
+      audience: "https://gannondarcy2.auth0.com/userinfo",
+      clientID: "OzMg1e7JDNF7DogxPEPvGzpG7fvvDHNe",
+      redirectUri: "http://localhost:3000/callback",
+      responseType: "id_token",
+      scope: "openid profile"
     });
 
     this.getProfile = this.getProfile.bind(this);
