@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom'
 import OpenContext from '../contexts/projects/OpenContext'
 // import AddProject from  '../components/modal/AddProject'
 import searchTermContext from '../contexts/searching/searchTerm'
-import AddOrEditProject from "../components/modal/AddOrEditProject";
+import AddProject from "../components/modal/AddProject";
 const HeaderContainer = styled.div`
 
   background: #fff;
@@ -312,7 +312,7 @@ const handleChange = e => {
             }
           />
         </ButtonContainer>
-        <AddOrEditProject/>
+        <AddProject/>
       </HeaderContainer>
     );
 }
