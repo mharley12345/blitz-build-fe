@@ -58,10 +58,6 @@ const IconImage = styled.img`
 
 function ProjectWeather({ weatherData, time, icon,city }) {
   
-    console.log(weatherData)
-      console.log(time);
-
-
   return (
     <>
       <WeatherContainerP>
@@ -81,7 +77,7 @@ function ProjectWeather({ weatherData, time, icon,city }) {
                   <span>&#176;</span>
                 </WeatherTem>
                 <p>
-                  Humidity {(weatherData.currently.humidity * 100).toFixed(2)}
+                  Humidity {(weatherData.currently.humidity * 100).toFixed(0)}
                   <span>&#37;</span>
                 </p>
               </WeatherData>

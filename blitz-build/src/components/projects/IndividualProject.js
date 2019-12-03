@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Weather from "../weather/Weather";
@@ -13,23 +13,46 @@ import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
 
 
-const IndividualProject = props => {
-  const [projectState, setProjectState] = useState([]);
+import DeleteProject from "../modal/DeleteProject";
+import AddOrEditProject from "../modal/AddOrEditProject";
+import OpenContext from '../../contexts/projects/OpenContext'
 
+
+const IndividualProject = props => {
+  const [projectState, setProjectState] = useState({});
+const [deleteStatus, setDeleteStatus] = useState(false);
+  const { open, setOpen } = useContext(OpenContext);
   useEffect(() => {
     const projectID = props.match.params.id;
     axiosWithAuth()
-      .get(`/project/${projectID}`)
-      .then(res => {
-        console.log("res", res.data);
-
-        setProjectState(res.data[0]);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    .get(
+      `projects/${projectID}`
+    )
+    .then(res => {
+      console.log("get single project: ", res.data);
+      
+      setProjectState(res.data[0]);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }, [props]);
 
+  
+  const handleDeleteOpen = e => {
+    e.stopPropagation();
+    setDeleteStatus(true);
+  };
+const handleDeleteClose = e => {
+  setDeleteStatus(false);
+  props.history.push(`/projects`);
+  };
+  
+  const OpenToggle = (e) => {
+    e.stopPropagation();
+      setOpen(!open);
+   
+  };
   return (
     <>
       <Global />
@@ -66,11 +89,11 @@ const IndividualProject = props => {
                 <img src={Page_icon} alt="page_icon" />
                 <p>&nbsp;&nbsp;90-Day Template in Use</p>
               </ContentbottomTemplate>
-              <EditIcon>
+              <EditIcon onClick={OpenToggle}>
                 <img src={Edit_icon} alt="edit_icon" />
                 <p>Edit</p>
               </EditIcon>
-              <DeleteIcon>
+              <DeleteIcon onClick={handleDeleteOpen}>
                 <img src={Delete_icon} alt="delete_icon" />
                 <p>Delete</p>
               </DeleteIcon>
@@ -91,8 +114,14 @@ const IndividualProject = props => {
         </Right>
       </Top>
       <TasksContainer>
-        <TaskCard projectID={props.match.params.id}/>
+        <TaskCard projectID={props.match.params.id} />
       </TasksContainer>
+      <DeleteProject
+        project={projectState}
+        deleteStatus={deleteStatus}
+        handleDeleteClose={handleDeleteClose}
+      />
+      <AddOrEditProject project={projectState} usage="edit"/>
     </>
   );
 };
@@ -168,10 +197,10 @@ const ContentSize = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 120px;
+  width: 170px;
   height: 56px;
   margin-top: 16px;
-  margin-left: 200px;
+  margin-left: 150px;
 
   p {
     font-size: 16px;

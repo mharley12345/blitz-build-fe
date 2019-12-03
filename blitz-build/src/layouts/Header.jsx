@@ -6,8 +6,9 @@ import Modal from '../components/global/Modal'
 import TaskForm from '../components/tasks/TaskForm'
 import { NavLink } from 'react-router-dom'
 import OpenContext from '../contexts/projects/OpenContext'
-import AddProject from  '../components/modal/AddProject'
+// import AddProject from  '../components/modal/AddProject'
 import searchTermContext from '../contexts/searching/searchTerm'
+import AddOrEditProject from "../components/modal/AddOrEditProject";
 const HeaderContainer = styled.div`
 
   background: #fff;
@@ -173,18 +174,23 @@ function Header({pathname}) {
     setTaskModalStatus(false);
   };
 
+  const id = [];
+  for (var i = 1; i <= 100; i++) {
+      id.push(i)
+  }
+
   const HideTheProjectButton = (pathname) => {
   
- if(pathname === '/projects' || pathname === '/dashboard' || pathname === '/tasks') {
-     return ButtonProjectCheck
+ if(pathname === '/documents' || pathname === '/templates' || pathname === '/delay-log' || pathname === `/help` || pathname === '/log-out') {
+     return HideButton
  }
  else {
-     return HideButton
+     return ButtonProjectCheck
  }  };
  const HideTheDocumentButton = (pathname) => {
   
-  if( pathname === '/dashboard' || pathname === '/projects' ) {
-      return ButtonDocumentCheck
+  if( pathname === '/templates' || pathname === '/delay-log' || pathname === '/tasks' ) {
+      return HideButton
   }
   else if(pathname === '/documents') {
 
@@ -192,7 +198,7 @@ function Header({pathname}) {
 
   }
   else {
-      return HideButton
+      return ButtonDocumentCheck
   }  
 }
 const HideTheTaskButton = (pathname) => {
@@ -238,47 +244,77 @@ const handleChange = e => {
 };
 
     return (
-        
-        <HeaderContainer >
-            <SearchContainer>
+      <HeaderContainer>
+        <SearchContainer>
+           <SearchInput
+             type="text"
+             placeholder='Search'
+             value={searchTerm}
+             onChange={handleChange}
+           />
+        </SearchContainer>
+        <ButtonContainer>
+          <ButtonDocument
+            onMouseEnter={() => setDocumentHover(true)}
+            onMouseLeave={() => setDocumentHover(false)}
+            style={HideTheDocumentButton(pathname)}
+          >
+            {" "}
+            <ButtonI
+              className="ion-ios-add-circle"
+              style={HoverDocumentStyleFunction()}
+            />{" "}
+            <ButtonText style={HoverDocumentStyleFunction()}>
+              New Document
+            </ButtonText>
+          </ButtonDocument>
 
-            <SearchInput
-        type="text"
-        placeholder= 'Search'
-        value={searchTerm}
-        onChange={handleChange}
-      />
-         
-                
-           </SearchContainer>
-            <ButtonContainer>
+          <ButtonTask
+            onMouseEnter={() => setTaskHover(true)}
+            onMouseLeave={() => setTaskHover(false)}
+            style={HideTheTaskButton(pathname)}
+            onClick={handleTaskModalOpen}
+          >
+            {" "}
+            <ButtonI
+              className="ion-ios-add-circle"
+              style={HoverTaskStyleFunction()}
+            />
+            <ButtonText style={HoverTaskStyleFunction()}>New Task</ButtonText>
+          </ButtonTask>
 
-      <ButtonDocument  onMouseEnter={() => setDocumentHover(true)}
-                       onMouseLeave={() =>  setDocumentHover(false) }style= {HideTheDocumentButton(pathname)}> <ButtonI className = 'ion-ios-add-circle' style={HoverDocumentStyleFunction()}/> <ButtonText style={HoverDocumentStyleFunction()}>New Document</ButtonText></ButtonDocument>
+          <ButtonProject
+            onMouseEnter={() => setProjectHover(true)}
+            onMouseLeave={() => setProjectHover(false)}
+            style={HideTheProjectButton(pathname)}
+            onClick={OpenToggle}
+          >
+            {" "}
+            <ButtonI
+              className="ion-ios-add-circle"
+              style={HoverProjectStyleFunction()}
+            />
+            <ButtonText style={HoverProjectStyleFunction()}>
+              New Project
+            </ButtonText>
+          </ButtonProject>
 
-      <ButtonTask  onMouseEnter={() => setTaskHover(true)}
-                       onMouseLeave={() =>  setTaskHover(false) } style = {HideTheTaskButton(pathname)} onClick={ handleTaskModalOpen }>  <ButtonI className = 'ion-ios-add-circle' style={HoverTaskStyleFunction()}/><ButtonText style={HoverTaskStyleFunction()}>New Task</ButtonText></ButtonTask>
-
-      <ButtonProject  onMouseEnter={() => setProjectHover(true)}
-                       onMouseLeave={() =>  setProjectHover(false) }style = {HideTheProjectButton(pathname)} onClick={OpenToggle}>  <ButtonI className = 'ion-ios-add-circle'style={HoverProjectStyleFunction()}/><ButtonText style={HoverProjectStyleFunction()}>New Project</ButtonText></ButtonProject>
-                       
           <Modal
-        visible={ TaskModalStatus }
-        dismiss={ handleTaskModalClose }
-        client={'50%'}
-        component={
-          <TaskForm 
-          closeModal={ handleTaskModalClose } 
-          handleFunction={ addTask }
-          text={ 'Add Task' }
-        />
-        }
-      />
-          </ButtonContainer>
-          <AddProject/>
-        </HeaderContainer>
-         
-    )
+            visible={TaskModalStatus}
+            dismiss={handleTaskModalClose}
+            client={"50%"}
+            component={
+              <TaskForm
+                closeModal={handleTaskModalClose}
+                handleFunction={addTask}
+                text={"Add Task"}
+              />
+            }
+          />
+        </ButtonContainer>
+        <AddOrEditProject/>
+      </HeaderContainer>
+    );
 }
 
 export default Header

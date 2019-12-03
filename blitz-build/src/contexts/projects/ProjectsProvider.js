@@ -20,10 +20,10 @@ export default function ProjectsProvider({ children }) {
   }, []);
 
   const addProject = newProject => {
-    console.log("new project", {...newProject,"user_id":1});
-    localStorage.setItem("user_id",1)
+    console.log("new project", { ...newProject });
+    
     axiosWithAuth()
-      .post(`/projects`,  {...newProject,"user_id":1})
+      .post(`/projects`, newProject)
       .then(res => {
         console.log("from addProject in projectsProvider", res);
         newProject.id = res.data[0];
@@ -32,8 +32,44 @@ export default function ProjectsProvider({ children }) {
       .catch(err => console.log(err));
   };
 
+
+  const deleteProject = deleteProject => {
+    axiosWithAuth()
+      .delete(`/projects/${deleteProject.id}`)
+      .then(res => {
+        console.log(`project with project id:${deleteProject.id} was removed`);
+      })
+      .catch(err => console.log(err));
+    const newProjectsList = projects.filter(project => {
+      return project.id !== deleteProject.id;
+    });
+    setProjects(newProjectsList);
+  };
+
+  
+  const editProject = (editedProject, editedProjectId) => {
+    console.log("edited project", editedProject, "id:", editedProjectId);
+
+    axiosWithAuth()
+      .put(`/projects/${editedProjectId}`, editedProject)
+      .then(res => {
+        console.log("from editProject in projectsProvider", res);
+        const newProjectsList = projects.map(project => {
+      if (project.id === editedProjectId) {
+        return res[0];
+      } else {
+        return project;
+      }
+    });
+    setProjects(newProjectsList);
+      })
+      .catch(err => console.log(err));
+    
+  };
   return (
-    <ProjectContext.Provider value={{ projects, addProject }}>
+    <ProjectContext.Provider
+      value={{ projects, addProject, deleteProject, editProject }}
+    >
       {children}
     </ProjectContext.Provider>
   );

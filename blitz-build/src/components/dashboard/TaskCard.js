@@ -6,7 +6,7 @@ import Task from "./Task";
 //context 
 import taskContext from '../../contexts/tasks/TaskContext'
 
-function TaskCard({ projectID }) {
+function TaskCard({ projectID, numberOfTasks }) {
   const { tasks } = useContext(taskContext);
   const [projectTasks, setProjectTasks] = useState([]);
   let renderedTasks
@@ -33,7 +33,7 @@ function TaskCard({ projectID }) {
         <p>View All</p>
       </Section>
       <Card>
-        {renderedTasks.slice(0, 3).map(item => {
+        {renderedTasks.slice(0, numberOfTasks).map(item => {
           return <Task item={item} key={item.id} />})}
       </Card>
     </Container>
@@ -58,6 +58,7 @@ const Section = styled.div`
 `;
 
 const Container = styled.div`
+
 margin-top: 20px;
   margin-bottom: 48px;
 `;

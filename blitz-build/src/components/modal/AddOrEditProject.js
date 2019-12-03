@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -155,29 +155,45 @@ margin-left: -5px;
 
 //START OF FUNCTIONAL COMPONENT
 
-const AddProject = props => {
-  const { addProject } = useContext(projectContext);
-  console.log("props", props);
+const AddOrEditProject = props => {
+  const { addProject, editProject } = useContext(projectContext);
   const [form, setForm] = useState({
     project_name: "",
     street_address: "",
     city: "",
     state: "",
-    zip_code: null,
+    zip_code: 0,
     status: "",
-    beds: 0 ,
-    baths: 0 ,
-    square_ft: 0 ,
+    beds: 0,
+    baths: 0,
+    square_ft: 0,
     // assign_template: undefined,
     imageURL: "",
     latitude: null,
     longitude: null
   });
-  const {open, setOpen} = useContext(OpenContext);
-
+  const { open, setOpen } = useContext(OpenContext);
+  useEffect(() => {
+    if (props.usage === "edit") {
+      setForm({
+        project_name: props.project.project_name,
+        street_address: props.project.street_address,
+        city: props.project.city,
+        state: props.project.state,
+        zip_code: props.project.zip_code,
+        status: props.project.status,
+        beds: props.project.beds,
+        baths: props.project.baths,
+        square_ft: props.project.square_ft,
+        // assign_template: undefined,
+        imageURL: props.project.imageURL,
+        latitude: null,
+        longitude: null
+      });
+    }
+  }, [props]);
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    
   };
 
   const handleClickOpen = () => {
@@ -195,57 +211,66 @@ const AddProject = props => {
 
     form.latitude = gps.latitude;
     form.longitude = gps.longitude;
-
-    addProject(form);
-    handleClose()
+    if (props.usage === "edit") {
+       editProject(form, props.project.id);
+     }
+    else {
+      addProject(form);
+    }
+    
+    handleClose();
   };
 
   return (
-    
-       
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-        style={DialogStyle}
-      >
-        <ModalContainer>
-        <DialogActions style = {DialogActionsStyle}>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+      style={DialogStyle}
+    >
+      <ModalContainer>
+        <DialogActions style={DialogActionsStyle}>
           <Button onClick={handleClose} style={CancelButtonStyle}>
             X
           </Button>
         </DialogActions>
 
         <ModalTitle>
-          
           {/* <DialogTitle id="form-dialog-title">Subscribe</DialogTitle> */}
-          <TitleText>Create a New Project</TitleText>
+          {props.usage === "edit" ? (
+            <TitleText>Edit Project</TitleText>
+          ) : (
+            <TitleText>Create a New Project</TitleText>
+          )}
         </ModalTitle>
         <DialogContent style={DialogContentStyle}>
-          
           <form onSubmit={submitForm} style={formStyle}>
             {/* <TopContainer> */}
             {/* top container is project name and address */}
             <InputLabel>Project Name</InputLabel>
-            <input style={inputStyle}
+            <input
+              style={inputStyle}
               name="project_name"
               onChange={changeHandler}
               value={form.project_name}
             />
-             <InputLabel>City</InputLabel>
-            <input  style={inputStyle}
+            <InputLabel>City</InputLabel>
+            <input
+              style={inputStyle}
               name="city"
               onChange={changeHandler}
               value={form.city}
             />
-             <InputLabel>State</InputLabel>
-            <input  style={inputStyle}
+            <InputLabel>State</InputLabel>
+            <input
+              style={inputStyle}
               name="state"
               onChange={changeHandler}
               value={form.state}
             />
-             <InputLabel>Street Address</InputLabel>
-            <input  style={inputStyle}
+            <InputLabel>Street Address</InputLabel>
+            <input
+              style={inputStyle}
               name="street_address"
               onChange={changeHandler}
               value={form.street_address}
@@ -261,20 +286,23 @@ const AddProject = props => {
             {/* </TopContainer> */}
             {/* second container includes beds and baths */}
             <InputLabel>Beds</InputLabel>
-            <input  style={inputStyle}
+            <input
+              style={inputStyle}
               name="beds"
               onChange={changeHandler}
               value={form.beds}
             />
-             <InputLabel>Baths</InputLabel>
-            <input  style={inputStyle}
+            <InputLabel>Baths</InputLabel>
+            <input
+              style={inputStyle}
               name="baths"
               onChange={changeHandler}
               value={form.baths}
             />
-             <InputLabel>Square Footage</InputLabel>
+            <InputLabel>Square Footage</InputLabel>
             {/* square footage on its own */}
-            <input  style={inputStyle}
+            <input
+              style={inputStyle}
               name="square_ft"
               onChange={changeHandler}
               value={form.square_ft}
@@ -288,26 +316,31 @@ const AddProject = props => {
             /> */}
             {/* thumbnail on its own and it will have to be uploaded */}
             <InputLabel>Project Thumbnail</InputLabel>
-            <input  style={inputStyle}
+            <input
+              style={inputStyle}
               name="imageURL"
               onChange={changeHandler}
               value={form.imageURL}
             />
-             <InputLabel>Zip Code</InputLabel>
-            <input  style={inputStyle}
+            <InputLabel>Zip Code</InputLabel>
+            <input
+              style={inputStyle}
               name="zip_code"
               onChange={changeHandler}
               value={form.zip_code}
             />
-            <button type="submit" style= {buttonStyle}> Save </button>
+            {props.usage === "edit" ? (
+              <button type="submit" style={buttonStyle}>Edit</button>
+            ) : (
+              <button type="submit" style={buttonStyle}>Save</button>
+            )}
+           
+          
           </form>
-         
         </DialogContent>
-        </ModalContainer>
-       
-      </Dialog>
-      
+      </ModalContainer>
+    </Dialog>
   );
 };
 
-export default AddProject;
+export default AddOrEditProject;

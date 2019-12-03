@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import projectContext from "../../contexts/projects/ProjectContext";
-import AddProject from "../modal/AddProject";
+import AddProject from "../modal/AddOrEditProject";
 import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
 import searchTermContext from '../../contexts/searching/searchTerm'
@@ -117,6 +117,10 @@ console.log("RESULTS:", results);
             
       
           })}
+         
+
+          
+         
 
             { projectSearchResults.length > 0 ?
             projectSearchResults.map(result => (
@@ -233,7 +237,7 @@ const ProjectListContainer = styled.div`
 `;
 const ProjectListCategories = styled.div`
   display: flex;
-  width: 62.8%;
+  width: 60%;
   line-height: 50px;
 `;
 
@@ -280,7 +284,7 @@ const ProjectLi = styled.div`
 const ProjectListCategoriesSecond = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 27%;
+  width: 30%;
   line-height: 50px;
 `;
 
@@ -337,6 +341,7 @@ const ProjectListDateCreated = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
+  width: 25%;
 `;
 const DateCreated = styled.div`
   font-family: Roboto;
@@ -344,7 +349,6 @@ const DateCreated = styled.div`
   font-weight: normal;
   font-size: 14px;
 
-  /* identical to box height, or 171% */
 
   text-align: right;
 
@@ -356,7 +360,8 @@ const ProjectListDateModified = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  margin-left: -30px;
+  width: 25%;
+  
 `;
 const DateModified = styled.div`
   font-family: Roboto;
@@ -376,14 +381,14 @@ const ProjectListStatus = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  margin-right: -20px;
+  width: 25%;
 `;
 const Status = styled.div`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
-
+  
   /* identical to box height */
 
   text-align: right;
