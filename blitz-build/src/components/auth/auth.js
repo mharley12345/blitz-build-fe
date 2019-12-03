@@ -65,12 +65,7 @@ class Auth {
         // localStorage.setItem("access_token", authResults.accessToken);
         localStorage.setItem("id_token", authResults.idToken);
         localStorage.setItem("expires_at", expiresAt);
-        if (localStorage.getItem("id_token")) {
-          console.log("profile 2");
-          return jwtDecode(localStorage.setItem("id_token"));
-        } else {
-          return {};
-        }
+        localStorage.setItem("user_id", authResults.idTokenPayload.sub);
       } else {
         console.log(err);
       }
