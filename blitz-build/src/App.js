@@ -35,7 +35,6 @@ function App() {
   const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
-  localStorage.setItem("user_id", 1);
   useEffect(() => {
     getData();
   }, []);
