@@ -7,7 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import styled from "styled-components";
 import zipcodes from "zipcodes";
-import OpenContext from "../../contexts/projects/OpenContext";
+
 import { Hidden } from "@material-ui/core";
 import projectContext from "../../contexts/projects/ProjectContext";
 
