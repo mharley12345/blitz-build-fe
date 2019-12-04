@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
-
+import searchTermContext from '../../contexts/searching/searchTerm'
 //components
 import Task from "../../components/dashboard/Task";
 
@@ -23,17 +23,48 @@ const StyledTasks = styled.div`
 
 export default function Tasks() {
   const { tasks } = useContext(taskContext);
+  const { searchTerm } = useContext(searchTermContext)
+  const taskSearchInput = searchTerm.toLowerCase();
+  const [taskSearchResults, setTaskSearchResults] = useState([]);
+
+
+useEffect(() => {
+   const results= tasks.filter(task =>
+    task.task_name.toLowerCase().includes(taskSearchInput)
+    
+    ) 
+console.log("RESULTS:", results);
+    setTaskSearchResults(results);
+  
+  }, [taskSearchInput]);
 
   return (
     <StyledTasks>
       {/* <TaskNav addTask={addTask} /> */}
-      {tasks.map((task, i) => {
+      {tasks.map(task => {
+        if(taskSearchResults.length > 0) {
+          return (
+            <div>
+
+            </div>
+          )
+        }
+        else {
         return (
           <>
             <Task item={task} key={task.id} />
           </>
+
         );
+        }
+
       })}
+        { taskSearchResults.length > 0 ?
+              taskSearchResults.map(result => (
+                <Task item={result} key={result.id} >
+                  </Task>
+             )) : <p></p>
+            }
     </StyledTasks>
   );
 }

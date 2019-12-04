@@ -17,12 +17,15 @@ import Logout from "./components/auth/Logout";
 import Layout from "./layouts/Layout";
 import Dashboard from "./components/dashboard/Dashboard";
 import DelayLog from "./components/delayLog/DelayLog";
-import UserContext from "./contexts/UserContext";
+
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
+import UserContext from "./contexts/UserContext";
+import SearchTermContext from './contexts/searching/searchTerm'
 import TaskProvider from "./contexts/tasks/TaskProvider";
 import OpenContext from "./contexts/projects/OpenContext";
+import PathnameContext from './contexts/PathnameContext';
 import ProjectsProvider from "./contexts/projects/ProjectsProvider";
 import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 
@@ -32,6 +35,7 @@ import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
   const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
@@ -93,7 +97,9 @@ function App() {
     <Router>
       <ProjectsProvider>
         <TaskProvider>
+          <SearchTermContext.Provider value={{searchTerm, setSearchTerm}}>
           <OpenContext.Provider value={{ open, setOpen }}>
+            <PathnameContext.Provider value = {{pathname, setPathname}}>
             <UserContext.Provider value={{ userInfo, setUserInfo }}>
               <NavBar setPathname={setPathname} navLinks={navLinks} />
               <Layout pathname={pathname}>
@@ -117,7 +123,9 @@ function App() {
                 </Switch>
               </Layout>
             </UserContext.Provider>
+            </PathnameContext.Provider>
           </OpenContext.Provider>
+          </SearchTermContext.Provider>
         </TaskProvider>
       </ProjectsProvider>
     </Router>

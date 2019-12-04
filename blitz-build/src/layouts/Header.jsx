@@ -6,6 +6,8 @@ import Modal from '../components/global/Modal'
 import TaskForm from '../components/tasks/TaskForm'
 import { NavLink } from 'react-router-dom'
 import OpenContext from '../contexts/projects/OpenContext'
+// import AddProject from  '../components/modal/AddProject'
+import searchTermContext from '../contexts/searching/searchTerm'
 import AddProject from "../components/modal/AddProject";
 const HeaderContainer = styled.div`
 
@@ -120,7 +122,7 @@ margin-top: 3px;
 
 `
 const ButtonText = styled.p`
-font-size: 19px
+font-size: 19px;
 margin-left: 10px;
 color: #8A827D
 
@@ -134,6 +136,19 @@ const HoverStyle = {
   color: '#DD6B20'
 }
 
+const SearchInput = styled.input`
+  height: 48px;
+  width: 464px;
+  padding-left: 30px;
+  border: 1px solid #DCD9D5;
+  border-radius: 3px;
+  background: #FAFAFA;
+  ::placeholder {
+    font-size: 16px;
+    color: #B0B0B0;
+   
+  }
+`
 
 
 
@@ -141,7 +156,7 @@ const HoverStyle = {
 
 
 function Header({pathname}) {
-  
+  const {searchTerm, setSearchTerm} =  useContext(searchTermContext);
   const [ TaskHover, setTaskHover ] = useState(false)
   const [ ProjectHover, setProjectHover ] = useState(false)
   const [ DocumentHover, setDocumentHover ] = useState(false)
@@ -159,18 +174,23 @@ function Header({pathname}) {
     setTaskModalStatus(false);
   };
 
+  const id = [];
+  for (var i = 1; i <= 100; i++) {
+      id.push(i)
+  }
+
   const HideTheProjectButton = (pathname) => {
   
- if(pathname === '/projects' || pathname === '/dashboard' || pathname === '/tasks') {
-     return ButtonProjectCheck
+ if(pathname === '/documents' || pathname === '/templates' || pathname === '/delay-log' || pathname === `/help` || pathname === '/log-out') {
+     return HideButton
  }
  else {
-     return HideButton
+     return ButtonProjectCheck
  }  };
  const HideTheDocumentButton = (pathname) => {
   
-  if( pathname === '/dashboard' || pathname === '/projects' ) {
-      return ButtonDocumentCheck
+  if( pathname === '/templates' || pathname === '/delay-log' || pathname === '/tasks' ) {
+      return HideButton
   }
   else if(pathname === '/documents') {
 
@@ -178,7 +198,7 @@ function Header({pathname}) {
 
   }
   else {
-      return HideButton
+      return ButtonDocumentCheck
   }  
 }
 const HideTheTaskButton = (pathname) => {
@@ -216,11 +236,76 @@ const OpenToggle = () => {
     setOpen(true)
   }
 }
+//// search function 
+
+const checkThePage = (inputProject, inputTasks, inputDocuments, inputTemplates, inputDelayLog, inputDashboard) => {
+  if(pathname === '/projects') {
+   return inputProject
+  }
+  else if (pathname ==='/documents') {
+    return inputDocuments
+  }
+  else if (pathname === '/templates') {
+    return inputTemplates
+  }
+  else if (pathname ==='/delay-log'){
+    return inputDelayLog
+  }
+  else if (pathname ==='/dashboard'){
+    return inputDashboard
+  }
+  else  {
+    return inputTasks
+  }
+}
+
+const handleChange = e => {
+  setSearchTerm(e.target.value);
+  // console.log("search term", searchTerm);
+};
 
     return (
       <HeaderContainer>
         <SearchContainer>
-          {/* <img  src={Search} alt="Blitz-Build-Search"/> */}
+          { checkThePage( <SearchInput
+             type="text"
+             placeholder='Search Projects'
+             value={searchTerm}
+             onChange={handleChange}
+           />, 
+           <SearchInput
+           type="text"
+           placeholder='Search Tasks'
+           value={searchTerm}
+           onChange={handleChange}
+         />,
+         <SearchInput
+         type="text"
+         placeholder='Search Documents'
+         value={searchTerm}
+         onChange={handleChange}
+       />,
+       <SearchInput
+       type="text"
+       placeholder='Search Templates'
+       value={searchTerm}
+       onChange={handleChange}
+     />,
+     <SearchInput
+     type="text"
+     placeholder='Search Delay Log'
+     value={searchTerm}
+     onChange={handleChange}
+   />,
+   <SearchInput
+   type="text"
+   placeholder='Search Dashboard'
+   value={searchTerm}
+   onChange={handleChange}
+ />
+      
+            )}
+          
         </SearchContainer>
         <ButtonContainer>
           <ButtonDocument

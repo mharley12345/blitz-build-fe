@@ -4,16 +4,35 @@ import projectContext from "../../contexts/projects/ProjectContext";
 import AddProject from "../modal/AddProject";
 import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
-
+import searchTermContext from '../../contexts/searching/searchTerm'
 const Projects = props => {
 
 
   const { projects } = useContext(projectContext);
+  const { searchTerm } = useContext(searchTermContext);
+  const projectSearchInput = searchTerm.toLowerCase();
+  const [projectSearchResults, setProjectSearchResults] = useState([]);
+
+
+  useEffect(() => {
+    const results = projects.filter(project =>
+      project.project_name.toLowerCase().includes(projectSearchInput)
+
+    )
+    console.log("RESULTS:", results);
+    setProjectSearchResults(results);
+  }, [projectSearchInput]);
+
+
+
+
+
 
 
   return (
     <>
       <Global />
+
       <OverallContainer>
         <Section>
           {" "}
@@ -35,42 +54,53 @@ const Projects = props => {
               </ProjectUlSecond>
             </ProjectCategoriesSecond>
           </ProjectTopContainer>
-          {projects.length ?  projects.map(project => {
-            return (
-              <Link to={`/project/${project.id}`}>
-                <ProjectListContainer
-                key={project.projectID}
-                onClick={() => {
-                  props.history.push(`/project/${project.projectID}`);
-                }}
-                key={project.id}
-                onClick={() => {
-                  props.history.push(`/project/${project.id}`);
-                }}
-                >
-                  <ProjectListCategories>
-                    <ProjectListName>
-                      <Name> {project.project_name} </Name>
-                    </ProjectListName>
 
-                    <ProjectListAddress>
-                      <Address>
-                    {project.street_address},{project.city},{project.state},{project.zip_code}
-                      </Address>
-                    </ProjectListAddress>
-                  </ProjectListCategories>
-                  <ProjectListCategoriesSecond>
-                    
 
-                    <ProjectListDateModified>
-                      <DateModified> {project.due_date} </DateModified>
-                    </ProjectListDateModified>
+          {projects.map(project => {
+            if (projectSearchResults.length > 0) {
+              return (
+                <div>
+                </div>
+              )
+            } else {
+              return (
 
-                    <ProjectListStatus>
-                      <Status>{project.status}</Status>
-                    </ProjectListStatus>
-                  </ProjectListCategoriesSecond>
-                  {/* <ProjectListIcons>
+                <Link to={`/project/${project.id}`}>
+                  <ProjectListContainer
+                    key={project.projectID}
+                    onClick={() => {
+                      props.history.push(`/project/${project.projectID}`);
+                    }}
+                    key={project.id}
+                    onClick={() => {
+                      props.history.push(`/project/${project.id}`);
+                    }}
+                  >
+                    <ProjectListCategories>
+                      <ProjectListName>
+                        <Name> {project.project_name} </Name>
+                      </ProjectListName>
+
+                      <ProjectListAddress>
+                        <Address>
+                          {project.street_address},{project.city},{project.state},{project.zip_code}
+                        </Address>
+                      </ProjectListAddress>
+                    </ProjectListCategories>
+                    <ProjectListCategoriesSecond>
+                      <ProjectListDateCreated>
+                        <DateCreated> {project.createdAt}</DateCreated>
+                      </ProjectListDateCreated>
+
+                      <ProjectListDateModified>
+                        <DateModified> {project.due_date} </DateModified>
+                      </ProjectListDateModified>
+
+                      <ProjectListStatus>
+                        <Status>{project.status}</Status>
+                      </ProjectListStatus>
+                    </ProjectListCategoriesSecond>
+                    {/* <ProjectListIcons>
                   <ProjectListCreate>
                     <Create className = "ion-ios-create"></Create>
                   </ProjectListCreate>
@@ -78,22 +108,94 @@ const Projects = props => {
                     <Destroy className = "ion-ios-trash"></Destroy>
                   </ProjectListDestroy>
                 </ProjectListIcons> */}
+                  </ProjectListContainer>
+                </Link>
+              );
+            }
+
+
+
+
+          })}
+
+
+
+
+
+          {projectSearchResults.length > 0 ?
+            projectSearchResults.map(result => (
+              <Link to={`/project/${result.id}`}>
+                <ProjectListContainer
+                  key={result.projectID}
+                  onClick={() => {
+                    props.history.push(`/project/${result.projectID}`);
+                  }}
+                  key={result.id}
+                  onClick={() => {
+                    props.history.push(`/project/${result.id}`);
+                  }}
+                >
+                  <ProjectListCategories>
+                    <ProjectListName>
+                      <Name> {result.project_name} </Name>
+                    </ProjectListName>
+
+                    <ProjectListAddress>
+                      <Address>
+                        {result.street_address},{result.city},{result.state},{result.zip_code}
+                      </Address>
+                    </ProjectListAddress>
+                  </ProjectListCategories>
+                  <ProjectListCategoriesSecond>
+                    <ProjectListDateCreated>
+                      <DateCreated> {result.createdAt}</DateCreated>
+                    </ProjectListDateCreated>
+
+                    <ProjectListDateModified>
+                      <DateModified> {result.due_date} </DateModified>
+                    </ProjectListDateModified>
+
+                    <ProjectListStatus>
+                      <Status>{result.status}</Status>
+                    </ProjectListStatus>
+                  </ProjectListCategoriesSecond>
+                  {/* <ProjectListIcons>
+                 <ProjectListCreate>
+                   <Create className = "ion-ios-create"></Create>
+                 </ProjectListCreate>
+                 <ProjectListDestroy>
+                   <Destroy className = "ion-ios-trash"></Destroy>
+                 </ProjectListDestroy>
+               </ProjectListIcons> */}
                 </ProjectListContainer>
               </Link>
-            );
-          }):null}
+            )) : <FailedSearch> <FailedSearchText></FailedSearchText></FailedSearch>
+          }
 
-          
-         
+
+
+
+
 
           <AddProject />
         </ProjectContainer>
       </OverallContainer>
+
     </>
   );
 };
 
 export default Projects;
+
+const FailedSearch = styled.div`
+background: #FAFAFA;
+border-radius: 3px;
+
+`
+const FailedSearchText = styled.p`
+font-size: 24px;
+color: #3B3B3B;
+`
 
 const OverallContainer = styled.div``;
 const Section = styled.div`
@@ -135,7 +237,7 @@ const ProjectListContainer = styled.div`
 `;
 const ProjectListCategories = styled.div`
   display: flex;
-  width: 62.8%;
+  width: 60%;
   line-height: 50px;
 `;
 
@@ -182,7 +284,7 @@ const ProjectLi = styled.div`
 const ProjectListCategoriesSecond = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 27%;
+  width: 30%;
   line-height: 50px;
 `;
 
@@ -239,6 +341,7 @@ const ProjectListDateCreated = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
+  width: 25%;
 `;
 const DateCreated = styled.div`
   font-family: Roboto;
@@ -246,7 +349,6 @@ const DateCreated = styled.div`
   font-weight: normal;
   font-size: 14px;
 
-  /* identical to box height, or 171% */
 
   text-align: right;
 
@@ -258,7 +360,8 @@ const ProjectListDateModified = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  margin-left: -30px;
+  width: 25%;
+  
 `;
 const DateModified = styled.div`
   font-family: Roboto;
@@ -278,14 +381,14 @@ const ProjectListStatus = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  margin-right: -20px;
+  width: 25%;
 `;
 const Status = styled.div`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
-
+  
   /* identical to box height */
 
   text-align: right;
