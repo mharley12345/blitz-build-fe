@@ -20,14 +20,15 @@ export default function ProjectsProvider({ children }) {
   }, []);
 
   const addProject = newProject => {
-    console.log("new project", { ...newProject });
+    
+    console.log("new project", newProject );
     
     axiosWithAuth()
       .post(`/projects`, newProject)
       .then(res => {
         console.log("from addProject in projectsProvider", res);
-        newProject.id = res.data.project_id;
-        setProjects([...projects, newProject]);
+        
+        setProjects([...projects, res.data.project[0]]);
       })
       .catch(err => console.log(err));
   };
@@ -49,24 +50,24 @@ export default function ProjectsProvider({ children }) {
   
   const editProject = (editedProject, editedProjectId) => {
     console.log("edited project", editedProject, "id:", editedProjectId);
-
+    
     axiosWithAuth()
       .put(`/projects/${editedProjectId}`, editedProject)
       .then(res => {
         console.log("from editProject in projectsProvider", res);
         const newProjectsList = projects.map(project => {
       if (project.id === editedProjectId) {
-        return res[0];
+        return res.data.updatedProject[0];
       } else {
         return project;
       }
     });
-        setProjects(newProjectsList);
-       
-      })
+        setProjects([...newProjectsList]);
+  
+        window.location.reload(true)
+       })
       .catch(err => console.log(err));
-    
-  };
+    };
   return (
     <ProjectContext.Provider
       value={{ projects, addProject, deleteProject, editProject }}

@@ -19,7 +19,6 @@ export default function TaskProvider({ children }) {
   //       console.log(err);
   //     });
 
-    localStorage.setItem("project_id",1)
     axiosWithAuth()
     
       .get(`/projects/tasks/byProject/1`)

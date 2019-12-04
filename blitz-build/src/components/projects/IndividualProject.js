@@ -113,7 +113,7 @@ const handleDeleteClose = e => {
         </Right>
       </Top>
       <TasksContainer>
-        <TaskCard projectID={props.match.params.id} />
+        <TaskCard projectID={props.match.params.id} numberOfTasks={3}/>
       </TasksContainer>
       <DeleteProject
         project={projectState}
