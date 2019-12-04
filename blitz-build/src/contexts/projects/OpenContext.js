@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-const OpenContext = createContext(false);
+const OpenContext = createContext();
 
 
 export default OpenContext;

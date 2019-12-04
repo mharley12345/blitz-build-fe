@@ -28,17 +28,19 @@ import OpenContext from "./contexts/projects/OpenContext";
 import PathnameContext from './contexts/PathnameContext';
 import ProjectsProvider from "./contexts/projects/ProjectsProvider";
 import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
-
+import EditModalContext from './contexts/EditModalContext'
 //AUTH0
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
+
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
+  const [editModalOpen, setEditModalOpen] = useState(false)
   useEffect(() => {
     getData();
   }, []);
@@ -99,6 +101,7 @@ function App() {
         <TaskProvider>
           <SearchTermContext.Provider value={{searchTerm, setSearchTerm}}>
           <OpenContext.Provider value={{ open, setOpen }}>
+            <EditModalContext.Provider value={{editModalOpen, setEditModalOpen}}>
             <PathnameContext.Provider value = {{pathname, setPathname}}>
             <UserContext.Provider value={{ userInfo, setUserInfo }}>
               <NavBar setPathname={setPathname} navLinks={navLinks} />
@@ -124,6 +127,7 @@ function App() {
               </Layout>
             </UserContext.Provider>
             </PathnameContext.Provider>
+            </EditModalContext.Provider>
           </OpenContext.Provider>
           </SearchTermContext.Provider>
         </TaskProvider>

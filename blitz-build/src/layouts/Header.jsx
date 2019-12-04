@@ -228,7 +228,7 @@ const HoverDocumentStyleFunction = () => {
   }
 }
 
-const OpenToggle = () => {
+const OpenToggler = () => {
   if(open !== false) {
     setOpen(false)
   }
@@ -341,7 +341,7 @@ const handleChange = e => {
             onMouseEnter={() => setProjectHover(true)}
             onMouseLeave={() => setProjectHover(false)}
             style={HideTheProjectButton(pathname)}
-            onClick={OpenToggle}
+            onClick={OpenToggler}
           >
             {" "}
             <ButtonI
