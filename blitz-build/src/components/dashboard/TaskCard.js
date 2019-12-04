@@ -9,6 +9,7 @@ import taskContext from '../../contexts/tasks/TaskContext'
 function TaskCard({ projectID, numberOfTasks }) {
   const { tasks } = useContext(taskContext);
   const [projectTasks, setProjectTasks] = useState([]);
+  
   let renderedTasks
   
   if(projectID){
