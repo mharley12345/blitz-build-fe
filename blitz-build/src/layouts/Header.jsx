@@ -6,7 +6,7 @@ import Modal from '../components/global/Modal'
 import TaskForm from '../components/tasks/TaskForm'
 import { NavLink } from 'react-router-dom'
 import OpenContext from '../contexts/projects/OpenContext'
-import AddOrEditProject from "../components/modal/AddOrEditProject";
+import AddProject from "../components/modal/AddProject";
 const HeaderContainer = styled.div`
 
   background: #fff;
@@ -281,7 +281,7 @@ const OpenToggle = () => {
             }
           />
         </ButtonContainer>
-        <AddOrEditProject/>
+        <AddProject/>
       </HeaderContainer>
     );
 }

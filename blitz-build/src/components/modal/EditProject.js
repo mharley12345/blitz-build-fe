@@ -147,26 +147,14 @@ const InputLabel = styled.p`
 
 //START OF FUNCTIONAL COMPONENT
 
-const AddOrEditProject = props => {
-  const { addProject, editProject } = useContext(projectContext);
+const EditProject = props => {
+  const {  editProject } = useContext(projectContext);
   const [form, setForm] = useState({
-    project_name: "",
-    street_address: "",
-    city: "",
-    state: "",
-    zip_code: 0,
-    status: "",
-    beds: 0,
-    baths: 0,
-    square_ft: 0,
-    // assign_template: undefined,
-    imageURL: "",
-    latitude: null,
-    longitude: null
   });
-  const { open, setOpen } = useContext(OpenContext);
-  useEffect(() => {
-    if (props.usage === "edit") {
+  const [ openModal, setOpenModal ] = useState(false);
+    useEffect(() => {
+      setOpenModal(props.open);
+    
       setForm({
         project_name: props.project.project_name,
         street_address: props.project.street_address,
@@ -182,18 +170,18 @@ const AddOrEditProject = props => {
         latitude: null,
         longitude: null
       });
-    }
+    
   }, [props]);
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpenModal(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenModal(false);
   };
 
   const submitForm = e => {
@@ -203,18 +191,16 @@ const AddOrEditProject = props => {
 
     form.latitude = gps.latitude;
     form.longitude = gps.longitude;
-    if (props.usage === "edit") {
+    
       editProject(form, props.project.id);
-    } else {
-      addProject(form);
-    }
+    
 
     handleClose();
   };
 
   return (
     <Dialog
-      open={open}
+      open={openModal}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       style={DialogStyle}
@@ -228,11 +214,8 @@ const AddOrEditProject = props => {
 
         <ModalTitle>
           {/* <DialogTitle id="form-dialog-title">Subscribe</DialogTitle> */}
-          {props.usage === "edit" ? (
-            <TitleText>Edit Project</TitleText>
-          ) : (
-            <TitleText>Create a New Project</TitleText>
-          )}
+
+          <TitleText>Edit Project</TitleText>
         </ModalTitle>
         <DialogContent style={DialogContentStyle}>
           <form onSubmit={submitForm} style={formStyle}>
@@ -320,15 +303,10 @@ const AddOrEditProject = props => {
               onChange={changeHandler}
               value={form.zip_code}
             />
-            {props.usage === "edit" ? (
-              <button type="submit" style={buttonStyle}>
-                Edit
-              </button>
-            ) : (
-              <button type="submit" style={buttonStyle}>
-                Save
-              </button>
-            )}
+
+            <button type="submit" style={buttonStyle}>
+              Edit
+            </button>
           </form>
         </DialogContent>
       </ModalContainer>
@@ -336,4 +314,4 @@ const AddOrEditProject = props => {
   );
 };
 
-export default AddOrEditProject;
+export default EditProject;
