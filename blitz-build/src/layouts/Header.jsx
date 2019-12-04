@@ -238,6 +238,27 @@ const OpenToggle = () => {
 }
 //// search function 
 
+const checkThePage = (inputProject, inputTasks, inputDocuments, inputTemplates, inputDelayLog, inputDashboard) => {
+  if(pathname === '/projects') {
+   return inputProject
+  }
+  else if (pathname ==='/documents') {
+    return inputDocuments
+  }
+  else if (pathname === '/templates') {
+    return inputTemplates
+  }
+  else if (pathname ==='/delay-log'){
+    return inputDelayLog
+  }
+  else if (pathname ==='/dashboard'){
+    return inputDashboard
+  }
+  else  {
+    return inputTasks
+  }
+}
+
 const handleChange = e => {
   setSearchTerm(e.target.value);
   // console.log("search term", searchTerm);
@@ -246,12 +267,45 @@ const handleChange = e => {
     return (
       <HeaderContainer>
         <SearchContainer>
-           <SearchInput
+          { checkThePage( <SearchInput
              type="text"
-             placeholder='Search'
+             placeholder='Search Projects'
              value={searchTerm}
              onChange={handleChange}
-           />
+           />, 
+           <SearchInput
+           type="text"
+           placeholder='Search Tasks'
+           value={searchTerm}
+           onChange={handleChange}
+         />,
+         <SearchInput
+         type="text"
+         placeholder='Search Documents'
+         value={searchTerm}
+         onChange={handleChange}
+       />,
+       <SearchInput
+       type="text"
+       placeholder='Search Templates'
+       value={searchTerm}
+       onChange={handleChange}
+     />,
+     <SearchInput
+     type="text"
+     placeholder='Search Delay Log'
+     value={searchTerm}
+     onChange={handleChange}
+   />,
+   <SearchInput
+   type="text"
+   placeholder='Search Dashboard'
+   value={searchTerm}
+   onChange={handleChange}
+ />
+      
+            )}
+          
         </SearchContainer>
         <ButtonContainer>
           <ButtonDocument

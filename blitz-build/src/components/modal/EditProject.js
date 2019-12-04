@@ -148,13 +148,12 @@ const InputLabel = styled.p`
 //START OF FUNCTIONAL COMPONENT
 
 const EditProject = props => {
-    console.log(props)
   const {  editProject } = useContext(projectContext);
   const [form, setForm] = useState({
   });
-  const [ open, setOpen ] = useState();
+  const [ openModal, setOpenModal ] = useState(false);
     useEffect(() => {
-      setOpen(props.open)
+      setOpenModal(props.open);
     
       setForm({
         project_name: props.project.project_name,
@@ -178,11 +177,11 @@ const EditProject = props => {
   };
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpenModal(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenModal(false);
   };
 
   const submitForm = e => {
@@ -201,7 +200,7 @@ const EditProject = props => {
 
   return (
     <Dialog
-      open={open}
+      open={openModal}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       style={DialogStyle}
@@ -215,9 +214,8 @@ const EditProject = props => {
 
         <ModalTitle>
           {/* <DialogTitle id="form-dialog-title">Subscribe</DialogTitle> */}
-          
-            <TitleText>Edit Project</TitleText>
-          
+
+          <TitleText>Edit Project</TitleText>
         </ModalTitle>
         <DialogContent style={DialogContentStyle}>
           <form onSubmit={submitForm} style={formStyle}>
@@ -305,11 +303,10 @@ const EditProject = props => {
               onChange={changeHandler}
               value={form.zip_code}
             />
-            
-              <button type="submit" style={buttonStyle}>
-                Edit
-              </button>
-            
+
+            <button type="submit" style={buttonStyle}>
+              Edit
+            </button>
           </form>
         </DialogContent>
       </ModalContainer>

@@ -25,6 +25,7 @@ import UserContext from "./contexts/UserContext";
 import SearchTermContext from './contexts/searching/searchTerm'
 import TaskProvider from "./contexts/tasks/TaskProvider";
 import OpenContext from "./contexts/projects/OpenContext";
+import PathnameContext from './contexts/PathnameContext';
 import ProjectsProvider from "./contexts/projects/ProjectsProvider";
 import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 
@@ -98,6 +99,7 @@ function App() {
         <TaskProvider>
           <SearchTermContext.Provider value={{searchTerm, setSearchTerm}}>
           <OpenContext.Provider value={{ open, setOpen }}>
+            <PathnameContext.Provider value = {{pathname, setPathname}}>
             <UserContext.Provider value={{ userInfo, setUserInfo }}>
               <NavBar setPathname={setPathname} navLinks={navLinks} />
               <Layout pathname={pathname}>
@@ -121,6 +123,7 @@ function App() {
                 </Switch>
               </Layout>
             </UserContext.Provider>
+            </PathnameContext.Provider>
           </OpenContext.Provider>
           </SearchTermContext.Provider>
         </TaskProvider>

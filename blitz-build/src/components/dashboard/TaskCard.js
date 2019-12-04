@@ -2,17 +2,25 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Task from "./Task";
-
+import searchTermContext from '../../contexts/searching/searchTerm'
 //context 
 import taskContext from '../../contexts/tasks/TaskContext'
 
 function TaskCard({ projectID, numberOfTasks }) {
   const { tasks } = useContext(taskContext);
   const [projectTasks, setProjectTasks] = useState([]);
-  
-  let renderedTasks
+  const { searchTerm } = useContext(searchTermContext)
+  const taskSearchInput = searchTerm.toLowerCase();
+  const [taskSearchResults, setTaskSearchResults] = useState([]);
+
   
   useEffect(() => {
+    const results= tasks.filter(task =>
+      task.task_name.toLowerCase().includes(taskSearchInput)
+      ) 
+  console.log("RESULTS:", results);
+      setTaskSearchResults(results);
+
         axiosWithAuth()
           .get(`projects/tasks/byProject/${projectID}`)
           .then(res => {
@@ -21,7 +29,7 @@ function TaskCard({ projectID, numberOfTasks }) {
           .catch(err => {
             console.log(err);
           });
-  },[])
+  },[taskSearchInput])
 
 
   return (
@@ -31,8 +39,25 @@ function TaskCard({ projectID, numberOfTasks }) {
         <p>View All</p>
       </Section>
       <Card>
-        {projectTasks.slice(0, numberOfTasks).map(item => {
-          return <Task item={item} key={item.id} />})}
+        {projectTasks.slice(0, numberOfTasks).map(item => 
+        { if(taskSearchResults.length > 0) {
+          return (
+            <div>
+
+            </div>
+          )
+        } else {
+        return (
+          <Task item={item} key={item.id} />
+           )
+         }
+           })}
+            { taskSearchResults.length > 0 ?
+              taskSearchResults.map(result => (
+                <Task item={result} key={result.id} >
+                  </Task>
+             )) : <p></p>
+            }
       </Card>
     </Container>
   );
