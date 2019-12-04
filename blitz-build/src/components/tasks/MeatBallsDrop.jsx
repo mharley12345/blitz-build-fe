@@ -13,28 +13,27 @@ import {
   DropP
 } from "../../styles/Tasks/tasks";
 
-
 export default function MeatBallsDrop({ task }) {
   const refContainer = useRef();
   const [dropStatus, setDropStatus] = useState(false);
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
 
-    useEffect(() => {
-      document.addEventListener("mousedown", handleClickOutside);
-    }, [])
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+  }, []);
 
-    const handleClickOutside = e => {
-      if(refContainer.current && !refContainer.current.contains(e.target)){
-        closeDrop()
-      }
+  const handleClickOutside = e => {
+    if (refContainer.current && !refContainer.current.contains(e.target)) {
+      closeDrop();
     }
+  };
   const toggleDrop = e => {
     e.stopPropagation();
     setDropStatus(!dropStatus);
   };
 
-  const closeDrop = (e) => {
+  const closeDrop = e => {
     setDropStatus(false);
   };
 
@@ -60,7 +59,11 @@ export default function MeatBallsDrop({ task }) {
 
   return (
     <>
-      <MeatBalls className="ion-ios-more" onClick={toggleDrop} ref={refContainer}>
+      <MeatBalls
+        className="ion-ios-more"
+        onClick={toggleDrop}
+        ref={refContainer}
+      >
         {dropStatus && (
           <>
             {/* <Geo></Geo> */}
@@ -97,7 +100,6 @@ export default function MeatBallsDrop({ task }) {
         closeDrop={closeDrop}
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
-        
       />
     </>
   );

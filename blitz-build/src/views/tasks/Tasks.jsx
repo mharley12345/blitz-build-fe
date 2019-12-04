@@ -12,7 +12,7 @@ import styled from "styled-components";
 let uid = localStorage.getItem('uid')
 let projectID = localStorage.getItem('projectID')
 const StyledTasks = styled.div`
-  max-height: 100%
+  height: 100%
   overflow-y: auto;
   width: 100%;
   display: flex;

@@ -9,23 +9,12 @@ export default function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-  //   axiosWithAuth()
-  //     .get(`/tasks`)
-  //     .then(res => {
-  //       console.log("get tasks", res);
-  //       setTasks(res.data);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-
-    localStorage.setItem("project_id",1)
+  const user_id = localStorage.getItem("user_id");
     axiosWithAuth()
-    
-      .get(`/projects/tasks/byProject/1`)
+      .get(`/projects/tasks/${user_id}`)
       .then(res => {
-        console.log("get tasks", res);
-        setTasks(res.data);
+        console.log("get tasks", res.data.tasks);
+        setTasks(res.data.tasks);
       })
       .catch(err => {
         console.log(err);
@@ -46,7 +35,7 @@ export default function TaskProvider({ children }) {
       .post(`/projects/tasks`, task)
       .then(res => {
         console.log("from addtask in taskProvider", res);
-        newTask.id = res.data[0];
+        newTask.id = res.data.taskId[0];
         setTasks([...tasks, newTask]);
       })
       .catch(err => console.log(err));

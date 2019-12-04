@@ -12,19 +12,16 @@ function TaskCard({ projectID, numberOfTasks }) {
   
   let renderedTasks
   
-  if(projectID){
-      axiosWithAuth()
-        .get(`projects/tasks/byProject/1`)
-        .then(res => {
-          setProjectTasks(res.data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    renderedTasks  = projectTasks
-  } else {
-    renderedTasks = tasks
-  }
+  useEffect(() => {
+        axiosWithAuth()
+          .get(`projects/tasks/byProject/${projectID}`)
+          .then(res => {
+            setProjectTasks(res.data);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+  },[])
 
 
   return (
@@ -34,7 +31,7 @@ function TaskCard({ projectID, numberOfTasks }) {
         <p>View All</p>
       </Section>
       <Card>
-        {renderedTasks.slice(0, numberOfTasks).map(item => {
+        {projectTasks.slice(0, numberOfTasks).map(item => {
           return <Task item={item} key={item.id} />})}
       </Card>
     </Container>
