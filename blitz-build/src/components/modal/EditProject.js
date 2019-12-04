@@ -7,10 +7,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import styled from "styled-components";
 import zipcodes from "zipcodes";
-
 import { Hidden } from "@material-ui/core";
 import projectContext from "../../contexts/projects/ProjectContext";
-
+import EditModalContext from '../../contexts/EditModalContext'
 const ModalContainer = styled.div`
 
   width: '750px',
@@ -151,10 +150,10 @@ const EditProject = props => {
   const {  editProject } = useContext(projectContext);
   const [form, setForm] = useState({
   });
-  const [ openModal, setOpenModal ] = useState(false);
+  const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
+  
     useEffect(() => {
-      setOpenModal(props.open);
-    
+      
       setForm({
         project_name: props.project.project_name,
         street_address: props.project.street_address,
@@ -177,11 +176,11 @@ const EditProject = props => {
   };
 
   const handleClickOpen = () => {
-    setOpenModal(true);
+    setEditModalOpen(true);
   };
 
   const handleClose = () => {
-    setOpenModal(false);
+    setEditModalOpen(false);
   };
 
   const submitForm = e => {
@@ -194,13 +193,12 @@ const EditProject = props => {
     
       editProject(form, props.project.id);
     
+  }
 
-    handleClose();
-  };
 
   return (
     <Dialog
-      open={openModal}
+      open={editModalOpen}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       style={DialogStyle}
