@@ -91,7 +91,7 @@ const handleDeleteClose = e => {
                 <img src={Page_icon} alt="page_icon" />
                 <p>&nbsp;&nbsp;90-Day Template in Use</p>
               </ContentbottomTemplate>
-              <EditIcon onClick={OpenToggle}>
+              <EditIcon onClick={OpenToggle} >
                 <img src={Edit_icon} alt="edit_icon" />
                 <p>Edit</p>
               </EditIcon>
