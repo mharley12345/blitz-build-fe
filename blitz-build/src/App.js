@@ -42,6 +42,8 @@ function App() {
   const [open, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
   const [editModalOpen, setEditModalOpen] = useState(false)
+  
+  // getting userInfo from id_token in localStorage.
   useEffect(() => {
     
   if (localStorage.getItem("id_token")) {
