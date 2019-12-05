@@ -42,6 +42,7 @@ console.log("RESULTS:", results);
     <StyledTasks>
       {/* <TaskNav addTask={addTask} /> */}
       {tasks.map(task => {
+        console.log(task.createdAt)
         if(taskSearchResults.length > 0) {
           return (
             <div>
