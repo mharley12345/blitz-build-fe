@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import axios from "axios";
 import styled, { css } from "styled-components";
 const Templates = () => {
-  const [templates, setTemplates] = useState();
+  const [templates, setTemplates] = useState([]);
 
   useEffect(() => {
     axios
-      .get("https://staging-blitz-build.herokuapp.com/templates", templates)
+      .get("https://staging-blitz-build.herokuapp.com/templates")
       .then(res => {
-        console.log(res);
         setTemplates(res.data);
       })
       .catch(err => {
         console.log(err);
       });
-  });
+  }, []);
 
   return (
     <div>
