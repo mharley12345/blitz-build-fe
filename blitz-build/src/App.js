@@ -18,7 +18,7 @@ import Logout from "./components/auth/Logout";
 import Layout from "./layouts/Layout";
 import Dashboard from "./components/dashboard/Dashboard";
 import DelayLog from "./components/delayLog/DelayLog";
-
+import Templates from "./components/templates/templates";
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
@@ -34,6 +34,7 @@ import EditModalContext from './contexts/EditModalContext'
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
+
 
 
 function App() {
@@ -113,6 +114,7 @@ function App() {
                   <Route exact path="/navbar" component={AuthNavBar} />
                   <Route exact path="/callback" component={Callback} />
                   <Route exact path="/login" component={Login} />
+                  
                   {/* <Route exact path="/signup" component={Signup} /> */}
                   <Route exact path="/log-out" component={Logout} />
                   {/*   */}
