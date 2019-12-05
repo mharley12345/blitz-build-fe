@@ -6,6 +6,7 @@ import Signup from "./components/auth/Signup";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import NavBar from "./components/NavBar";
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 // import Layout from "./components/dashboard/Layout";
 // import Dashboard from "./components/dashboard/index";
 // import Dashboard from "./components/dashboard/Dashboard";
@@ -42,15 +43,14 @@ function App() {
   const [userInfo, setUserInfo] = useState([]);
   const [editModalOpen, setEditModalOpen] = useState(false)
   useEffect(() => {
-    getData();
+    
+  if (localStorage.getItem("id_token")) {
+      setUserInfo(jwtDecode(localStorage.getItem("id_token")));
+    } 
   }, []);
-  const getData = () => {
-    axiosWithAuth()
-      .get("/projects")
-      .then(res => setUserInfo(res.data))
-      .catch(error => console.log(error));
-  };
-  console.log(userInfo);
+  
+    
+  console.log('userInfo',userInfo);
 
   const navLinks = [
     {
