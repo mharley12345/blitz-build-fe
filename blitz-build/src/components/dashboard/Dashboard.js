@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-import TaskCard from "./TaskCard";
+import DashboardTasks from './DashboardTasks'
 import Weather from "../weather/Weather.jsx";
 import ActivityFeed from './ActivityFeed';
 function Dashboard() {
@@ -13,7 +12,7 @@ function Dashboard() {
       <Weather usage="dashboard" />
      
     </WeatherAndFeedContainer>
-      <TaskCard numberOfTasks={3} />
+      <DashboardTasks numberOfTasks = {10} />
      
     </Container>
   );
@@ -25,10 +24,8 @@ const Container = styled.div`
 `
 
 const WeatherAndFeedContainer = styled.div`
-
 display: flex;
 justify-content: space-between;
-
-
+align-items: start;
 
 `;

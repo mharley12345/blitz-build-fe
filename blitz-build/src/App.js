@@ -36,6 +36,7 @@ import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
 
 
+
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [pathname, setPathname] = useState(window.location.pathname);
@@ -113,6 +114,7 @@ function App() {
                   <Route exact path="/navbar" component={AuthNavBar} />
                   <Route exact path="/callback" component={Callback} />
                   <Route exact path="/login" component={Login} />
+                  
                   {/* <Route exact path="/signup" component={Signup} /> */}
                   <Route exact path="/log-out" component={Logout} />
                   {/*   */}
