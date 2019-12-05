@@ -11,7 +11,7 @@ import jwtDecode from "jwt-decode";
 // import Dashboard from "./components/dashboard/index";
 // import Dashboard from "./components/dashboard/Dashboard";
 import Tasks from "./views/tasks/Tasks";
-
+import Templates from "./components/templates/templates";
 import Projects from "./components/projects/Projects";
 import IndividualProject from "./components/projects/IndividualProject";
 import Logout from "./components/auth/Logout";
@@ -119,6 +119,7 @@ function App() {
                   <Route exact path="/dashboard" component={Dashboard} />
                   <Route exact path="/tasks" component={Tasks} />
                   <Route exact path="/projects" component={Projects} />
+                  <Route exact path="/templates" component={Templates} />
                   <Route
                     exact
                     path="/project/:id"
