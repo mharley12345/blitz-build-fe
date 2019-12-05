@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import EditTask from "./EditTask";
 import DeleteTask from "./DeleteTask";
-
+import DelayTask from "./DelayTask";
 //styles
 import styled from "styled-components";
 import {
@@ -18,7 +18,7 @@ export default function MeatBallsDrop({ task }) {
   const [dropStatus, setDropStatus] = useState(false);
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
-
+const [delayStatus, setDelayStatus] = useState(false);
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
   }, []);
@@ -56,7 +56,16 @@ export default function MeatBallsDrop({ task }) {
     setDeleteStatus(false);
     closeDrop();
   };
-
+//delay modal functions
+  const handleDelayOpen = e => {
+    e.stopPropagation();
+    setDelayStatus(true);
+    
+  };
+  const handleDelayClose = e => {
+    setDelayStatus(false);
+    closeDrop();
+  };
   return (
     <>
       <MeatBalls
@@ -77,7 +86,7 @@ export default function MeatBallsDrop({ task }) {
                 <DropP>Edit</DropP>
                 <TaskI className="ion-md-create" />
               </StyledLi>
-              <StyledLi>
+              <StyledLi onClick={handleDelayOpen}>
                 <DropP>Delay</DropP>
                 <TaskI className="ion-md-clock" />
               </StyledLi>
@@ -100,6 +109,12 @@ export default function MeatBallsDrop({ task }) {
         closeDrop={closeDrop}
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
+      />
+      <DelayTask
+        task={task}
+        closeDrop={closeDrop}
+        deleteStatus={delayStatus}
+        handleDeleteClose={handleDelayClose}
       />
     </>
   );
