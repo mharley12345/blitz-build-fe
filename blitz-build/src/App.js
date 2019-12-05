@@ -18,7 +18,7 @@ import Logout from "./components/auth/Logout";
 import Layout from "./layouts/Layout";
 import Dashboard from "./components/dashboard/Dashboard";
 import DelayLog from "./components/delayLog/DelayLog";
-import Templates from "./components/templates/templates";
+
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context

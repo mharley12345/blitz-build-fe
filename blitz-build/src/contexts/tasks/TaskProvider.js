@@ -55,14 +55,8 @@ export default function TaskProvider({ children }) {
     setTasks([...newTasks]);
   };
 
-<<<<<<< HEAD
   const editTask = editedTask => {
     console.log(editedTask);
-=======
-  const editTask = (editedTask) => {
-  
-    console.log(editedTask)
->>>>>>> d1d1ffb3ee0fb18bfb6a76d02619cb96b4d8b49c
     const dbTask = {
       task_name: editedTask.task_name,
       task_description: editedTask.task_description,
