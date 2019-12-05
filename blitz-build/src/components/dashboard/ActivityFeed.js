@@ -75,7 +75,7 @@ const newdate = year + "-" + month + "-" + changeTheDay(day);
   `;
   
   const Container = styled.div`
-  
+  width: 65%;
   margin-top: 20px;
     margin-bottom: 48px;
   `;
