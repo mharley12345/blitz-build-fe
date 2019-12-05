@@ -113,8 +113,8 @@ const [delayStatus, setDelayStatus] = useState(false);
       <DelayTask
         task={task}
         closeDrop={closeDrop}
-        deleteStatus={delayStatus}
-        handleDeleteClose={handleDelayClose}
+        delayStatus={delayStatus}
+        handleDelayClose={handleDelayClose}
       />
     </>
   );
