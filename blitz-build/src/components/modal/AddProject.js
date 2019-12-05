@@ -187,7 +187,21 @@ const AddProject = props => {
     form.longitude = gps.longitude;
     
       addProject(form);
-    
+    setForm({
+      project_name: "",
+      street_address: "",
+      city: "",
+      state: "",
+      zip_code: null,
+      status: "",
+      beds: null,
+      baths: null,
+      square_ft: null,
+      // assign_template: undefined,
+      imageURL: "",
+      latitude: null,
+      longitude: null
+    });
   
     handleClose();
   };

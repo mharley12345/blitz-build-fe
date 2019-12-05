@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Weather from "../weather/Weather";
@@ -11,17 +11,20 @@ import Edit_icon from "../../styles/icons_project/edit_icon.png";
 import Delete_icon from "../../styles/icons_project/delete_icon.png";
 import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
-
-
+import PathnameContext from '../../contexts/PathnameContext'
+import EditModalContext from '../../contexts/EditModalContext'
 import DeleteProject from "../modal/DeleteProject";
 import EditProject from "../modal/EditProject";
 
 
 const IndividualProject = props => {
+  const { pathname, setPathname } = useContext(PathnameContext)
   const [projectState, setProjectState] = useState({});
 const [deleteStatus, setDeleteStatus] = useState(false);
-  const [ open, setOpen ] = useState(false);
+  const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
+
   useEffect(() => {
+     setPathname(window.location.pathname)
     const projectID = props.match.params.id;
     axiosWithAuth()
     .get(
@@ -49,7 +52,7 @@ const handleDeleteClose = e => {
   
   const OpenToggle = (e) => {
     e.stopPropagation();
-      setOpen(!open);
+      setEditModalOpen(true);
    
   };
   return (
@@ -120,7 +123,7 @@ const handleDeleteClose = e => {
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
       />
-      <EditProject project={projectState} open={open} />
+      <EditProject project={projectState}  />
     </>
   );
 };

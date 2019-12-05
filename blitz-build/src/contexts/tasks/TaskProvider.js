@@ -4,10 +4,9 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 //context
 import TaskContext from "./TaskContext";
-
 export default function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
-
+ 
   useEffect(() => {
     const user_id = localStorage.getItem("user_id");
     axiosWithAuth()
@@ -23,7 +22,7 @@ export default function TaskProvider({ children }) {
 
   const addTask = newTask => {
     console.log("new task", newTask);
-
+   
     const task = {
       due_date: newTask.due_date,
       task_name: newTask.task_name,
@@ -43,6 +42,7 @@ export default function TaskProvider({ children }) {
   };
 
   const deleteTask = deletedTask => {
+   
     axiosWithAuth()
       .delete(`/projects/tasks/${deletedTask.id}`)
       .then(res => {
@@ -55,8 +55,14 @@ export default function TaskProvider({ children }) {
     setTasks([...newTasks]);
   };
 
+<<<<<<< HEAD
   const editTask = editedTask => {
     console.log(editedTask);
+=======
+  const editTask = (editedTask) => {
+  
+    console.log(editedTask)
+>>>>>>> d1d1ffb3ee0fb18bfb6a76d02619cb96b4d8b49c
     const dbTask = {
       task_name: editedTask.task_name,
       task_description: editedTask.task_description,
@@ -82,8 +88,11 @@ export default function TaskProvider({ children }) {
     setTasks([...newTasks]);
   };
   return (
-    <TaskContext.Provider value={{ tasks, addTask, deleteTask, editTask }}>
+    <div>
+    <TaskContext.Provider value={{ tasks, addTask, deleteTask, editTask, }}>
       {children}
     </TaskContext.Provider>
+   
+    </div>
   );
 }

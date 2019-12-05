@@ -6,6 +6,7 @@ import Signup from "./components/auth/Signup";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import NavBar from "./components/NavBar";
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 // import Layout from "./components/dashboard/Layout";
 // import Dashboard from "./components/dashboard/index";
 // import Dashboard from "./components/dashboard/Dashboard";
@@ -17,34 +18,41 @@ import Logout from "./components/auth/Logout";
 import Layout from "./layouts/Layout";
 import Dashboard from "./components/dashboard/Dashboard";
 import DelayLog from "./components/delayLog/DelayLog";
-import UserContext from "./contexts/UserContext";
+
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
+import UserContext from "./contexts/UserContext";
+import SearchTermContext from './contexts/searching/searchTerm'
 import TaskProvider from "./contexts/tasks/TaskProvider";
 import OpenContext from "./contexts/projects/OpenContext";
+import PathnameContext from './contexts/PathnameContext';
 import ProjectsProvider from "./contexts/projects/ProjectsProvider";
 import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
-
+import EditModalContext from './contexts/EditModalContext'
 //AUTH0
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
 
+
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
   const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
+  const [editModalOpen, setEditModalOpen] = useState(false)
+  
+  // getting userInfo from id_token in localStorage.
   useEffect(() => {
-    getData();
+    
+  if (localStorage.getItem("id_token")) {
+      setUserInfo(jwtDecode(localStorage.getItem("id_token")));
+    } 
   }, []);
-  const getData = () => {
-    axiosWithAuth()
-      .get("/projects")
-      .then(res => setUserInfo(res.data))
-      .catch(error => console.log(error));
-  };
-  console.log(userInfo);
+  
+    
+  console.log('userInfo',userInfo);
 
   const navLinks = [
     {
@@ -93,7 +101,10 @@ function App() {
     <Router>
       <ProjectsProvider>
         <TaskProvider>
+          <SearchTermContext.Provider value={{searchTerm, setSearchTerm}}>
           <OpenContext.Provider value={{ open, setOpen }}>
+            <EditModalContext.Provider value={{editModalOpen, setEditModalOpen}}>
+            <PathnameContext.Provider value = {{pathname, setPathname}}>
             <UserContext.Provider value={{ userInfo, setUserInfo }}>
               <NavBar setPathname={setPathname} navLinks={navLinks} />
               <Layout pathname={pathname}>
@@ -118,7 +129,10 @@ function App() {
                 </Switch>
               </Layout>
             </UserContext.Provider>
+            </PathnameContext.Provider>
+            </EditModalContext.Provider>
           </OpenContext.Provider>
+          </SearchTermContext.Provider>
         </TaskProvider>
       </ProjectsProvider>
     </Router>
