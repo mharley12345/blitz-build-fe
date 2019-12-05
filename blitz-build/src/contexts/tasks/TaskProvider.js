@@ -9,7 +9,7 @@ export default function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-  const user_id = localStorage.getItem("user_id");
+    const user_id = localStorage.getItem("user_id");
     axiosWithAuth()
       .get(`/projects/tasks/${user_id}`)
       .then(res => {
@@ -19,7 +19,7 @@ export default function TaskProvider({ children }) {
       .catch(err => {
         console.log(err);
       });
-    }, []);
+  }, []);
 
   const addTask = newTask => {
     console.log("new task", newTask);
@@ -29,8 +29,8 @@ export default function TaskProvider({ children }) {
       task_name: newTask.task_name,
       task_description: newTask.task_description,
       project_id: newTask.project_id
-    }
-    console.log('task const from addTask', task)
+    };
+    console.log("task const from addTask", task);
     axiosWithAuth()
       .post(`/projects/tasks`, task)
       .then(res => {
@@ -55,8 +55,8 @@ export default function TaskProvider({ children }) {
     setTasks([...newTasks]);
   };
 
-  const editTask = (editedTask) => {
-    console.log(editedTask)
+  const editTask = editedTask => {
+    console.log(editedTask);
     const dbTask = {
       task_name: editedTask.task_name,
       task_description: editedTask.task_description,
@@ -78,7 +78,7 @@ export default function TaskProvider({ children }) {
         return task;
       }
     });
-    console.log('from editTask newTasks', newTasks)
+    console.log("from editTask newTasks", newTasks);
     setTasks([...newTasks]);
   };
   return (
