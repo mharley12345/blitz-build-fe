@@ -7,7 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import styled from "styled-components";
 import zipcodes from "zipcodes";
-import OpenContext from "../../contexts/projects/OpenContext";
+import OpenTemplateContext from "../../contexts/OpenTemplateContext";
 import { Hidden } from "@material-ui/core";
 import TemplateContext from "../../contexts/templates/TemplateContext";
 
@@ -160,18 +160,18 @@ const AddProject = props => {
       }
     ]
   });
-  const { open, setOpen } = useContext(OpenContext);
+  const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext);
 
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpenTemplate(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenTemplate(false);
   };
 
   const submitForm = e => {
@@ -187,7 +187,7 @@ const AddProject = props => {
 
   return (
     <Dialog
-      open={open}
+      open={openTemplate}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       style={DialogStyle}
@@ -202,13 +202,13 @@ const AddProject = props => {
         <ModalTitle>
           {/* <DialogTitle id="form-dialog-title">Subscribe</DialogTitle> */}
 
-          <TitleText>Create a New Project</TitleText>
+          <TitleText>Create a New Template</TitleText>
         </ModalTitle>
         <DialogContent style={DialogContentStyle}>
           <form onSubmit={submitForm} style={formStyle}>
             {/* <TopContainer> */}
             {/* top container is project name and address */}
-            <InputLabel>Project Name</InputLabel>
+            <InputLabel>Template name</InputLabel>
             <input
               style={inputStyle}
               name="template_name"

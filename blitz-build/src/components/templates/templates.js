@@ -4,7 +4,7 @@ import templateContext from "../../contexts/templates/TemplateContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
 import AddTemplate from "../modal/AddTemplate";
 import styled, { css } from "styled-components";
-
+import TemplateMeatBallsDrop from './TemplateMeatBalls'
 const Templates = () => {
   const { templates } = useContext(templateContext);
 
@@ -29,17 +29,18 @@ const Templates = () => {
 
       <Container>
         <Name>this is the template name</Name>
+        <TemplateMeatBallsDrop/>
       </Container>
       {templates.map(template => {
         return (
           <div>
-            <p>{template.template_name}</p>
+           {template.template_name}
           </div>
         );
       })}
-      <button>
+    
         <AddTemplate />
-      </button>
+    
     </div>
   );
 };

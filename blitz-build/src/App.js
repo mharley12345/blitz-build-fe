@@ -19,7 +19,7 @@ import Layout from "./layouts/Layout";
 import Dashboard from "./components/dashboard/Dashboard";
 import DelayLog from "./components/delayLog/DelayLog";
 import AddTemplate from "./components/modal/AddTemplate";
-
+import OpenTemplateContext from './contexts/OpenTemplateContext'
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
@@ -37,14 +37,16 @@ import TemplateProvider from "./contexts/templates/TemplateProvider";
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
+import TemplatesProvider from "./contexts/templates/TemplateProvider";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
+  const [openTemplate, setOpenTemplate] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
   const [editModalOpen, setEditModalOpen] = useState(false);
-
+  
   // getting userInfo from id_token in localStorage.
   useEffect(() => {
     if (localStorage.getItem("id_token")) {
@@ -99,6 +101,8 @@ function App() {
 
   return (
     <Router>
+      <TemplatesProvider>
+        <OpenTemplateContext.Provider value= {{openTemplate, setOpenTemplate}} >
       <ProjectsProvider>
         <TaskProvider>
           <DelayLogProvider>
@@ -148,6 +152,8 @@ function App() {
           </DelayLogProvider>
         </TaskProvider>
       </ProjectsProvider>
+      </OpenTemplateContext.Provider>
+      </TemplatesProvider>
     </Router>
   );
 }
