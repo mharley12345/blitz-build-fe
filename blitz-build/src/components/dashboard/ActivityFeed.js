@@ -30,7 +30,7 @@ function ActivityFeed({ projectID, numberOfTasks }) {
 
  const year = dateObj.getUTCFullYear();
 
-const newdate = year + "-" + month + "-" + '05';
+const newdate = year + "-" + month + "-" + changeTheDay(day);
 
  console.log(newdate);
    const wasMadeToday= (createdAt) => {

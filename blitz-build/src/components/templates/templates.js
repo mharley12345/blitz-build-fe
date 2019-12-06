@@ -19,7 +19,7 @@ const Templates = () => {
     console.log("RESULTS:", results);
     settemplateSearchResults(results);
   }, [templatesSearchInput]);
-
+console.log(templates);
   return (
     <div>
       <Section>
@@ -27,15 +27,12 @@ const Templates = () => {
         <p> Your Templates </p>
       </Section>
 
-      <Container>
-        <Name>this is the template name</Name>
-        <TemplateMeatBallsDrop/>
-      </Container>
       {templates.map(template => {
         return (
-          <div>
-           {template.template_name}
-          </div>
+      <Container>
+        <Name>{template.template_name}</Name>
+        <TemplateMeatBallsDrop template={template}/>
+      </Container>
         );
       })}
     

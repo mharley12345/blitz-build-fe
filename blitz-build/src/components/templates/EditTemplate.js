@@ -21,7 +21,7 @@ export default function EditTask({ template , editStatus, handleEditClose }) {
             closeModal={ handleEditClose }
             handleFunction={ editTemplate }
             editFields={ template }
-            text={ 'Edit Template' }
+            text={ `Edit ${template.template_name} template` }
           />
         }
       />
