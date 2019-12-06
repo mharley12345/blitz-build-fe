@@ -45,7 +45,7 @@ const LogCardCreated = styled.div`
 `;
 
 function DelayLogCard(props) {
-  console.log(props);
+  //console.log(props);
   return (
     <LogCardContainer>
       <LogCardTask>{props.data.task_name}</LogCardTask>

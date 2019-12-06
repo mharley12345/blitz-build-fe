@@ -26,6 +26,7 @@ import AddTemplate from "./components/modal/AddTemplate";
 import UserContext from "./contexts/UserContext";
 import SearchTermContext from "./contexts/searching/searchTerm";
 import TaskProvider from "./contexts/tasks/TaskProvider";
+import DelayLogProvider from "./contexts/delayLog/DelayLogProvider";
 import OpenContext from "./contexts/projects/OpenContext";
 import PathnameContext from "./contexts/PathnameContext";
 import ProjectsProvider from "./contexts/projects/ProjectsProvider";
@@ -100,41 +101,51 @@ function App() {
     <Router>
       <ProjectsProvider>
         <TaskProvider>
-          <SearchTermContext.Provider value={{ searchTerm, setSearchTerm }}>
-            <OpenContext.Provider value={{ open, setOpen }}>
-              <EditModalContext.Provider
-                value={{ editModalOpen, setEditModalOpen }}
-              >
-                <PathnameContext.Provider value={{ pathname, setPathname }}>
-                  <UserContext.Provider value={{ userInfo, setUserInfo }}>
-                    <NavBar setPathname={setPathname} navLinks={navLinks} />
-                    <Layout pathname={pathname}>
-                      <Switch>
-                        <Route exact path="/auth" component={Auth} />
-                        <Route exact path="/navbar" component={AuthNavBar} />
-                        <Route exact path="/callback" component={Callback} />
-                        <Route exact path="/login" component={Login} />
+          <DelayLogProvider>
+            <SearchTermContext.Provider value={{ searchTerm, setSearchTerm }}>
+              <OpenContext.Provider value={{ open, setOpen }}>
+                <EditModalContext.Provider
+                  value={{ editModalOpen, setEditModalOpen }}
+                >
+                  <PathnameContext.Provider value={{ pathname, setPathname }}>
+                    <UserContext.Provider value={{ userInfo, setUserInfo }}>
+                      <NavBar setPathname={setPathname} navLinks={navLinks} />
+                      <Layout pathname={pathname}>
+                        <Switch>
+                          <Route exact path="/auth" component={Auth} />
+                          <Route exact path="/navbar" component={AuthNavBar} />
+                          <Route exact path="/callback" component={Callback} />
+                          <Route exact path="/login" component={Login} />
 
-                        {/* <Route exact path="/signup" component={Signup} /> */}
-                        <Route exact path="/log-out" component={Logout} />
-                        {/*   */}
-                        <Route exact path="/dashboard" component={Dashboard} />
-                        <Route exact path="/tasks" component={Tasks} />
-                        <Route exact path="/projects" component={Projects} />
-                        <Route exact path="/templates" component={Templates} />
-                        <Route
-                          exact
-                          path="/project/:id"
-                          component={IndividualProject}
-                        />
-                        <Route exact path="/delay-log" component={DelayLog} />
-                      </Switch>
-                    </Layout>
-                  </UserContext.Provider>
-                </PathnameContext.Provider>
-              </EditModalContext.Provider>
-            </OpenContext.Provider>
-          </SearchTermContext.Provider>
+                          {/* <Route exact path="/signup" component={Signup} /> */}
+                          <Route exact path="/log-out" component={Logout} />
+                          {/*   */}
+                          <Route
+                            exact
+                            path="/dashboard"
+                            component={Dashboard}
+                          />
+                          <Route exact path="/tasks" component={Tasks} />
+                          <Route exact path="/projects" component={Projects} />
+                          <Route
+                            exact
+                            path="/templates"
+                            component={Templates}
+                          />
+                          <Route
+                            exact
+                            path="/project/:id"
+                            component={IndividualProject}
+                          />
+                          <Route exact path="/delay-log" component={DelayLog} />
+                        </Switch>
+                      </Layout>
+                    </UserContext.Provider>
+                  </PathnameContext.Provider>
+                </EditModalContext.Provider>
+              </OpenContext.Provider>
+            </SearchTermContext.Provider>
+          </DelayLogProvider>
         </TaskProvider>
       </ProjectsProvider>
     </Router>

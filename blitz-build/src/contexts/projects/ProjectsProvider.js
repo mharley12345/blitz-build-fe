@@ -20,54 +20,52 @@ export default function ProjectsProvider({ children }) {
   }, []);
 
   const addProject = newProject => {
-    
-    console.log("new project", newProject );
-    
+    console.log("new project", newProject);
+
     axiosWithAuth()
       .post(`/projects`, newProject)
       .then(res => {
         console.log("from addProject in projectsProvider", res);
-        
+
         setProjects([...projects, res.data.project[0]]);
       })
       .catch(err => console.log(err));
   };
-
 
   const deleteProject = deleteProject => {
     axiosWithAuth()
       .delete(`/projects/${deleteProject.id}`)
       .then(res => {
         console.log(`project with project id:${deleteProject.id} was removed`);
+      
       })
       .catch(err => console.log(err));
     const newProjectsList = projects.filter(project => {
       return project.id !== deleteProject.id;
     });
-    setProjects(newProjectsList);
+    setProjects([...newProjectsList]);
   };
 
-  
   const editProject = (editedProject, editedProjectId) => {
+    editedProject.id=editedProjectId
     console.log("edited project", editedProject, "id:", editedProjectId);
-    
+
     axiosWithAuth()
       .put(`/projects/${editedProjectId}`, editedProject)
       .then(res => {
         console.log("from editProject in projectsProvider", res);
-        const newProjectsList = projects.map(project => {
-      if (project.id === editedProjectId) {
-        return res.data.updatedProject[0];
-      } else {
-        return project;
-      }
-    });
-        setProjects([...newProjectsList]);
-  
-        window.location.reload(true)
-       })
-      .catch(err => console.log(err));
-    };
+       
+      }).catch(err => console.log(err));
+       const newProjectsList = projects.map(project => {
+          if (project.id === editedProjectId) {
+            return editedProject;
+          } else {
+            return project;
+          }
+        });
+        setProjects(newProjectsList);
+          
+  };
   return (
     <ProjectContext.Provider
       value={{ projects, addProject, deleteProject, editProject }}

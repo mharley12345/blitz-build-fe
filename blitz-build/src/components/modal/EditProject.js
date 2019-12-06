@@ -192,7 +192,7 @@ const EditProject = props => {
     form.longitude = gps.longitude;
     
       editProject(form, props.project.id);
-    
+    setEditModalOpen(false);
   }
 
 
