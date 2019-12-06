@@ -5,10 +5,10 @@ import Modal from "../global/Modal";
 import DelayForm from "./DelayForm";
 
 //context
-//import TasksContext from "../../contexts/tasks/TaskContext";
+import DelayLogContext from "../../contexts/delayLog/DelayLogContext";
 
 export default function DelayTask({ task, delayStatus, handleDelayClose }) {
-  //const { addDelay } = useContext(DelayLogContext);
+  const { addDelayLog } = useContext(DelayLogContext);
 
   return (
     <>
@@ -19,7 +19,7 @@ export default function DelayTask({ task, delayStatus, handleDelayClose }) {
         component={
           <DelayForm
             closeModal={handleDelayClose}
-            //handleFunction={addDelay}
+            handleFunction={addDelayLog}
             task={task}
           />
         }

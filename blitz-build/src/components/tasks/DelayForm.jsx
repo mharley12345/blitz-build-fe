@@ -13,23 +13,26 @@ import {
 
 export default function DelayForm({
     closeModal,
-   // handleFunction,
+    handleFunction,
     task
 }) {
+    //console.log("task from delayForm", task)
     const [form, setForm] = useState({
-        reason:""
-    })
+      reason: "",
+      project_id: task.project_id,
+      task_id: task.id
+    });
 const changeHandler = e => {
   setForm({ ...form, [e.target.name]: e.target.value });
 };
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    console.log("from delayform submit", form);
-    //handleFunction(reason);
+      
+    handleFunction(form,task.project_name,task.task_name);
     setForm({
       reason: ""
+     
     });
     closeModal();
   };
@@ -40,7 +43,7 @@ const changeHandler = e => {
         <XButton onClick={closeModal}>X</XButton>
       </div>
 
-      <header style={{ fontFamily: "roboto", padding: "0 0 0 30px" }}>
+      <header style={{ fontFamily: "roboto", textAlign: "center" }}>
         <h1 style={{ fontSize: "2.5rem", fontFamily: "roboto" }}>
           What is the reason for the Delay?
         </h1>

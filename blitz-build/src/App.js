@@ -25,6 +25,7 @@ import DelayLog from "./components/delayLog/DelayLog";
 import UserContext from "./contexts/UserContext";
 import SearchTermContext from './contexts/searching/searchTerm'
 import TaskProvider from "./contexts/tasks/TaskProvider";
+import DelayLogProvider from "./contexts/delayLog/DelayLogProvider";
 import OpenContext from "./contexts/projects/OpenContext";
 import PathnameContext from './contexts/PathnameContext';
 import ProjectsProvider from "./contexts/projects/ProjectsProvider";
@@ -101,6 +102,7 @@ function App() {
     <Router>
       <ProjectsProvider>
         <TaskProvider>
+          <DelayLogProvider>
           <SearchTermContext.Provider value={{searchTerm, setSearchTerm}}>
           <OpenContext.Provider value={{ open, setOpen }}>
             <EditModalContext.Provider value={{editModalOpen, setEditModalOpen}}>
@@ -131,7 +133,8 @@ function App() {
             </PathnameContext.Provider>
             </EditModalContext.Provider>
           </OpenContext.Provider>
-          </SearchTermContext.Provider>
+            </SearchTermContext.Provider>
+             </DelayLogProvider>
         </TaskProvider>
       </ProjectsProvider>
     </Router>
