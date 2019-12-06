@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Weather from "../weather/Weather";
-import Documents from "./Documents";
+
 import TaskCard from "../dashboard/TaskCard";
 import styled from "styled-components";
 import Global from "../../styles/Global";
@@ -12,7 +12,7 @@ import Delete_icon from "../../styles/icons_project/delete_icon.png";
 import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
 import PathnameContext from '../../contexts/PathnameContext'
-
+import Documents from "../documents/Documents"
 import DeleteProject from "../modal/DeleteProject";
 import EditProject from "../modal/EditProject";
 
