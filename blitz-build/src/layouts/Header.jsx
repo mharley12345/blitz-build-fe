@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import  Search from '../styles/Search/Search.png'
+import Uploader from '../components/documents/upload'
 import TasksContext from '../contexts/tasks/TaskContext'
 import Modal from '../components/global/Modal'
 import TaskForm from '../components/tasks/TaskForm'
-import { NavLink } from 'react-router-dom'
+import { NavLink ,Link} from 'react-router-dom'
 import OpenContext from '../contexts/projects/OpenContext'
 // import AddProject from  '../components/modal/AddProject'
 import searchTermContext from '../contexts/searching/searchTerm'
@@ -174,6 +175,7 @@ function Header({pathname}) {
     setTaskModalStatus(false);
   };
 
+
   const id = [];
   for (var i = 1; i <= 100; i++) {
       id.push(i)
@@ -317,9 +319,10 @@ const handleChange = e => {
             <ButtonI
               className="ion-ios-add-circle"
               style={HoverDocumentStyleFunction()}
+      
             />{" "}
             <ButtonText style={HoverDocumentStyleFunction()}>
-              New Document
+             <NavLink to="/documents/add"> New Document</NavLink>
             </ButtonText>
           </ButtonDocument>
 

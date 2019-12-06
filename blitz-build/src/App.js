@@ -33,6 +33,7 @@ import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
+import Uploader from './components/documents/upload'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -115,6 +116,7 @@ function App() {
                   <Route exact path="/tasks" component={Tasks} />
                   <Route exact path="/projects" component={Projects} />
                   <Route exact path="/documents" component={Documents}/>
+                  <Route exact path="/documents/add" component={Uploader}/>
                   <Route
                     exact
                     path="/project/:id"
