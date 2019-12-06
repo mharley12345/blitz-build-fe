@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Task from "./Task";
+import CompletedTask from './CompletedTask'
+import NewTask from './NewTask'
 //context 
 import taskContext from '../../contexts/tasks/TaskContext'
 
@@ -28,7 +30,7 @@ function ActivityFeed({ projectID, numberOfTasks }) {
 
  const year = dateObj.getUTCFullYear();
 
-const newdate = year + "-" + month + "-" + changeTheDay(day);
+const newdate = year + "-" + month + "-" + '05';
 
  console.log(newdate);
    const wasMadeToday= (createdAt) => {
@@ -45,9 +47,14 @@ const newdate = year + "-" + month + "-" + changeTheDay(day);
         </Section>
         <Card>
           {tasks.slice(0, numberOfTasks).map(item => 
-          { if(item.isComplete === true || wasMadeToday(item.createdAt)) {
+          { if(item.isComplete === true) {
             return (
-            <Task item={item} key={item.id} />
+            <CompletedTask item={item} key={item.id} />
+             )
+           }
+           else if (wasMadeToday(item.createdAt)) {
+             return (
+              <NewTask item={item} key={item.id} />
              )
            }
              })}
