@@ -6,11 +6,13 @@ import TemplateContext from "./TemplateContext";
 
 export default function TemplatesProvider({ children }) {
   const [templates, setTemplates] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     axiosWithAuth()
       .get("/templates")
       .then(res => {
+        console.log(res);
         setTemplates(res.data);
       })
       .catch(err => {
@@ -19,6 +21,7 @@ export default function TemplatesProvider({ children }) {
   }, []);
 
   const addTemplate = newTemplate => {
+    console.log("addTemplate", newTemplate);
     axiosWithAuth()
       .post("/templates", newTemplate)
       .then(res => {
@@ -32,6 +35,7 @@ export default function TemplatesProvider({ children }) {
   };
 
   const deleteTemplate = deletedTemplate => {
+    console.log("deletedTemplate", deletedTemplate);
     axiosWithAuth()
       .delete(`/templates/${deletedTemplate.id}`)
 
@@ -68,9 +72,29 @@ export default function TemplatesProvider({ children }) {
       });
   };
 
+  const templateTasks = () => {
+    axiosWithAuth()
+      .get(`/templates/${templates.id}`)
+      .then(res => {
+        console.log("template tasks", res);
+
+        setTasks(res.data);
+        console.log(tasks);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   return (
     <TemplateContext.Provider
-      value={{ templates, addTemplate, deleteTemplate, editTemplate }}
+      value={{
+        templates,
+        addTemplate,
+        deleteTemplate,
+        editTemplate,
+        templateTasks
+      }}
     >
       {children}
     </TemplateContext.Provider>

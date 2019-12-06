@@ -156,7 +156,7 @@ const AddProject = props => {
         due_date: "",
         task_name: "",
         isComplete: false,
-        project_id: 1
+        project_id: null
       }
     ]
   });
