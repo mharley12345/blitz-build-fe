@@ -20,7 +20,7 @@ export default function DeleteTemplate({ template, closeDrop, deleteStatus, hand
             closeModal={handleDeleteClose}
             deleteFunction={deleteTemplate}
             deleteItem={template}
-            text={'template.template_name'}
+            text={`${template.template_name} template`}
           />
         }
       />
