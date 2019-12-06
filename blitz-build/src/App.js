@@ -18,41 +18,40 @@ import Logout from "./components/auth/Logout";
 import Layout from "./layouts/Layout";
 import Dashboard from "./components/dashboard/Dashboard";
 import DelayLog from "./components/delayLog/DelayLog";
+import AddTemplate from "./components/modal/AddTemplate";
 
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
 import UserContext from "./contexts/UserContext";
-import SearchTermContext from './contexts/searching/searchTerm'
+import SearchTermContext from "./contexts/searching/searchTerm";
 import TaskProvider from "./contexts/tasks/TaskProvider";
 import OpenContext from "./contexts/projects/OpenContext";
-import PathnameContext from './contexts/PathnameContext';
+import PathnameContext from "./contexts/PathnameContext";
 import ProjectsProvider from "./contexts/projects/ProjectsProvider";
 import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
-import EditModalContext from './contexts/EditModalContext'
+import EditModalContext from "./contexts/EditModalContext";
+import TemplateProvider from "./contexts/templates/TemplateProvider";
 //AUTH0
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
 
-
 function App() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
-  const [editModalOpen, setEditModalOpen] = useState(false)
-  
+  const [editModalOpen, setEditModalOpen] = useState(false);
+
   // getting userInfo from id_token in localStorage.
   useEffect(() => {
-    
-  if (localStorage.getItem("id_token")) {
+    if (localStorage.getItem("id_token")) {
       setUserInfo(jwtDecode(localStorage.getItem("id_token")));
-    } 
+    }
   }, []);
-  
-    
-  console.log('userInfo',userInfo);
+
+  console.log("userInfo", userInfo);
 
   const navLinks = [
     {
@@ -100,40 +99,52 @@ function App() {
   return (
     <Router>
       <ProjectsProvider>
-        <TaskProvider>
-          <SearchTermContext.Provider value={{searchTerm, setSearchTerm}}>
-          <OpenContext.Provider value={{ open, setOpen }}>
-            <EditModalContext.Provider value={{editModalOpen, setEditModalOpen}}>
-            <PathnameContext.Provider value = {{pathname, setPathname}}>
-            <UserContext.Provider value={{ userInfo, setUserInfo }}>
-              <NavBar setPathname={setPathname} navLinks={navLinks} />
-              <Layout pathname={pathname}>
-                <Switch>
-                  <Route exact path="/auth" component={Auth} />
-                  <Route exact path="/navbar" component={AuthNavBar} />
-                  <Route exact path="/callback" component={Callback} />
-                  <Route exact path="/login" component={Login} />
-                  {/* <Route exact path="/signup" component={Signup} /> */}
-                  <Route exact path="/log-out" component={Logout} />
-                  {/*   */}
-                  <Route exact path="/dashboard" component={Dashboard} />
-                  <Route exact path="/tasks" component={Tasks} />
-                  <Route exact path="/projects" component={Projects} />
-                  <Route exact path="/templates" component={Templates} />
-                  <Route
-                    exact
-                    path="/project/:id"
-                    component={IndividualProject}
-                  />
-                  <Route exact path="/delay-log" component={DelayLog} />
-                </Switch>
-              </Layout>
-            </UserContext.Provider>
-            </PathnameContext.Provider>
-            </EditModalContext.Provider>
-          </OpenContext.Provider>
-          </SearchTermContext.Provider>
-        </TaskProvider>
+        <TemplateProvider>
+          <TaskProvider>
+            <SearchTermContext.Provider value={{ searchTerm, setSearchTerm }}>
+              <OpenContext.Provider value={{ open, setOpen }}>
+                <EditModalContext.Provider
+                  value={{ editModalOpen, setEditModalOpen }}
+                >
+                  <PathnameContext.Provider value={{ pathname, setPathname }}>
+                    <UserContext.Provider value={{ userInfo, setUserInfo }}>
+                      <NavBar setPathname={setPathname} navLinks={navLinks} />
+                      <Layout pathname={pathname}>
+                        <Switch>
+                          <Route exact path="/auth" component={Auth} />
+                          <Route exact path="/navbar" component={AuthNavBar} />
+                          <Route exact path="/callback" component={Callback} />
+                          <Route exact path="/login" component={Login} />
+                          {/* <Route exact path="/signup" component={Signup} /> */}
+                          <Route exact path="/log-out" component={Logout} />
+                          {/*   */}
+                          <Route
+                            exact
+                            path="/dashboard"
+                            component={Dashboard}
+                          />
+                          <Route exact path="/tasks" component={Tasks} />
+                          <Route exact path="/projects" component={Projects} />
+                          <Route
+                            exact
+                            path="/templates"
+                            component={Templates}
+                          />
+                          <Route
+                            exact
+                            path="/project/:id"
+                            component={IndividualProject}
+                          />
+                          <Route exact path="/delay-log" component={DelayLog} />
+                        </Switch>
+                      </Layout>
+                    </UserContext.Provider>
+                  </PathnameContext.Provider>
+                </EditModalContext.Provider>
+              </OpenContext.Provider>
+            </SearchTermContext.Provider>
+          </TaskProvider>
+        </TemplateProvider>
       </ProjectsProvider>
     </Router>
   );
