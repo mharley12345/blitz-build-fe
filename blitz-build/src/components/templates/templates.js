@@ -1,40 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-import axios from "axios";
+import templateContext from "../../contexts/templates/TemplateContext";
+import searchTermContext from "../../contexts/searching/searchTerm";
+import AddTemplate from "../modal/AddTemplate";
 import styled, { css } from "styled-components";
+
 const Templates = () => {
-  const [templates, setTemplates] = useState([]);
- console.log(templates);
+  const { templates } = useContext(templateContext);
+
+  const { searchTerm } = useContext(searchTermContext);
+  const templatesSearchInput = searchTerm.toLowerCase();
+  const [templatesSearchResults, settemplateSearchResults] = useState([]);
+
   useEffect(() => {
-    axios
-      .get("https://staging-blitz-build.herokuapp.com/templates")
-      .then(res => {
-        setTemplates(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
+    const results = templates.filter(template =>
+      template.template_name.toLowerCase().includes(templatesSearchInput)
+    );
+    console.log("RESULTS:", results);
+    settemplateSearchResults(results);
+  }, [templatesSearchInput]);
 
   return (
     <div>
       <Section>
-          {" "}
-          <p> Your Templates </p>
-        </Section>
+        {" "}
+        <p> Your Templates </p>
+      </Section>
 
-        <Container>
+      <Container>
         <Name>this is the template name</Name>
-        </Container>
+      </Container>
       {templates.map(template => {
-       
         return (
           <div>
             <p>{template.template_name}</p>
-         
           </div>
         );
       })}
+      <button>
+        <AddTemplate />
+      </button>
     </div>
   );
 };
@@ -80,7 +85,7 @@ const Name = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  
+
   /* 500 Gray */
 
   color: #3f3a36;

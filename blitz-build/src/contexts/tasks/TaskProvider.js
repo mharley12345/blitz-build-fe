@@ -6,7 +6,7 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import TaskContext from "./TaskContext";
 export default function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
- 
+
   useEffect(() => {
     const user_id = localStorage.getItem("user_id");
     axiosWithAuth()
@@ -22,7 +22,7 @@ export default function TaskProvider({ children }) {
 
   const addTask = newTask => {
     console.log("new task", newTask);
-   
+
     const task = {
       due_date: newTask.due_date,
       task_name: newTask.task_name,
@@ -42,7 +42,6 @@ export default function TaskProvider({ children }) {
   };
 
   const deleteTask = deletedTask => {
-   
     axiosWithAuth()
       .delete(`/projects/tasks/${deletedTask.id}`)
       .then(res => {
@@ -83,10 +82,9 @@ export default function TaskProvider({ children }) {
   };
   return (
     <div>
-    <TaskContext.Provider value={{ tasks, addTask, deleteTask, editTask, }}>
-      {children}
-    </TaskContext.Provider>
-   
+      <TaskContext.Provider value={{ tasks, addTask, deleteTask, editTask }}>
+        {children}
+      </TaskContext.Provider>
     </div>
   );
 }

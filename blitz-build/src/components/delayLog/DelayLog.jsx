@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { ExportToCsv } from "export-to-csv";
 import Global from "../../styles/Global";
-
+import DelayLogContext from '../../contexts/delayLog/DelayLogContext'
 import DelayLogCard from "./DelayLogCard";
 
 
@@ -49,7 +49,7 @@ const DelayLogListText = styled.p`
 
   color: #8a827d;
 `;
-const DelayLogTableTitles = styled.p`
+const DelayLogTableTitles = styled.div`
   width: 1080px;
   height: 51px;
   margin-top: 8px;
@@ -125,24 +125,9 @@ const DelayLogGray = styled.div`
   border-radius: 3px;
 `;
 function DelayLog() {
-  const [delayLogs, setDelayLogs] = useState([]);
-  useEffect(() => {
-    axios
-      .get(
-        ` https://blitz-build-production.herokuapp.com/delay_logs/1`,
-        { headers: { token: localStorage.getItem("token") } }
-      )
-      .then(res => {
-      
-       let logs = res.data 
-        setDelayLogs(logs);
-         console.log(delayLogs)
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  },[]);
-  console.log(delayLogs.delay_logs)
+    const { delayLogs } = useContext(DelayLogContext);
+
+
   function handleExportCSV() {
     const options = {
       fieldSeparator: ",",
@@ -166,10 +151,9 @@ function DelayLog() {
     if (delayLogs.length === 0) {
       return <DelayLogGray>You do not have DelayLog</DelayLogGray>;
     } else {
-      return delayLogs.delay_logs.map((data) => {
+      return delayLogs.map(data => {
         return (
           <DelayLogListContainer>
-           
             <DelayLogCard data={data} />
           </DelayLogListContainer>
         );
