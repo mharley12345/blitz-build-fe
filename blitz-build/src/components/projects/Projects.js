@@ -48,7 +48,7 @@ const Projects = props => {
             </ProjectCategories>
             <ProjectCategoriesSecond>
               <ProjectUlSecond>
-               
+                 <ProjectLi>Date Created</ProjectLi>
                 <ProjectLi> Due Date</ProjectLi>
                 <ProjectLi> Status </ProjectLi>
               </ProjectUlSecond>
