@@ -55,9 +55,26 @@ export default function DelayLogProvider({ children }) {
         });
         setDelayLogs(newDelayLogsList);
     }
-  
+
+    const deleteReason = deleteReason => {
+       console.log("delete reason", deleteReason)
+     axiosWithAuth()
+       .delete(`/delay_logs/${deleteReason.id}`)
+       .then(res => {
+         console.log(
+           `delayLog with delayLog id:${deleteReason.id} was removed`
+         );
+       })
+       .catch(err => console.log(err));
+     const newDelayLogsList = delayLogs.filter(delayLog => {
+       return delayLog.id !== deleteReason.id;
+     });
+     setDelayLogs(newDelayLogsList);
+   };
   return (
-    <DelayLogContext.Provider value={{ delayLogs, addDelayLog, editDelayLog }}>
+    <DelayLogContext.Provider
+      value={{ delayLogs, addDelayLog, editDelayLog, deleteReason }}
+    >
       {children}
     </DelayLogContext.Provider>
   );

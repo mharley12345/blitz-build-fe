@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import EditDelayReason from "./EditDelayReason";
-
+import DeleteDelayReason from './DeleteDelayReason'
 
 function DelayLogCard(props) {
   //console.log(props);
@@ -41,7 +41,11 @@ function DelayLogCard(props) {
         editStatus={editStatus}
         handleEditClose={handleEditClose}
       />
-     
+      <DeleteDelayReason
+        delayReason={props}
+        deleteStatus={deleteStatus}
+        handleDeleteClose={handleDeleteClose}
+      />
     </>
   );
 }
