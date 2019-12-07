@@ -25,7 +25,7 @@ export default function DelayLogProvider({ children }) {
     axiosWithAuth()
       .post(`/delay_logs`, newDelay)
       .then(res => {
-        console.log("from delay_logs in delayLogsProvider", res);
+        console.log("from add delay_logs in delayLogsProvider", res);
           res.data.log[0].project_name = projectName;
            res.data.log[0].task_name = taskName;
        setDelayLogs([...delayLogs, res.data.log[0]]);
@@ -33,11 +33,31 @@ export default function DelayLogProvider({ children }) {
       .catch(err => console.log(err));
   };
 
+    const editDelayLog = (editedReason, id) => {
+        console.log("edited Reason", editedReason, id);
+        const newReason = {
+          reason: editedReason.reason,
+          project_id: editedReason.project_id,
+          task_id: editedReason.task_id
+        };
+        axiosWithAuth()
+          .put(`/delay_logs/${id}`, newReason)
+          .then(res => {
+            console.log("from edit delay_logs in delayLogsProvider", res);
+          })
+            .catch(err => console.log(err));
+        const newDelayLogsList = delayLogs.map(delay => {
+          if (delay.id === editedReason.id) {
+            return editedReason;
+          } else {
+            return delay;
+          }
+        });
+        setDelayLogs(newDelayLogsList);
+    }
   
   return (
-    <DelayLogContext.Provider
-      value={{ delayLogs, addDelayLog}}
-    >
+    <DelayLogContext.Provider value={{ delayLogs, addDelayLog, editDelayLog }}>
       {children}
     </DelayLogContext.Provider>
   );
