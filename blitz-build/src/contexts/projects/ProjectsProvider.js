@@ -43,7 +43,7 @@ export default function ProjectsProvider({ children }) {
     const newProjectsList = projects.filter(project => {
       return project.id !== deleteProject.id;
     });
-    setProjects([...newProjectsList]);
+        setProjects(newProjectsList);
   };
 
   const editProject = (editedProject, editedProjectId) => {
