@@ -8,9 +8,9 @@ const  DocumentCard = (props) => {
   const[document,setDocument] =useState([])
 
   useEffect(() =>{
-    let body = {id:user_id}
+ 
     axiosWithAuth()
-    .post(`/docs/documents/docs_url`,body)
+    .get(`/docs/url`,user_id)
      
     .then(response =>{
       let docs = response.data
@@ -31,7 +31,7 @@ const  DocumentCard = (props) => {
     return(<>
           <Name>{documents.file_name}</Name>
              <Right>  
-       <a href ={documents.doc_url} target="_blank">View</a>
+       <a href ={documents.doc_url} rel="noopener noreferrer" target="_blank">View</a>
     
         </Right>
         </>

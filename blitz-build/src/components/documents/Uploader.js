@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { axiosWithAuth } from '../../utils/auth/axiosWithAuth';
+import {axiosWithAuth} from '../../utils/auth/axiosWithAuth';
+import {link}from 'react-router'
+let user_id = localStorage.getItem("user_id")
 class Uploader extends Component {
+
   constructor(props){
     super(props);
     this.state = {
       success : false,
-      url : "",
-      user_id:localStorage.getItem('user_id'),
-      fileName:''
+      doc_url : "",
+      user_id:user_id,
+      file_name:'',
+      project_id:1
     }
   }
   
@@ -23,36 +26,40 @@ class Uploader extends Component {
     let fileParts = this.uploadInput.files[0].name.split('.');
     let fileName = fileParts[0];
     let fileType = fileParts[1];
-    this.setState({fileName:fileName})
     console.log("Preparing the upload");
+    //Calls BE to get validated url 
     axiosWithAuth().post("/docs/documents",{
       fileName : fileName,
       fileType : fileType,
-      user_id: this.state.user_id
+      user_id:this.state.user_id
     })
     .then(response => {
       var returnData = response.data.data.returnData;
       var signedRequest = returnData.signedRequest;
       var url = returnData.url;
-      this.setState({url: url})
+      this.setState({doc_url: url,file_name:fileName})
       console.log("Recieved a signed request " + signedRequest);
-      axiosWithAuth().post('/docs/addurl',{
-          file_name:this.state.fileName,
-          doc_url:url,
-          user_id:this.state.user_id
-      }).then(response=>{console.log(response)})
+      console.log(this.state)
      // Put the fileType in the headers for the upload
       var options = {
         headers: {
-          'Content-Type': fileType,
-
+          'Content-Type': fileType
         }
       };
-      axios.put(signedRequest,file,options)
+      //Uploads File to S3 bucket
+      axiosWithAuth().put(signedRequest,file,options)
       .then(result => {
         console.log("Response from s3")
         this.setState({success: true});
-      })
+})
+.then(
+ 
+      axiosWithAuth().post('docs/url',{
+        doc_url : this.state.doc_url,
+      user_id: this.state.user_id,
+      file_name:this.state.file_name,
+      project_id:1}))
+      
       .catch(error => {
         alert("ERROR " + JSON.stringify(error));
       })
@@ -67,8 +74,8 @@ class Uploader extends Component {
     const Success_message = () => (
       <div style={{padding:50}}>
         <h3 style={{color: 'green'}}>SUCCESSFUL UPLOAD</h3>
-        <a href={this.state.url}>Access the file here</a>
-        <br/>
+       
+      
       </div>
     )
     return (

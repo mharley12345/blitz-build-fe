@@ -33,7 +33,7 @@ import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
-import Uploader from './components/documents/upload'
+import Uploader from './components/documents/Uploader'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -71,6 +71,7 @@ function App() {
       text: "Documents",
       path: "/documents",
       icon: "ion-ios-document"
+      
     },
     {
       text: "Templates",
