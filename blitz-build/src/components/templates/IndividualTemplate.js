@@ -8,10 +8,10 @@ const IndividualTemplate = props => {
   useEffect(() => {
     const templateID = props.match.params.id;
     axiosWithAuth()
-      .get(`/templates/${templateID}`)
+      .get(`/projects/tasks/template/${templateID}`)
       .then(res => {
-        console.log("template tasks", res.data[0].template);
-        setTemplateTasks(res.data[0].template);
+        console.log("template tasks", res);
+        setTemplateTasks(res.data);
       })
       .catch(err => {
         console.log(err);
@@ -22,7 +22,7 @@ const IndividualTemplate = props => {
     <div>
       <h1>individual template</h1>
       {templateTasks.map(tasks => {
-        return <div>{tasks.project_id}</div>;
+        return <div>{tasks.task_name}</div>;
       })}
     </div>
   );

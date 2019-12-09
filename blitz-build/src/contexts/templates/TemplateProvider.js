@@ -12,7 +12,7 @@ export default function TemplatesProvider({ children }) {
     axiosWithAuth()
       .get("/templates")
       .then(res => {
-        console.log(res);
+        console.log("get templates response", res);
         setTemplates(res.data);
       })
       .catch(err => {
@@ -26,8 +26,8 @@ export default function TemplatesProvider({ children }) {
       .post("/templates", newTemplate)
       .then(res => {
         console.log("This template was posted,", res);
-
-        setTemplates([...templates, res.data[0]]);
+        newTemplate.id = res.data.template_id;
+        setTemplates([...templates, newTemplate]);
       })
       .catch(err => {
         console.log(err);

@@ -150,15 +150,7 @@ const InputLabel = styled.p`
 const AddProject = props => {
   const { addTemplate } = useContext(TemplateContext);
   const [form, setForm] = useState({
-    template_name: "",
-    template: [
-      {
-        due_date: "",
-        task_name: "",
-        isComplete: false,
-        project_id: null
-      }
-    ]
+    template_name: ""
   });
   const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext);
 
