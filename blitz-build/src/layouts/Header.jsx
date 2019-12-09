@@ -95,7 +95,7 @@ border: 1px solid #8A827D
   border: 1px solid #DD6B20 ;
   color: #DD6B20;
   cursor: pointer;
-}
+} 
 }
 `
 const ButtonTemplate = styled.div `
