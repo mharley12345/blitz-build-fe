@@ -12,7 +12,8 @@ export default function DeleteDelayReason({
   deleteStatus,
   handleDeleteClose
 }) {
-    const { deleteReason } = useContext(DelayLogContext);
+  const { deleteReason } = useContext(DelayLogContext);
+  //console.log(delayReason);
   return (
     <>
       <Modal
@@ -23,8 +24,8 @@ export default function DeleteDelayReason({
           <Confirm
             closeModal={handleDeleteClose}
             deleteFunction={deleteReason}
-            deleteItem={delayReason.data}
-            text={`Delay Reason of ${delayReason.data.task_name}`}
+            deleteItem={delayReason.delayLog}
+            text={`Delay Reason of ${delayReason.delayLog.task_name}`}
           />
         }
       />

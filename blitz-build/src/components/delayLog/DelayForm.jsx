@@ -18,14 +18,14 @@ export default function DelayForm({
   editFields,
   text
 }) {
-  //console.log("task from delayForm", task)
+  //console.log("task from delayForm", task,editFields)
   const [form, setForm] = useState({
     reason: ""
   });
   useEffect(() => {
     if (editFields) {
       //console.log("editFields", editFields);
-      setForm(editFields.data);
+      setForm(editFields.delayLog);
       //console.log(form);
     } else {
       setForm({ ...form, project_id: task.project_id, task_id: task.id });
