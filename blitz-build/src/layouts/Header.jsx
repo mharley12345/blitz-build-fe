@@ -7,6 +7,7 @@ import Modal from '../components/global/Modal'
 import TaskForm from '../components/tasks/TaskForm'
 import { NavLink ,Link} from 'react-router-dom'
 import OpenContext from '../contexts/projects/OpenContext'
+import OpenTemplateContext from '../contexts/OpenTemplateContext'
 // import AddProject from  '../components/modal/AddProject'
 import searchTermContext from '../contexts/searching/searchTerm'
 import AddProject from "../components/modal/AddProject";
@@ -62,6 +63,16 @@ const ButtonDocumentCheck = {
    alignItems: 'center',
    
   }
+  const ButtonTemplateCheck = {
+    display: 'flex',
+    borderRadius: '3px',
+     width: '174px',
+     height: '48px',
+     justifyContent: 'center',
+     alignItems: 'center',
+    marginLeft: '160px',
+     
+    }
 const SoloDocument = {
   display: 'flex',
   borderRadius: '3px',
@@ -73,6 +84,22 @@ const SoloDocument = {
  
 }
 const ButtonProject = styled.div `
+display: flex;
+border-radius: 3px;
+border: 1px solid #8A827D
+ width: 151px;
+ height: 48px;
+ justify-content: center;
+ align-items: center;
+ margin-left: 10px;
+ :hover {
+  border: 1px solid #DD6B20 ;
+  color: #DD6B20;
+  cursor: pointer;
+}
+}
+`
+const ButtonTemplate = styled.div `
 display: flex;
 border-radius: 3px;
 border: 1px solid #8A827D
@@ -161,13 +188,15 @@ function Header({pathname}) {
   const [ TaskHover, setTaskHover ] = useState(false)
   const [ ProjectHover, setProjectHover ] = useState(false)
   const [ DocumentHover, setDocumentHover ] = useState(false)
-
+  const [ TemplateHover, setTemplateHover ] = useState(false)
+  const { openTemplate, setOpenTemplate }  = useContext(OpenTemplateContext)
   const { addTask } = useContext(TasksContext);
   const { open, setOpen } = useContext(OpenContext)
   const [TaskModalStatus, setTaskModalStatus] = useState(false);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
   
+
 
   const handleTaskModalOpen = () => {
     setTaskModalStatus(true);
@@ -220,6 +249,14 @@ const HideTheTaskButton = (pathname) => {
   }  
 }
 
+const HideTheTemplateButton = (pathname) => {
+  if (pathname === '/templates') {
+    return ButtonTemplateCheck
+  }
+  else {
+    return HideButton
+  }
+}
 const HoverTaskStyleFunction = () => {
   if (TaskHover === true || TaskModalStatus === true) {
     return HoverStyle
@@ -235,13 +272,26 @@ const HoverDocumentStyleFunction = () => {
     return HoverStyle
   }
 }
+const HoverTemplateStyleFunction = () => {
+  if (TemplateHover === true || openTemplate === true) {
+    return HoverStyle
+  }
+}
 
-const OpenToggle = () => {
+const OpenToggler = () => {
   if(open !== false) {
     setOpen(false)
   }
   else if (open === false) {
     setOpen(true)
+  }
+}
+const OpenTemplateToggler = () => {
+  if(openTemplate !== false) {
+    setOpenTemplate(false)
+  }
+  else if (openTemplate === false) {
+    setOpenTemplate(true)
   }
 }
 //// search function 
@@ -351,7 +401,7 @@ const handleChange = e => {
             onMouseEnter={() => setProjectHover(true)}
             onMouseLeave={() => setProjectHover(false)}
             style={HideTheProjectButton(pathname)}
-            onClick={OpenToggle}
+            onClick={OpenToggler}
           >
             {" "}
             <ButtonI
@@ -362,6 +412,21 @@ const handleChange = e => {
               New Project
             </ButtonText>
           </ButtonProject>
+          <ButtonTemplate
+            onMouseEnter={() => setTemplateHover(true)}
+            onMouseLeave={() => setTemplateHover(false)}
+            style={HideTheTemplateButton(pathname)}
+            onClick={OpenTemplateToggler}
+          >
+            {" "}
+            <ButtonI
+              className="ion-ios-add-circle"
+              style={HoverTemplateStyleFunction()}
+            />
+            <ButtonText style={HoverTemplateStyleFunction()}>
+              New Template
+            </ButtonText>
+          </ButtonTemplate>
 
           <Modal
             visible={TaskModalStatus}

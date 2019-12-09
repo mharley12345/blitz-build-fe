@@ -113,10 +113,11 @@ const NavBarContainer = styled.div`
       `
       const UserProfile = styled.div`
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      
-    
+      flex-direction: row;
+      justify-content: space-between;
+     
+      align-items: center;
+      width: 58%;
       `
       const LogoAvatarContainer = styled.div`
       height: 160px
@@ -137,6 +138,20 @@ const NavBarContainer = styled.div`
        font-size: 14px
        color: #B5AFAB;
        `
+       const UserImg = styled.div`
+        height: 48px;
+        width: 48px;
+        border-radius: 100px;
+        border: 1px solid #FFFFFF;
+       `
+       const imgStyle = {
+         maxWidth: '100%',
+         maxHeight: '100%',
+         borderRadius: '100px'
+       }
+       const userInfoContainer = styled.div`
+        
+       `
            
 function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, setPathname }) {
    const [ hoverIndex, setHoverIndex ] = useState(0)
@@ -153,10 +168,18 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
            <img  src={Logo} alt="Blitz-Build-Logo"/>
            </LogoContainer>
            <UserProfile>
+<<<<<<< HEAD
                {userInfo.map(user => 
              <UserName> {user.name}</UserName>
              )}  
              <UserTitle> </UserTitle>
+=======
+             <UserImg> <img src={userInfo.picture} style = {imgStyle}/></UserImg>
+             <userInfoContainer>
+             <UserName> {userInfo.name}</UserName>
+             <UserTitle>  Super Intendent  </UserTitle>
+             </userInfoContainer>
+>>>>>>> ef6f7e7009ed3c51e2e79e842cbe00321eb899e6
            </UserProfile>
         </LogoAvatarContainer>
   

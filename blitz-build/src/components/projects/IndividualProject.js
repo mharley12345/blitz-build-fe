@@ -12,7 +12,11 @@ import Delete_icon from "../../styles/icons_project/delete_icon.png";
 import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
 import PathnameContext from '../../contexts/PathnameContext'
+<<<<<<< HEAD
 import Documents from "../documents/Documents"
+=======
+import EditModalContext from '../../contexts/EditModalContext'
+>>>>>>> ef6f7e7009ed3c51e2e79e842cbe00321eb899e6
 import DeleteProject from "../modal/DeleteProject";
 import EditProject from "../modal/EditProject";
 
@@ -21,7 +25,8 @@ const IndividualProject = props => {
   const { pathname, setPathname } = useContext(PathnameContext)
   const [projectState, setProjectState] = useState({});
 const [deleteStatus, setDeleteStatus] = useState(false);
-  const [ open, setOpen ] = useState(false);
+  const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
+
   useEffect(() => {
      setPathname(window.location.pathname)
     const projectID = props.match.params.id;
@@ -51,7 +56,7 @@ const handleDeleteClose = e => {
   
   const OpenToggle = (e) => {
     e.stopPropagation();
-      setOpen(!open);
+      setEditModalOpen(true);
    
   };
   return (
@@ -90,7 +95,7 @@ const handleDeleteClose = e => {
                 <img src={Page_icon} alt="page_icon" />
                 <p>&nbsp;&nbsp;90-Day Template in Use</p>
               </ContentbottomTemplate>
-              <EditIcon onClick={OpenToggle}>
+              <EditIcon onClick={OpenToggle} >
                 <img src={Edit_icon} alt="edit_icon" />
                 <p>Edit</p>
               </EditIcon>
@@ -122,7 +127,7 @@ const handleDeleteClose = e => {
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
       />
-      <EditProject project={projectState} open={open} />
+      <EditProject project={projectState}  />
     </>
   );
 };

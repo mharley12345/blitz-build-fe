@@ -7,13 +7,14 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import styled from "styled-components";
 import zipcodes from "zipcodes";
+import OpenTemplateContext from "../../contexts/OpenTemplateContext";
 import { Hidden } from "@material-ui/core";
-import projectContext from "../../contexts/projects/ProjectContext";
-import EditModalContext from '../../contexts/EditModalContext'
+import TemplateContext from "../../contexts/templates/TemplateContext";
+
 const ModalContainer = styled.div`
 
-  width: '750px',
-  height: '1000px',
+  width: '250px',
+  height: '333px',
   background-color: '#FFFFFF',
   border-radius: '3px',
   display:'flex',
@@ -146,59 +147,47 @@ const InputLabel = styled.p`
 
 //START OF FUNCTIONAL COMPONENT
 
-const EditProject = props => {
-  const {  editProject } = useContext(projectContext);
+const AddProject = props => {
+  const { addTemplate } = useContext(TemplateContext);
   const [form, setForm] = useState({
+    template_name: "",
+    template: [
+      {
+        due_date: "",
+        task_name: "",
+        isComplete: false,
+        project_id: 1
+      }
+    ]
   });
-  const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
-  
-    useEffect(() => {
-      
-      setForm({
-        project_name: props.project.project_name,
-        street_address: props.project.street_address,
-        city: props.project.city,
-        state: props.project.state,
-        zip_code: props.project.zip_code,
-        status: props.project.status,
-        beds: props.project.beds,
-        baths: props.project.baths,
-        square_ft: props.project.square_ft,
-        // assign_template: undefined,
-        imageURL: props.project.imageURL,
-        latitude: null,
-        longitude: null
-      });
-    
-  }, [props]);
+  const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext);
+
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleClickOpen = () => {
-    setEditModalOpen(true);
+    setOpenTemplate(true);
   };
 
   const handleClose = () => {
-    setEditModalOpen(false);
+    setOpenTemplate(false);
   };
 
   const submitForm = e => {
     e.preventDefault();
 
-    const gps = zipcodes.lookup(form.zip_code);
+    addTemplate(form);
+    setForm({
+      template_name: ""
+    });
 
-    form.latitude = gps.latitude;
-    form.longitude = gps.longitude;
-    
-      editProject(form, props.project.id);
-    setEditModalOpen(false);
-  }
-
+    handleClose();
+  };
 
   return (
     <Dialog
-      open={editModalOpen}
+      open={openTemplate}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       style={DialogStyle}
@@ -213,97 +202,22 @@ const EditProject = props => {
         <ModalTitle>
           {/* <DialogTitle id="form-dialog-title">Subscribe</DialogTitle> */}
 
-          <TitleText>Edit Project</TitleText>
+          <TitleText>Create a New Template</TitleText>
         </ModalTitle>
         <DialogContent style={DialogContentStyle}>
           <form onSubmit={submitForm} style={formStyle}>
             {/* <TopContainer> */}
             {/* top container is project name and address */}
-            <InputLabel>Project Name</InputLabel>
+            <InputLabel>Template name</InputLabel>
             <input
               style={inputStyle}
-              name="project_name"
+              name="template_name"
               onChange={changeHandler}
-              value={form.project_name}
-            />
-            <InputLabel>City</InputLabel>
-            <input
-              style={inputStyle}
-              name="city"
-              onChange={changeHandler}
-              value={form.city}
-            />
-            <InputLabel>State</InputLabel>
-            <input
-              style={inputStyle}
-              name="state"
-              onChange={changeHandler}
-              value={form.state}
-            />
-            <InputLabel>Street Address</InputLabel>
-            <input
-              style={inputStyle}
-              name="street_address"
-              onChange={changeHandler}
-              value={form.street_address}
-            />
-            {/* Zip Code
-            <input
-              name="zip_code"
-              placeholder="Zip Code"
-              onChange={changeHandler}
-              value={form.zip_code}
-            /> */}
-
-            {/* </TopContainer> */}
-            {/* second container includes beds and baths */}
-            <InputLabel>Beds</InputLabel>
-            <input
-              style={inputStyle}
-              name="beds"
-              onChange={changeHandler}
-              value={form.beds}
-            />
-            <InputLabel>Baths</InputLabel>
-            <input
-              style={inputStyle}
-              name="baths"
-              onChange={changeHandler}
-              value={form.baths}
-            />
-            <InputLabel>Square Footage</InputLabel>
-            {/* square footage on its own */}
-            <input
-              style={inputStyle}
-              name="square_ft"
-              onChange={changeHandler}
-              value={form.square_ft}
-            />
-            {/* templates on its own and its a drop down */}
-            {/* <input
-              name="assign_template"
-              placeholder="Assign Template"
-              onChange={changeHandler}
-              value={form.assign_template}
-            /> */}
-            {/* thumbnail on its own and it will have to be uploaded */}
-            <InputLabel>Project Thumbnail</InputLabel>
-            <input
-              style={inputStyle}
-              name="imageURL"
-              onChange={changeHandler}
-              value={form.imageURL}
-            />
-            <InputLabel>Zip Code</InputLabel>
-            <input
-              style={inputStyle}
-              name="zip_code"
-              onChange={changeHandler}
-              value={form.zip_code}
+              value={form.template_name}
             />
 
             <button type="submit" style={buttonStyle}>
-              Edit
+              Save
             </button>
           </form>
         </DialogContent>
@@ -312,4 +226,4 @@ const EditProject = props => {
   );
 };
 
-export default EditProject;
+export default AddProject;

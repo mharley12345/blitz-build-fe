@@ -49,6 +49,7 @@ const Content = styled.div`
 `;
 
 const Footer = styled.div`
+
   padding: 16px 32px;
   position: fixed;
   bottom: 0;

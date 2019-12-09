@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import EditTask from "./EditTask";
-import DeleteTask from "./DeleteTask";
-import AddDelayReason from "../delayLog/AddDelayReason";
+import EditTemplate from "./EditTemplate";
+import DeleteTemplate from "./DeleteTemplate";
+
 //styles
 import styled from "styled-components";
 import {
@@ -13,7 +13,7 @@ import {
   DropP
 } from "../../styles/Tasks/tasks";
 
-export default function MeatBallsDrop({ task }) {
+export default function TemplateMeatBallsDrop({ template }) {
   const refContainer = useRef();
   const [dropStatus, setDropStatus] = useState(false);
   const [editStatus, setEditStatus] = useState(false);
@@ -78,17 +78,10 @@ const [delayStatus, setDelayStatus] = useState(false);
             {/* <Geo></Geo> */}
             <DropDown>
               {/* <Geo></Geo> */}
-              <StyledLi>
-                <DropP>Complete</DropP>
-                <TaskI className="ion-md-checkmark-circle" />
-              </StyledLi>
+             
               <StyledLi onClick={handleEditOpen}>
                 <DropP>Edit</DropP>
                 <TaskI className="ion-md-create" />
-              </StyledLi>
-              <StyledLi onClick={handleDelayOpen}>
-                <DropP>Delay</DropP>
-                <TaskI className="ion-md-clock" />
               </StyledLi>
               <StyledLi onClick={handleDeleteOpen}>
                 <DropP>Delete</DropP>
@@ -98,24 +91,19 @@ const [delayStatus, setDelayStatus] = useState(false);
           </>
         )}
       </MeatBalls>
-      <EditTask
-        task={task}
+      <EditTemplate
+        template={template}
         closeDrop={closeDrop}
         editStatus={editStatus}
         handleEditClose={handleEditClose}
       />
-      <DeleteTask
-        task={task}
+      <DeleteTemplate
+        template={template}
         closeDrop={closeDrop}
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
       />
-      <AddDelayReason
-        task={task}
-        closeDrop={closeDrop}
-        delayStatus={delayStatus}
-        handleDelayClose={handleDelayClose}
-      />
+      
     </>
   );
 }
