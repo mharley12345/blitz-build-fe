@@ -12,14 +12,10 @@ import Delete_icon from "../../styles/icons_project/delete_icon.png";
 import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
 import PathnameContext from '../../contexts/PathnameContext'
-<<<<<<< HEAD
-import Documents from "../documents/Documents"
-=======
 import EditModalContext from '../../contexts/EditModalContext'
->>>>>>> ef6f7e7009ed3c51e2e79e842cbe00321eb899e6
 import DeleteProject from "../modal/DeleteProject";
 import EditProject from "../modal/EditProject";
-
+import Documents from "../documents/Documents"
 
 const IndividualProject = props => {
   const { pathname, setPathname } = useContext(PathnameContext)

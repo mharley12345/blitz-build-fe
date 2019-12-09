@@ -11,11 +11,7 @@ import jwtDecode from "jwt-decode";
 // import Dashboard from "./components/dashboard/index";
 // import Dashboard from "./components/dashboard/Dashboard";
 import Tasks from "./views/tasks/Tasks";
-<<<<<<< HEAD
-import Documents from "./components/documents/Documents"
-=======
 import Templates from "./components/templates/templates";
->>>>>>> ef6f7e7009ed3c51e2e79e842cbe00321eb899e6
 import Projects from "./components/projects/Projects";
 import IndividualProject from "./components/projects/IndividualProject";
 import Logout from "./components/auth/Logout";
@@ -24,6 +20,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import DelayLog from "./components/delayLog/DelayLog";
 import AddTemplate from "./components/modal/AddTemplate";
 import OpenTemplateContext from './contexts/OpenTemplateContext'
+import Documents from './components/documents/Documents'
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
@@ -41,12 +38,8 @@ import TemplateProvider from "./contexts/templates/TemplateProvider";
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
-<<<<<<< HEAD
-import Uploader from './components/documents/Uploader'
-=======
 import TemplatesProvider from "./contexts/templates/TemplateProvider";
->>>>>>> ef6f7e7009ed3c51e2e79e842cbe00321eb899e6
-
+import Uploader from './components/documents/Uploader'
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [pathname, setPathname] = useState(window.location.pathname);
@@ -114,39 +107,6 @@ function App() {
         <OpenTemplateContext.Provider value= {{openTemplate, setOpenTemplate}} >
       <ProjectsProvider>
         <TaskProvider>
-<<<<<<< HEAD
-          <SearchTermContext.Provider value={{searchTerm, setSearchTerm}}>
-          <OpenContext.Provider value={{ open, setOpen }}>
-            <PathnameContext.Provider value = {{pathname, setPathname}}>
-            <UserContext.Provider value={{ userInfo, setUserInfo }}>
-              <NavBar setPathname={setPathname} navLinks={navLinks} />
-              <Layout pathname={pathname}>
-                <Switch>
-                  <Route exact path="/auth" component={Auth} />
-                  <Route exact path="/navbar" component={AuthNavBar} />
-                  <Route exact path="/callback" component={Callback} />
-                  <Route exact path="/login" component={Login} />
-                  {/* <Route exact path="/signup" component={Signup} /> */}
-                  <Route exact path="/log-out" component={Logout} />
-                  {/*   */}
-                  <Route exact path="/dashboard" component={Dashboard} />
-                  <Route exact path="/tasks" component={Tasks} />
-                  <Route exact path="/projects" component={Projects} />
-                  <Route exact path="/documents" component={Documents}/>
-                  <Route exact path="/documents/add" component={Uploader}/>
-                  <Route
-                    exact
-                    path="/project/:id"
-                    component={IndividualProject}
-                  />
-                  <Route exact path="/delay-log" component={DelayLog} />
-                </Switch>
-              </Layout>
-            </UserContext.Provider>
-            </PathnameContext.Provider>
-          </OpenContext.Provider>
-          </SearchTermContext.Provider>
-=======
           <DelayLogProvider>
             <SearchTermContext.Provider value={{ searchTerm, setSearchTerm }}>
               <OpenContext.Provider value={{ open, setOpen }}>
@@ -184,6 +144,8 @@ function App() {
                             component={IndividualProject}
                           />
                           <Route exact path="/delay-log" component={DelayLog} />
+                          <Route exact path="/documents" component={Documents}/>
+                          <Route exact path="/documents/add" component={Uploader}/>
                         </Switch>
                       </Layout>
                     </UserContext.Provider>
@@ -192,7 +154,6 @@ function App() {
               </OpenContext.Provider>
             </SearchTermContext.Provider>
           </DelayLogProvider>
->>>>>>> ef6f7e7009ed3c51e2e79e842cbe00321eb899e6
         </TaskProvider>
       </ProjectsProvider>
       </OpenTemplateContext.Provider>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {axiosWithAuth} from '../../utils/auth/axiosWithAuth';
 import {link}from 'react-router'
+import Dropzone from  './Dropzone'
 let user_id = localStorage.getItem("user_id")
 class Uploader extends Component {
 
@@ -87,6 +88,7 @@ class Uploader extends Component {
           <br/>
           <button onClick={this.handleUpload}>UPLOAD</button>
         </center>
+   
       </div>
     );
   }

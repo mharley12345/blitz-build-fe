@@ -168,18 +168,11 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
            <img  src={Logo} alt="Blitz-Build-Logo"/>
            </LogoContainer>
            <UserProfile>
-<<<<<<< HEAD
-               {userInfo.map(user => 
-             <UserName> {user.name}</UserName>
-             )}  
-             <UserTitle> </UserTitle>
-=======
              <UserImg> <img src={userInfo.picture} style = {imgStyle}/></UserImg>
              <userInfoContainer>
              <UserName> {userInfo.name}</UserName>
              <UserTitle>  Super Intendent  </UserTitle>
              </userInfoContainer>
->>>>>>> ef6f7e7009ed3c51e2e79e842cbe00321eb899e6
            </UserProfile>
         </LogoAvatarContainer>
   
