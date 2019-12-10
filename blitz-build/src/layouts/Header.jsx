@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import  Search from '../styles/Search/Search.png'
+import Uploader from '../components/documents/Uploader'
 import TasksContext from '../contexts/tasks/TaskContext'
 import Modal from '../components/global/Modal'
 import TaskForm from '../components/tasks/TaskForm'
-import { NavLink } from 'react-router-dom'
+import { NavLink ,Link} from 'react-router-dom'
 import OpenContext from '../contexts/projects/OpenContext'
 import OpenTemplateContext from '../contexts/OpenTemplateContext'
 // import AddProject from  '../components/modal/AddProject'
@@ -194,6 +195,7 @@ function Header({pathname}) {
   const [TaskModalStatus, setTaskModalStatus] = useState(false);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
+  
 
 
   const handleTaskModalOpen = () => {
@@ -202,6 +204,12 @@ function Header({pathname}) {
   const handleTaskModalClose = () => {
     setTaskModalStatus(false);
   };
+ const handleDocumentModalOpen =()=>{
+   setDocumentModalStatus(true)
+ }
+ const handleDocumentModalClose =()=>{
+   setDocumentModalStatus(false)
+ }
 
   const id = [];
   for (var i = 1; i <= 100; i++) {
@@ -362,14 +370,16 @@ const handleChange = e => {
             onMouseEnter={() => setDocumentHover(true)}
             onMouseLeave={() => setDocumentHover(false)}
             style={HideTheDocumentButton(pathname)}
+            onClick={handleDocumentModalOpen}
           >
             {" "}
             <ButtonI
               className="ion-ios-add-circle"
               style={HoverDocumentStyleFunction()}
+              onClick={handleDocumentModalClose}
             />{" "}
             <ButtonText style={HoverDocumentStyleFunction()}>
-              New Document
+            Add Document
             </ButtonText>
           </ButtonDocument>
 
