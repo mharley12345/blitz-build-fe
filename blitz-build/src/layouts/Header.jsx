@@ -219,7 +219,7 @@ function Header({pathname}) {
 
   const HideTheProjectButton = (pathname) => {
   
- if(pathname === '/documents' || pathname === '/templates' || pathname === '/delay-log' || pathname === `/help` || pathname === '/log-out') {
+ if(pathname === '/documents' || pathname === '/delay-log' || pathname === `/help` || pathname === '/log-out' || pathname ==='90_Day' || pathname.includes('templates')) {
      return HideButton
  }
  else {
@@ -227,7 +227,7 @@ function Header({pathname}) {
  }  };
  const HideTheDocumentButton = (pathname) => {
   
-  if( pathname === '/templates' || pathname === '/delay-log' || pathname === '/tasks' ) {
+  if( pathname === '/delay-log' || pathname === '/tasks' || pathname === '90_Day' || pathname.includes('templates') ) {
       return HideButton
   }
   else if(pathname === '/documents') {
@@ -260,11 +260,11 @@ const HideTheTemplateButton = (pathname) => {
   }
 }
 const HideTheTemplateTaskButton = (pathname) => {
-  if (pathname.includes('templates')) {
-    return ButtonProjectCheck
+   if(pathname.includes('project') || pathname === '/dashboard' || pathname === '/tasks' || pathname === '/projects' || pathname === '/documents' || pathname === '/templates' || pathname === '/delay-log' || pathname === `/help` || pathname === '/log-out' ) {
+    return HideButton
   }
   else {
-    return HideButton
+    return ButtonProjectCheck
   }
 }
 const HoverTaskStyleFunction = () => {
