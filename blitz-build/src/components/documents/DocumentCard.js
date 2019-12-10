@@ -7,13 +7,18 @@ import {Link} from 'react-router-dom'
 const  DocumentCard = (props) => {
   const[document,setDocument] =useState([])
   
+  const handleClick =(ev)=>{
+    let id = ev.target.id
+    axiosWithAuth().delete(`/docs/url/${id}`).then(res=>{console.log(res)})
+  
+  }
   useEffect(() =>{
  
     axiosWithAuth()
     .get(`/docs/url`)
      
     .then(response =>{
-      console.log(response)
+      console.log(response.data)
       let docs = response.data
       console.log(docs)
      
@@ -33,7 +38,7 @@ const  DocumentCard = (props) => {
           <Name>{documents.file_name}</Name>
              <Right>  
        <a href ={documents.doc_url} rel="noopener noreferrer" target="_blank">View</a>
-    
+          <button id={documents.id} onClick={handleClick}>Delete</button>
         </Right>
         </>
      )})}
