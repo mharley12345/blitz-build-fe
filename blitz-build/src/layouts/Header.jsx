@@ -85,6 +85,16 @@ const SoloDocument = {
   marginLeft: '160px',
  
 }
+
+const SoloTask = {
+  display: 'flex',
+borderRadius: '3px',
+ width: '151px',
+ height: '48px',
+ justifyContent: 'center',
+ alignItems: 'center',
+ marginLeft: '160px',
+}
 const ButtonProject = styled.div `
 display: flex;
 border-radius: 3px;
@@ -197,13 +207,8 @@ function Header({pathname}) {
   const [TaskModalStatus, setTaskModalStatus] = useState(false);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
-<<<<<<< HEAD
   const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
   // const { addTemplate } = useContext(TemplateContext)
-=======
-  
-
->>>>>>> 785b943365805042aa2bf5fd8b21d41ee38345ee
 
   const handleTaskModalOpen = () => {
     setTaskModalStatus(true);
@@ -211,21 +216,18 @@ function Header({pathname}) {
   const handleTaskModalClose = () => {
     setTaskModalStatus(false);
   };
-<<<<<<< HEAD
   const handleTemplateTaskModalOpen = () => {
     setTemplateTaskModalStatus(true);
   };
   const handleTemplateTaskModalClose = () => {
     setTemplateTaskModalStatus(false);
   };
-=======
  const handleDocumentModalOpen =()=>{
    setDocumentModalStatus(true)
  }
  const handleDocumentModalClose =()=>{
    setDocumentModalStatus(false)
  }
->>>>>>> 785b943365805042aa2bf5fd8b21d41ee38345ee
 
   const id = [];
   for (var i = 1; i <= 100; i++) {
@@ -279,7 +281,7 @@ const HideTheTemplateTaskButton = (pathname) => {
     return HideButton
   }
   else {
-    return ButtonProjectCheck
+    return SoloTask
   }
 }
 const HoverTaskStyleFunction = () => {
