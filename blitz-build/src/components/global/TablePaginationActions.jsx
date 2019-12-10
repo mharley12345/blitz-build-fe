@@ -1,19 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { withStyles, makeStyles, useTheme } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
-import FirstPageIcon from "@material-ui/icons/FirstPage";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import LastPageIcon from "@material-ui/icons/LastPage";
+
 
 
 const useStyles1 = makeStyles(theme => ({
@@ -49,7 +38,11 @@ function TablePaginationActions(props) {
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
+        {theme.direction === "rtl" ? (
+          <i class="icon ion-md-skip-forward"></i>
+        ) : (
+          <i class="icon ion-md-skip-backward"></i>
+        )}
       </IconButton>
       <IconButton
         onClick={handleBackButtonClick}
@@ -57,9 +50,9 @@ function TablePaginationActions(props) {
         aria-label="previous page"
       >
         {theme.direction === "rtl" ? (
-          <KeyboardArrowRight />
+          <i class="icon ion-ios-arrow-forward"></i>
         ) : (
-          <KeyboardArrowLeft />
+          <i class="icon ion-ios-arrow-back"></i>
         )}
       </IconButton>
       <IconButton
@@ -68,9 +61,9 @@ function TablePaginationActions(props) {
         aria-label="next page"
       >
         {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft />
+          <i class="icon ion-ios-arrow-back"></i>
         ) : (
-          <KeyboardArrowRight />
+          <i class="icon ion-ios-arrow-forward"></i>
         )}
       </IconButton>
       <IconButton
@@ -78,7 +71,11 @@ function TablePaginationActions(props) {
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
+        {theme.direction === "rtl" ? (
+          <i class="icon ion-md-skip-backward"></i>
+        ) : (
+          <i class="icon ion-md-skip-forward"></i>
+        )}
       </IconButton>
     </div>
   );
