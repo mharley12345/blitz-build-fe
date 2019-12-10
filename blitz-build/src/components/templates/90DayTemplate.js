@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import TemplatesProvider from "../../contexts/templates/TemplateProvider";
+import React, { useEffect, useState } from "react";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 const NinetyDayTemplate = props => {
