@@ -21,6 +21,8 @@ import Layout from "./layouts/Layout";
 import Dashboard from "./components/dashboard/Dashboard";
 import DelayLog from "./components/delayLog/DelayLog";
 import OpenTemplateContext from "./contexts/OpenTemplateContext";
+import AddTemplate from "./components/modal/AddTemplate";
+import Documents from "./components/documents/Documents";
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
@@ -39,7 +41,7 @@ import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
 import TemplatesProvider from "./contexts/templates/TemplateProvider";
-
+import Uploader from "./components/documents/Uploader";
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [pathname, setPathname] = useState(window.location.pathname);
@@ -175,6 +177,16 @@ function App() {
                                 exact
                                 path="/delay-log"
                                 component={DelayLog}
+                              />
+                              <Route
+                                exact
+                                path="/documents"
+                                component={Documents}
+                              />
+                              <Route
+                                exact
+                                path="/documents/add"
+                                component={Uploader}
                               />
                             </Switch>
                           </Layout>

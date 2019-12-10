@@ -13,7 +13,7 @@ export default function EditDelayReason({
   delayReason
 }) {
   const { editDelayLog } = useContext(DelayLogContext);
-
+//console.log(delayReason)
   return (
     <>
       <Modal

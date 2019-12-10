@@ -4,87 +4,100 @@ import styled from "styled-components";
 
 // css of the weather container in the project page
 const WeatherContainerP = styled.div`
-  width: 530px;
-  height: 224px;
-
+  min-width:530px;
+  height: 172px;
+  border: 1px solid #dcd9d5;
+  box-sizing: border-box;
+  border-radius: 3px;
   background: #ffffff;
-`;
-const Weathertitle = styled.div`
-  width: 530px;
-  height: 40px;
-  left: 878px;
-  top: 168px;
-
-  background: #3f3a36;
-
-  font-family: Roboto;
-  font-size: 16px;
-  line-height: 19px;
-
-  color: #fbfaf9;
-`;
-const WeatherTitleText = styled.div`
-  padding: 12px 16px 12px 16px;
-
-  font-family: Roboto;
-  font-size: 16px;
-  line-height: 19px;
-
-  color: #fbfaf9;
-`;
-const WeatherLocationInfo = styled.div`
-  margin: 15px 35px;
-  border-bottom: 1px solid lightgrey;
-`;
-const WeatherInfo = styled.div`
-  margin: 15px 35px;
   display: flex;
 `;
+const CityInfo = styled.div`
+  width: 50%;
+  height: 172px;
+`;
+const WeatherInfo = styled.div`
+  width: 50%;
+  height: 172px;
+  display: flex;
+  align-items:center
+`;
 const WeatherData = styled.div`
-  width: 50%;
-`;
-const WeatherTem = styled.div`
-  font-weight: bold;
-  font-size: 60px;
-`;
-const WeatherIcon = styled.div`
-  width: 50%;
+  text-align: center;
 `;
 
-const IconImage = styled.img`
-  width: 100px;
-  height: 100px;
+
+
+
+const WeatherIcon = styled.div`
+  text-align: center;
 `;
+
+
 
 function ProjectWeather({ weatherData, time, icon,city }) {
-  
+           
   return (
     <>
       <WeatherContainerP>
-          <Weathertitle>
-            <WeatherTitleText>Weather</WeatherTitleText>
-          </Weathertitle>
-          <WeatherLocationInfo>
-                <h5>{city}</h5>
-            <p>{time}</p>
-          </WeatherLocationInfo>
-            <WeatherInfo>
-              <WeatherData>
-                <WeatherTem>
-                  {((weatherData.currently.temperature * 9) / 5 + 32).toFixed(
-                    0
-                  )}
-                  <span>&#176;</span>
-                </WeatherTem>
-                <p>
-                  Humidity {(weatherData.currently.humidity * 100).toFixed(0)}
-                  <span>&#37;</span>
-                </p>
-              </WeatherData>
-              <WeatherIcon>{icon}</WeatherIcon>
-            </WeatherInfo>
-        </WeatherContainerP>
-      
+        <CityInfo>
+          <p
+            style={{
+              fontSize: "24px",
+              fontWeight: 500,
+              marginTop: "59px",
+              marginLeft: "32px",
+              color: "#3B3B3B",
+              lineHeiht: "28px"
+            }}
+          >
+            {city}
+          </p>
+          <p
+            style={{
+              fontSize: "16px",
+              marginTop: "2px",
+              marginLeft: "32px",
+              color: "#3B3B3B",
+              lineHeiht: "24px"
+            }}
+          >
+            {time}
+          </p>
+        </CityInfo>
+
+        <WeatherInfo>
+          <WeatherData>
+            <p
+              style={{
+                fontSize: "24px",
+                fontWeight: 500,
+                
+                marginLeft: "32px",
+                color: "#3B3B3B",
+                lineHeiht: "28px"
+              }}
+            >
+              {((weatherData.currently.temperature * 9) / 5 + 32).toFixed(0)}
+              <span>&#176;</span>
+            </p>
+            <p
+              style={{
+                fontSize: "16px",
+                marginTop: "2px",
+                marginLeft: "32px",
+                color: "#817974",
+                lineHeiht: "24px"
+              }}
+            >
+              {weatherData.currently.summary}
+            </p>
+          </WeatherData>
+          <WeatherIcon>
+            {icon}
+            </WeatherIcon>
+        </WeatherInfo>
+      </WeatherContainerP>
     </>
   );
 }

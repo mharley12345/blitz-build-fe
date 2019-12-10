@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import  Search from '../styles/Search/Search.png'
+import Uploader from '../components/documents/Uploader'
 import TasksContext from '../contexts/tasks/TaskContext'
 import Modal from '../components/global/Modal'
 import TaskForm from '../components/tasks/TaskForm'
-import { NavLink } from 'react-router-dom'
+import { NavLink ,Link} from 'react-router-dom'
 import OpenContext from '../contexts/projects/OpenContext'
 import OpenTemplateContext from '../contexts/OpenTemplateContext'
 // import AddProject from  '../components/modal/AddProject'
@@ -97,7 +98,7 @@ border: 1px solid #8A827D
   border: 1px solid #DD6B20 ;
   color: #DD6B20;
   cursor: pointer;
-}
+} 
 }
 `
 const ButtonTemplate = styled.div `
@@ -196,8 +197,13 @@ function Header({pathname}) {
   const [TaskModalStatus, setTaskModalStatus] = useState(false);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
+<<<<<<< HEAD
   const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
   // const { addTemplate } = useContext(TemplateContext)
+=======
+  
+
+>>>>>>> 785b943365805042aa2bf5fd8b21d41ee38345ee
 
   const handleTaskModalOpen = () => {
     setTaskModalStatus(true);
@@ -205,12 +211,21 @@ function Header({pathname}) {
   const handleTaskModalClose = () => {
     setTaskModalStatus(false);
   };
+<<<<<<< HEAD
   const handleTemplateTaskModalOpen = () => {
     setTemplateTaskModalStatus(true);
   };
   const handleTemplateTaskModalClose = () => {
     setTemplateTaskModalStatus(false);
   };
+=======
+ const handleDocumentModalOpen =()=>{
+   setDocumentModalStatus(true)
+ }
+ const handleDocumentModalClose =()=>{
+   setDocumentModalStatus(false)
+ }
+>>>>>>> 785b943365805042aa2bf5fd8b21d41ee38345ee
 
   const id = [];
   for (var i = 1; i <= 100; i++) {
@@ -380,14 +395,16 @@ const handleChange = e => {
             onMouseEnter={() => setDocumentHover(true)}
             onMouseLeave={() => setDocumentHover(false)}
             style={HideTheDocumentButton(pathname)}
+            onClick={handleDocumentModalOpen}
           >
             {" "}
             <ButtonI
               className="ion-ios-add-circle"
               style={HoverDocumentStyleFunction()}
+              onClick={handleDocumentModalClose}
             />{" "}
             <ButtonText style={HoverDocumentStyleFunction()}>
-              New Document
+            Add Document
             </ButtonText>
           </ButtonDocument>
 
