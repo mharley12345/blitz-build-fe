@@ -42,7 +42,6 @@ export default function TaskForm({
   editFields,
   text
 }) {
-  const { addTask } = useContext(tasksContext);
   const [templates, setTemplates] = useState([]);
 
   const template_id = localStorage.getItem("template_id");
@@ -66,10 +65,6 @@ export default function TaskForm({
   const handleSubmit = e => {
     e.preventDefault();
 
-    //finds the the project that the user picked
-
-    // console.log("from handleSubmit in TaskForm", chosenProject);
-
     //asigns the project id to the new task
     const newTask = {
       id: task.id,
@@ -81,7 +76,6 @@ export default function TaskForm({
 
     console.log("from taskform submit", task);
     handleFunction(newTask);
-    // addTask();
     setTask({
       task_name: "",
       task_description: "",

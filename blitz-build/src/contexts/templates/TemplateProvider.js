@@ -7,8 +7,10 @@ import TemplateContext from "./TemplateContext";
 export default function TemplatesProvider({ children }) {
   const [templates, setTemplates] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [templateTask, setTemplatesTask] = useState([])
 
   useEffect(() => {
+   
     axiosWithAuth()
       .get("/templates")
       // .get("/90_day")
@@ -20,6 +22,21 @@ export default function TemplatesProvider({ children }) {
         console.log(err);
       });
   }, []);
+
+const getTemplateTasks = () => {
+   const templateID = localStorage.getItem('template_id');
+
+  axiosWithAuth()
+      .get(`/projects/tasks/template/${templateID}`)
+      .then(res => {
+        console.log("template tasks", res);
+        setTemplatesTask(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+}
+
 
   const addTemplate = newTemplate => {
     console.log("addTemplate", newTemplate);
@@ -33,6 +50,29 @@ export default function TemplatesProvider({ children }) {
       .catch(err => {
         console.log(err);
       });
+  };
+
+  const addTemplateTask = newTask => {
+    // console.log("new task", newTask);
+
+    // const task = {
+    //   due_date: newTask.due_date,
+    //   task_name: newTask.task_name,
+    //   task_description: newTask.task_description,
+    //   project_id: newTask.project_id,
+    //   template_id: newTask.template_id
+    // };
+    // console.log("task const from addTask", task);
+    axiosWithAuth()
+      .post(`/projects/tasks`, newTask)
+      .then(res => {
+        console.log("from addTemplateTask in templateProvider", res);
+        newTask.id = res.data.taskId[0];
+        setTemplatesTask([...tasks, newTask]);
+        getTemplateTasks();
+      })
+      .catch(err => console.log(err));
+    console.log(newTask);
   };
 
   const deleteTemplate = deletedTemplate => {
@@ -73,28 +113,18 @@ export default function TemplatesProvider({ children }) {
       });
   };
 
-  const templateTasks = () => {
-    axiosWithAuth()
-      .get(`/templates/${templates.id}`)
-      .then(res => {
-        console.log("template tasks", res);
-
-        setTasks(res.data);
-        console.log(tasks);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
 
   return (
     <TemplateContext.Provider
       value={{
+        templateTask,
+        setTemplatesTask,
         templates,
         addTemplate,
         deleteTemplate,
         editTemplate,
-        templateTasks
+        addTemplateTask,
+        getTemplateTasks
       }}
     >
       {children}
