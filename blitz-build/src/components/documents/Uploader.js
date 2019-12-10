@@ -10,10 +10,11 @@ class Uploader extends Component {
     this.state = {
       success : false,
       doc_url : "",
-      user_id:user_id,
+      user_id:localStorage.getItem('user_id'),
       file_name:'',
       project_id:1
     }
+    console.log(this.state)
   }
   
   handleChange = (ev) => {
@@ -22,6 +23,7 @@ class Uploader extends Component {
   }
   // Perform the upload
   handleUpload = (ev) => {
+    console.log(ev)
     let file = this.uploadInput.files[0];
     // Split the filename to get the name and type
     let fileParts = this.uploadInput.files[0].name.split('.');
@@ -59,7 +61,7 @@ class Uploader extends Component {
         doc_url : this.state.doc_url,
       user_id: this.state.user_id,
       file_name:this.state.file_name,
-      project_id:1}))
+      project_id:this.state.project_id}))
       
       .catch(error => {
         alert("ERROR " + JSON.stringify(error));
