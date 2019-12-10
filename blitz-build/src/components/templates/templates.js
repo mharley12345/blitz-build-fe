@@ -46,7 +46,7 @@ const Templates = props => {
       </Section>
 
       <Container>
-        <Link to={`/90_Day`}>
+        <Link to={`/90_Day`} style={LinkStyle}>
           <Name>{NinetyDayBuild}</Name>
         </Link>
       </Container>
@@ -62,7 +62,7 @@ const Templates = props => {
           //   </Container>
           // </div>
           <Container>
-            <Link
+            <Link style={LinkStyle}
               to={`/templates/${template.id}`}
               onClick={() => localStorage.setItem("template_id", template.id)}
             >
@@ -80,6 +80,11 @@ const Templates = props => {
 
 export default Templates;
 
+const LinkStyle = {
+  textDecoration: 'none',
+  
+  }
+ 
 const Section = styled.div`
   width: 100%;
   display: flex;
@@ -111,7 +116,7 @@ const Container = styled.div`
 `;
 const Name = styled.div`
   /* Heading 4 */
-  width: 50%;
+  width: 500px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
