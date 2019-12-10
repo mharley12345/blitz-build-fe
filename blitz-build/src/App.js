@@ -21,6 +21,7 @@ import DelayLog from "./components/delayLog/DelayLog";
 import AddTemplate from "./components/modal/AddTemplate";
 import OpenTemplateContext from './contexts/OpenTemplateContext'
 import Documents from './components/documents/Documents'
+
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
@@ -40,6 +41,7 @@ import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
 import TemplatesProvider from "./contexts/templates/TemplateProvider";
 import Uploader from './components/documents/Uploader'
+
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [pathname, setPathname] = useState(window.location.pathname);
@@ -55,7 +57,7 @@ function App() {
     }
   }, []);
 
-  console.log("userInfo", userInfo);
+  // console.log("userInfo", userInfo);
 
   const navLinks = [
     {
@@ -146,6 +148,7 @@ function App() {
                           <Route exact path="/delay-log" component={DelayLog} />
                           <Route exact path="/documents" component={Documents}/>
                           <Route exact path="/documents/add" component={Uploader}/>
+                          {/* <Route exact path="/documents/dropzone" component={DropZoneApp}/> */}
                         </Switch>
                       </Layout>
                     </UserContext.Provider>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {axiosWithAuth} from '../../utils/auth/axiosWithAuth';
-import {link}from 'react-router'
-import Dropzone from  './Dropzone'
+
+
+import './DropZone.css'
+
 let user_id = localStorage.getItem("user_id")
 class Uploader extends Component {
 
@@ -9,13 +11,14 @@ class Uploader extends Component {
     super(props);
     this.state = {
       success : false,
+      isActive : false,
       doc_url : "",
       user_id:user_id,
       file_name:'',
       project_id:1
     }
   }
-  
+ 
   handleChange = (ev) => {
     this.setState({success: false, url : ""});
     
@@ -50,29 +53,32 @@ class Uploader extends Component {
       //Uploads File to S3 bucket
       axiosWithAuth().put(signedRequest,file,options)
       .then(result => {
-        console.log("Response from s3",result)
+        console.log("Response from s3")
         this.setState({success: true});
 })
 .then(
  
-      axiosWithAuth().post('/docs/url',{
+      axiosWithAuth().post('docs/url',{
         doc_url : this.state.doc_url,
       user_id: this.state.user_id,
       file_name:this.state.file_name,
       project_id:1}))
-      .then(response=> console.log(response))
+      
       .catch(error => {
-         console.log({error})
+        alert("ERROR " + JSON.stringify(error));
       })
     })
     .catch(error => {
-      console.log({error});
+      alert(JSON.stringify(error));
     })
-  }
-  
+  };
+ 
+ 
+ 
   
   render() {
-    const Success_message = () => (
+
+    const SuccessMessage = () => (
       <div style={{padding:50}}>
         <h3 style={{color: 'green'}}>SUCCESSFUL UPLOAD</h3>
        
@@ -80,15 +86,15 @@ class Uploader extends Component {
       </div>
     )
     return (
+         
       <div className="Uploader">
-        <center>
-          <h1>UPLOAD A FILE</h1>
-          {this.state.success ? <Success_message/> : null}
+
+   
+          {this.state.success ? <SuccessMessage/> : null}
           <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file"/>
           <br/>
           <button onClick={this.handleUpload}>UPLOAD</button>
-        </center>
-   
+     
       </div>
     );
   }
