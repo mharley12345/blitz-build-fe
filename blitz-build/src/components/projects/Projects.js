@@ -5,6 +5,7 @@ import AddProject from "../modal/AddProject";
 import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
 import searchTermContext from '../../contexts/searching/searchTerm'
+import moment from "moment";
 
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -17,6 +18,8 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 // pages bar function from global
 import TablePaginationActions from '../global/TablePaginationActions'
+
+
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -105,6 +108,7 @@ const Projects = props => {
             project.project_name,
             project.status,
             project.createdAt,
+            
             "View Project >"
           )
         ); 
@@ -147,7 +151,9 @@ console.log("rows in projects table", rows)
                 </StyledTableCell>
                 <StyledTableCell>{row.name}</StyledTableCell>
                 <StyledTableCell>{row.status}</StyledTableCell>
-                <StyledTableCell>{row.createDate}</StyledTableCell>
+                <StyledTableCell>
+                  {new Date(row.createDate*1000).toLocaleDateString()}
+                </StyledTableCell>
                 <StyledTableCell>
                   <Link
                     to={`/project/${row.id}`}
@@ -167,7 +173,7 @@ console.log("rows in projects table", rows)
               </TableRow>
             )}
           </TableBody>
-          
+
           <TableFooter>
             <TableRow>
               <TablePagination
@@ -178,7 +184,7 @@ console.log("rows in projects table", rows)
                 page={page}
                 SelectProps={{
                   inputProps: { "aria-label": "rows per page" },
-                  native: true
+                  native: false
                 }}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
