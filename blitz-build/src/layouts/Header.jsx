@@ -219,7 +219,7 @@ function Header({pathname}) {
 
   const HideTheProjectButton = (pathname) => {
   
- if(pathname === '/documents' || pathname === '/delay-log' || pathname === `/help` || pathname === '/log-out' || pathname ==='90_Day' || pathname.includes('templates')) {
+ if(pathname === '/documents' || pathname === '/delay-log' || pathname === `/help` || pathname === '/log-out' || pathname ==='/90_Day' || pathname.includes('templates')) {
      return HideButton
  }
  else {
@@ -227,7 +227,7 @@ function Header({pathname}) {
  }  };
  const HideTheDocumentButton = (pathname) => {
   
-  if( pathname === '/delay-log' || pathname === '/tasks' || pathname === '90_Day' || pathname.includes('templates') ) {
+  if( pathname === '/delay-log' || pathname === '/tasks' || pathname === '/90_Day' || pathname.includes('templates') ) {
       return HideButton
   }
   else if(pathname === '/documents') {

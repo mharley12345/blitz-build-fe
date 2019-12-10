@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-
+import PathnameContext from '../../contexts/PathnameContext'
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import templateContext from "../../contexts/templates/TemplateContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
@@ -14,8 +14,9 @@ const Templates = () => {
   const { searchTerm } = useContext(searchTermContext);
   const templatesSearchInput = searchTerm.toLowerCase();
   const [templatesSearchResults, settemplateSearchResults] = useState([]);
-
+  const { pathname, setPathname } = useContext(PathnameContext)
   const seedData = () => {
+    setPathname(window.location.pathname)
     axiosWithAuth()
       .get("/90_Day")
       .then(res => {

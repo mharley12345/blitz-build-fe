@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import TemplatesProvider from "../../contexts/templates/TemplateProvider";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-
+import PathnameContext from '../../contexts/PathnameContext'
 const NinetyDayTemplate = props => {
   const [templateTasks, setTemplateTasks] = useState([]);
+  const { pathname, setPathname } = useContext(PathnameContext)
 
   useEffect(() => {
+    setPathname(window.location.pathname)
     axiosWithAuth()
       .get(`/90_Day`)
       .then(res => {
