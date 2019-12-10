@@ -232,6 +232,7 @@ const DelayLogButtons = styled.div`
   padding-left: 30px;
   font-size: 19px;
   color: #8a827d;
+  cursor: pointer;
   &:hover {
     color: #dd6b20;
   }

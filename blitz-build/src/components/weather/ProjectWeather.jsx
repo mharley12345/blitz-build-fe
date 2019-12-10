@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 
@@ -13,7 +13,7 @@ const WeatherContainerP = styled.div`
   display: flex;
 `;
 const CityInfo = styled.div`
-  width: 50%;
+  width: 45%;
   height: 172px;
 `;
 const WeatherInfo = styled.div`
@@ -31,6 +31,7 @@ const WeatherData = styled.div`
 
 const WeatherIcon = styled.div`
   text-align: center;
+  margin-left:10px
 `;
 
 

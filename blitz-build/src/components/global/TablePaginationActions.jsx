@@ -50,9 +50,15 @@ function TablePaginationActions(props) {
         aria-label="previous page"
       >
         {theme.direction === "rtl" ? (
-          <i class="icon ion-ios-arrow-forward"></i>
+          <i
+            class="icon ion-ios-arrow-forward"
+            style={{ padding: "0", margin: "0px 6px" }}
+          ></i>
         ) : (
-          <i class="icon ion-ios-arrow-back"></i>
+          <i
+            class="icon ion-ios-arrow-back"
+            style={{ padding: "0", margin: "0px 6px" }}
+          ></i>
         )}
       </IconButton>
       <IconButton
@@ -61,9 +67,15 @@ function TablePaginationActions(props) {
         aria-label="next page"
       >
         {theme.direction === "rtl" ? (
-          <i class="icon ion-ios-arrow-back"></i>
+          <i
+            class="icon ion-ios-arrow-back"
+            style={{ padding: "0", margin: "0px 6px" }}
+          ></i>
         ) : (
-          <i class="icon ion-ios-arrow-forward"></i>
+          <i
+            class="icon ion-ios-arrow-forward"
+            style={{ padding: "0", margin: "0px 6px" }}
+          ></i>
         )}
       </IconButton>
       <IconButton
