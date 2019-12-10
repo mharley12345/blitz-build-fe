@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import templateContext from "../../contexts/templates/TemplateContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
 import AddTemplate from "../modal/AddTemplate";
 import styled, { css } from "styled-components";
-import TemplateMeatBallsDrop from './TemplateMeatBalls'
+import TemplateMeatBallsDrop from "./TemplateMeatBalls";
 const Templates = () => {
   const { templates } = useContext(templateContext);
 
@@ -29,15 +31,18 @@ console.log(templates);
 
       {templates.map(template => {
         return (
-      <Container>
-        <Name>{template.template_name}</Name>
-        <TemplateMeatBallsDrop template={template}/>
-      </Container>
+          <div>
+            <Container>
+              <Link to={`/templates/${template.id}`}>
+                <Name>{template.template_name}</Name>
+              </Link>
+              <TemplateMeatBallsDrop template={template}/>
+            </Container>
+          </div>
         );
       })}
-    
-        <AddTemplate />
-    
+
+      <AddTemplate />
     </div>
   );
 };

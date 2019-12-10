@@ -194,12 +194,19 @@ function Header({pathname}) {
   const [TaskModalStatus, setTaskModalStatus] = useState(false);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
-
+  const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
+  const { addTemplate } = useContext(templateContext)
 
   const handleTaskModalOpen = () => {
     setTaskModalStatus(true);
   };
   const handleTaskModalClose = () => {
+    setTaskModalStatus(false);
+  };
+  const handleTemplateTaskModalOpen = () => {
+    setTaskModalStatus(true);
+  };
+  const handleTemplateTaskModalClose = () => {
     setTaskModalStatus(false);
   };
 
@@ -242,6 +249,14 @@ const HideTheTaskButton = (pathname) => {
 }
 
 const HideTheTemplateButton = (pathname) => {
+  if (pathname === '/templates') {
+    return ButtonTemplateCheck
+  }
+  else {
+    return HideButton
+  }
+}
+const HideTheTemplateTaskButton = (pathname) => {
   if (pathname === '/templates') {
     return ButtonTemplateCheck
   }
@@ -386,6 +401,20 @@ const handleChange = e => {
             />
             <ButtonText style={HoverTaskStyleFunction()}>New Task</ButtonText>
           </ButtonTask>
+          
+          <ButtonTask
+            onMouseEnter={() => setTaskHover(true)}
+            onMouseLeave={() => setTaskHover(false)}
+            style={HideTheTemplateTaskButton(pathname)}
+            onClick={handleTemplateTaskModalOpen}
+          >
+            {" "}
+            <ButtonI
+              className="ion-ios-add-circle"
+              style={HoverTaskStyleFunction()}
+            />
+            <ButtonText style={HoverTaskStyleFunction()}>New Task</ButtonText>
+          </ButtonTask>
 
           <ButtonProject
             onMouseEnter={() => setProjectHover(true)}
@@ -428,7 +457,22 @@ const handleChange = e => {
                 handleFunction={addTask}
                 text={"Add Task"}
               />
+              
+            } />
+
+            <Modal
+            visible={TemplateTaskModalStatus}
+            dismiss={handleTemplateTaskModalClose}
+            client={"50%"}
+            component={
+              <TemplateTaskForm
+                closeModal={handleTemplateTaskModalClose}
+                handleFunction={addTemplateTask}
+                text={"Add Task"}
+              />
+              
             }
+            
           />
         </ButtonContainer>
         <AddProject/>
