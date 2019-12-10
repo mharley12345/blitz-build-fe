@@ -10,6 +10,8 @@ import OpenTemplateContext from '../contexts/OpenTemplateContext'
 // import AddProject from  '../components/modal/AddProject'
 import searchTermContext from '../contexts/searching/searchTerm'
 import AddProject from "../components/modal/AddProject";
+import TemplateContext from '../contexts/templates/TemplateContext'
+import TemplateTaskForm from '../components/templates/TemplateTaskForm'
 const HeaderContainer = styled.div`
 
   background: #fff;
@@ -195,7 +197,7 @@ function Header({pathname}) {
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
   const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
-  const { addTemplate } = useContext(templateContext)
+  // const { addTemplate } = useContext(TemplateContext)
 
   const handleTaskModalOpen = () => {
     setTaskModalStatus(true);
@@ -204,10 +206,10 @@ function Header({pathname}) {
     setTaskModalStatus(false);
   };
   const handleTemplateTaskModalOpen = () => {
-    setTaskModalStatus(true);
+    setTemplateTaskModalStatus(true);
   };
   const handleTemplateTaskModalClose = () => {
-    setTaskModalStatus(false);
+    setTemplateTaskModalStatus(false);
   };
 
   const id = [];
@@ -248,6 +250,7 @@ const HideTheTaskButton = (pathname) => {
   }  
 }
 
+
 const HideTheTemplateButton = (pathname) => {
   if (pathname === '/templates') {
     return ButtonTemplateCheck
@@ -257,8 +260,8 @@ const HideTheTemplateButton = (pathname) => {
   }
 }
 const HideTheTemplateTaskButton = (pathname) => {
-  if (pathname === '/templates') {
-    return ButtonTemplateCheck
+  if (pathname.includes('templates')) {
+    return ButtonProjectCheck
   }
   else {
     return HideButton
@@ -467,7 +470,7 @@ const handleChange = e => {
             component={
               <TemplateTaskForm
                 closeModal={handleTemplateTaskModalClose}
-                handleFunction={addTemplateTask}
+                handleFunction={addTask}
                 text={"Add Task"}
               />
               
