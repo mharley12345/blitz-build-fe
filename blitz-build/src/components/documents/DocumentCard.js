@@ -2,17 +2,18 @@ import React,{useState,useEffect} from "react";
 import styled from "styled-components";
 import {axiosWithAuth} from "../../utils/auth/axiosWithAuth";
 import {Link} from 'react-router-dom'
-const user_id = localStorage.getItem('user_id')
+
 
 const  DocumentCard = (props) => {
   const[document,setDocument] =useState([])
-
+  
   useEffect(() =>{
  
     axiosWithAuth()
-    .get(`/docs/url`,user_id)
+    .get(`/docs/url`)
      
     .then(response =>{
+      console.log(response)
       let docs = response.data
       console.log(docs)
      

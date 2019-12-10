@@ -50,23 +50,23 @@ class Uploader extends Component {
       //Uploads File to S3 bucket
       axiosWithAuth().put(signedRequest,file,options)
       .then(result => {
-        console.log("Response from s3")
+        console.log("Response from s3",result)
         this.setState({success: true});
 })
 .then(
  
-      axiosWithAuth().post('docs/url',{
+      axiosWithAuth().post('/docs/url',{
         doc_url : this.state.doc_url,
       user_id: this.state.user_id,
       file_name:this.state.file_name,
       project_id:1}))
-      
+      .then(response=> console.log(response))
       .catch(error => {
-        alert("ERROR " + JSON.stringify(error));
+         console.log({error})
       })
     })
     .catch(error => {
-      alert(JSON.stringify(error));
+      console.log({error});
     })
   }
   
