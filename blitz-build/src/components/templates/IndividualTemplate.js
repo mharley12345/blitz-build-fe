@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import TemplatesProvider from "../../contexts/templates/TemplateProvider";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-import PathnameContext from '../../contexts/PathnameContext'
+import PathnameContext from "../../contexts/PathnameContext";
 const IndividualTemplate = props => {
   const [templateTasks, setTemplateTasks] = useState([]);
-  const { pathname, setPathname } = useContext(PathnameContext)
+  const { pathname, setPathname } = useContext(PathnameContext);
+
   useEffect(() => {
     const templateID = props.match.params.id;
     setPathname(window.location.pathname);

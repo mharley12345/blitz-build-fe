@@ -27,7 +27,8 @@ export default function TaskProvider({ children }) {
       due_date: newTask.due_date,
       task_name: newTask.task_name,
       task_description: newTask.task_description,
-      project_id: newTask.project_id
+      project_id: newTask.project_id,
+      template_id: newTask.template_id
     };
     console.log("task const from addTask", task);
     axiosWithAuth()

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 // import DatePicker from "react-datepicker";
 
 //styles
@@ -20,6 +20,8 @@ import { useInput } from "../../customHooks/useInput";
 //axios
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
+import tasksContext from "../../contexts/tasks/TaskContext";
+
 const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
@@ -40,23 +42,23 @@ export default function TaskForm({
   editFields,
   text
 }) {
+  const { addTask } = useContext(tasksContext);
   const [templates, setTemplates] = useState([]);
+
+  const template_id = localStorage.getItem("template_id");
   const [task, setTask, handleChanges] = useInput({
     task_name: "",
     task_description: "",
     due_date: "",
-   
+    template_id: template_id
   });
 
   useEffect(() => {
- 
-  
     if (editFields) {
-      console.log('editFields', editFields)
+      console.log("editFields", editFields);
       setTask(editFields);
-      console.log('project_name', )
     }
-  },[]);
+  }, []);
 
   //sets the fields if the editFields prop is passed down
   //else they are empty
@@ -65,25 +67,26 @@ export default function TaskForm({
     e.preventDefault();
 
     //finds the the project that the user picked
-    
+
     // console.log("from handleSubmit in TaskForm", chosenProject);
 
     //asigns the project id to the new task
     const newTask = {
-     
       id: task.id,
       task_name: task.task_name,
       task_description: task.task_description,
       due_date: task.due_date,
-     
+      template_id: task.template_id
     };
+
     console.log("from taskform submit", task);
     handleFunction(newTask);
+    // addTask();
     setTask({
       task_name: "",
       task_description: "",
       due_date: "",
-      
+      template_id: template_id
     });
     closeModal();
   };
@@ -141,10 +144,6 @@ export default function TaskForm({
         onChange={handleChanges}
       /> */}
 
-     
-        
-
-   
       <StyledBtn>Save</StyledBtn>
     </StyledForm>
   );

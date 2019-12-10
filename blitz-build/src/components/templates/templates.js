@@ -1,26 +1,26 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import PathnameContext from '../../contexts/PathnameContext'
+import PathnameContext from "../../contexts/PathnameContext";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import templateContext from "../../contexts/templates/TemplateContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
 import AddTemplate from "../modal/AddTemplate";
 import styled, { css } from "styled-components";
 import TemplateMeatBallsDrop from "./TemplateMeatBalls";
-const Templates = () => {
+const Templates = props => {
   const { templates } = useContext(templateContext);
   const [NinetyDayBuild, setNinetyDayBuild] = useState();
 
   const { searchTerm } = useContext(searchTermContext);
   const templatesSearchInput = searchTerm.toLowerCase();
   const [templatesSearchResults, settemplateSearchResults] = useState([]);
-  const { pathname, setPathname } = useContext(PathnameContext)
+  const { pathname, setPathname } = useContext(PathnameContext);
+
   const seedData = () => {
-    setPathname(window.location.pathname)
+    setPathname(window.location.pathname);
     axiosWithAuth()
       .get("/90_Day")
       .then(res => {
-        console.log(res);
         setNinetyDayBuild(res.data[0].template_name);
       })
       .catch(err => {
@@ -62,7 +62,10 @@ const Templates = () => {
           //   </Container>
           // </div>
           <Container>
-            <Link to={`/templates/${template.id}`}>
+            <Link
+              to={`/templates/${template.id}`}
+              onClick={() => localStorage.setItem("template_id", template.id)}
+            >
               <Name>{template.template_name}</Name>
             </Link>
             <TemplateMeatBallsDrop template={template} />
