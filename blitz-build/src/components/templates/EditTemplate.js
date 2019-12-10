@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 //components
 import Modal from "../global/Modal";
-import TaskForm from "../tasks/TaskForm";
+import EditTemplateForm from "./EditTemplateForm";
 
 //context
 import TemplateContext from "../../contexts/templates/TemplateContext";
@@ -17,7 +17,7 @@ export default function EditTask({ template , editStatus, handleEditClose }) {
         dismiss={ handleEditClose }
         client={'50%'}
         component={
-          <TaskForm
+          <EditTemplateForm
             closeModal={ handleEditClose }
             handleFunction={ editTemplate }
             editFields={ template }

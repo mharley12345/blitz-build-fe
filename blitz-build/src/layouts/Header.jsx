@@ -11,6 +11,8 @@ import OpenTemplateContext from '../contexts/OpenTemplateContext'
 // import AddProject from  '../components/modal/AddProject'
 import searchTermContext from '../contexts/searching/searchTerm'
 import AddProject from "../components/modal/AddProject";
+import TemplateContext from '../contexts/templates/TemplateContext'
+import TemplateTaskForm from '../components/templates/TemplateTaskForm'
 const HeaderContainer = styled.div`
 
   background: #fff;
@@ -82,6 +84,16 @@ const SoloDocument = {
    alignItems: 'center',
   marginLeft: '160px',
  
+}
+
+const SoloTask = {
+  display: 'flex',
+borderRadius: '3px',
+ width: '151px',
+ height: '48px',
+ justifyContent: 'center',
+ alignItems: 'center',
+ marginLeft: '160px',
 }
 const ButtonProject = styled.div `
 display: flex;
@@ -195,14 +207,20 @@ function Header({pathname}) {
   const [TaskModalStatus, setTaskModalStatus] = useState(false);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
-  
-
+  const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
+  // const { addTemplate } = useContext(TemplateContext)
 
   const handleTaskModalOpen = () => {
     setTaskModalStatus(true);
   };
   const handleTaskModalClose = () => {
     setTaskModalStatus(false);
+  };
+  const handleTemplateTaskModalOpen = () => {
+    setTemplateTaskModalStatus(true);
+  };
+  const handleTemplateTaskModalClose = () => {
+    setTemplateTaskModalStatus(false);
   };
  const handleDocumentModalOpen =()=>{
    setDocumentModalStatus(true)
@@ -218,7 +236,7 @@ function Header({pathname}) {
 
   const HideTheProjectButton = (pathname) => {
   
- if(pathname === '/documents' || pathname === '/templates' || pathname === '/delay-log' || pathname === `/help` || pathname === '/log-out') {
+ if(pathname === '/documents' || pathname === '/delay-log' || pathname === `/help` || pathname === '/log-out' || pathname ==='/90_Day' || pathname.includes('templates')) {
      return HideButton
  }
  else {
@@ -226,7 +244,7 @@ function Header({pathname}) {
  }  };
  const HideTheDocumentButton = (pathname) => {
   
-  if( pathname === '/templates' || pathname === '/delay-log' || pathname === '/tasks' ) {
+  if( pathname === '/delay-log' || pathname === '/tasks' || pathname === '/90_Day' || pathname.includes('templates') ) {
       return HideButton
   }
   else if(pathname === '/documents') {
@@ -249,12 +267,21 @@ const HideTheTaskButton = (pathname) => {
   }  
 }
 
+
 const HideTheTemplateButton = (pathname) => {
   if (pathname === '/templates') {
     return ButtonTemplateCheck
   }
   else {
     return HideButton
+  }
+}
+const HideTheTemplateTaskButton = (pathname) => {
+   if(pathname.includes('project') || pathname === '/dashboard' || pathname === '/tasks' || pathname === '/projects' || pathname === '/documents' || pathname === '/templates' || pathname === '/delay-log' || pathname === `/help` || pathname === '/log-out' ) {
+    return HideButton
+  }
+  else {
+    return SoloTask
   }
 }
 const HoverTaskStyleFunction = () => {
@@ -396,6 +423,20 @@ const handleChange = e => {
             />
             <ButtonText style={HoverTaskStyleFunction()}>New Task</ButtonText>
           </ButtonTask>
+          
+          <ButtonTask
+            onMouseEnter={() => setTaskHover(true)}
+            onMouseLeave={() => setTaskHover(false)}
+            style={HideTheTemplateTaskButton(pathname)}
+            onClick={handleTemplateTaskModalOpen}
+          >
+            {" "}
+            <ButtonI
+              className="ion-ios-add-circle"
+              style={HoverTaskStyleFunction()}
+            />
+            <ButtonText style={HoverTaskStyleFunction()}>New Task</ButtonText>
+          </ButtonTask>
 
           <ButtonProject
             onMouseEnter={() => setProjectHover(true)}
@@ -438,7 +479,22 @@ const handleChange = e => {
                 handleFunction={addTask}
                 text={"Add Task"}
               />
+              
+            } />
+
+            <Modal
+            visible={TemplateTaskModalStatus}
+            dismiss={handleTemplateTaskModalClose}
+            client={"50%"}
+            component={
+              <TemplateTaskForm
+                closeModal={handleTemplateTaskModalClose}
+                handleFunction={addTask}
+                text={"Add Task"}
+              />
+              
             }
+            
           />
         </ButtonContainer>
         <AddProject/>

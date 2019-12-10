@@ -6,11 +6,14 @@ import TemplateContext from "./TemplateContext";
 
 export default function TemplatesProvider({ children }) {
   const [templates, setTemplates] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     axiosWithAuth()
       .get("/templates")
+      // .get("/90_day")
       .then(res => {
+        console.log("get templates response", res);
         setTemplates(res.data);
       })
       .catch(err => {
@@ -19,12 +22,13 @@ export default function TemplatesProvider({ children }) {
   }, []);
 
   const addTemplate = newTemplate => {
+    console.log("addTemplate", newTemplate);
     axiosWithAuth()
       .post("/templates", newTemplate)
       .then(res => {
         console.log("This template was posted,", res);
-
-        setTemplates([...templates, res.data[0]]);
+        newTemplate.id = res.data.template_id;
+        setTemplates([...templates, newTemplate]);
       })
       .catch(err => {
         console.log(err);
@@ -32,6 +36,7 @@ export default function TemplatesProvider({ children }) {
   };
 
   const deleteTemplate = deletedTemplate => {
+    console.log("deletedTemplate", deletedTemplate);
     axiosWithAuth()
       .delete(`/templates/${deletedTemplate.id}`)
 
@@ -49,7 +54,7 @@ export default function TemplatesProvider({ children }) {
 
   const editTemplate = (editedTemplate, editedTemplateId) => {
     axiosWithAuth()
-      .post(`/templates/${editedTemplate.id}`, editedTemplate)
+      .put(`/templates/${editedTemplate.id}`, editedTemplate)
       .then(res => {
         console.log("template was edited", res);
         const newTemplatesList = templates.map(template => {
@@ -68,9 +73,29 @@ export default function TemplatesProvider({ children }) {
       });
   };
 
+  const templateTasks = () => {
+    axiosWithAuth()
+      .get(`/templates/${templates.id}`)
+      .then(res => {
+        console.log("template tasks", res);
+
+        setTasks(res.data);
+        console.log(tasks);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   return (
     <TemplateContext.Provider
-      value={{ templates, addTemplate, deleteTemplate, editTemplate }}
+      value={{
+        templates,
+        addTemplate,
+        deleteTemplate,
+        editTemplate,
+        templateTasks
+      }}
     >
       {children}
     </TemplateContext.Provider>
