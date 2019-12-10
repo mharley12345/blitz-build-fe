@@ -14,6 +14,10 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import TableFooter from "@material-ui/core/TableFooter";
+import TablePagination from "@material-ui/core/TablePagination";
+// pages bar function from global
+import TablePaginationActions from "../global/TablePaginationActions";
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -53,7 +57,7 @@ function createData(
 const useStyles = makeStyles({
   root: {
     border: "1px solid #DCD9D5",
-    overflowX: "auto"
+    
   },
   table: {
     minWidth: "1080px"
@@ -70,7 +74,17 @@ function DelayLog() {
   const classes = useStyles();
   const { searchTerm } = useContext(searchTermContext);
   const delayLogSearchInput = searchTerm.toLowerCase("");
+const [page, setPage] = React.useState(0);
+const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+const handleChangePage = (event, newPage) => {
+  setPage(newPage);
+};
+
+const handleChangeRowsPerPage = event => {
+  setRowsPerPage(parseInt(event.target.value, 10));
+  setPage(0);
+};
   //console.log(delayLogs)
   //return all delayLogs or filtered delayLogs
   const results = delayLogs.filter(
@@ -115,7 +129,9 @@ function DelayLog() {
       );
     });
   }
-
+const emptyRows =
+  rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  
   console.log("rows in delayLogs table", rows);
   return (
     <div>
@@ -127,7 +143,7 @@ function DelayLog() {
       </div>
       <p style={{ color: "#817974", paddingBottom: "8px" }}>
         {" "}
-        Your Project List{" "}
+        Your Delay_Logs List{" "}
       </p>
       <Paper className={classes.root}>
         <Table className={classes.table} aria-label="customized table">
@@ -140,9 +156,11 @@ function DelayLog() {
               <StyledTableCell>{"    "}</StyledTableCell>
             </TableRow>
           </TableHead>
-
           <TableBody>
-            {rows.map(row => (
+            {(rowsPerPage > 0
+              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              : rows
+            ).map(row => (
               <StyledTableRow className={classes.tableHover} key={row.id}>
                 <StyledTableCell
                   component="th"
@@ -165,7 +183,33 @@ function DelayLog() {
                 </StyledTableCell>
               </StyledTableRow>
             ))}
+
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
           </TableBody>
+          
+
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                colSpan={3}
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  inputProps: { "aria-label": "rows per page" },
+                  native: true
+                }}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
+            </TableRow>
+          </TableFooter>
         </Table>
       </Paper>
     </div>
@@ -188,6 +232,7 @@ const DelayLogButtons = styled.div`
   padding-left: 30px;
   font-size: 19px;
   color: #8a827d;
+  cursor: pointer;
   &:hover {
     color: #dd6b20;
   }
