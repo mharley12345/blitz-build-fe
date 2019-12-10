@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Weather from "../weather/Weather";
-import Documents from "./Documents";
+
 import TaskCard from "../dashboard/TaskCard";
 import styled from "styled-components";
 import Global from "../../styles/Global";
@@ -12,6 +12,9 @@ import PathnameContext from "../../contexts/PathnameContext";
 import EditModalContext from "../../contexts/EditModalContext";
 import DeleteProject from "../modal/DeleteProject";
 import EditProject from "../modal/EditProject";
+
+import Documents from "../documents/Documents"
+
 
 const IndividualProject = props => {
   const { pathname, setPathname } = useContext(PathnameContext);

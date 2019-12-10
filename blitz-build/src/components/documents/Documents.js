@@ -2,44 +2,26 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DocumentCard from './DocumentCard'
 
-const documents = [
-  {
-    documentName: "Upcoming",
-    date: "11/9/19",
-    time: "3:24 pm"
-  },
-  {
-    documentName: "Upcoming",
-    date: "11/9/19",
-    time: "3:24 pm"
-  },
-  {
-    documentName: "Upcoming",
-    date: "11/9/19",
-    time: "3:24 pm"
-  },
-  {
-    documentName: "Upcoming",
-    date: "11/9/19",
-    time: "3:24 pm"
-  }
-];
 
 const Documents = props => {
-    const getDocuments = () => {
-      return documents.map((document) => {
-      return(
-      <DocumentsListContainer>
-      <DocumentCard document={document} />
-      </DocumentsListContainer>)
-        })
-  };
+//     const getDocuments = () => {
+//       axios.get()
+//       return documents.map((document) => {
+//       return(
+//       <DocumentsListContainer>
+//       <DocumentCard document={document} />
+//       </DocumentsListContainer>)
+//         })
+//   };
 
   return (
     <>
       <DocumentsContainer>
-        
-          {getDocuments()}
+        <Documentstitle>
+          <DocumentsTitleText>Documents</DocumentsTitleText>
+        </Documentstitle>
+             
+         <DocumentCard/>
         
       </DocumentsContainer>
     </>
