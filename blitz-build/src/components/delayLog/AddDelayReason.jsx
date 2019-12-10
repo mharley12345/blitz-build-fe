@@ -7,7 +7,7 @@ import DelayForm from "./DelayForm";
 //context
 import DelayLogContext from "../../contexts/delayLog/DelayLogContext";
 
-export default function DelayTask({ task, delayStatus, handleDelayClose }) {
+export default function AddDelayReason({ task, delayStatus, handleDelayClose }) {
   const { addDelayLog } = useContext(DelayLogContext);
 
   return (
@@ -21,6 +21,8 @@ export default function DelayTask({ task, delayStatus, handleDelayClose }) {
             closeModal={handleDelayClose}
             handleFunction={addDelayLog}
             task={task}
+            text={"What is the reason for the Delay?"}
+           
           />
         }
       />

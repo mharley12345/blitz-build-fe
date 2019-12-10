@@ -9,10 +9,25 @@ import styled, { css } from "styled-components";
 import TemplateMeatBallsDrop from "./TemplateMeatBalls";
 const Templates = () => {
   const { templates } = useContext(templateContext);
+  const [NinetyDayBuild, setNinetyDayBuild] = useState();
 
   const { searchTerm } = useContext(searchTermContext);
   const templatesSearchInput = searchTerm.toLowerCase();
   const [templatesSearchResults, settemplateSearchResults] = useState([]);
+
+  const seedData = () => {
+    axiosWithAuth()
+      .get("/90_Day")
+      .then(res => {
+        console.log(res);
+        setNinetyDayBuild(res.data[0].template_name);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  seedData();
 
   useEffect(() => {
     const results = templates.filter(template =>
@@ -21,7 +36,7 @@ const Templates = () => {
     console.log("RESULTS:", results);
     settemplateSearchResults(results);
   }, [templatesSearchInput]);
-
+  console.log(templates);
   return (
     <div>
       <Section>
@@ -29,16 +44,28 @@ const Templates = () => {
         <p> Your Templates </p>
       </Section>
 
+      <Container>
+        <Link to={`/90_Day`}>
+          <Name>{NinetyDayBuild}</Name>
+        </Link>
+      </Container>
+
       {templates.map(template => {
         return (
-          <div>
-            <Container>
-              <Link to={`/templates/${template.id}`}>
-                <Name>{template.template_name}</Name>
-              </Link>
-              <TemplateMeatBallsDrop />
-            </Container>
-          </div>
+          // <div>
+          //   <Container>
+          //     <Link to={`/templates/${template.id}`}>
+          //       <Name>{template.template_name}</Name>
+          //     </Link>
+          //     <TemplateMeatBallsDrop />
+          //   </Container>
+          // </div>
+          <Container>
+            <Link to={`/templates/${template.id}`}>
+              <Name>{template.template_name}</Name>
+            </Link>
+            <TemplateMeatBallsDrop template={template} />
+          </Container>
         );
       })}
 

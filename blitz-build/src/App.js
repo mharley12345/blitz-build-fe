@@ -13,6 +13,7 @@ import jwtDecode from "jwt-decode";
 import Tasks from "./views/tasks/Tasks";
 import Templates from "./components/templates/templates";
 import IndividualTemplate from "./components/templates/IndividualTemplate";
+import NinetyDayTemplate from "./components/templates/90DayTemplate";
 import Projects from "./components/projects/Projects";
 import IndividualProject from "./components/projects/IndividualProject";
 import Logout from "./components/auth/Logout";
@@ -164,6 +165,11 @@ function App() {
                                 exact
                                 path="/templates/:id"
                                 component={IndividualTemplate}
+                              />
+                              <Route
+                                exact
+                                path="/90_Day"
+                                component={NinetyDayTemplate}
                               />
                               <Route
                                 exact

@@ -11,6 +11,7 @@ export default function TemplatesProvider({ children }) {
   useEffect(() => {
     axiosWithAuth()
       .get("/templates")
+      // .get("/90_day")
       .then(res => {
         console.log("get templates response", res);
         setTemplates(res.data);

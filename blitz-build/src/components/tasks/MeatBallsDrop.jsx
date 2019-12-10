@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import EditTask from "./EditTask";
 import DeleteTask from "./DeleteTask";
-import DelayTask from "./DelayTask";
+import AddDelayReason from "../delayLog/AddDelayReason";
 //styles
 import styled from "styled-components";
 import {
@@ -110,7 +110,7 @@ const [delayStatus, setDelayStatus] = useState(false);
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
       />
-      <DelayTask
+      <AddDelayReason
         task={task}
         closeDrop={closeDrop}
         delayStatus={delayStatus}
