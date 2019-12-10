@@ -3,19 +3,27 @@ import TemplatesProvider from "../../contexts/templates/TemplateProvider";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import PathnameContext from "../../contexts/PathnameContext";
 import TemplateContext from '../../contexts/templates/TemplateContext'
+import searchTermContext from '../../contexts/searching/searchTerm'
 import styled, { css } from "styled-components";
 import MeatBallsDrop from '../tasks/MeatBallsDrop'
 import { set } from "date-fns";
 const IndividualTemplate = props => {
   const {templateTask, setTemplatesTask, getTemplateTasks} = useContext(TemplateContext);
   const { pathname, setPathname } = useContext(PathnameContext);
-  
+  const { searchTerm } = useContext(searchTermContext)
+  const taskSearchInput = searchTerm.toLowerCase();
+  const [taskSearchResults, setTaskSearchResults] = useState([]);
   console.log(templateTask)
   useEffect(() => {
-    const templateID = props.match.params.id;
+    const results= templateTask.filter(task =>
+    task.task_name.toLowerCase().includes(taskSearchInput)
+      
+      ) 
+  console.log("RESULTS:", results);
+      setTaskSearchResults(results);
     setPathname(window.location.pathname);
     getTemplateTasks();
-  }, [props]);
+  }, [taskSearchInput]);
 
   return (
    <div>
@@ -24,9 +32,22 @@ const IndividualTemplate = props => {
       </Section>
      
       {templateTask.map(task => {
+         if(taskSearchResults.length > 0) {
+          return (
+            <div>
+
+            </div>
+          )
+        }
+        else {
         return  <Container> <TitleText>{task.task_name}</TitleText> <MeatBallsDrop task={task}/> </Container>;
+      }
       })}
-  
+        { taskSearchResults.length > 0 ?
+              taskSearchResults.map(result => (
+                <Container> <TitleText>{result.task_name}</TitleText> <MeatBallsDrop task={result}/> </Container>
+             )) : <p></p>
+            }
    </div>
    
   );
