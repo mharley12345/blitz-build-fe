@@ -35,6 +35,28 @@ export default function TemplatesProvider({ children }) {
       });
   };
 
+  const addTemplateTask = newTask => {
+    console.log("new task", newTask);
+
+    const task = {
+      due_date: newTask.due_date,
+      task_name: newTask.task_name,
+      task_description: newTask.task_description,
+      project_id: newTask.project_id,
+      template_id: newTask.template_id
+    };
+    console.log("task const from addTask", task);
+    axiosWithAuth()
+      .post(`/projects/tasks`, task)
+      .then(res => {
+        console.log("from addtask in taskProvider", res);
+        newTask.id = res.data.taskId[0];
+        setTasks([...tasks, newTask]);
+      })
+      .catch(err => console.log(err));
+    console.log(newTask);
+  };
+
   const deleteTemplate = deletedTemplate => {
     console.log("deletedTemplate", deletedTemplate);
     axiosWithAuth()
@@ -94,7 +116,8 @@ export default function TemplatesProvider({ children }) {
         addTemplate,
         deleteTemplate,
         editTemplate,
-        templateTasks
+        templateTasks,
+        addTemplateTask
       }}
     >
       {children}

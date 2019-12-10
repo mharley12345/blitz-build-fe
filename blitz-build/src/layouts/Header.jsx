@@ -185,6 +185,7 @@ function Header({ pathname }) {
   const [TemplateHover, setTemplateHover] = useState(false);
   const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext);
   const { addTask } = useContext(TasksContext);
+  const { addTemplateTask } = useContext(TemplateContext);
   const { open, setOpen } = useContext(OpenContext);
   const [TaskModalStatus, setTaskModalStatus] = useState(false);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
@@ -480,7 +481,7 @@ function Header({ pathname }) {
           component={
             <TemplateTaskForm
               closeModal={handleTemplateTaskModalClose}
-              handleFunction={addTask}
+              handleFunction={addTemplateTask}
               text={"Add Task"}
             />
           }
