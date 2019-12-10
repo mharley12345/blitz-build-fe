@@ -12,7 +12,7 @@ import PathnameContext from "../../contexts/PathnameContext";
 import EditModalContext from "../../contexts/EditModalContext";
 import DeleteProject from "../modal/DeleteProject";
 import EditProject from "../modal/EditProject";
-
+import TaskContext from '../../contexts/tasks/TaskContext'
 import Documents from "../documents/Documents"
 
 
@@ -21,21 +21,17 @@ const IndividualProject = props => {
   const [projectState, setProjectState] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
   const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
+  const {tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks} = useContext(TaskContext);
 
   useEffect(() => {
+   
     setPathname(window.location.pathname);
     const projectID = props.match.params.id;
-    axiosWithAuth()
-      .get(`projects/${projectID}`)
-      .then(res => {
-        console.log("get single project: ", res.data);
-
-        setProjectState(res.data[0]);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    console.log(projectID)
+     getProjectTasks(projectID);
   }, [props]);
+  
+ 
 
   const handleDeleteOpen = e => {
     e.stopPropagation();
@@ -50,6 +46,10 @@ const IndividualProject = props => {
     e.stopPropagation();
     setEditModalOpen(true);
   };
+  const AddTask = () => {
+    setTaskModalStatus(true)
+
+  }
   return (
     <>
       <Global />
@@ -86,6 +86,10 @@ const IndividualProject = props => {
                 <PageI className=" ion-ios-document" />
                 <p>&nbsp;&nbsp;90-Day Template in Use</p>
               </ContentbottomTemplate>
+              <AddIcon onClick={AddTask}>
+                <ProjectI className="ion-md-add" />
+                <p>Add</p>
+              </AddIcon>
               <EditIcon onClick={OpenToggle}>
                 <ProjectI className="ion-md-create" />
                 <p>Edit</p>
@@ -130,7 +134,7 @@ const IndividualProject = props => {
         </Right>
       </Top>
       <TasksContainer>
-        <TaskCard projectID={props.match.params.id} numberOfTasks={3} />
+        <TaskCard projectID={props.match.params.id} numberOfTasks={3}  />
       </TasksContainer>
       <DeleteProject
         project={projectState}
@@ -227,24 +231,33 @@ const Contentbottom = styled.div`
   display: flex;
   align-content: center;
   p {
+    width: 100%;
     font-size: 16px;
     line-height: 24px;
     color: #8a827d;
+    
   }
 `;
 const ContentbottomTemplate = styled.div`
-  width: 200px;
+  width: 400px;
   height: 22px;
   margin-top: 48px;
-  margin-left: 37.75px;
+  margin-left: 12px;
   display: flex;
+`;
+const AddIcon = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  margin-left: 169px;
 `;
 const EditIcon = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
-  margin-left: 169px;
+  margin-left: 20px;
 `;
 const DeleteIcon = styled.div`
   display: flex;
@@ -252,6 +265,7 @@ const DeleteIcon = styled.div`
   align-items: center;
   margin-top: 30px;
   margin-left: 20px;
+  margin-right: 20px;
 `;
 const DocumentsContainer = styled.div`
   margin-top: 8px;

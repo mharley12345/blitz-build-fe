@@ -6,7 +6,8 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import TaskContext from "./TaskContext";
 export default function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
-
+  const [TaskModalStatus, setTaskModalStatus] = useState(false);
+  const [ projectTasks, setProjectTasks ] = useState([])
   useEffect(() => {
     const user_id = localStorage.getItem("user_id");
     axiosWithAuth()
@@ -19,6 +20,17 @@ export default function TaskProvider({ children }) {
         console.log(err);
       });
   }, []);
+
+  const getProjectTasks = (projectID) => {
+    axiosWithAuth()
+    .get(`projects/tasks/byProject/${projectID}`)
+    .then(res => {
+      setProjectTasks(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+     }
 
   const addTask = newTask => {
     console.log("new task", newTask);
@@ -37,6 +49,7 @@ export default function TaskProvider({ children }) {
         console.log("from addtask in taskProvider", res);
         newTask.id = res.data.taskId[0];
         setTasks([...tasks, newTask]);
+        
       })
       .catch(err => console.log(err));
     console.log(newTask);
@@ -83,7 +96,7 @@ export default function TaskProvider({ children }) {
   };
   return (
     <div>
-      <TaskContext.Provider value={{ tasks, addTask, deleteTask, editTask }}>
+      <TaskContext.Provider value={{ tasks, setTasks, addTask, deleteTask, editTask, TaskModalStatus, setTaskModalStatus, projectTasks, setProjectTasks, getProjectTasks }}>
         {children}
       </TaskContext.Provider>
     </div>

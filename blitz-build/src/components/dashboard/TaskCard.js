@@ -6,9 +6,9 @@ import searchTermContext from '../../contexts/searching/searchTerm'
 //context 
 import taskContext from '../../contexts/tasks/TaskContext'
 
-function TaskCard({ projectID, numberOfTasks }) {
-  const { tasks } = useContext(taskContext);
-  const [projectTasks, setProjectTasks] = useState([]);
+function TaskCard({ projectID, numberOfTasks, AddTask }) {
+  const { tasks, setTasks } = useContext(taskContext);
+  const { projectTasks, setProjectTasks, getProjectTasks } = useContext(taskContext);
   const { searchTerm } = useContext(searchTermContext)
   const taskSearchInput = searchTerm.toLowerCase();
   const [taskSearchResults, setTaskSearchResults] = useState([]);
@@ -20,15 +20,8 @@ function TaskCard({ projectID, numberOfTasks }) {
       ) 
   console.log("RESULTS:", results);
       setTaskSearchResults(results);
-
-        axiosWithAuth()
-          .get(`projects/tasks/byProject/${projectID}`)
-          .then(res => {
-            setProjectTasks(res.data);
-          })
-          .catch(err => {
-            console.log(err);
-          });
+      
+      
   },[taskSearchInput])
 
 
@@ -48,7 +41,7 @@ function TaskCard({ projectID, numberOfTasks }) {
           )
         } else {
         return (
-          <Task item={item} key={item.id} />
+          <Task item={item} key={item.id}  />
            )
          }
            })}

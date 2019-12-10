@@ -49,7 +49,7 @@ export default function TaskForm({
   });
 
   useEffect(() => {
- 
+    
     axiosWithAuth()
       .get(`/projects`)
       .then(res => {
