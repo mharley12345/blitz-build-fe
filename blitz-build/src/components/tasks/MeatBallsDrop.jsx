@@ -4,6 +4,7 @@ import EditTask from "./EditTask";
 import DeleteTask from "./DeleteTask";
 import AddDelayReason from "../delayLog/AddDelayReason";
 import PathnameContext from "../../contexts/PathnameContext";
+import EditTemplateTask from '../templates/EditTemplateTask'
 //styles
 import styled from "styled-components";
 import {
@@ -81,6 +82,15 @@ const { pathname, setPathname } = useContext(PathnameContext);
     display: 'none'
   }
 
+  const checkThePage = (editTask, editTemplateTask) => {
+    if (pathname.includes('/templates')) {
+      return editTemplateTask
+    }
+    else {
+      return editTask
+    }
+  }
+
   return (
     <>
       <MeatBalls
@@ -113,12 +123,20 @@ const { pathname, setPathname } = useContext(PathnameContext);
           </>
         )}
       </MeatBalls>
+      {checkThePage(
       <EditTask
         task={task}
         closeDrop={closeDrop}
         editStatus={editStatus}
         handleEditClose={handleEditClose}
-      />
+      />,
+      <EditTemplateTask 
+      task={task}
+      closeDrop={closeDrop}
+      editStatus={editStatus}
+      handleEditClose={handleEditClose}
+    />
+      )}
       <DeleteTask
         task={task}
         closeDrop={closeDrop}
