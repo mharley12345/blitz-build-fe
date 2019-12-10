@@ -13,6 +13,7 @@ import searchTermContext from "../contexts/searching/searchTerm";
 import AddProject from "../components/modal/AddProject";
 import TemplateContext from "../contexts/templates/TemplateContext";
 import TemplateTaskForm from "../components/templates/TemplateTaskForm";
+
 const HeaderContainer = styled.div`
   background: #fff;
   width: 100%;
@@ -191,6 +192,7 @@ function Header({ pathname }) {
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
   const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
+
   // const { addTemplate } = useContext(TemplateContext)
 
   const handleTaskModalOpen = () => {
@@ -201,6 +203,7 @@ function Header({ pathname }) {
   };
   const handleTemplateTaskModalOpen = () => {
     setTemplateTaskModalStatus(true);
+  
   };
   const handleTemplateTaskModalClose = () => {
     setTemplateTaskModalStatus(false);
