@@ -54,7 +54,7 @@ export default function TemplatesProvider({ children }) {
 
   const editTemplate = (editedTemplate, editedTemplateId) => {
     axiosWithAuth()
-      .post(`/templates/${editedTemplate.id}`, editedTemplate)
+      .put(`/templates/${editedTemplate.id}`, editedTemplate)
       .then(res => {
         console.log("template was edited", res);
         const newTemplatesList = templates.map(template => {
