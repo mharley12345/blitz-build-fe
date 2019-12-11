@@ -16,7 +16,7 @@ const NinetyDayTemplate = props => {
       .catch(err => {
         console.log(err);
       });
-  }, [props]);
+  }, [templateTasks]);
 
   return (
     <div>

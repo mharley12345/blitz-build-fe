@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-  
     "@material-ui/core": "^4.6.0",
     "@material-ui/icons": "^4.5.1",
     "auth0-js": "^9.11.3",
@@ -22,9 +21,9 @@
     "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-big-calendar": "^0.23.0",
+    "react-bootstrap": "^1.0.0-beta.16",
     "react-circle": "^1.1.1",
     "react-datepicker": "^2.10.0",
-  
     "react-dom": "^16.11.0",
     "react-dropzone": "^10.2.1",
     "react-dropzone-s3-uploader": "^1.1.0",

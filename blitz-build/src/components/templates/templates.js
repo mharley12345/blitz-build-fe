@@ -33,11 +33,11 @@ const Templates = props => {
   useEffect(() => {
     axiosWithAuth().post('/90_day').then(templates =>{
       console.log(templates)
-    const results = templates.filter(template =>
-      template.template_name.toLowerCase().includes(templatesSearchInput)
-    );
-    console.log("RESULTS:", results);
-    settemplateSearchResults(results);
+    // const results = templates.filter((template =>
+    //   template.template_name.toLowerCase().includes(templatesSearchInput)
+    // ));
+    // console.log("RESULTS:", results);
+    // settemplateSearchResults(results);
   })}, [templatesSearchInput]);
 console.log(templates);
   return (
