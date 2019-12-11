@@ -6,8 +6,14 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import TaskContext from "./TaskContext";
 export default function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
-
+  const [TaskModalStatus, setTaskModalStatus] = useState(false);
+  const [ projectTasks, setProjectTasks ] = useState([])
   useEffect(() => {
+    
+    getTasks();
+  }, []);
+
+  const getTasks = () => {
     const user_id = localStorage.getItem("user_id");
     axiosWithAuth()
       .get(`/projects/tasks/${user_id}`)
@@ -18,11 +24,25 @@ export default function TaskProvider({ children }) {
       .catch(err => {
         console.log(err);
       });
-  }, []);
+    }
+
+
+  const getProjectTasks = (projectID) => {
+    
+    axiosWithAuth()
+    .get(`projects/tasks/byProject/${projectID}`)
+    .then(res => {
+      setProjectTasks(res.data);
+     
+    })
+    .catch(err => {
+      console.log(err);
+    });
+     }
 
   const addTask = newTask => {
     console.log("new task", newTask);
-
+    
     const task = {
       due_date: newTask.due_date,
       task_name: newTask.task_name,
@@ -37,12 +57,15 @@ export default function TaskProvider({ children }) {
         console.log("from addtask in taskProvider", res);
         newTask.id = res.data.taskId[0];
         setTasks([...tasks, newTask]);
+        getTasks();
+        
       })
       .catch(err => console.log(err));
     console.log(newTask);
   };
 
   const deleteTask = deletedTask => {
+    
     axiosWithAuth()
       .delete(`/projects/tasks/${deletedTask.id}`)
       .then(res => {
@@ -52,7 +75,10 @@ export default function TaskProvider({ children }) {
     const newTasks = tasks.filter(task => {
       return task.id != deletedTask.id;
     });
-    setTasks([...newTasks]);
+    setTasks([...newTasks]); 
+    // getTasks();
+   
+    
   };
 
   const editTask = editedTask => {
@@ -83,7 +109,7 @@ export default function TaskProvider({ children }) {
   };
   return (
     <div>
-      <TaskContext.Provider value={{ tasks, addTask, deleteTask, editTask }}>
+      <TaskContext.Provider value={{getTasks, tasks, setTasks, addTask, deleteTask, editTask, TaskModalStatus, setTaskModalStatus, projectTasks, setProjectTasks, getProjectTasks }}>
         {children}
       </TaskContext.Provider>
     </div>
