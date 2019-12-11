@@ -96,7 +96,7 @@ export default function Tasks() {
     <>
       <InfoContainer>
         <p style={{ fontWeight: 600 }}>Your Task List</p>
-        <SortBtn style={{textDecoration: 'none'}}>
+        <SortBtn style={{textDecoration: 'none' }}>
           Sort By <span className="ion-ios-arrow-down" />
         </SortBtn>
       </InfoContainer>

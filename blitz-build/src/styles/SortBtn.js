@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { primaryColor } from './color'
 
 export const SortBtn = styled.button`
+  text-outline: none;
   font-size: 20px;
   background-color: white;
   border: none;
@@ -12,4 +13,10 @@ export const SortBtn = styled.button`
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
+  text-decoration: underline;
+  :hover {
+    color: white
+    background: ${primaryColor}
+  }
+
 `;
