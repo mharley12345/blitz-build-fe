@@ -41,8 +41,8 @@ import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
 import TemplatesProvider from "./contexts/templates/TemplateProvider";
-import Uploader from './components/documents/Uploader'
-
+import Uploader from "./components/documents/Uploader";
+import MyCalendar from "./components/calendar/MyCalender";
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [pathname, setPathname] = useState(window.location.pathname);
@@ -188,6 +188,11 @@ function App() {
                                 exact
                                 path="/documents/add"
                                 component={Uploader}
+                              />
+                              <Route
+                                exact
+                                path="/mycalendar"
+                                component={MyCalendar}
                               />
                             </Switch>
                           </Layout>

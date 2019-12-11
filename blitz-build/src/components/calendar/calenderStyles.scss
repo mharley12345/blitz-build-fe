@@ -1,0 +1,65 @@
+// @import '../node_modules/react-big-calendar/lib/sass/styles';
+// added to header <link href="https://cdn.jsdelivr.net/npm/react-big-calendar@0.19.0/lib/css/react-big-calendar.css" rel="stylesheet"/>
+// Here's a link to the sass style sheets in case you want to
+// import them and override more of the styles
+// 
+// https://github.com/intljusticemission/react-big-calendar/tree/master/src/sass
+html {
+  background-color: white;
+}
+
+body {
+  margin: 0;
+}
+
+
+
+.rbc-month-view{
+  height:650px
+}
+.rbc-month-row,.rbc-row-bg,.rbc-day-bg{
+  height:125px
+}
+.rbc-calendar {
+  font-family: sans-serif;
+  color: rgb(138, 130, 125);
+  background-color: #ebe9e7;
+  padding: 30px;
+  height: auto;
+}
+
+.rbc-agenda-view,.rbc-time-content,.rbc-label.rbc-time-header-gutter{
+  display: none;
+}
+
+.rbc-day-bg,.rbc-time-view{
+  
+  background: rgb(255, 255, 255);
+  position: relative;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(220, 217, 213);
+  border-image: initial;
+  border-radius: 3px;
+}
+
+.rbc-event {
+  background-color: #de6b20;
+    color: #fff;
+}
+
+.rbc-today {
+  background-color: lightgoldenrodyellow
+}
+.rbc-btn-group{
+  color:red
+}
+.rbc-header{
+  background-color:white
+}
+.rbc-btn-group{
+  button:nth-child(4) {
+    border-radius: 0;
+     display: none; 
+}
+}

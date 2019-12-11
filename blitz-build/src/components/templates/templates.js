@@ -38,8 +38,8 @@ const Templates = props => {
     );
     console.log("RESULTS:", results);
     settemplateSearchResults(results);
-  }, [templatesSearchInput]);
-  console.log(templates);
+  })}, [templatesSearchInput]);
+console.log(templates);
   return (
     <div>
       <Section>
