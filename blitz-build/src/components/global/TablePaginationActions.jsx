@@ -39,9 +39,9 @@ function TablePaginationActions(props) {
         aria-label="first page"
       >
         {theme.direction === "rtl" ? (
-          <i class="icon ion-md-skip-forward"></i>
+          <i className="icon ion-md-skip-forward"></i>
         ) : (
-          <i class="icon ion-md-skip-backward"></i>
+          <i className="icon ion-md-skip-backward"></i>
         )}
       </IconButton>
       <IconButton
@@ -51,12 +51,12 @@ function TablePaginationActions(props) {
       >
         {theme.direction === "rtl" ? (
           <i
-            class="icon ion-ios-arrow-forward"
+            className="icon ion-ios-arrow-forward"
             style={{ padding: "0", margin: "0px 6px" }}
           ></i>
         ) : (
           <i
-            class="icon ion-ios-arrow-back"
+            className="icon ion-ios-arrow-back"
             style={{ padding: "0", margin: "0px 6px" }}
           ></i>
         )}
@@ -68,12 +68,12 @@ function TablePaginationActions(props) {
       >
         {theme.direction === "rtl" ? (
           <i
-            class="icon ion-ios-arrow-back"
+            className="icon ion-ios-arrow-back"
             style={{ padding: "0", margin: "0px 6px" }}
           ></i>
         ) : (
           <i
-            class="icon ion-ios-arrow-forward"
+            className="icon ion-ios-arrow-forward"
             style={{ padding: "0", margin: "0px 6px" }}
           ></i>
         )}
@@ -84,9 +84,9 @@ function TablePaginationActions(props) {
         aria-label="last page"
       >
         {theme.direction === "rtl" ? (
-          <i class="icon ion-md-skip-backward"></i>
+          <i className="icon ion-md-skip-backward"></i>
         ) : (
-          <i class="icon ion-md-skip-forward"></i>
+          <i className="icon ion-md-skip-forward"></i>
         )}
       </IconButton>
     </div>
