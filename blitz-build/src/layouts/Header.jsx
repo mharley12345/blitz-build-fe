@@ -15,6 +15,7 @@ const HeaderContainer = styled.div`
   background: #fff;
   width: 100%;
   height: 96px;
+  border-bottom: 2px solid #E9E9E9
   display: flex;
   justify-content: space-between;
   position: sticky;
