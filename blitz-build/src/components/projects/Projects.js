@@ -119,8 +119,7 @@ console.log("rows in projects table", rows)
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-  
-  
+    
   return (
     <>
       <Global />
@@ -151,9 +150,7 @@ console.log("rows in projects table", rows)
                 </StyledTableCell>
                 <StyledTableCell>{row.name}</StyledTableCell>
                 <StyledTableCell>{row.status}</StyledTableCell>
-                <StyledTableCell>
-                  {new Date(row.createDate*1000).toLocaleDateString()}
-                </StyledTableCell>
+                <StyledTableCell>{row.createDate}</StyledTableCell>
                 <StyledTableCell>
                   <Link
                     to={`/project/${row.id}`}
