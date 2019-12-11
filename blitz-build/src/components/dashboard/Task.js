@@ -20,6 +20,7 @@ function Task({ item, children }) {
 
   const StyledTableCell = withStyles(theme => ({
     head: {
+
       padding: "8px 32px",
       height: 35,
       backgroundColor: "#E9E9E9",

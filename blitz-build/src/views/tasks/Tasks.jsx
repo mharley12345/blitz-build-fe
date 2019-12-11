@@ -16,12 +16,14 @@ import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 
+//pagnation
+import TablePaginationActions from "../../components/global/TablePaginationActions";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableFooter from "@material-ui/core/TableFooter";
+
 //styles
 import styled from "styled-components";
-import { SortBtn } from '../../styles/SortBtn'
-
-let uid = localStorage.getItem("uid");
-let projectID = localStorage.getItem("projectID");
+import { SortBtn } from "../../styles/SortBtn";
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -36,8 +38,6 @@ const StyledTableCell = withStyles(theme => ({
     height: 104
   }
 }))(TableCell);
-
-
 
 const InfoContainer = styled.div`
   overflow-y: auto;
@@ -67,6 +67,21 @@ export default function Tasks() {
   const taskSearchInput = searchTerm.toLowerCase();
   const [taskSearchResults, setTaskSearchResults] = useState([]);
 
+  //pagnation
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, tasks.length - page * rowsPerPage);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
   const classes = useStyles();
 
   useEffect(() => {
@@ -80,8 +95,10 @@ export default function Tasks() {
   return (
     <>
       <InfoContainer>
-        <p style={{fontWeight: 600}}>Your Task List</p>
-        <SortBtn  >Sort By <span className="ion-ios-arrow-down"/></SortBtn>
+        <p style={{ fontWeight: 600 }}>Your Task List</p>
+        <SortBtn style={{textDecoration: 'none'}}>
+          Sort By <span className="ion-ios-arrow-down" />
+        </SortBtn>
       </InfoContainer>
 
       <Paper className={classes.root}>
@@ -96,8 +113,13 @@ export default function Tasks() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* <TaskNav addTask={addTask} /> */}
-            {tasks.map(task => {
+            {(rowsPerPage > 0
+              ? tasks.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : tasks
+            ).map(task => {
               console.log(task.createdAt);
               if (taskSearchResults.length > 0) {
                 return <div></div>;
@@ -116,7 +138,30 @@ export default function Tasks() {
             ) : (
               <p></p>
             )}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
           </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                colSpan={3}
+                count={tasks.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  inputProps: { "aria-label": "rows per page" },
+                  native: true
+                }}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
+            </TableRow>
+          </TableFooter>
         </Table>
       </Paper>
     </>
