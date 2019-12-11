@@ -13,6 +13,10 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import TableFooter from "@material-ui/core/TableFooter";
+import TablePagination from "@material-ui/core/TablePagination";
+// pages bar function from global
+import TablePaginationActions from '../global/TablePaginationActions'
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -56,6 +60,7 @@ const useStyles = makeStyles({
   }
 });
 
+
 const Projects = props => {
 
   const classes = useStyles();
@@ -64,6 +69,19 @@ const Projects = props => {
   const { searchTerm } = useContext(searchTermContext);
   const projectSearchInput = searchTerm.toLowerCase('');
   
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
   
   //return all projects or filtered projects
     const results = projects.filter(
@@ -95,6 +113,8 @@ const Projects = props => {
 
 console.log("rows in projects table", rows)
 
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
   
   
   return (
@@ -115,13 +135,12 @@ console.log("rows in projects table", rows)
               <StyledTableCell>VIEW</StyledTableCell>
             </TableRow>
           </TableHead>
-
           <TableBody>
-            {rows.map(row => (
-              <StyledTableRow
-                className={classes.tableHover}
-                key={row.id}
-              >
+            {(rowsPerPage > 0
+              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              : rows
+            ).map(row => (
+              <StyledTableRow className={classes.tableHover} key={row.id}>
                 <StyledTableCell component="th" scope="row">
                   <p>{row.address}</p>
                   <p>{`${row.city}, ${row.state} ${row.zip_code}`}</p>
@@ -141,7 +160,32 @@ console.log("rows in projects table", rows)
                 </StyledTableCell>
               </StyledTableRow>
             ))}
+
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
           </TableBody>
+          
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                colSpan={3}
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  inputProps: { "aria-label": "rows per page" },
+                  native: true
+                }}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
+            </TableRow>
+          </TableFooter>
         </Table>
       </Paper>
     </>

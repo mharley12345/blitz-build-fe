@@ -2,43 +2,17 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DocumentCard from './DocumentCard'
 
-const documents = [
-  {
-    documentName: "Upcoming",
-    date: "11/9/19",
-    time: "3:24 pm"
-  },
-  {
-    documentName: "Upcoming",
-    date: "11/9/19",
-    time: "3:24 pm"
-  },
-  {
-    documentName: "Upcoming",
-    date: "11/9/19",
-    time: "3:24 pm"
-  },
-  {
-    documentName: "Upcoming",
-    date: "11/9/19",
-    time: "3:24 pm"
-  },
-  {
-    documentName: "Upcoming",
-    date: "11/9/19",
-    time: "3:24 pm"
-  }
-];
 
 const Documents = props => {
-    const getDocuments = () => {
-      return documents.map((document) => {
-      return(
-      <DocumentsListContainer>
-      <DocumentCard document={document} />
-      </DocumentsListContainer>)
-        })
-  };
+//     const getDocuments = () => {
+//       axios.get()
+//       return documents.map((document) => {
+//       return(
+//       <DocumentsListContainer>
+//       <DocumentCard document={document} />
+//       </DocumentsListContainer>)
+//         })
+//   };
 
   return (
     <>
@@ -47,7 +21,7 @@ const Documents = props => {
           <DocumentsTitleText>Documents</DocumentsTitleText>
         </Documentstitle>
              
-          {getDocuments()}
+         <DocumentCard/>
         
       </DocumentsContainer>
     </>
@@ -59,7 +33,7 @@ export default Documents;
 const DocumentsContainer = styled.div`
   
   width: 530px;
-  height: 400px;
+  height: 288px;
   
   border: 1px solid #dcd9d5;
   box-sizing: border-box;
@@ -93,7 +67,7 @@ const DocumentsTitleText = styled.div`
 const DocumentsListContainer = styled.div`
   background: #fafafa;
   
-  :nth-child(even) {
+  :nth-child(odd) {
     background: #ffffff;
   }
 `;
