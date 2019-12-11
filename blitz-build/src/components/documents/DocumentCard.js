@@ -1,8 +1,8 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,Fragment} from "react";
 import styled from "styled-components";
 import {axiosWithAuth} from "../../utils/auth/axiosWithAuth";
-import {Link} from 'react-router-dom'
 
+import {Table,tr,th,td,tbody} from 'react-bootstrap'
 
 const  DocumentCard = (props) => {
   const[document,setDocument] =useState([])
@@ -18,6 +18,7 @@ const  DocumentCard = (props) => {
     .get(`/docs/url`)
      
     .then(response =>{
+      console.log(response)
       console.log(response.data)
       let docs = response.data
       console.log(docs)
@@ -31,20 +32,39 @@ const  DocumentCard = (props) => {
   console.log(document)
   return (
    
-    <DocumentCardContainer>
+<>
    {document.map((documents)=>{
-     
-    return(<>
-          <Name>{documents.file_name}</Name>
-             <Right>  
-       <a href ={documents.doc_url} rel="noopener noreferrer" target="_blank">View</a>
-          <button id={documents.id} onClick={handleClick}>Delete</button>
-        </Right>
-        </>
-     )})}
-    </DocumentCardContainer>
-    
-    
+    return(<Table responsive>
+         
+             <thead>
+             <tr>
+               <th>Name</th>
+               <th>Project</th>
+               <th>User</th>
+               <th>View</th>
+               
+             </tr>
+             </thead>
+            
+             <tbody>
+               <tr>
+                 <td>{documents.file_name}</td>
+                 <td>{documents.project_id}</td>
+                 <td>{documents.user_id}</td>
+                 <td> 
+                 <a href ={documents.doc_url} 
+                  rel="noopener noreferrer" target="_blank">
+                  View</a>
+                  </td>
+               </tr>
+             </tbody>
+         </Table>)}
+         
+   )
+   }
+   </>
+
+
   )
   }
 export default DocumentCard;
@@ -52,7 +72,7 @@ export default DocumentCard;
 const DocumentCardContainer = styled.div`
   display: flex;
   flex-direction:column;
-  width: 500px;
+  width: 960px;
   height: 300px;
 `;
 
@@ -69,7 +89,14 @@ font-size: 16px;
 
   color: #3b3b3b;
 `;
+const DocumentCardHeader = styled.div `
 
+position: absolute;
+width: 1080px;
+height: 35px;
+left: 32px;
+top: 59px;
+`
 const Right = styled.div`
   display: flex;
   flex-direction: column;

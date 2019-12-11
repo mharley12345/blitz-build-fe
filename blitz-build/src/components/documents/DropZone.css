@@ -13,7 +13,9 @@
 }
 
 
-
+#root > div > div.sc-fYiAbW.lbFfTk > div.sc-fOKMvo.cWpzSY > div.sc-dUjcNx.jaTPyW > div > button{
+   background-attachment: fixed;
+}
 #root > div > div.sc-fYiAbW.lbFfTk > div.sc-fOKMvo.cWpzSY > div.sc-dUjcNx.jaTPyW > div > input[type=file]{  padding: 30px;
   height: 30vh;
   width: 128vh;

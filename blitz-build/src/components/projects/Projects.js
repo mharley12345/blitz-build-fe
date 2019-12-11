@@ -133,7 +133,7 @@ console.log("rows in projects table", rows)
                   <Link
                     to={`/project/${row.id}`}
                     onClick={() => {
-                      props.history.push(`/project/${row.id}`);
+                      props.history.push(`/project/${row.id}`,localStorage.setItem('project_name',row.name));
                     }}
                   >
                     {row.view}

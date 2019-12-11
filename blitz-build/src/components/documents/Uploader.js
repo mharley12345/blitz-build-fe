@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {axiosWithAuth} from '../../utils/auth/axiosWithAuth';
-
+import CloseIcon from '@material-ui/icons/Close';
 
 import './DropZone.css'
 
 let user_id = localStorage.getItem("user_id")
+let project_name = localStorage.getItem("project_name")
 class Uploader extends Component {
 
   constructor(props){
@@ -15,7 +16,9 @@ class Uploader extends Component {
       doc_url : "",
       user_id:user_id,
       file_name:'',
-      project_id:1
+      project_name:project_name,
+      project_id:6,
+      createdAt:Date.now()
     }
   }
  
@@ -62,7 +65,8 @@ class Uploader extends Component {
         doc_url : this.state.doc_url,
       user_id: this.state.user_id,
       file_name:this.state.file_name,
-      project_id:1}))
+      project_name:this.state.project_name,
+      project_id:6}))
       
       .catch(error => {
         alert("ERROR " + JSON.stringify(error));
@@ -89,11 +93,11 @@ class Uploader extends Component {
          
       <div className="Uploader">
 
-   
+           <h1>Add A New Document</h1> <h6>Close <CloseIcon/></h6>
           {this.state.success ? <SuccessMessage/> : null}
           <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file"/>
           <br/>
-          <button onClick={this.handleUpload}>UPLOAD</button>
+          <button onClick={this.handleUpload}>Add Document</button>
      
       </div>
     );

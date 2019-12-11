@@ -21,7 +21,6 @@ import DelayLog from "./components/delayLog/DelayLog";
 import AddTemplate from "./components/modal/AddTemplate";
 import OpenTemplateContext from './contexts/OpenTemplateContext'
 import Documents from './components/documents/Documents'
-
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
@@ -148,7 +147,7 @@ function App() {
                           <Route exact path="/delay-log" component={DelayLog} />
                           <Route exact path="/documents" component={Documents}/>
                           <Route exact path="/documents/add" component={Uploader}/>
-                          {/* <Route exact path="/documents/dropzone" component={DropZoneApp}/> */}
+              
                         </Switch>
                       </Layout>
                     </UserContext.Provider>
