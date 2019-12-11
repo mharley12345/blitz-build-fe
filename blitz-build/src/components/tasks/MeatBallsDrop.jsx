@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 
 import EditTask from "./EditTask";
 import DeleteTask from "./DeleteTask";
 import AddDelayReason from "../delayLog/AddDelayReason";
+import PathnameContext from "../../contexts/PathnameContext";
+import EditTemplateTask from '../templates/EditTemplateTask'
 //styles
 import styled from "styled-components";
 import {
@@ -19,7 +21,9 @@ export default function MeatBallsDrop({ task }) {
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
 const [delayStatus, setDelayStatus] = useState(false);
+const { pathname, setPathname } = useContext(PathnameContext);
   useEffect(() => {
+    setPathname(window.location.pathname);
     document.addEventListener("mousedown", handleClickOutside);
   }, []);
 
@@ -66,6 +70,27 @@ const [delayStatus, setDelayStatus] = useState(false);
     setDelayStatus(false);
     closeDrop();
   };
+
+  const hideOnTemplates = () => {
+    if(pathname.includes('/templates')){
+      return Hidden
+    }
+    
+  }
+
+  const Hidden = {
+    display: 'none'
+  }
+
+  const checkThePage = (editTask, editTemplateTask) => {
+    if (pathname.includes('/templates')) {
+      return editTemplateTask
+    }
+    else {
+      return editTask
+    }
+  }
+
   return (
     <>
       <MeatBalls
@@ -78,7 +103,7 @@ const [delayStatus, setDelayStatus] = useState(false);
             {/* <Geo></Geo> */}
             <DropDown>
               {/* <Geo></Geo> */}
-              <StyledLi>
+              <StyledLi style={hideOnTemplates()}>
                 <DropP>Complete</DropP>
                 <TaskI className="ion-md-checkmark-circle" />
               </StyledLi>
@@ -86,7 +111,7 @@ const [delayStatus, setDelayStatus] = useState(false);
                 <DropP>Edit</DropP>
                 <TaskI className="ion-md-create" />
               </StyledLi>
-              <StyledLi onClick={handleDelayOpen}>
+              <StyledLi onClick={handleDelayOpen} style= {hideOnTemplates()}>
                 <DropP>Delay</DropP>
                 <TaskI className="ion-md-clock" />
               </StyledLi>
@@ -98,12 +123,20 @@ const [delayStatus, setDelayStatus] = useState(false);
           </>
         )}
       </MeatBalls>
+      {checkThePage(
       <EditTask
         task={task}
         closeDrop={closeDrop}
         editStatus={editStatus}
         handleEditClose={handleEditClose}
-      />
+      />,
+      <EditTemplateTask 
+      task={task}
+      closeDrop={closeDrop}
+      editStatus={editStatus}
+      handleEditClose={handleEditClose}
+    />
+      )}
       <DeleteTask
         task={task}
         closeDrop={closeDrop}

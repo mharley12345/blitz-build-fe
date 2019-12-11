@@ -1,16 +1,34 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import PathnameContext from "../../contexts/PathnameContext";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import templateContext from "../../contexts/templates/TemplateContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
 import AddTemplate from "../modal/AddTemplate";
 import styled, { css } from "styled-components";
-import TemplateMeatBallsDrop from './TemplateMeatBalls'
-const Templates = () => {
+import TemplateMeatBallsDrop from "./TemplateMeatBalls";
+const Templates = props => {
   const { templates } = useContext(templateContext);
+  const [NinetyDayBuild, setNinetyDayBuild] = useState();
 
   const { searchTerm } = useContext(searchTermContext);
   const templatesSearchInput = searchTerm.toLowerCase();
   const [templatesSearchResults, settemplateSearchResults] = useState([]);
+  const { pathname, setPathname } = useContext(PathnameContext);
+
+  const seedData = () => {
+    setPathname(window.location.pathname);
+    axiosWithAuth()
+      .get("/90_Day")
+      .then(res => {
+        setNinetyDayBuild(res.data[0].template_name);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  seedData();
 
   useEffect(() => {
     const results = templates.filter(template =>
@@ -19,7 +37,7 @@ const Templates = () => {
     console.log("RESULTS:", results);
     settemplateSearchResults(results);
   }, [templatesSearchInput]);
-console.log(templates);
+  console.log(templates);
   return (
     <div>
       <Section>
@@ -27,23 +45,46 @@ console.log(templates);
         <p> Your Templates </p>
       </Section>
 
+      <Container>
+        <Link to={`/90_Day`} style={LinkStyle}>
+          <Name>{NinetyDayBuild}</Name>
+        </Link>
+      </Container>
+
       {templates.map(template => {
         return (
-      <Container>
-        <Name>{template.template_name}</Name>
-        <TemplateMeatBallsDrop template={template}/>
-      </Container>
+          // <div>
+          //   <Container>
+          //     <Link to={`/templates/${template.id}`}>
+          //       <Name>{template.template_name}</Name>
+          //     </Link>
+          //     <TemplateMeatBallsDrop />
+          //   </Container>
+          // </div>
+          <Container>
+            <Link style={LinkStyle}
+              to={`/templates/${template.id}`}
+              onClick={() => localStorage.setItem("template_id", template.id)}
+            >
+              <Name>{template.template_name}</Name>
+            </Link>
+            <TemplateMeatBallsDrop template={template} />
+          </Container>
         );
       })}
-    
-        <AddTemplate />
-    
+
+      <AddTemplate />
     </div>
   );
 };
 
 export default Templates;
 
+const LinkStyle = {
+  textDecoration: 'none',
+  
+  }
+ 
 const Section = styled.div`
   width: 100%;
   display: flex;
@@ -75,7 +116,7 @@ const Container = styled.div`
 `;
 const Name = styled.div`
   /* Heading 4 */
-  width: 50%;
+  width: 500px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;

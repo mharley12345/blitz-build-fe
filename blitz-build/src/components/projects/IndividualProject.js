@@ -6,54 +6,49 @@ import Weather from "../weather/Weather";
 import TaskCard from "../dashboard/TaskCard";
 import styled from "styled-components";
 import Global from "../../styles/Global";
-import Page_icon from "../../styles/icons_project/page_icon.png";
-import Edit_icon from "../../styles/icons_project/edit_icon.png";
-import Delete_icon from "../../styles/icons_project/delete_icon.png";
 import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
-import PathnameContext from '../../contexts/PathnameContext'
-import EditModalContext from '../../contexts/EditModalContext'
+import PathnameContext from "../../contexts/PathnameContext";
+import EditModalContext from "../../contexts/EditModalContext";
 import DeleteProject from "../modal/DeleteProject";
 import EditProject from "../modal/EditProject";
+
 import Documents from "../documents/Documents"
 
+
 const IndividualProject = props => {
-  const { pathname, setPathname } = useContext(PathnameContext)
+  const { pathname, setPathname } = useContext(PathnameContext);
   const [projectState, setProjectState] = useState({});
-const [deleteStatus, setDeleteStatus] = useState(false);
+  const [deleteStatus, setDeleteStatus] = useState(false);
   const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
 
   useEffect(() => {
-     setPathname(window.location.pathname)
+    setPathname(window.location.pathname);
     const projectID = props.match.params.id;
     axiosWithAuth()
-    .get(
-      `projects/${projectID}`
-    )
-    .then(res => {
-      console.log("get single project: ", res.data);
-      
-      setProjectState(res.data[0]);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+      .get(`projects/${projectID}`)
+      .then(res => {
+        console.log("get single project: ", res.data);
+
+        setProjectState(res.data[0]);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }, [props]);
 
-  
   const handleDeleteOpen = e => {
     e.stopPropagation();
     setDeleteStatus(true);
   };
-const handleDeleteClose = e => {
-  setDeleteStatus(false);
-  props.history.push(`/projects`);
+  const handleDeleteClose = e => {
+    setDeleteStatus(false);
+    props.history.push(`/projects`);
   };
-  
-  const OpenToggle = (e) => {
+
+  const OpenToggle = e => {
     e.stopPropagation();
-      setEditModalOpen(true);
-   
+    setEditModalOpen(true);
   };
   return (
     <>
@@ -88,15 +83,15 @@ const handleDeleteClose = e => {
             </ContentInfo>
             <Contentbottom>
               <ContentbottomTemplate>
-                <img src={Page_icon} alt="page_icon" />
+                <PageI className=" ion-ios-document" />
                 <p>&nbsp;&nbsp;90-Day Template in Use</p>
               </ContentbottomTemplate>
               <EditIcon onClick={OpenToggle}>
-                <img src={Edit_icon} alt="edit_icon" />
+                <ProjectI className="ion-md-create" />
                 <p>Edit</p>
               </EditIcon>
               <DeleteIcon onClick={handleDeleteOpen}>
-                <img src={Delete_icon} alt="delete_icon" />
+                <ProjectI className="ion-md-trash" />
                 <p>Delete</p>
               </DeleteIcon>
             </Contentbottom>
@@ -107,9 +102,8 @@ const handleDeleteClose = e => {
             <p
               style={{
                 fontSize: "16px",
-                
+
                 color: "#817974"
-                
               }}
             >
               Weather
@@ -126,7 +120,6 @@ const handleDeleteClose = e => {
               fontSize: "16px",
               marginTop: "35px",
               color: "#817974"
-              
             }}
           >
             Your Documents
@@ -152,9 +145,9 @@ const handleDeleteClose = e => {
 export default withRouter(IndividualProject);
 
 const Top = styled.div`
-width:1080px;
+  width: 1080px;
   display: flex;
-  padding-right:32px;
+  padding-right: 32px;
 `;
 const Right = styled.div`
   display: flex;
@@ -167,13 +160,12 @@ const Right = styled.div`
 const IndividualProjectContainer = styled.div`
   min-width: 530px;
   height: 547px;
-  
 `;
 const IndividualProjectTitleContainer = styled.div`
   display: flex;
   min-width: 530px;
   height: 24px;
-  
+
   p {
     font-family: Roboto;
     font-size: 16px;
@@ -251,14 +243,14 @@ const EditIcon = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 27px;
+  margin-top: 30px;
   margin-left: 169px;
 `;
 const DeleteIcon = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 27px;
+  margin-top: 30px;
   margin-left: 20px;
 `;
 const DocumentsContainer = styled.div`
@@ -267,5 +259,23 @@ const DocumentsContainer = styled.div`
 
 const TasksContainer = styled.div`
   margin-top: 24px;
-    width: 1080px;
+  width: 1080px;
+`;
+const ProjectI = styled.i`
+  width: 25%;
+  height: 18px;
+  font-size: 1.4rem;
+  background-color: #ffffff;
+  color: #8a827d;
+text-align: right;
+  text-decoration: none;
+cursor: pointer;
+`;
+const PageI = styled.i`
+  height: 18px;
+  font-size: 1.4rem;
+  background-color: #ffffff;
+  color: #8a827d;
+  text-decoration: none;
+  cursor: pointer;
 `;
