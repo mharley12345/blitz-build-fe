@@ -56,15 +56,14 @@ function createData(
 
 const useStyles = makeStyles({
   root: {
-    border: "1px solid #DCD9D5",
-    
+    border: "1px solid #DCD9D5"
   },
   table: {
     minWidth: "1080px"
   },
   tableHover: {
     "&:hover": {
-      border: "3px solid orange"
+      border: "3px solid rgb(221, 107, 32)"
     }
   }
 });
@@ -202,7 +201,7 @@ const emptyRows =
                 page={page}
                 SelectProps={{
                   inputProps: { "aria-label": "rows per page" },
-                  native: true
+                  native: false
                 }}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}

@@ -58,7 +58,7 @@ const useStyles = makeStyles({
   },
   tableHover: {
     "&:hover": {
-      border: "3px solid orange"
+      border: "3px solid rgb(221, 107, 32)"
     }
   }
 });
