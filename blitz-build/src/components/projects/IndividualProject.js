@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Weather from "../weather/Weather";
+import axios from "axios";
 
 import TaskCard from "../dashboard/TaskCard";
 import styled from "styled-components";
@@ -12,15 +13,31 @@ import PathnameContext from "../../contexts/PathnameContext";
 import EditModalContext from "../../contexts/EditModalContext";
 import DeleteProject from "../modal/DeleteProject";
 import EditProject from "../modal/EditProject";
+import TemplateContext from "../../contexts/templates/TemplateContext";
 
-import Documents from "../documents/Documents"
+import Documents from "../documents/Documents";
 
+import { StyledLabel, StyledSelect } from "../../styles/Tasks/taskForm";
 
 const IndividualProject = props => {
+  const { templates } = useContext(TemplateContext);
+
   const { pathname, setPathname } = useContext(PathnameContext);
   const [projectState, setProjectState] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
   const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
+
+  const [form, setForm] = useState({
+    template_id: null
+  });
+
+  const project_id = props.match.params.id;
+
+  console.log("form, templates, project_id", form, templates, project_id);
+
+  const changeHandler = e => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   useEffect(() => {
     setPathname(window.location.pathname);
@@ -36,6 +53,33 @@ const IndividualProject = props => {
         console.log(err);
       });
   }, [props]);
+
+  const addPreBuiltTemplate = () => {
+    console.log(project_id);
+    axiosWithAuth()
+      .post("/90_day", { project_id })
+      .then(res => {
+        console.log("90_day post", res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const addCustomTemplate = template_id => {
+    console.log(template_id);
+    const templateID = parseInt(template_id);
+    console.log(templateID);
+    axiosWithAuth()
+      .post(`/templates/addTasks/${project_id}`, templateID)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  // /templates/addTasks/:id(project_id)
 
   const handleDeleteOpen = e => {
     e.stopPropagation();
@@ -53,6 +97,30 @@ const IndividualProject = props => {
   return (
     <>
       <Global />
+      <DisplayFlex>
+        <button onClick={() => addPreBuiltTemplate()}> add template </button>
+        <form>
+          <StyledLabel>Assign A Template</StyledLabel>
+          <StyledSelect
+            name="template_id"
+            onChange={changeHandler}
+            value={form.template_id}
+          >
+            <option>Choose Template</option>
+
+            {templates.map(template => {
+              return (
+                <option key={template.id} value={template.template_id}>
+                  {template.id}
+                </option>
+              );
+            })}
+          </StyledSelect>
+          <button type="submit" onSubmit={addCustomTemplate}>
+            Add custom template
+          </button>
+        </form>
+      </DisplayFlex>
       <IndividualProjectTitleContainer>
         <img src={Project_icon} alt="project_icon" />
         <p>&nbsp;&nbsp;Projects / {projectState.project_name}</p>
@@ -143,6 +211,11 @@ const IndividualProject = props => {
 };
 
 export default withRouter(IndividualProject);
+
+const DisplayFlex = styled.div`
+  display: flex;
+  margin: 10px;
+`;
 
 const Top = styled.div`
   width: 1080px;
@@ -267,9 +340,9 @@ const ProjectI = styled.i`
   font-size: 1.4rem;
   background-color: #ffffff;
   color: #8a827d;
-text-align: right;
+  text-align: right;
   text-decoration: none;
-cursor: pointer;
+  cursor: pointer;
 `;
 const PageI = styled.i`
   height: 18px;

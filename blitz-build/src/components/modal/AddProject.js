@@ -162,7 +162,7 @@ const AddProject = props => {
     beds: null,
     baths: null,
     square_ft: null,
-    template_name: null,
+    // template_name: null,
     imageURL: "",
     latitude: null,
     longitude: null
@@ -200,7 +200,7 @@ const AddProject = props => {
       beds: null,
       baths: null,
       square_ft: null,
-      template_name: null,
+      // template_name: null,
       imageURL: "",
       latitude: null,
       longitude: null
@@ -314,7 +314,7 @@ const AddProject = props => {
               onChange={changeHandler}
               value={form.zip_code}
             />
-            <StyledLabel>Assign A Template</StyledLabel>
+            {/* <StyledLabel>Assign A Template</StyledLabel>
             <StyledSelect
               name="template_name"
               onChange={changeHandler}
@@ -329,7 +329,7 @@ const AddProject = props => {
                   </option>
                 );
               })}
-            </StyledSelect>
+            </StyledSelect> */}
 
             <button type="submit" style={buttonStyle}>
               Save
