@@ -23,12 +23,23 @@ const IndividualProject = props => {
   const [deleteStatus, setDeleteStatus] = useState(false);
   const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
   const {getTasks, tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks, projectTasks} = useContext(TaskContext);
- 
-
+  const [results, setResults ] = useState([])
+  const taskSearchInput = searchTerm.toLowerCase();
+  const [taskSearchResults, setTaskSearchResults] = useState([])
   
   const projectID =props.match.params.id;
   useEffect(() => {
-     
+    if(searchTerm.length === 0) {
+      setResults([])
+  }
+  else {
+     setResults( projectTasks.filter(task =>
+    task.task_name.toLowerCase().includes(taskSearchInput))
+    ) 
+  }
+  console.log("RESULTS:", results);
+      setTaskSearchResults(results);
+   
     getProjectTasks(projectID);
 
     setPathname(window.location.pathname)
@@ -140,7 +151,7 @@ const IndividualProject = props => {
         </Right>
       </Top>
       <TasksContainer>
-        <TaskCard projectID={props.match.params.id} numberOfTasks={3}  />
+        <TaskCard projectID={props.match.params.id} numberOfTasks={3} results={results} setResults={setResults} taskSearchResults={taskSearchResults}  />
       </TasksContainer>
       <DeleteProject
         project={projectState}

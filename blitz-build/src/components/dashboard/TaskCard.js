@@ -2,42 +2,66 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Task from "./Task";
-import searchTermContext from '../../contexts/searching/searchTerm'
-//context 
-import taskContext from '../../contexts/tasks/TaskContext'
+import searchTermContext from "../../contexts/searching/searchTerm";
 
-function TaskCard({ projectID, numberOfTasks, AddTask}) {
+//context
+import taskContext from "../../contexts/tasks/TaskContext";
+
+//mui
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import TableHead from "@material-ui/core/TableHead";
+import TableCell from "@material-ui/core/TableCell";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+
+const StyledTableCell = withStyles(theme => ({
+  head: {
+    padding: "8px 32px",
+    height: 35,
+    backgroundColor: "#E9E9E9",
+    color: theme.palette.common.black
+  },
+  body: {
+    padding: "8px 32px",
+    fontSize: 16,
+    height: 104
+  }
+}))(TableCell);
+
+function TaskCard({ projectID, numberOfTasks, AddTask, results, taskSearchResults}) {
  
   const { projectTasks, setProjectTasks, getProjectTasks, tasks, setTasks, getTasks } = useContext(taskContext);
   const { searchTerm } = useContext(searchTermContext)
-  const [results, setResults ] = useState([])
-  const taskSearchInput = searchTerm.toLowerCase();
-  const [taskSearchResults, setTaskSearchResults] = useState([])
+  
  console.log("projectID:", projectID)
   useEffect(() => {
-    if(searchTerm.length === 0) {
-      setResults([])
-  }
-  else {
-     setResults( projectTasks.filter(task =>
-    task.task_name.toLowerCase().includes(taskSearchInput))
-    ) 
-  }
-  console.log("RESULTS:", results);
-      setTaskSearchResults(results);
+    
    
     
     getTasks();
   },[])
 
-
+    
   return (
     <Container>
       <Section>
         <p>Your Task List</p>
         <p>View All</p>
       </Section>
-      <Card>
+     <Paper>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>PROJECT</StyledTableCell>
+              <StyledTableCell>NAME</StyledTableCell>
+              <StyledTableCell>TASK</StyledTableCell>
+              <StyledTableCell>DUE DATE</StyledTableCell>
+              <StyledTableCell>STATUS</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
         {tasks.map(item => 
        
         { if(results.length > 0 ) {
@@ -49,7 +73,7 @@ function TaskCard({ projectID, numberOfTasks, AddTask}) {
           )
         } else if( JSON.stringify(item.project_id) === projectID ) { 
         return (
-          <Task item={item} key={item.id} results={results} setResults={setResults}  />
+          <Task item={item} key={item.id}   />
            )
          }
            })}
@@ -59,8 +83,13 @@ function TaskCard({ projectID, numberOfTasks, AddTask}) {
                   </Task>
              )) : <p></p>
             }
-      </Card>
+       </TableBody>
+        </Table>
+      </Paper>
     </Container>
+      
+       
+         
   );
 }
 
@@ -82,8 +111,7 @@ const Section = styled.div`
 `;
 
 const Container = styled.div`
-
-margin-top: 20px;
+  margin-top: 20px;
   margin-bottom: 48px;
 `;
 

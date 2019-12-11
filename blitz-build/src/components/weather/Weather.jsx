@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import moment from "moment";
 import ProjectWeather from "./ProjectWeather";
 import DashboardWeather from "./DashboardWeather";
 import {
@@ -32,7 +33,7 @@ function Weather(props) {
     if (props.usage === "project") {
       setWeatherPosition({
         latitude: props.latitude,
-        longitude:props.longitude
+        longitude: props.longitude
       });
     } else if (props.usage === "dashboard") {
       if (navigator.geolocation) {
@@ -59,7 +60,6 @@ function Weather(props) {
         .then(res => {
           setWeatherData(res.data);
           console.log("get weather data", res.data);
-
         })
         .catch(err => {
           console.log(err);
@@ -67,64 +67,43 @@ function Weather(props) {
     }
   }, [weatherPosition]);
 
-
   // get time
   function getTime() {
-    const days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ];
-    const d = new Date();
-    const day = days[d.getDay()];
-    var hour = d.getHours();
-    var ampm = "am";
-
-    if (hour > 12) {
-      hour = hour - 12;
-      ampm = "pm";
-    }
-
-    const minute = d.getMinutes();
-    return `${day}, ${hour}:${("0" + minute).slice(-2)} ${ampm}`;
+    return `${moment().format("dddd")}, ${moment().format("LT")}`;
   }
 
   // convert weather info to weather icon - not finish!
   function getWeatherIcon() {
-     var weatherIcon = null;
+    var weatherIcon = null;
 
-     if (weatherData.currently.icon === "clear-night") {
-       weatherIcon = <WiNightClear size={110} color="#000" />;
-     } else if (weatherData.currently.icon === "clear-day") {
-       weatherIcon = <WiDaySunny size={110} color="#000" />;
-     } else if (weatherData.currently.icon === "rain") {
-       weatherIcon = <WiRain size={110} color="#000" />;
-     } else if (weatherData.currently.icon === "snow") {
-       weatherIcon = <WiSnow size={110} color="#000" />;
-     } else if (weatherData.currently.icon === "sleet") {
-       weatherIcon = <WiSleet size={110} color="#000" />;
-     } else if (weatherData.currently.icon === "wind") {
-       weatherIcon = <WiStrongWind size={110} color="#000" />;
-     } else if (weatherData.currently.icon === "fog") {
-       weatherIcon = <WiFog size={110} color="#000" />;
-     } else if (weatherData.currently.icon === "cloudy") {
-       weatherIcon = <WiCloudy size={110} color="#000" />;
-     } else if (weatherData.currently.icon === "partly-cloudy-day") {
-       weatherIcon = <WiDayCloudy size={110} color="#000" />;
-     } else if (weatherData.currently.icon === "partly-cloudy-night") {
-       weatherIcon = <WiNightAltCloudy size={110} color="#000" />;
-     } else if (weatherData.currently.icon === "hail") {
-       weatherIcon = <WiHail size={110} color="#000" />;
-     } else if (weatherData.currently.icon === "thunderstorm") {
-       weatherIcon = <WiNightThunderstorm size={110} color="#000" />;
-     } else if (weatherData.currently.icon === "tornado") {
-       weatherIcon = <WiTornado size={110} color="#000" />;
-     }
-     return weatherIcon;
+    if (weatherData.currently.icon === "clear-night") {
+      weatherIcon = <WiNightClear size={110} color="#000" />;
+    } else if (weatherData.currently.icon === "clear-day") {
+      weatherIcon = <WiDaySunny size={110} color="#000" />;
+    } else if (weatherData.currently.icon === "rain") {
+      weatherIcon = <WiRain size={110} color="#000" />;
+    } else if (weatherData.currently.icon === "snow") {
+      weatherIcon = <WiSnow size={110} color="#000" />;
+    } else if (weatherData.currently.icon === "sleet") {
+      weatherIcon = <WiSleet size={110} color="#000" />;
+    } else if (weatherData.currently.icon === "wind") {
+      weatherIcon = <WiStrongWind size={110} color="#000" />;
+    } else if (weatherData.currently.icon === "fog") {
+      weatherIcon = <WiFog size={110} color="#000" />;
+    } else if (weatherData.currently.icon === "cloudy") {
+      weatherIcon = <WiCloudy size={110} color="#000" />;
+    } else if (weatherData.currently.icon === "partly-cloudy-day") {
+      weatherIcon = <WiDayCloudy size={110} color="#000" />;
+    } else if (weatherData.currently.icon === "partly-cloudy-night") {
+      weatherIcon = <WiNightAltCloudy size={110} color="#000" />;
+    } else if (weatherData.currently.icon === "hail") {
+      weatherIcon = <WiHail size={110} color="#000" />;
+    } else if (weatherData.currently.icon === "thunderstorm") {
+      weatherIcon = <WiNightThunderstorm size={110} color="#000" />;
+    } else if (weatherData.currently.icon === "tornado") {
+      weatherIcon = <WiTornado size={110} color="#000" />;
+    }
+    return weatherIcon;
   }
   return (
     <>
@@ -147,10 +126,10 @@ function Weather(props) {
         <>
           {weatherData ? (
             <DashboardWeather
-                weatherData={weatherData}
-                time={getTime()}
-                icon={getWeatherIcon()}
-                weatherPosition={weatherPosition}
+              weatherData={weatherData}
+              time={getTime()}
+              icon={getWeatherIcon()}
+              weatherPosition={weatherPosition}
             />
           ) : (
             <p>Weather Loading...</p>

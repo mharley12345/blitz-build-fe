@@ -12,7 +12,7 @@ function Dashboard() {
       <Weather usage="dashboard" />
      
     </WeatherAndFeedContainer>
-      <DashboardTasks numberOfTasks = {10} />
+      <DashboardTasks numberOfTasks = {3} />
      
     </Container>
   );

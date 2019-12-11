@@ -20,8 +20,9 @@ export default function ProjectsProvider({ children }) {
   }, []);
 
   const addProject = newProject => {
+    
+    newProject.status = "On Schedule";
     console.log("new project", newProject);
-
     axiosWithAuth()
       .post(`/projects`, newProject)
       .then(res => {
