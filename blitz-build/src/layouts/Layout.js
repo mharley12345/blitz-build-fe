@@ -35,13 +35,12 @@ const Main = styled.div`
   flex-direction: column;
   background: #ebe9e7;
   width: 100%;
-  
 `;
 
 
 
 const Content = styled.div`
-  background: #ebe9e7;
+  background: #ffffff;
   height: 100%;
   padding: 32px;
   display: flex;
@@ -49,10 +48,9 @@ const Content = styled.div`
 `;
 
 const Footer = styled.div`
-
   padding: 16px 32px;
-  position: fixed;
   bottom: 0;
+  background: white;
 
   p {
     color: #8a827d;

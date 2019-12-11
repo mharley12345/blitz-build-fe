@@ -18,9 +18,10 @@ export const black = '#000'
 export const brown = '#8B4708'
 export const lightYellow = '#FFF3B3'
 export const green = '#326021'
-export const green = '#D2FAC4'
+// export const green = '#D2FAC4'
 export const red = '#9C0E0E'
 export const lightRed = '#FFBFBF'
+export const orange = '#DD6B20'
 
 // Set colors
 
