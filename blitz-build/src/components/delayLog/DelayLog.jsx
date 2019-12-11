@@ -56,8 +56,7 @@ function createData(
 
 const useStyles = makeStyles({
   root: {
-    border: "1px solid #DCD9D5",
-    
+    border: "1px solid #DCD9D5"
   },
   table: {
     minWidth: "1080px"
@@ -202,7 +201,7 @@ const emptyRows =
                 page={page}
                 SelectProps={{
                   inputProps: { "aria-label": "rows per page" },
-                  native: true
+                  native: false
                 }}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}

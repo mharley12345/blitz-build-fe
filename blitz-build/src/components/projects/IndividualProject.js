@@ -45,7 +45,16 @@ const IndividualProject = props => {
     setPathname(window.location.pathname)
     console.log(projectID)
     
-   
+    axiosWithAuth()
+      .get(`projects/${projectID}`)
+      .then(res => {
+        console.log("get single project: ", res.data);
+
+        setProjectState(res.data[0]);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }, [props]);
   
  
@@ -181,6 +190,8 @@ const Right = styled.div`
 const IndividualProjectContainer = styled.div`
   min-width: 530px;
   height: 547px;
+  border: 1px solid #dcd9d5;
+  margin-top: 16px;
 `;
 const IndividualProjectTitleContainer = styled.div`
   display: flex;
@@ -197,9 +208,7 @@ const IndividualProjectTitleContainer = styled.div`
 const IndividualProjectImgContainer = styled.div`
   min-width: 530px;
   height: 328px;
-  margin-top: 16px;
 
-  background: lightblue;
 `;
 const IndividualProjectcontentContainer = styled.div`
   min-width: 530px;
