@@ -22,17 +22,25 @@ const StyledTasks = styled.div`
 `;
 
 export default function Tasks() {
-  const { tasks } = useContext(taskContext);
-  const { searchTerm } = useContext(searchTermContext)
+  const { tasks, getTasks } = useContext(taskContext);
+  const { searchTerm, setSearchTerm } = useContext(searchTermContext)
   const taskSearchInput = searchTerm.toLowerCase();
   const [taskSearchResults, setTaskSearchResults] = useState([]);
+  const [results, setResults ] = useState([])
+ 
 
+useEffect(() => { 
 
-useEffect(() => {
-   const results= tasks.filter(task =>
-    task.task_name.toLowerCase().includes(taskSearchInput)
-    
+  if(searchTerm.length === 0) {
+      setResults([])
+  }
+  else {
+     setResults( tasks.filter(task =>
+    task.task_name.toLowerCase().includes(taskSearchInput))
     ) 
+  }
+
+   
 console.log("RESULTS:", results);
     setTaskSearchResults(results);
   
@@ -43,14 +51,14 @@ console.log("RESULTS:", results);
       {/* <TaskNav addTask={addTask} /> */}
       {tasks.map(task => {
         console.log(task.createdAt)
-        if(taskSearchResults.length > 0) {
+        if(results.length > 0) {
           return (
             <div>
 
             </div>
           )
-        }
-        else {
+          } else {
+           
         return (
           <>
             <Task item={task} key={task.id} />
@@ -60,7 +68,7 @@ console.log("RESULTS:", results);
         }
 
       })}
-        { taskSearchResults.length > 0 ?
+        { results.length > 0 ?
               taskSearchResults.map(result => (
                 <Task item={result} key={result.id} >
                   </Task>

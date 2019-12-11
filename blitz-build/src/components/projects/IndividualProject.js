@@ -14,21 +14,27 @@ import DeleteProject from "../modal/DeleteProject";
 import EditProject from "../modal/EditProject";
 import TaskContext from '../../contexts/tasks/TaskContext'
 import Documents from "../documents/Documents"
-
+import searchTermContext from '../../contexts/searching/searchTerm'
 
 const IndividualProject = props => {
   const { pathname, setPathname } = useContext(PathnameContext);
+  const { searchTerm, setSearchTerm } = useContext(searchTermContext)
   const [projectState, setProjectState] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
   const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
-  const {tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks} = useContext(TaskContext);
+  const {getTasks, tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks, projectTasks} = useContext(TaskContext);
+ 
 
+  
+  const projectID =props.match.params.id;
   useEffect(() => {
-   
-    setPathname(window.location.pathname);
-    const projectID = props.match.params.id;
+     
+    getProjectTasks(projectID);
+
+    setPathname(window.location.pathname)
     console.log(projectID)
-     getProjectTasks(projectID);
+    
+   
   }, [props]);
   
  

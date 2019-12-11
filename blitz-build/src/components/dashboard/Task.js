@@ -1,9 +1,11 @@
 import React,{useState,useEffect, useRef, useContext} from "react";
 import styled, { css } from "styled-components";
 import MeatBallsDrop from "../tasks/MeatBallsDrop"
-
-function Task({ item, children, projectID }) {
+import TaskContext from '../../contexts/tasks/TaskContext'
+function Task({ item, children, projectID, results, setResults }) {
   //
+
+
   
 
   const today = new window.Date().toISOString().slice(0, 10);

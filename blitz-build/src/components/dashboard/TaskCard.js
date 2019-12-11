@@ -6,23 +6,29 @@ import searchTermContext from '../../contexts/searching/searchTerm'
 //context 
 import taskContext from '../../contexts/tasks/TaskContext'
 
-function TaskCard({ projectID, numberOfTasks, AddTask }) {
-  const { tasks, setTasks } = useContext(taskContext);
-  const { projectTasks, setProjectTasks, getProjectTasks } = useContext(taskContext);
+function TaskCard({ projectID, numberOfTasks, AddTask}) {
+ 
+  const { projectTasks, setProjectTasks, getProjectTasks, tasks, setTasks, getTasks } = useContext(taskContext);
   const { searchTerm } = useContext(searchTermContext)
+  const [results, setResults ] = useState([])
   const taskSearchInput = searchTerm.toLowerCase();
-  const [taskSearchResults, setTaskSearchResults] = useState([]);
-
-  
+  const [taskSearchResults, setTaskSearchResults] = useState([])
+ console.log("projectID:", projectID)
   useEffect(() => {
-    const results= tasks.filter(task =>
-      task.task_name.toLowerCase().includes(taskSearchInput)
-      ) 
+    if(searchTerm.length === 0) {
+      setResults([])
+  }
+  else {
+     setResults( projectTasks.filter(task =>
+    task.task_name.toLowerCase().includes(taskSearchInput))
+    ) 
+  }
   console.log("RESULTS:", results);
       setTaskSearchResults(results);
-      
-      
-  },[taskSearchInput])
+   
+    
+    getTasks();
+  },[])
 
 
   return (
@@ -32,22 +38,24 @@ function TaskCard({ projectID, numberOfTasks, AddTask }) {
         <p>View All</p>
       </Section>
       <Card>
-        {projectTasks.slice(0, numberOfTasks).map(item => 
-        { if(taskSearchResults.length > 0) {
+        {tasks.map(item => 
+       
+        { if(results.length > 0 ) {
+          
           return (
             <div>
 
             </div>
           )
-        } else {
+        } else if( JSON.stringify(item.project_id) === projectID ) { 
         return (
-          <Task item={item} key={item.id}  />
+          <Task item={item} key={item.id} results={results} setResults={setResults}  />
            )
          }
            })}
-            { taskSearchResults.length > 0 ?
+            { results.length > 0 ?
               taskSearchResults.map(result => (
-                <Task item={result} key={result.id} >
+                <Task item={result} key={result.id}   >
                   </Task>
              )) : <p></p>
             }
