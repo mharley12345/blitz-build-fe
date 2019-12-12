@@ -63,11 +63,11 @@ const useStyles = makeStyles({
 
 export default function Tasks() {
   const { tasks, getTasks } = useContext(taskContext);
-  const { searchTerm, setSearchTerm } = useContext(searchTermContext)
+  const { searchTerm, setSearchTerm, results, setResults,taskSearchResults } = useContext(searchTermContext)
   const taskSearchInput = searchTerm.toLowerCase();
-  const [taskSearchResults, setTaskSearchResults] = useState([]);
-  const [results, setResults ] = useState([])
+  
 
+  console.log('taskSearchResults', taskSearchResults)
    
 console.log("RESULTS:", results);
   //pagnation
@@ -96,7 +96,7 @@ console.log("RESULTS:", results);
     task.task_name.toLowerCase().includes(taskSearchInput))
     ) 
   }
-    setTaskSearchResults(results);
+    
   }, [taskSearchInput]);
 
   return (
@@ -147,7 +147,8 @@ console.log("RESULTS:", results);
             })}
               { results.length > 0 ?
                (
-              taskSearchResults.map(result => (
+              results.map(result => (
+               
                 <Task item={result} key={result.id}></Task>
               ))
             ) : (

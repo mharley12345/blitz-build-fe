@@ -5,7 +5,7 @@ import Uploader from "../components/documents/Uploader";
 import TasksContext from "../contexts/tasks/TaskContext";
 import Modal from "../components/global/Modal";
 import TaskForm from "../components/tasks/TaskForm";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, Redirect } from "react-router-dom";
 import OpenContext from "../contexts/projects/OpenContext";
 import OpenTemplateContext from "../contexts/OpenTemplateContext";
 // import AddProject from  '../components/modal/AddProject'
@@ -168,7 +168,7 @@ const HoverStyle = {
 
 const SearchInput = styled.input`
   height: 48px;
-  width: 464px;
+  width: 100%;
   padding-left: 30px;
   border: 1px solid #dcd9d5;
   border-radius: 3px;
@@ -178,8 +178,27 @@ const SearchInput = styled.input`
     color: #b0b0b0;
   }
 `;
+const SearchTotal = styled.div`
+position: relative;
+ 
+`
+const ButtonSearch = styled.i`
+position: absolute;
+right: -10px;
+top: 10px;
+border:none;
+font-size: 30px;
+color: #8a827d;
+text-align:center;
+background: #fafafa;
+z-index: 2;
+width: 20px;
+hieght: 20px;
+
+`
 
 function Header({ pathname }) {
+  const [ searchCatch, setSearchCatch ] = useState('')
   const { searchTerm, setSearchTerm } = useContext(searchTermContext);
   const [TaskHover, setTaskHover] = useState(false);
   const [ProjectHover, setProjectHover] = useState(false);
@@ -194,6 +213,8 @@ function Header({ pathname }) {
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
   const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
 
+  console.log("this is the handlechange", searchCatch)
+  console.log("this is the handlesubmit", searchTerm)
   // const { addTemplate } = useContext(TemplateContext)
 
   const handleTaskModalOpen = () => {
@@ -228,7 +249,9 @@ function Header({ pathname }) {
       pathname === `/help` ||
       pathname === "/log-out" ||
       pathname === "/90_Day" ||
-      pathname.includes("templates")
+      pathname.includes("templates") ||
+      pathname === '/documents/add' ||
+      pathname.includes('/myCalendar')
     ) {
       return HideButton;
     } else {
@@ -240,7 +263,9 @@ function Header({ pathname }) {
       pathname === "/delay-log" ||
       pathname === "/tasks" ||
       pathname === "/90_Day" ||
-      pathname.includes("templates")
+      pathname.includes("templates") ||
+      pathname === '/documents/add' ||
+      pathname.includes('/myCalendar')
     ) {
       return HideButton;
     } else if (pathname === "/documents") {
@@ -274,7 +299,9 @@ function Header({ pathname }) {
       pathname === "/templates" ||
       pathname === "/delay-log" ||
       pathname === `/help` ||
-      pathname === "/log-out"
+      pathname === "/log-out" ||
+      pathname === '/documents/add' ||
+      pathname.includes('/myCalendar')
     ) {
       return HideButton;
     } else {
@@ -318,75 +345,33 @@ function Header({ pathname }) {
   };
   //// search function
 
-  const checkThePage = (
-    inputProject,
-    inputTasks,
-    inputDocuments,
-    inputTemplates,
-    inputDelayLog,
-    inputDashboard
-  ) => {
-    if (pathname === "/projects") {
-      return inputProject;
-    } else if (pathname === "/documents") {
-      return inputDocuments;
-    } else if (pathname === "/templates") {
-      return inputTemplates;
-    } else if (pathname === "/delay-log") {
-      return inputDelayLog;
-    } else if (pathname === "/dashboard") {
-      return inputDashboard;
-    } else {
-      return inputTasks;
-    }
-  };
+ 
 
   const handleChange = e => {
-    setSearchTerm(e.target.value);
+    setSearchCatch(e.target.value);
     // console.log("search term", searchTerm);
   };
 
+  const handleSubmit = ( )=> {
+     setSearchTerm(searchCatch)
+    
+  }
+ 
+
   return (
+    
     <HeaderContainer>
       <SearchContainer>
-        {checkThePage(
+          <SearchTotal>
           <SearchInput
             type="text"
-            placeholder="Search Projects"
-            value={searchTerm}
-            onChange={handleChange}
-          />,
-          <SearchInput
-            type="text"
-            placeholder="Search Tasks"
-            value={searchTerm}
-            onChange={handleChange}
-          />,
-          <SearchInput
-            type="text"
-            placeholder="Search Documents"
-            value={searchTerm}
-            onChange={handleChange}
-          />,
-          <SearchInput
-            type="text"
-            placeholder="Search Templates"
-            value={searchTerm}
-            onChange={handleChange}
-          />,
-          <SearchInput
-            type="text"
-            placeholder="Search Delay Log"
-            value={searchTerm}
-            onChange={handleChange}
-          />,
-          <SearchInput
-            type="text"
-            placeholder="Search Dashboard"
-            value={searchTerm}
+            placeholder="Search Tasks" 
+            value={searchCatch}
             onChange={handleChange}
           />
-        )}
+          <Link to= '/tasks'><ButtonSearch className="ion-ios-search" onClick={handleSubmit}/></Link>
+       </SearchTotal>
+        
       </SearchContainer>
       <ButtonContainer>
         <ButtonDocument

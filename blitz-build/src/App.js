@@ -36,6 +36,7 @@ import ProjectsProvider from "./contexts/projects/ProjectsProvider";
 import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 import EditModalContext from "./contexts/EditModalContext";
 import TemplateProvider from "./contexts/templates/TemplateProvider";
+import SearchProvider from './contexts/searching/searchTermProvider'
 //AUTH0
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
@@ -44,7 +45,7 @@ import TemplatesProvider from "./contexts/templates/TemplateProvider";
 import Uploader from "./components/documents/Uploader";
 import MyCalendar from "./components/calendar/MyCalender";
 function App() {
-  const [searchTerm, setSearchTerm] = useState("");
+  
   const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
   const [openTemplate, setOpenTemplate] = useState(false);
@@ -104,15 +105,13 @@ function App() {
   ];
 
   return (
-    <Router>
+    <Router >
       <TemplatesProvider>
         <OpenTemplateContext.Provider value={{ openTemplate, setOpenTemplate }}>
           <ProjectsProvider>
             <TaskProvider>
               <DelayLogProvider>
-                <SearchTermContext.Provider
-                  value={{ searchTerm, setSearchTerm }}
-                >
+                <SearchProvider>
                   <OpenContext.Provider value={{ open, setOpen }}>
                     <EditModalContext.Provider
                       value={{ editModalOpen, setEditModalOpen }}
@@ -200,7 +199,7 @@ function App() {
                       </PathnameContext.Provider>
                     </EditModalContext.Provider>
                   </OpenContext.Provider>
-                </SearchTermContext.Provider>
+                </SearchProvider>
               </DelayLogProvider>
             </TaskProvider>
           </ProjectsProvider>
