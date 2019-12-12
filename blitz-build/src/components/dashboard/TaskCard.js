@@ -62,27 +62,15 @@ function TaskCard({ projectID, numberOfTasks, AddTask, results, taskSearchResult
             </TableRow>
           </TableHead>
           <TableBody>
-        {tasks.map(item => 
+        {tasks.slice(0, numberOfTasks).map(item => 
        
-        { if(results.length > 0 ) {
-          
-          return (
-            <div>
-
-            </div>
-          )
-        } else if( JSON.stringify(item.project_id) === projectID ) { 
+        { if ( JSON.stringify(item.project_id) === projectID ) { 
         return (
           <Task item={item} key={item.id}   />
            )
          }
            })}
-            { results.length > 0 ?
-              taskSearchResults.map(result => (
-                <Task item={result} key={result.id}   >
-                  </Task>
-             )) : <p></p>
-            }
+            
        </TableBody>
         </Table>
       </Paper>

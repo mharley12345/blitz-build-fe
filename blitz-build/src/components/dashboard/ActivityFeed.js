@@ -47,7 +47,11 @@ const newdate = year + "-" + month + "-" + changeTheDay(day);
         </Section>
         <Card>
           {tasks.slice(0, numberOfTasks).map(item => 
-          { if(item.isComplete === true) {
+          {  if(!item) { 
+
+            return <div></div>
+
+          } else if(item.isComplete === true) {
             return (
             <CompletedTask item={item} key={item.id} />
              )

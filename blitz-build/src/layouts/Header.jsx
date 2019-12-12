@@ -198,8 +198,8 @@ hieght: 20px;
 `
 
 function Header({ pathname }) {
-  const [ searchCatch, setSearchCatch ] = useState('')
-  const { searchTerm, setSearchTerm } = useContext(searchTermContext);
+ 
+  const { searchTerm, setSearchTerm, searchCatch, setSearchCatch  } = useContext(searchTermContext);
   const [TaskHover, setTaskHover] = useState(false);
   const [ProjectHover, setProjectHover] = useState(false);
   const [DocumentHover, setDocumentHover] = useState(false);
@@ -348,30 +348,28 @@ function Header({ pathname }) {
  
 
   const handleChange = e => {
-    setSearchCatch(e.target.value);
+    setSearchTerm(e.target.value);
     // console.log("search term", searchTerm);
   };
 
-  const handleSubmit = ( )=> {
-     setSearchTerm(searchCatch)
-    
-  }
+
  
 
   return (
     
     <HeaderContainer>
       <SearchContainer>
+        <Link to= '/tasks'>
           <SearchTotal>
           <SearchInput
             type="text"
             placeholder="Search Tasks" 
-            value={searchCatch}
+            value={searchTerm}
             onChange={handleChange}
           />
-          <Link to= '/tasks'><ButtonSearch className="ion-ios-search" onClick={handleSubmit}/></Link>
+         <Link to= '/tasks'> <ButtonSearch className="ion-ios-search" /></Link>
        </SearchTotal>
-        
+        </Link>
       </SearchContainer>
       <ButtonContainer>
         <ButtonDocument

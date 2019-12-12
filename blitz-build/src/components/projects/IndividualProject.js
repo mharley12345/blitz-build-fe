@@ -160,7 +160,7 @@ const IndividualProject = props => {
         </Right>
       </Top>
       <TasksContainer>
-        <TaskCard projectID={props.match.params.id} numberOfTasks={3} results={results} setResults={setResults} taskSearchResults={taskSearchResults}  />
+        <TaskCard projectID={props.match.params.id} numberOfTasks={3}  />
       </TasksContainer>
       <DeleteProject
         project={projectState}

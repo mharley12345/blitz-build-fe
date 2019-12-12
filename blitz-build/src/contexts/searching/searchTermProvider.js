@@ -10,7 +10,7 @@ const [results, setResults] = useState('');
 const [taskSearchResults, setTaskSearchResults] = useState([]);
 const [tasks, setTasks] = useState([])
 const taskSearchInput = searchTerm.toLowerCase();
-
+const [ searchCatch, setSearchCatch ] = useState('')
   useEffect(() => {
     
     getTasks();
@@ -44,7 +44,7 @@ const taskSearchInput = searchTerm.toLowerCase();
   
   return (
     <div>
-      <searchTermContext.Provider value={{searchTerm, setSearchTerm, results, setResults, taskSearchInput, taskSearchResults, setTaskSearchResults }}>
+      <searchTermContext.Provider value={{searchTerm, setSearchTerm, results, setResults, taskSearchInput, taskSearchResults, setTaskSearchResults, searchCatch, setSearchCatch  }}>
         {children}
       </searchTermContext.Provider>
     </div>
