@@ -135,7 +135,7 @@ const emptyRows =
                 )
               : results
             ).map(result => (
-              <StyledTableRow className={classes.tableHover} key={result.id}>
+              <StyledTableRow key={result.id}>
                 <StyledTableCell
                   component="th"
                   scope="row"
