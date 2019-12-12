@@ -46,8 +46,7 @@ const StyledTableRow = withStyles(theme => ({
 
 const useStyles = makeStyles({
   root: {
-    border: "1px solid #DCD9D5",
-    
+    border: "1px solid #DCD9D5"
   },
   table: {
     minWidth: "1080px"
@@ -82,7 +81,7 @@ const handleChangeRowsPerPage = event => {
       delayLog.task_name.toLowerCase().includes(delayLogSearchInput) ||
       delayLog.reason.toLowerCase().includes(delayLogSearchInput)
   );
-  console.log("RESULTS:", results);
+  
 
   function handleExportCSV() {
     const options = {
@@ -102,7 +101,7 @@ const handleChangeRowsPerPage = event => {
     csvExporter.generateCsv(results);
   }
 
-  
+
 const emptyRows =
   rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
   
@@ -139,7 +138,10 @@ const emptyRows =
               : results
             ).map(result => (
               <StyledTableRow key={result.id}>
+
                 <StyledTableCell style={{ maxWidth: 150 }}>
+
+               
                   {result.task_name}
                 </StyledTableCell>
                 <StyledTableCell style={{ maxWidth: 300 }}>
@@ -174,7 +176,7 @@ const emptyRows =
                 page={page}
                 SelectProps={{
                   inputProps: { "aria-label": "rows per page" },
-                  native: true
+                  native: false
                 }}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
