@@ -86,19 +86,11 @@ function DashboardTasks({ projectID, numberOfTasks }) {
           </TableHead>
           <TableBody>
             {tasks.slice(0, numberOfTasks).map(item => {
-              if (taskSearchResults.length > 0) {
-                return <div></div>;
-              } else {
+            
                 return <Task item={item} key={item.id} />;
               }
-            })}
-            {taskSearchResults.length > 0 ? (
-              taskSearchResults.map(result => (
-                <Task item={result} key={result.id}></Task>
-              ))
-            ) : (
-              <p></p>
             )}
+            
           </TableBody>
         </Table>
       </Paper>

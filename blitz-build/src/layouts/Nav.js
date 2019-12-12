@@ -22,7 +22,7 @@ const Container = styled.div`
 
   min-width: 296px;
   height: 100vh;
-  background: #3f3a36;
+  background:  #3B3B3B;
   display: flex;
   flex-direction: column;
   align-items: center;
