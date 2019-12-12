@@ -4,7 +4,7 @@ import projectContext from "../../contexts/projects/ProjectContext";
 import AddProject from "../modal/AddProject";
 import Global from "../../styles/Global";
 import styled, { css } from "styled-components";
-import searchTermContext from '../../contexts/searching/searchTerm'
+import searchTermContext from "../../contexts/searching/searchTerm";
 import moment from "moment";
 
 import { withStyles, makeStyles } from "@material-ui/core/styles";
@@ -17,9 +17,7 @@ import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 // pages bar function from global
-import TablePaginationActions from '../global/TablePaginationActions'
-
-
+import TablePaginationActions from "../global/TablePaginationActions";
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -40,14 +38,9 @@ const StyledTableRow = withStyles(theme => ({
     "&:nth-of-type(even)": {
       background: "#F5F5F5"
     },
-    marginBottom:"32px",
-   
+    marginBottom: "32px"
   }
 }))(TableRow);
-
-function createData(id,address, city,state,zip_code,name, status, createDate, view) {
-  return {id, address,city,state,zip_code, name, status, createDate, view };
-}
 
 const useStyles = makeStyles({
   root: {
@@ -58,24 +51,24 @@ const useStyles = makeStyles({
   },
   tableHover: {
     "&:hover": {
-      border: "3px solid orange"
+      cursor: "pointer",
+      "& span": {
+        color: "#DD6B20",
+        textDecoration:"underline"
+      }
     }
   }
 });
 
-
 const Projects = props => {
-
   const classes = useStyles();
-  
+
   const { projects } = useContext(projectContext);
   const { searchTerm } = useContext(searchTermContext);
-  const projectSearchInput = searchTerm.toLowerCase('');
-  
+  const projectSearchInput = searchTerm.toLowerCase("");
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -85,41 +78,19 @@ const Projects = props => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  
-  //return all projects or filtered projects
-    const results = projects.filter(
-      project =>
-        project.project_name.toLowerCase().includes(projectSearchInput) ||
-        project.street_address.toLowerCase().includes(projectSearchInput)
-    );
-  console.log("RESULTS:", results);
-  
-    //Setup the data for material-ui table
-    let rows =[]
-    if (results.length > 0) {
-      results.forEach(project => {
-        rows.push(
-          createData(
-            project.id,
-            project.street_address,
-            project.city,
-            project.state,
-            project.zip_code,
-            project.project_name,
-            project.status,
-            project.createdAt,
-            
-            "View Project >"
-          )
-        ); 
-       });
-    }
 
-console.log("rows in projects table", rows)
+  //return all projects or filtered projects
+  const results = projects.filter(
+    project =>
+      project.project_name.toLowerCase().includes(projectSearchInput) ||
+      project.street_address.toLowerCase().includes(projectSearchInput)
+  );
+
+  console.log("rows in projects table", results);
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-    
+    rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
+
   return (
     <>
       <Global />
@@ -140,26 +111,30 @@ console.log("rows in projects table", rows)
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : rows
-            ).map(row => (
-              <StyledTableRow className={classes.tableHover} key={row.id}>
+              ? results.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : results
+            ).map(result => (
+              <StyledTableRow
+                className={classes.tableHover}
+                key={result.id}
+                Link
+                to={`/project/${result.id}`}
+                onClick={() => {
+                  props.history.push(`/project/${result.id}`);
+                }}
+              >
                 <StyledTableCell component="th" scope="row">
-                  <p>{row.address}</p>
-                  <p>{`${row.city}, ${row.state} ${row.zip_code}`}</p>
+                  <p>{result.street_address}</p>
+                  <p>{`${result.city}, ${result.state} ${result.zip_code}`}</p>
                 </StyledTableCell>
-                <StyledTableCell>{row.name}</StyledTableCell>
-                <StyledTableCell>{row.status}</StyledTableCell>
-                <StyledTableCell>{row.createDate}</StyledTableCell>
+                <StyledTableCell>{result.project_name}</StyledTableCell>
+                <StyledTableCell>{result.status}</StyledTableCell>
+                <StyledTableCell>{result.createdAt}</StyledTableCell>
                 <StyledTableCell>
-                  <Link
-                    to={`/project/${row.id}`}
-                    onClick={() => {
-                      props.history.push(`/project/${row.id}`);
-                    }}
-                  >
-                    {row.view}
-                  </Link>
+                  <span>View Project ></span>
                 </StyledTableCell>
               </StyledTableRow>
             ))}
@@ -176,7 +151,7 @@ console.log("rows in projects table", rows)
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={3}
-                count={rows.length}
+                count={results.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{
@@ -196,4 +171,3 @@ console.log("rows in projects table", rows)
 };
 
 export default Projects;
-

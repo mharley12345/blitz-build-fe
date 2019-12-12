@@ -47,12 +47,12 @@ const Documentstitle = styled.div`
   left: 878px;
   top: 136px;
 
-  background: #3f3a36;
+  
 
   font-size: 16px;
   line-height: 19px;
 
-  color: #fbfaf9;
+  
 `;
 const DocumentsTitleText = styled.div`
   padding: 12px 16px 12px 16px;
