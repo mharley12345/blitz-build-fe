@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Search from "../styles/Search/Search.png";
 import Uploader from "../components/documents/Uploader";
+import OpenUploaderContext from '../contexts/documents/OpenUploaderContext'
+
 import TasksContext from "../contexts/tasks/TaskContext";
 import Modal from "../components/global/Modal";
 import TaskForm from "../components/tasks/TaskForm";
@@ -157,6 +159,7 @@ const ButtonText = styled.p`
   font-size: 19px;
   margin-left: 10px;
   color: #8a827d;
+  margin-bottom: 0rem;
 `;
 const HideButton = {
   display: "none"
@@ -184,13 +187,13 @@ position: relative;
 `
 const ButtonSearch = styled.i`
 position: absolute;
-right: -10px;
-top: 10px;
+right: 15px;
+top: 2px;
 border:none;
 font-size: 30px;
 color: #8a827d;
 text-align:center;
-background: #fafafa;
+
 z-index: 2;
 width: 20px;
 hieght: 20px;
@@ -211,6 +214,7 @@ function Header({ pathname }) {
   const {TaskModalStatus, setTaskModalStatus} = useContext(TaskContext);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
+  const {openUploader,setUploaderOpen}= useContext(OpenUploaderContext)
   const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
 
   console.log("this is the handlechange", searchCatch)
@@ -251,7 +255,8 @@ function Header({ pathname }) {
       pathname === "/90_Day" ||
       pathname.includes("templates") ||
       pathname === '/documents/add' ||
-      pathname.includes('/myCalendar')
+      pathname.includes('/myCalendar') ||
+      pathname === ('/')
     ) {
       return HideButton;
     } else {
@@ -265,7 +270,9 @@ function Header({ pathname }) {
       pathname === "/90_Day" ||
       pathname.includes("templates") ||
       pathname === '/documents/add' ||
-      pathname.includes('/myCalendar')
+      pathname.includes('/myCalendar') ||
+      pathname === ('/')
+     
     ) {
       return HideButton;
     } else if (pathname === "/documents") {
@@ -301,7 +308,8 @@ function Header({ pathname }) {
       pathname === `/help` ||
       pathname === "/log-out" ||
       pathname === '/documents/add' ||
-      pathname.includes('/myCalendar')
+      pathname.includes('/myCalendar')  ||
+      pathname === ('/')
     ) {
       return HideButton;
     } else {
@@ -343,6 +351,13 @@ function Header({ pathname }) {
       setOpenTemplate(true);
     }
   };
+  const OpenUploaderContextToggler = () =>{
+    if (openUploader !== false){
+      setUploaderOpen(false);
+      } else if (openUploader === false) {
+        setOpenTemplate(true);
+      }
+  }
   //// search function
 
  
@@ -372,13 +387,14 @@ function Header({ pathname }) {
         </Link>
       </SearchContainer>
       <ButtonContainer>
-        <ButtonDocument
+      <ButtonDocument
           onMouseEnter={() => setDocumentHover(true)}
           onMouseLeave={() => setDocumentHover(false)}
           style={HideTheDocumentButton(pathname)}
-          onClick={handleDocumentModalOpen}
+          onClick={OpenUploaderContext}
         >
           {" "}
+        
           <ButtonI
             className="ion-ios-add-circle"
             style={HoverDocumentStyleFunction()}

@@ -99,6 +99,7 @@ const NavBarContainer = styled.div`
             const NavBarP = styled.p`
                 width: 80px;
                 margin-left: 15px;
+                margin-bottom: 0rem;
            
             `;
              const NavBarI = styled.i`

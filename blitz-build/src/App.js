@@ -23,6 +23,7 @@ import DelayLog from "./components/delayLog/DelayLog";
 import OpenTemplateContext from "./contexts/OpenTemplateContext";
 import AddTemplate from "./components/modal/AddTemplate";
 import Documents from "./components/documents/Documents";
+import OpenUploaderContext from "./contexts/documents/OpenUploaderContext"
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
@@ -44,6 +45,7 @@ import Callback from "./components/auth/callback";
 import TemplatesProvider from "./contexts/templates/TemplateProvider";
 import Uploader from "./components/documents/Uploader";
 import MyCalendar from "./components/calendar/MyCalender";
+import DocumentsProvider from "./contexts/documents/DocumentsProvider";
 function App() {
   
   const [pathname, setPathname] = useState(window.location.pathname);
@@ -51,7 +53,7 @@ function App() {
   const [openTemplate, setOpenTemplate] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
   const [editModalOpen, setEditModalOpen] = useState(false);
-
+  const [openUploader,setOpenUploader]= useState(false)
   // getting userInfo from id_token in localStorage.
   useEffect(() => {
     if (localStorage.getItem("id_token")) {
@@ -59,8 +61,8 @@ function App() {
     }
   }, []);
 
-  console.log("userInfo", userInfo);
-
+  // console.log("userInfo", userInfo);
+console.log('pathname', pathname)
   const navLinks = [
     {
       text: "Home",
@@ -109,6 +111,8 @@ function App() {
       <TemplatesProvider>
         <OpenTemplateContext.Provider value={{ openTemplate, setOpenTemplate }}>
           <ProjectsProvider>
+          <DocumentsProvider>          
+          <OpenUploaderContext.Provider value={{ openUploader, setOpenUploader}}>
             <TaskProvider>
               <DelayLogProvider>
                 <SearchProvider>
@@ -202,6 +206,8 @@ function App() {
                 </SearchProvider>
               </DelayLogProvider>
             </TaskProvider>
+            </OpenUploaderContext.Provider>
+            </DocumentsProvider>
           </ProjectsProvider>
         </OpenTemplateContext.Provider>
       </TemplatesProvider>

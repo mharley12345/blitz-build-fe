@@ -81,7 +81,9 @@ const IndividualProject = props => {
       <Global />
       <IndividualProjectTitleContainer>
         <img src={Project_icon} alt="project_icon" />
-        <p>&nbsp;&nbsp;Projects / {projectState.project_name}</p>
+        <p >
+          &nbsp;&nbsp;Projects / {projectState.project_name}
+        </p>
       </IndividualProjectTitleContainer>
       <Top>
         <IndividualProjectContainer>
@@ -139,12 +141,14 @@ const IndividualProject = props => {
               Weather
             </p>
           </div>
-          <Weather
-            usage="project"
-            city={`${projectState.city}, ${projectState.state}`}
-            latitude={projectState.latitude}
-            longitude={projectState.longitude}
-          />
+          <WeatherContainer>
+            <Weather
+              usage="project"
+              city={`${projectState.city}, ${projectState.state}`}
+              latitude={projectState.latitude}
+              longitude={projectState.longitude}
+            />
+          </WeatherContainer>
           <p
             style={{
               fontSize: "16px",
@@ -152,11 +156,9 @@ const IndividualProject = props => {
               color: "#817974"
             }}
           >
-            Your Documents
+            Your Documents - upcoming
           </p>
-          <DocumentsContainer>
-            <Documents />
-          </DocumentsContainer>
+          <DocumentsContainer></DocumentsContainer>
         </Right>
       </Top>
       <TasksContainer>
@@ -188,16 +190,19 @@ const Right = styled.div`
   margin-left: 20px;
 `;
 const IndividualProjectContainer = styled.div`
+  margin-top: 16px;
+
   min-width: 530px;
   height: 547px;
   border: 1px solid #dcd9d5;
-  margin-top: 16px;
+
+  border-radius: 3px;
+
 `;
 const IndividualProjectTitleContainer = styled.div`
   display: flex;
   min-width: 530px;
   height: 24px;
-
   p {
     font-family: Roboto;
     font-size: 16px;
@@ -209,11 +214,14 @@ const IndividualProjectImgContainer = styled.div`
   min-width: 530px;
   height: 328px;
 
+  
+
+  background: lightblue;
+
 `;
 const IndividualProjectcontentContainer = styled.div`
   min-width: 530px;
   height: 219px;
-
   background: #ffffff;
 `;
 const Contenth2 = styled.h2`
@@ -231,7 +239,6 @@ const ContentAddress = styled.div`
   height: 48px;
   margin-top: 16px;
   margin-left: 32px;
-
   p {
     font-size: 16px;
     line-height: 24px;
@@ -246,7 +253,6 @@ const ContentSize = styled.div`
   height: 56px;
   margin-top: 16px;
   margin-left: 150px;
-
   p {
     font-size: 16px;
     line-height: 24px;
@@ -295,8 +301,17 @@ const DeleteIcon = styled.div`
 `;
 const DocumentsContainer = styled.div`
   margin-top: 8px;
+  width: 530px;
+  height: 288px;
+  border: 1px solid #dcd9d5;
+  border-radius: 3px;
 `;
-
+const WeatherContainer = styled.div`
+  min-width: 530px;
+  height: 172px;
+  border: 1px solid #dcd9d5;
+  border-radius: 3px;
+`;
 const TasksContainer = styled.div`
   margin-top: 24px;
   width: 1080px;
