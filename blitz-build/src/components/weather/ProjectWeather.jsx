@@ -6,10 +6,6 @@ import styled from "styled-components";
 const WeatherContainerP = styled.div`
   min-width:530px;
   height: 172px;
-  border: 1px solid #dcd9d5;
-  box-sizing: border-box;
-  border-radius: 3px;
-  background: #ffffff;
   display: flex;
 `;
 const CityInfo = styled.div`

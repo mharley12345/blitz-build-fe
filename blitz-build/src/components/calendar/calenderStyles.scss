@@ -23,7 +23,7 @@ body {
 .rbc-calendar {
   font-family: sans-serif;
   color: rgb(138, 130, 125);
-  background-color: #ebe9e7;
+
   padding: 30px;
   height: auto;
 }
@@ -31,7 +31,9 @@ body {
 .rbc-agenda-view,.rbc-time-content,.rbc-label.rbc-time-header-gutter{
   display: none;
 }
-
+.rbc-row-content{
+  border: 0px solid white;
+}
 .rbc-day-bg,.rbc-time-view{
   
   background: rgb(255, 255, 255);

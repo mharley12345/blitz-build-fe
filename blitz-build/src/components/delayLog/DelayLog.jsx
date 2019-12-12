@@ -42,17 +42,7 @@ const StyledTableRow = withStyles(theme => ({
   }
 }))(TableRow);
 
-function createData(
-  id,
-  task_name,
-  reason,
-  createdAt,
-  updatedAt,
-  project_id,
-  task_id
-) {
-  return { id, task_name, reason, createdAt, updatedAt, project_id, task_id };
-}
+
 
 const useStyles = makeStyles({
   root: {
@@ -109,30 +99,14 @@ const handleChangeRowsPerPage = event => {
     };
     const csvExporter = new ExportToCsv(options);
 
-    csvExporter.generateCsv(delayLogs);
+    csvExporter.generateCsv(results);
   }
 
-  //Setup the data for material-ui table
-  let rows = [];
-  if (results.length > 0) {
-    results.forEach(delayLog => {
-      rows.push(
-        createData(
-          delayLog.id,
-          delayLog.task_name,
-          delayLog.reason,
-          delayLog.createdAt,
-          delayLog.updatedAt,
-          delayLog.project_id,
-          delayLog.task_id
-        )
-      );
-    });
-  }
-const emptyRows =
-  rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
   
-  console.log("rows in delayLogs table", rows);
+const emptyRows =
+  rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
+  
+  console.log("rows in delayLogs table", results);
   return (
     <div>
       <Global />
@@ -158,28 +132,27 @@ const emptyRows =
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : rows
-            ).map(row => (
-              <StyledTableRow className={classes.tableHover} key={row.id}>
-                <StyledTableCell
-                  component="th"
-                  scope="row"
-                  style={{ maxWidth: 150 }}
-                >
-                  {row.task_name}
+              ? results.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : results
+            ).map(result => (
+              <StyledTableRow key={result.id}>
+                <StyledTableCell style={{ maxWidth: 150 }}>
+                  {result.task_name}
                 </StyledTableCell>
                 <StyledTableCell style={{ maxWidth: 300 }}>
-                  {row.reason}
+                  {result.reason}
                 </StyledTableCell>
                 <StyledTableCell style={{ maxWidth: 150 }}>
-                  {row.createdAt}
+                  {result.createdAt}
                 </StyledTableCell>
                 <StyledTableCell style={{ maxWidth: 150 }}>
-                  {row.updatedAt}
+                  {result.updatedAt}
                 </StyledTableCell>
                 <StyledTableCell style={{ maxWidth: 150 }}>
-                  {<DelayLogButton delayLog={row} />}
+                  {<DelayLogButton delayLog={result} />}
                 </StyledTableCell>
               </StyledTableRow>
             ))}
@@ -190,14 +163,13 @@ const emptyRows =
               </TableRow>
             )}
           </TableBody>
-          
 
           <TableFooter>
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={3}
-                count={rows.length}
+                count={results.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{
