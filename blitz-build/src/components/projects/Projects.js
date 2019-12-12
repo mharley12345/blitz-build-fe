@@ -45,9 +45,6 @@ const StyledTableRow = withStyles(theme => ({
   }
 }))(TableRow);
 
-function createData(id,address, city,state,zip_code,name, status, createDate, view) {
-  return {id, address,city,state,zip_code, name, status, createDate, view };
-}
 
 const useStyles = makeStyles({
   root: {
@@ -92,33 +89,11 @@ const Projects = props => {
         project.project_name.toLowerCase().includes(projectSearchInput) ||
         project.street_address.toLowerCase().includes(projectSearchInput)
     );
-  console.log("RESULTS:", results);
-  
-    //Setup the data for material-ui table
-    let rows =[]
-    if (results.length > 0) {
-      results.forEach(project => {
-        rows.push(
-          createData(
-            project.id,
-            project.street_address,
-            project.city,
-            project.state,
-            project.zip_code,
-            project.project_name,
-            project.status,
-            project.createdAt,
-            
-            "View Project >"
-          )
-        ); 
-       });
-    }
 
-console.log("rows in projects table", rows)
+console.log("rows in projects table", results);
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
     
   return (
     <>
@@ -140,25 +115,28 @@ console.log("rows in projects table", rows)
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : rows
-            ).map(row => (
-              <StyledTableRow className={classes.tableHover} key={row.id}>
+              ? results.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : results
+            ).map(result => (
+              <StyledTableRow className={classes.tableHover} key={result.id}>
                 <StyledTableCell component="th" scope="row">
-                  <p>{row.address}</p>
-                  <p>{`${row.city}, ${row.state} ${row.zip_code}`}</p>
+                  <p>{result.street_address}</p>
+                  <p>{`${result.city}, ${result.state} ${result.zip_code}`}</p>
                 </StyledTableCell>
-                <StyledTableCell>{row.name}</StyledTableCell>
-                <StyledTableCell>{row.status}</StyledTableCell>
-                <StyledTableCell>{row.createDate}</StyledTableCell>
+                <StyledTableCell>{result.project_name}</StyledTableCell>
+                <StyledTableCell>{result.status}</StyledTableCell>
+                <StyledTableCell>{result.createdAt}</StyledTableCell>
                 <StyledTableCell>
                   <Link
-                    to={`/project/${row.id}`}
+                    to={`/project/${result.id}`}
                     onClick={() => {
-                      props.history.push(`/project/${row.id}`);
+                      props.history.push(`/project/${result.id}`);
                     }}
                   >
-                    {row.view}
+                    View Project >
                   </Link>
                 </StyledTableCell>
               </StyledTableRow>
@@ -176,7 +154,7 @@ console.log("rows in projects table", rows)
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={3}
-                count={rows.length}
+                count={results.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{
