@@ -63,7 +63,7 @@ const useStyles = makeStyles({
 
 export default function Tasks() {
   const { tasks, getTasks } = useContext(taskContext);
-  const { searchTerm, setSearchTerm, results, setResults,taskSearchResults } = useContext(searchTermContext)
+  const { searchTerm, setSearchTerm, results, setResults, taskSearchResults } = useContext(searchTermContext)
   const taskSearchInput = searchTerm.toLowerCase();
   
 
@@ -85,19 +85,21 @@ console.log("RESULTS:", results);
     setPage(0);
   };
 
+  const itemCounter = () => {
+    if (results.length > 0) {
+      return results.length
+    }
+    else {
+      return tasks.length
+    }
+  }
+
   const classes = useStyles();
 
   useEffect(() => {
-     if(searchTerm.length === 0) {
-      setResults([])
-  }
-  else {
-     setResults( tasks.filter(task =>
-    task.task_name.toLowerCase().includes(taskSearchInput))
-    ) 
-  }
+   
     
-  }, [taskSearchInput]);
+  }, []);
 
   return (
     <>
@@ -165,7 +167,7 @@ console.log("RESULTS:", results);
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={3}
-                count={tasks.length}
+                count={itemCounter()}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{
