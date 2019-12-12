@@ -54,7 +54,9 @@ const useStyles = makeStyles({
       cursor: "pointer",
       "& span": {
         color: "#DD6B20",
-        textDecoration:"underline"
+
+        textDecoration: "underline"
+
       }
     }
   }
@@ -80,6 +82,7 @@ const Projects = props => {
   };
 
   //return all projects or filtered projects
+
   const results = projects.filter(
     project =>
       project.project_name.toLowerCase().includes(projectSearchInput) ||
