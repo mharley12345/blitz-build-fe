@@ -110,7 +110,7 @@ function App() {
       <TemplatesProvider>
         <OpenTemplateContext.Provider value={{ openTemplate, setOpenTemplate }}>
           <ProjectsProvider>
-          <DocumentsProvider>
+          <DocumentsProvider>          
           <OpenUploaderContext.Provider value={{ openUploader, setOpenUploader}}>
             <TaskProvider>
               <DelayLogProvider>

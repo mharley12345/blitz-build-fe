@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Search from "../styles/Search/Search.png";
 import Uploader from "../components/documents/Uploader";
 import OpenUploaderContext from '../contexts/documents/OpenUploaderContext'
+import UploaderCard from '../components/documents/'
 import TasksContext from "../contexts/tasks/TaskContext";
 import Modal from "../components/global/Modal";
 import TaskForm from "../components/tasks/TaskForm";

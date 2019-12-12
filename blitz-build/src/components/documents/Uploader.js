@@ -1,14 +1,14 @@
-import React, { useState,Component } from 'react';
+import React, { useState,useContext } from 'react';
 import {axiosWithAuth} from '../../utils/auth/axiosWithAuth';
 import CloseIcon from '@material-ui/icons/Close';
-import { OpenUploaderContext }  from '../../contexts/documents/OpenUploaderContext'
+import  OpenUploaderContext   from '../../contexts/documents/OpenUploaderContext'
 import './DropZone.css'
 
 let user_id = localStorage.getItem("user_id")
 let project_name = localStorage.getItem("project_name")
 const  Uploader = () => {
  const[uploaderState,setUploaderState] = useState({
-
+  
                           success : false,
                           isActive : false,
                           doc_url : "",
@@ -21,7 +21,7 @@ const  Uploader = () => {
                            })
    
    const[uploadInput,setUploadInput] = useState([])
-  
+   const { openUploader , setOpen } =useContext(OpenUploaderContext)
  
   const handleChange = (ev) => {
     setUploaderState( 
@@ -68,7 +68,7 @@ const  Uploader = () => {
       axiosWithAuth().put(signedRequest,file,options)
       .then(result => {
         console.log("Response from s3")
-        setUploaderState({success: true});
+        setUploaderState({...uploaderState,success: true});
 })
 .then(
  
