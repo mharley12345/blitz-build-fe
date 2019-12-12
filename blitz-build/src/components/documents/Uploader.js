@@ -1,54 +1,63 @@
-import React, { Component } from 'react';
+import React, { useState,Component } from 'react';
 import {axiosWithAuth} from '../../utils/auth/axiosWithAuth';
 import CloseIcon from '@material-ui/icons/Close';
-
+import { OpenUploaderContext }  from '../../contexts/documents/OpenUploaderContext'
 import './DropZone.css'
 
 let user_id = localStorage.getItem("user_id")
 let project_name = localStorage.getItem("project_name")
-class Uploader extends Component {
+const  Uploader = () => {
+ const[uploaderState,setUploaderState] = useState({
 
-  constructor(props){
-    super(props);
-    this.state = {
-      success : false,
-      isActive : false,
-      doc_url : "",
-      user_id:localStorage.getItem('user_id'),
-      file_name:'',
-      project_name:project_name,
-      project_id:6,
-      createdAt:Date.now()
-    }
-    console.log(this.state)
-  }
+                          success : false,
+                          isActive : false,
+                          doc_url : "",
+                          user_id:user_id,
+                          file_name:'',
+                          project_name:project_name,
+                          project_id:6,
+                          createdAt:Date.now()
+
+                           })
+   
+   const[uploadInput,setUploadInput] = useState([])
+  
  
-  handleChange = (ev) => {
-    this.setState({success: false, url : ""});
+  const handleChange = (ev) => {
+    setUploaderState( 
+        
+      {...uploaderState,success: false, url : ""});
     
   }
   // Perform the upload
-  handleUpload = (ev) => {
-    console.log(ev)
-    let file = this.uploadInput.files[0];
+  const handleUpload = (ev) => {
+      let input = ev.setUploadInput
+    
+    
+    let file = uploadInput.files[0];
     // Split the filename to get the name and type
-    let fileParts = this.uploadInput.files[0].name.split('.');
+    let fileParts = uploadInput.files[0].name.split('.');
+   
     let fileName = fileParts[0];
     let fileType = fileParts[1];
-    console.log("Preparing the upload");
+
+    console.log("Preparing the upload",uploadInput,"STATE===>>>>",uploaderState);
     //Calls BE to get validated url 
+
     axiosWithAuth().post("/docs/documents",{
+   
       fileName : fileName,
       fileType : fileType,
-      user_id:this.state.user_id
+      user_id:uploaderState.user_id
     })
     .then(response => {
+      console.log("RESPONSE",response)
       var returnData = response.data.data.returnData;
       var signedRequest = returnData.signedRequest;
       var url = returnData.url;
-      this.setState({doc_url: url,file_name:fileName})
+      setUploaderState({doc_url: url,file_name:fileName})
       console.log("Recieved a signed request " + signedRequest);
-      console.log(this.state)
+      console.log(uploaderState)
      // Put the fileType in the headers for the upload
       var options = {
         headers: {
@@ -59,29 +68,28 @@ class Uploader extends Component {
       axiosWithAuth().put(signedRequest,file,options)
       .then(result => {
         console.log("Response from s3")
-        this.setState({success: true});
+        setUploaderState({success: true});
 })
 .then(
  
       axiosWithAuth().post('docs/url',{
-        doc_url : this.state.doc_url,
-      user_id: this.state.user_id,
-      file_name:this.state.file_name,
-      project_id:this.state.project_id}))
+        doc_url : uploaderState.doc_url,
+      user_id: uploaderState.user_id,
+      file_name: uploaderState.file_name,
+      project_id:uploaderState.project_id}))
       
       .catch(error => {
-        alert("ERROR " + JSON.stringify(error));
+         console.log("ERROR ",error)
       })
     })
     .catch(error => {
-      alert(JSON.stringify(error));
+      console.log("ERROR",error);
     })
   };
  
  
  
   
-  render() {
 
     const SuccessMessage = () => (
       <div style={{padding:50}}>
@@ -89,19 +97,21 @@ class Uploader extends Component {
        
       
       </div>
+        
     )
+    if(uploaderState.success != false){return SuccessMessage()}
     return (
          
       <div className="Uploader">
 
            <h1>Add A New Document</h1> <h6>Close <CloseIcon/></h6>
-          {this.state.success ? <SuccessMessage/> : null}
-          <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file"/>
+          {uploaderState.success ? <SuccessMessage/> : null}
+          <input onChange={handleChange} ref={(ref) => { setUploadInput(ref); }} type="file"/>
           <br/>
-          <button onClick={this.handleUpload}>Add Document</button>
+          <button onClick={handleUpload}>Add Document</button>
      
       </div>
     );
   }
-}
+
 export default Uploader;
