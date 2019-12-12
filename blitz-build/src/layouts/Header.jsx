@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Search from "../styles/Search/Search.png";
 import Uploader from "../components/documents/Uploader";
+import OpenUploaderContext from '../contexts/documents/OpenUploaderContext'
+import UploaderCard from '../components/documents/'
 import TasksContext from "../contexts/tasks/TaskContext";
 import Modal from "../components/global/Modal";
 import TaskForm from "../components/tasks/TaskForm";
@@ -192,6 +194,7 @@ function Header({ pathname }) {
   const {TaskModalStatus, setTaskModalStatus} = useContext(TaskContext);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
+  const {openUploader,setUploaderOpen}= useContext(OpenUploaderContext)
   const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
 
   // const { addTemplate } = useContext(TemplateContext)
@@ -316,6 +319,13 @@ function Header({ pathname }) {
       setOpenTemplate(true);
     }
   };
+  const OpenUploaderContextToggler = () =>{
+    if (openUploader !== false){
+      setUploaderOpen(false);
+      } else if (openUploader === false) {
+        setOpenTemplate(true);
+      }
+  }
   //// search function
 
   const checkThePage = (
@@ -389,13 +399,14 @@ function Header({ pathname }) {
         )}
       </SearchContainer>
       <ButtonContainer>
-        <ButtonDocument
+      <ButtonDocument
           onMouseEnter={() => setDocumentHover(true)}
           onMouseLeave={() => setDocumentHover(false)}
           style={HideTheDocumentButton(pathname)}
-          onClick={handleDocumentModalOpen}
+          onClick={OpenUploaderContext}
         >
           {" "}
+        
           <ButtonI
             className="ion-ios-add-circle"
             style={HoverDocumentStyleFunction()}

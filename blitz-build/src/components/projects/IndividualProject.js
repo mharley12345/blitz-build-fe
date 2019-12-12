@@ -197,7 +197,6 @@ const IndividualProjectTitleContainer = styled.div`
   display: flex;
   min-width: 530px;
   height: 24px;
-
   p {
     font-family: Roboto;
     font-size: 16px;
@@ -208,12 +207,10 @@ const IndividualProjectTitleContainer = styled.div`
 const IndividualProjectImgContainer = styled.div`
   min-width: 530px;
   height: 328px;
-
 `;
 const IndividualProjectcontentContainer = styled.div`
   min-width: 530px;
   height: 219px;
-
   background: #ffffff;
 `;
 const Contenth2 = styled.h2`
@@ -231,7 +228,6 @@ const ContentAddress = styled.div`
   height: 48px;
   margin-top: 16px;
   margin-left: 32px;
-
   p {
     font-size: 16px;
     line-height: 24px;
@@ -246,7 +242,6 @@ const ContentSize = styled.div`
   height: 56px;
   margin-top: 16px;
   margin-left: 150px;
-
   p {
     font-size: 16px;
     line-height: 24px;
