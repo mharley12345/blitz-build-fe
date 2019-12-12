@@ -62,11 +62,14 @@ const useStyles = makeStyles({
 });
 
 export default function Tasks() {
-  const { tasks } = useContext(taskContext);
-  const { searchTerm } = useContext(searchTermContext);
+  const { tasks, getTasks } = useContext(taskContext);
+  const { searchTerm, setSearchTerm } = useContext(searchTermContext)
   const taskSearchInput = searchTerm.toLowerCase();
   const [taskSearchResults, setTaskSearchResults] = useState([]);
+  const [results, setResults ] = useState([])
 
+   
+console.log("RESULTS:", results);
   //pagnation
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -85,10 +88,14 @@ export default function Tasks() {
   const classes = useStyles();
 
   useEffect(() => {
-    const results = tasks.filter(task =>
-      task.task_name.toLowerCase().includes(taskSearchInput)
-    );
-    console.log("RESULTS:", results);
+     if(searchTerm.length === 0) {
+      setResults([])
+  }
+  else {
+     setResults( tasks.filter(task =>
+    task.task_name.toLowerCase().includes(taskSearchInput))
+    ) 
+  }
     setTaskSearchResults(results);
   }, [taskSearchInput]);
 
@@ -121,17 +128,25 @@ export default function Tasks() {
               : tasks
             ).map(task => {
               console.log(task.createdAt);
-              if (taskSearchResults.length > 0) {
-                return <div></div>;
-              } else {
+              if(results.length > 0) {
                 return (
-                  <>
-                    <Task item={task} key={task.id} />
-                  </>
-                );
+                  <div>
+      
+                  </div>
+                )
+                } else {
+                 
+              return (
+                <>
+                  <Task item={task} key={task.id} />
+                </>
+      
+              );
               }
+      
             })}
-            {taskSearchResults.length > 0 ? (
+              { results.length > 0 ?
+               (
               taskSearchResults.map(result => (
                 <Task item={result} key={result.id}></Task>
               ))

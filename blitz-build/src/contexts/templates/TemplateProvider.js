@@ -10,8 +10,13 @@ export default function TemplatesProvider({ children }) {
   const [templateTask, setTemplatesTask] = useState([])
 
   useEffect(() => {
-   
-    axiosWithAuth()
+   getTemplates();
+
+  }, []);
+
+const getTemplates = () => {
+
+ axiosWithAuth()
       .get("/templates")
       // .get("/90_day")
       .then(res => {
@@ -21,7 +26,8 @@ export default function TemplatesProvider({ children }) {
       .catch(err => {
         console.log(err);
       });
-  }, []);
+
+  }
 
 const getTemplateTasks = () => {
    const templateID = localStorage.getItem('template_id');
@@ -46,6 +52,7 @@ const getTemplateTasks = () => {
         console.log("This template was posted,", res);
         newTemplate.id = res.data.template_id;
         setTemplates([...templates, newTemplate]);
+       
       })
       .catch(err => {
         console.log(err);
@@ -76,6 +83,7 @@ const getTemplateTasks = () => {
   };
 
   const deleteTemplate = deletedTemplate => {
+     getTemplates();
     console.log("deletedTemplate", deletedTemplate);
     axiosWithAuth()
       .delete(`/templates/${deletedTemplate.id}`)
@@ -89,7 +97,8 @@ const getTemplateTasks = () => {
       })
       .catch(err => {
         console.log(err);
-      });
+      }); 
+     
   };
 
   const editTemplate = (editedTemplate, editedTemplateId) => {

@@ -15,7 +15,7 @@ import searchTermContext from "../contexts/searching/searchTerm";
 import AddProject from "../components/modal/AddProject";
 import TemplateContext from "../contexts/templates/TemplateContext";
 import TemplateTaskForm from "../components/templates/TemplateTaskForm";
-
+import TaskContext from '../contexts/tasks/TaskContext'
 const HeaderContainer = styled.div`
   background: #fff;
   width: 100%;
@@ -191,7 +191,7 @@ function Header({ pathname }) {
   const { addTask } = useContext(TasksContext);
   const { addTemplateTask } = useContext(TemplateContext);
   const { open, setOpen } = useContext(OpenContext);
-  const [TaskModalStatus, setTaskModalStatus] = useState(false);
+  const {TaskModalStatus, setTaskModalStatus} = useContext(TaskContext);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
   const {openUploader,setUploaderOpen}= useContext(OpenUploaderContext)

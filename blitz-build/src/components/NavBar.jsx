@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import media from '../styles/sizes'
@@ -6,7 +6,7 @@ import Logo from '../styles/Logo/Logo.png'
 import Avatar from '../styles/Avatar/Avatar.png'
 import UserContext from '../contexts/UserContext'
 import userContext from '../contexts/UserContext'
-
+import TaskContext from '../contexts/tasks/TaskContext'
 
 const NavBarContainer = styled.div`
    margin-top: 20px;
@@ -152,11 +152,12 @@ const NavBarContainer = styled.div`
        const userInfoContainer = styled.div`
         
        `
-           
+     
 function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, setPathname }) {
    const [ hoverIndex, setHoverIndex ] = useState(0)
    const [navOpen, setNavOpen ] = useState(false)
    const {userInfo, setUserInfo} = useContext(UserContext)
+   const {getTasks, tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks} = useContext(TaskContext);
 //    console.log(navLinks, background, hoverBackground, linkColor, logo)
 
    return (

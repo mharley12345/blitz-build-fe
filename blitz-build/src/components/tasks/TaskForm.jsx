@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 // import DatePicker from "react-datepicker";
 
 //styles
@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import styled from "styled-components";
 import { XButton } from "../../styles/Tasks/tasks";
+import TaskContext from '../../contexts/tasks/TaskContext'
 import {
   StyledForm,
   StyledLabel,
@@ -41,6 +42,7 @@ export default function TaskForm({
   text
 }) {
   const [projects, setProjects] = useState([]);
+  const {getTasks, tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks} = useContext(TaskContext);
   const [task, setTask, handleChanges] = useInput({
     task_name: "",
     task_description: "",
@@ -49,7 +51,7 @@ export default function TaskForm({
   });
 
   useEffect(() => {
- 
+    getTasks();
     axiosWithAuth()
       .get(`/projects`)
       .then(res => {
@@ -69,7 +71,7 @@ export default function TaskForm({
 
   const handleSubmit = e => {
     e.preventDefault();
-
+  
     //finds the the project that the user picked
     const chosenProject = projects.filter(project => {
       return project.project_name === task.project_name;
