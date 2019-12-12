@@ -55,7 +55,7 @@ function Weather(props) {
     if (weatherPosition.latitude !== 0) {
       axios
         .get(
-          ` https://blitz-build-weather.herokuapp.com/forecast/${weatherPosition.latitude},${weatherPosition.longitude}`
+          ` https://blitzbuild-weather.herokuapp.com/forecast/${weatherPosition.latitude},${weatherPosition.longitude}`
         )
         .then(res => {
           setWeatherData(res.data);
