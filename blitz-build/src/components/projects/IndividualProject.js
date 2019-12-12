@@ -28,12 +28,12 @@ const IndividualProject = props => {
   const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
 
   const [form, setForm] = useState({
-    template_id: null
+    template_id: 0
   });
 
-  const project_id = props.match.params.id;
+  console.log(form);
 
-  console.log("form, templates, project_id", form, templates, project_id);
+  const project_id = props.match.params.id;
 
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -66,12 +66,12 @@ const IndividualProject = props => {
       });
   };
 
-  const addCustomTemplate = template_id => {
-    console.log(template_id);
-    const templateID = parseInt(template_id);
-    console.log(templateID);
+  const addCustomTemplate = e => {
+    e.preventDefault();
+    const templateID = parseInt(form.template_id);
+    console.log("templateID", templateID);
     axiosWithAuth()
-      .post(`/templates/addTasks/${project_id}`, templateID)
+      .post(`/templates/addTasks/${project_id}`, { template_id: templateID })
       .then(res => {
         console.log(res);
       })
@@ -99,9 +99,10 @@ const IndividualProject = props => {
       <Global />
       <DisplayFlex>
         <button onClick={() => addPreBuiltTemplate()}> add template </button>
-        <form>
+        <form onSubmit={addCustomTemplate}>
           <StyledLabel>Assign A Template</StyledLabel>
           <StyledSelect
+            type="number"
             name="template_id"
             onChange={changeHandler}
             value={form.template_id}
@@ -116,9 +117,7 @@ const IndividualProject = props => {
               );
             })}
           </StyledSelect>
-          <button type="submit" onSubmit={addCustomTemplate}>
-            Add custom template
-          </button>
+          <button type="submit">Add custom template</button>
         </form>
       </DisplayFlex>
       <IndividualProjectTitleContainer>
