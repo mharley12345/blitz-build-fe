@@ -18,12 +18,12 @@ const NavBarContainer = styled.div`
     height: 1574px;
     left: 0;
     top: 0;
-    background: #3F3A36;
+    background: #3B3B3B;
     
 `;
     const NavBarUl = styled.ul`
         
-        background: #3F3A36;
+        background: #3B3B3B;
         display: flex;
         margin-block-start: 0;
         margin-block-end: 0;
@@ -91,7 +91,7 @@ const NavBarContainer = styled.div`
        }   
 
        const HoverStyles = {
-           backgroundColor: '#4f4843',
+           backgroundColor: '#4a4a4a',
           
            
            
@@ -198,7 +198,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
                        style={NavLinkHover(hoverIndex, index)}
                        >
                            
-                          <NavLink to={link.path}  activeStyle={{ backgroundColor: '#27221F',
+                          <NavLink to={link.path}  activeStyle={{ backgroundColor: '#232323',
            borderRadius: '3px', 
            borderLeft: ' 4px solid #DD6B20', marginLeft: '-4px'
   }} style = {NavBarLink}  > 
