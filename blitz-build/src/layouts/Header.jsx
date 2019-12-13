@@ -255,7 +255,7 @@ function Header({ pathname }) {
       pathname === "/90_Day" ||
       pathname.includes("templates") ||
       pathname === '/documents/add' ||
-      pathname.includes('/myCalendar') ||
+      pathname.includes('/mycalendar') ||
       pathname === ('/')
     ) {
       return HideButton;
@@ -269,10 +269,9 @@ function Header({ pathname }) {
       pathname === "/tasks" ||
       pathname === "/90_Day" ||
       pathname.includes("templates") ||
-      pathname === '/documents/add' ||
-      pathname.includes('/myCalendar') ||
-      pathname === ('/')
-     
+      pathname === "/documents/add" ||
+      pathname.includes("/mycalendar") ||
+      pathname === "/"
     ) {
       return HideButton;
     } else if (pathname === "/documents") {
@@ -307,9 +306,9 @@ function Header({ pathname }) {
       pathname === "/delay-log" ||
       pathname === `/help` ||
       pathname === "/log-out" ||
-      pathname === '/documents/add' ||
-      pathname.includes('/myCalendar')  ||
-      pathname === ('/')
+      pathname === "/documents/add" ||
+      pathname.includes("/mycalendar") ||
+      pathname === "/"
     ) {
       return HideButton;
     } else {

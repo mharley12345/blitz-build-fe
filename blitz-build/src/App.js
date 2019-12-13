@@ -95,6 +95,11 @@ console.log('pathname', pathname)
       icon: "ion-ios-hourglass"
     },
     {
+      text: "MyCalendar",
+      path: "/mycalendar",
+      icon: "ion-ios-calendar-outline"
+    },
+    {
       text: "Log Out",
       path: "/log-out",
       icon: "ion-ios-cog"
