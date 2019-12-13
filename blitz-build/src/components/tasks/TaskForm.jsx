@@ -115,7 +115,8 @@ export default function TaskForm({
         width: "75%",
         height: '48px',
         background: '#E9E9E9',
-        border: 'none'
+        border: 'none',
+        paddingLeft: '10px'
 
       }}
         type="text"
@@ -130,7 +131,8 @@ export default function TaskForm({
         width: "75%",
         height: '48px',
         background: '#E9E9E9',
-        border: 'none'
+        border: 'none',
+        paddingLeft: '10px'
 
       }}
         type="text"
@@ -148,8 +150,9 @@ export default function TaskForm({
         width: "75%",
         height: '48px',
         background: '#E9E9E9',
-        border: 'none'
-
+        border: 'none',
+        paddingLeft: '10px'
+  
       }}
         name="project_name"
         onChange={handleChanges}
@@ -173,7 +176,10 @@ export default function TaskForm({
           width: "75%",
           height: '48px',
           background: '#E9E9E9',
-          border: 'none'
+          border: 'none',
+          paddingTop: '15px',
+          paddingBottom: '10px',
+          paddingLeft: '10px'
 
         }}
         id="date"
