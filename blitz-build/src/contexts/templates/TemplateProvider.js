@@ -86,6 +86,9 @@ const getTemplateTasks = () => {
           return template.id !== deleteTemplate.id;
         });
         setTemplates(newTemplateList);
+
+        window.location.reload(true);
+
       })
       .catch(err => {
         console.log(err);

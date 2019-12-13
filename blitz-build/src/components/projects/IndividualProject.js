@@ -79,7 +79,6 @@ const IndividualProject = props => {
         console.log(err);
       });
   };
-  // /templates/addTasks/:id(project_id)
 
   const handleDeleteOpen = e => {
     e.stopPropagation();
