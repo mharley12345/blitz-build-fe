@@ -44,6 +44,7 @@ function ProjectWeather({ weatherData, time, icon,city }) {
               fontWeight: 500,
               marginTop: "59px",
               marginLeft: "32px",
+              marginBottom: 0,
               color: "#3B3B3B",
               lineHeiht: "28px"
             }}
@@ -55,6 +56,7 @@ function ProjectWeather({ weatherData, time, icon,city }) {
               fontSize: "16px",
               marginTop: "2px",
               marginLeft: "32px",
+              marginBottom: 0,
               color: "#3B3B3B",
               lineHeiht: "24px"
             }}
@@ -69,7 +71,7 @@ function ProjectWeather({ weatherData, time, icon,city }) {
               style={{
                 fontSize: "24px",
                 fontWeight: 500,
-                
+                marginBottom: 0,
                 marginLeft: "32px",
                 color: "#3B3B3B",
                 lineHeiht: "28px"
@@ -83,6 +85,7 @@ function ProjectWeather({ weatherData, time, icon,city }) {
                 fontSize: "16px",
                 marginTop: "2px",
                 marginLeft: "32px",
+                marginBottom: 0,
                 color: "#817974",
                 lineHeiht: "24px"
               }}
@@ -90,9 +93,7 @@ function ProjectWeather({ weatherData, time, icon,city }) {
               {weatherData.currently.summary}
             </p>
           </WeatherData>
-          <WeatherIcon>
-            {icon}
-            </WeatherIcon>
+          <WeatherIcon>{icon}</WeatherIcon>
         </WeatherInfo>
       </WeatherContainerP>
     </>

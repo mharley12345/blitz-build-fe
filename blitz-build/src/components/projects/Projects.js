@@ -97,10 +97,10 @@ const Projects = props => {
   return (
     <>
       <Global />
-      <p style={{ color: "#817974", paddingBottom: "8px" }}>
+      <div style={{ color: "#817974", paddingBottom: "8px" }}>
         {" "}
         Your Project List{" "}
-      </p>
+      </div>
       <Paper className={classes.root}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
@@ -129,9 +129,11 @@ const Projects = props => {
                   props.history.push(`/project/${result.id}`);
                 }}
               >
-                <StyledTableCell component="th" scope="row">
-                  <p>{result.street_address}</p>
-                  <p>{`${result.city}, ${result.state} ${result.zip_code}`}</p>
+                <StyledTableCell >
+                  <p style={{ marginBottom: 0 }}>{result.street_address}</p>
+                  <p
+                    style={{ marginBottom: 0 }}
+                  >{`${result.city}, ${result.state} ${result.zip_code}`}</p>
                 </StyledTableCell>
                 <StyledTableCell>{result.project_name}</StyledTableCell>
                 <StyledTableCell>{result.status}</StyledTableCell>
