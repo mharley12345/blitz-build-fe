@@ -3,7 +3,6 @@ import React, { useEffect, useState, useContext } from "react";
 
 //styles
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import styled from "styled-components";
 import { XButton } from "../../styles/Tasks/tasks";
 import TaskContext from '../../contexts/tasks/TaskContext'
@@ -12,7 +11,8 @@ import {
   StyledLabel,
   StyledInput,
   StyledSelect,
-  StyledBtn
+  StyledBtn,
+
 } from "../../styles/Tasks/taskForm";
 
 //hooks
@@ -100,16 +100,24 @@ export default function TaskForm({
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <div style={{ width: "100%", textAlign: "right" }}>
-        <XButton onClick={closeModal}>X</XButton>
-      </div>
+     
+       
 
-      <header>
-        <h1 style={{ fontSize: "3rem", fontFamily: "roboto" }}>{text}</h1>
+      <header style={{  width: "76%", display:'flex', justifyContent: 'space-between', marginTop: '6%', marginBottom:'3%'}} >
+        <h1 style={{ color: '#232323', fontSize: "3rem", fontFamily: "roboto", width: "70%"   }}>{text}</h1>
+        <XButton onClick={closeModal}> Close X</XButton>
+     
       </header>
 
       <StyledLabel>Task Name</StyledLabel>
       <StyledInput
+      style={{
+        width: "75%",
+        height: '48px',
+        background: '#E9E9E9',
+        border: 'none'
+
+      }}
         type="text"
         name="task_name"
         value={task.task_name}
@@ -118,6 +126,13 @@ export default function TaskForm({
 
       <StyledLabel>Task Decription</StyledLabel>
       <StyledInput
+      style={{
+        width: "75%",
+        height: '48px',
+        background: '#E9E9E9',
+        border: 'none'
+
+      }}
         type="text"
         name="task_description"
         value={task.task_description}
@@ -127,13 +142,42 @@ export default function TaskForm({
       {/* <StyledLabel>Due Date</StyledLabel>
       <DatePicker selected={dueDate} onChange={date => setDueDate(date)} /> */}
 
-      <TextField
+<StyledLabel>Assign Project</StyledLabel>
+      <StyledSelect
+      style={{
+        width: "75%",
+        height: '48px',
+        background: '#E9E9E9',
+        border: 'none'
+
+      }}
+        name="project_name"
+        onChange={handleChanges}
+        value={task.project_name}
+      >
+        <option>Choose Project</option>
+
+        {projects.map(project => {
+          return (
+            <option key={project.id} value={project.project_name}>
+              {project.project_name}
+            </option>
+          );
+        })}
+      </StyledSelect>
+
+      
+      <StyledLabel>Due Date</StyledLabel>
+      <StyledInput
         style={{
-          width: "77%",
-          marginTop: "20px"
+          width: "75%",
+          height: '48px',
+          background: '#E9E9E9',
+          border: 'none'
+
         }}
         id="date"
-        label="Due Date"
+        label=""
         type="date"
         name="due_date"
         onChange={handleChanges}
@@ -151,23 +195,8 @@ export default function TaskForm({
         onChange={handleChanges}
       /> */}
 
-      <StyledLabel>Assign Project</StyledLabel>
-      <StyledSelect
-        name="project_name"
-        onChange={handleChanges}
-        value={task.project_name}
-      >
-        <option>Choose Project</option>
-
-        {projects.map(project => {
-          return (
-            <option key={project.id} value={project.project_name}>
-              {project.project_name}
-            </option>
-          );
-        })}
-      </StyledSelect>
-      <StyledBtn>Save</StyledBtn>
+      
+      <StyledBtn style={{marginBottom: "50px"}}>Add Task</StyledBtn>
     </StyledForm>
   );
 }
