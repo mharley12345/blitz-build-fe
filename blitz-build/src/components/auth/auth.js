@@ -77,13 +77,13 @@ class Auth {
     return new Date().getTime() < expiresAt;
   }
 
-  //doing this function in the logout component
-  // signOut() {
-  //   // clear id token, profile, and expiration
-  //   localStorage.removeItem("access_token");
-  //   localStorage.removeItem("id_token");
-  //   localStorage.removeItem("expires_at");
-  // }
+  // doing this function in the logout component
+  signOut() {
+    // clear id token, profile, and expiration
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("expires_at");
+  }
 
   getProfile() {
     if (localStorage.getItem("id_token")) {

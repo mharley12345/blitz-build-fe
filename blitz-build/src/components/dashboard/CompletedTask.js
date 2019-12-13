@@ -10,6 +10,17 @@ function CompletedTask({ item, children }) {
 
   const { projects } = useContext(projectContext);
 
+  const projectID = projects.map( project =>{
+    if (project.id === item.project_id) {
+      return project.id
+    }
+  }
+    )
+    const TaskProjectName = projects.map(project => {
+      if (project.id === item.project_id) {
+        return project.project_name
+      }
+    })
   const TaskAddress = projects.map(project => {
     if (project.id === item.project_id) {
       return project.street_address
@@ -61,7 +72,7 @@ function CompletedTask({ item, children }) {
       <Spacer> / </Spacer>
 
       <AddressText> {TaskAddress} </AddressText>
-
+      <ProjectName>{TaskProjectName} </ProjectName> 
         </Address>
        </Inner>
     </Container>
@@ -71,6 +82,16 @@ function CompletedTask({ item, children }) {
 
 export default CompletedTask;
 
+
+const NavLinkStyle = {
+  textDecoration: 'none',
+  display: 'flex',
+  height: '100%',
+  width:'100%',
+ 
+
+ 
+} ;
 const Spacer = styled.div`
 
 width: 2%;
@@ -124,6 +145,17 @@ width: 40%;
 const AddressText = styled.p`
 width: 40%;
 margin-left: 10%;
+  font-size: 14px;
+  line-height: 16px;
+  font-family: "Roboto";
+  color: #3f3a36;
+  margin-bottom: 8px;
+`;
+const ProjectName = styled.p`
+width: 5%;
+display: flex;
+justify-content: end;
+margin-left: 50px;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
