@@ -64,12 +64,19 @@ const useStyles = makeStyles({
 export default function Tasks() {
   const { tasks } = useContext(taskContext);
   const { searchTerm } = useContext(searchTermContext);
-  const taskSearchInput = searchTerm.toLowerCase();
+  const taskSearchInput = searchTerm.toLowerCase("");
   const [taskSearchResults, setTaskSearchResults] = useState([]);
 
   //pagnation
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const results = tasks.filter(task =>
+    task.task_name.toLowerCase().includes(taskSearchInput)
+  );
+  console.log("RESULTS:", results);
+  // setTaskSearchResults(results);
+
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, tasks.length - page * rowsPerPage);
 
@@ -84,20 +91,15 @@ export default function Tasks() {
 
   const classes = useStyles();
 
-  useEffect(() => {
-    const results = tasks.filter(task =>
-      task.task_name.toLowerCase().includes(taskSearchInput)
-    );
-    console.log("RESULTS:", results);
-    setTaskSearchResults(results);
-  }, [taskSearchInput]);
-
   return (
     <>
       <InfoContainer>
         <p style={{ fontWeight: 600 }}>Your Task List</p>
-        <SortBtn style={{textDecoration: 'none' }}>
-          Sort By <span className="ion-ios-arrow-down" />
+        <SortBtn style={{ textDecoration: "none" }}>
+          <option value="">Sort</option>
+          <option>All</option>
+          <option>Project</option>
+          <option>Due Date</option>
         </SortBtn>
       </InfoContainer>
 
@@ -114,7 +116,7 @@ export default function Tasks() {
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? tasks.slice(
+              ? results.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
