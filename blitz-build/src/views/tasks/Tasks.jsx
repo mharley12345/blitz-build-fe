@@ -61,40 +61,45 @@ const useStyles = makeStyles({
   }
 });
 const MainFailContainer = styled.div`
-
-postion: relative;
-width: 900px;
-height: 200px;
-display: flex;
-justify-content: center;
-align-items: center;
-margin-left: 250px;
-`
+  postion: relative;
+  width: 900px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 250px;
+`;
 
 const failedContainer = styled.div`
-margin-top: 80px;
+  margin-top: 80px;
 
-display: flex;
-justify-content: center;
-align-items: center;
-
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const failText = styled.div`
-font-size: 50px;
-`
+  font-size: 50px;
+`;
 
 export default function Tasks() {
-  const { tasks, getTasks } = useContext(taskContext);
-  const { searchTerm, setSearchTerm, results, setResults, taskSearchResults } = useContext(searchTermContext)
-  const taskSearchInput = searchTerm.toLowerCase();
-  
+  const { tasks } = useContext(taskContext);
+  const { searchTerm } = useContext(searchTermContext);
+  const taskSearchInput = searchTerm.toLowerCase("");
+  const [taskSearchResults, setTaskSearchResults] = useState([]);
 
-  console.log('taskSearchResults', taskSearchResults)
-   
-console.log("RESULTS:", results);
+  console.log("taskSearchResults", taskSearchResults);
+
+  console.log("RESULTS:", results);
   //pagnation
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const results = tasks.filter(task =>
+    task.task_name.toLowerCase().includes(taskSearchInput)
+  );
+  console.log("RESULTS:", results);
+  // setTaskSearchResults(results);
+
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, tasks.length - page * rowsPerPage);
 
@@ -109,37 +114,36 @@ console.log("RESULTS:", results);
 
   const itemCounter = () => {
     if (results.length > 0) {
-      return results.length
+      return results.length;
+    } else {
+      return tasks.length;
     }
-    else {
-      return tasks.length
-    }
-  }
+  };
   const failedSearch = () => {
-    if(searchTerm.length > 0 && results.length === 0) {
+    if (searchTerm.length > 0 && results.length === 0) {
       return (
         <MainFailContainer>
-        <failedContainer>
-          <failText>There doesn't seem to be any tasks with that name</failText>
+          <failedContainer>
+            <failText>
+              There doesn't seem to be any tasks with that name
+            </failText>
           </failedContainer>
-          </MainFailContainer>
-      )
+        </MainFailContainer>
+      );
     }
-  }
+  };
 
   const classes = useStyles();
-
-  useEffect(() => {
-   
-    
-  }, []);
 
   return (
     <>
       <InfoContainer>
         <p style={{ fontWeight: 600 }}>Your Task List</p>
-        <SortBtn style={{textDecoration: 'none' }}>
-          Sort By <span className="ion-ios-arrow-down" />
+        <SortBtn style={{ textDecoration: "none" }}>
+          <option value="">Sort</option>
+          <option>All</option>
+          <option>Project</option>
+          <option>Due Date</option>
         </SortBtn>
       </InfoContainer>
 
@@ -156,41 +160,24 @@ console.log("RESULTS:", results);
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? tasks.slice(
+              ? results.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
               : tasks
             ).map(task => {
               console.log(task.createdAt);
-              if(results.length === 0 && searchTerm.length === 0) {
-                return (
-                    <Task item={task} key={task.id} />
-                )
+              if (results.length === 0 && searchTerm.length === 0) {
+                return <Task item={task} key={task.id} />;
+              } else if (results.length > 0) {
+                return <div></div>;
               }
-              
-                 else if (results.length > 0) {
-                 
-              return (
-                <div>
-      
-                  </div>
-              
-                
-      
-              );
-              }
-      
             })}
 
             {failedSearch()}
-              
-              { results.length > 0 ?
-               (
-              results.map(result => (
-               
-                <Task item={result} key={result.id}></Task>
-              ))
+
+            {results.length > 0 ? (
+              results.map(result => <Task item={result} key={result.id}></Task>)
             ) : (
               <p></p>
             )}
@@ -217,8 +204,7 @@ console.log("RESULTS:", results);
                 ActionsComponent={TablePaginationActions}
               />
             </TableRow>
-          </TableFooter> 
-         
+          </TableFooter>
         </Table>
       </Paper>
     </>

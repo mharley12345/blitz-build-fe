@@ -85,15 +85,18 @@ function Task({ item, children }) {
   const dueDateText = DueDateLogic(diffDays, status);
   return (
     <>
-      <StyledTableRow>
-        <StyledTableCell>
-          <Text>{item.project_name}</Text>
-        </StyledTableCell>
+      <StyledTableRow >
+        {!!item.project_name 
+        &&
+          <StyledTableCell>
+            <Text style ={{fontWeight: 600}}>{item.project_name}</Text>
+          </StyledTableCell>
+        }
         <StyledTableCell>
           <Text>{item.task_name}</Text>
         </StyledTableCell>
 
-        <StyledTableCell>
+        <StyledTableCell  style ={{maxWidth: 200}}>
           <Text>{item.task_description}</Text>
         </StyledTableCell>
         <StyledTableCell>
@@ -140,8 +143,8 @@ const Address = styled.div`
 `;
 
 const Text = styled.p`
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 1.2rem;
+  line-height: 20px;
   font-family: "Roboto";
   color: #3f3a36;
   margin-bottom: 8px;
@@ -197,26 +200,3 @@ const Status = styled.div`
 const Inner = styled.div`
   display: flex;
 `;
-
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    padding: "8px 32px",
-    height: 35,
-    backgroundColor: "#E9E9E9",
-    color: theme.palette.common.black
-  },
-  body: {
-    padding: "8px 32px",
-    fontSize: 16,
-    height: 104
-  }
-}))(TableCell);
-
-const StyledTableRow = withStyles(theme => ({
-  root: {
-    "&:nth-of-type(even)": {
-      background: "#F5F5F5"
-    },
-    marginBottom: "32px"
-  }
-}))(TableRow);
