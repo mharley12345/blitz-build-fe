@@ -21,7 +21,7 @@ const MyCalendar = props => {
        const tasksEvents= tasks.map(task => {
           
            const newtask = {
-             title: task.task_name,
+             title: `${task.task_name} (${task.project_name})`,
              allDay: true,
              start: new Date(moment(task.due_date).format("L")),
              end: new Date(moment(task.due_date).format("L"))
