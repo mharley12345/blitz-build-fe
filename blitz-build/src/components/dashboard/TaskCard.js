@@ -31,29 +31,26 @@ const StyledTableCell = withStyles(theme => ({
 }))(TableCell);
 
 function TaskCard({ projectID, numberOfTasks }) {
-  const { tasks } = useContext(taskContext);
   const [projectTasks, setProjectTasks] = useState([]);
   const { searchTerm } = useContext(searchTermContext);
   const taskSearchInput = searchTerm.toLowerCase();
   const [taskSearchResults, setTaskSearchResults] = useState([]);
 
   useEffect(() => {
-    const results = tasks.filter(task =>
-      task.task_name.toLowerCase().includes(taskSearchInput)
-    );
-    console.log("RESULTS:", results);
-    setTaskSearchResults(results);
 
     axiosWithAuth()
-      .get(`projects/tasks/byProject/${projectID}`)
-      .then(res => {
-        setProjectTasks(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [taskSearchInput]);
+    .get(`projects/tasks/byProject/${projectID}`)
+    .then(res => {
+      setProjectTasks(res.data)
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }, []);
 
+  const results = projectTasks.filter(task =>
+    task.task_name.toLowerCase().includes(taskSearchInput)
+  );
   return (
     <Container>
       <Section>
@@ -64,7 +61,6 @@ function TaskCard({ projectID, numberOfTasks }) {
         <Table>
           <TableHead>
             <TableRow>
-              <StyledTableCell>PROJECT</StyledTableCell>
               <StyledTableCell>NAME</StyledTableCell>
               <StyledTableCell>TASK</StyledTableCell>
               <StyledTableCell>DUE DATE</StyledTableCell>
@@ -72,15 +68,15 @@ function TaskCard({ projectID, numberOfTasks }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {projectTasks.slice(0, numberOfTasks).map(item => {
-              if (taskSearchResults.length > 0) {
+            {results.slice(0, numberOfTasks).map(item => {
+              if (results.length > 0) {
                 return <div></div>;
               } else {
                 return <Task item={item} key={item.id} />;
               }
             })}
-            {taskSearchResults.length > 0 ? (
-              taskSearchResults.map(result => (
+            {results.length > 0 ? (
+              results.map(result => (
                 <Task item={result} key={result.id}></Task>
               ))
             ) : (
