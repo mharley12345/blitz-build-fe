@@ -287,6 +287,7 @@ function Header({ pathname }) {
   };
   const HideTheDocumentButton = pathname => {
     if (
+      pathname === "/log-out" ||
       pathname === "/delay-log" ||
       pathname === "/tasks" ||
       pathname === "/90_Day" ||
