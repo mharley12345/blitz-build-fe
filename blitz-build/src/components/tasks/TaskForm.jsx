@@ -151,11 +151,12 @@ export default function TaskForm({
 
       <StyledLabel>Assign Project</StyledLabel>
       <StyledSelect
+        required
         name="project_name"
         onChange={handleChanges}
         value={task.project_name}
       >
-        <option>Choose Project</option>
+        <option value=""></option>
 
         {projects.map(project => {
           return (
