@@ -18,7 +18,7 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 
 //styles
-import { SortBtn } from "../../styles/SortBtn";
+import { ViewBtn } from "../../styles/ViewBtn";
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -70,7 +70,7 @@ function DashboardTasks({ projectID, numberOfTasks }) {
       <Section>
         <p>Your Task List</p>
         <Link to="/tasks">
-          <SortBtn>View All</SortBtn>
+          <ViewBtn>View All</ViewBtn>
         </Link>
       </Section>
       <Paper className={classes.root}>
