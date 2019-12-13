@@ -1,73 +1,71 @@
-import React, { useState, useEffect } from "react";
+import React,{useContext} from "react";
 import styled from "styled-components";
-import DocumentCard from './DocumentCard'
+import DocumentsContext from '../../contexts/documents/DocumentsContext'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import {Table} from 'react-bootstrap'
+import './table.css'
+const  DocumentCard = (props) => {
+  const {document} =
+  useContext(DocumentsContext)
+  
+ 
 
-
-const Documents = props => {
-//     const getDocuments = () => {
-//       axios.get()
-//       return documents.map((document) => {
-//       return(
-//       <DocumentsListContainer>
-//       <DocumentCard document={document} />
-//       </DocumentsListContainer>)
-//         })
-//   };
 
   return (
     <>
-      <DocumentsContainer>
-        <Documentstitle>
-          <DocumentsTitleText>Documents</DocumentsTitleText>
-        </Documentstitle>
-             
-         <DocumentCard/>
-        
-      </DocumentsContainer>
-    </>
-  );
-};
 
-export default Documents;
+   <div className='tbl-container'>
+  <Theader>Your Documents</Theader>
+<div className='sort'>Sort </div>
+ <Table responsive>
 
-const DocumentsContainer = styled.div`
-  
-  width: 530px;
-  height: 288px;
-  
-  border: 1px solid #dcd9d5;
-  box-sizing: border-box;
-  border-radius: 3px;
-  background: #ffffff;
-`;
+       <thead>
+             <tr>
+               <th>Name</th>
+               <th>Project</th>
+               <th>Created</th>
+               <th>View</th>
+               
+             </tr>
+             </thead>
+   {document.map((documents)=>{
+    return(
+         
+            
+            
+             <tbody>
+               <tr>
+                 <td>{documents.file_name}</td>
+                 <td>{documents.project_name}</td>
+                 <td>{documents.createdAt}</td>
+                 <td> 
+                 <a href ={documents.doc_url} 
+                  rel="noopener noreferrer" target="_blank">
+                  View</a><ChevronRightIcon/>
+                  </td>
+               </tr>
+             </tbody>
+      )}
+         
+   )
+   }
+   </Table>
+   </div>
+   </>
 
-const Documentstitle = styled.div`
-  width: 530px;
-  height: 40px;
-  left: 878px;
-  top: 136px;
 
-  background: #3f3a36;
-
-  font-size: 16px;
-  line-height: 19px;
-
-  color: #fbfaf9;
-`;
-const DocumentsTitleText = styled.div`
-  padding: 12px 16px 12px 16px;
-
-  font-family: Roboto;
-  font-size: 16px;
-  line-height: 19px;
-
-  color: #fbfaf9;
-`;
-
-const DocumentsListContainer = styled.div`
-  background: #fafafa;
-  
-  :nth-child(odd) {
-    background: #ffffff;
+  )
   }
-`;
+export default DocumentCard;
+
+
+const Theader = styled.div `
+
+position: relitive;
+width: 1150px;
+height: 60px;
+left: 32px;
+top: 32px;
+color: white;
+background:#3b3b3b
+`

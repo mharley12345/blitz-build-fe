@@ -60,6 +60,26 @@ const useStyles = makeStyles({
     }
   }
 });
+const MainFailContainer = styled.div`
+  postion: relative;
+  width: 900px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 250px;
+`;
+
+const failedContainer = styled.div`
+  margin-top: 80px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const failText = styled.div`
+  font-size: 50px;
+`;
 
 export default function Tasks() {
   const { tasks } = useContext(taskContext);
@@ -67,6 +87,9 @@ export default function Tasks() {
   const taskSearchInput = searchTerm.toLowerCase("");
   const [taskSearchResults, setTaskSearchResults] = useState([]);
 
+  console.log("taskSearchResults", taskSearchResults);
+
+  console.log("RESULTS:", results);
   //pagnation
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -87,6 +110,27 @@ export default function Tasks() {
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  };
+
+  const itemCounter = () => {
+    if (results.length > 0) {
+      return results.length;
+    } else {
+      return tasks.length;
+    }
+  };
+  const failedSearch = () => {
+    if (searchTerm.length > 0 && results.length === 0) {
+      return (
+        <MainFailContainer>
+          <failedContainer>
+            <failText>
+              There doesn't seem to be any tasks with that name
+            </failText>
+          </failedContainer>
+        </MainFailContainer>
+      );
+    }
   };
 
   const classes = useStyles();
@@ -123,20 +167,17 @@ export default function Tasks() {
               : tasks
             ).map(task => {
               console.log(task.createdAt);
-              if (taskSearchResults.length > 0) {
+              if (results.length === 0 && searchTerm.length === 0) {
+                return <Task item={task} key={task.id} />;
+              } else if (results.length > 0) {
                 return <div></div>;
-              } else {
-                return (
-                  <>
-                    <Task item={task} key={task.id} />
-                  </>
-                );
               }
             })}
-            {taskSearchResults.length > 0 ? (
-              taskSearchResults.map(result => (
-                <Task item={result} key={result.id}></Task>
-              ))
+
+            {failedSearch()}
+
+            {results.length > 0 ? (
+              results.map(result => <Task item={result} key={result.id}></Task>)
             ) : (
               <p></p>
             )}
@@ -151,7 +192,7 @@ export default function Tasks() {
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={3}
-                count={tasks.length}
+                count={itemCounter()}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{

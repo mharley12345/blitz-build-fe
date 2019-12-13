@@ -10,6 +10,8 @@ import zipcodes from "zipcodes";
 import OpenContext from "../../contexts/projects/OpenContext";
 import { Hidden } from "@material-ui/core";
 import projectContext from "../../contexts/projects/ProjectContext";
+import TemplateContext from "../../contexts/templates/TemplateContext";
+import { StyledLabel, StyledSelect } from "../../styles/Tasks/taskForm";
 
 const ModalContainer = styled.div`
 
@@ -148,7 +150,8 @@ const InputLabel = styled.p`
 //START OF FUNCTIONAL COMPONENT
 
 const AddProject = props => {
-  const { addProject} = useContext(projectContext);
+  const { templates } = useContext(TemplateContext);
+  const { addProject } = useContext(projectContext);
   const [form, setForm] = useState({
     project_name: "",
     street_address: "",
@@ -159,13 +162,13 @@ const AddProject = props => {
     beds: null,
     baths: null,
     square_ft: null,
-    // assign_template: undefined,
+    // template_name: null,
     imageURL: "",
     latitude: null,
     longitude: null
   });
   const { open, setOpen } = useContext(OpenContext);
-  
+
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -185,8 +188,8 @@ const AddProject = props => {
 
     form.latitude = gps.latitude;
     form.longitude = gps.longitude;
-    
-      addProject(form);
+
+    addProject(form);
     setForm({
       project_name: "",
       street_address: "",
@@ -197,12 +200,12 @@ const AddProject = props => {
       beds: null,
       baths: null,
       square_ft: null,
-      // assign_template: undefined,
+      // template_name: null,
       imageURL: "",
       latitude: null,
       longitude: null
     });
-  
+
     handleClose();
   };
 
@@ -222,9 +225,8 @@ const AddProject = props => {
 
         <ModalTitle>
           {/* <DialogTitle id="form-dialog-title">Subscribe</DialogTitle> */}
-         
-            <TitleText>Create a New Project</TitleText>
-          
+
+          <TitleText>Create a New Project</TitleText>
         </ModalTitle>
         <DialogContent style={DialogContentStyle}>
           <form onSubmit={submitForm} style={formStyle}>
@@ -312,11 +314,26 @@ const AddProject = props => {
               onChange={changeHandler}
               value={form.zip_code}
             />
-            
-              <button type="submit" style={buttonStyle}>Save</button>
-            
-           
-          
+            {/* <StyledLabel>Assign A Template</StyledLabel>
+            <StyledSelect
+              name="template_name"
+              onChange={changeHandler}
+              value={form.template_name}
+            >
+              <option>Choose Project</option>
+
+              {templates.map(template => {
+                return (
+                  <option key={template.id} value={template.template_name}>
+                    {template.template_name}
+                  </option>
+                );
+              })}
+            </StyledSelect> */}
+
+            <button type="submit" style={buttonStyle}>
+              Save
+            </button>
           </form>
         </DialogContent>
       </ModalContainer>

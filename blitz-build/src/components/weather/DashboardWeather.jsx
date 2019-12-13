@@ -20,7 +20,7 @@ function DashboardWeather({ weatherData, time, icon, weatherPosition }) {
           <h2>
             {cityInfo.city}, {cityInfo.state}
           </h2>
-          <p>{time}</p>
+          <span>{time}</span>
         </WeatherLocationInfo>
 
         <WeatherInfo>
@@ -29,7 +29,7 @@ function DashboardWeather({ weatherData, time, icon, weatherPosition }) {
               {((weatherData.currently.temperature * 9) / 5 + 32).toFixed(0)}
               <span>&#176;</span>
             </WeatherTem>
-            <p>{weatherData.currently.summary}</p>
+            <span>{weatherData.currently.summary}</span>
           </WeatherData>
           <WeatherIcon>{icon}</WeatherIcon>
         </WeatherInfo>
@@ -58,6 +58,7 @@ const WeatherLocationInfo = styled.div`
   width: 428px;
   margin-top: 32px;
   margin-left: 48px;
+  margin-right: 48px;
   border-bottom: 1px solid lightgrey;
   h2 {
     height: 38px;
@@ -66,6 +67,7 @@ const WeatherLocationInfo = styled.div`
   }
   p {
     margin-top: 8px;
+    margin-bottom: 0;
     height: 24px;
     font-size: 24px;
   }
@@ -81,6 +83,7 @@ const WeatherData = styled.div`
   flex-direction: column;
   p {
     margin-top: 32px;
+    margin-bottom: 0;
     font-size: 16px;
     /*500 Gray */
 

@@ -11,13 +11,14 @@ const NinetyDayTemplate = props => {
       .get(`/90_Day`)
       .then(res => {
         console.log("template tasks", res);
-        setTemplateTasks(res.data[0].template);
+        setTemplateTasks(res.data);
+        console.log(templateTasks)
       })
       .catch(err => {
         console.log(err);
       });
-  }, [props]);
-
+  }, []);
+console.log(templateTasks)
   return (
     <div>
       <h1>90 Day Template</h1>
