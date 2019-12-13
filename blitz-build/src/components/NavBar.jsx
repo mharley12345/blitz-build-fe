@@ -54,7 +54,7 @@ const NavBarContainer = styled.div`
             border-radius: 5px;
             width: 85%;
             margin: 5px;
-          :nth-child(8) {
+          :nth-child(9) {
             border-top: 1px solid white;
             border-radius: 0px;
             margin-top: 40px;
