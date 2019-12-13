@@ -193,6 +193,7 @@ console.log("RESULTS:", results);
               ))
             ) : (
               <p></p>
+              
             )}
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
