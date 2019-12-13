@@ -81,7 +81,7 @@ const IndividualProject = props => {
       <Global />
       <IndividualProjectTitleContainer>
         <img src={Project_icon} alt="project_icon" />
-        <p>&nbsp;&nbsp;Projects / {projectState.project_name}</p>
+        <span>&nbsp;&nbsp;Projects / {projectState.project_name}</span>
       </IndividualProjectTitleContainer>
       <Top>
         <IndividualProjectContainer>
@@ -93,74 +93,79 @@ const IndividualProject = props => {
             <Contenth2>{projectState.project_name}</Contenth2>
             <ContentInfo>
               <ContentAddress>
-                <p>{projectState.street_address}</p>
-                <p>
+                <p style={{ marginBottom: 0 }}>{projectState.street_address}</p>
+                <p style={{ marginBottom: 0 }}>
                   {projectState.city}, {projectState.state}{" "}
                   {projectState.zip_code}
                 </p>
               </ContentAddress>
               <ContentSize>
-                <p>
+                <p style={{ marginBottom: 0 }}>
                   {projectState.beds} Beds&nbsp;&nbsp;&nbsp;
                   {projectState.baths} Baths
                 </p>
-                <p>{projectState.square_ft} sq.ft.</p>
+                <p style={{ marginBottom: 0 }}>
+                  {projectState.square_ft} sq.ft.
+                </p>
               </ContentSize>
             </ContentInfo>
             <Contentbottom>
               <ContentbottomTemplate>
                 <PageI className=" ion-ios-document" />
-                <p>&nbsp;&nbsp;90-Day Template in Use</p>
+                <span >
+                  &nbsp;&nbsp;90-Day Template in Use
+                </span>
               </ContentbottomTemplate>
               <AddIcon onClick={AddTask}>
                 <ProjectI className="ion-md-add" />
-                <p>Add</p>
+                <span>Add</span>
               </AddIcon>
               <EditIcon onClick={OpenToggle}>
                 <ProjectI className="ion-md-create" />
-                <p>Edit</p>
+                <span>Edit</span>
               </EditIcon>
               <DeleteIcon onClick={handleDeleteOpen}>
                 <ProjectI className="ion-md-trash" />
-                <p>Delete</p>
+                <span>Delete</span>
               </DeleteIcon>
             </Contentbottom>
           </IndividualProjectcontentContainer>
         </IndividualProjectContainer>
         <Right>
-          <div style={{ width: "530px", height: "19px", marginBottom: "8px" }}>
-            <p
-              style={{
-                fontSize: "16px",
+          <div
+            style={{
+              width: "530px",
+              height: "19px",
+              marginBottom: "8px",
+              fontSize: "16px",
 
-                color: "#817974"
-              }}
-            >
-              Weather
-            </p>
+              color: "#817974"
+            }}
+          >
+            Weather
           </div>
-          <Weather
-            usage="project"
-            city={`${projectState.city}, ${projectState.state}`}
-            latitude={projectState.latitude}
-            longitude={projectState.longitude}
-          />
-          <p
+          <WeatherContainer>
+            <Weather
+              usage="project"
+              city={`${projectState.city}, ${projectState.state}`}
+              latitude={projectState.latitude}
+              longitude={projectState.longitude}
+            />
+          </WeatherContainer>
+          <div
             style={{
               fontSize: "16px",
               marginTop: "35px",
               color: "#817974"
             }}
           >
-            Your Documents
-          </p>
-          <DocumentsContainer>
-            <Documents />
-          </DocumentsContainer>
+            Your Documents - upcoming
+          </div>
+          <DocumentsContainer></DocumentsContainer>
         </Right>
       </Top>
       <TasksContainer>
-        <TaskCard projectID={props.match.params.id} numberOfTasks={3} results={results} setResults={setResults} taskSearchResults={taskSearchResults}  />
+        <TaskCard projectID={props.match.params.id} numberOfTasks={3} />
       </TasksContainer>
       <DeleteProject
         project={projectState}
@@ -188,33 +193,43 @@ const Right = styled.div`
   margin-left: 20px;
 `;
 const IndividualProjectContainer = styled.div`
+  margin-top: 16px;
+
   min-width: 530px;
   height: 547px;
   border: 1px solid #dcd9d5;
-  margin-top: 16px;
+
+  border-radius: 3px;
 `;
 const IndividualProjectTitleContainer = styled.div`
   display: flex;
   min-width: 530px;
   height: 24px;
-  p {
-    font-family: Roboto;
+  span {
+    
     font-size: 16px;
     color: #8a827d;
-    padding-top: 5px;
+   
   }
 `;
 const IndividualProjectImgContainer = styled.div`
   min-width: 530px;
   height: 328px;
+
+  
+
+  background: lightblue;
+
 `;
 const IndividualProjectcontentContainer = styled.div`
   min-width: 530px;
   height: 219px;
+  border: 1px solid #dcd9d5;
+border-radius: 3px;
   background: #ffffff;
 `;
 const Contenth2 = styled.h2`
-  padding-top: 24px;
+  padding-top: 10px;
   padding-left: 32px;
   font-size: 36px;
   font-weight: bold;
@@ -251,12 +266,11 @@ const ContentSize = styled.div`
 const Contentbottom = styled.div`
   display: flex;
   align-content: center;
-  p {
+  span {
     width: 100%;
     font-size: 16px;
     line-height: 24px;
     color: #8a827d;
-    
   }
 `;
 const ContentbottomTemplate = styled.div`
@@ -271,7 +285,7 @@ const AddIcon = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
-  margin-left: 169px;
+  margin-left: 120px;
 `;
 const EditIcon = styled.div`
   display: flex;
@@ -290,8 +304,17 @@ const DeleteIcon = styled.div`
 `;
 const DocumentsContainer = styled.div`
   margin-top: 8px;
+  width: 530px;
+  height: 288px;
+  border: 1px solid #dcd9d5;
+  border-radius: 3px;
 `;
-
+const WeatherContainer = styled.div`
+  min-width: 530px;
+  height: 172px;
+  border: 1px solid #dcd9d5;
+  border-radius: 3px;
+`;
 const TasksContainer = styled.div`
   margin-top: 24px;
   width: 1080px;

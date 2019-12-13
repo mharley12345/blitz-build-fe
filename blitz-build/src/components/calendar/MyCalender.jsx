@@ -21,27 +21,27 @@ const MyCalendar = props => {
        const tasksEvents= tasks.map(task => {
           
            const newtask = {
-             title: task.task_name,
+             title: `${task.task_name} (${task.project_name})`,
              allDay: true,
              start: new Date(moment(task.due_date).format("L")),
              end: new Date(moment(task.due_date).format("L"))
            };
-     console.log("tasks", task.due_date);
+    
             return newtask
        });
         
-        const projectsEvents = projects.map(project => {
-          const newproject = {
-            title: project.project_name,
-            allDay: true,
-            start: new Date(moment(project.createdAt).format("L")),
-            end: new Date(moment(project.due_date).format("L"))
-          };
+        // const projectsEvents = projects.map(project => {
+        //   const newproject = {
+        //     title: project.project_name,
+        //     allDay: true,
+        //     start: new Date(moment(project.createdAt).format("L")),
+        //     end: new Date(moment(project.due_date).format("L"))
+        //   };
 
-          return newproject;
-        });
-        const eventsList = tasksEvents.concat(projectsEvents);
-        setMyEventsList(eventsList);
+        //   return newproject;
+        // });
+        // const eventsList = tasksEvents.concat(projectsEvents);
+        setMyEventsList(tasksEvents);
     }, [tasks,projects]);
    
    console.log(myEventsList)

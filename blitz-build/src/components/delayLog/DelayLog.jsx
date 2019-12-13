@@ -43,6 +43,7 @@ const StyledTableRow = withStyles(theme => ({
 }))(TableRow);
 
 
+
 const useStyles = makeStyles({
   root: {
     border: "1px solid #DCD9D5"
@@ -97,8 +98,9 @@ const handleChangeRowsPerPage = event => {
     };
     const csvExporter = new ExportToCsv(options);
 
-    csvExporter.generateCsv(delayLogs);
+    csvExporter.generateCsv(results);
   }
+
 
 const emptyRows =
   rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
@@ -136,11 +138,10 @@ const emptyRows =
               : results
             ).map(result => (
               <StyledTableRow key={result.id}>
-                <StyledTableCell
-                  component="th"
-                  scope="row"
-                  style={{ maxWidth: 150 }}
-                >
+
+                <StyledTableCell style={{ maxWidth: 150 }}>
+
+               
                   {result.task_name}
                 </StyledTableCell>
                 <StyledTableCell style={{ maxWidth: 300 }}>
@@ -201,7 +202,7 @@ const DelayLogButtons = styled.div`
   border: 1px solid;
   box-sizing: border-box;
   border-radius: 3px;
-  padding-top: 12px;
+  padding-top:8px;
   padding-left: 30px;
   font-size: 19px;
   color: #8a827d;

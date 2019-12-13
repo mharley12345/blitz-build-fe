@@ -10,25 +10,14 @@ import { set } from "date-fns";
 const IndividualTemplate = props => {
   const {templateTask, setTemplatesTask, getTemplateTasks} = useContext(TemplateContext);
   const { pathname, setPathname } = useContext(PathnameContext);
-  const { searchTerm } = useContext(searchTermContext)
-  const taskSearchInput = searchTerm.toLowerCase();
-  const [taskSearchResults, setTaskSearchResults] = useState([]);
-  const [results, setResults ] = useState([])
+
+  
   console.log(templateTask)
   useEffect(() => {
-    if(searchTerm.length === 0) {
-      setResults([])
-  }
-  else {
-     setResults( templateTask.filter(task =>
-    task.task_name.toLowerCase().includes(taskSearchInput))
-    ) 
-  }
-  console.log("RESULTS:", results);
-      setTaskSearchResults(results);
+  
     setPathname(window.location.pathname);
     getTemplateTasks();
-  }, [taskSearchInput]);
+  }, []);
 
   return (
    <div>
@@ -37,22 +26,11 @@ const IndividualTemplate = props => {
       </Section>
      
       {templateTask.map(task => {
-         if(results.length > 0) {
-          return (
-            <div>
-
-            </div>
-          )
-        }
-        else {
+        
         return  <Container> <TitleText>{task.task_name}</TitleText> <MeatBallsDrop task={task}/> </Container>;
       }
-      })}
-        { results.length > 0 ?
-              taskSearchResults.map(result => (
-                <Container> <TitleText>{result.task_name}</TitleText> <MeatBallsDrop task={result}/> </Container>
-             )) : <p></p>
-            }
+      )}
+       
    </div>
    
   );
