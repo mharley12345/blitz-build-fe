@@ -286,6 +286,7 @@ const AddIcon = styled.div`
   align-items: center;
   margin-top: 30px;
   margin-left: 120px;
+  cursor: pointer;
 `;
 const EditIcon = styled.div`
   display: flex;
@@ -293,6 +294,7 @@ const EditIcon = styled.div`
   align-items: center;
   margin-top: 30px;
   margin-left: 20px;
+  cursor: pointer;
 `;
 const DeleteIcon = styled.div`
   display: flex;
@@ -301,6 +303,7 @@ const DeleteIcon = styled.div`
   margin-top: 30px;
   margin-left: 20px;
   margin-right: 20px;
+  cursor: pointer;
 `;
 const DocumentsContainer = styled.div`
   margin-top: 8px;
@@ -327,7 +330,6 @@ const ProjectI = styled.i`
   color: #8a827d;
 text-align: right;
   text-decoration: none;
-cursor: pointer;
 `;
 const PageI = styled.i`
   height: 18px;
@@ -335,5 +337,4 @@ const PageI = styled.i`
   background-color: #ffffff;
   color: #8a827d;
   text-decoration: none;
-  cursor: pointer;
 `;
