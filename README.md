@@ -1,49 +1,44 @@
-🚫 Note : All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline, feel free to add your own flare to it.
 
-🚫 The numbers 1️⃣ through 5️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
+# Blitz Build
 
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
+ You can find the deployed project at [Blitz Build](https://blitz-build-dev.netlify.com).
 
-# 1️⃣ Title of project goes here
+##  Contributors
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
-
-## 4️⃣ Contributors
-
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
-
-|                                       [Student 1](https://github.com/)                                        |                                       [Student 2](https://github.com/)                                        |                                       [Student 3](https://github.com/)                                        |                                       [Student 4](https://github.com/)                                        |                                       [Student 5](https://github.com/)                                        |
+|                                       [Frank Martinez-Team Lead](https://github.com/letanque)                                        |                                       [Graham Bunt-UX Designer](https://github.com/grahambunt)                                        |                                       [LC Carrier-FE Developer/Marketing Page](https://github.com/lccarrier)                                        |                                       [Mike Harley - BE/FE Developer](https://github.com/mharley12345)                                        |                                       [Connor Holly-FE/BE Develpoer](https://github.com/connorholly11)                                        |
 | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
-|                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/)                       |
-|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)           |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wvandolah)             |
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
+|                      [<img src="https://avatars2.githubusercontent.com/u/7180772?s=400&v=4" width = "200" />](https://github.com/letanque)                       |                      [<img src="https://avatars1.githubusercontent.com/u/48662947?s=400&v=4" width = "200" />](https://github.com/grahambunt)                       |                      [<img src="https://avatars3.githubusercontent.com/u/26601139?s=400&v=4" width = "200" />](https://github.com/lccarrier)                       |                      [<img src="https://avatars2.githubusercontent.com/u/47269554?s=400&u=63b53fee0a55a59f76690421623282ec9bd80553&v=4" width = "200" />](https://github.com/mharley12345)                       |                      [<img src="https://avatars2.githubusercontent.com/u/52669492?s=400&v=4" width = "200" />](https://github.com/connorholly11)                       |
+|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/letanque)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/grahambunt)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/lccarrier)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/mharley12345)           |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/connorholly11)             |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/michael-harley-5336a9188) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
 
+
+|                                       [Min Huang-FE/BE Developer](https://github.com/huangm96)                                        |                                       [Matthew Meeves-FE/BE Developer](https://github.com/msquared88)                                        |                                       [John Rojcewicz-FE Developer](https://github.com/rojcewiczj)                                        |                                       [Chariton Shumway-UX Designer](https://github.com/)                                        |
+| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
+|[<img src="https://avatars3.githubusercontent.com/u/51139311?s=400&v=4" width = "200" />](https://github.com/huangm96)                       |                      [<img src="https://avatars0.githubusercontent.com/u/39702456?s=400&v=4" width = "200" />](https://github.com/msquared88)  |                      <img src="https://avatars2.githubusercontent.com/u/52579412?s=400&v=4" width="200"/>               |  <img src="https://ca.slack-edge.com/T4JUEB3ME-UDYER3P7B-81fb23cb315b-512" width="200"/>
+|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/huangm96)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/msquared88)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/rojcewiczj)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)           |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
 <br>
 <br>
 
-🚫 4️⃣ Optional examples of using images with links for your tech stack, make sure to change these to fit your project
+
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](netlify link goes in these parenthesis)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](https://blitz-build-dev.netlify.com)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-🚫 more info on using badges [here](https://github.com/badges/shields)
+
 
 ## Project Overview
 
-1️⃣ [Trello Board](🚫add link to trello board here)
+ [Trello Board](https://trello.com/b/td7d8uV2/blitz-build)
 
-1️⃣ [Product Canvas](🚫add link to product canvas here)
+ [Product Canvas](https://www.notion.so/a6c9730caad2440cbae7c72a1026b09a?v=189686f59ea34dd4a72b7793adf34258)
 
-1️⃣ [UX Design files](🚫add link to design files here) - 🚫 delete if not applicable
-
-🚫 Replace lorem ipsum with a description of your project
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+ [UX Design files](https://www.figma.com/file/zcyEae0BYNzuFkSBGhS98d/Blitz-Build_Chariton_Graham)
+ 
+Blitz Build is web app built on a PostgreSQL database. The front-end is built on React and using context api for state management. While utilizing the following API's:  Auth0 for authentication. 
 
 
 ### 4️⃣ Key Features
