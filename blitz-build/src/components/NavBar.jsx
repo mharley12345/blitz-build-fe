@@ -15,10 +15,21 @@ const NavBarContainer = styled.div`
     background-color: red;
     position: fixed;
     width: 296px;
-    height: 1574px;
+    height: 800px;
     left: 0;
     top: 0;
     background: #3B3B3B;
+    @media only screen and (max-height: 900px) {
+      overflow: scroll;
+       ::-webkit-scrollbar { 
+           display: none; 
+       }
+     }
+     @media only screen and (max-width: 1500px) {
+      width: 160px;
+      justify-content: center;
+      margin-top: 0px;
+      padding-top: 20px;
     
 `;
     const NavBarUl = styled.ul`
@@ -28,12 +39,11 @@ const NavBarContainer = styled.div`
         margin-block-start: 0;
         margin-block-end: 0;
         padding-inline-start: 0;
-        height: 1574px;
+        height: 1200px;
         align-items: center;
         flex-direction: column;
-        box-shadow: 2px 2px 2px #ccc;
         transition: 300ms ease all;
-        
+      
        
         `;
 
@@ -47,7 +57,8 @@ const NavBarContainer = styled.div`
         `;
 
         const NavBarLi = styled.li` 
-        
+         display: flex;
+         flex-drection: column;
             list-style-type: none;
             height: 70px;
             align-items: center;
@@ -59,6 +70,8 @@ const NavBarContainer = styled.div`
             border-radius: 4px;
             margin-top: 40px;
           }
+         
+
         `;
       const NavScrollableContainer = styled.div`
       
@@ -92,14 +105,19 @@ const NavBarContainer = styled.div`
 
        const HoverStyles = {
            backgroundColor: '#4a4a4a',
-          
            
            
+           
+        }
+        const smallScreenHoverStyle = {
+          backgroundColor: '#4a4a4a',
+          width: '80px'
         }
             const NavBarP = styled.p`
                 width: 80px;
                 margin-left: 15px;
                 margin-bottom: 0rem;
+              
            
             `;
              const NavBarI = styled.i`
@@ -119,6 +137,11 @@ const NavBarContainer = styled.div`
      
       align-items: center;
       width: 58%;
+      @media only screen and (max-width: 1500px) {
+      
+        justify-Content: center; 
+    
+  }
       `
       const LogoAvatarContainer = styled.div`
       height: 160px
@@ -134,10 +157,20 @@ const NavBarContainer = styled.div`
       font-size: 16px;
       color: #FFFFFF;
       margin-bottom: 5px;
+      @media only screen and (max-width: 1500px) {
+      
+             display: none; 
+         
+       }
        `
        const UserTitle = styled.p`
        font-size: 14px
        color: #B5AFAB;
+       @media only screen and (max-width: 1500px) {
+        
+             display: none; 
+         
+       }
        `
        const UserImg = styled.div`
         height: 48px;
@@ -153,7 +186,7 @@ const NavBarContainer = styled.div`
        const userInfoContainer = styled.div`
         
        `
-     
+  
 function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, setPathname }) {
    const [ hoverIndex, setHoverIndex ] = useState(0)
    const [navOpen, setNavOpen ] = useState(false)
