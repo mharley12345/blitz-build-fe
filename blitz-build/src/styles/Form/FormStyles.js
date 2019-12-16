@@ -16,18 +16,16 @@ export const StyledLabel = styled.label`
 `;
 
 export const StyledInput = styled.input`
-width:100%;
+         width: 100%;
          margin: 0;
          font-size: 14px;
          padding: 6px 8px;
          background: #e9e9e9;
          border-width: 1px;
          border-style: solid;
-         border-color: ${props => (props.error ? "red" : " #e9e9e9")};
-         outline: none;
-         :focus {
-           border: none;
-         }
+         border-radius: 3px;
+        border-color: ${props => (props.error ? "red" : " #e9e9e9")};
+         box-shadow: none;
        `;
 export const StyledTextAreaInput = styled.textarea`
   width: 75%;
