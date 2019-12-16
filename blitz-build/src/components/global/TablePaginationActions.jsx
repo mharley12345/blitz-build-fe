@@ -8,7 +8,8 @@ import IconButton from "@material-ui/core/IconButton";
 const useStyles1 = makeStyles(theme => ({
   root: {
     flexShrink: 0,
-    marginLeft: theme.spacing(2.5)
+    marginLeft: theme.spacing(2.5),
+    
   }
 }));
 function TablePaginationActions(props) {
