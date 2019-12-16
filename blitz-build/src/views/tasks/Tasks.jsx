@@ -25,6 +25,7 @@ import TableFooter from "@material-ui/core/TableFooter";
 import styled from "styled-components";
 import { SortBtn } from "../../styles/SortBtn";
 
+
 const StyledTableCell = withStyles(theme => ({
   head: {
     padding: "8px 32px",
@@ -130,8 +131,9 @@ export default function Tasks() {
   return (
     <>
       <InfoContainer>
-        {failedSearch()}s
+        {failedSearch()}
         <SortBtn style={{ textDecoration: "none" }}>
+          Sort By <span className="ion-ios-arrow-down" />
           <option value="">Sort</option>
           <option>All</option>
           <option>Project</option>
@@ -174,7 +176,7 @@ export default function Tasks() {
             )}
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
+                <TableCell colSpan={5} />
               </TableRow>
             )}
           </TableBody>
@@ -182,7 +184,7 @@ export default function Tasks() {
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={3}
+                colSpan={5}
                 count={itemCounter()}
                 rowsPerPage={rowsPerPage}
                 page={page}
