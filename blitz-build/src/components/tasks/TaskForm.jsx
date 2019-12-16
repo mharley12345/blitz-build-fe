@@ -101,6 +101,7 @@ export default function TaskForm({
 
   return (
     <StyledForm onSubmit={handleSubmit}>
+
       <StyledFormHeader>
         <h1
           style={{
@@ -112,6 +113,8 @@ export default function TaskForm({
         </h1>
         <XButton onClick={closeModal}> Close X</XButton>
       </StyledFormHeader>
+
+
       <StyledLabel>Task Name</StyledLabel>
       <StyledInput
         

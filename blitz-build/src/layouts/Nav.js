@@ -19,13 +19,19 @@ function Nav() {
 export default Nav
 
 const Container = styled.div`
-
+ min-width: 160px;
+ height: 100vh;
+@media only screen and (min-width: 1500px) {
+ 
+ 
   min-width: 296px;
   height: 100vh;
   background:  #3B3B3B;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+  
 `;
 const LogoContainer = styled.div`
   margin: 29.25px 108px 35px 74.8px;
