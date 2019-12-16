@@ -31,8 +31,8 @@ const getProject = () => {
       .post(`/projects`, newProject)
       .then(res => {
         console.log("from addProject in projectsProvider", res);
+                getProject();
 
-        setProjects([...projects, res.data.project[0]]);
       })
       .catch(err => console.log(err.response.data.message));
   
@@ -43,12 +43,14 @@ const getProject = () => {
       .delete(`/projects/${deleteProject.id}`)
       .then(res => {
         console.log(`project with project id:${deleteProject.id} was removed`);
+                        getProject();
+
       })
       .catch(err => console.log(err));
-    const newProjectsList = projects.filter(project => {
-      return project.id !== deleteProject.id;
-    });
-    setProjects(newProjectsList);
+    // const newProjectsList = projects.filter(project => {
+    //   return project.id !== deleteProject.id;
+    // });
+    // setProjects(newProjectsList);
   };
 
   const editProject = (editedProject, editedProjectId) => {
@@ -59,7 +61,7 @@ const getProject = () => {
       .put(`/projects/${editedProjectId}`, editedProject)
       .then(res => {
         console.log("from editProject in projectsProvider", res);
-        getProject();
+       
       })
       .catch(err => console.log(err));
     const newProjectsList = projects.map(project => {

@@ -493,7 +493,7 @@ function Header({ pathname }) {
         <Modal
           visible={TaskModalStatus}
           dismiss={handleTaskModalClose}
-          client={"50%"}
+          client={"40%"}
           component={
             <TaskForm
               closeModal={handleTaskModalClose}
