@@ -11,11 +11,14 @@ import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
 import PathnameContext from "../../contexts/PathnameContext";
 import EditModalContext from "../../contexts/EditModalContext";
-import DeleteProject from "../modal/DeleteProject";
-import EditProject from "../modal/EditProject";
+import DeleteProject from "./DeleteProject";
+import EditProject from "./EditProject";
+import TaskContext from "../../contexts/tasks/TaskContext";
+import Documents from "../documents/Documents";
+import searchTermContext from "../../contexts/searching/searchTerm";
+
 import TemplateContext from "../../contexts/templates/TemplateContext";
 
-import Documents from "../documents/Documents";
 
 import { StyledLabel, StyledSelect } from "../../styles/Tasks/taskForm";
 
@@ -25,6 +28,7 @@ const IndividualProject = props => {
   const { pathname, setPathname } = useContext(PathnameContext);
   const [projectState, setProjectState] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
+  const [editProjectStatus, setEditProjectStatus] = useState(false);
   const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
 
   const [form, setForm] = useState({
@@ -81,6 +85,16 @@ const IndividualProject = props => {
   };
   // /templates/addTasks/:id(project_id)
 
+  //edit modal functions
+  const handleEditProjectOpen = e => {
+    e.stopPropagation();
+    setEditProjectStatus(true);
+  };
+  const handleEditProjectClose = e => {
+    setEditProjectStatus(false);
+    
+  };
+  //delete modal functions
   const handleDeleteOpen = e => {
     e.stopPropagation();
     setDeleteStatus(true);
@@ -122,7 +136,7 @@ const IndividualProject = props => {
       </DisplayFlex>
       <IndividualProjectTitleContainer>
         <img src={Project_icon} alt="project_icon" />
-        <p>&nbsp;&nbsp;Projects / {projectState.project_name}</p>
+        <span>&nbsp;&nbsp;Projects / {projectState.project_name}</span>
       </IndividualProjectTitleContainer>
       <Top>
         <IndividualProjectContainer>
@@ -151,9 +165,9 @@ const IndividualProject = props => {
             <Contentbottom>
               <ContentbottomTemplate>
                 <PageI className=" ion-ios-document" />
-                <p>&nbsp;&nbsp;90-Day Template in Use</p>
+                <span>&nbsp;&nbsp;90-Day Template in Use</span>
               </ContentbottomTemplate>
-              <EditIcon onClick={OpenToggle}>
+              <EditIcon onClick={handleEditProjectOpen}>
                 <ProjectI className="ion-md-create" />
                 <p>Edit</p>
               </EditIcon>
@@ -204,7 +218,11 @@ const IndividualProject = props => {
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
       />
-      <EditProject project={projectState} />
+      <EditProject
+        project={projectState}
+        editStatus={editProjectStatus}
+        handleEditClose={handleEditProjectClose}
+      />
     </>
   );
 };
@@ -237,22 +255,21 @@ const IndividualProjectTitleContainer = styled.div`
   display: flex;
   min-width: 530px;
   height: 24px;
-  p {
-    font-family: Roboto;
+  span {
     font-size: 16px;
     color: #8a827d;
-    padding-top: 5px;
   }
 `;
 const IndividualProjectImgContainer = styled.div`
   min-width: 530px;
   height: 328px;
-  margin-top: 16px;
   background: lightblue;
 `;
 const IndividualProjectcontentContainer = styled.div`
   min-width: 530px;
   height: 219px;
+  border: 1px solid #dcd9d5;
+  border-radius: 3px;
   background: #ffffff;
 `;
 const Contenth2 = styled.h2`
@@ -266,7 +283,7 @@ const ContentInfo = styled.div`
   display: flex;
 `;
 const ContentAddress = styled.div`
-  width: 153px;
+  width: 200px;
   height: 48px;
   margin-top: 16px;
   margin-left: 32px;
@@ -311,7 +328,8 @@ const EditIcon = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
-  margin-left: 169px;
+  margin-left: 20px;
+  cursor: pointer;
 `;
 const DeleteIcon = styled.div`
   display: flex;
@@ -319,6 +337,8 @@ const DeleteIcon = styled.div`
   align-items: center;
   margin-top: 30px;
   margin-left: 20px;
+  margin-right: 20px;
+  cursor: pointer;
 `;
 const DocumentsContainer = styled.div`
   margin-top: 8px;
@@ -336,7 +356,6 @@ const ProjectI = styled.i`
   color: #8a827d;
   text-align: right;
   text-decoration: none;
-  cursor: pointer;
 `;
 const PageI = styled.i`
   height: 18px;
@@ -344,5 +363,4 @@ const PageI = styled.i`
   background-color: #ffffff;
   color: #8a827d;
   text-decoration: none;
-  cursor: pointer;
 `;

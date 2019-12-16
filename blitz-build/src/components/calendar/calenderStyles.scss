@@ -2,7 +2,7 @@
 // added to header <link href="https://cdn.jsdelivr.net/npm/react-big-calendar@0.19.0/lib/css/react-big-calendar.css" rel="stylesheet"/>
 // Here's a link to the sass style sheets in case you want to
 // import them and override more of the styles
-// 
+//
 // https://github.com/intljusticemission/react-big-calendar/tree/master/src/sass
 html {
   background-color: white;
@@ -12,30 +12,35 @@ body {
   margin: 0;
 }
 
-
-
-.rbc-month-view{
-  height:650px
+.rbc-month-view {
+  height: 650px;
+  border-radius: 3px;
 }
-.rbc-month-row,.rbc-row-bg,.rbc-day-bg{
-  height:125px
+.rbc-month-row,
+.rbc-row-bg,
+.rbc-day-bg {
+  height: 125px;
+  border-radius: 3px;
+  border-bottom: 1px solid;
 }
 .rbc-calendar {
   font-family: sans-serif;
   color: rgb(138, 130, 125);
-
+  border-radius: 3px;
   padding: 30px;
   height: auto;
 }
 
-.rbc-agenda-view,.rbc-time-content,.rbc-label.rbc-time-header-gutter{
+.rbc-agenda-view,
+.rbc-time-content,
+.rbc-label.rbc-time-header-gutter {
   display: none;
 }
-.rbc-row-content{
+.rbc-row-content {
   border: 0px solid white;
 }
-.rbc-day-bg,.rbc-time-view{
-  
+.rbc-day-bg,
+.rbc-time-view {
   background: rgb(255, 255, 255);
   position: relative;
   border-width: 1px;
@@ -47,21 +52,21 @@ body {
 
 .rbc-event {
   background-color: #de6b20;
-    color: #fff;
+  color: #fff;
 }
 
 .rbc-today {
-  background-color: lightgoldenrodyellow
+  background-color: lightgoldenrodyellow;
 }
-.rbc-btn-group{
-  color:red
+.rbc-btn-group {
+  color: red;
 }
-.rbc-header{
-  background-color:white
+.rbc-header {
+  background-color: white;
 }
-.rbc-btn-group{
+.rbc-btn-group {
   button:nth-child(4) {
     border-radius: 0;
-     display: none; 
-}
+    display: none;
+  }
 }
