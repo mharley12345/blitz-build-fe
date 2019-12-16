@@ -19,7 +19,8 @@ export default function ProjectForm({
   closeModal,
   handleFunction,
   editFields,
-  text
+  text,
+  
 }) {
   //console.log("task from delayForm", task,editFields)
   const [form, setForm] = useState({
@@ -160,7 +161,7 @@ export default function ProjectForm({
           />
         </div>
       </div>
-      <StyledBtn>Save</StyledBtn>
+      <StyledBtn>{text}</StyledBtn>
     </StyledForm>
   );
 }

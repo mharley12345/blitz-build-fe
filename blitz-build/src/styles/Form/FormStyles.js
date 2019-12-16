@@ -29,8 +29,8 @@ export const StyledInput = styled.input`
   box-shadow: none;
 `;
 export const StyledTextAreaInput = styled.textarea`
-         width: 75%;
-         margin: 0;
+         width: 100%;
+        
          font-size: 14px;
          padding: 6px 8px;
          background: #e9e9e9;

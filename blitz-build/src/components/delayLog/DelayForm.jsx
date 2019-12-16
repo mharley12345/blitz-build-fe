@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 
 //styles
 //import styled from "styled-components";
-import { XButton } from "../../styles/Form/FormStyles";
 import {
   StyledForm,
+  StyledFormHeader,
   StyledLabel,
   StyledTextAreaInput,
-  StyledBtn
-} from "../../styles/Tasks/taskForm";
+  StyledBtn,
+  XButton
+} from "../../styles/Form/FormStyles";
 
 export default function DelayForm({
   closeModal,
@@ -52,17 +53,11 @@ export default function DelayForm({
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <div style={{ width: "100%", textAlign: "right" }}>
+      <StyledFormHeader style={{marginBottom:"32px"}}>
+        <h1 style={{ fontSize: "2rem", margin: 0 }}>{text}</h1>
         <XButton onClick={closeModal}>close X</XButton>
-      </div>
-
-      <header style={{ fontFamily: "roboto", textAlign: "center" }}>
-        <h1 style={{ fontSize: "2.5rem", fontFamily: "roboto" }}>{text}</h1>
-        <p style={{ margin: "8px 0 38px 0" }}>
-          Please document all delays to publish and save in the Delay Log.
-        </p>
-      </header>
-
+      </StyledFormHeader>
+      <StyledLabel>Reason for delay</StyledLabel>
       <StyledTextAreaInput
         rows="8"
         type="text"
@@ -71,7 +66,7 @@ export default function DelayForm({
         onChange={changeHandler}
       />
 
-      <StyledBtn>Save</StyledBtn>
+      <StyledBtn>Publish to delay log</StyledBtn>
     </StyledForm>
   );
 }
