@@ -119,16 +119,14 @@ export default function Tasks() {
   const failedSearch = () => {
     if (searchTerm.length > 0 && results.length === 0) {
       return (
-        <MainFailContainer>
-          <failedContainer>
-            <failText>
-              There doesn't seem to be any tasks with that name
-            </failText>
-          </failedContainer>
-        </MainFailContainer>
-      );
+        <p style={{ fontWeight: 600 }}>There doesn't seem to be any tasks with that name</p>
+      )}
+      else {
+        return (
+        <p style={{ fontWeight: 600 }}>Your Task List</p>)
+      }
     }
-  };
+  
 
   const classes = useStyles();
 
@@ -137,7 +135,7 @@ export default function Tasks() {
   return (
     <>
       <InfoContainer>
-        <p style={{ fontWeight: 600 }}>Your Task List</p>
+        {failedSearch()}
         <SortBtn style={{ textDecoration: "none" }}>
           <option value="">Sort</option>
           <option>All</option>
@@ -174,12 +172,17 @@ export default function Tasks() {
               }
             })}
 
-            {failedSearch()}
-
-            {results.length > 0 ? (
-              results.map(result => <Task item={result} key={result.id}></Task>)
+           
+              
+              { results.length > 0 ?
+               (
+              results.map(result => (
+               
+                <Task item={result} key={result.id}></Task>
+              ))
             ) : (
               <p></p>
+              
             )}
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>

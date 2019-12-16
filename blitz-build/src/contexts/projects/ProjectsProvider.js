@@ -8,16 +8,20 @@ export default function ProjectsProvider({ children }) {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axiosWithAuth()
-      .get("/projects")
-      .then(res => {
-        console.log("get projects", res.data);
-        setProjects(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    getProject();
   }, []);
+
+const getProject = () => {
+   axiosWithAuth()
+     .get("/projects")
+     .then(res => {
+       console.log("get projects", res.data);
+       setProjects(res.data);
+     })
+     .catch(err => {
+       console.log(err);
+     });
+};
 
   const addProject = newProject => {
     
@@ -30,7 +34,8 @@ export default function ProjectsProvider({ children }) {
 
         setProjects([...projects, res.data.project[0]]);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.response.data.message));
+  
   };
 
   const deleteProject = deleteProject => {
@@ -54,6 +59,7 @@ export default function ProjectsProvider({ children }) {
       .put(`/projects/${editedProjectId}`, editedProject)
       .then(res => {
         console.log("from editProject in projectsProvider", res);
+        getProject();
       })
       .catch(err => console.log(err));
     const newProjectsList = projects.map(project => {

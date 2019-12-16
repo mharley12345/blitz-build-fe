@@ -36,6 +36,10 @@ const GlobalStyle = createGlobalStyle`
         /* font-family: 'Roboto Mono', monospace; */
         /* font-family: 'Roboto Condensed', sans-serif; */
         font-family: 'Roboto', sans-serif;
+        overflow: scroll;
+::-webkit-scrollbar { 
+    display: none; 
+}
     }
     ol, ul {
         list-style: none;

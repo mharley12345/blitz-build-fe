@@ -2,11 +2,12 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Search from "../styles/Search/Search.png";
 import Uploader from "../components/documents/Uploader";
-import OpenUploaderContext from '../contexts/documents/OpenUploaderContext'
+import OpenUploaderContext from "../contexts/documents/OpenUploaderContext";
 
 import TasksContext from "../contexts/tasks/TaskContext";
 import Modal from "../components/global/Modal";
 import TaskForm from "../components/tasks/TaskForm";
+import ProjectForm from "../components/projects/ProjectForm";
 import { NavLink, Link, Redirect } from "react-router-dom";
 import OpenContext from "../contexts/projects/OpenContext";
 import OpenTemplateContext from "../contexts/OpenTemplateContext";
@@ -15,7 +16,9 @@ import searchTermContext from "../contexts/searching/searchTerm";
 import AddProject from "../components/modal/AddProject";
 import TemplateContext from "../contexts/templates/TemplateContext";
 import TemplateTaskForm from "../components/templates/TemplateTaskForm";
-import TaskContext from '../contexts/tasks/TaskContext'
+import TaskContext from "../contexts/tasks/TaskContext";
+import ProjectContext from "../contexts/projects/ProjectContext";
+
 const HeaderContainer = styled.div`
   background: #fff;
   width: 100%;
@@ -58,6 +61,8 @@ border: 1px solid #8A827D
 `;
 const ButtonDocumentCheck = {
   display: "flex",
+  position: 'absolute',
+  right: '200px',
   borderRadius: "3px",
   width: "174px",
   height: "48px",
@@ -65,6 +70,8 @@ const ButtonDocumentCheck = {
   alignItems: "center"
 };
 const ButtonTemplateCheck = {
+  position: 'absolute',
+  right: '40px',
   display: "flex",
   borderRadius: "3px",
   width: "174px",
@@ -74,6 +81,8 @@ const ButtonTemplateCheck = {
   marginLeft: "160px"
 };
 const SoloDocument = {
+  position: 'absolute',
+  right: '40px',
   display: "flex",
   borderRadius: "3px",
   width: "174px",
@@ -84,6 +93,8 @@ const SoloDocument = {
 };
 
 const SoloTask = {
+  position: 'absolute',
+  right: '40px',
   display: "flex",
   borderRadius: "3px",
   width: "151px",
@@ -125,6 +136,8 @@ border: 1px solid #8A827D
 }
 `;
 const ButtonTask = styled.div`
+
+
 display: flex;
 border-radius: 3px;
 border: 1px solid #8A827D
@@ -142,6 +155,18 @@ border: 1px solid #8A827D
 `;
 
 const ButtonProjectCheck = {
+  position: 'absolute',
+  right: '40px',
+  display: "flex",
+  borderRadius: "3px",
+  width: "151px",
+  height: "48px",
+  justifyContent: "center",
+  alignItems: "center"
+};
+const ButtonTaskCheck = {
+  position: 'absolute',
+  right: '200px',
   display: "flex",
   borderRadius: "3px",
   width: "151px",
@@ -182,43 +207,43 @@ const SearchInput = styled.input`
   }
 `;
 const SearchTotal = styled.div`
-position: relative;
- 
-`
+  position: relative;
+`;
 const ButtonSearch = styled.i`
-position: absolute;
-right: 15px;
-top: 2px;
-border:none;
-font-size: 30px;
-color: #8a827d;
-text-align:center;
+  position: absolute;
+  right: 15px;
+  top: 2px;
+  border: none;
+  font-size: 30px;
+  color: #8a827d;
+  text-align: center;
 
-z-index: 2;
-width: 20px;
-hieght: 20px;
-
-`
+  z-index: 2;
+  width: 20px;
+  hieght: 20px;
+`;
 
 function Header({ pathname }) {
- 
-  const { searchTerm, setSearchTerm, searchCatch, setSearchCatch  } = useContext(searchTermContext);
+  const { searchTerm, setSearchTerm, searchCatch, setSearchCatch } = useContext(
+    searchTermContext
+  );
   const [TaskHover, setTaskHover] = useState(false);
   const [ProjectHover, setProjectHover] = useState(false);
   const [DocumentHover, setDocumentHover] = useState(false);
   const [TemplateHover, setTemplateHover] = useState(false);
   const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext);
+  const { addProject } = useContext(ProjectContext);
   const { addTask } = useContext(TasksContext);
   const { addTemplateTask } = useContext(TemplateContext);
   const { open, setOpen } = useContext(OpenContext);
-  const {TaskModalStatus, setTaskModalStatus} = useContext(TaskContext);
+  const { TaskModalStatus, setTaskModalStatus } = useContext(TaskContext);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
-  const {openUploader,setUploaderOpen}= useContext(OpenUploaderContext)
+  const { openUploader, setUploaderOpen } = useContext(OpenUploaderContext);
   const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
 
-  console.log("this is the handlechange", searchCatch)
-  console.log("this is the handlesubmit", searchTerm)
+  console.log("this is the handlechange", searchCatch);
+  console.log("this is the handlesubmit", searchTerm);
   // const { addTemplate } = useContext(TemplateContext)
 
   const handleTaskModalOpen = () => {
@@ -227,9 +252,14 @@ function Header({ pathname }) {
   const handleTaskModalClose = () => {
     setTaskModalStatus(false);
   };
+  const handleProjectModalOpen = () => {
+    setProjectModalStatus(true);
+  };
+  const handleProjectModalClose = () => {
+    setProjectModalStatus(false);
+  };
   const handleTemplateTaskModalOpen = () => {
     setTemplateTaskModalStatus(true);
-  
   };
   const handleTemplateTaskModalClose = () => {
     setTemplateTaskModalStatus(false);
@@ -254,9 +284,9 @@ function Header({ pathname }) {
       pathname === "/log-out" ||
       pathname === "/90_Day" ||
       pathname.includes("templates") ||
-      pathname === '/documents/add' ||
-      pathname.includes('/mycalendar') ||
-      pathname === ('/')
+      pathname === "/documents/add" ||
+      pathname.includes("/mycalendar") ||
+      pathname === "/"
     ) {
       return HideButton;
     } else {
@@ -265,6 +295,7 @@ function Header({ pathname }) {
   };
   const HideTheDocumentButton = pathname => {
     if (
+      pathname === "/log-out" ||
       pathname === "/delay-log" ||
       pathname === "/tasks" ||
       pathname === "/90_Day" ||
@@ -282,7 +313,7 @@ function Header({ pathname }) {
   };
   const HideTheTaskButton = pathname => {
     if (pathname === "/tasks") {
-      return ButtonProjectCheck;
+      return ButtonTaskCheck;
     } else {
       return HideButton;
     }
@@ -350,50 +381,46 @@ function Header({ pathname }) {
       setOpenTemplate(true);
     }
   };
-  const OpenUploaderContextToggler = () =>{
-    if (openUploader !== false){
+  const OpenUploaderContextToggler = () => {
+    if (openUploader !== false) {
       setUploaderOpen(false);
-      } else if (openUploader === false) {
-        setOpenTemplate(true);
-      }
-  }
+    } else if (openUploader === false) {
+      setOpenTemplate(true);
+    }
+  };
   //// search function
-
- 
 
   const handleChange = e => {
     setSearchTerm(e.target.value);
     // console.log("search term", searchTerm);
   };
 
-
- 
-
   return (
-    
     <HeaderContainer>
       <SearchContainer>
-        <Link to= '/tasks'>
+        <Link to="/tasks">
           <SearchTotal>
-          <SearchInput
-            type="text"
-            placeholder="Search Tasks" 
-            value={searchTerm}
-            onChange={handleChange}
-          />
-         <Link to= '/tasks'> <ButtonSearch className="ion-ios-search" /></Link>
-       </SearchTotal>
+            <SearchInput
+              type="text"
+              placeholder="Search Tasks"
+              value={searchTerm}
+              onChange={handleChange}
+            />
+            <Link to="/tasks">
+              {" "}
+              <ButtonSearch className="ion-ios-search" />
+            </Link>
+          </SearchTotal>
         </Link>
       </SearchContainer>
       <ButtonContainer>
-      <ButtonDocument
+        <ButtonDocument
           onMouseEnter={() => setDocumentHover(true)}
           onMouseLeave={() => setDocumentHover(false)}
           style={HideTheDocumentButton(pathname)}
           onClick={OpenUploaderContext}
         >
           {" "}
-        
           <ButtonI
             className="ion-ios-add-circle"
             style={HoverDocumentStyleFunction()}
@@ -436,7 +463,7 @@ function Header({ pathname }) {
           onMouseEnter={() => setProjectHover(true)}
           onMouseLeave={() => setProjectHover(false)}
           style={HideTheProjectButton(pathname)}
-          onClick={OpenToggler}
+          onClick={handleProjectModalOpen}
         >
           {" "}
           <ButtonI
@@ -485,6 +512,18 @@ function Header({ pathname }) {
               closeModal={handleTemplateTaskModalClose}
               handleFunction={addTemplateTask}
               text={"Add Task"}
+            />
+          }
+        />
+        <Modal
+          visible={ProjectModalStatus}
+          dismiss={handleProjectModalClose}
+          client={"40%"}
+          component={
+            <ProjectForm
+              closeModal={handleProjectModalClose}
+              handleFunction={addProject}
+              text={"Add Project"}
             />
           }
         />
