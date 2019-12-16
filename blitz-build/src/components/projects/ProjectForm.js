@@ -83,7 +83,7 @@ export default function ProjectForm({
       </StyledFormHeader>
       <div style={{ marginBottom: "16px" }}>
         {" "}
-        <span style={{ marginTop: "5px", color: "orange", cursor: "pointer" }}>
+        <span style={{ marginTop: "24px", color: "orange", cursor: "pointer" }}>
           Upload a Project Image
         </span>
         <span> (optional)</span>

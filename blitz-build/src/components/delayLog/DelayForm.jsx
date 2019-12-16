@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 //styles
 //import styled from "styled-components";
-import { XButton } from "../../styles/Tasks/tasks";
+import { XButton } from "../../styles/Form/FormStyles";
 import {
   StyledForm,
   StyledLabel,
