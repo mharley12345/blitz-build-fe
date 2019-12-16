@@ -72,7 +72,6 @@ const MainFailContainer = styled.div`
 
 const failedContainer = styled.div`
   margin-top: 80px;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,10 +81,15 @@ const failText = styled.div`
 `;
 
 export default function Tasks() {
-  const { tasks } = useContext(taskContext);
-  const { searchTerm } = useContext(searchTermContext);
-  const taskSearchInput = searchTerm.toLowerCase("");
-  const [taskSearchResults, setTaskSearchResults] = useState([]);
+  const { tasks, getTasks } = useContext(taskContext);
+  const {
+    searchTerm,
+    setSearchTerm,
+    results,
+    setResults,
+    taskSearchResults
+  } = useContext(searchTermContext);
+  const taskSearchInput = searchTerm.toLowerCase();
 
   console.log("taskSearchResults", taskSearchResults);
 
@@ -93,13 +97,6 @@ export default function Tasks() {
   //pagnation
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  const results = tasks.filter(task =>
-    task.task_name.toLowerCase().includes(taskSearchInput)
-  );
-  console.log("RESULTS:", results);
-  // setTaskSearchResults(results);
-
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, tasks.length - page * rowsPerPage);
 
@@ -135,6 +132,8 @@ export default function Tasks() {
 
   const classes = useStyles();
 
+  useEffect(() => {}, []);
+
   return (
     <>
       <InfoContainer>
@@ -146,6 +145,7 @@ export default function Tasks() {
           <option>Due Date</option>
         </SortBtn>
       </InfoContainer>
+
 
       <Paper className={classes.root}>
         <Table className={classes.table} aria-label="customized table">
@@ -160,7 +160,7 @@ export default function Tasks() {
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? results.slice(
+              ? tasks.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
