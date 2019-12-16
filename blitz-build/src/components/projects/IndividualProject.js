@@ -10,41 +10,51 @@ import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
 import PathnameContext from "../../contexts/PathnameContext";
 import EditModalContext from "../../contexts/EditModalContext";
-import DeleteProject from "../modal/DeleteProject";
-import EditProject from "../modal/EditProject";
-import TaskContext from '../../contexts/tasks/TaskContext'
-import Documents from "../documents/Documents"
-import searchTermContext from '../../contexts/searching/searchTerm'
+import DeleteProject from "./DeleteProject";
+import EditProject from "./EditProject";
+import TaskContext from "../../contexts/tasks/TaskContext";
+import Documents from "../documents/Documents";
+import searchTermContext from "../../contexts/searching/searchTerm";
 
 const IndividualProject = props => {
   const { pathname, setPathname } = useContext(PathnameContext);
-  const { searchTerm, setSearchTerm } = useContext(searchTermContext)
+  const { searchTerm, setSearchTerm } = useContext(searchTermContext);
   const [projectState, setProjectState] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
+  const [editProjectStatus, setEditProjectStatus] = useState(false);
   const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
-  const {getTasks, tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks, projectTasks} = useContext(TaskContext);
-  const [results, setResults ] = useState([])
+  const {
+    getTasks,
+    tasks,
+    setTasks,
+    TaskModalStatus,
+    setTaskModalStatus,
+    getProjectTasks,
+    projectTasks
+  } = useContext(TaskContext);
+  const [results, setResults] = useState([]);
   const taskSearchInput = searchTerm.toLowerCase();
-  const [taskSearchResults, setTaskSearchResults] = useState([])
-  
-  const projectID =props.match.params.id;
+  const [taskSearchResults, setTaskSearchResults] = useState([]);
+
+  const projectID = props.match.params.id;
   useEffect(() => {
-    if(searchTerm.length === 0) {
-      setResults([])
-  }
-  else {
-     setResults( projectTasks.filter(task =>
-    task.task_name.toLowerCase().includes(taskSearchInput))
-    ) 
-  }
-  console.log("RESULTS:", results);
-      setTaskSearchResults(results);
-   
+    if (searchTerm.length === 0) {
+      setResults([]);
+    } else {
+      setResults(
+        projectTasks.filter(task =>
+          task.task_name.toLowerCase().includes(taskSearchInput)
+        )
+      );
+    }
+    console.log("RESULTS:", results);
+    setTaskSearchResults(results);
+
     getProjectTasks(projectID);
 
-    setPathname(window.location.pathname)
-    console.log(projectID)
-    
+    setPathname(window.location.pathname);
+    console.log(projectID);
+
     axiosWithAuth()
       .get(`projects/${projectID}`)
       .then(res => {
@@ -56,9 +66,17 @@ const IndividualProject = props => {
         console.log(err);
       });
   }, [props]);
-  
- 
 
+  //edit modal functions
+  const handleEditProjectOpen = e => {
+    e.stopPropagation();
+    setEditProjectStatus(true);
+  };
+  const handleEditProjectClose = e => {
+    setEditProjectStatus(false);
+    
+  };
+  //delete modal functions
   const handleDeleteOpen = e => {
     e.stopPropagation();
     setDeleteStatus(true);
@@ -73,9 +91,8 @@ const IndividualProject = props => {
     setEditModalOpen(true);
   };
   const AddTask = () => {
-    setTaskModalStatus(true)
-
-  }
+    setTaskModalStatus(true);
+  };
   return (
     <>
       <Global />
@@ -112,15 +129,13 @@ const IndividualProject = props => {
             <Contentbottom>
               <ContentbottomTemplate>
                 <PageI className=" ion-ios-document" />
-                <span >
-                  &nbsp;&nbsp;90-Day Template in Use
-                </span>
+                <span>&nbsp;&nbsp;90-Day Template in Use</span>
               </ContentbottomTemplate>
               <AddIcon onClick={AddTask}>
                 <ProjectI className="ion-md-add" />
                 <span>Add</span>
               </AddIcon>
-              <EditIcon onClick={OpenToggle}>
+              <EditIcon onClick={handleEditProjectOpen}>
                 <ProjectI className="ion-md-create" />
                 <span>Edit</span>
               </EditIcon>
@@ -172,7 +187,11 @@ const IndividualProject = props => {
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
       />
-      <EditProject project={projectState} />
+      <EditProject
+        project={projectState}
+        editStatus={editProjectStatus}
+        handleEditClose={handleEditProjectClose}
+      />
     </>
   );
 };
@@ -206,26 +225,21 @@ const IndividualProjectTitleContainer = styled.div`
   min-width: 530px;
   height: 24px;
   span {
-    
     font-size: 16px;
     color: #8a827d;
-   
   }
 `;
 const IndividualProjectImgContainer = styled.div`
   min-width: 530px;
   height: 328px;
 
-  
-
   background: lightblue;
-
 `;
 const IndividualProjectcontentContainer = styled.div`
   min-width: 530px;
   height: 219px;
   border: 1px solid #dcd9d5;
-border-radius: 3px;
+  border-radius: 3px;
   background: #ffffff;
 `;
 const Contenth2 = styled.h2`
@@ -239,7 +253,7 @@ const ContentInfo = styled.div`
   display: flex;
 `;
 const ContentAddress = styled.div`
-  width: 153px;
+  width: 200px;
   height: 48px;
   margin-top: 16px;
   margin-left: 32px;
@@ -328,7 +342,7 @@ const ProjectI = styled.i`
   font-size: 1.4rem;
   background-color: #ffffff;
   color: #8a827d;
-text-align: right;
+  text-align: right;
   text-decoration: none;
 `;
 const PageI = styled.i`

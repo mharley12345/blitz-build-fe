@@ -59,6 +59,7 @@ const getProject = () => {
       .put(`/projects/${editedProjectId}`, editedProject)
       .then(res => {
         console.log("from editProject in projectsProvider", res);
+        getProject();
       })
       .catch(err => console.log(err));
     const newProjectsList = projects.map(project => {
