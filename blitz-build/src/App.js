@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import NavBar from "./components/NavBar";
@@ -23,7 +22,7 @@ import DelayLog from "./components/delayLog/DelayLog";
 import OpenTemplateContext from "./contexts/OpenTemplateContext";
 import AddTemplate from "./components/modal/AddTemplate";
 import Documents from "./components/documents/Documents";
-import OpenUploaderContext from "./contexts/documents/OpenUploaderContext"
+import OpenUploaderContext from "./contexts/documents/OpenUploaderContext";
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
@@ -37,23 +36,31 @@ import ProjectsProvider from "./contexts/projects/ProjectsProvider";
 import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 import EditModalContext from "./contexts/EditModalContext";
 import TemplateProvider from "./contexts/templates/TemplateProvider";
-import SearchProvider from './contexts/searching/searchTermProvider'
+import SearchProvider from "./contexts/searching/searchTermProvider";
 //AUTH0
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
+//AUTH0 2.O
+import Auth0NavBar from "./components/auth0/navbar-auth0";
+import { useAuth0 } from "./components/auth0/auth0-spa";
+import Profile from "./components/auth0/profile";
+import history from "./utils/auth/history";
+
 import TemplatesProvider from "./contexts/templates/TemplateProvider";
 import Uploader from "./components/documents/Uploader";
 import MyCalendar from "./components/calendar/MyCalender";
 import DocumentsProvider from "./contexts/documents/DocumentsProvider";
 function App() {
-  
   const [pathname, setPathname] = useState(window.location.pathname);
   const [open, setOpen] = useState(false);
   const [openTemplate, setOpenTemplate] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const [openUploader,setOpenUploader]= useState(false)
+  const [openUploader, setOpenUploader] = useState(false);
+
+  const { loading } = useAuth0();
+
   // getting userInfo from id_token in localStorage.
   useEffect(() => {
     if (localStorage.getItem("id_token")) {
@@ -61,8 +68,12 @@ function App() {
     }
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   // console.log("userInfo", userInfo);
-console.log('pathname', pathname)
+  console.log("pathname", pathname);
   const navLinks = [
     {
       text: "Home",
@@ -112,106 +123,130 @@ console.log('pathname', pathname)
   ];
 
   return (
-    <Router >
+    <Router history={history}>
       <TemplatesProvider>
         <OpenTemplateContext.Provider value={{ openTemplate, setOpenTemplate }}>
           <ProjectsProvider>
-          <DocumentsProvider>          
-          <OpenUploaderContext.Provider value={{ openUploader, setOpenUploader}}>
-            <TaskProvider>
-              <DelayLogProvider>
-                <SearchProvider>
-                  <OpenContext.Provider value={{ open, setOpen }}>
-                    <EditModalContext.Provider
-                      value={{ editModalOpen, setEditModalOpen }}
-                    >
-                      <PathnameContext.Provider
-                        value={{ pathname, setPathname }}
-                      >
-                        <UserContext.Provider value={{ userInfo, setUserInfo }}>
-                          <NavBar
-                            setPathname={setPathname}
-                            navLinks={navLinks}
-                          />
-                          <Layout pathname={pathname}>
-                            <Switch>
-                              <Route exact path="/auth" component={Auth} />
-                              <Route
-                                exact
-                                path="/navbar"
-                                component={AuthNavBar}
+            <DocumentsProvider>
+              <OpenUploaderContext.Provider
+                value={{ openUploader, setOpenUploader }}
+              >
+                <TaskProvider>
+                  <DelayLogProvider>
+                    <SearchProvider>
+                      <OpenContext.Provider value={{ open, setOpen }}>
+                        <EditModalContext.Provider
+                          value={{ editModalOpen, setEditModalOpen }}
+                        >
+                          <PathnameContext.Provider
+                            value={{ pathname, setPathname }}
+                          >
+                            <UserContext.Provider
+                              value={{ userInfo, setUserInfo }}
+                            >
+                              <NavBar
+                                setPathname={setPathname}
+                                navLinks={navLinks}
                               />
-                              <Route
-                                exact
-                                path="/callback"
-                                component={Callback}
-                              />
-                              <Route exact path="/login" component={Login} />
+                              {/* <AuthNavBar> */}
+                              <Auth0NavBar>
+                                <Layout pathname={pathname}>
+                                  <Switch>
+                                    <Route
+                                      exact
+                                      path="/auth"
+                                      component={Auth}
+                                    />
+                                    {/* <Route
+                                      exact
+                                      path="/navbar"
+                                      component={AuthNavBar}
+                                    /> */}
+                                    <Route
+                                      exact
+                                      path="/callback"
+                                      component={Callback}
+                                    />
 
-                              {/* <Route exact path="/signup" component={Signup} /> */}
-                              <Route exact path="/log-out" component={Logout} />
-                              {/*   */}
-                              <Route
-                                exact
-                                path="/dashboard"
-                                component={Dashboard}
-                              />
-                              <Route exact path="/tasks" component={Tasks} />
-                              <Route
-                                exact
-                                path="/projects"
-                                component={Projects}
-                              />
-                              <Route
-                                exact
-                                path="/project/:id"
-                                component={IndividualProject}
-                              />
-                              <Route
-                                exact
-                                path="/templates"
-                                component={Templates}
-                              />
-                              <Route
-                                exact
-                                path="/templates/:id"
-                                component={IndividualTemplate}
-                              />
-                              <Route
-                                exact
-                                path="/90_Day"
-                                component={NinetyDayTemplate}
-                              />
-                              <Route
-                                exact
-                                path="/delay-log"
-                                component={DelayLog}
-                              />
-                              <Route
-                                exact
-                                path="/documents"
-                                component={Documents}
-                              />
-                              <Route
-                                exact
-                                path="/documents/add"
-                                component={Uploader}
-                              />
-                              <Route
-                                exact
-                                path="/mycalendar"
-                                component={MyCalendar}
-                              />
-                            </Switch>
-                          </Layout>
-                        </UserContext.Provider>
-                      </PathnameContext.Provider>
-                    </EditModalContext.Provider>
-                  </OpenContext.Provider>
-                </SearchProvider>
-              </DelayLogProvider>
-            </TaskProvider>
-            </OpenUploaderContext.Provider>
+                                    {/* <Route exact path="/signup" component={Signup} /> */}
+                                    <Route
+                                      exact
+                                      path="/log-out"
+                                      component={Logout}
+                                    />
+                                    {/*   */}
+                                    <Route
+                                      exact
+                                      path="/dashboard"
+                                      component={Dashboard}
+                                    />
+                                    <Route
+                                      exact
+                                      path="/tasks"
+                                      component={Tasks}
+                                    />
+                                    <Route
+                                      exact
+                                      path="/projects"
+                                      component={Projects}
+                                    />
+                                    <Route
+                                      exact
+                                      path="/project/:id"
+                                      component={IndividualProject}
+                                    />
+                                    <Route
+                                      exact
+                                      path="/templates"
+                                      component={Templates}
+                                    />
+                                    <Route
+                                      exact
+                                      path="/templates/:id"
+                                      component={IndividualTemplate}
+                                    />
+                                    <Route
+                                      exact
+                                      path="/90_Day"
+                                      component={NinetyDayTemplate}
+                                    />
+                                    <Route
+                                      exact
+                                      path="/delay-log"
+                                      component={DelayLog}
+                                    />
+                                    <Route
+                                      exact
+                                      path="/documents"
+                                      component={Documents}
+                                    />
+                                    <Route
+                                      exact
+                                      path="/documents/add"
+                                      component={Uploader}
+                                    />
+                                    <Route
+                                      exact
+                                      path="/mycalendar"
+                                      component={MyCalendar}
+                                    />
+                                    <Route
+                                      exact
+                                      path="/profile"
+                                      component={Profile}
+                                    />
+                                  </Switch>
+                                </Layout>
+                              </Auth0NavBar>
+                              {/* </AuthNavBar> */}
+                            </UserContext.Provider>
+                          </PathnameContext.Provider>
+                        </EditModalContext.Provider>
+                      </OpenContext.Provider>
+                    </SearchProvider>
+                  </DelayLogProvider>
+                </TaskProvider>
+              </OpenUploaderContext.Provider>
             </DocumentsProvider>
           </ProjectsProvider>
         </OpenTemplateContext.Provider>

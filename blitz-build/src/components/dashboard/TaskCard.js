@@ -30,51 +30,35 @@ const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
-<<<<<<< HEAD
-function TaskCard({ projectID, numberOfTasks }) {
-  const [projectTasks, setProjectTasks] = useState([]);
+function TaskCard({
+  projectID,
+  numberOfTasks,
+  AddTask,
+  results,
+  taskSearchResults
+}) {
+  const {
+    projectTasks,
+    setProjectTasks,
+    getProjectTasks,
+    tasks,
+    setTasks,
+    getTasks
+  } = useContext(taskContext);
   const { searchTerm } = useContext(searchTermContext);
-  const taskSearchInput = searchTerm.toLowerCase();
-  const [taskSearchResults, setTaskSearchResults] = useState([]);
 
+  console.log("projectID:", projectID);
   useEffect(() => {
-
-    axiosWithAuth()
-    .get(`projects/tasks/byProject/${projectID}`)
-    .then(res => {
-      setProjectTasks(res.data)
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    getTasks();
   }, []);
 
-  const results = projectTasks.filter(task =>
-    task.task_name.toLowerCase().includes(taskSearchInput)
-  );
-=======
-function TaskCard({ projectID, numberOfTasks, AddTask, results, taskSearchResults}) {
- 
-  const { projectTasks, setProjectTasks, getProjectTasks, tasks, setTasks, getTasks } = useContext(taskContext);
-  const { searchTerm } = useContext(searchTermContext)
-  
- console.log("projectID:", projectID)
-  useEffect(() => {
-    
-   
-    
-    getTasks();
-  },[])
-
-    
->>>>>>> 0a185519d899258cd215441141ef8a1e5bbc5108
   return (
     <Container>
       <Section>
         <p>Your Task List</p>
         <p>View All</p>
       </Section>
-     <Paper>
+      <Paper>
         <Table>
           <TableHead>
             <TableRow>
@@ -85,40 +69,15 @@ function TaskCard({ projectID, numberOfTasks, AddTask, results, taskSearchResult
             </TableRow>
           </TableHead>
           <TableBody>
-<<<<<<< HEAD
-            {results.slice(0, numberOfTasks).map(item => {
-              if (results.length > 0) {
-                return <div></div>;
-              } else {
+            {tasks.slice(0, numberOfTasks).map(item => {
+              if (JSON.stringify(item.project_id) === projectID) {
                 return <Task item={item} key={item.id} />;
               }
             })}
-            {results.length > 0 ? (
-              results.map(result => (
-                <Task item={result} key={result.id}></Task>
-              ))
-            ) : (
-              <p></p>
-            )}
           </TableBody>
-=======
-        {tasks.slice(0, numberOfTasks).map(item => 
-       
-        { if ( JSON.stringify(item.project_id) === projectID ) { 
-        return (
-          <Task item={item} key={item.id}   />
-           )
-         }
-           })}
-            
-       </TableBody>
->>>>>>> 0a185519d899258cd215441141ef8a1e5bbc5108
         </Table>
       </Paper>
     </Container>
-      
-       
-         
   );
 }
 

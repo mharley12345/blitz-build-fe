@@ -9,7 +9,7 @@ class Auth {
     domain: "gannondarcy2.auth0.com",
     audience: "https://gannondarcy2.auth0.com/userinfo",
     clientID: "OzMg1e7JDNF7DogxPEPvGzpG7fvvDHNe",
-    redirectUri: "https://blitz-build-dev.netlify.com/callback",
+    redirectUri: "http://localhost:3000/callback",
     responseType: "id_token",
     scope: "openid profile"
   });
@@ -78,12 +78,12 @@ class Auth {
   }
 
   // doing this function in the logout component
-  signOut() {
-    // clear id token, profile, and expiration
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("id_token");
-    localStorage.removeItem("expires_at");
-  }
+  // signOut() {
+  //   // clear id token, profile, and expiration
+  //   localStorage.removeItem("access_token");
+  //   localStorage.removeItem("id_token");
+  //   localStorage.removeItem("expires_at");
+  // }
 
   getProfile() {
     if (localStorage.getItem("id_token")) {
