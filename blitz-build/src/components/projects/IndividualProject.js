@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Weather from "../weather/Weather";
+import axios from "axios";
 
 import TaskCard from "../dashboard/TaskCard";
 import styled from "styled-components";
@@ -16,45 +17,35 @@ import TaskContext from "../../contexts/tasks/TaskContext";
 import Documents from "../documents/Documents";
 import searchTermContext from "../../contexts/searching/searchTerm";
 
+import TemplateContext from "../../contexts/templates/TemplateContext";
+
+
+import { StyledLabel, StyledSelect } from "../../styles/Tasks/taskForm";
+
 const IndividualProject = props => {
+  const { templates } = useContext(TemplateContext);
+
   const { pathname, setPathname } = useContext(PathnameContext);
-  const { searchTerm, setSearchTerm } = useContext(searchTermContext);
   const [projectState, setProjectState] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
   const [editProjectStatus, setEditProjectStatus] = useState(false);
   const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
-  const {
-    getTasks,
-    tasks,
-    setTasks,
-    TaskModalStatus,
-    setTaskModalStatus,
-    getProjectTasks,
-    projectTasks
-  } = useContext(TaskContext);
-  const [results, setResults] = useState([]);
-  const taskSearchInput = searchTerm.toLowerCase();
-  const [taskSearchResults, setTaskSearchResults] = useState([]);
 
-  const projectID = props.match.params.id;
+  const [form, setForm] = useState({
+    template_id: 0
+  });
+
+  console.log(form);
+
+  const project_id = props.match.params.id;
+
+  const changeHandler = e => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
   useEffect(() => {
-    if (searchTerm.length === 0) {
-      setResults([]);
-    } else {
-      setResults(
-        projectTasks.filter(task =>
-          task.task_name.toLowerCase().includes(taskSearchInput)
-        )
-      );
-    }
-    console.log("RESULTS:", results);
-    setTaskSearchResults(results);
-
-    getProjectTasks(projectID);
-
     setPathname(window.location.pathname);
-    console.log(projectID);
-
+    const projectID = props.match.params.id;
     axiosWithAuth()
       .get(`projects/${projectID}`)
       .then(res => {
@@ -66,6 +57,33 @@ const IndividualProject = props => {
         console.log(err);
       });
   }, [props]);
+
+  const addPreBuiltTemplate = () => {
+    console.log(project_id);
+    axiosWithAuth()
+      .post("/90_day", { project_id })
+      .then(res => {
+        console.log("90_day post", res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const addCustomTemplate = e => {
+    e.preventDefault();
+    const templateID = parseInt(form.template_id);
+    console.log("templateID", templateID);
+    axiosWithAuth()
+      .post(`/templates/addTasks/${project_id}`, { template_id: templateID })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  // /templates/addTasks/:id(project_id)
 
   //edit modal functions
   const handleEditProjectOpen = e => {
@@ -90,12 +108,32 @@ const IndividualProject = props => {
     e.stopPropagation();
     setEditModalOpen(true);
   };
-  const AddTask = () => {
-    setTaskModalStatus(true);
-  };
   return (
     <>
       <Global />
+      <DisplayFlex>
+        <button onClick={() => addPreBuiltTemplate()}> add template </button>
+        <form onSubmit={addCustomTemplate}>
+          <StyledLabel>Assign A Template</StyledLabel>
+          <StyledSelect
+            type="number"
+            name="template_id"
+            onChange={changeHandler}
+            value={form.template_id}
+          >
+            <option>Choose Template</option>
+
+            {templates.map(template => {
+              return (
+                <option key={template.id} value={template.template_id}>
+                  {template.id}
+                </option>
+              );
+            })}
+          </StyledSelect>
+          <button type="submit">Add custom template</button>
+        </form>
+      </DisplayFlex>
       <IndividualProjectTitleContainer>
         <img src={Project_icon} alt="project_icon" />
         <span>&nbsp;&nbsp;Projects / {projectState.project_name}</span>
@@ -110,20 +148,18 @@ const IndividualProject = props => {
             <Contenth2>{projectState.project_name}</Contenth2>
             <ContentInfo>
               <ContentAddress>
-                <p style={{ marginBottom: 0 }}>{projectState.street_address}</p>
-                <p style={{ marginBottom: 0 }}>
+                <p>{projectState.street_address}</p>
+                <p>
                   {projectState.city}, {projectState.state}{" "}
                   {projectState.zip_code}
                 </p>
               </ContentAddress>
               <ContentSize>
-                <p style={{ marginBottom: 0 }}>
+                <p>
                   {projectState.beds} Beds&nbsp;&nbsp;&nbsp;
                   {projectState.baths} Baths
                 </p>
-                <p style={{ marginBottom: 0 }}>
-                  {projectState.square_ft} sq.ft.
-                </p>
+                <p>{projectState.square_ft} sq.ft.</p>
               </ContentSize>
             </ContentInfo>
             <Contentbottom>
@@ -131,52 +167,47 @@ const IndividualProject = props => {
                 <PageI className=" ion-ios-document" />
                 <span>&nbsp;&nbsp;90-Day Template in Use</span>
               </ContentbottomTemplate>
-              <AddIcon onClick={AddTask}>
-                <ProjectI className="ion-md-add" />
-                <span>Add</span>
-              </AddIcon>
               <EditIcon onClick={handleEditProjectOpen}>
                 <ProjectI className="ion-md-create" />
-                <span>Edit</span>
+                <p>Edit</p>
               </EditIcon>
               <DeleteIcon onClick={handleDeleteOpen}>
                 <ProjectI className="ion-md-trash" />
-                <span>Delete</span>
+                <p>Delete</p>
               </DeleteIcon>
             </Contentbottom>
           </IndividualProjectcontentContainer>
         </IndividualProjectContainer>
         <Right>
-          <div
-            style={{
-              width: "530px",
-              height: "19px",
-              marginBottom: "8px",
-              fontSize: "16px",
+          <div style={{ width: "530px", height: "19px", marginBottom: "8px" }}>
+            <p
+              style={{
+                fontSize: "16px",
 
-              color: "#817974"
-            }}
-          >
-            Weather
+                color: "#817974"
+              }}
+            >
+              Weather
+            </p>
           </div>
-          <WeatherContainer>
-            <Weather
-              usage="project"
-              city={`${projectState.city}, ${projectState.state}`}
-              latitude={projectState.latitude}
-              longitude={projectState.longitude}
-            />
-          </WeatherContainer>
-          <div
+          <Weather
+            usage="project"
+            city={`${projectState.city}, ${projectState.state}`}
+            latitude={projectState.latitude}
+            longitude={projectState.longitude}
+          />
+          <p
             style={{
               fontSize: "16px",
               marginTop: "35px",
               color: "#817974"
             }}
           >
-            Your Documents - upcoming
-          </div>
-          <DocumentsContainer></DocumentsContainer>
+            Your Documents
+          </p>
+          <DocumentsContainer>
+            <Documents />
+          </DocumentsContainer>
         </Right>
       </Top>
       <TasksContainer>
@@ -198,6 +229,11 @@ const IndividualProject = props => {
 
 export default withRouter(IndividualProject);
 
+const DisplayFlex = styled.div`
+  display: flex;
+  margin: 10px;
+`;
+
 const Top = styled.div`
   width: 1080px;
   display: flex;
@@ -212,13 +248,8 @@ const Right = styled.div`
   margin-left: 20px;
 `;
 const IndividualProjectContainer = styled.div`
-  margin-top: 16px;
-
   min-width: 530px;
   height: 547px;
-  border: 1px solid #dcd9d5;
-
-  border-radius: 3px;
 `;
 const IndividualProjectTitleContainer = styled.div`
   display: flex;
@@ -232,7 +263,6 @@ const IndividualProjectTitleContainer = styled.div`
 const IndividualProjectImgContainer = styled.div`
   min-width: 530px;
   height: 328px;
-
   background: lightblue;
 `;
 const IndividualProjectcontentContainer = styled.div`
@@ -243,7 +273,7 @@ const IndividualProjectcontentContainer = styled.div`
   background: #ffffff;
 `;
 const Contenth2 = styled.h2`
-  padding-top: 10px;
+  padding-top: 24px;
   padding-left: 32px;
   font-size: 36px;
   font-weight: bold;
@@ -280,27 +310,18 @@ const ContentSize = styled.div`
 const Contentbottom = styled.div`
   display: flex;
   align-content: center;
-  span {
-    width: 100%;
+  p {
     font-size: 16px;
     line-height: 24px;
     color: #8a827d;
   }
 `;
 const ContentbottomTemplate = styled.div`
-  width: 400px;
+  width: 200px;
   height: 22px;
   margin-top: 48px;
-  margin-left: 12px;
+  margin-left: 37.75px;
   display: flex;
-`;
-const AddIcon = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 30px;
-  margin-left: 120px;
-  cursor: pointer;
 `;
 const EditIcon = styled.div`
   display: flex;
@@ -321,17 +342,8 @@ const DeleteIcon = styled.div`
 `;
 const DocumentsContainer = styled.div`
   margin-top: 8px;
-  width: 530px;
-  height: 288px;
-  border: 1px solid #dcd9d5;
-  border-radius: 3px;
 `;
-const WeatherContainer = styled.div`
-  min-width: 530px;
-  height: 172px;
-  border: 1px solid #dcd9d5;
-  border-radius: 3px;
-`;
+
 const TasksContainer = styled.div`
   margin-top: 24px;
   width: 1080px;

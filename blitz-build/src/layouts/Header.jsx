@@ -61,6 +61,8 @@ border: 1px solid #8A827D
 `;
 const ButtonDocumentCheck = {
   display: "flex",
+  position: 'absolute',
+  right: '200px',
   borderRadius: "3px",
   width: "174px",
   height: "48px",
@@ -68,6 +70,8 @@ const ButtonDocumentCheck = {
   alignItems: "center"
 };
 const ButtonTemplateCheck = {
+  position: 'absolute',
+  right: '40px',
   display: "flex",
   borderRadius: "3px",
   width: "174px",
@@ -77,6 +81,8 @@ const ButtonTemplateCheck = {
   marginLeft: "160px"
 };
 const SoloDocument = {
+  position: 'absolute',
+  right: '40px',
   display: "flex",
   borderRadius: "3px",
   width: "174px",
@@ -87,6 +93,8 @@ const SoloDocument = {
 };
 
 const SoloTask = {
+  position: 'absolute',
+  right: '40px',
   display: "flex",
   borderRadius: "3px",
   width: "151px",
@@ -128,6 +136,8 @@ border: 1px solid #8A827D
 }
 `;
 const ButtonTask = styled.div`
+
+
 display: flex;
 border-radius: 3px;
 border: 1px solid #8A827D
@@ -145,6 +155,18 @@ border: 1px solid #8A827D
 `;
 
 const ButtonProjectCheck = {
+  position: 'absolute',
+  right: '40px',
+  display: "flex",
+  borderRadius: "3px",
+  width: "151px",
+  height: "48px",
+  justifyContent: "center",
+  alignItems: "center"
+};
+const ButtonTaskCheck = {
+  position: 'absolute',
+  right: '200px',
   display: "flex",
   borderRadius: "3px",
   width: "151px",
@@ -273,6 +295,7 @@ function Header({ pathname }) {
   };
   const HideTheDocumentButton = pathname => {
     if (
+      pathname === "/log-out" ||
       pathname === "/delay-log" ||
       pathname === "/tasks" ||
       pathname === "/90_Day" ||
@@ -290,7 +313,7 @@ function Header({ pathname }) {
   };
   const HideTheTaskButton = pathname => {
     if (pathname === "/tasks") {
-      return ButtonProjectCheck;
+      return ButtonTaskCheck;
     } else {
       return HideButton;
     }

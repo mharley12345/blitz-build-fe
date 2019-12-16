@@ -23,7 +23,7 @@ export const TaskNavStyle = styled.div`
 `;
 
 export const XButton = styled.button`
-  font-size: 25px;
+  font-size: 20px;
   background-color: white;
   border: none;
   color: black;
@@ -31,7 +31,6 @@ export const XButton = styled.button`
   text-align: right;
   text-decoration: none;
   display: inline-block;
-  margin: 4px 2px;
   cursor: pointer;
 `;
 export const TaskI = styled.i`

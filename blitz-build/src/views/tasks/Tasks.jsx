@@ -118,14 +118,14 @@ console.log("RESULTS:", results);
   const failedSearch = () => {
     if(searchTerm.length > 0 && results.length === 0) {
       return (
-        <MainFailContainer>
-        <failedContainer>
-          <failText>There doesn't seem to be any tasks with that name</failText>
-          </failedContainer>
-          </MainFailContainer>
-      )
+        <p style={{ fontWeight: 600 }}>There doesn't seem to be any tasks with that name</p>
+      )}
+      else {
+        return (
+        <p style={{ fontWeight: 600 }}>Your Task List</p>)
+      }
     }
-  }
+  
 
   const classes = useStyles();
 
@@ -137,7 +137,7 @@ console.log("RESULTS:", results);
   return (
     <>
       <InfoContainer>
-        <p style={{ fontWeight: 600 }}>Your Task List</p>
+        {failedSearch()}
         <SortBtn style={{textDecoration: 'none' }}>
           Sort By <span className="ion-ios-arrow-down" />
         </SortBtn>
@@ -183,7 +183,7 @@ console.log("RESULTS:", results);
       
             })}
 
-            {failedSearch()}
+           
               
               { results.length > 0 ?
                (
@@ -193,6 +193,7 @@ console.log("RESULTS:", results);
               ))
             ) : (
               <p></p>
+              
             )}
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
