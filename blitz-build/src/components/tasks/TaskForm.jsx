@@ -154,11 +154,12 @@ export default function TaskForm({
         paddingLeft: '10px'
   
       }}
+        required
         name="project_name"
         onChange={handleChanges}
         value={task.project_name}
       >
-        <option>Choose Project</option>
+        <option value=''></option>
 
         {projects.map(project => {
           return (
@@ -200,24 +201,6 @@ export default function TaskForm({
         value={task.dueDate}
         onChange={handleChanges}
       /> */}
-
-      <StyledLabel>Assign Project</StyledLabel>
-      <StyledSelect
-        required
-        name="project_name"
-        onChange={handleChanges}
-        value={task.project_name}
-      >
-        <option value=""></option>
-
-        {projects.map(project => {
-          return (
-            <option key={project.id} value={project.project_name}>
-              {project.project_name}
-            </option>
-          );
-        })}
-      </StyledSelect>
       <StyledBtn>Save</StyledBtn>
       
       <StyledBtn style={{marginBottom: "50px"}}>Add Task</StyledBtn>
