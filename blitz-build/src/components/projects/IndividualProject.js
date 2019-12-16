@@ -19,7 +19,6 @@ import searchTermContext from "../../contexts/searching/searchTerm";
 
 import TemplateContext from "../../contexts/templates/TemplateContext";
 
-
 import { StyledLabel, StyledSelect } from "../../styles/Tasks/taskForm";
 
 const IndividualProject = props => {
@@ -92,7 +91,6 @@ const IndividualProject = props => {
   };
   const handleEditProjectClose = e => {
     setEditProjectStatus(false);
-    
   };
   //delete modal functions
   const handleDeleteOpen = e => {
@@ -165,16 +163,24 @@ const IndividualProject = props => {
             <Contentbottom>
               <ContentbottomTemplate>
                 <PageI className=" ion-ios-document" />
-                <span>&nbsp;&nbsp;90-Day Template in Use</span>
+                <p>&nbsp;&nbsp;90-Day Template in Use</p>
               </ContentbottomTemplate>
-              <EditIcon onClick={handleEditProjectOpen}>
-                <ProjectI className="ion-md-create" />
-                <p>Edit</p>
-              </EditIcon>
-              <DeleteIcon onClick={handleDeleteOpen}>
-                <ProjectI className="ion-md-trash" />
-                <p>Delete</p>
-              </DeleteIcon>
+              <div
+                style={{
+                  display: "flex",
+                  width: "35%",
+                  justifyContent: "flex-end"
+                }}
+              >
+                <EditIcon onClick={handleEditProjectOpen}>
+                  <ProjectI className="ion-md-create" />
+                  <p>Edit</p>
+                </EditIcon>
+                <DeleteIcon onClick={handleDeleteOpen}>
+                  <ProjectI className="ion-md-trash" />
+                  <p>Delete</p>
+                </DeleteIcon>
+              </div>
             </Contentbottom>
           </IndividualProjectcontentContainer>
         </IndividualProjectContainer>
@@ -266,78 +272,61 @@ const IndividualProjectImgContainer = styled.div`
   background: lightblue;
 `;
 const IndividualProjectcontentContainer = styled.div`
-  min-width: 530px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 32px 5px 32px;
   height: 219px;
   border: 1px solid #dcd9d5;
   border-radius: 3px;
   background: #ffffff;
+  p {
+    font-size: 16px;
+    line-height: 24px;
+    color: #8a827d;
+    margin-bottom: 0;
+  }
 `;
 const Contenth2 = styled.h2`
-  padding-top: 24px;
-  padding-left: 32px;
   font-size: 36px;
   font-weight: bold;
   color: #3b3b3b;
 `;
 const ContentInfo = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 const ContentAddress = styled.div`
-  width: 200px;
-  height: 48px;
-  margin-top: 16px;
-  margin-left: 32px;
-  p {
-    font-size: 16px;
-    line-height: 24px;
-    color: #8a827d;
-  }
+  width: 55%;
 `;
 const ContentSize = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 170px;
-  height: 56px;
-  margin-top: 16px;
-  margin-left: 150px;
-  p {
-    font-size: 16px;
-    line-height: 24px;
-    color: #8a827d;
-  }
+  width: 40%;
 `;
 const Contentbottom = styled.div`
   display: flex;
-  align-content: center;
-  p {
-    font-size: 16px;
-    line-height: 24px;
-    color: #8a827d;
-  }
+  justify-content: space-between;
+  align-items: flex-end;
 `;
 const ContentbottomTemplate = styled.div`
-  width: 200px;
-  height: 22px;
-  margin-top: 48px;
-  margin-left: 37.75px;
+  width: 60%;
   display: flex;
+  
 `;
 const EditIcon = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
-  margin-left: 20px;
+
   cursor: pointer;
 `;
 const DeleteIcon = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
   margin-left: 20px;
-  margin-right: 20px;
   cursor: pointer;
 `;
 const DocumentsContainer = styled.div`
