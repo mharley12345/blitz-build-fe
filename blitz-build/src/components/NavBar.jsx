@@ -27,9 +27,10 @@ const NavBarContainer = styled.div`
      }
      @media only screen and (max-width: 1500px) {
       width: 160px;
-      justify-content: center;
+      padding-right: -15px;
       margin-top: 0px;
       padding-top: 20px;
+     }
     
 `;
     const NavBarUl = styled.ul`
@@ -43,7 +44,7 @@ const NavBarContainer = styled.div`
         align-items: center;
         flex-direction: column;
         transition: 300ms ease all;
-      
+        
        
         `;
 
@@ -70,7 +71,7 @@ const NavBarContainer = styled.div`
             border-radius: 4px;
             margin-top: 40px;
           }
-         
+        
 
         `;
       const NavScrollableContainer = styled.div`
@@ -117,7 +118,11 @@ const NavBarContainer = styled.div`
                 width: 80px;
                 margin-left: 15px;
                 margin-bottom: 0rem;
+                @media only screen and (max-width: 1500px) {
+      
+                  font-size: 15px;
               
+            }
            
             `;
              const NavBarI = styled.i`
