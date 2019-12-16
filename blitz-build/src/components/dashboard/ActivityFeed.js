@@ -34,7 +34,7 @@ const newdate = year + "-" + month + "-" + changeTheDay(day);
 
  console.log(newdate);
    const wasMadeToday= (createdAt) => {
-       if (createdAt.includes(newdate)) {
+       if (createdAt) {
            return true
        }
    }
