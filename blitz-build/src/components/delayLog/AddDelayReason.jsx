@@ -15,13 +15,13 @@ export default function AddDelayReason({ task, delayStatus, handleDelayClose }) 
       <Modal
         visible={delayStatus}
         dismiss={handleDelayClose}
-        client={"60%"}
+        client={"40%"}
         component={
           <DelayForm
             closeModal={handleDelayClose}
             handleFunction={addDelayLog}
             task={task}
-            text={"What is the reason for the Delay?"}
+            text={"Delay Project"}
            
           />
         }
