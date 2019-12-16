@@ -8,12 +8,13 @@ import { XButton } from "../../styles/Tasks/tasks";
 import TaskContext from '../../contexts/tasks/TaskContext'
 import {
   StyledForm,
+  StyledFormHeader,
   StyledLabel,
   StyledInput,
   StyledSelect,
   StyledBtn,
 
-} from "../../styles/Tasks/taskForm";
+} from "../../styles/Form/FormStyles";
 
 //hooks
 import { useInput } from "../../customHooks/useInput";
@@ -100,25 +101,20 @@ export default function TaskForm({
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-     
-       
-
-      <header style={{  width: "76%", display:'flex', justifyContent: 'space-between', marginTop: '6%', marginBottom:'3%'}} >
-        <h1 style={{ color: '#232323', fontSize: "3rem", fontFamily: "roboto", width: "70%"   }}>{text}</h1>
+      <StyledFormHeader>
+        <h1
+          style={{
+            fontSize: "2rem",
+            margin: 0
+          }}
+        >
+          {text}
+        </h1>
         <XButton onClick={closeModal}> Close X</XButton>
-     
-      </header>
-
+      </StyledFormHeader>
       <StyledLabel>Task Name</StyledLabel>
       <StyledInput
-      style={{
-        width: "75%",
-        height: '48px',
-        background: '#E9E9E9',
-        border: 'none',
-        paddingLeft: '10px'
-
-      }}
+        
         type="text"
         name="task_name"
         value={task.task_name}
@@ -127,14 +123,7 @@ export default function TaskForm({
 
       <StyledLabel>Task Decription</StyledLabel>
       <StyledInput
-      style={{
-        width: "75%",
-        height: '48px',
-        background: '#E9E9E9',
-        border: 'none',
-        paddingLeft: '10px'
-
-      }}
+       
         type="text"
         name="task_description"
         value={task.task_description}
@@ -144,16 +133,14 @@ export default function TaskForm({
       {/* <StyledLabel>Due Date</StyledLabel>
       <DatePicker selected={dueDate} onChange={date => setDueDate(date)} /> */}
 
-<StyledLabel>Assign Project</StyledLabel>
+      <StyledLabel>Assign Project</StyledLabel>
       <StyledSelect
-      style={{
-        width: "75%",
-        height: '48px',
-        background: '#E9E9E9',
-        border: 'none',
-        paddingLeft: '10px'
-  
-      }}
+        style={{
+          
+          background: "#E9E9E9",
+          border: "none",
+          paddingLeft: "10px"
+        }}
         name="project_name"
         onChange={handleChanges}
         value={task.project_name}
@@ -169,19 +156,9 @@ export default function TaskForm({
         })}
       </StyledSelect>
 
-      
       <StyledLabel>Due Date</StyledLabel>
       <StyledInput
-        style={{
-          width: "75%",
-          height: '48px',
-          background: '#E9E9E9',
-          border: 'none',
-          paddingTop: '15px',
-          paddingBottom: '10px',
-          paddingLeft: '10px'
-
-        }}
+       
         id="date"
         label=""
         type="date"
@@ -201,8 +178,7 @@ export default function TaskForm({
         onChange={handleChanges}
       /> */}
 
-      
-      <StyledBtn style={{marginBottom: "50px"}}>Add Task</StyledBtn>
+      <StyledBtn style={{ marginBottom: "50px" }}>Add Task</StyledBtn>
     </StyledForm>
   );
 }
