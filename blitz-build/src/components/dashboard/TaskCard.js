@@ -30,7 +30,6 @@ const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
-<<<<<<< HEAD
 function TaskCard({ projectID, numberOfTasks }) {
   const [projectTasks, setProjectTasks] = useState([]);
   const { searchTerm } = useContext(searchTermContext);
@@ -52,22 +51,6 @@ function TaskCard({ projectID, numberOfTasks }) {
   const results = projectTasks.filter(task =>
     task.task_name.toLowerCase().includes(taskSearchInput)
   );
-=======
-function TaskCard({ projectID, numberOfTasks, AddTask, results, taskSearchResults}) {
- 
-  const { projectTasks, setProjectTasks, getProjectTasks, tasks, setTasks, getTasks } = useContext(taskContext);
-  const { searchTerm } = useContext(searchTermContext)
-  
- console.log("projectID:", projectID)
-  useEffect(() => {
-    
-   
-    
-    getTasks();
-  },[])
-
-    
->>>>>>> 0a185519d899258cd215441141ef8a1e5bbc5108
   return (
     <Container>
       <Section>
@@ -85,7 +68,6 @@ function TaskCard({ projectID, numberOfTasks, AddTask, results, taskSearchResult
             </TableRow>
           </TableHead>
           <TableBody>
-<<<<<<< HEAD
             {results.slice(0, numberOfTasks).map(item => {
               if (results.length > 0) {
                 return <div></div>;
@@ -101,18 +83,6 @@ function TaskCard({ projectID, numberOfTasks, AddTask, results, taskSearchResult
               <p></p>
             )}
           </TableBody>
-=======
-        {tasks.slice(0, numberOfTasks).map(item => 
-       
-        { if ( JSON.stringify(item.project_id) === projectID ) { 
-        return (
-          <Task item={item} key={item.id}   />
-           )
-         }
-           })}
-            
-       </TableBody>
->>>>>>> 0a185519d899258cd215441141ef8a1e5bbc5108
         </Table>
       </Paper>
     </Container>
