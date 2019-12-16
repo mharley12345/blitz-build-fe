@@ -328,7 +328,7 @@ const EditIcon = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
-  margin-left: 20px;
+  margin-left: 120px;
   cursor: pointer;
 `;
 const DeleteIcon = styled.div`
