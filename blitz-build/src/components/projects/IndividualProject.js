@@ -196,12 +196,13 @@ const IndividualProject = props => {
               Weather
             </p>
           </div>
+          <WeatherContainer>
           <Weather
             usage="project"
             city={`${projectState.city}, ${projectState.state}`}
             latitude={projectState.latitude}
             longitude={projectState.longitude}
-          />
+          /></WeatherContainer>
           <p
             style={{
               fontSize: "16px",
@@ -212,7 +213,7 @@ const IndividualProject = props => {
             Your Documents
           </p>
           <DocumentsContainer>
-            <Documents />
+            
           </DocumentsContainer>
         </Right>
       </Top>
@@ -244,13 +245,19 @@ const Top = styled.div`
   width: 1080px;
   display: flex;
   padding-right: 32px;
+  p {
+    font-size: 16px;
+    line-height: 24px;
+    color: #8a827d;
+    margin-bottom: 0;
+  }
 `;
 const Right = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 530px;
   height: 547px;
-  margin-top: 16px;
+  
   margin-left: 20px;
 `;
 const IndividualProjectContainer = styled.div`
@@ -280,12 +287,7 @@ const IndividualProjectcontentContainer = styled.div`
   border: 1px solid #dcd9d5;
   border-radius: 3px;
   background: #ffffff;
-  p {
-    font-size: 16px;
-    line-height: 24px;
-    color: #8a827d;
-    margin-bottom: 0;
-  }
+  
 `;
 const Contenth2 = styled.h2`
   font-size: 36px;
@@ -331,6 +333,16 @@ const DeleteIcon = styled.div`
 `;
 const DocumentsContainer = styled.div`
   margin-top: 8px;
+  width: 530px;
+  height: 288px;
+  border: 1px solid #dcd9d5;
+  border-radius: 3px;
+`;
+const WeatherContainer = styled.div`
+  min-width: 530px;
+  height: 172px;
+  border: 1px solid #dcd9d5;
+  border-radius: 3px;
 `;
 
 const TasksContainer = styled.div`
