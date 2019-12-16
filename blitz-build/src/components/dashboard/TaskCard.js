@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
@@ -30,27 +31,20 @@ const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
-function TaskCard({ projectID, numberOfTasks }) {
-  const [projectTasks, setProjectTasks] = useState([]);
-  const { searchTerm } = useContext(searchTermContext);
-  const taskSearchInput = searchTerm.toLowerCase();
-  const [taskSearchResults, setTaskSearchResults] = useState([]);
-
+function TaskCard({ projectID, numberOfTasks, AddTask, results, taskSearchResults}) {
+ 
+  const { projectTasks, setProjectTasks, getProjectTasks, tasks, setTasks, getTasks } = useContext(taskContext);
+  const { searchTerm } = useContext(searchTermContext)
+  
+ console.log("projectID:", projectID)
   useEffect(() => {
+    
+   
+    
+    getTasks();
+  },[])
 
-    axiosWithAuth()
-    .get(`projects/tasks/byProject/${projectID}`)
-    .then(res => {
-      setProjectTasks(res.data)
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  }, []);
-
-  const results = projectTasks.filter(task =>
-    task.task_name.toLowerCase().includes(taskSearchInput)
-  );
+    
   return (
     <Container>
       <Section>
@@ -61,6 +55,7 @@ function TaskCard({ projectID, numberOfTasks }) {
         <Table>
           <TableHead>
             <TableRow>
+              <StyledTableCell>PROJECT</StyledTableCell>
               <StyledTableCell>NAME</StyledTableCell>
               <StyledTableCell>TASK</StyledTableCell>
               <StyledTableCell>DUE DATE</StyledTableCell>
@@ -68,21 +63,16 @@ function TaskCard({ projectID, numberOfTasks }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {results.slice(0, numberOfTasks).map(item => {
-              if (results.length > 0) {
-                return <div></div>;
-              } else {
-                return <Task item={item} key={item.id} />;
-              }
-            })}
-            {results.length > 0 ? (
-              results.map(result => (
-                <Task item={result} key={result.id}></Task>
-              ))
-            ) : (
-              <p></p>
-            )}
-          </TableBody>
+        {tasks.slice(0, numberOfTasks).map(item => 
+       
+        { if ( JSON.stringify(item.project_id) === projectID ) { 
+        return (
+          <Task item={item} key={item.id}   />
+           )
+         }
+           })}
+            
+       </TableBody>
         </Table>
       </Paper>
     </Container>
@@ -99,7 +89,6 @@ const Section = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
-
   p {
     font-family: "Roboto";
     font-size: 16px;
