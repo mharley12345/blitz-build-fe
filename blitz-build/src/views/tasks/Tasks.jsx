@@ -52,7 +52,7 @@ const useStyles = makeStyles({
     border: "1px solid #DCD9D5"
   },
   table: {
-    minWidth: "1080px"
+    // minWidth: "1080px"
   },
   tableHover: {
     "&:hover": {
@@ -60,36 +60,31 @@ const useStyles = makeStyles({
     }
   }
 });
-const MainFailContainer = styled.div`
-  postion: relative;
-  width: 900px;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 250px;
-`;
+// const MainFailContainer = styled.div`
+//   postion: relative;
+//   width: 900px;
+//   height: 200px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin-left: 250px;
+// `;
 
-const failedContainer = styled.div`
-  margin-top: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const failText = styled.div`
-  font-size: 50px;
-`;
+// const failedContainer = styled.div`
+//   margin-top: 80px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
+// const failText = styled.div`
+//   font-size: 50px;
+// `;
 
 export default function Tasks() {
   const { tasks, getTasks } = useContext(taskContext);
-  const {
-    searchTerm,
-    setSearchTerm,
-    results,
-    setResults,
-    taskSearchResults
-  } = useContext(searchTermContext);
-  const taskSearchInput = searchTerm.toLowerCase();
+  const { searchTerm, results, taskSearchResults } = useContext(
+    searchTermContext
+  );
 
   console.log("taskSearchResults", taskSearchResults);
 
@@ -119,14 +114,14 @@ export default function Tasks() {
   const failedSearch = () => {
     if (searchTerm.length > 0 && results.length === 0) {
       return (
-        <p style={{ fontWeight: 600 }}>There doesn't seem to be any tasks with that name</p>
-      )}
-      else {
-        return (
-        <p style={{ fontWeight: 600 }}>Your Task List</p>)
-      }
+        <p style={{ fontWeight: 600 }}>
+          There doesn't seem to be any tasks with that name
+        </p>
+      );
+    } else {
+      return <p style={{ fontWeight: 600 }}>Your Task List</p>;
     }
-  
+  };
 
   const classes = useStyles();
 
@@ -135,15 +130,15 @@ export default function Tasks() {
   return (
     <>
       <InfoContainer>
-        {failedSearch()}
+        {failedSearch()}s
         <SortBtn style={{ textDecoration: "none" }}>
           <option value="">Sort</option>
           <option>All</option>
           <option>Project</option>
           <option>Due Date</option>
+          <option>Completed</option>
         </SortBtn>
       </InfoContainer>
-
 
       <Paper className={classes.root}>
         <Table className={classes.table} aria-label="customized table">
@@ -172,17 +167,10 @@ export default function Tasks() {
               }
             })}
 
-           
-              
-              { results.length > 0 ?
-               (
-              results.map(result => (
-               
-                <Task item={result} key={result.id}></Task>
-              ))
+            {results.length > 0 ? (
+              results.map(result => <Task item={result} key={result.id}></Task>)
             ) : (
               <p></p>
-              
             )}
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
