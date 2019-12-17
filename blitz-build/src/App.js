@@ -135,7 +135,7 @@ console.log('pathname', pathname)
                           />
                           <Layout pathname={pathname}>
                             <Switch>
-                              <Route exact path="/auth" component={Auth} />
+                              {/* <Route exact path="/auth" component={Auth} /> */}
                               <Route
                                 exact
                                 path="/navbar"

@@ -183,7 +183,7 @@ const NavBarContainer = styled.div`
          maxHeight: '100%',
          borderRadius: '100px'
        }
-       const userInfoContainer = styled.div`
+       const UserInfoContainer = styled.div`
         
        `
   
@@ -204,10 +204,10 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
            </LogoContainer>
            <UserProfile>
              <UserImg> <img src={userInfo.picture} style = {imgStyle}/></UserImg>
-             <userInfoContainer>
+             <UserInfoContainer>
              <UserName> {userInfo.name}</UserName>
              <UserTitle>  Super Intendent  </UserTitle>
-             </userInfoContainer>
+             </UserInfoContainer>
            </UserProfile>
         </LogoAvatarContainer>
   
@@ -225,7 +225,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
 
          //// links recieve their text and icons through app.js          
  
-     <NavBarLi onClick={()=> (setPathname(window.location.pathname))}
+                     <NavBarLi onClick={()=> (setPathname(window.location.pathname))}
                        onMouseEnter={() => setHoverIndex(index)}
                        onMouseLeave={() => setHoverIndex(-1)}
                       
