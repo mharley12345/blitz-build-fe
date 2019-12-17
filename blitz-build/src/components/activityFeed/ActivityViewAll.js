@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
-import { axiosWithAuth } from "../utils/auth/axiosWithAuth";
-import NewTask from '../components/dashboard/NewTask'
+
+import NewTask from '../dashboard/NewTask'
 
 //context 
-import taskContext from '../contexts/tasks/TaskContext'
+import taskContext from '../../contexts/tasks/TaskContext'
 import {  Link } from "react-router-dom";
 
 
@@ -48,14 +48,14 @@ return (
     </Section>
     <ContainerContent>
         <TableHead>
-        <InnerContainer>
+        
       
             <Activity>ACTIVITY</Activity>
             <Name>NAME</Name>
             <Slash></Slash>
             <Address>ADDRESS</Address>
             <Project>PROJECT</Project>
-            </InnerContainer>
+           
         </TableHead>
        
         {tasks.slice(0, 20).map(item => 
@@ -161,41 +161,25 @@ const Project = styled.p`
 color: rgba(0, 0, 0, 0.87);
 background-color: #E9E9E9
 flex-direction: column;
-width: 7%;
+width: 7.5%;
 display: flex;
 font-weight: 500;
 
 `
 
 const TableHead = styled.div`
- width: 100%;
+ width: 95%;
  display: flex;
  justify-content: space-around;
  align-items: center;
  height: 72px;
  color: rgba(0, 0, 0, 0.87);
  background-color: #E9E9E9
- padding: 0px 32px;
+ padding: 0 2.5%;
  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
 border-radius: 3px;
 border: 1px solid #dcd9d5;
  
  `
- const InnerContainer = styled.div`
- width: 98%;
- display: flex;
- justify-content: space-around;
- align-items: center;
- color: rgba(0, 0, 0, 0.87);
- background-color: #E9E9E9
- p {
-    font-weight: 500;
-  font-size: 14px;
-    line-height: 16px;
-    font-family: "Roboto";
-    color: #3f3a36;
-    color: #000;
-  }
 
 
- `

@@ -24,7 +24,7 @@ import OpenTemplateContext from "./contexts/OpenTemplateContext";
 import AddTemplate from "./components/modal/AddTemplate";
 import Documents from "./components/documents/Documents";
 import OpenUploaderContext from "./contexts/documents/OpenUploaderContext";
-import ActivityViewAll from "./components/ActivityViewAll";
+import ActivityViewAll from "./components/activityFeed/ActivityViewAll";
 
 import Landing from "./components/landing/pages/Landing"
 
@@ -64,7 +64,7 @@ function App() {
   
 
 const LandingPage = (component) => {
-  if(pathname.includes('/landing')) {
+  if(pathname === '/' ) {
     return (
       null
     )}
@@ -154,7 +154,7 @@ const LandingPage = (component) => {
                                   <Route exact path="/auth" component={Auth} />
                                   <Route
                                     exact
-                                    path="/landing"
+                                    path="/"
                                     component={Landing}
                                   />
                                   

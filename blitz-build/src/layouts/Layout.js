@@ -16,7 +16,7 @@ function Layout({ children, pathname }) {
 
 
 const LandingPage = (component) => {
- if(pathname.includes('/landing')) {
+ if(pathname === '/') {
    return (
      <div></div>
    )}
@@ -25,7 +25,7 @@ const LandingPage = (component) => {
    }
  }
  const checkForLanding = () => {
-  if(pathname.includes('/landing')) {
+  if(pathname ==='/') {
     return LandingContentStyle
   }
   else {
