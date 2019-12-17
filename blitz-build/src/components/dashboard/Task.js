@@ -12,7 +12,7 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 
-function Task({ item, children }) {
+function Task({ item, children, projectTask }) {
   const StyledTableRow = withStyles(theme => ({
     root: {
       "&:nth-of-type(even)": {
@@ -89,7 +89,7 @@ function Task({ item, children }) {
   return (
     <>
       <StyledTableRow>
-        {!!item.project_name && (
+        {!projectTask && (
           <StyledTableCell>
             <Text>{item.project_name}</Text>
           </StyledTableCell>
