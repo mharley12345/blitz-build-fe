@@ -35,9 +35,8 @@ const IndividualProject = props => {
     template_id: null
   });
 
-  console.log(form);
-
   const project_id = props.match.params.id;
+  const { getProjectTasks } = useContext(TaskContext);
 
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -56,15 +55,16 @@ const IndividualProject = props => {
       .catch(err => {
         console.log(err);
       });
-    axiosWithAuth()
-      .get("/90_day")
-      .then(res => {
-        console.log("90 day res", res);
-        // setPreBuiltTemplate()
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // axiosWithAuth()
+    //   .get("/90_day")
+    //   .then(res => {
+    //     console.log("90 day res", res);
+    //     // setPreBuiltTemplate()
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    getProjectTasks();
   }, [props]);
 
   const addPreBuiltTemplate = () => {

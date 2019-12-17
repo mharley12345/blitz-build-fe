@@ -45,7 +45,7 @@ export default function ProjectForm({
   console.log("templateForm", templateForm);
 
   const { templates } = useContext(TemplateContext);
-  const { getProjectTasks } = useContext(TaskContext);
+  // const { getProjectTasks } = useContext(TaskContext);
 
   const makeTrue = () => {
     setTemplateForm({
@@ -83,8 +83,6 @@ export default function ProjectForm({
 
     form.latitude = gps.latitude;
     form.longitude = gps.longitude;
-    console.log("template_id", templateForm.template_id);
-    console.log("90 Days", templateForm.preBuiltTemplate);
 
     if (editFields) {
       handleFunction(form, form.id, templateForm);
@@ -105,53 +103,55 @@ export default function ProjectForm({
     closeModal();
   };
 
-  const addCustomTemplate = e => {
-    e.preventDefault();
-    const templateID = parseInt(templateForm.template_id);
-    const project_id = editFields.id;
-    console.log("project_id", project_id);
-    console.log("templateID", templateID);
-    axiosWithAuth()
-      .post(`/templates/addTasks/${project_id}`, { template_id: templateID })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-  const add90Day = () => {
-    if (templateForm.preBuiltTemplate === true) {
-      const project_id = editFields.id;
-      console.log(project_id);
-      axiosWithAuth()
-        .post("/90_day", { project_id })
-        .then(res => {
-          console.log("90_day post", res);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  };
+  // const addCustomTemplate = e => {
+  //   if (templateForm.template_id !== null) {
+  //     e.preventDefault();
+  //     const templateID = parseInt(templateForm.template_id);
+  //     const project_id = editFields.id;
+  //     console.log("project_id", project_id);
+  //     console.log("templateID", templateID);
+  //     axiosWithAuth()
+  //       .post(`/templates/addTasks/${project_id}`, { template_id: templateID })
+  //       .then(res => {
+  //         console.log(res);
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       });
+  //   }
+  // };
+  // const add90Day = () => {
+  //   if (templateForm.preBuiltTemplate === true) {
+  //     const project_id = editFields.id;
+  //     console.log(project_id);
+  //     axiosWithAuth()
+  //       .post("/90_day", { project_id })
+  //       .then(res => {
+  //         console.log("90_day post", res);
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       });
+  //   }
+  // };
 
-  async function submitForm(e) {
-    e.preventDefault();
-    const originalhandleSubmit = await handleSubmit(e);
-    console.log("async", originalhandleSubmit);
+  // async function submitForm(e) {
+  //   e.preventDefault();
+  //   const originalhandleSubmit = await handleSubmit(e);
+  //   console.log("async", originalhandleSubmit);
 
-    const customTemplate = await addCustomTemplate(e);
-    console.log("async", customTemplate);
+  //   const customTemplate = await addCustomTemplate(e);
+  //   console.log("async", customTemplate);
 
-    const preBuilt = await add90Day();
-    console.log("async", preBuilt);
+  //   const preBuilt = await add90Day();
+  //   console.log("async", preBuilt);
 
-    const projectTasks = await getProjectTasks();
-    console.log("async", projectTasks);
-  }
+  //   const projectTasks = await getProjectTasks();
+  //   console.log("async", projectTasks);
+  // }
 
   return (
-    <StyledForm onSubmit={submitForm}>
+    <StyledForm onSubmit={handleSubmit}>
       <StyledFormHeader>
         <h1 style={{ fontSize: "2rem", margin: 0 }}>{text}</h1>
         <XButton onClick={closeModal}>close X</XButton>
