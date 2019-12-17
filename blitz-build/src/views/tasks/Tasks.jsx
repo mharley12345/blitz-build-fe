@@ -158,18 +158,17 @@ export default function Tasks() {
                 )
               : tasks
             ).map(task => {
-              console.log(task.createdAt);
               if (results.length === 0 && searchTerm.length === 0) {
                 return <Task item={task} key={task.id} />;
               } else if (results.length > 0) {
-                return <div></div>;
+                return <></>
               }
             })}
 
             {results.length > 0 ? (
               results.map(result => <Task item={result} key={result.id}></Task>)
             ) : (
-              <p></p>
+              <></>
             )}
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
