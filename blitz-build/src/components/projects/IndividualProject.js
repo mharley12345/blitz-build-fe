@@ -23,6 +23,7 @@ import { StyledLabel, StyledSelect } from "../../styles/Tasks/taskForm";
 
 const IndividualProject = props => {
   const { templates } = useContext(TemplateContext);
+  const [PreBuiltTemplate, setPreBuiltTemplate] = useState([]);
 
   const { pathname, setPathname } = useContext(PathnameContext);
   const [projectState, setProjectState] = useState({});
@@ -31,7 +32,7 @@ const IndividualProject = props => {
   const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
 
   const [form, setForm] = useState({
-    template_id: 0
+    template_id: null
   });
 
   console.log(form);
@@ -51,6 +52,15 @@ const IndividualProject = props => {
         console.log("get single project: ", res.data);
 
         setProjectState(res.data[0]);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    axiosWithAuth()
+      .get("/90_day")
+      .then(res => {
+        console.log("90 day res", res);
+        // setPreBuiltTemplate()
       })
       .catch(err => {
         console.log(err);
@@ -82,7 +92,6 @@ const IndividualProject = props => {
         console.log(err);
       });
   };
-  // /templates/addTasks/:id(project_id)
 
   //edit modal functions
   const handleEditProjectOpen = e => {
@@ -110,9 +119,14 @@ const IndividualProject = props => {
     <>
       <Global />
       <DisplayFlex>
-        <button onClick={() => addPreBuiltTemplate()}> add template </button>
+        <PreBuiltButton>
+          <button onClick={() => addPreBuiltTemplate()}>
+            {" "}
+            Add 90-Day Template{" "}
+          </button>
+        </PreBuiltButton>
         <form onSubmit={addCustomTemplate}>
-          <StyledLabel>Assign A Template</StyledLabel>
+          <StyledLabel>Assign A Your Own Custom Template</StyledLabel>
           <StyledSelect
             type="number"
             name="template_id"
@@ -129,7 +143,7 @@ const IndividualProject = props => {
               );
             })}
           </StyledSelect>
-          <button type="submit">Add custom template</button>
+          <button type="submit">Add Template</button>
         </form>
       </DisplayFlex>
       <IndividualProjectTitleContainer>
@@ -197,12 +211,13 @@ const IndividualProject = props => {
             </p>
           </div>
           <WeatherContainer>
-          <Weather
-            usage="project"
-            city={`${projectState.city}, ${projectState.state}`}
-            latitude={projectState.latitude}
-            longitude={projectState.longitude}
-          /></WeatherContainer>
+            <Weather
+              usage="project"
+              city={`${projectState.city}, ${projectState.state}`}
+              latitude={projectState.latitude}
+              longitude={projectState.longitude}
+            />
+          </WeatherContainer>
           <p
             style={{
               fontSize: "16px",
@@ -212,9 +227,7 @@ const IndividualProject = props => {
           >
             Your Documents
           </p>
-          <DocumentsContainer>
-            
-          </DocumentsContainer>
+          <DocumentsContainer></DocumentsContainer>
         </Right>
       </Top>
       <TasksContainer>
@@ -257,7 +270,7 @@ const Right = styled.div`
   flex-direction: column;
   min-width: 530px;
   height: 547px;
-  
+
   margin-left: 20px;
 `;
 const IndividualProjectContainer = styled.div`
@@ -287,7 +300,6 @@ const IndividualProjectcontentContainer = styled.div`
   border: 1px solid #dcd9d5;
   border-radius: 3px;
   background: #ffffff;
-  
 `;
 const Contenth2 = styled.h2`
   font-size: 36px;
@@ -315,7 +327,6 @@ const Contentbottom = styled.div`
 const ContentbottomTemplate = styled.div`
   width: 60%;
   display: flex;
-  
 `;
 const EditIcon = styled.div`
   display: flex;
@@ -364,4 +375,8 @@ const PageI = styled.i`
   background-color: #ffffff;
   color: #8a827d;
   text-decoration: none;
+`;
+
+const PreBuiltButton = styled.div`
+  height: 20px;
 `;
