@@ -1,17 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 import Global from "./Global";
 import Nav from "./Nav";
 import Header from "./Header.jsx"
 
+
+
+
+
+
 function Layout({ children, pathname }) {
+
+
+
+
+const LandingPage = (component) => {
+ if(pathname.includes('/landing')) {
+   return (
+     <div></div>
+   )}
+   else {
+     return component
+   }
+ }
+
+
   return (
     <Container>
       <Global />
-      <Nav />  
+      {LandingPage(<Nav />)}  
       <Main>
-      <Header pathname = {pathname}  />
+      {LandingPage( <Header pathname = {pathname} />)} 
         <Content>{children}</Content>
         <Footer>
           <p>2019 © BlitzBuild, Inc. All Rights Reserved.</p>
