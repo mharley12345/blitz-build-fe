@@ -1,10 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import reverseGeocode from "reverse-geocode";
 
-import Sun from "../../styles/icons_weather/sun.png";
+// for dashboard import <Weather usage="dashboard"/>
+// for project page import <Weather usage="project" city={} latitude={} longitude={} />
 
-// css of the weather container in the dashboard
+function DashboardWeather({ weatherData, time, icon, weatherPosition }) {
+  const cityInfo = reverseGeocode.lookup(
+    weatherPosition.latitude,
+    weatherPosition.longitude,
+    "us"
+  );
+  return (
+    // display in dashboard
+    <div>
+      <Title>Weather</Title>
+      <WeatherContainerD>
+        <WeatherLocationInfo>
+          <h2>
+            {cityInfo.city}, {cityInfo.state}
+          </h2>
+          <span>{time}</span>
+        </WeatherLocationInfo>
+
+        <WeatherInfo>
+          <WeatherData>
+            <WeatherTem>
+              {((weatherData.currently.temperature * 9) / 5 + 32).toFixed(0)}
+              <span>&#176;</span>
+            </WeatherTem>
+            <span>{weatherData.currently.summary}</span>
+          </WeatherData>
+          <WeatherIcon>{icon}</WeatherIcon>
+        </WeatherInfo>
+      </WeatherContainerD>
+    </div>
+  );
+}
+
+export default DashboardWeather;
 const WeatherContainerD = styled.div`
   width: 524pxpx;
   height: 384px;
@@ -24,6 +58,7 @@ const WeatherLocationInfo = styled.div`
   width: 428px;
   margin-top: 32px;
   margin-left: 48px;
+  margin-right: 48px;
   border-bottom: 1px solid lightgrey;
   h2 {
     height: 38px;
@@ -32,6 +67,7 @@ const WeatherLocationInfo = styled.div`
   }
   p {
     margin-top: 8px;
+    margin-bottom: 0;
     height: 24px;
     font-size: 24px;
   }
@@ -47,6 +83,7 @@ const WeatherData = styled.div`
   flex-direction: column;
   p {
     margin-top: 32px;
+    margin-bottom: 0;
     font-size: 16px;
     /*500 Gray */
 
@@ -62,44 +99,6 @@ const WeatherIcon = styled.div`
 `;
 const Title = styled.div`
   font-size: 16px;
- 
-color: #8A827D;
+
+  color: #8a827d;
 `;
-const IconImage = styled.img`
-  width: 100px;
-  height: 100px;
-`;
-
-// for dashboard import <Weather usage="dashboard"/>
-// for project page import <Weather usage="project" city={} latitude={} longitude={} />
-
-function DashboardWeather({ weatherData, time, icon, weatherPosition }) {
-  const cityInfo = reverseGeocode.lookup(weatherPosition.latitude, weatherPosition.longitude, "us");
-  return (
-    // display in dashboard
-    <div>
-      <Title>Weather</Title>
-      <WeatherContainerD>
-        <WeatherLocationInfo>
-          <h2>{cityInfo.city}, {cityInfo.state}</h2>
-          <p>{time}</p>
-        </WeatherLocationInfo>
-
-        <WeatherInfo>
-          <WeatherData>
-            <WeatherTem>
-              {((weatherData.currently.temperature * 9) / 5 + 32).toFixed(0)}
-              <span>&#176;</span>
-            </WeatherTem>
-            <p>{weatherData.currently.summary}</p>
-          </WeatherData>
-          <WeatherIcon>
-            <img src={Sun} alt="sun" />
-          </WeatherIcon>
-        </WeatherInfo>
-      </WeatherContainerD>
-    </div>
-  );
-}
-
-export default DashboardWeather;

@@ -1,148 +1,88 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
-import axios from "axios";
+
 import { ExportToCsv } from "export-to-csv";
 import Global from "../../styles/Global";
+import DelayLogContext from "../../contexts/delayLog/DelayLogContext";
+import DelayLogButton from "./DelayLogButton";
+import searchTermContext from "../../contexts/searching/searchTerm";
 
-import DelayLogCard from "./DelayLogCard";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import TableFooter from "@material-ui/core/TableFooter";
+import TablePagination from "@material-ui/core/TablePagination";
+// pages bar function from global
+import TablePaginationActions from "../global/TablePaginationActions";
 
-
-const DelayLogContent = styled.div`
-  position: absolute;
-
-  width: 1144px;
-  
-  left: 296px;
-  top: 96px;
-
-  /* 200 Gray */
-
-  background: #ebe9e7;
-
-  :nth-child(odd) {
-    background: #fbfaf9;
+const StyledTableCell = withStyles(theme => ({
+  head: {
+    padding: "8px 32px",
+    height: 35,
+    backgroundColor: "#E9E9E9",
+    color: theme.palette.common.black
+  },
+  body: {
+    padding: "8px 32px",
+    fontSize: 16,
+    height: 104
   }
-`;
-const DelayLogButton = styled.div`
-  position: absolute;
-  width: 151px;
-  height: 48px;
-  left: 1257px;
-  top: 24px;
-  border: 1px solid #dd6b20;
-  box-sizing: border-box;
-  border-radius: 3px;
-  padding-top: 14px;
-  padding-left: 30px;
-  font-size: 16px;
-  font-family: Roboto;
-`;
-const DelayLogListText = styled.p`
-  width: 161px;
-  height: 19px;
-  margin-top: 32px;
-  margin-left: 32px;
-  font-family: Roboto;
-  font-size: 16px;
+}))(TableCell);
 
-  /* 400 Gray */
-
-  color: #8a827d;
-`;
-const DelayLogTableTitles = styled.p`
-  width: 1080px;
-  height: 51px;
-  margin-top: 8px;
-  margin-left: 32px;
-
-  /* 000 White */
-
-  background: #ffffff;
-  border-radius: 3px;
-  display: flex;
-`;
-const TitlesTask = styled.p`
-  width: 223px;
-  height: 19px;
-  padding-top: 16px;
-  margin-left: 32px;
-  font-family: Roboto;
-
-  font-size: 16px;
-
-  /* 600 Orange */
-
-  color: #dd6b20;
-`;
-const TitlesReason = styled.p`
-  width: 500px;
-  height: 19px;
-  padding-top: 16px;
-  margin-left: 50px;
-  font-family: Roboto;
-
-  font-size: 16px;
-
-  /* 600 Orange */
-
-  color: #dd6b20;
-`;
-const TitlesCreatedTime = styled.p`
-  width: 210px;
-  height: 19px;
-  padding-top: 16px;
-  margin-left: 50px;
-  font-family: Roboto;
-
-  font-size: 16px;
-
-  /* 600 Orange */
-
-  color: #dd6b20;
-`;
-const DelayLogListContainer = styled.div`
-  width: 1080px;
-  height: 100px;
-  margin-left: 32px;
-
-  /* 100 Gray */
-
-  background: #fbfaf9;
-  border-radius: 3px;
-
-  :nth-child(even) {
-    background: #ffffff;
+const StyledTableRow = withStyles(theme => ({
+  root: {
+    "&:nth-of-type(even)": {
+      background: "#F5F5F5"
+    },
+    marginBottom: "32px"
   }
-`;
-const DelayLogGray = styled.div`
-  width: 1080px;
-  height: 100px;
-  margin-left: 32px;
+}))(TableRow);
 
-  /* 100 Gray */
 
-  background: #fbfaf9;
-  border-radius: 3px;
-`;
+
+const useStyles = makeStyles({
+  root: {
+    border: "1px solid #DCD9D5"
+  },
+  table: {
+    minWidth: "1080px"
+  },
+  tableHover: {
+    "&:hover": {
+      border: "3px solid orange"
+    }
+  }
+});
+
 function DelayLog() {
-  const [delayLogs, setDelayLogs] = useState([]);
-  useEffect(() => {
-    axios
-      .get(
-        ` https://blitz-build-production.herokuapp.com/delay_logs/1`,
-        { headers: { token: localStorage.getItem("token") } }
-      )
-      .then(res => {
-      
-       let logs = res.data 
-        setDelayLogs(logs);
-         console.log(delayLogs)
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  },[]);
-  console.log(delayLogs.delay_logs)
+  const { delayLogs } = useContext(DelayLogContext);
+  const classes = useStyles();
+  const { searchTerm } = useContext(searchTermContext);
+  const delayLogSearchInput = searchTerm.toLowerCase("");
+const [page, setPage] = React.useState(0);
+const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+const handleChangePage = (event, newPage) => {
+  setPage(newPage);
+};
+
+const handleChangeRowsPerPage = event => {
+  setRowsPerPage(parseInt(event.target.value, 10));
+  setPage(0);
+};
+  //console.log(delayLogs)
+  //return all delayLogs or filtered delayLogs
+  const results = delayLogs.filter(
+    delayLog =>
+      delayLog.task_name.toLowerCase().includes(delayLogSearchInput) ||
+      delayLog.reason.toLowerCase().includes(delayLogSearchInput)
+  );
+  
+
   function handleExportCSV() {
     const options = {
       fieldSeparator: ",",
@@ -158,41 +98,117 @@ function DelayLog() {
     };
     const csvExporter = new ExportToCsv(options);
 
-    csvExporter.generateCsv(delayLogs);
-    
+    csvExporter.generateCsv(results);
   }
 
-  function getDelayLogs() {
-    if (delayLogs.length === 0) {
-      return <DelayLogGray>You do not have DelayLog</DelayLogGray>;
-    } else {
-      return delayLogs.delay_logs.map((data) => {
-        return (
-          <DelayLogListContainer>
-           
-            <DelayLogCard data={data} />
-          </DelayLogListContainer>
-        );
-      });
-    }
-  }
+
+const emptyRows =
+  rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
+  
+  console.log("rows in delayLogs table", results);
   return (
     <div>
       <Global />
       <div>
-        <DelayLogButton onClick={handleExportCSV}>Export to CSV</DelayLogButton>
+        <DelayLogButtons onClick={handleExportCSV}>
+          Export to CSV
+        </DelayLogButtons>
       </div>
-      <DelayLogContent>
-        <DelayLogListText>Your DelayLog List</DelayLogListText>
-        <DelayLogTableTitles>
-          <TitlesTask>Task</TitlesTask>
-          <TitlesReason>Reason for Delay</TitlesReason>
-          <TitlesCreatedTime>Created</TitlesCreatedTime>
-        </DelayLogTableTitles>
-        {getDelayLogs()}
-      </DelayLogContent>
+      <p style={{ color: "#817974", paddingBottom: "8px" }}>
+        {" "}
+        Your Delay_Logs List{" "}
+      </p>
+      <Paper className={classes.root}>
+        <Table className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>TASK NAME</StyledTableCell>
+              <StyledTableCell>REASON</StyledTableCell>
+              <StyledTableCell>CREATED</StyledTableCell>
+              <StyledTableCell>UPDATED</StyledTableCell>
+              <StyledTableCell>{"    "}</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {(rowsPerPage > 0
+              ? results.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : results
+            ).map(result => (
+              <StyledTableRow key={result.id}>
+
+                <StyledTableCell style={{ maxWidth: 150 }}>
+
+               
+                  {result.task_name}
+                </StyledTableCell>
+                <StyledTableCell style={{ maxWidth: 300 }}>
+                  {result.reason}
+                </StyledTableCell>
+                <StyledTableCell style={{ maxWidth: 150 }}>
+                  {result.createdAt}
+                </StyledTableCell>
+                <StyledTableCell style={{ maxWidth: 150 }}>
+                  {result.updatedAt}
+                </StyledTableCell>
+                <StyledTableCell style={{ maxWidth: 150 }}>
+                  {<DelayLogButton delayLog={result} />}
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
+
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
+          </TableBody>
+
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                colSpan={3}
+                count={results.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  inputProps: { "aria-label": "rows per page" },
+                  native: false
+                }}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
+            </TableRow>
+          </TableFooter>
+        </Table>
+      </Paper>
     </div>
   );
 }
 
 export default DelayLog;
+
+
+const DelayLogButtons = styled.div`
+  position: absolute;
+  width: 174px;
+  height: 48px;
+  right: 32px;
+  top: 24px;
+  border: 1px solid;
+  box-sizing: border-box;
+  border-radius: 3px;
+  padding-top:8px;
+  padding-left: 30px;
+  font-size: 19px;
+  color: #8a827d;
+  cursor: pointer;
+  &:hover {
+    color: #dd6b20;
+  }
+`;
+

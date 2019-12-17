@@ -4,56 +4,68 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 //context
 import TaskContext from "./TaskContext";
-
 export default function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
-
+  const [TaskModalStatus, setTaskModalStatus] = useState(false);
+  const [ projectTasks, setProjectTasks ] = useState([])
   useEffect(() => {
-  //   axiosWithAuth()
-  //     .get(`/tasks`)
-  //     .then(res => {
-  //       console.log("get tasks", res);
-  //       setTasks(res.data);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-
-    localStorage.setItem("project_id",1)
-    axiosWithAuth()
     
-      .get(`/projects/tasks/byProject/1`)
+    getTasks();
+  }, []);
+
+  const getTasks = () => {
+    const user_id = localStorage.getItem("user_id");
+    axiosWithAuth()
+      .get(`/projects/tasks/${user_id}`)
       .then(res => {
-        console.log("get tasks", res);
-        setTasks(res.data);
+        console.log("get tasks", res.data.tasks);
+        setTasks(res.data.tasks);
       })
       .catch(err => {
         console.log(err);
       });
-    }, []);
+    }
+
+
+  const getProjectTasks = (projectID) => {
+    
+    axiosWithAuth()
+    .get(`projects/tasks/byProject/${projectID}`)
+    .then(res => {
+      setProjectTasks(res.data);
+     
+    })
+    .catch(err => {
+      console.log(err);
+    });
+     }
 
   const addTask = newTask => {
     console.log("new task", newTask);
-
+    
     const task = {
       due_date: newTask.due_date,
       task_name: newTask.task_name,
       task_description: newTask.task_description,
-      project_id: newTask.project_id
-    }
-    console.log('task const from addTask', task)
+      project_id: newTask.project_id,
+      template_id: newTask.template_id
+    };
+    console.log("task const from addTask", task);
     axiosWithAuth()
       .post(`/projects/tasks`, task)
       .then(res => {
         console.log("from addtask in taskProvider", res);
-        newTask.id = res.data[0];
+        newTask.id = res.data.taskId[0];
         setTasks([...tasks, newTask]);
+        getTasks();
+        
       })
       .catch(err => console.log(err));
     console.log(newTask);
   };
 
   const deleteTask = deletedTask => {
+    
     axiosWithAuth()
       .delete(`/projects/tasks/${deletedTask.id}`)
       .then(res => {
@@ -63,11 +75,14 @@ export default function TaskProvider({ children }) {
     const newTasks = tasks.filter(task => {
       return task.id != deletedTask.id;
     });
-    setTasks([...newTasks]);
+    setTasks([...newTasks]); 
+    // getTasks();
+   
+    
   };
 
-  const editTask = (editedTask) => {
-    console.log(editedTask)
+  const editTask = editedTask => {
+    console.log(editedTask);
     const dbTask = {
       task_name: editedTask.task_name,
       task_description: editedTask.task_description,
@@ -89,12 +104,14 @@ export default function TaskProvider({ children }) {
         return task;
       }
     });
-    console.log('from editTask newTasks', newTasks)
+    console.log("from editTask newTasks", newTasks);
     setTasks([...newTasks]);
   };
   return (
-    <TaskContext.Provider value={{ tasks, addTask, deleteTask, editTask }}>
-      {children}
-    </TaskContext.Provider>
+    <div>
+      <TaskContext.Provider value={{getTasks, tasks, setTasks, addTask, deleteTask, editTask, TaskModalStatus, setTaskModalStatus, projectTasks, setProjectTasks, getProjectTasks }}>
+        {children}
+      </TaskContext.Provider>
+    </div>
   );
 }

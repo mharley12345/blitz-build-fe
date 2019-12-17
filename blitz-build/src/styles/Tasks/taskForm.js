@@ -22,7 +22,17 @@ export const StyledInput = styled.input`
   border-color: ${props => (props.error ? "red" : "black")};
   border-radius: 3px;
 `;
-
+export const StyledTextAreaInput = styled.textarea`
+  width: 75%;
+  margin: 0;
+  font-size: 14px;
+  padding: 6px 8px;
+  background: #fbfaf9;
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${props => (props.error ? "red" : "black")};
+  border-radius: 3px;
+`;
 export const StyledSelect = styled.select`
   width: 77%;
   font-size: 14px;

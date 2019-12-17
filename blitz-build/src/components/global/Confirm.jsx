@@ -42,7 +42,7 @@ export default function Confirm({ closeModal, text, deleteFunction, deleteItem }
     return (
         <ConfirmStyle>
             <div style={{textAlign: 'right', height: '50px'}}>
-                <XButton onClick={ closeModal }>X</XButton>
+                <XButton onClick={ closeModal }>close X</XButton>
             </div>
 
             <H1 style={{fontSize: '30px', fontWeight: 600}}>Delete {text}</H1>

@@ -1,38 +1,44 @@
-import React, { useState, useContext } from 'react'
-import styled from 'styled-components'
-import  Search from '../styles/Search/Search.png'
-import TasksContext from '../contexts/tasks/TaskContext'
-import Modal from '../components/global/Modal'
-import TaskForm from '../components/tasks/TaskForm'
-import { NavLink } from 'react-router-dom'
-import OpenContext from '../contexts/projects/OpenContext'
-import AddOrEditProject from "../components/modal/AddOrEditProject";
-const HeaderContainer = styled.div`
+import React, { useState, useContext } from "react";
+import styled from "styled-components";
+import Search from "../styles/Search/Search.png";
+import Uploader from "../components/documents/Uploader";
+import OpenUploaderContext from '../contexts/documents/OpenUploaderContext'
 
+import TasksContext from "../contexts/tasks/TaskContext";
+import Modal from "../components/global/Modal";
+import TaskForm from "../components/tasks/TaskForm";
+import { NavLink, Link, Redirect } from "react-router-dom";
+import OpenContext from "../contexts/projects/OpenContext";
+import OpenTemplateContext from "../contexts/OpenTemplateContext";
+// import AddProject from  '../components/modal/AddProject'
+import searchTermContext from "../contexts/searching/searchTerm";
+import AddProject from "../components/modal/AddProject";
+import TemplateContext from "../contexts/templates/TemplateContext";
+import TemplateTaskForm from "../components/templates/TemplateTaskForm";
+import TaskContext from '../contexts/tasks/TaskContext'
+const HeaderContainer = styled.div`
   background: #fff;
   width: 100%;
   height: 96px;
+  border-bottom: 2px solid #E9E9E9
   display: flex;
   justify-content: space-between;
   position: sticky;
   top: 0px;
-
 `;
 
-const SearchContainer= styled.div`
+const SearchContainer = styled.div`
   margin: 24px 32px;
   width: 464px;
-
-`
-const ButtonContainer=styled.div`
-display: flex;
-margin-top: 24px;
-margin-bottom: 24px;
-margin-right: 25px;
-width: 400px;
-justify-content: center;
-
-`
+`;
+const ButtonContainer = styled.div`
+  display: flex;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  margin-right: 25px;
+  width: 400px;
+  justify-content: center;
+`;
 
 const ButtonDocument = styled.div`
 display: flex;
@@ -49,27 +55,60 @@ border: 1px solid #8A827D
 }
   
 }
-`
+`;
 const ButtonDocumentCheck = {
-  display: 'flex',
-  borderRadius: '3px',
-   width: '174px',
-   height: '48px',
-   justifyContent: 'center',
-   alignItems: 'center',
-   
-  }
+  display: "flex",
+  borderRadius: "3px",
+  width: "174px",
+  height: "48px",
+  justifyContent: "center",
+  alignItems: "center"
+};
+const ButtonTemplateCheck = {
+  display: "flex",
+  borderRadius: "3px",
+  width: "174px",
+  height: "48px",
+  justifyContent: "center",
+  alignItems: "center",
+  marginLeft: "160px"
+};
 const SoloDocument = {
-  display: 'flex',
-  borderRadius: '3px',
-   width: '174px',
-   height: '48px',
-   justifyContent: 'center',
-   alignItems: 'center',
-  marginLeft: '160px',
- 
+  display: "flex",
+  borderRadius: "3px",
+  width: "174px",
+  height: "48px",
+  justifyContent: "center",
+  alignItems: "center",
+  marginLeft: "160px"
+};
+
+const SoloTask = {
+  display: "flex",
+  borderRadius: "3px",
+  width: "151px",
+  height: "48px",
+  justifyContent: "center",
+  alignItems: "center",
+  marginLeft: "160px"
+};
+const ButtonProject = styled.div`
+display: flex;
+border-radius: 3px;
+border: 1px solid #8A827D
+ width: 151px;
+ height: 48px;
+ justify-content: center;
+ align-items: center;
+ margin-left: 10px;
+ :hover {
+  border: 1px solid #DD6B20 ;
+  color: #DD6B20;
+  cursor: pointer;
+} 
 }
-const ButtonProject = styled.div `
+`;
+const ButtonTemplate = styled.div`
 display: flex;
 border-radius: 3px;
 border: 1px solid #8A827D
@@ -84,7 +123,7 @@ border: 1px solid #8A827D
   cursor: pointer;
 }
 }
-`
+`;
 const ButtonTask = styled.div`
 display: flex;
 border-radius: 3px;
@@ -100,57 +139,87 @@ border: 1px solid #8A827D
   cursor: pointer;
 }
 
-`
+`;
 
 const ButtonProjectCheck = {
-display: 'flex',
-borderRadius: '3px',
- width: '151px',
- height: '48px',
- justifyContent: 'center',
- alignItems: 'center',
- 
-}
+  display: "flex",
+  borderRadius: "3px",
+  width: "151px",
+  height: "48px",
+  justifyContent: "center",
+  alignItems: "center"
+};
 
-const ButtonI =styled.i`
-margin-top: 3px;
- font-size: 21px;
- color: #8A827D
- 
-
-`
+const ButtonI = styled.i`
+  margin-top: 3px;
+  font-size: 21px;
+  color: #8a827d;
+`;
 const ButtonText = styled.p`
-font-size: 19px
-margin-left: 10px;
-color: #8A827D
-
-`
-const HideButton = { 
-display: 'none',
-
-}
+  font-size: 19px;
+  margin-left: 10px;
+  color: #8a827d;
+  margin-bottom: 0rem;
+`;
+const HideButton = {
+  display: "none"
+};
 
 const HoverStyle = {
-  color: '#DD6B20'
-}
+  color: "#DD6B20"
+};
 
+const SearchInput = styled.input`
+  height: 48px;
+  width: 100%;
+  padding-left: 30px;
+  border: 1px solid #dcd9d5;
+  border-radius: 3px;
+  background: #fafafa;
+  ::placeholder {
+    font-size: 16px;
+    color: #b0b0b0;
+  }
+`;
+const SearchTotal = styled.div`
+position: relative;
+ 
+`
+const ButtonSearch = styled.i`
+position: absolute;
+right: 15px;
+top: 2px;
+border:none;
+font-size: 30px;
+color: #8a827d;
+text-align:center;
 
+z-index: 2;
+width: 20px;
+hieght: 20px;
 
+`
 
-
-
-
-function Header({pathname}) {
-  
-  const [ TaskHover, setTaskHover ] = useState(false)
-  const [ ProjectHover, setProjectHover ] = useState(false)
-  const [ DocumentHover, setDocumentHover ] = useState(false)
-
+function Header({ pathname }) {
+ 
+  const { searchTerm, setSearchTerm, searchCatch, setSearchCatch  } = useContext(searchTermContext);
+  const [TaskHover, setTaskHover] = useState(false);
+  const [ProjectHover, setProjectHover] = useState(false);
+  const [DocumentHover, setDocumentHover] = useState(false);
+  const [TemplateHover, setTemplateHover] = useState(false);
+  const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext);
   const { addTask } = useContext(TasksContext);
-  const { open, setOpen } = useContext(OpenContext)
-  const [TaskModalStatus, setTaskModalStatus] = useState(false);
+  const { addTemplateTask } = useContext(TemplateContext);
+  const { open, setOpen } = useContext(OpenContext);
+  const {TaskModalStatus, setTaskModalStatus} = useContext(TaskContext);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
+  const {openUploader,setUploaderOpen}= useContext(OpenUploaderContext)
+  const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
+
+  console.log("this is the handlechange", searchCatch)
+  console.log("this is the handlesubmit", searchTerm)
+  // const { addTemplate } = useContext(TemplateContext)
 
   const handleTaskModalOpen = () => {
     setTaskModalStatus(true);
@@ -158,136 +227,271 @@ function Header({pathname}) {
   const handleTaskModalClose = () => {
     setTaskModalStatus(false);
   };
-
-  const HideTheProjectButton = (pathname) => {
+  const handleTemplateTaskModalOpen = () => {
+    setTemplateTaskModalStatus(true);
   
- if(pathname === '/projects' || pathname === '/dashboard' || pathname === '/tasks') {
-     return ButtonProjectCheck
- }
- else {
-     return HideButton
- }  };
- const HideTheDocumentButton = (pathname) => {
-  
-  if( pathname === '/dashboard' || pathname === '/projects' ) {
-      return ButtonDocumentCheck
-  }
-  else if(pathname === '/documents') {
+  };
+  const handleTemplateTaskModalClose = () => {
+    setTemplateTaskModalStatus(false);
+  };
+  const handleDocumentModalOpen = () => {
+    setDocumentModalStatus(true);
+  };
+  const handleDocumentModalClose = () => {
+    setDocumentModalStatus(false);
+  };
 
-    return SoloDocument
-
+  const id = [];
+  for (var i = 1; i <= 100; i++) {
+    id.push(i);
   }
-  else {
-      return HideButton
-  }  
-}
-const HideTheTaskButton = (pathname) => {
-  
-  if( pathname === '/tasks' ){
-      return ButtonProjectCheck
-  }
-  
-  else {
-      return HideButton
-  }  
-}
 
-const HoverTaskStyleFunction = () => {
-  if (TaskHover === true || TaskModalStatus === true) {
-    return HoverStyle
-  }
-}
-const HoverProjectStyleFunction = () => {
-  if (ProjectHover === true || open === true) {
-    return HoverStyle
-  }
-}
-const HoverDocumentStyleFunction = () => {
-  if (DocumentHover === true || DocumentModalStatus === true) {
-    return HoverStyle
-  }
-}
+  const HideTheProjectButton = pathname => {
+    if (
+      pathname === "/documents" ||
+      pathname === "/delay-log" ||
+      pathname === `/help` ||
+      pathname === "/log-out" ||
+      pathname === "/90_Day" ||
+      pathname.includes("templates") ||
+      pathname === '/documents/add' ||
+      pathname.includes('/mycalendar') ||
+      pathname === ('/')
+    ) {
+      return HideButton;
+    } else {
+      return ButtonProjectCheck;
+    }
+  };
+  const HideTheDocumentButton = pathname => {
+    if (
+      pathname === "/delay-log" ||
+      pathname === "/tasks" ||
+      pathname === "/90_Day" ||
+      pathname.includes("templates") ||
+      pathname === "/documents/add" ||
+      pathname.includes("/mycalendar") ||
+      pathname === "/"
+    ) {
+      return HideButton;
+    } else if (pathname === "/documents") {
+      return SoloDocument;
+    } else {
+      return ButtonDocumentCheck;
+    }
+  };
+  const HideTheTaskButton = pathname => {
+    if (pathname === "/tasks") {
+      return ButtonProjectCheck;
+    } else {
+      return HideButton;
+    }
+  };
 
-const OpenToggle = () => {
-  if(open !== false) {
-    setOpen(false)
+  const HideTheTemplateButton = pathname => {
+    if (pathname === "/templates") {
+      return ButtonTemplateCheck;
+    } else {
+      return HideButton;
+    }
+  };
+  const HideTheTemplateTaskButton = pathname => {
+    if (
+      pathname.includes("project") ||
+      pathname === "/dashboard" ||
+      pathname === "/tasks" ||
+      pathname === "/projects" ||
+      pathname === "/documents" ||
+      pathname === "/templates" ||
+      pathname === "/delay-log" ||
+      pathname === `/help` ||
+      pathname === "/log-out" ||
+      pathname === "/documents/add" ||
+      pathname.includes("/mycalendar") ||
+      pathname === "/"
+    ) {
+      return HideButton;
+    } else {
+      return SoloTask;
+    }
+  };
+  const HoverTaskStyleFunction = () => {
+    if (TaskHover === true || TaskModalStatus === true) {
+      return HoverStyle;
+    }
+  };
+  const HoverProjectStyleFunction = () => {
+    if (ProjectHover === true || open === true) {
+      return HoverStyle;
+    }
+  };
+  const HoverDocumentStyleFunction = () => {
+    if (DocumentHover === true || DocumentModalStatus === true) {
+      return HoverStyle;
+    }
+  };
+  const HoverTemplateStyleFunction = () => {
+    if (TemplateHover === true || openTemplate === true) {
+      return HoverStyle;
+    }
+  };
+
+  const OpenToggler = () => {
+    if (open !== false) {
+      setOpen(false);
+    } else if (open === false) {
+      setOpen(true);
+    }
+  };
+  const OpenTemplateToggler = () => {
+    if (openTemplate !== false) {
+      setOpenTemplate(false);
+    } else if (openTemplate === false) {
+      setOpenTemplate(true);
+    }
+  };
+  const OpenUploaderContextToggler = () =>{
+    if (openUploader !== false){
+      setUploaderOpen(false);
+      } else if (openUploader === false) {
+        setOpenTemplate(true);
+      }
   }
-  else if (open === false) {
-    setOpen(true)
-  }
-}
+  //// search function
 
-    return (
-      <HeaderContainer>
-        <SearchContainer>
-          {/* <img  src={Search} alt="Blitz-Build-Search"/> */}
-        </SearchContainer>
-        <ButtonContainer>
-          <ButtonDocument
-            onMouseEnter={() => setDocumentHover(true)}
-            onMouseLeave={() => setDocumentHover(false)}
-            style={HideTheDocumentButton(pathname)}
-          >
-            {" "}
-            <ButtonI
-              className="ion-ios-add-circle"
-              style={HoverDocumentStyleFunction()}
-            />{" "}
-            <ButtonText style={HoverDocumentStyleFunction()}>
-              New Document
-            </ButtonText>
-          </ButtonDocument>
+ 
 
-          <ButtonTask
-            onMouseEnter={() => setTaskHover(true)}
-            onMouseLeave={() => setTaskHover(false)}
-            style={HideTheTaskButton(pathname)}
-            onClick={handleTaskModalOpen}
-          >
-            {" "}
-            <ButtonI
-              className="ion-ios-add-circle"
-              style={HoverTaskStyleFunction()}
-            />
-            <ButtonText style={HoverTaskStyleFunction()}>New Task</ButtonText>
-          </ButtonTask>
+  const handleChange = e => {
+    setSearchTerm(e.target.value);
+    // console.log("search term", searchTerm);
+  };
 
-          <ButtonProject
-            onMouseEnter={() => setProjectHover(true)}
-            onMouseLeave={() => setProjectHover(false)}
-            style={HideTheProjectButton(pathname)}
-            onClick={OpenToggle}
-          >
-            {" "}
-            <ButtonI
-              className="ion-ios-add-circle"
-              style={HoverProjectStyleFunction()}
-            />
-            <ButtonText style={HoverProjectStyleFunction()}>
-              New Project
-            </ButtonText>
-          </ButtonProject>
 
-          <Modal
-            visible={TaskModalStatus}
-            dismiss={handleTaskModalClose}
-            client={"50%"}
-            component={
-              <TaskForm
-                closeModal={handleTaskModalClose}
-                handleFunction={addTask}
-                text={"Add Task"}
-              />
-            }
+ 
+
+  return (
+    
+    <HeaderContainer>
+      <SearchContainer>
+        <Link to= '/tasks'>
+          <SearchTotal>
+          <SearchInput
+            type="text"
+            placeholder="Search Tasks" 
+            value={searchTerm}
+            onChange={handleChange}
           />
-        </ButtonContainer>
-        <AddOrEditProject/>
-      </HeaderContainer>
-    );
+         <Link to= '/tasks'> <ButtonSearch className="ion-ios-search" /></Link>
+       </SearchTotal>
+        </Link>
+      </SearchContainer>
+      <ButtonContainer>
+      <ButtonDocument
+          onMouseEnter={() => setDocumentHover(true)}
+          onMouseLeave={() => setDocumentHover(false)}
+          style={HideTheDocumentButton(pathname)}
+          onClick={OpenUploaderContext}
+        >
+          {" "}
+        
+          <ButtonI
+            className="ion-ios-add-circle"
+            style={HoverDocumentStyleFunction()}
+            onClick={handleDocumentModalClose}
+          />{" "}
+          <ButtonText style={HoverDocumentStyleFunction()}>
+            Add Document
+          </ButtonText>
+        </ButtonDocument>
+
+        <ButtonTask
+          onMouseEnter={() => setTaskHover(true)}
+          onMouseLeave={() => setTaskHover(false)}
+          style={HideTheTaskButton(pathname)}
+          onClick={handleTaskModalOpen}
+        >
+          {" "}
+          <ButtonI
+            className="ion-ios-add-circle"
+            style={HoverTaskStyleFunction()}
+          />
+          <ButtonText style={HoverTaskStyleFunction()}>New Task</ButtonText>
+        </ButtonTask>
+
+        <ButtonTask
+          onMouseEnter={() => setTaskHover(true)}
+          onMouseLeave={() => setTaskHover(false)}
+          style={HideTheTemplateTaskButton(pathname)}
+          onClick={handleTemplateTaskModalOpen}
+        >
+          {" "}
+          <ButtonI
+            className="ion-ios-add-circle"
+            style={HoverTaskStyleFunction()}
+          />
+          <ButtonText style={HoverTaskStyleFunction()}>New Task</ButtonText>
+        </ButtonTask>
+
+        <ButtonProject
+          onMouseEnter={() => setProjectHover(true)}
+          onMouseLeave={() => setProjectHover(false)}
+          style={HideTheProjectButton(pathname)}
+          onClick={OpenToggler}
+        >
+          {" "}
+          <ButtonI
+            className="ion-ios-add-circle"
+            style={HoverProjectStyleFunction()}
+          />
+          <ButtonText style={HoverProjectStyleFunction()}>
+            New Project
+          </ButtonText>
+        </ButtonProject>
+        <ButtonTemplate
+          onMouseEnter={() => setTemplateHover(true)}
+          onMouseLeave={() => setTemplateHover(false)}
+          style={HideTheTemplateButton(pathname)}
+          onClick={OpenTemplateToggler}
+        >
+          {" "}
+          <ButtonI
+            className="ion-ios-add-circle"
+            style={HoverTemplateStyleFunction()}
+          />
+          <ButtonText style={HoverTemplateStyleFunction()}>
+            New Template
+          </ButtonText>
+        </ButtonTemplate>
+
+        <Modal
+          visible={TaskModalStatus}
+          dismiss={handleTaskModalClose}
+          client={"50%"}
+          component={
+            <TaskForm
+              closeModal={handleTaskModalClose}
+              handleFunction={addTask}
+              text={"Add Task"}
+            />
+          }
+        />
+
+        <Modal
+          visible={TemplateTaskModalStatus}
+          dismiss={handleTemplateTaskModalClose}
+          client={"50%"}
+          component={
+            <TemplateTaskForm
+              closeModal={handleTemplateTaskModalClose}
+              handleFunction={addTemplateTask}
+              text={"Add Task"}
+            />
+          }
+        />
+      </ButtonContainer>
+      <AddProject />
+    </HeaderContainer>
+  );
 }
 
-export default Header
-
-
-
-
+export default Header;

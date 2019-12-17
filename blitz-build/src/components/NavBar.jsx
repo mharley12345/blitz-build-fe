@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import media from '../styles/sizes'
@@ -6,7 +6,7 @@ import Logo from '../styles/Logo/Logo.png'
 import Avatar from '../styles/Avatar/Avatar.png'
 import UserContext from '../contexts/UserContext'
 import userContext from '../contexts/UserContext'
-
+import TaskContext from '../contexts/tasks/TaskContext'
 
 const NavBarContainer = styled.div`
    margin-top: 20px;
@@ -18,12 +18,12 @@ const NavBarContainer = styled.div`
     height: 1574px;
     left: 0;
     top: 0;
-    background: #3F3A36;
+    background: #3B3B3B;
     
 `;
     const NavBarUl = styled.ul`
         
-        background: #3F3A36;
+        background: #3B3B3B;
         display: flex;
         margin-block-start: 0;
         margin-block-end: 0;
@@ -54,7 +54,7 @@ const NavBarContainer = styled.div`
             border-radius: 5px;
             width: 85%;
             margin: 5px;
-          :nth-child(8) {
+          :nth-child(9) {
             border-top: 1px solid white;
             border-radius: 0px;
             margin-top: 40px;
@@ -91,7 +91,7 @@ const NavBarContainer = styled.div`
        }   
 
        const HoverStyles = {
-           backgroundColor: '#4f4843',
+           backgroundColor: '#4a4a4a',
           
            
            
@@ -99,6 +99,7 @@ const NavBarContainer = styled.div`
             const NavBarP = styled.p`
                 width: 80px;
                 margin-left: 15px;
+                margin-bottom: 0rem;
            
             `;
              const NavBarI = styled.i`
@@ -113,10 +114,11 @@ const NavBarContainer = styled.div`
       `
       const UserProfile = styled.div`
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      
-    
+      flex-direction: row;
+      justify-content: space-between;
+     
+      align-items: center;
+      width: 58%;
       `
       const LogoAvatarContainer = styled.div`
       height: 160px
@@ -137,11 +139,26 @@ const NavBarContainer = styled.div`
        font-size: 14px
        color: #B5AFAB;
        `
-           
+       const UserImg = styled.div`
+        height: 48px;
+        width: 48px;
+        border-radius: 100px;
+        border: 1px solid #FFFFFF;
+       `
+       const imgStyle = {
+         maxWidth: '100%',
+         maxHeight: '100%',
+         borderRadius: '100px'
+       }
+       const userInfoContainer = styled.div`
+        
+       `
+     
 function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, setPathname }) {
    const [ hoverIndex, setHoverIndex ] = useState(0)
    const [navOpen, setNavOpen ] = useState(false)
    const {userInfo, setUserInfo} = useContext(UserContext)
+   const {getTasks, tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks} = useContext(TaskContext);
 //    console.log(navLinks, background, hoverBackground, linkColor, logo)
 
    return (
@@ -153,10 +170,11 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
            <img  src={Logo} alt="Blitz-Build-Logo"/>
            </LogoContainer>
            <UserProfile>
-               {/* {userInfo.map(user => 
-             <UserName> {user.name}</UserName>
-             )}   */}
+             <UserImg> <img src={userInfo.picture} style = {imgStyle}/></UserImg>
+             <userInfoContainer>
+             <UserName> {userInfo.name}</UserName>
              <UserTitle>  Super Intendent  </UserTitle>
+             </userInfoContainer>
            </UserProfile>
         </LogoAvatarContainer>
   
@@ -181,7 +199,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
                        style={NavLinkHover(hoverIndex, index)}
                        >
                            
-                          <NavLink to={link.path}  activeStyle={{ backgroundColor: '#27221F',
+                          <NavLink to={link.path}  activeStyle={{ backgroundColor: '#232323',
            borderRadius: '3px', 
            borderLeft: ' 4px solid #DD6B20', marginLeft: '-4px'
   }} style = {NavBarLink}  > 
