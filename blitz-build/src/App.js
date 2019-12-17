@@ -66,7 +66,7 @@ function App() {
 const LandingPage = (component) => {
   if(pathname.includes('/landing')) {
     return (
-      <div></div>
+      null
     )}
     else {
       return component
