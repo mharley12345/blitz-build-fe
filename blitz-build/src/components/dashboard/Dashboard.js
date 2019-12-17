@@ -8,7 +8,7 @@ function Dashboard() {
     <Container> 
     <WeatherAndFeedContainer> 
       
-      <ActivityFeed numberOfTasks = {5} />
+      <ActivityFeed numberOfTasks = {3} />
       <Weather usage="dashboard" />
      
     </WeatherAndFeedContainer>
@@ -21,6 +21,7 @@ function Dashboard() {
 export default Dashboard;
 
 const Container = styled.div`
+
 `
 
 const WeatherAndFeedContainer = styled.div`

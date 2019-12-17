@@ -8,16 +8,20 @@ export default function ProjectsProvider({ children }) {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axiosWithAuth()
-      .get("/projects")
-      .then(res => {
-        console.log("get projects", res.data);
-        setProjects(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    getProject();
   }, []);
+
+const getProject = () => {
+   axiosWithAuth()
+     .get("/projects")
+     .then(res => {
+       console.log("get projects", res.data);
+       setProjects(res.data);
+     })
+     .catch(err => {
+       console.log(err);
+     });
+};
 
   const addProject = newProject => {
     
@@ -27,10 +31,11 @@ export default function ProjectsProvider({ children }) {
       .post(`/projects`, newProject)
       .then(res => {
         console.log("from addProject in projectsProvider", res);
+                getProject();
 
-        setProjects([...projects, res.data.project[0]]);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.response.data.message));
+  
   };
 
   const deleteProject = deleteProject => {
@@ -38,12 +43,14 @@ export default function ProjectsProvider({ children }) {
       .delete(`/projects/${deleteProject.id}`)
       .then(res => {
         console.log(`project with project id:${deleteProject.id} was removed`);
+                        getProject();
+
       })
       .catch(err => console.log(err));
-    const newProjectsList = projects.filter(project => {
-      return project.id !== deleteProject.id;
-    });
-    setProjects(newProjectsList);
+    // const newProjectsList = projects.filter(project => {
+    //   return project.id !== deleteProject.id;
+    // });
+    // setProjects(newProjectsList);
   };
 
   const editProject = (editedProject, editedProjectId) => {
@@ -54,6 +61,7 @@ export default function ProjectsProvider({ children }) {
       .put(`/projects/${editedProjectId}`, editedProject)
       .then(res => {
         console.log("from editProject in projectsProvider", res);
+       
       })
       .catch(err => console.log(err));
     const newProjectsList = projects.map(project => {

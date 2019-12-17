@@ -65,7 +65,7 @@ function DelayLog() {
   const delayLogSearchInput = searchTerm.toLowerCase("");
 const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+const [hover, setHover] = useState(false);
 const handleChangePage = (event, newPage) => {
   setPage(newPage);
 };
@@ -101,6 +101,11 @@ const handleChangeRowsPerPage = event => {
     csvExporter.generateCsv(results);
   }
 
+  const hoverStyle = () => {
+    if(hover === true) {
+      return HoverStyle
+    }
+  }
 
 const emptyRows =
   rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
@@ -109,9 +114,13 @@ const emptyRows =
   return (
     <div>
       <Global />
-      <div>
-        <DelayLogButtons onClick={handleExportCSV}>
-          Export to CSV
+      <div onMouseEnter={()=> setHover(true)} onMouseLeave={()=> setHover(false)} >
+      <ButtonI
+            className="ion-ios-add-circle"
+            style={hoverStyle()}
+          />
+        <DelayLogButtons onClick={handleExportCSV} >
+         Export to CSV
         </DelayLogButtons>
       </div>
       <p style={{ color: "#817974", paddingBottom: "8px" }}>
@@ -161,7 +170,7 @@ const emptyRows =
 
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
+                <TableCell colSpan={5} />
               </TableRow>
             )}
           </TableBody>
@@ -170,7 +179,7 @@ const emptyRows =
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={3}
+                colSpan={5}
                 count={results.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
@@ -195,15 +204,15 @@ export default DelayLog;
 
 const DelayLogButtons = styled.div`
   position: absolute;
-  width: 174px;
+  width: 180px;
   height: 48px;
-  right: 32px;
+  right: 40px;
   top: 24px;
   border: 1px solid;
   box-sizing: border-box;
   border-radius: 3px;
   padding-top:8px;
-  padding-left: 30px;
+  padding-left: 40px;
   font-size: 19px;
   color: #8a827d;
   cursor: pointer;
@@ -211,4 +220,16 @@ const DelayLogButtons = styled.div`
     color: #dd6b20;
   }
 `;
+
+const ButtonI = styled.i`
+  position: absolute;
+  top: 33px;
+  right: 192px
+  font-size: 21px;
+  color: #8a827d;
+`;
+
+const HoverStyle = {
+  color: "#DD6B20"
+}
 

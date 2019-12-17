@@ -27,8 +27,22 @@ function DelayLogButton(delayLog) {
   };
   return (
     <>
-      <button onClick={handleEditOpen}>edit</button>
-      <button onClick={handleDeleteOpen}>delete</button>
+      <div
+        style={{
+          display: "flex",
+          width: "35%",
+          justifyContent: "flex-end"
+        }}
+      >
+        <EditIcon onClick={handleEditOpen}>
+          <ProjectI className="ion-md-create" />
+          <p>Edit</p>
+        </EditIcon>
+        <DeleteIcon onClick={handleDeleteOpen}>
+          <ProjectI className="ion-md-trash" />
+          <p>Delete</p>
+        </DeleteIcon>
+      </div>
 
       <EditDelayReason
         delayReason={delayLog}
@@ -45,3 +59,27 @@ function DelayLogButton(delayLog) {
 }
 
 export default DelayLogButton;
+
+const EditIcon = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  cursor: pointer;
+`;
+const DeleteIcon = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 20px;
+  cursor: pointer;
+`;
+const ProjectI = styled.i`
+  width: 25%;
+  height: 18px;
+  font-size: 1.4rem;
+  background-color: #ffffff;
+  color: #8a827d;
+  text-align: right;
+  text-decoration: none;
+`;

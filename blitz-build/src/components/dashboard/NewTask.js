@@ -65,9 +65,10 @@ function NewTask({ item, children }) {
   return (
     <Container>  
        <NavLink to={`/project/${projectID}`} style = {NavLinkStyle}>
-      <Inner>
+  
      
-      <Address>
+      <InnerContainer>
+      
         
           <TitleText>  Added Task </TitleText>
  <NameText>{item.task_name}  </NameText>
@@ -77,9 +78,9 @@ function NewTask({ item, children }) {
       <AddressText> {TaskAddress} </AddressText>
       <ProjectName>{TaskProjectName} </ProjectName> 
      
-        </Address>
+        </InnerContainer>
        
-       </Inner> 
+     
        </NavLink>
     </Container>
   );
@@ -115,9 +116,10 @@ const Container = styled.div`
   }
 `;
 
-const Address = styled.div`
-width: 90%;
+const InnerContainer = styled.div`
+width: 98%;
 display: flex;
+justify-content: space-around;
 align-items: center;
 cursor: pointer;
 
@@ -131,7 +133,6 @@ cursor: pointer;
 `;
 
 const TitleText = styled.p`
-width: 40%;
 
   font-size: 14px;
   line-height: 16px;
@@ -141,7 +142,7 @@ width: 40%;
 `;
 
 const NameText = styled.p`
-width: 40%;
+
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
@@ -149,8 +150,7 @@ width: 40%;
   margin-bottom: 8px;
 `;
 const AddressText = styled.p`
-width: 40%;
-margin-left: 50px;
+
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
@@ -158,10 +158,9 @@ margin-left: 50px;
   margin-bottom: 8px;
 `;
 const ProjectName = styled.p`
-width: 5%;
+
 display: flex;
 justify-content: end;
-margin-left: 50px;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";

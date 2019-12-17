@@ -25,6 +25,7 @@ import TableFooter from "@material-ui/core/TableFooter";
 import styled from "styled-components";
 import { SortBtn } from "../../styles/SortBtn";
 
+
 const StyledTableCell = withStyles(theme => ({
   head: {
     padding: "8px 32px",
@@ -118,14 +119,14 @@ console.log("RESULTS:", results);
   const failedSearch = () => {
     if(searchTerm.length > 0 && results.length === 0) {
       return (
-        <MainFailContainer>
-        <failedContainer>
-          <failText>There doesn't seem to be any tasks with that name</failText>
-          </failedContainer>
-          </MainFailContainer>
-      )
+        <p style={{ fontWeight: 600 }}>There doesn't seem to be any tasks with that name</p>
+      )}
+      else {
+        return (
+        <p style={{ fontWeight: 600 }}>Your Task List</p>)
+      }
     }
-  }
+  
 
   const classes = useStyles();
 
@@ -137,8 +138,8 @@ console.log("RESULTS:", results);
   return (
     <>
       <InfoContainer>
-        <p style={{ fontWeight: 600 }}>Your Task List</p>
-        <SortBtn style={{textDecoration: 'none' }}>
+        {failedSearch()}
+        <SortBtn style={{ textDecoration: "none" }}>
           Sort By <span className="ion-ios-arrow-down" />
         </SortBtn>
       </InfoContainer>
@@ -163,40 +164,21 @@ console.log("RESULTS:", results);
               : tasks
             ).map(task => {
               console.log(task.createdAt);
-              if(results.length === 0 && searchTerm.length === 0) {
-                return (
-                    <Task item={task} key={task.id} />
-                )
+              if (results.length === 0 && searchTerm.length === 0) {
+                return <Task item={task} key={task.id} />;
+              } else if (results.length > 0) {
+                return <div></div>;
               }
-              
-                 else if (results.length > 0) {
-                 
-              return (
-                <div>
-      
-                  </div>
-              
-                
-      
-              );
-              }
-      
             })}
 
-            {failedSearch()}
-              
-              { results.length > 0 ?
-               (
-              results.map(result => (
-               
-                <Task item={result} key={result.id}></Task>
-              ))
+            {results.length > 0 ? (
+              results.map(result => <Task item={result} key={result.id}></Task>)
             ) : (
               <p></p>
             )}
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
+                <TableCell colSpan={5} />
               </TableRow>
             )}
           </TableBody>
@@ -204,7 +186,7 @@ console.log("RESULTS:", results);
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={3}
+                colSpan={5}
                 count={itemCounter()}
                 rowsPerPage={rowsPerPage}
                 page={page}
@@ -217,8 +199,7 @@ console.log("RESULTS:", results);
                 ActionsComponent={TablePaginationActions}
               />
             </TableRow>
-          </TableFooter> 
-         
+          </TableFooter>
         </Table>
       </Paper>
     </>
