@@ -14,7 +14,7 @@ import {
   XButton
 } from "../../styles/Form/FormStyles";
 import { orange } from "@material-ui/core/colors";
-
+import {axiosWithAuth} from '../../utils/auth/axiosWithAuth'
 export default function ProjectForm({
   closeModal,
   handleFunction,
@@ -71,13 +71,35 @@ export default function ProjectForm({
     square_ft: null,
     state: "",
     street_address: "",
-    zip_code: null
+    zip_code: null,
+    template_id:null,
     });
     closeModal();
   };
+  const addCustomTemplate = e => {
+    e.preventDefault();
+    const templateID = parseInt(form.template_id);
+    const project_id = editFields.id;
+    console.log("project_id", project_id);
+    console.log("templateID", templateID);
+    axiosWithAuth()
+      .post(`/templates/addTasks/${project_id}`, { template_id: templateID })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  async function submitForm() {
+    const originalhandleSubmit = await handleSubmit();
+    console.log("async", originalhandleSubmit);
+    const customTemplate = await addCustomTemplate();
+    console.log("async", customTemplate);
+  }
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm onSubmit={submitForm}>
       <StyledFormHeader>
         <h1 style={{ fontSize: "2rem", margin: 0 }}>{text}</h1>
         <XButton onClick={closeModal}>close X</XButton>

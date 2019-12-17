@@ -1,7 +1,7 @@
 import React,{useContext} from "react";
 import styled from "styled-components";
 import DocumentsContext from '../../contexts/documents/DocumentsContext'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
 import {Table} from 'react-bootstrap'
 import './table.css'
 const  DocumentCard = (props) => {
@@ -41,7 +41,7 @@ const  DocumentCard = (props) => {
                  <td> 
                  <a href ={documents.doc_url} 
                   rel="noopener noreferrer" target="_blank">
-                  View</a><ChevronRightIcon/>
+                  View</a> >
                   </td>
                </tr>
              </tbody>

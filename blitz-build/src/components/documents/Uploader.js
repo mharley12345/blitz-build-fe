@@ -1,6 +1,5 @@
 import React, { useState,useContext } from 'react';
 import {axiosWithAuth} from '../../utils/auth/axiosWithAuth';
-import CloseIcon from '@material-ui/icons/Close';
 import  OpenUploaderContext   from '../../contexts/documents/OpenUploaderContext'
 import './DropZone.css'
 
@@ -99,12 +98,12 @@ const  Uploader = () => {
       </div>
         
     )
-    if(uploaderState.success != false){return SuccessMessage()}
+    if(uploaderState.success !== false){return SuccessMessage()}
     return (
          
       <div className="Uploader">
 
-           <h1>Add A New Document</h1> <h6>Close <CloseIcon/></h6>
+           <h1>Add A New Document</h1> <h6>Close X</h6>
           {uploaderState.success ? <SuccessMessage/> : null}
           <input onChange={handleChange} ref={(ref) => { setUploadInput(ref); }} type="file"/>
           <br/>
