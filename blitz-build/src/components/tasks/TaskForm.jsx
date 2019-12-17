@@ -3,8 +3,6 @@ import React, { useEffect, useState, useContext } from "react";
 
 //styles
 import { makeStyles } from "@material-ui/core/styles";
-import styled from "styled-components";
-import TaskContext from '../../contexts/tasks/TaskContext'
 import {
   StyledForm,
   StyledFormHeader,
@@ -43,7 +41,6 @@ export default function TaskForm({
   text
 }) {
   const [projects, setProjects] = useState([]);
-  const {getTasks, tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks} = useContext(TaskContext);
   const [task, setTask, handleChanges] = useInput({
     task_name: "",
     task_description: "",
@@ -52,7 +49,6 @@ export default function TaskForm({
   });
 
   useEffect(() => {
-    getTasks();
     axiosWithAuth()
       .get(`/projects`)
       .then(res => {
@@ -174,7 +170,7 @@ export default function TaskForm({
         value={task.task_description}
         onChange={handleChanges}
       />
-      <StyledBtn style={{ marginBottom: "50px" }}>Add Task</StyledBtn>
+      <StyledBtn style={{ marginBottom: "50px" }}>{text}</StyledBtn>
     </StyledForm>
   );
 }

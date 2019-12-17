@@ -41,7 +41,6 @@ const StyledTableCell = withStyles(theme => ({
 }))(TableCell);
 
 const InfoContainer = styled.div`
-  overflow-y: auto;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -53,7 +52,7 @@ const useStyles = makeStyles({
     border: "1px solid #DCD9D5"
   },
   table: {
-    minWidth: "1080px"
+    // minWidth: "1080px"
   },
   tableHover: {
     "&:hover": {
@@ -61,38 +60,35 @@ const useStyles = makeStyles({
     }
   }
 });
-const MainFailContainer = styled.div`
+// const MainFailContainer = styled.div`
+//   postion: relative;
+//   width: 900px;
+//   height: 200px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin-left: 250px;
+// `;
 
-postion: relative;
-width: 900px;
-height: 200px;
-display: flex;
-justify-content: center;
-align-items: center;
-margin-left: 250px;
-`
-
-const failedContainer = styled.div`
-margin-top: 80px;
-
-display: flex;
-justify-content: center;
-align-items: center;
-
-`
-const failText = styled.div`
-font-size: 50px;
-`
+// const failedContainer = styled.div`
+//   margin-top: 80px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
+// const failText = styled.div`
+//   font-size: 50px;
+// `;
 
 export default function Tasks() {
   const { tasks, getTasks } = useContext(taskContext);
-  const { searchTerm, setSearchTerm, results, setResults, taskSearchResults } = useContext(searchTermContext)
-  const taskSearchInput = searchTerm.toLowerCase();
-  
+  const { searchTerm, results, taskSearchResults } = useContext(
+    searchTermContext
+  );
 
-  console.log('taskSearchResults', taskSearchResults)
-   
-console.log("RESULTS:", results);
+  console.log("taskSearchResults", taskSearchResults);
+
+  console.log("RESULTS:", results);
   //pagnation
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -110,49 +106,48 @@ console.log("RESULTS:", results);
 
   const itemCounter = () => {
     if (results.length > 0) {
-      return results.length
+      return results.length;
+    } else {
+      return tasks.length;
     }
-    else {
-      return tasks.length
-    }
-  }
+  };
   const failedSearch = () => {
-    if(searchTerm.length > 0 && results.length === 0) {
+    if (searchTerm.length > 0 && results.length === 0) {
       return (
-        <p style={{ fontWeight: 600 }}>There doesn't seem to be any tasks with that name</p>
-      )}
-      else {
-        return (
-        <p style={{ fontWeight: 600 }}>Your Task List</p>)
-      }
+        <p style={{ fontWeight: 600 }}>
+          There doesn't seem to be any tasks with that name
+        </p>
+      );
+    } else {
+      return <p style={{ fontWeight: 600 }}>Your Task List</p>;
     }
-  
+  };
 
   const classes = useStyles();
 
-  useEffect(() => {
-   
-    
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
       <InfoContainer>
         {failedSearch()}
-        <SortBtn style={{ textDecoration: "none" }}>
-          Sort By <span className="ion-ios-arrow-down" />
+        {/* <SortBtn >
+          Active
         </SortBtn>
+        <SortBtn>
+          Complete
+        </SortBtn> */}
       </InfoContainer>
 
       <Paper className={classes.root}>
         <Table className={classes.table} aria-label="customized table"  style = {{minHeight: '500px'}}>
           <TableHead>
             <TableRow>
-              <StyledTableCell>PROJECT</StyledTableCell>
-              <StyledTableCell>NAME</StyledTableCell>
-              <StyledTableCell>TASK</StyledTableCell>
-              <StyledTableCell>DUE DATE</StyledTableCell>
-              <StyledTableCell>STATUS</StyledTableCell>
+              <StyledTableCell>Poject Name</StyledTableCell>
+              <StyledTableCell>Task</StyledTableCell>
+              <StyledTableCell>Description</StyledTableCell>
+              <StyledTableCell>Due Date</StyledTableCell>
+              <StyledTableCell>Status</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
