@@ -211,8 +211,8 @@ const SearchTotal = styled.div`
 `;
 const ButtonSearch = styled.i`
   position: absolute;
-  right: 15px;
-  top: 2px;
+  right: 3%;
+  top: 1%;
   border: none;
   font-size: 30px;
   color: #8a827d;
@@ -220,7 +220,7 @@ const ButtonSearch = styled.i`
 
   z-index: 2;
   width: 20px;
-  hieght: 20px;
+  height: 20px;
 `;
 
 function Header({ pathname }) {

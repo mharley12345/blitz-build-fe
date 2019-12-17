@@ -141,6 +141,7 @@ const NavBarContainer = styled.div`
       justify-content: space-between;
       align-items: center;
       @media only screen and (max-width: 1500px) {
+      width:65%;
       
         justify-Content: center; 
     
