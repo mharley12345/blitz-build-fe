@@ -61,6 +61,17 @@ function App() {
       setUserInfo(jwtDecode(localStorage.getItem("id_token")));
     }
   }, []);
+  
+
+const LandingPage = (component) => {
+  if(pathname.includes('/landing')) {
+    return (
+      <div></div>
+    )}
+    else {
+      return component
+    }
+  }
 
   // console.log("userInfo", userInfo);
   console.log("pathname", pathname);
@@ -134,10 +145,10 @@ function App() {
                             <UserContext.Provider
                               value={{ userInfo, setUserInfo }}
                             >
-                              <NavBar
+                            {LandingPage(<NavBar
                                 setPathname={setPathname}
                                 navLinks={navLinks}
-                              />
+                              />)}  
                               <Layout pathname={pathname}>
                                 <Switch>
                                   <Route exact path="/auth" component={Auth} />
