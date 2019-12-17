@@ -161,14 +161,14 @@ export default function Tasks() {
               if (results.length === 0 && searchTerm.length === 0) {
                 return <Task item={task} key={task.id} />;
               } else if (results.length > 0) {
-                return <div></div>;
+                return <TableRow></TableRow>;
               }
             })}
 
             {results.length > 0 ? (
               results.map(result => <Task item={result} key={result.id}></Task>)
             ) : (
-              <p></p>
+              <TableRow></TableRow>
             )}
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
