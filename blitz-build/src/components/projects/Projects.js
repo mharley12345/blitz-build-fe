@@ -101,8 +101,8 @@ const Projects = props => {
         {" "}
         Your Project List{" "}
       </div>
-      <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="customized table">
+      <Paper className={classes.root} >
+        <Table className={classes.table} aria-label="customized table"  >
           <TableHead>
             <TableRow>
               <StyledTableCell>ADDRESS</StyledTableCell>

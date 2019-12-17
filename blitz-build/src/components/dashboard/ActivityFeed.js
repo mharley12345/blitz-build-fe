@@ -6,7 +6,7 @@ import CompletedTask from './CompletedTask'
 import NewTask from './NewTask'
 //context 
 import taskContext from '../../contexts/tasks/TaskContext'
-
+import {  Link } from "react-router-dom";
 
 
 
@@ -44,19 +44,17 @@ const newdate = year + "-" + month + "-" + changeTheDay(day);
       <Container>
         <Section>
           <p>Your Recent Activites</p>
+          <Link to={'/activity-feed'}style={{ textDecoration: 'none'}}><p style={{color: '#DD6B20'}}>View All</p></Link>
         </Section>
         <Card>
           {tasks.slice(0, numberOfTasks).map(item => 
-          {  if(!item) { 
+          {  if(!item ) { 
 
             return <div></div>
 
-          } else if(item.isComplete === true) {
-            return (
-            <CompletedTask item={item} key={item.id} />
-             )
+          
            }
-           else if (wasMadeToday(item.createdAt)) {
+           else if (wasMadeToday(item.createdAt) || item.isComplete === true  ) {
              return (
               <NewTask item={item} key={item.id} />
              )
@@ -88,10 +86,12 @@ const newdate = year + "-" + month + "-" + changeTheDay(day);
   const Container = styled.div`
   width: 65%;
   margin-top: 20px;
+  margin-right: 20px;
     margin-bottom: 48px;
   `;
   
   const Card = styled.div`
     border: 1px solid #dcd9d5;
+    border-radius: 3px;
   `;
   
