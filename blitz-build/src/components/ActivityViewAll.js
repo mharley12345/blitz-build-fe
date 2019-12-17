@@ -115,7 +115,7 @@ width: 95%
 margin-top: 20px;
 margin-bottom: 48px;
 box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
-
+border-radius: 3px;
 `
 
 
@@ -176,6 +176,9 @@ const TableHead = styled.div`
  color: rgba(0, 0, 0, 0.87);
  background-color: #E9E9E9
  padding: 0px 32px;
+ box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+border-radius: 3px;
+border: 1px solid #dcd9d5;
  
  `
  const InnerContainer = styled.div`

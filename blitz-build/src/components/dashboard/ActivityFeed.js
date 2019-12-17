@@ -92,5 +92,6 @@ const newdate = year + "-" + month + "-" + changeTheDay(day);
   
   const Card = styled.div`
     border: 1px solid #dcd9d5;
+    border-radius: 3px;
   `;
   
