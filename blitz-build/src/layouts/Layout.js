@@ -1,21 +1,49 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 import Global from "./Global";
 import Nav from "./Nav";
 import Header from "./Header.jsx"
 
+
+
+
+
+
 function Layout({ children, pathname }) {
+
+
+
+
+const LandingPage = (component) => {
+ if(pathname === '/') {
+   return (
+     <div></div>
+   )}
+   else {
+     return component
+   }
+ }
+ const checkForLanding = () => {
+  if(pathname ==='/') {
+    return LandingContentStyle
+  }
+  else {
+    return ContentStyle
+  }
+ }
+
+
   return (
     <Container>
       <Global />
-      <Nav />  
+      {LandingPage(<Nav /> )}
       <Main>
-      <Header pathname = {pathname}  />
-        <Content>{children}</Content>
-        <Footer>
+      {LandingPage( <Header pathname = {pathname} /> )} 
+       <Content style={checkForLanding()}>{children}</Content>
+       {LandingPage(   <Footer>
           <p>2019 © BlitzBuild, Inc. All Rights Reserved.</p>
-        </Footer>
+        </Footer>)}
       </Main>
     </Container>
   );
@@ -40,12 +68,22 @@ const Main = styled.div`
 
 
 const Content = styled.div`
-  background: #ffffff;
-  height: 100%;
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
+  
 `;
+
+const ContentStyle = {
+background: '#ffffff',
+  height: '100%',
+  padding: '32px',
+  display: 'flex',
+  flexDirection: 'column',
+}
+const LandingContentStyle = {
+  background: '#ffffff',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+}
 
 const Footer = styled.div`
   padding: 16px 32px;

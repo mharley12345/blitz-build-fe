@@ -11,18 +11,25 @@ const [taskSearchResults, setTaskSearchResults] = useState([]);
 const [tasks, setTasks] = useState([])
 const taskSearchInput = searchTerm.toLowerCase();
 const [ searchCatch, setSearchCatch ] = useState('')
+const [projects, setProjects] = useState([]);
   useEffect(() => {
     
     getTasks();
-
+ 
     if(searchTerm.length === 0) {
         setResults([])
     }
     else {
-       setResults( tasks.filter(task =>
-      task.task_name.toLowerCase().includes(taskSearchInput))
-      ) 
+       setResults( tasks.filter(task => {
+        if( task.task_name.toLowerCase().includes(taskSearchInput) ||  task.project_name.toLowerCase().includes(taskSearchInput)  ){
+          return task
+        }
+     })
+      )  
+      
     }
+   
+         
       setTaskSearchResults(results);
     }, [taskSearchInput]);
 
@@ -39,7 +46,10 @@ const [ searchCatch, setSearchCatch ] = useState('')
             console.log(err);
           });
         }
+
+
   
+       
 
   
   return (

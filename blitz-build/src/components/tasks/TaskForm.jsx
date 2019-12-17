@@ -3,17 +3,16 @@ import React, { useEffect, useState, useContext } from "react";
 
 //styles
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import styled from "styled-components";
-import { XButton } from "../../styles/Tasks/tasks";
-import TaskContext from '../../contexts/tasks/TaskContext'
 import {
   StyledForm,
+  StyledFormHeader,
   StyledLabel,
   StyledInput,
   StyledSelect,
-  StyledBtn
-} from "../../styles/Tasks/taskForm";
+  StyledTextAreaInput,
+  StyledBtn,
+  XButton
+} from "../../styles/Form/FormStyles";
 
 //hooks
 import { useInput } from "../../customHooks/useInput";
@@ -42,7 +41,6 @@ export default function TaskForm({
   text
 }) {
   const [projects, setProjects] = useState([]);
-  const {getTasks, tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks} = useContext(TaskContext);
   const [task, setTask, handleChanges] = useInput({
     task_name: "",
     task_description: "",
@@ -51,7 +49,6 @@ export default function TaskForm({
   });
 
   useEffect(() => {
-    getTasks();
     axiosWithAuth()
       .get(`/projects`)
       .then(res => {
@@ -100,13 +97,17 @@ export default function TaskForm({
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <div style={{ width: "100%", textAlign: "right" }}>
-        <XButton onClick={closeModal}>X</XButton>
-      </div>
-
-      <header>
-        <h1 style={{ fontSize: "3rem", fontFamily: "roboto" }}>{text}</h1>
-      </header>
+      <StyledFormHeader>
+        <h1
+          style={{
+            fontSize: "2rem",
+            margin: 0
+          }}
+        >
+          {text}
+        </h1>
+        <XButton onClick={closeModal}> Close X</XButton>
+      </StyledFormHeader>
 
       <StyledLabel>Task Name</StyledLabel>
       <StyledInput
@@ -115,34 +116,45 @@ export default function TaskForm({
         value={task.task_name}
         onChange={handleChanges}
       />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ width: "70%" }}>
+          <StyledLabel>Assign Project</StyledLabel>
+          <StyledSelect
+            style={{
+              background: "#E9E9E9",
+              border: "none",
+              paddingLeft: "10px"
+            }}
+            name="project_name"
+            onChange={handleChanges}
+            value={task.project_name}
+          >
+            <option>Choose Project</option>
 
-      <StyledLabel>Task Decription</StyledLabel>
-      <StyledInput
-        type="text"
-        name="task_description"
-        value={task.task_description}
-        onChange={handleChanges}
-      />
-
-      {/* <StyledLabel>Due Date</StyledLabel>
-      <DatePicker selected={dueDate} onChange={date => setDueDate(date)} /> */}
-
-      <TextField
-        style={{
-          width: "77%",
-          marginTop: "20px"
-        }}
-        id="date"
-        label="Due Date"
-        type="date"
-        name="due_date"
-        onChange={handleChanges}
-        value={task.due_date}
-        InputLabelProps={{
-          shrink: true
-        }}
-      />
-
+            {projects.map(project => {
+              return (
+                <option key={project.id} value={project.project_name}>
+                  {project.project_name}
+                </option>
+              );
+            })}
+          </StyledSelect>
+        </div>
+        <div style={{ width: "25%" }}>
+          <StyledLabel>Due Date</StyledLabel>
+          <StyledInput
+            id="date"
+            label=""
+            type="date"
+            name="due_date"
+            onChange={handleChanges}
+            value={task.due_date}
+            InputLabelProps={{
+              shrink: true
+            }}
+          />
+        </div>
+      </div>
       {/* <StyledLabel>Due Date</StyledLabel>
       <input
         type="text"
@@ -150,24 +162,15 @@ export default function TaskForm({
         value={task.dueDate}
         onChange={handleChanges}
       /> */}
-
-      <StyledLabel>Assign Project</StyledLabel>
-      <StyledSelect
-        name="project_name"
+      <StyledLabel>Task Decription</StyledLabel>
+      <StyledTextAreaInput
+        rows="8"
+        type="text"
+        name="task_description"
+        value={task.task_description}
         onChange={handleChanges}
-        value={task.project_name}
-      >
-        <option>Choose Project</option>
-
-        {projects.map(project => {
-          return (
-            <option key={project.id} value={project.project_name}>
-              {project.project_name}
-            </option>
-          );
-        })}
-      </StyledSelect>
-      <StyledBtn>Save</StyledBtn>
+      />
+      <StyledBtn style={{ marginBottom: "50px" }}>{text}</StyledBtn>
     </StyledForm>
   );
 }

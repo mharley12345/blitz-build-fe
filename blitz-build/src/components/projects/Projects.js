@@ -101,8 +101,8 @@ const Projects = props => {
         {" "}
         Your Project List{" "}
       </div>
-      <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="customized table">
+      <Paper className={classes.root} >
+        <Table className={classes.table} aria-label="customized table"  >
           <TableHead>
             <TableRow>
               <StyledTableCell>ADDRESS</StyledTableCell>
@@ -129,7 +129,7 @@ const Projects = props => {
                   props.history.push(`/project/${result.id}`);
                 }}
               >
-                <StyledTableCell >
+                <StyledTableCell>
                   <p style={{ marginBottom: 0 }}>{result.street_address}</p>
                   <p
                     style={{ marginBottom: 0 }}
@@ -155,7 +155,7 @@ const Projects = props => {
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={3}
+                colSpan={6}
                 count={results.length}
                 rowsPerPage={rowsPerPage}
                 page={page}

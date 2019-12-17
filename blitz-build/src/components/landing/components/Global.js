@@ -1,9 +1,6 @@
-// CODE IS MESSY, PLEASE READ AT YOUR OWN RISK
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components"
 
-
-const GlobalStyle = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed|Roboto+Mono&display=swap');
+const Global = createGlobalStyle`
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
     a, abbr, acronym, address, big, cite, code,
@@ -17,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
     figure, figcaption, footer, header, hgroup, 
     menu, nav, output, ruby, section, summary,
     time, mark, audio, video {
+       
         margin: 0;
         padding: 0;
         border: 0;
@@ -25,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
         vertical-align: baseline;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        font-family: 'Cereal';
     }
     /* HTML5 display-role reset for older browsers */
     article, aside, details, figcaption, figure, 
@@ -33,13 +32,7 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         line-height: 1;
-        /* font-family: 'Roboto Mono', monospace; */
-        /* font-family: 'Roboto Condensed', sans-serif; */
-        font-family: 'Roboto', sans-serif;
-        overflow: scroll;
-::-webkit-scrollbar { 
-    display: none; 
-}
+        font-family: 'Roboto Mono', monospace;
     }
     ol, ul {
         list-style: none;
@@ -58,4 +51,4 @@ const GlobalStyle = createGlobalStyle`
     }
  `
 
- export default GlobalStyle;
+ export default Global;

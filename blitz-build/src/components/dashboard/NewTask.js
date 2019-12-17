@@ -42,6 +42,18 @@ function NewTask({ item, children }) {
     }
   }
 
+  const checkCondition = () => {
+    if(item.isComplete === true) {
+      return (
+        <TitleText>Completed Task</TitleText>
+      )}
+      else {
+        return (
+          <TitleText>  Added Task </TitleText>
+        )
+      }
+    
+  }
   const status = DateCalc(today, item);
 
   const todayDate = new window.Date(today);
@@ -65,11 +77,12 @@ function NewTask({ item, children }) {
   return (
     <Container>  
        <NavLink to={`/project/${projectID}`} style = {NavLinkStyle}>
-      <Inner>
+  
      
-      <Address>
+      <InnerContainer>
+      
         
-          <TitleText>  Added Task </TitleText>
+          {checkCondition()}
  <NameText>{item.task_name}  </NameText>
 
       <Spacer> / </Spacer>
@@ -77,11 +90,14 @@ function NewTask({ item, children }) {
       <AddressText> {TaskAddress} </AddressText>
       <ProjectName>{TaskProjectName} </ProjectName> 
      
-        </Address>
+        </InnerContainer>
        
-       </Inner> 
+     
        </NavLink>
     </Container>
+
+
+
   );
    
 }
@@ -98,7 +114,9 @@ const NavLinkStyle = {
  
 } ;
 const Spacer = styled.div`
-
+display: flex;
+flex-direction: column;
+width: 2%;
 
 `
 const Container = styled.div`
@@ -109,21 +127,22 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
   :nth-child(odd) {
     background: #fbfaf9;
   }
 `;
 
-const Address = styled.div`
-width: 90%;
+const InnerContainer = styled.div`
+width: 98%;
 display: flex;
+justify-content: space-around;
 align-items: center;
 cursor: pointer;
 
   p {
     font-weight: 500;
-  font-size: 18px;
+  font-size: 14px;
     line-height: 16px;
     font-family: "Roboto";
     color: #3f3a36;
@@ -131,26 +150,30 @@ cursor: pointer;
 `;
 
 const TitleText = styled.p`
-width: 40%;
-
+  display: flex;
+  flex-direction: column;
+  width: 15%;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
-  color: #3f3a36;
   margin-bottom: 8px;
 `;
 
 const NameText = styled.p`
-width: 40%;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
   color: #3f3a36;
   margin-bottom: 8px;
+ 
 `;
 const AddressText = styled.p`
-width: 40%;
-margin-left: 50px;
+display: flex;
+flex-direction: column;
+width: 25%;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
@@ -158,10 +181,9 @@ margin-left: 50px;
   margin-bottom: 8px;
 `;
 const ProjectName = styled.p`
-width: 5%;
+
 display: flex;
 justify-content: end;
-margin-left: 50px;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";

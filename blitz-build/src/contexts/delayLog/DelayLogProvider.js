@@ -8,6 +8,12 @@ export default function DelayLogProvider({ children }) {
   const [delayLogs, setDelayLogs] = useState([]);
 
   useEffect(() => {
+    getDelayLog();
+  }, []);
+
+  const getDelayLog = () => {
+   
+
     axiosWithAuth()
       .get("/delay_logs")
       .then(res => {
@@ -17,7 +23,7 @@ export default function DelayLogProvider({ children }) {
       .catch(err => {
         console.log(err);
       });
-  }, []);
+  };
 
   const addDelayLog = (newDelay,projectName, taskName) => {
     console.log("new delay", newDelay);
@@ -44,16 +50,10 @@ export default function DelayLogProvider({ children }) {
           .put(`/delay_logs/${id}`, newReason)
           .then(res => {
             console.log("from edit delay_logs in delayLogsProvider", res);
+            getDelayLog();
           })
             .catch(err => console.log(err));
-        const newDelayLogsList = delayLogs.map(delay => {
-          if (delay.id === editedReason.id) {
-            return editedReason;
-          } else {
-            return delay;
-          }
-        });
-        setDelayLogs(newDelayLogsList);
+     
     }
 
     const deleteReason = deleteReason => {

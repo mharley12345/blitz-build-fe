@@ -9,7 +9,7 @@ class Auth {
     domain: "gannondarcy2.auth0.com",
     audience: "https://gannondarcy2.auth0.com/userinfo",
     clientID: "OzMg1e7JDNF7DogxPEPvGzpG7fvvDHNe",
-    redirectUri: "http://localhost:3000/callback",
+    redirectUri: process.env.REACT_APP_REDIRECT_URL,
     responseType: "id_token",
     scope: "openid profile"
   });
@@ -77,13 +77,13 @@ class Auth {
     return new Date().getTime() < expiresAt;
   }
 
-  //doing this function in the logout component
-  // signOut() {
-  //   // clear id token, profile, and expiration
-  //   localStorage.removeItem("access_token");
-  //   localStorage.removeItem("id_token");
-  //   localStorage.removeItem("expires_at");
-  // }
+  // doing this function in the logout component
+  signOut() {
+    // clear id token, profile, and expiration
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("expires_at");
+  }
 
   getProfile() {
     if (localStorage.getItem("id_token")) {

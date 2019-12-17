@@ -25,6 +25,7 @@ import TableFooter from "@material-ui/core/TableFooter";
 import styled from "styled-components";
 import { SortBtn } from "../../styles/SortBtn";
 
+
 const StyledTableCell = withStyles(theme => ({
   head: {
     padding: "8px 32px",
@@ -40,7 +41,6 @@ const StyledTableCell = withStyles(theme => ({
 }))(TableCell);
 
 const InfoContainer = styled.div`
-  overflow-y: auto;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -52,7 +52,7 @@ const useStyles = makeStyles({
     border: "1px solid #DCD9D5"
   },
   table: {
-    minWidth: "1080px"
+    // minWidth: "1080px"
   },
   tableHover: {
     "&:hover": {
@@ -60,38 +60,35 @@ const useStyles = makeStyles({
     }
   }
 });
-const MainFailContainer = styled.div`
+// const MainFailContainer = styled.div`
+//   postion: relative;
+//   width: 900px;
+//   height: 200px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin-left: 250px;
+// `;
 
-postion: relative;
-width: 900px;
-height: 200px;
-display: flex;
-justify-content: center;
-align-items: center;
-margin-left: 250px;
-`
-
-const failedContainer = styled.div`
-margin-top: 80px;
-
-display: flex;
-justify-content: center;
-align-items: center;
-
-`
-const failText = styled.div`
-font-size: 50px;
-`
+// const failedContainer = styled.div`
+//   margin-top: 80px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
+// const failText = styled.div`
+//   font-size: 50px;
+// `;
 
 export default function Tasks() {
   const { tasks, getTasks } = useContext(taskContext);
-  const { searchTerm, setSearchTerm, results, setResults, taskSearchResults } = useContext(searchTermContext)
-  const taskSearchInput = searchTerm.toLowerCase();
-  
+  const { searchTerm, results, taskSearchResults } = useContext(
+    searchTermContext
+  );
 
-  console.log('taskSearchResults', taskSearchResults)
-   
-console.log("RESULTS:", results);
+  console.log("taskSearchResults", taskSearchResults);
+
+  console.log("RESULTS:", results);
   //pagnation
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -109,49 +106,48 @@ console.log("RESULTS:", results);
 
   const itemCounter = () => {
     if (results.length > 0) {
-      return results.length
+      return results.length;
+    } else {
+      return tasks.length;
     }
-    else {
-      return tasks.length
-    }
-  }
+  };
   const failedSearch = () => {
-    if(searchTerm.length > 0 && results.length === 0) {
+    if (searchTerm.length > 0 && results.length === 0) {
       return (
-        <MainFailContainer>
-        <failedContainer>
-          <failText>There doesn't seem to be any tasks with that name</failText>
-          </failedContainer>
-          </MainFailContainer>
-      )
+        <p style={{ fontWeight: 600 }}>
+          There doesn't seem to be any tasks with that name
+        </p>
+      );
+    } else {
+      return <p style={{ fontWeight: 600 }}>Your Task List</p>;
     }
-  }
+  };
 
   const classes = useStyles();
 
-  useEffect(() => {
-   
-    
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
       <InfoContainer>
-        <p style={{ fontWeight: 600 }}>Your Task List</p>
-        <SortBtn style={{textDecoration: 'none' }}>
-          Sort By <span className="ion-ios-arrow-down" />
+        {failedSearch()}
+        {/* <SortBtn >
+          Active
         </SortBtn>
+        <SortBtn>
+          Complete
+        </SortBtn> */}
       </InfoContainer>
 
       <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="customized table">
+        <Table className={classes.table} aria-label="customized table"  style = {{minHeight: '500px'}}>
           <TableHead>
             <TableRow>
-              <StyledTableCell>PROJECT</StyledTableCell>
-              <StyledTableCell>NAME</StyledTableCell>
-              <StyledTableCell>TASK</StyledTableCell>
-              <StyledTableCell>DUE DATE</StyledTableCell>
-              <StyledTableCell>STATUS</StyledTableCell>
+              <StyledTableCell>Poject Name</StyledTableCell>
+              <StyledTableCell>Task</StyledTableCell>
+              <StyledTableCell>Description</StyledTableCell>
+              <StyledTableCell>Due Date</StyledTableCell>
+              <StyledTableCell>Status</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -162,49 +158,29 @@ console.log("RESULTS:", results);
                 )
               : tasks
             ).map(task => {
-              console.log(task.createdAt);
-              if(results.length === 0 && searchTerm.length === 0) {
-                return (
-                    <Task item={task} key={task.id} />
-                )
+              if (results.length === 0 && searchTerm.length === 0) {
+                return <Task item={task} key={task.id} />;
+              } else if (results.length > 0) {
+                return <></>
               }
-              
-                 else if (results.length > 0) {
-                 
-              return (
-                <div>
-      
-                  </div>
-              
-                
-      
-              );
-              }
-      
             })}
 
-            {failedSearch()}
-              
-              { results.length > 0 ?
-               (
-              results.map(result => (
-               
-                <Task item={result} key={result.id}></Task>
-              ))
+            {results.length > 0 ? (
+              results.map(result => <Task item={result} key={result.id}></Task>)
             ) : (
-              <p></p>
+              <></>
             )}
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
+                <TableCell colSpan={5} />
               </TableRow>
             )}
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TablePagination
+              <TablePagination 
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={3}
+                colSpan={5}
                 count={itemCounter()}
                 rowsPerPage={rowsPerPage}
                 page={page}
@@ -217,8 +193,7 @@ console.log("RESULTS:", results);
                 ActionsComponent={TablePaginationActions}
               />
             </TableRow>
-          </TableFooter> 
-         
+          </TableFooter>
         </Table>
       </Paper>
     </>
