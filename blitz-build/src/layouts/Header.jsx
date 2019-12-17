@@ -211,8 +211,8 @@ const SearchTotal = styled.div`
 `;
 const ButtonSearch = styled.i`
   position: absolute;
-  right: 3%;
-  top: 1%;
+  left: 98%;
+  top: 25%;
   border: none;
   font-size: 30px;
   color: #8a827d;
@@ -412,7 +412,7 @@ function Header({ pathname }) {
             />
             <Link to="/tasks">
               {" "}
-              {/* <ButtonSearch className="ion-ios-search" /> */}
+              <ButtonSearch className="ion-ios-search" />
             </Link>
           </SearchTotal>
         </Link>

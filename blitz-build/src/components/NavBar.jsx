@@ -140,7 +140,7 @@ const NavBarContainer = styled.div`
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      width:62%;
+      width:60%;
       @media only screen and (max-width: 1500px) {
       
 
@@ -189,6 +189,8 @@ const NavBarContainer = styled.div`
          borderRadius: '100px'
        }
       
+   
+
   const UserInfoContainer = styled.div`
        
        `
@@ -198,7 +200,16 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
    const {userInfo, setUserInfo} = useContext(UserContext)
    const {getTasks, tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks} = useContext(TaskContext);
 //    console.log(navLinks, background, hoverBackground, linkColor, logo)
-
+const pictureOrNot = () => {
+  if(userInfo.picture === null) {
+    return <div></div>
+  }
+  else {
+    return (
+     <UserImg> <img src={userInfo.picture} style = {imgStyle}/></UserImg>
+    )
+  }
+}
    return (
        <NavBarContainer 
        style={{ background }}>
@@ -208,7 +219,7 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
            <img  src={Logo} alt="Blitz-Build-Logo"/>
            </LogoContainer>
            <UserProfile>
-             <UserImg> <img src={userInfo.picture} style = {imgStyle}/></UserImg>
+              {pictureOrNot()}
              <UserInfoContainer>
              <UserName> {userInfo.name}</UserName>
              <UserTitle>  Super Intendent  </UserTitle>
