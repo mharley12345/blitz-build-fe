@@ -3,10 +3,8 @@ import styled from "styled-components";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Task from "./Task";
 import searchTermContext from "../../contexts/searching/searchTerm";
-
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
-
 //mui
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TableHead from "@material-ui/core/TableHead";
@@ -15,7 +13,6 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
-
 const StyledTableCell = withStyles(theme => ({
   head: {
     padding: "8px 32px",
@@ -29,66 +26,73 @@ const StyledTableCell = withStyles(theme => ({
     height: 104
   }
 }))(TableCell);
+<<<<<<< HEAD
+function TaskCard({ projectID, numberOfTasks }) {
+  const { tasks, getTasks } = useContext(taskContext);
+  const { searchTerm } = useContext(searchTermContext);
+=======
 
-function TaskCard({ projectID, numberOfTasks, AddTask, results, taskSearchResults}) {
- 
-  const { projectTasks, setProjectTasks, getProjectTasks, tasks, setTasks, getTasks } = useContext(taskContext);
-  const { searchTerm } = useContext(searchTermContext)
-  
- console.log("projectID:", projectID)
+function TaskCard({
+  projectID,
+  numberOfTasks,
+}) {
+  const {
+    tasks,
+    getTasks
+  } = useContext(taskContext);
+  const { searchTerm } = useContext(searchTermContext);
+
+>>>>>>> 4d344fb8ca1ad12f33ad9092df10d72d9b3ee68e
+  console.log("projectID:", projectID);
   useEffect(() => {
-    
-   
-    
     getTasks();
-  },[])
+  }, []);
+<<<<<<< HEAD
+  const projectTasks = tasks.filter(item => {
+    return `${item.project_id}` === projectID;
+  });
+=======
 
-    
+>>>>>>> 4d344fb8ca1ad12f33ad9092df10d72d9b3ee68e
   return (
     <Container>
       <Section>
         <p>Your Task List</p>
         <p>View All</p>
       </Section>
-     <Paper>
+      <Paper>
         <Table>
           <TableHead>
             <TableRow>
-              <StyledTableCell>PROJECT</StyledTableCell>
-              <StyledTableCell>NAME</StyledTableCell>
-              <StyledTableCell>TASK</StyledTableCell>
-              <StyledTableCell>DUE DATE</StyledTableCell>
-              <StyledTableCell>STATUS</StyledTableCell>
+              <StyledTableCell>Task</StyledTableCell>
+              <StyledTableCell>Description</StyledTableCell>
+              <StyledTableCell>Due Date</StyledTableCell>
+              <StyledTableCell>Status</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-        {tasks.slice(0, numberOfTasks).map(item => 
-       
-        { if ( JSON.stringify(item.project_id) === projectID ) { 
-        return (
-          <Task item={item} key={item.id}   />
-           )
-         }
-           })}
-            
-       </TableBody>
+<<<<<<< HEAD
+            {projectTasks.slice(0, numberOfTasks).map(item => {
+              return <Task item={item} key={item.id} projectTask={true} />;
+=======
+            {tasks.slice(0, numberOfTasks).map(item => {
+              if (JSON.stringify(item.project_id) === projectID) {
+                return <Task item={item} key={item.id} />;
+              }
+>>>>>>> 4d344fb8ca1ad12f33ad9092df10d72d9b3ee68e
+            })}
+          </TableBody>
         </Table>
       </Paper>
     </Container>
-      
-       
-         
   );
 }
-
 export default TaskCard;
-
 const Section = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
-
   p {
     font-family: "Roboto";
     font-size: 16px;
@@ -97,12 +101,10 @@ const Section = styled.div`
     font-weight: 500;
   }
 `;
-
 const Container = styled.div`
   margin-top: 20px;
   margin-bottom: 48px;
 `;
-
 const Card = styled.div`
   border: 1px solid #dcd9d5;
 `;
