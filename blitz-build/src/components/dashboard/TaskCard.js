@@ -33,35 +33,33 @@ function TaskCard({ projectID, numberOfTasks }) {
   useEffect(() => {
     getTasks();
   }, []);
-
   const projectTasks = tasks.filter(item => {
     return `${item.project_id}` === projectID;
   });
-
   return (
     <Container>
-    <Section>
-      <p>Your Task List</p>
-      <p>View All</p>
-    </Section>
-    <Paper>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Task</StyledTableCell>
-            <StyledTableCell>Description</StyledTableCell>
-            <StyledTableCell>Due Date</StyledTableCell>
-            <StyledTableCell>Status</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {projectTasks.slice(0, numberOfTasks).map(item => {
-              return <Task item={item} key={item.id} projectTask={true}/>;
-          })}
-        </TableBody>
-      </Table>
-    </Paper>
-  </Container>
+      <Section>
+        <p>Your Task List</p>
+        <p>View All</p>
+      </Section>
+      <Paper>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Task</StyledTableCell>
+              <StyledTableCell>Description</StyledTableCell>
+              <StyledTableCell>Due Date</StyledTableCell>
+              <StyledTableCell>Status</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {projectTasks.slice(0, numberOfTasks).map(item => {
+              return <Task item={item} key={item.id} projectTask={true} />;
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
+    </Container>
   );
 }
 export default TaskCard;

@@ -118,7 +118,7 @@ const IndividualProject = props => {
   return (
     <>
       <Global />
-      <DisplayFlex>
+      {/* <DisplayFlex>
         <PreBuiltButton>
           <button onClick={() => addPreBuiltTemplate()}>
             {" "}
@@ -145,7 +145,7 @@ const IndividualProject = props => {
           </StyledSelect>
           <button type="submit">Add Template</button>
         </form>
-      </DisplayFlex>
+      </DisplayFlex> */}
       <IndividualProjectTitleContainer>
         <img src={Project_icon} alt="project_icon" />
         <span>&nbsp;&nbsp;Projects / {projectState.project_name}</span>
