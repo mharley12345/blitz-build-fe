@@ -137,6 +137,7 @@ const LandingPage = (component) => {
                     <SearchProvider>
                       <OpenContext.Provider value={{ open, setOpen }}>
                         <EditModalContext.Provider
+
                           value={{ editModalOpen, setEditModalOpen }}
                         >
                           <PathnameContext.Provider
@@ -260,3 +261,4 @@ const LandingPage = (component) => {
 }
 
 export default App;
+ 

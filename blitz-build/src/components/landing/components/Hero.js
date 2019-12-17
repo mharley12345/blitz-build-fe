@@ -15,7 +15,7 @@ const Hero = () => {
         </Title>
         <Subheader>Source, plan, and work faster.</Subheader>
         <ButtonGroup>
-        <Button>Sign up</Button>
+        <Button onClick={() => alert('yahoo')}>Sign up</Button>
         <Button secondary>Learn more</Button>
         </ButtonGroup>
       </Inner>
