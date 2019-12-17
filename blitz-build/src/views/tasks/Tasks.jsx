@@ -132,13 +132,11 @@ export default function Tasks() {
     <>
       <InfoContainer>
         {failedSearch()}
-        <SortBtn style={{ textDecoration: "none" }}>
-          Sort By <span className="ion-ios-arrow-down" />
-          <option value="">Sort</option>
-          <option>All</option>
-          <option>Project</option>
-          <option>Due Date</option>
-          <option>Completed</option>
+        <SortBtn>
+          Active
+        </SortBtn>
+        <SortBtn>
+          Complete
         </SortBtn>
       </InfoContainer>
 

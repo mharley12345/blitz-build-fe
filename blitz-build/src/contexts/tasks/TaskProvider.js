@@ -42,6 +42,21 @@ export default function TaskProvider({ children }) {
       });
   };
 
+  const completeTask = () => {
+    const user_id = localStorage.getItem("user_id");
+    axiosWithAuth()
+      .get(
+        `/projects/tasks/${user_id}?sortby=isComplete&sortcondition=false&sortdir=desc`
+      )
+      .then(res => {
+        console.log("get tasks", res.data.tasks);
+        setTasks(res.data.tasks);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   const getProjectTasks = projectID => {
     axiosWithAuth()
       .get(`projects/tasks/byProject/${projectID}`)
@@ -122,6 +137,7 @@ export default function TaskProvider({ children }) {
         value={{
           getTasks,
           sortTasks,
+          completeTask,
           tasks,
           setTasks,
           addTask,

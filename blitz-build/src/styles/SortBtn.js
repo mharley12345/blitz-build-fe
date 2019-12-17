@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { primaryColor } from './color'
 
-export const SortBtn = styled.select`
+export const SortBtn = styled.button`
   outline: none;
   font-size: 20px;
   background-color: white;
