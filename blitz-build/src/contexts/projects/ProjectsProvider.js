@@ -42,10 +42,10 @@ export default function ProjectsProvider({ children }) {
             .catch(err => {
               console.log(err);
             });
-        }
-        if (templateForm.preBuiltTemplate === true) {
+        } else if (templateForm.preBuiltTemplate === true) {
+          console.log("im here");
           axiosWithAuth()
-            .post("/90_day", res.data.project[0].id)
+            .post("/90_day", { project_id: res.data.project[0].id })
             .then(res => {
               console.log("90_day post", res);
             })
@@ -74,7 +74,7 @@ export default function ProjectsProvider({ children }) {
   };
 
   const editProject = (editedProject, editedProjectId, templateForm) => {
-    editedProject.id = editedProjectId;
+    // editedProject.id = editedProjectId;
     console.log("edited project", editedProject, "id:", editedProjectId);
 
     axiosWithAuth()
@@ -92,10 +92,11 @@ export default function ProjectsProvider({ children }) {
             .catch(err => {
               console.log(err);
             });
-        }
-        if (templateForm.preBuiltTemplate) {
+        } else if (templateForm.preBuiltTemplate === true) {
+          console.log("im here in edit");
+          console.log("edited project id", editedProjectId);
           axiosWithAuth()
-            .post("/90_day", editedProjectId)
+            .post("/90_day", { project_id: editedProjectId })
             .then(res => {
               console.log("90_day post", res);
             })
