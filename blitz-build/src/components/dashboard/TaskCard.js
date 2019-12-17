@@ -34,15 +34,18 @@ function TaskCard({
   projectID,
   numberOfTasks,
 }) {
-  const {
-    tasks,
-    getTasks
-  } = useContext(taskContext);
   const { searchTerm } = useContext(searchTermContext);
-
-  console.log("projectID:", projectID);
+  const [projectTasks, setProjectTasks] = useState([])
   useEffect(() => {
-    getTasks();
+    axiosWithAuth()
+    .get(`/projects/tasks/byProject/${projectID}`)
+    .then(res => {
+      console.log('res', res)
+      setProjectTasks(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }, []);
 
   return (
@@ -55,15 +58,14 @@ function TaskCard({
         <Table>
           <TableHead>
             <TableRow>
-              <StyledTableCell>PROJECT</StyledTableCell>
-              <StyledTableCell>NAME</StyledTableCell>
-              <StyledTableCell>TASK</StyledTableCell>
-              <StyledTableCell>DUE DATE</StyledTableCell>
-              <StyledTableCell>STATUS</StyledTableCell>
+              <StyledTableCell>Task</StyledTableCell>
+              <StyledTableCell>Description</StyledTableCell>
+              <StyledTableCell>Due Date</StyledTableCell>
+              <StyledTableCell>Status</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {tasks.slice(0, numberOfTasks).map(item => {
+            {projectTasks.slice(0, numberOfTasks).map(item => {
               if (JSON.stringify(item.project_id) === projectID) {
                 return <Task item={item} key={item.id} />;
               }
