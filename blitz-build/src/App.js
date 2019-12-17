@@ -24,6 +24,7 @@ import OpenTemplateContext from "./contexts/OpenTemplateContext";
 import AddTemplate from "./components/modal/AddTemplate";
 import Documents from "./components/documents/Documents";
 import OpenUploaderContext from "./contexts/documents/OpenUploaderContext"
+import ActivityViewAll from './components/ActivityViewAll'
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 
 //context
@@ -145,6 +146,11 @@ console.log('pathname', pathname)
                                 exact
                                 path="/callback"
                                 component={Callback}
+                              />
+                               <Route
+                                exact
+                                path="/activity-feed"
+                                component={ActivityViewAll}
                               />
                               <Route exact path="/login" component={Login} />
 

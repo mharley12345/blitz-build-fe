@@ -42,6 +42,18 @@ function NewTask({ item, children }) {
     }
   }
 
+  const checkCondition = () => {
+    if(item.isComplete === true) {
+      return (
+        <TitleText>Completed Task</TitleText>
+      )}
+      else {
+        return (
+          <TitleText>  Added Task </TitleText>
+        )
+      }
+    
+  }
   const status = DateCalc(today, item);
 
   const todayDate = new window.Date(today);
@@ -70,7 +82,7 @@ function NewTask({ item, children }) {
       <InnerContainer>
       
         
-          <TitleText>  Added Task </TitleText>
+          {checkCondition()}
  <NameText>{item.task_name}  </NameText>
 
       <Spacer> / </Spacer>
@@ -83,6 +95,9 @@ function NewTask({ item, children }) {
      
        </NavLink>
     </Container>
+
+
+
   );
    
 }
@@ -99,7 +114,9 @@ const NavLinkStyle = {
  
 } ;
 const Spacer = styled.div`
-
+display: flex;
+flex-direction: column;
+width: 2%;
 
 `
 const Container = styled.div`
@@ -110,7 +127,7 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
   :nth-child(odd) {
     background: #fbfaf9;
   }
@@ -125,7 +142,7 @@ cursor: pointer;
 
   p {
     font-weight: 500;
-  font-size: 18px;
+  font-size: 14px;
     line-height: 16px;
     font-family: "Roboto";
     color: #3f3a36;
@@ -133,24 +150,30 @@ cursor: pointer;
 `;
 
 const TitleText = styled.p`
-
+  display: flex;
+  flex-direction: column;
+  width: 15%;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
-  color: #3f3a36;
   margin-bottom: 8px;
 `;
 
 const NameText = styled.p`
-
+  display: flex;
+  flex-direction: column;
+  width: 25%;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
   color: #3f3a36;
   margin-bottom: 8px;
+ 
 `;
 const AddressText = styled.p`
-
+display: flex;
+flex-direction: column;
+width: 25%;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
