@@ -144,7 +144,7 @@ console.log("RESULTS:", results);
       </InfoContainer>
 
       <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="customized table">
+        <Table className={classes.table} aria-label="customized table"  style = {{minHeight: '500px'}}>
           <TableHead>
             <TableRow>
               <StyledTableCell>PROJECT</StyledTableCell>
@@ -203,7 +203,7 @@ console.log("RESULTS:", results);
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TablePagination
+              <TablePagination 
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={3}
                 count={itemCounter()}

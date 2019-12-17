@@ -287,6 +287,8 @@ function Header({ pathname }) {
       pathname === "/documents/add" ||
       pathname.includes("/mycalendar") ||
       pathname === "/"
+      ||
+      pathname ==='/activity-feed'
     ) {
       return HideButton;
     } else {
@@ -302,7 +304,8 @@ function Header({ pathname }) {
       pathname.includes("templates") ||
       pathname === "/documents/add" ||
       pathname.includes("/mycalendar") ||
-      pathname === "/"
+      pathname === "/" ||
+      pathname ==='/activity-feed'
     ) {
       return HideButton;
     } else if (pathname === "/documents") {
@@ -339,7 +342,8 @@ function Header({ pathname }) {
       pathname === "/log-out" ||
       pathname === "/documents/add" ||
       pathname.includes("/mycalendar") ||
-      pathname === "/"
+      pathname === "/" ||
+      pathname ==='/activity-feed'
     ) {
       return HideButton;
     } else {

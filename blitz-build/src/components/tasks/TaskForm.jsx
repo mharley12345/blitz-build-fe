@@ -104,7 +104,7 @@ export default function TaskForm({
        
 
       <header style={{  width: "76%", display:'flex', justifyContent: 'space-between', marginTop: '6%', marginBottom:'3%'}} >
-        <h1 style={{ color: '#232323', fontSize: "3rem", fontFamily: "roboto", width: "70%"   }}>{text}</h1>
+        <h1 style={{ color: '#232323', fontSize: "2rem", fontFamily: "roboto", width: "70%"   }}>{text}</h1>
         <XButton onClick={closeModal}> close X</XButton>
      
       </header>
@@ -202,7 +202,7 @@ export default function TaskForm({
       /> */}
 
       
-      <StyledBtn style={{marginBottom: "50px"}}>Add Task</StyledBtn>
+      <StyledBtn>Add Task</StyledBtn>
     </StyledForm>
   );
 }
