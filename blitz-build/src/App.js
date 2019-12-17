@@ -64,7 +64,7 @@ function App() {
   
 
 const LandingPage = (component) => {
-  if(pathname.includes('/landing')) {
+  if(pathname === '/' ) {
     return (
       null
     )}
@@ -154,7 +154,7 @@ const LandingPage = (component) => {
                                   <Route exact path="/auth" component={Auth} />
                                   <Route
                                     exact
-                                    path="/landing"
+                                    path="/"
                                     component={Landing}
                                   />
                                   

@@ -139,9 +139,7 @@ const NavBarContainer = styled.div`
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-     
       align-items: center;
-      width: 58%;
       @media only screen and (max-width: 1500px) {
       
         justify-Content: center; 
@@ -155,7 +153,6 @@ const NavBarContainer = styled.div`
       flex-direction: column;
       justify-content: center;
       justify-content: space-between;
-      
       align-items: center;
       `
       const UserName = styled.p`
@@ -176,22 +173,23 @@ const NavBarContainer = styled.div`
              display: none; 
          
        }
-       `
+       ` 
        const UserImg = styled.div`
         height: 48px;
         width: 48px;
         border-radius: 100px;
         border: 1px solid #FFFFFF;
+        
        `
        const imgStyle = {
          maxWidth: '100%',
          maxHeight: '100%',
          borderRadius: '100px'
        }
-       const userInfoContainer = styled.div`
-        
+      
+  const UserInfoContainer = styled.div`
+        margin-left: 5px;
        `
-  
 function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, setPathname }) {
    const [ hoverIndex, setHoverIndex ] = useState(0)
    const [navOpen, setNavOpen ] = useState(false)
@@ -209,10 +207,10 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
            </LogoContainer>
            <UserProfile>
              <UserImg> <img src={userInfo.picture} style = {imgStyle}/></UserImg>
-             <userInfoContainer>
+             <UserInfoContainer>
              <UserName> {userInfo.name}</UserName>
              <UserTitle>  Super Intendent  </UserTitle>
-             </userInfoContainer>
+             </UserInfoContainer>
            </UserProfile>
         </LogoAvatarContainer>
   
