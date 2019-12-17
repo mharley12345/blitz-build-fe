@@ -26,16 +26,34 @@ const StyledTableCell = withStyles(theme => ({
     height: 104
   }
 }))(TableCell);
+<<<<<<< HEAD
 function TaskCard({ projectID, numberOfTasks }) {
   const { tasks, getTasks } = useContext(taskContext);
   const { searchTerm } = useContext(searchTermContext);
+=======
+
+function TaskCard({
+  projectID,
+  numberOfTasks,
+}) {
+  const {
+    tasks,
+    getTasks
+  } = useContext(taskContext);
+  const { searchTerm } = useContext(searchTermContext);
+
+>>>>>>> 4d344fb8ca1ad12f33ad9092df10d72d9b3ee68e
   console.log("projectID:", projectID);
   useEffect(() => {
     getTasks();
   }, []);
+<<<<<<< HEAD
   const projectTasks = tasks.filter(item => {
     return `${item.project_id}` === projectID;
   });
+=======
+
+>>>>>>> 4d344fb8ca1ad12f33ad9092df10d72d9b3ee68e
   return (
     <Container>
       <Section>
@@ -53,8 +71,15 @@ function TaskCard({ projectID, numberOfTasks }) {
             </TableRow>
           </TableHead>
           <TableBody>
+<<<<<<< HEAD
             {projectTasks.slice(0, numberOfTasks).map(item => {
               return <Task item={item} key={item.id} projectTask={true} />;
+=======
+            {tasks.slice(0, numberOfTasks).map(item => {
+              if (JSON.stringify(item.project_id) === projectID) {
+                return <Task item={item} key={item.id} />;
+              }
+>>>>>>> 4d344fb8ca1ad12f33ad9092df10d72d9b3ee68e
             })}
           </TableBody>
         </Table>

@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
+import moment from "moment";
+
+//components
 import MeatBallsDrop from "../tasks/MeatBallsDrop";
 
 //styles
 import styled, { css } from "styled-components";
+
 //mui
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TableCell from "@material-ui/core/TableCell";
@@ -20,7 +24,6 @@ function Task({ item, children }) {
 
   const StyledTableCell = withStyles(theme => ({
     head: {
-
       padding: "8px 32px",
       height: 35,
       backgroundColor: "#E9E9E9",
@@ -50,24 +53,24 @@ function Task({ item, children }) {
   const classes = useStyles();
 
   const today = new window.Date().toISOString().slice(0, 10);
-  // This value is hardcoded now because the server don't send back a date
-  // It should be {item.due_date}
   const project_date = item.due_date;
 
   function DateCalc(today, project_date) {
     if (today === project_date) {
       return "Pending";
+    } else if (!project_date) {
+      return "Unavailable"
     } else if (today > project_date) {
       return "Overdue";
     } else if (today < project_date) {
       return "Upcoming";
     }
   }
-
-  const status = DateCalc(today, item);
+  
+  console.log(!project_date)
+  const status = DateCalc(today, item.due_date);
 
   const todayDate = new window.Date(today);
-  const projectDate = new window.Date(item.due_date);
   const oneDay = 24 * 60 * 60 * 1000;
 
   const diffDays = Math.round(Math.abs((todayDate - item.due_date) / oneDay));
@@ -86,18 +89,22 @@ function Task({ item, children }) {
   return (
     <>
       <StyledTableRow>
-        <StyledTableCell>
-          <Text>{item.project_name}</Text>
-        </StyledTableCell>
+        {!!item.project_name && (
+          <StyledTableCell>
+            <Text>{item.project_name}</Text>
+          </StyledTableCell>
+        )}
         <StyledTableCell>
           <Text>{item.task_name}</Text>
         </StyledTableCell>
 
-        <StyledTableCell>
+        <StyledTableCell style={{ maxWidth: 200 }}>
           <Text>{item.task_description}</Text>
         </StyledTableCell>
         <StyledTableCell>
-          <Date>{item.due_date}</Date>
+          <Date>
+            {!item.due_date ? "" : moment(item.due_date).format("MM-DD-YYYY")}
+          </Date>
         </StyledTableCell>
         <StyledTableCell>
           <Inner>
@@ -140,8 +147,8 @@ const Address = styled.div`
 `;
 
 const Text = styled.p`
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 1.2rem;
+  line-height: 20px;
   font-family: "Roboto";
   color: #3f3a36;
   margin-bottom: 8px;
@@ -158,11 +165,14 @@ const Date = styled.p`
 `;
 
 const Status = styled.div`
-  padding: 5px 16px 3px;
+  padding: 3px 8px 3px;
+  height: 26px;
+  width: 79px;
   background-color: grey;
   color: black;
   border-radius: 30px;
   display: flex;
+  justify-content: center;
   align-items: center;
 
   p {
@@ -196,27 +206,5 @@ const Status = styled.div`
 
 const Inner = styled.div`
   display: flex;
+  align-items: center
 `;
-
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    padding: "8px 32px",
-    height: 35,
-    backgroundColor: "#E9E9E9",
-    color: theme.palette.common.black
-  },
-  body: {
-    padding: "8px 32px",
-    fontSize: 16,
-    height: 104
-  }
-}))(TableCell);
-
-const StyledTableRow = withStyles(theme => ({
-  root: {
-    "&:nth-of-type(even)": {
-      background: "#F5F5F5"
-    },
-    marginBottom: "32px"
-  }
-}))(TableRow);

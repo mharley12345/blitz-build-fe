@@ -25,6 +25,9 @@ import AddTemplate from "./components/modal/AddTemplate";
 import Documents from "./components/documents/Documents";
 import OpenUploaderContext from "./contexts/documents/OpenUploaderContext";
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
+import ActivityViewAll from "./components/activityFeed/ActivityViewAll";
+
+import Landing from "./components/landing/pages/Landing"
 
 //context
 import UserContext from "./contexts/UserContext";
@@ -59,6 +62,17 @@ function App() {
       setUserInfo(jwtDecode(localStorage.getItem("id_token")));
     }
   }, []);
+  
+
+const LandingPage = (component) => {
+  if(pathname === '/' ) {
+    return (
+      null
+    )}
+    else {
+      return component
+    }
+  }
 
   // console.log("userInfo", userInfo);
   console.log("pathname", pathname);
@@ -132,24 +146,39 @@ function App() {
                             <UserContext.Provider
                               value={{ userInfo, setUserInfo }}
                             >
-                              <NavBar
+                            {LandingPage(<NavBar
                                 setPathname={setPathname}
                                 navLinks={navLinks}
-                              />
+                              />)}  
                               <Layout pathname={pathname}>
                                 <Switch>
+                                  <Route exact path="/auth" component={Auth} />
                                   <Route
                                     exact
                                     path="/"
+                                    component={Landing}
+                                  />
+                                  
+                                  <Route
+                                    exact
+                                    path="/navbar"
                                     component={AuthNavBar}
                                   />
-                                  <Route exact path="/auth" component={Auth} />
                                   <Route
                                     exact
                                     path="/callback"
                                     component={Callback}
                                   />
-                                  {/* <Route exact path="/login" component={Login} /> */}
+                                  <Route
+                                    exact
+                                    path="/activity-feed"
+                                    component={ActivityViewAll}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/login"
+                                    component={Login}
+                                  />
 
                                   {/* <Route exact path="/signup" component={Signup} /> */}
                                   <Route

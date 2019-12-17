@@ -211,8 +211,8 @@ const SearchTotal = styled.div`
 `;
 const ButtonSearch = styled.i`
   position: absolute;
-  right: 15px;
-  top: 2px;
+  right: 3%;
+  top: 1%;
   border: none;
   font-size: 30px;
   color: #8a827d;
@@ -220,7 +220,7 @@ const ButtonSearch = styled.i`
 
   z-index: 2;
   width: 20px;
-  hieght: 20px;
+  height: 20px;
 `;
 
 function Header({ pathname }) {
@@ -287,6 +287,8 @@ function Header({ pathname }) {
       pathname === "/documents/add" ||
       pathname.includes("/mycalendar") ||
       pathname === "/"
+      ||
+      pathname ==='/activity-feed'
     ) {
       return HideButton;
     } else {
@@ -302,7 +304,8 @@ function Header({ pathname }) {
       pathname.includes("templates") ||
       pathname === "/documents/add" ||
       pathname.includes("/mycalendar") ||
-      pathname === "/"
+      pathname === "/" ||
+      pathname ==='/activity-feed'
     ) {
       return HideButton;
     } else if (pathname === "/documents") {
@@ -339,7 +342,8 @@ function Header({ pathname }) {
       pathname === "/log-out" ||
       pathname === "/documents/add" ||
       pathname.includes("/mycalendar") ||
-      pathname === "/"
+      pathname === "/" ||
+      pathname ==='/activity-feed'
     ) {
       return HideButton;
     } else {
@@ -408,7 +412,7 @@ function Header({ pathname }) {
             />
             <Link to="/tasks">
               {" "}
-              <ButtonSearch className="ion-ios-search" />
+              {/* <ButtonSearch className="ion-ios-search" /> */}
             </Link>
           </SearchTotal>
         </Link>
@@ -493,7 +497,7 @@ function Header({ pathname }) {
         <Modal
           visible={TaskModalStatus}
           dismiss={handleTaskModalClose}
-          client={"50%"}
+          client={"40%"}
           component={
             <TaskForm
               closeModal={handleTaskModalClose}
