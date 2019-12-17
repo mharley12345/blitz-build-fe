@@ -19,7 +19,6 @@ export default function TaskProvider({ children }) {
         `/projects/tasks/${user_id}?sortby=isComplete&sortcondition=false&sortdir=desc`
       )
       .then(res => {
-        console.log("get tasks", res.data.tasks);
         setTasks(res.data.tasks);
       })
       .catch(err => {
@@ -34,7 +33,6 @@ export default function TaskProvider({ children }) {
         `/projects/tasks/${user_id}?sortby=isComplete&sortcondition=false&sortdir=desc`
       )
       .then(res => {
-        console.log("get tasks", res.data.tasks);
         setTasks(res.data.tasks);
       })
       .catch(err => {
@@ -49,7 +47,6 @@ export default function TaskProvider({ children }) {
         `/projects/tasks/${user_id}?sortby=isComplete&sortcondition=false&sortdir=desc`
       )
       .then(res => {
-        console.log("get tasks", res.data.tasks);
         setTasks(res.data.tasks);
       })
       .catch(err => {
