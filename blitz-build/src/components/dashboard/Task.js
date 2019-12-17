@@ -89,7 +89,7 @@ function Task({ item, children }) {
         {!!item.project_name 
         &&
           <StyledTableCell>
-            <Text style ={{fontWeight: 600}}>{item.project_name}</Text>
+            <Text>{item.project_name}</Text>
           </StyledTableCell>
         }
         <StyledTableCell>
