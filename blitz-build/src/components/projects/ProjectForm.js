@@ -34,15 +34,22 @@ export default function ProjectForm({
     square_ft: null,
     state: "",
     street_address: "",
-    zip_code: null,
-    template_id: null,
-    preBuiltTemplate: false
+    zip_code: null
   });
+  const [templateForm, setTemplateForm] = useState({
+    preBuiltTemplate: false,
+    template_id:null
+  });
+ 
+  
   const { templates } = useContext(TemplateContext);
 
-  console.log("prebuilt template", form.preBuiltTemplate);
+  
   const makeTrue = () => {
-    setForm({...form, preBuiltTemplate: true})
+    setTemplateForm({
+      ...templateForm,
+     preBuiltTemplate: !templateForm.preBuiltTemplate
+    });
   }
 
   useEffect(() => {
@@ -62,18 +69,26 @@ export default function ProjectForm({
       [e.target.name]: e.target.value
     });
   };
-
+const changeTampleIdHandler = e => {
+  setTemplateForm({
+    ...templateForm,
+    [e.target.name]: e.target.value
+  });
+};
   const handleSubmit = e => {
     e.preventDefault();
     const gps = zipcodes.lookup(form.zip_code);
 
     form.latitude = gps.latitude;
     form.longitude = gps.longitude;
+    console.log("template_id", templateForm.template_id)
+    console.log("90 Days", templateForm.preBuiltTemplate);
+    
 
     if (editFields) {
-      handleFunction(form, form.id);
+      handleFunction(form, form.id, templateForm);
     } else {
-      handleFunction(form);
+      handleFunction(form, templateForm);
     }
     setForm({
       project_name: "",
@@ -83,9 +98,7 @@ export default function ProjectForm({
       square_ft: null,
       state: "",
       street_address: "",
-      zip_code: null,
-      template_id: null,
-      preBuiltTemplate: false
+      zip_code: null
     });
 
     closeModal();
@@ -106,9 +119,8 @@ export default function ProjectForm({
         console.log(err);
       });
   };
-
-  
-    if (form.preBuiltTemplate === true) {
+  const add90Day = () => {
+   if (form.preBuiltTemplate === true) {
       const project_id = editFields.id;
       console.log(project_id);
       axiosWithAuth()
@@ -120,17 +132,20 @@ export default function ProjectForm({
           console.log(err);
         });
     }
+}
+  
+   
  
 
-  async function submitForm() {
-    const originalhandleSubmit = await handleSubmit();
-    console.log("async", originalhandleSubmit);
-    const customTemplate = await addCustomTemplate();
-    console.log("async", customTemplate);
-  }
+  // async function submitForm() {
+  //   const originalhandleSubmit = await handleSubmit();
+  //   console.log("async", originalhandleSubmit);
+  //   const customTemplate = await addCustomTemplate();
+  //   console.log("async", customTemplate);
+  // }
 
   return (
-    <StyledForm onSubmit={submitForm}>
+    <StyledForm onSubmit={handleSubmit}>
       <StyledFormHeader>
         <h1 style={{ fontSize: "2rem", margin: 0 }}>{text}</h1>
         <XButton onClick={closeModal}>close X</XButton>
@@ -157,8 +172,8 @@ export default function ProjectForm({
           <StyledSelect
             type="number"
             name="template_id"
-            value={form.template_id}
-            onChange={changeHandler}
+            value={templateForm.template_id}
+            onChange={changeTampleIdHandler}
           >
             <option>Choose Template</option>
 
@@ -177,8 +192,6 @@ export default function ProjectForm({
             id="check"
             type="checkbox"
             name="preBuiltTemplate"
-            value={form.preBuiltTemplate}
-            onChange={changeHandler}
             onClick={makeTrue}
           />
         </div>

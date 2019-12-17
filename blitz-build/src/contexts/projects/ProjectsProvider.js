@@ -23,19 +23,40 @@ const getProject = () => {
      });
 };
 
-  const addProject = newProject => {
-    
+  const addProject = (newProject, templateForm) => {
     newProject.status = "On Schedule";
     console.log("new project", newProject);
+    console.log("new project", templateForm);
     axiosWithAuth()
       .post(`/projects`, newProject)
       .then(res => {
         console.log("from addProject in projectsProvider", res);
-
+        if (templateForm.template_id!==null) {
+          axiosWithAuth()
+            .post(
+              `/templates/addTasks/${res.data.project[0].id}`,
+              { template_id:templateForm.template_id }
+            )
+            .then(res => {
+              console.log(res);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+        if (templateForm.preBuiltTemplate===true) {
+          axiosWithAuth()
+            .post("/90_day", res.data.project[0].id)
+            .then(res => {
+              console.log("90_day post", res);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
         setProjects([...projects, res.data.project[0]]);
       })
       .catch(err => console.log(err.response.data.message));
-  
   };
 
   const deleteProject = deleteProject => {
@@ -51,7 +72,11 @@ const getProject = () => {
     setProjects(newProjectsList);
   };
 
-  const editProject = (editedProject, editedProjectId) => {
+  const editProject = (
+    editedProject,
+    editedProjectId,
+    templateForm
+  ) => {
     editedProject.id = editedProjectId;
     console.log("edited project", editedProject, "id:", editedProjectId);
 
@@ -59,6 +84,28 @@ const getProject = () => {
       .put(`/projects/${editedProjectId}`, editedProject)
       .then(res => {
         console.log("from editProject in projectsProvider", res);
+         if (templateForm.template_id) {
+           axiosWithAuth()
+             .post(`/templates/addTasks/${editedProjectId}`, {
+               template_id: templateForm.template_id
+             })
+             .then(res => {
+               console.log(res);
+             })
+             .catch(err => {
+               console.log(err);
+             });
+         }
+        if (templateForm.preBuiltTemplate) {
+          axiosWithAuth()
+            .post("/90_day", editedProjectId)
+            .then(res => {
+              console.log("90_day post", res);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
         getProject();
       })
       .catch(err => console.log(err));
