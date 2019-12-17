@@ -41,7 +41,6 @@ const StyledTableCell = withStyles(theme => ({
 }))(TableCell);
 
 const InfoContainer = styled.div`
-  overflow-y: auto;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -132,23 +131,23 @@ export default function Tasks() {
     <>
       <InfoContainer>
         {failedSearch()}
-        <SortBtn>
+        {/* <SortBtn >
           Active
         </SortBtn>
         <SortBtn>
           Complete
-        </SortBtn>
+        </SortBtn> */}
       </InfoContainer>
 
       <Paper className={classes.root}>
         <Table className={classes.table} aria-label="customized table"  style = {{minHeight: '500px'}}>
           <TableHead>
             <TableRow>
-              <StyledTableCell>PROJECT</StyledTableCell>
-              <StyledTableCell>NAME</StyledTableCell>
-              <StyledTableCell>TASK</StyledTableCell>
-              <StyledTableCell>DUE DATE</StyledTableCell>
-              <StyledTableCell>STATUS</StyledTableCell>
+              <StyledTableCell>Poject Name</StyledTableCell>
+              <StyledTableCell>Task</StyledTableCell>
+              <StyledTableCell>Description</StyledTableCell>
+              <StyledTableCell>Due Date</StyledTableCell>
+              <StyledTableCell>Status</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
