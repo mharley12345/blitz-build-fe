@@ -140,9 +140,10 @@ const NavBarContainer = styled.div`
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      width:62%;
       @media only screen and (max-width: 1500px) {
-      width:65%;
       
+
         justify-Content: center; 
     
   }
@@ -189,7 +190,7 @@ const NavBarContainer = styled.div`
        }
       
   const UserInfoContainer = styled.div`
-        margin-left: 5px;
+       
        `
 function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, setPathname }) {
    const [ hoverIndex, setHoverIndex ] = useState(0)

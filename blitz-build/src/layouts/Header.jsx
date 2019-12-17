@@ -412,7 +412,7 @@ function Header({ pathname }) {
             />
             <Link to="/tasks">
               {" "}
-              <ButtonSearch className="ion-ios-search" />
+              {/* <ButtonSearch className="ion-ios-search" /> */}
             </Link>
           </SearchTotal>
         </Link>

@@ -24,7 +24,7 @@ import OpenTemplateContext from "./contexts/OpenTemplateContext";
 import AddTemplate from "./components/modal/AddTemplate";
 import Documents from "./components/documents/Documents";
 import OpenUploaderContext from "./contexts/documents/OpenUploaderContext";
-import ActivityViewAll from "./components/ActivityViewAll";
+import ActivityViewAll from "./components/activityFeed/ActivityViewAll";
 
 import Landing from "./components/landing/pages/Landing"
 
