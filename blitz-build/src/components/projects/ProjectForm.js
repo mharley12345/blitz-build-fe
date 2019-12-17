@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 // using zip_code to find latitude and longitude
 import zipcodes from "zipcodes";
+import TemplateContext from "../../contexts/templates/TemplateContext";
+import TaskContext from "../../contexts/tasks/TaskContext";
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 //styles
 //import styled from "styled-components";
@@ -13,6 +16,8 @@ import {
   StyledBtn,
   XButton
 } from "../../styles/Form/FormStyles";
+import { StyledSelect } from "../../styles/Tasks/taskForm";
+
 import { orange } from "@material-ui/core/colors";
 
 export default function ProjectForm({
@@ -32,8 +37,24 @@ export default function ProjectForm({
     state: "",
     street_address: "",
     zip_code: null
-    
   });
+  const [templateForm, setTemplateForm] = useState({
+    preBuiltTemplate: false,
+    template_id: null
+  });
+
+  console.log("templateForm", templateForm);
+
+  const { templates } = useContext(TemplateContext);
+  // const { getProjectTasks } = useContext(TaskContext);
+
+  const makeTrue = () => {
+    setTemplateForm({
+      ...templateForm,
+      preBuiltTemplate: !templateForm.preBuiltTemplate
+    });
+  };
+
   useEffect(() => {
     if (editFields) {
       console.log("editFields", editFields);
@@ -51,30 +72,84 @@ export default function ProjectForm({
       [e.target.name]: e.target.value
     });
   };
+  const changeTampleIdHandler = e => {
+    setTemplateForm({
+      ...templateForm,
+      [e.target.name]: e.target.value
+    });
+  };
   const handleSubmit = e => {
-      e.preventDefault();
-      const gps = zipcodes.lookup(form.zip_code);
+    e.preventDefault();
+    const gps = zipcodes.lookup(form.zip_code);
 
-      form.latitude = gps.latitude;
-      form.longitude = gps.longitude;
+    form.latitude = gps.latitude;
+    form.longitude = gps.longitude;
+
     if (editFields) {
-      handleFunction(form, form.id);
+      handleFunction(form, form.id, templateForm);
     } else {
-        
-      handleFunction(form);
+      handleFunction(form, templateForm);
     }
     setForm({
-    project_name: "",
-    beds: null,
-    baths: null,
-    city: "",
-    square_ft: null,
-    state: "",
-    street_address: "",
-    zip_code: null
+      project_name: "",
+      beds: null,
+      baths: null,
+      city: "",
+      square_ft: null,
+      state: "",
+      street_address: "",
+      zip_code: null
     });
+
     closeModal();
   };
+
+  // const addCustomTemplate = e => {
+  //   if (templateForm.template_id !== null) {
+  //     e.preventDefault();
+  //     const templateID = parseInt(templateForm.template_id);
+  //     const project_id = editFields.id;
+  //     console.log("project_id", project_id);
+  //     console.log("templateID", templateID);
+  //     axiosWithAuth()
+  //       .post(`/templates/addTasks/${project_id}`, { template_id: templateID })
+  //       .then(res => {
+  //         console.log(res);
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       });
+  //   }
+  // };
+  // const add90Day = () => {
+  //   if (templateForm.preBuiltTemplate === true) {
+  //     const project_id = editFields.id;
+  //     console.log(project_id);
+  //     axiosWithAuth()
+  //       .post("/90_day", { project_id })
+  //       .then(res => {
+  //         console.log("90_day post", res);
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       });
+  //   }
+  // };
+
+  // async function submitForm(e) {
+  //   e.preventDefault();
+  //   const originalhandleSubmit = await handleSubmit(e);
+  //   console.log("async", originalhandleSubmit);
+
+  //   const customTemplate = await addCustomTemplate(e);
+  //   console.log("async", customTemplate);
+
+  //   const preBuilt = await add90Day();
+  //   console.log("async", preBuilt);
+
+  //   const projectTasks = await getProjectTasks();
+  //   console.log("async", projectTasks);
+  // }
 
   return (
     <StyledForm onSubmit={handleSubmit}>
@@ -98,6 +173,37 @@ export default function ProjectForm({
         value={form.project_name}
         onChange={changeHandler}
       />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ width: "60%" }}>
+          <StyledLabel>Assign Custom Template</StyledLabel>
+          <StyledSelect
+            type="number"
+            name="template_id"
+            value={templateForm.template_id}
+            onChange={changeTampleIdHandler}
+          >
+            <option>Choose Template</option>
+
+            {templates.map(template => {
+              return (
+                <option key={template.id} value={template.template_id}>
+                  {template.id}
+                </option>
+              );
+            })}
+          </StyledSelect>
+        </div>
+        <div style={{ width: "33%" }}>
+          <StyledLabel>90 Day Template</StyledLabel>
+          <StyledInput
+            id="check"
+            type="checkbox"
+            name="preBuiltTemplate"
+            onClick={makeTrue}
+          />
+        </div>
+      </div>
+
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div style={{ width: "30%" }}>
           <StyledLabel>Beds</StyledLabel>

@@ -11,31 +11,52 @@ export default function ProjectsProvider({ children }) {
     getProject();
   }, []);
 
-const getProject = () => {
-   axiosWithAuth()
-     .get("/projects")
-     .then(res => {
-       console.log("get projects", res.data);
-       setProjects(res.data);
-     })
-     .catch(err => {
-       console.log(err);
-     });
-};
+  const getProject = () => {
+    axiosWithAuth()
+      .get("/projects")
+      .then(res => {
+        console.log("get projects", res.data);
+        setProjects(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
-  const addProject = newProject => {
-    
+  const addProject = (newProject, templateForm) => {
     newProject.status = "On Schedule";
     console.log("new project", newProject);
+    console.log("new project", templateForm);
     axiosWithAuth()
       .post(`/projects`, newProject)
       .then(res => {
         console.log("from addProject in projectsProvider", res);
-                getProject();
-
+        if (templateForm.template_id !== null) {
+          axiosWithAuth()
+            .post(`/templates/addTasks/${res.data.project[0].id}`, {
+              template_id: templateForm.template_id
+            })
+            .then(res => {
+              console.log(res);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+        if (templateForm.preBuiltTemplate === true) {
+          axiosWithAuth()
+            .post("/90_day", res.data.project[0].id)
+            .then(res => {
+              console.log("90_day post", res);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+        setProjects([...projects, res.data.project[0]]);
+        // getProject();
       })
       .catch(err => console.log(err.response.data.message));
-  
   };
 
   const deleteProject = deleteProject => {
@@ -43,8 +64,7 @@ const getProject = () => {
       .delete(`/projects/${deleteProject.id}`)
       .then(res => {
         console.log(`project with project id:${deleteProject.id} was removed`);
-                        getProject();
-
+        getProject();
       })
       .catch(err => console.log(err));
     // const newProjectsList = projects.filter(project => {
@@ -53,7 +73,7 @@ const getProject = () => {
     // setProjects(newProjectsList);
   };
 
-  const editProject = (editedProject, editedProjectId) => {
+  const editProject = (editedProject, editedProjectId, templateForm) => {
     editedProject.id = editedProjectId;
     console.log("edited project", editedProject, "id:", editedProjectId);
 
@@ -61,7 +81,29 @@ const getProject = () => {
       .put(`/projects/${editedProjectId}`, editedProject)
       .then(res => {
         console.log("from editProject in projectsProvider", res);
-       
+        if (templateForm.template_id) {
+          axiosWithAuth()
+            .post(`/templates/addTasks/${editedProjectId}`, {
+              template_id: templateForm.template_id
+            })
+            .then(res => {
+              console.log(res);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+        if (templateForm.preBuiltTemplate) {
+          axiosWithAuth()
+            .post("/90_day", editedProjectId)
+            .then(res => {
+              console.log("90_day post", res);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+        getProject();
       })
       .catch(err => console.log(err));
     const newProjectsList = projects.map(project => {
