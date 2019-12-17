@@ -38,19 +38,19 @@ export default function ProjectForm({
   });
   const [templateForm, setTemplateForm] = useState({
     preBuiltTemplate: false,
-    template_id:null
+    template_id: null
   });
- 
-  
+
+  console.log("templateForm", templateForm);
+
   const { templates } = useContext(TemplateContext);
 
-  
   const makeTrue = () => {
     setTemplateForm({
       ...templateForm,
-     preBuiltTemplate: !templateForm.preBuiltTemplate
+      preBuiltTemplate: !templateForm.preBuiltTemplate
     });
-  }
+  };
 
   useEffect(() => {
     if (editFields) {
@@ -69,21 +69,20 @@ export default function ProjectForm({
       [e.target.name]: e.target.value
     });
   };
-const changeTampleIdHandler = e => {
-  setTemplateForm({
-    ...templateForm,
-    [e.target.name]: e.target.value
-  });
-};
+  const changeTampleIdHandler = e => {
+    setTemplateForm({
+      ...templateForm,
+      [e.target.name]: e.target.value
+    });
+  };
   const handleSubmit = e => {
     e.preventDefault();
     const gps = zipcodes.lookup(form.zip_code);
 
     form.latitude = gps.latitude;
     form.longitude = gps.longitude;
-    console.log("template_id", templateForm.template_id)
+    console.log("template_id", templateForm.template_id);
     console.log("90 Days", templateForm.preBuiltTemplate);
-    
 
     if (editFields) {
       handleFunction(form, form.id, templateForm);
@@ -106,7 +105,7 @@ const changeTampleIdHandler = e => {
 
   const addCustomTemplate = e => {
     e.preventDefault();
-    const templateID = parseInt(form.template_id);
+    const templateID = parseInt(templateForm.template_id);
     const project_id = editFields.id;
     console.log("project_id", project_id);
     console.log("templateID", templateID);
@@ -120,7 +119,7 @@ const changeTampleIdHandler = e => {
       });
   };
   const add90Day = () => {
-   if (form.preBuiltTemplate === true) {
+    if (templateForm.preBuiltTemplate === true) {
       const project_id = editFields.id;
       console.log(project_id);
       axiosWithAuth()
@@ -132,20 +131,22 @@ const changeTampleIdHandler = e => {
           console.log(err);
         });
     }
-}
-  
-   
- 
+  };
 
-  // async function submitForm() {
-  //   const originalhandleSubmit = await handleSubmit();
-  //   console.log("async", originalhandleSubmit);
-  //   const customTemplate = await addCustomTemplate();
-  //   console.log("async", customTemplate);
-  // }
+  async function submitForm(e) {
+    e.preventDefault();
+    const originalhandleSubmit = await handleSubmit(e);
+    console.log("async", originalhandleSubmit);
+
+    const customTemplate = await addCustomTemplate(e);
+    console.log("async", customTemplate);
+
+    const preBuilt = await add90Day();
+    console.log("async", preBuilt);
+  }
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm onSubmit={submitForm}>
       <StyledFormHeader>
         <h1 style={{ fontSize: "2rem", margin: 0 }}>{text}</h1>
         <XButton onClick={closeModal}>close X</XButton>
