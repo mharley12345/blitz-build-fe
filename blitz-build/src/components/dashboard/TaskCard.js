@@ -30,27 +30,28 @@ const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
-function TaskCard({ projectID, numberOfTasks, AddTask, results, taskSearchResults}) {
- 
-  const { projectTasks, setProjectTasks, getProjectTasks, tasks, setTasks, getTasks } = useContext(taskContext);
-  const { searchTerm } = useContext(searchTermContext)
-  
- console.log("projectID:", projectID)
-  useEffect(() => {
-    
-   
-    
-    getTasks();
-  },[])
+function TaskCard({
+  projectID,
+  numberOfTasks,
+}) {
+  const {
+    tasks,
+    getTasks
+  } = useContext(taskContext);
+  const { searchTerm } = useContext(searchTermContext);
 
-    
+  console.log("projectID:", projectID);
+  useEffect(() => {
+    getTasks();
+  }, []);
+
   return (
     <Container>
       <Section>
         <p>Your Task List</p>
         <p>View All</p>
       </Section>
-     <Paper>
+      <Paper>
         <Table>
           <TableHead>
             <TableRow>
@@ -62,22 +63,15 @@ function TaskCard({ projectID, numberOfTasks, AddTask, results, taskSearchResult
             </TableRow>
           </TableHead>
           <TableBody>
-        {tasks.slice(0, numberOfTasks).map(item => 
-       
-        { if ( JSON.stringify(item.project_id) === projectID ) { 
-        return (
-          <Task item={item} key={item.id}   />
-           )
-         }
-           })}
-            
-       </TableBody>
+            {tasks.slice(0, numberOfTasks).map(item => {
+              if (JSON.stringify(item.project_id) === projectID) {
+                return <Task item={item} key={item.id} />;
+              }
+            })}
+          </TableBody>
         </Table>
       </Paper>
     </Container>
-      
-       
-         
   );
 }
 
@@ -88,7 +82,6 @@ const Section = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
-
   p {
     font-family: "Roboto";
     font-size: 16px;
