@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 // using zip_code to find latitude and longitude
 import zipcodes from "zipcodes";
 import TemplateContext from "../../contexts/templates/TemplateContext";
+import TaskContext from "../../contexts/tasks/TaskContext";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 //styles
@@ -44,6 +45,7 @@ export default function ProjectForm({
   console.log("templateForm", templateForm);
 
   const { templates } = useContext(TemplateContext);
+  const { getProjectTasks } = useContext(TaskContext);
 
   const makeTrue = () => {
     setTemplateForm({
@@ -143,6 +145,9 @@ export default function ProjectForm({
 
     const preBuilt = await add90Day();
     console.log("async", preBuilt);
+
+    const projectTasks = await getProjectTasks();
+    console.log("async", projectTasks);
   }
 
   return (
