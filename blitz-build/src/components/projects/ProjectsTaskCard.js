@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-import Task from "./Task";
+import Task from "../dashboard/Task";
 import searchTermContext from "../../contexts/searching/searchTerm";
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
@@ -26,16 +26,10 @@ const StyledTableCell = withStyles(theme => ({
     height: 104
   }
 }))(TableCell);
-function TaskCard({ projectID, numberOfTasks }) {
-  const { tasks, getTasks } = useContext(taskContext);
+function ProjectTaskCard({ projectID, numberOfTasks }) {
+  const { projectTasks } = useContext(taskContext);
   const { searchTerm } = useContext(searchTermContext);
   console.log("projectID:", projectID);
-  useEffect(() => {
-    getTasks();
-  }, []);
-  const projectTasks = tasks.filter(item => {
-    return `${item.project_id}` === projectID;
-  });
   return (
     <Container>
       <Section>
@@ -62,7 +56,7 @@ function TaskCard({ projectID, numberOfTasks }) {
     </Container>
   );
 }
-export default TaskCard;
+export default ProjectTaskCard;
 const Section = styled.div`
   width: 100%;
   display: flex;
