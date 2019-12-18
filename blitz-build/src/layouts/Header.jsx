@@ -528,6 +528,7 @@ function Header({ pathname }) {
               closeModal={handleProjectModalClose}
               handleFunction={addProject}
               text={"Add Project"}
+              imgText={"Upload a Project Image"}
             />
           }
         />

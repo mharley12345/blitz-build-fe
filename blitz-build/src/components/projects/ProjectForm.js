@@ -22,14 +22,15 @@ import {
 } from "../../styles/Form/FormStyles";
 import Checkbox from "@material-ui/core/Checkbox";
 
-
 export default function ProjectForm({
   closeModal,
   handleFunction,
   editFields,
-  text
+  text,
+  imgText
 }) {
   //console.log("task from delayForm", task,editFields)
+    const { templates } = useContext(TemplateContext);
   const [form, setForm] = useState({
     project_name: "",
     beds: null,
@@ -40,29 +41,14 @@ export default function ProjectForm({
     street_address: "",
     zip_code: null
   });
+ 
   const [templateForm, setTemplateForm] = useState({
     preBuiltTemplate: false,
     template_id: null
   });
-  const [checked, setChecked] = React.useState(false);
-
-  const handleChange = event => {
-    setChecked(event.target.checked);
-  };
   console.log("templateForm", templateForm);
 
-  const { templates } = useContext(TemplateContext);
-  // const { getProjectTasks } = useContext(TaskContext);
-
-  const preBuildTemplatehandler = () => {
-   
-    setTemplateForm({
-      ...templateForm,
-      preBuiltTemplate: !templateForm.preBuiltTemplate
-    });
-  };
-
-  useEffect(() => {
+ useEffect(() => {
     if (editFields) {
       console.log("editFields", editFields);
       setForm(editFields);
@@ -71,15 +57,30 @@ export default function ProjectForm({
       setForm(form);
       console.log(form);
     }
-  }, []);
+ }, []); 
+  
+// handle checkBox changing
+  const [checked, setChecked] = React.useState(false);
 
-  const changeHandler = e => {
+  const checkBoxChangeHandler = event => {
+    setChecked(event.target.checked);
+  };
+
+
+  const preBuildTemplatehandler = () => {
+    setTemplateForm({
+      ...templateForm,
+      preBuiltTemplate: !templateForm.preBuiltTemplate
+    });
+  };
+
+  const formChangeHandler = e => {
     setForm({
       ...form,
       [e.target.name]: e.target.value
     });
   };
-  const changeTampleIdHandler = e => {
+  const tampleIdChangeHandler = e => {
     setTemplateForm({
       ...templateForm,
       [e.target.name]: e.target.value
@@ -166,8 +167,14 @@ export default function ProjectForm({
       </StyledFormHeader>
       <div style={{ marginBottom: "16px" }}>
         {" "}
-        <span style={{ marginTop: "24px", color: "orange", cursor: "pointer" }}>
-          Upload a Project Image
+        <span
+          style={{
+            marginTop: "24px",
+            color: "orange",
+            cursor: "pointer"
+          }}
+        >
+          {imgText}
         </span>
         <span> (optional)</span>
       </div>
@@ -178,9 +185,14 @@ export default function ProjectForm({
         name="project_name"
         maxlength="25"
         value={form.project_name}
-        onChange={changeHandler}
+        onChange={formChangeHandler}
       />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between"
+        }}
+      >
         <div style={{ width: "67%" }}>
           <StyledLabel>Assign Custom Template</StyledLabel>
           <StyledSelect
@@ -192,7 +204,7 @@ export default function ProjectForm({
             type="number"
             name="template_id"
             value={templateForm.template_id}
-            onChange={changeTampleIdHandler}
+            onChange={tampleIdChangeHandler}
           >
             <option>Choose Template</option>
 
@@ -207,9 +219,7 @@ export default function ProjectForm({
         </div>
         <div style={{ width: "30%" }}>
           {" "}
-          <StyledLabel>
-            90 Day Template
-          </StyledLabel>
+          <StyledLabel>90 Day Template</StyledLabel>
           <div
             style={{
               width: "100%",
@@ -219,15 +229,17 @@ export default function ProjectForm({
               display: "flex",
               alignItems: "center",
               borderRadius: "3px",
-              marginTop:"5px"
+              marginTop: "5px"
             }}
           >
             <Checkbox
               checked={checked}
               color="default"
               value="false"
-              onChange={handleChange}
-              inputProps={{ "aria-label": "checkbox with default color" }}
+              onChange={checkBoxChangeHandler}
+              inputProps={{
+                "aria-label": "checkbox with default color"
+              }}
               name="preBuiltTemplate"
               onClick={preBuildTemplatehandler}
             />
@@ -237,14 +249,19 @@ export default function ProjectForm({
         </div>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between"
+        }}
+      >
         <div style={{ width: "30%" }}>
           <StyledLabel>Beds</StyledLabel>
           <StyledInput
             type="number"
             name="beds"
             value={form.beds}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
         <div style={{ width: "30%" }}>
@@ -253,7 +270,7 @@ export default function ProjectForm({
             type="number"
             name="baths"
             value={form.baths}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
         <div style={{ width: "30%" }}>
@@ -262,7 +279,7 @@ export default function ProjectForm({
             type="number"
             name="square_ft"
             value={form.square_ft}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
       </div>
@@ -271,23 +288,28 @@ export default function ProjectForm({
         type="text"
         name="street_address"
         value={form.street_address}
-        onChange={changeHandler}
+        onChange={formChangeHandler}
       />
       <StyledLabel>City</StyledLabel>
       <StyledInput
         type="text"
         name="city"
         value={form.city}
-        onChange={changeHandler}
+        onChange={formChangeHandler}
       />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between"
+        }}
+      >
         <div style={{ width: "45%" }}>
           <StyledLabel>State</StyledLabel>
           <StyledInput
             type="text"
             name="state"
             value={form.state}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
         <div style={{ width: "45%" }}>
@@ -296,7 +318,7 @@ export default function ProjectForm({
             type="number"
             name="zip_code"
             value={form.zip_code}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
       </div>
