@@ -4,7 +4,7 @@ export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
 `;
-export const StyledFormHeader = styled.form`
+export const StyledFormHeader = styled.div`
 margin-top:10px;
   display: flex;
   justify-content: space-between;

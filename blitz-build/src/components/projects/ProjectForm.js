@@ -183,7 +183,7 @@ export default function ProjectForm({
       <StyledInput
         type="text"
         name="project_name"
-        maxlength="25"
+        maxLength="25"
         value={form.project_name}
         onChange={formChangeHandler}
       />
