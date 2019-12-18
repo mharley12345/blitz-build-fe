@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
+
+//axios, moment
 import axios from "axios";
 import moment from "moment";
+
+//components
 import ProjectWeather from "./ProjectWeather";
 import DashboardWeather from "./DashboardWeather";
 import {
