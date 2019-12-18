@@ -18,11 +18,10 @@ import EditProject from "./EditProject";
 import Documents from "../documents/Documents";
 
 //context
-import EditModalContext from "../../contexts/EditModalContext";
 import PathnameContext from "../../contexts/PathnameContext";
 import TaskContext from "../../contexts/tasks/TaskContext";
-import searchTermContext from "../../contexts/searching/searchTerm";
-import TemplateContext from "../../contexts/templates/TemplateContext";
+// import searchTermContext from "../../contexts/searching/searchTerm";
+// import TemplateContext from "../../contexts/templates/TemplateContext";
 
 
 const IndividualProject = props => {
@@ -32,10 +31,6 @@ const IndividualProject = props => {
   const [deleteStatus, setDeleteStatus] = useState(false);
   const [editProjectStatus, setEditProjectStatus] = useState(false);
 
-
-  const [form, setForm] = useState({
-    template_id: null
-  });
 
   const project_id = props.match.params.id;
   const { getProjectTasks } = useContext(TaskContext);
