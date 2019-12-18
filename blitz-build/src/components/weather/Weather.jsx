@@ -56,8 +56,12 @@ function Weather(props) {
 
   // get the weather data from backend.
   useEffect(() => {
-    if (weatherPosition.latitude !== 0) {
-      axios
+    
+    if (weatherPosition.latitude == 0 || weatherPosition.latitude == undefined) { 
+     console.log("no weather position")
+    }
+  else {
+    axios
         .get(
           ` https://blitzbuild-weather.herokuapp.com/forecast/${weatherPosition.latitude},${weatherPosition.longitude}`
         )
@@ -69,7 +73,9 @@ function Weather(props) {
         .catch(err => {
           console.log(err);
         });
-    }
+  }
+      
+    
   }, [weatherPosition]);
 
   // get time
