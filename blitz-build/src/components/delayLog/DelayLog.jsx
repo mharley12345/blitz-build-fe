@@ -213,7 +213,7 @@ const DelayLogButtons = styled.div`
   border: 1px solid;
   box-sizing: border-box;
   border-radius: 3px;
-  padding-top: 8px;
+  padding-top: 10px;
   padding-left: 40px;
   font-size: 19px;
   color: #8a827d;
