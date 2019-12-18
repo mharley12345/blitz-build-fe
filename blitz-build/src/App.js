@@ -204,7 +204,7 @@ const LandingPage = (component) => {
                                   />
                                   <Route
                                     exact
-                                    path="/project/:id"
+                                    path="/projects/:id"
                                     component={IndividualProject}
                                   />
                                   <Route
