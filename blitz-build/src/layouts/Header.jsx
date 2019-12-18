@@ -497,7 +497,7 @@ function Header({ pathname }) {
         <Modal
           visible={TaskModalStatus}
           dismiss={handleTaskModalClose}
-          client={"40%"}
+          client={"45%"}
           component={
             <TaskForm
               closeModal={handleTaskModalClose}
@@ -528,6 +528,7 @@ function Header({ pathname }) {
               closeModal={handleProjectModalClose}
               handleFunction={addProject}
               text={"Add Project"}
+              imgText={"Upload a Project Image"}
             />
           }
         />

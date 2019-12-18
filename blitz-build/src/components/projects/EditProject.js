@@ -24,6 +24,7 @@ export default function EditProject({
             closeModal={handleEditClose}
             handleFunction={editProject}
             text={"Edit Project"}
+            imgText={"Change Project Image"}
             editFields={project}
           />
         }

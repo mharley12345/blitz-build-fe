@@ -16,7 +16,7 @@ export default function TaskProvider({ children }) {
     const user_id = localStorage.getItem("user_id");
     axiosWithAuth()
       .get(
-        `/projects/tasks/${user_id}?sortby=isComplete&sortcondition=false&sortdir=desc`
+        `/projects/tasks/${user_id}?sortdir=desc&orderby=id`
       )
       .then(res => {
         setTasks(res.data.tasks);
