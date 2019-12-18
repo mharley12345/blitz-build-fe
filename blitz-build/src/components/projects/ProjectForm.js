@@ -1,31 +1,33 @@
 import React, { useEffect, useState, useContext } from "react";
 // using zip_code to find latitude and longitude
 import zipcodes from "zipcodes";
+
+// contexts
 import TemplateContext from "../../contexts/templates/TemplateContext";
 import TaskContext from "../../contexts/tasks/TaskContext";
+
+// axios
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
-//styles
+// styles
 //import styled from "styled-components";
-
 import {
   StyledForm,
   StyledFormHeader,
   StyledLabel,
   StyledInput,
   StyledBtn,
-  XButton
+  XButton,
+  StyledSelect
 } from "../../styles/Form/FormStyles";
-import { StyledSelect } from "../../styles/Tasks/taskForm";
+import Checkbox from "@material-ui/core/Checkbox";
 
-import { orange } from "@material-ui/core/colors";
 
 export default function ProjectForm({
   closeModal,
   handleFunction,
   editFields,
-  text,
-  
+  text
 }) {
   //console.log("task from delayForm", task,editFields)
   const [form, setForm] = useState({
@@ -42,13 +44,18 @@ export default function ProjectForm({
     preBuiltTemplate: false,
     template_id: null
   });
+  const [checked, setChecked] = React.useState(false);
 
+  const handleChange = event => {
+    setChecked(event.target.checked);
+  };
   console.log("templateForm", templateForm);
 
   const { templates } = useContext(TemplateContext);
   // const { getProjectTasks } = useContext(TaskContext);
 
-  const makeTrue = () => {
+  const preBuildTemplatehandler = () => {
+   
     setTemplateForm({
       ...templateForm,
       preBuiltTemplate: !templateForm.preBuiltTemplate
@@ -174,9 +181,14 @@ export default function ProjectForm({
         onChange={changeHandler}
       />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div style={{ width: "60%" }}>
+        <div style={{ width: "67%" }}>
           <StyledLabel>Assign Custom Template</StyledLabel>
           <StyledSelect
+            style={{
+              background: "#E9E9E9",
+              border: "none",
+              paddingLeft: "10px"
+            }}
             type="number"
             name="template_id"
             value={templateForm.template_id}
@@ -193,14 +205,35 @@ export default function ProjectForm({
             })}
           </StyledSelect>
         </div>
-        <div style={{ width: "33%" }}>
-          <StyledLabel>90 Day Template</StyledLabel>
-          <StyledInput
-            id="check"
-            type="checkbox"
-            name="preBuiltTemplate"
-            onClick={makeTrue}
-          />
+        <div style={{ width: "30%" }}>
+          {" "}
+          <StyledLabel>
+            90 Day Template
+          </StyledLabel>
+          <div
+            style={{
+              width: "100%",
+              height: "16px",
+              padding: "6px 8px",
+              backgroundColor: "#e9e9e9",
+              display: "flex",
+              alignItems: "center",
+              borderRadius: "3px",
+              marginTop:"5px"
+            }}
+          >
+            <Checkbox
+              checked={checked}
+              color="default"
+              value="false"
+              onChange={handleChange}
+              inputProps={{ "aria-label": "checkbox with default color" }}
+              name="preBuiltTemplate"
+              onClick={preBuildTemplatehandler}
+            />
+
+            <span style={{ color: "#817974" }}>Apply</span>
+          </div>
         </div>
       </div>
 
