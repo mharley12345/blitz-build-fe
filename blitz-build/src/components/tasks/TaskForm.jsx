@@ -116,7 +116,13 @@ export default function TaskForm({
         value={task.task_name}
         onChange={handleChanges}
       />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "4px"
+        }}
+      >
         <div style={{ width: "62%" }}>
           <StyledLabel>Assign Project</StyledLabel>
           <StyledSelect
