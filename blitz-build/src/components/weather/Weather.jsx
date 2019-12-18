@@ -64,6 +64,7 @@ function Weather(props) {
         .then(res => {
           setWeatherData(res.data);
           console.log("get weather data", res.data);
+          
         })
         .catch(err => {
           console.log(err);
