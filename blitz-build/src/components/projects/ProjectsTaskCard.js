@@ -13,6 +13,13 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
+
+//router
+import { Link } from 'react-router-dom'
+
+//styles
+import { ViewBtn } from "../../styles/ViewBtn";
+
 const StyledTableCell = withStyles(theme => ({
   head: {
     padding: "8px 32px",
@@ -34,7 +41,9 @@ function ProjectTaskCard({ projectID, numberOfTasks }) {
     <Container>
       <Section>
         <p>Your Task List</p>
-        <p>View All</p>
+        <Link to= {`/projects/${projectID}/tasks`}>
+          <ViewBtn>View All</ViewBtn>
+        </Link>
       </Section>
       <Paper>
         <Table>

@@ -9,6 +9,7 @@ import Global from "../../styles/Global";
 import DeleteProject from "./DeleteProject";
 import EditProject from "./EditProject";
 import Documents from "../documents/Documents";
+import ProjectTasks from "../../views/tasks/ProjectTasks";
 
 //static
 import Project_icon from "../../styles/icons_project/project_icon.png";
@@ -19,15 +20,13 @@ import PathnameContext from "../../contexts/PathnameContext";
 import EditModalContext from "../../contexts/EditModalContext";
 import TemplateContext from "../../contexts/templates/TemplateContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
-import TaskContext from "../../contexts/tasks/TaskContext"
+import TaskContext from "../../contexts/tasks/TaskContext";
 
 //styles
 import styled from "styled-components";
 import { StyledLabel, StyledSelect } from "../../styles/Tasks/taskForm";
 
-
 const IndividualProject = props => {
-  
   //local states
   const [PreBuiltTemplate, setPreBuiltTemplate] = useState([]);
   const [projectState, setProjectState] = useState({});
@@ -37,12 +36,10 @@ const IndividualProject = props => {
     template_id: null
   });
 
-
   //contexts
   const { getProjectTasks } = useContext(TaskContext);
   const { pathname, setPathname } = useContext(PathnameContext);
   const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
-
 
   const project_id = props.match.params.id;
 
@@ -63,8 +60,8 @@ const IndividualProject = props => {
       .catch(err => {
         console.log(err);
       });
-      //gets the project tasks and sets them to projectTask context
-      getProjectTasks(projectID)
+    //gets the project tasks and sets them to projectTask context
+    getProjectTasks(projectID);
   }, [props]);
 
   //edit modal functions
