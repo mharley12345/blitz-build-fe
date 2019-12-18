@@ -190,7 +190,8 @@ export default function ProjectForm({
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
+          marginTop: "4px"
         }}
       >
         <div style={{ width: "67%" }}>
@@ -252,7 +253,8 @@ export default function ProjectForm({
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
+          marginTop: "4px"
         }}
       >
         <div style={{ width: "30%" }}>
@@ -300,7 +302,8 @@ export default function ProjectForm({
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between"
+          justifyContent: "space-between",
+          marginTop: "4px"
         }}
       >
         <div style={{ width: "45%" }}>

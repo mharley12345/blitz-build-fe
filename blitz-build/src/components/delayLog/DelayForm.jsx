@@ -52,7 +52,7 @@ export default function DelayForm({
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <StyledFormHeader style={{marginBottom:"32px"}}>
+      <StyledFormHeader style={{marginBottom:"20px"}}>
         <h1 style={{ fontSize: "2rem", margin: 0 }}>{text}</h1>
         <XButton onClick={closeModal}>close X</XButton>
       </StyledFormHeader>
