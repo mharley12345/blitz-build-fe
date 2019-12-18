@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-import projectContext from "../../contexts/projects/ProjectContext";
-import AddProject from "../modal/AddProject";
-import Global from "../../styles/Global";
-import styled, { css } from "styled-components";
-import searchTermContext from "../../contexts/searching/searchTerm";
-import moment from "moment";
+import React, {useContext } from "react";
 
+// context
+import projectContext from "../../contexts/projects/ProjectContext";
+import searchTermContext from "../../contexts/searching/searchTerm";
+
+//styles
+import Global from "../../styles/Global";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -16,6 +15,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
+
 // pages bar function from global
 import TablePaginationActions from "../global/TablePaginationActions";
 
@@ -123,7 +123,7 @@ const Projects = props => {
               <StyledTableRow
                 className={classes.tableHover}
                 key={result.id}
-                Link
+                
                 to={`/project/${result.id}`}
                 onClick={() => {
                   props.history.push(`/project/${result.id}`);
