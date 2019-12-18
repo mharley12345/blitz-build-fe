@@ -165,8 +165,14 @@ export default function Tasks() {
               }
             })}
 
-            {results.length > 0 ? (
-              results.map(result => <Task item={result} key={result.id}></Task>)
+            {results.length > 0 ? (   (rowsPerPage > 0
+              ? results.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : results
+            )
+              .map(result => <Task item={result} key={result.id}></Task>)
             ) : (
               <></>
             )}
