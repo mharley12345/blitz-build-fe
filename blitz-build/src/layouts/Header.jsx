@@ -11,9 +11,7 @@ import ProjectForm from "../components/projects/ProjectForm";
 import { NavLink, Link, Redirect } from "react-router-dom";
 import OpenContext from "../contexts/projects/OpenContext";
 import OpenTemplateContext from "../contexts/OpenTemplateContext";
-// import AddProject from  '../components/modal/AddProject'
 import searchTermContext from "../contexts/searching/searchTerm";
-import AddProject from "../components/modal/AddProject";
 import TemplateContext from "../contexts/templates/TemplateContext";
 import TemplateTaskForm from "../components/templates/TemplateTaskForm";
 import TaskContext from "../contexts/tasks/TaskContext";
@@ -546,7 +544,7 @@ function Header({ pathname }) {
           }
         />
       </ButtonContainer>
-      <AddProject />
+      
     </HeaderContainer>
   );
 }
