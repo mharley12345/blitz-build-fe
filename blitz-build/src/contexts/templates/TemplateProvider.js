@@ -111,14 +111,14 @@ const getTemplateTasks = () => {
         console.log("template was edited", res);
         const newTemplatesList = templates.map(template => {
           if (template.id === editedTemplateId) {
-            return res.data.editedTemplate[0];
+            return editedTemplate;
           } else {
             return template;
           }
         });
         setTemplates([...newTemplatesList]);
 
-        window.location.reload(true);
+        
       })
       .catch(err => {
         console.log(err);

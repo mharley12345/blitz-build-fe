@@ -120,7 +120,7 @@ export default function ProjectsProvider({ children }) {
               console.log(err);
             });
         }
-        getProject();
+        window.location.reload(true);
       })
       .catch(err => console.log(err));
     const newProjectsList = projects.map(project => {
