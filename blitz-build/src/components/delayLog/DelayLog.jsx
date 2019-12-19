@@ -52,9 +52,7 @@ const useStyles = makeStyles({
   root: {
     border: "1px solid #DCD9D5"
   },
-  table: {
-    minWidth: "1080px"
-  },
+
   tableHover: {
     "&:hover": {
       border: "3px solid orange"
@@ -109,7 +107,7 @@ function DelayLog() {
 
     csvExporter.generateCsv(results);
   }
-// hover function for the button in the top
+  // hover function for the button in the top
   const hoverStyle = () => {
     if (hover === true) {
       return HoverStyle;
@@ -132,12 +130,11 @@ function DelayLog() {
           Export to CSV
         </DelayLogButtons>
       </div>
-      <p style={{ color: "#817974", paddingBottom: "8px" }}>
-        {" "}
-        Your Delay_Logs List{" "}
+      <p style={{ paddingBottom: "8px", fontWeight: 600 }}>
+        Your DelayLogs List
       </p>
       <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="customized table">
+        <Table aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell>TASK NAME</StyledTableCell>

@@ -1,4 +1,4 @@
-import React, {useContext } from "react";
+import React, { useContext } from "react";
 
 // context
 import projectContext from "../../contexts/projects/ProjectContext";
@@ -46,9 +46,7 @@ const useStyles = makeStyles({
   root: {
     border: "1px solid #DCD9D5"
   },
-  table: {
-    minWidth: "1080px"
-  },
+  
   tableHover: {
     "&:hover": {
       cursor: "pointer",
@@ -56,7 +54,6 @@ const useStyles = makeStyles({
         color: "#DD6B20",
 
         textDecoration: "underline"
-
       }
     }
   }
@@ -100,12 +97,9 @@ const Projects = props => {
   return (
     <>
       <Global />
-      <div style={{ color: "#817974", paddingBottom: "8px" }}>
-        {" "}
-        Your Project List{" "}
-      </div>
-      <Paper className={classes.root} >
-        <Table className={classes.table} aria-label="customized table"  >
+      <p style={{ paddingBottom: "8px", fontWeight: 600 }}>Your Project List</p>
+      <Paper className={classes.root}>
+        <Table  aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell>ADDRESS</StyledTableCell>
@@ -126,10 +120,9 @@ const Projects = props => {
               <StyledTableRow
                 className={classes.tableHover}
                 key={result.id}
-                
-                to={`/project/${result.id}`}
+                to={`/projects/${result.id}`}
                 onClick={() => {
-                  props.history.push(`/project/${result.id}`);
+                  props.history.push(`/projects/${result.id}`);
                 }}
               >
                 <StyledTableCell>
