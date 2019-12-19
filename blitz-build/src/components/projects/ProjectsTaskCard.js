@@ -34,9 +34,11 @@ const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 function ProjectTaskCard({ projectID, numberOfTasks }) {
-  const { projectTasks } = useContext(taskContext);
-  const { searchTerm } = useContext(searchTermContext);
-  console.log("projectID:", projectID);
+  const { tasks } = useContext(taskContext);
+
+  const projectTasks = tasks.filter(item => {
+    return `${item.project_id}` === projectID;
+  });
   return (
     <Container>
       <Section>

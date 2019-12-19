@@ -131,23 +131,23 @@ export default function Tasks() {
     <>
       <InfoContainer>
         {failedSearch()}
-        {/* <SortBtn >
+        <SortBtn >
           Active
         </SortBtn>
         <SortBtn>
           Complete
-        </SortBtn> */}
+        </SortBtn>
       </InfoContainer>
 
       <Paper className={classes.root}>
         <Table className={classes.table} aria-label="customized table"  style = {{minHeight: '500px'}}>
           <TableHead>
             <TableRow>
-              <StyledTableCell>Poject Name</StyledTableCell>
-              <StyledTableCell>Task</StyledTableCell>
-              <StyledTableCell>Description</StyledTableCell>
-              <StyledTableCell>Due Date</StyledTableCell>
-              <StyledTableCell>Status</StyledTableCell>
+              <StyledTableCell>PROJECT NAME</StyledTableCell>
+              <StyledTableCell>TASK</StyledTableCell>
+              <StyledTableCell>DESCRIPTION</StyledTableCell>
+              <StyledTableCell>DUE DATE</StyledTableCell>
+              <StyledTableCell>STATUS</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
