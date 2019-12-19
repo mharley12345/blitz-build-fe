@@ -16,7 +16,7 @@ import TemplateContext from "../contexts/templates/TemplateContext";
 import TemplateTaskForm from "../components/templates/TemplateTaskForm";
 import TaskContext from "../contexts/tasks/TaskContext";
 import ProjectContext from "../contexts/projects/ProjectContext";
-
+import DocumentsContext from '../contexts/documents/DocumentsContext'
 const HeaderContainer = styled.div`
   background: #fff;
   width: 100%;
@@ -233,6 +233,7 @@ function Header({ pathname }) {
   const { addProject } = useContext(ProjectContext);
   const { addTask } = useContext(TasksContext);
   const { addTemplateTask } = useContext(TemplateContext);
+  const {addDocument} = useContext(DocumentsContext)
   const { open, setOpen } = useContext(OpenContext);
   const { TaskModalStatus, setTaskModalStatus } = useContext(TaskContext);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
@@ -420,13 +421,13 @@ function Header({ pathname }) {
           onMouseEnter={() => setDocumentHover(true)}
           onMouseLeave={() => setDocumentHover(false)}
           style={HideTheDocumentButton(pathname)}
-          onClick={OpenUploaderContext}
+          onClick={handleDocumentModalOpen}
         >
           {" "}
           <ButtonI
             className="ion-ios-add-circle"
             style={HoverDocumentStyleFunction()}
-            onClick={handleDocumentModalClose}
+  
           />{" "}
           <ButtonText style={HoverDocumentStyleFunction()}>
             Add Document
@@ -528,8 +529,31 @@ function Header({ pathname }) {
               text={"Add Project"}
               imgText={"Upload a Project Image"}
             />
+          
           }
         />
+           <Modal 
+            visible={DocumentModalStatus}
+            dismiss={handleProjectModalClose}
+            client={"80%"}
+            style={{
+            "position": "absolute",
+             "width": "604px",
+            "height": "493px",
+            "left": "418px",
+            "top": "96px",
+
+
+
+           "background": "#FFFFFF",
+           "border-radius": "3px"}}
+            component={
+              <Uploader
+                 closeModal={handleDocumentModalClose}
+                 handleFunction={addDocument}
+            />
+            }
+            />
       </ButtonContainer>
       
     </HeaderContainer>
