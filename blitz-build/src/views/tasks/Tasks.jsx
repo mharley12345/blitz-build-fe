@@ -24,21 +24,10 @@ import TableFooter from "@material-ui/core/TableFooter";
 //styles
 import styled from "styled-components";
 import { SortBtn } from "../../styles/SortBtn";
-
-
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    padding: "8px 32px",
-    height: 35,
-    backgroundColor: "#E9E9E9",
-    color: theme.palette.common.black
-  },
-  body: {
-    padding: "8px 32px",
-    fontSize: 16,
-    height: 104
-  }
-}))(TableCell);
+import {
+  useStyles,
+  StyledTableCell
+} from "../../styles/Table/TableStyles";
 
 const InfoContainer = styled.div`
   width: 100%;
@@ -47,19 +36,7 @@ const InfoContainer = styled.div`
   align-items: center;
   margin-bottom: 10px;
 `;
-const useStyles = makeStyles({
-  root: {
-    border: "1px solid #DCD9D5"
-  },
-  table: {
-    // minWidth: "1080px"
-  },
-  tableHover: {
-    "&:hover": {
-      border: "3px solid orange"
-    }
-  }
-});
+
 // const MainFailContainer = styled.div`
 //   postion: relative;
 //   width: 900px;

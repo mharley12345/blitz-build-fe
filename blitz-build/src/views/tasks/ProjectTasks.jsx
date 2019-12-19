@@ -20,27 +20,15 @@ import TableBody from "@material-ui/core/TableBody";
 import TablePaginationActions from "../../components/global/TablePaginationActions";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableFooter from "@material-ui/core/TableFooter";
-
+import {
+  StyledTableCell,
+} from "../../styles/Table/TableStyles";
 //styles
 import styled from "styled-components";
 import { SortBtn } from "../../styles/SortBtn";
 
 //static
 import Project_icon from "../../styles/icons_project/project_icon.png";
-
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    padding: "8px 32px",
-    height: 35,
-    backgroundColor: "#E9E9E9",
-    color: theme.palette.common.black
-  },
-  body: {
-    padding: "8px 32px",
-    fontSize: 16,
-    height: 104
-  }
-}))(TableCell);
 
 const InfoContainer = styled.div`
   width: 100%;
