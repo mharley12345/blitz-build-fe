@@ -66,6 +66,7 @@ const NavBarContainer = styled.div`
             border-radius: 5px;
             width: 85%;
             margin: 5px;
+           
           :nth-child(9) {
             border-top: 1px solid white;
             border-radius: 4px;
@@ -128,6 +129,9 @@ const NavBarContainer = styled.div`
              const NavBarI = styled.i`
            align-items: center;
             font-size: 1.4em;
+            @media only screen and (max-width: 1500px) {
+              margin-left: 10%;
+           }
            
         `;
 

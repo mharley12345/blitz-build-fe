@@ -222,6 +222,9 @@ const ButtonSearch = styled.i`
   width: 20px;
   height: 20px;
 `;
+const SearchHoverStyle = {
+  color: "#DD6B20"
+}
 
 function Header({ pathname }) {
   const { searchTerm, setSearchTerm, searchCatch, setSearchCatch } = useContext(
@@ -229,6 +232,7 @@ function Header({ pathname }) {
   );
   const [TaskHover, setTaskHover] = useState(false);
   const [ProjectHover, setProjectHover] = useState(false);
+  const [searchHover, setSearchHover ] = useState(false)
   const [DocumentHover, setDocumentHover] = useState(false);
   const [TemplateHover, setTemplateHover] = useState(false);
   const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext);
@@ -392,6 +396,13 @@ function Header({ pathname }) {
       setOpenTemplate(true);
     }
   };
+
+  const searchOnHover = () => {
+    if(searchTerm.length > 0) {
+     return SearchHoverStyle
+    }
+   
+  }
   //// search function
 
   const handleChange = e => {
@@ -401,18 +412,20 @@ function Header({ pathname }) {
 
   return (
     <HeaderContainer>
-      <SearchContainer>
+      <SearchContainer  onMouseEnter={() => setSearchHover(true)}
+          onMouseLeave={() => setSearchHover(false)}>
         <Link to="/tasks">
-          <SearchTotal>
+          <SearchTotal >
             <SearchInput
-              type="text"
+              type="text" 
               placeholder="Search Tasks"
               value={searchTerm}
               onChange={handleChange}
+              style={{ outline: 'none'}}
             />
             <Link to="/tasks">
               {" "}
-              <ButtonSearch className="ion-ios-search" />
+              <ButtonSearch className="ion-ios-search" style={searchOnHover()} />
             </Link>
           </SearchTotal>
         </Link>
