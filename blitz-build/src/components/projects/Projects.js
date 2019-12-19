@@ -117,9 +117,9 @@ const Projects = props => {
               <StyledTableRow
                 className={classes.tableHover}
                 key={result.id}
-                to={`/project/${result.id}`}
+                to={`/projects/${result.id}`}
                 onClick={() => {
-                  props.history.push(`/project/${result.id}`);
+                  props.history.push(`/projects/${result.id}`);
                 }}
               >
                 <StyledTableCell>
