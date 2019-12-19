@@ -15,7 +15,7 @@ const  DocumentCard = (props) => {
 
    <div className='tbl-container'>
   <Theader>Your Documents</Theader>
-<div className='sort'>Sort </div>
+
  <Table responsive>
 
        <thead>
@@ -60,11 +60,21 @@ export default DocumentCard;
 
 const Theader = styled.div `
 
-position: relitive;
-width: 1150px;
-height: 60px;
+width: 255px;
+height: 19px;
 left: 32px;
 top: 32px;
-color: white;
-background:#3b3b3b
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+letter-spacing: 0.04em;
+
+/* 400 Gray */
+
+color: #817974;
 `

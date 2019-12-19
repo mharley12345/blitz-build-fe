@@ -1,11 +1,11 @@
 import React from 'react';
 import {axiosWithAuth} from '../../utils/auth/axiosWithAuth';
-import moment from 'moment'
+
 import './DropZone.css'
 import styled from 'styled-components'
 let user_id = localStorage.getItem("user_id")
 let project_name = localStorage.getItem("project_name")
-
+let projectID = localStorage.getItem("projectID")
 class Uploader extends React.Component {
   constructor(props){
     super(props);
@@ -16,8 +16,9 @@ class Uploader extends React.Component {
       user_id:user_id,
       file_name:'',
       project_name:project_name,
+      project_id:projectID,
       
-      createdAt: moment().format('l')
+      createdAt: Date.now()
     }
     let Success = this.state.success
   }

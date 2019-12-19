@@ -30,6 +30,7 @@ function TaskCard({ projectID, numberOfTasks }) {
   const { tasks, getTasks } = useContext(taskContext);
   const { searchTerm } = useContext(searchTermContext);
   console.log("projectID:", projectID);
+  localStorage.setItem("projectID",projectID)
   useEffect(() => {
     getTasks();
   }, []);
