@@ -3,6 +3,8 @@ import styled, { css } from "styled-components";
 
 import { media, mediaDown } from "../styles/media"
 
+import { Link, withRouter } from "react-router-dom";
+import auth0Client from "../../auth/auth";
 
 const Hero = () => {
   return (
@@ -15,7 +17,7 @@ const Hero = () => {
         </Title>
         <Subheader>Source, plan, and work faster.</Subheader>
         <ButtonGroup>
-        <Button onClick={() => alert('yahoo')}>Sign up</Button>
+        <Button onClick={auth0Client.signIn}>Sign up</Button>
         <Button secondary>Learn more</Button>
         </ButtonGroup>
       </Inner>
