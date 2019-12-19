@@ -27,14 +27,13 @@ import styled from "styled-components";
 import { StyledLabel, StyledSelect } from "../../styles/Tasks/taskForm";
 
 const IndividualProject = props => {
+
+
   //local states
-  const [PreBuiltTemplate, setPreBuiltTemplate] = useState([]);
   const [projectState, setProjectState] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
   const [editProjectStatus, setEditProjectStatus] = useState(false);
-  const [form, setForm] = useState({
-    template_id: null
-  });
+  
 
 
   //contexts
@@ -42,9 +41,8 @@ const IndividualProject = props => {
   const { pathname, setPathname } = useContext(PathnameContext);
   const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
 
-  const project_id = props.match.params.id;
 
-
+  //this gets the project id and sets it to state so we have a single project getting returned, then we are getting the projectTasks
   useEffect(() => {
     setPathname(window.location.pathname);
     const projectID = props.match.params.id;
@@ -69,6 +67,7 @@ const IndividualProject = props => {
     e.stopPropagation();
     setEditProjectStatus(true);
   };
+  //handles close
   const handleEditProjectClose = e => {
     setEditProjectStatus(false);
   };

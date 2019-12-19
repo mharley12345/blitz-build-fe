@@ -62,17 +62,21 @@ const useStyles = makeStyles({
 const Projects = props => {
   const classes = useStyles();
 
+  //importing state of projects, and search term from context
   const { projects } = useContext(projectContext);
   const { searchTerm } = useContext(searchTermContext);
   const projectSearchInput = searchTerm.toLowerCase("");
 
+  //this tracks which page you are on for projects and sets the intial state of how many rows there are
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  //sets new page
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
+  //this handles the changes the user makes to how many rows they want
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -86,8 +90,7 @@ const Projects = props => {
       project.street_address.toLowerCase().includes(projectSearchInput)
   );
 
-  console.log("rows in projects table", results);
-
+  
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
 
