@@ -18,12 +18,12 @@ import ProjectTasks from "./views/tasks/ProjectTasks";
 import Templates from "./components/templates/templates";
 import IndividualTemplate from "./components/templates/IndividualTemplate";
 import NinetyDayTemplate from "./components/templates/90DayTemplate";
-import Projects from "./components/projects/Projects";
-import IndividualProject from "./components/projects/IndividualProject";
+import Projects from "./views/projects/Projects";
+import IndividualProject from "./views/projects/IndividualProject";
 import Logout from "./components/auth/Logout";
 import Layout from "./layouts/Layout";
 import Dashboard from "./components/dashboard/Dashboard";
-import DelayLog from "./components/delayLog/DelayLog";
+import DelayLog from "./views/delayLog/DelayLog";
 import OpenTemplateContext from "./contexts/OpenTemplateContext";
 import AddTemplate from "./components/modal/AddTemplate";
 

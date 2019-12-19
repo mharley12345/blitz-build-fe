@@ -3,13 +3,13 @@ import { withRouter } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 //components
-import Weather from "../weather/Weather";
-import ProjectTaskCard from "./ProjectsTaskCard";
+import Weather from "../../components/weather/Weather";
+import ProjectTaskCard from "../../components/projects/ProjectsTaskCard";
 import Global from "../../styles/Global";
-import DeleteProject from "./DeleteProject";
-import EditProject from "./EditProject";
-import Documents from "../documents/Documents";
-import ProjectTasks from "../../views/tasks/ProjectTasks";
+import DeleteProject from "../../components/projects/DeleteProject";
+import EditProject from "../../components/projects/EditProject";
+import Documents from "../../components/documents/Documents";
+
 
 //static
 import Project_icon from "../../styles/icons_project/project_icon.png";
@@ -17,14 +17,11 @@ import Project_img from "../../styles/icons_project/project_img.png";
 
 //contexts
 import PathnameContext from "../../contexts/PathnameContext";
-import EditModalContext from "../../contexts/EditModalContext";
-import TemplateContext from "../../contexts/templates/TemplateContext";
-import searchTermContext from "../../contexts/searching/searchTerm";
 import TaskContext from "../../contexts/tasks/TaskContext";
 
 //styles
 import styled from "styled-components";
-import { StyledLabel, StyledSelect } from "../../styles/Tasks/taskForm";
+
 
 const IndividualProject = props => {
 
@@ -39,7 +36,7 @@ const IndividualProject = props => {
   //contexts
   const { getProjectTasks } = useContext(TaskContext);
   const { pathname, setPathname } = useContext(PathnameContext);
-  const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
+
 
 
   //this gets the project id and sets it to state so we have a single project getting returned, then we are getting the projectTasks
