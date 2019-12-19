@@ -66,7 +66,7 @@ console.log(templates);
           <Container>
             <Link style={LinkStyle}
               to={`/templates/${template.id}`}
-              onClick={() => localStorage.setItem("template_id", template.id)}
+              onClick={() => localStorage.setItem("template_id", template.id,"template_name",template.name)}
             >
               <Name>{template.template_name}</Name>
             </Link>
