@@ -8,7 +8,9 @@ export default function ProjectsProvider({ children }) {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
+
     getProject();
+
   }, []);
 
   const getProject = () => {
@@ -31,7 +33,10 @@ export default function ProjectsProvider({ children }) {
       .post(`/projects`, newProject)
       .then(res => {
         console.log("from addProject in projectsProvider", res);
-        if (templateForm.template_id !== null) {
+
+        //adding custom template
+
+        if (templateForm.template_id) {
           axiosWithAuth()
             .post(`/templates/addTasks/${res.data.project[0].id}`, {
               template_id: templateForm.template_id
@@ -43,9 +48,15 @@ export default function ProjectsProvider({ children }) {
               console.log(err);
             });
         }
+
+        //adding pre-build 90 days template
+
         if (templateForm.preBuiltTemplate === true) {
+          console.log("im here");
           axiosWithAuth()
-            .post("/90_day", res.data.project[0].id)
+            .post("/90_day", {
+              project_id: res.data.project[0].id
+            })
             .then(res => {
               console.log("90_day post", res);
             })
@@ -67,10 +78,6 @@ export default function ProjectsProvider({ children }) {
         getProject();
       })
       .catch(err => console.log(err));
-    // const newProjectsList = projects.filter(project => {
-    //   return project.id !== deleteProject.id;
-    // });
-    // setProjects(newProjectsList);
   };
 
   const editProject = (editedProject, editedProjectId, templateForm) => {
@@ -81,6 +88,9 @@ export default function ProjectsProvider({ children }) {
       .put(`/projects/${editedProjectId}`, editedProject)
       .then(res => {
         console.log("from editProject in projectsProvider", res);
+
+        //adding custom template
+
         if (templateForm.template_id) {
           axiosWithAuth()
             .post(`/templates/addTasks/${editedProjectId}`, {
@@ -93,9 +103,13 @@ export default function ProjectsProvider({ children }) {
               console.log(err);
             });
         }
-        if (templateForm.preBuiltTemplate) {
+        //adding pre-build 90 days template
+
+        if (templateForm.preBuiltTemplate === true) {
+          console.log("im here in edit");
+          console.log("edited project id", editedProjectId);
           axiosWithAuth()
-            .post("/90_day", editedProjectId)
+            .post("/90_day", { project_id: editedProjectId })
             .then(res => {
               console.log("90_day post", res);
             })
@@ -115,9 +129,18 @@ export default function ProjectsProvider({ children }) {
     });
     setProjects(newProjectsList);
   };
+  
+
   return (
     <ProjectContext.Provider
-      value={{ projects, addProject, deleteProject, editProject }}
+      value={{
+        projects,
+        addProject,
+        deleteProject,
+        editProject,
+        getProject
+        
+      }}
     >
       {children}
     </ProjectContext.Provider>

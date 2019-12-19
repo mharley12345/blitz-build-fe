@@ -22,6 +22,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import DelayLog from "./components/delayLog/DelayLog";
 import OpenTemplateContext from "./contexts/OpenTemplateContext";
 import AddTemplate from "./components/modal/AddTemplate";
+
 import Documents from "./components/documents/Documents";
 import OpenUploaderContext from "./contexts/documents/OpenUploaderContext";
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
