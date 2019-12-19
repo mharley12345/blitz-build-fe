@@ -23,7 +23,7 @@ import IndividualProject from "./components/projects/IndividualProject";
 import Logout from "./components/auth/Logout";
 import Layout from "./layouts/Layout";
 import Dashboard from "./components/dashboard/Dashboard";
-import DelayLog from "./components/delayLog/DelayLog";
+import DelayLog from "./views/delayLog/DelayLog";
 import OpenTemplateContext from "./contexts/OpenTemplateContext";
 import AddTemplate from "./components/modal/AddTemplate";
 
