@@ -26,16 +26,18 @@ import TaskContext from "../../contexts/tasks/TaskContext";
 
 const IndividualProject = props => {
 
+
+  //importing the pathname and setting local state
   const { pathname, setPathname } = useContext(PathnameContext);
   const [projectState, setProjectState] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
   const [editProjectStatus, setEditProjectStatus] = useState(false);
 
-
+  //getting the project_id from the url and importing the getProjectTasks function
   const project_id = props.match.params.id;
   const { getProjectTasks } = useContext(TaskContext);
 
-
+  //this gets the project id and sets it to state so we have a single project getting returned, then we are getting the projectTasks
   useEffect(() => {
     setPathname(window.location.pathname);
     const projectID = props.match.params.id;
@@ -62,6 +64,7 @@ const IndividualProject = props => {
     e.stopPropagation();
     setEditProjectStatus(true);
   };
+  //handles close
   const handleEditProjectClose = e => {
     setEditProjectStatus(false);
   };
@@ -79,7 +82,7 @@ const IndividualProject = props => {
   return (
     <>
       <Global />
-     
+    
       <IndividualProjectTitleContainer>
         <img src={Project_icon} alt="project_icon" />
         <span>&nbsp;&nbsp;Projects / {projectState.project_name}</span>

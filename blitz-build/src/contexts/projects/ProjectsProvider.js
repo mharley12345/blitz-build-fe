@@ -5,14 +5,17 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import ProjectContext from "./ProjectContext";
 
 export default function ProjectsProvider({ children }) {
+  //sets state of projects throughout the app
   const [projects, setProjects] = useState([]);
 
+  //this is getting all projects
   useEffect(() => {
 
     getProject();
 
   }, []);
 
+  //this gets all projects associated with a user id
   const getProject = () => {
     axiosWithAuth()
       .get("/projects")
@@ -25,6 +28,7 @@ export default function ProjectsProvider({ children }) {
       });
   };
 
+  //this adds a project to your user id
   const addProject = (newProject, templateForm) => {
     newProject.status = "On Schedule";
     console.log("new project", newProject);
@@ -35,7 +39,6 @@ export default function ProjectsProvider({ children }) {
         console.log("from addProject in projectsProvider", res);
 
         //adding custom template
-
         if (templateForm.template_id) {
           axiosWithAuth()
             .post(`/templates/addTasks/${res.data.project[0].id}`, {
@@ -50,7 +53,6 @@ export default function ProjectsProvider({ children }) {
         }
 
         //adding pre-build 90 days template
-
         if (templateForm.preBuiltTemplate === true) {
           console.log("im here");
           axiosWithAuth()
@@ -65,11 +67,11 @@ export default function ProjectsProvider({ children }) {
             });
         }
         setProjects([...projects, res.data.project[0]]);
-        // getProject();
       })
       .catch(err => console.log(err.response.data.message));
   };
 
+  //deletes project by user id
   const deleteProject = deleteProject => {
     axiosWithAuth()
       .delete(`/projects/${deleteProject.id}`)
@@ -80,6 +82,7 @@ export default function ProjectsProvider({ children }) {
       .catch(err => console.log(err));
   };
 
+  //this allows you to edit the project based on the project id you selected
   const editProject = (editedProject, editedProjectId, templateForm) => {
     editedProject.id = editedProjectId;
     console.log("edited project", editedProject, "id:", editedProjectId);
@@ -130,7 +133,7 @@ export default function ProjectsProvider({ children }) {
     setProjects(newProjectsList);
   };
   
-
+  //this returns all the functions and state of projects in the provider and then this will wrap around the application in app.js
   return (
     <ProjectContext.Provider
       value={{
