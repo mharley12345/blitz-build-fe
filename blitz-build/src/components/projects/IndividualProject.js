@@ -1,39 +1,48 @@
 import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
-
-//styles
-import styled from "styled-components";
-import Global from "../../styles/Global";
-
-//axios
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 //components
 import Weather from "../weather/Weather";
-import TaskCard from "../dashboard/TaskCard";
-import Project_icon from "../../styles/icons_project/project_icon.png";
-import Project_img from "../../styles/icons_project/project_img.png";
+import ProjectTaskCard from "./ProjectsTaskCard";
+import Global from "../../styles/Global";
 import DeleteProject from "./DeleteProject";
 import EditProject from "./EditProject";
 import Documents from "../documents/Documents";
+import ProjectTasks from "../../views/tasks/ProjectTasks";
 
-//context
+//static
+import Project_icon from "../../styles/icons_project/project_icon.png";
+import Project_img from "../../styles/icons_project/project_img.png";
+
+//contexts
 import PathnameContext from "../../contexts/PathnameContext";
+import EditModalContext from "../../contexts/EditModalContext";
+import TemplateContext from "../../contexts/templates/TemplateContext";
+import searchTermContext from "../../contexts/searching/searchTerm";
 import TaskContext from "../../contexts/tasks/TaskContext";
-// import searchTermContext from "../../contexts/searching/searchTerm";
-// import TemplateContext from "../../contexts/templates/TemplateContext";
 
+//styles
+import styled from "styled-components";
+import { StyledLabel, StyledSelect } from "../../styles/Tasks/taskForm";
 
 const IndividualProject = props => {
-
-  const { pathname, setPathname } = useContext(PathnameContext);
+  //local states
+  const [PreBuiltTemplate, setPreBuiltTemplate] = useState([]);
   const [projectState, setProjectState] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
   const [editProjectStatus, setEditProjectStatus] = useState(false);
+  const [form, setForm] = useState({
+    template_id: null
+  });
 
+
+  //contexts
+  const { getProjectTasks } = useContext(TaskContext);
+  const { pathname, setPathname } = useContext(PathnameContext);
+  const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
 
   const project_id = props.match.params.id;
-  const { getProjectTasks } = useContext(TaskContext);
 
 
   useEffect(() => {
@@ -51,11 +60,9 @@ const IndividualProject = props => {
       .catch(err => {
         console.log(err);
       });
-    
-    getProjectTasks();
+    //gets the project tasks and sets them to projectTask context
+    getProjectTasks(projectID);
   }, [props]);
-
-  
 
   //edit modal functions
   const handleEditProjectOpen = e => {
@@ -79,7 +86,6 @@ const IndividualProject = props => {
   return (
     <>
       <Global />
-     
       <IndividualProjectTitleContainer>
         <img src={Project_icon} alt="project_icon" />
         <span>&nbsp;&nbsp;Projects / {projectState.project_name}</span>
@@ -165,7 +171,7 @@ const IndividualProject = props => {
         </Right>
       </Top>
       <TasksContainer>
-        <TaskCard projectID={props.match.params.id} numberOfTasks={3} />
+        <ProjectTaskCard projectID={props.match.params.id} numberOfTasks={3} />
       </TasksContainer>
       <DeleteProject
         project={projectState}
@@ -182,8 +188,6 @@ const IndividualProject = props => {
 };
 
 export default withRouter(IndividualProject);
-
-
 
 const Top = styled.div`
   width: 1080px;
@@ -307,5 +311,3 @@ const PageI = styled.i`
   color: #8a827d;
   text-decoration: none;
 `;
-
-
