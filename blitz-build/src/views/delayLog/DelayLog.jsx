@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
 //components
-import DelayLogButton from "./DelayLogButton";
+import DelayLogButton from "../../components/delayLog/DelayLogButton";
 
 //contexts
 import DelayLogContext from "../../contexts/delayLog/DelayLogContext";
@@ -21,7 +21,7 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 
 // pages bar function from global
-import TablePaginationActions from "../global/TablePaginationActions";
+import TablePaginationActions from "../../components/global/TablePaginationActions";
 // csv function
 import { ExportToCsv } from "export-to-csv";
 
@@ -213,7 +213,7 @@ const DelayLogButtons = styled.div`
   border: 1px solid;
   box-sizing: border-box;
   border-radius: 3px;
-  padding-top: 8px;
+  padding-top: 10px;
   padding-left: 40px;
   font-size: 19px;
   color: #8a827d;
