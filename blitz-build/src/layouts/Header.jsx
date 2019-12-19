@@ -11,9 +11,7 @@ import ProjectForm from "../components/projects/ProjectForm";
 import { NavLink, Link, Redirect } from "react-router-dom";
 import OpenContext from "../contexts/projects/OpenContext";
 import OpenTemplateContext from "../contexts/OpenTemplateContext";
-// import AddProject from  '../components/modal/AddProject'
 import searchTermContext from "../contexts/searching/searchTerm";
-import AddProject from "../components/modal/AddProject";
 import TemplateContext from "../contexts/templates/TemplateContext";
 import TemplateTaskForm from "../components/templates/TemplateTaskForm";
 import TaskContext from "../contexts/tasks/TaskContext";
@@ -497,7 +495,7 @@ function Header({ pathname }) {
         <Modal
           visible={TaskModalStatus}
           dismiss={handleTaskModalClose}
-          client={"40%"}
+          client={"45%"}
           component={
             <TaskForm
               closeModal={handleTaskModalClose}
@@ -528,11 +526,12 @@ function Header({ pathname }) {
               closeModal={handleProjectModalClose}
               handleFunction={addProject}
               text={"Add Project"}
+              imgText={"Upload a Project Image"}
             />
           }
         />
       </ButtonContainer>
-      <AddProject />
+      
     </HeaderContainer>
   );
 }

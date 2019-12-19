@@ -1,33 +1,36 @@
 import React, { useEffect, useState, useContext } from "react";
 // using zip_code to find latitude and longitude
 import zipcodes from "zipcodes";
+
+// contexts
 import TemplateContext from "../../contexts/templates/TemplateContext";
 import TaskContext from "../../contexts/tasks/TaskContext";
+
+// axios
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
-//styles
+// styles
 //import styled from "styled-components";
-
 import {
   StyledForm,
   StyledFormHeader,
   StyledLabel,
   StyledInput,
   StyledBtn,
-  XButton
+  XButton,
+  StyledSelect
 } from "../../styles/Form/FormStyles";
-import { StyledSelect } from "../../styles/Tasks/taskForm";
-
-import { orange } from "@material-ui/core/colors";
+import Checkbox from "@material-ui/core/Checkbox";
 
 export default function ProjectForm({
   closeModal,
   handleFunction,
   editFields,
   text,
-  
+  imgText
 }) {
   //console.log("task from delayForm", task,editFields)
+    const { templates } = useContext(TemplateContext);
   const [form, setForm] = useState({
     project_name: "",
     beds: null,
@@ -38,24 +41,14 @@ export default function ProjectForm({
     street_address: "",
     zip_code: null
   });
+ 
   const [templateForm, setTemplateForm] = useState({
     preBuiltTemplate: false,
     template_id: null
   });
-
   console.log("templateForm", templateForm);
 
-  const { templates } = useContext(TemplateContext);
-  // const { getProjectTasks } = useContext(TaskContext);
-
-  const makeTrue = () => {
-    setTemplateForm({
-      ...templateForm,
-      preBuiltTemplate: !templateForm.preBuiltTemplate
-    });
-  };
-
-  useEffect(() => {
+ useEffect(() => {
     if (editFields) {
       console.log("editFields", editFields);
       setForm(editFields);
@@ -64,15 +57,30 @@ export default function ProjectForm({
       setForm(form);
       console.log(form);
     }
-  }, []);
+ }, []); 
+  
+// handle checkBox changing
+  const [checked, setChecked] = React.useState(false);
 
-  const changeHandler = e => {
+  const checkBoxChangeHandler = event => {
+    setChecked(event.target.checked);
+  };
+
+
+  const preBuildTemplatehandler = () => {
+    setTemplateForm({
+      ...templateForm,
+      preBuiltTemplate: !templateForm.preBuiltTemplate
+    });
+  };
+
+  const formChangeHandler = e => {
     setForm({
       ...form,
       [e.target.name]: e.target.value
     });
   };
-  const changeTampleIdHandler = e => {
+  const tampleIdChangeHandler = e => {
     setTemplateForm({
       ...templateForm,
       [e.target.name]: e.target.value
@@ -159,8 +167,14 @@ export default function ProjectForm({
       </StyledFormHeader>
       <div style={{ marginBottom: "16px" }}>
         {" "}
-        <span style={{ marginTop: "24px", color: "orange", cursor: "pointer" }}>
-          Upload a Project Image
+        <span
+          style={{
+            marginTop: "24px",
+            color: "orange",
+            cursor: "pointer"
+          }}
+        >
+          {imgText}
         </span>
         <span> (optional)</span>
       </div>
@@ -169,18 +183,29 @@ export default function ProjectForm({
       <StyledInput
         type="text"
         name="project_name"
-        maxlength="25"
+        maxLength="25"
         value={form.project_name}
-        onChange={changeHandler}
+        onChange={formChangeHandler}
       />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div style={{ width: "60%" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "4px"
+        }}
+      >
+        <div style={{ width: "67%" }}>
           <StyledLabel>Assign Custom Template</StyledLabel>
           <StyledSelect
+            style={{
+              background: "#E9E9E9",
+              border: "none",
+              paddingLeft: "10px"
+            }}
             type="number"
             name="template_id"
             value={templateForm.template_id}
-            onChange={changeTampleIdHandler}
+            onChange={tampleIdChangeHandler}
           >
             <option>Choose Template</option>
 
@@ -193,25 +218,52 @@ export default function ProjectForm({
             })}
           </StyledSelect>
         </div>
-        <div style={{ width: "33%" }}>
+        <div style={{ width: "30%" }}>
+          {" "}
           <StyledLabel>90 Day Template</StyledLabel>
-          <StyledInput
-            id="check"
-            type="checkbox"
-            name="preBuiltTemplate"
-            onClick={makeTrue}
-          />
+          <div
+            style={{
+              width: "100%",
+              height: "16px",
+              padding: "6px 8px",
+              backgroundColor: "#e9e9e9",
+              display: "flex",
+              alignItems: "center",
+              borderRadius: "3px",
+              marginTop: "5px"
+            }}
+          >
+            <Checkbox
+              checked={checked}
+              color="default"
+              value="false"
+              onChange={checkBoxChangeHandler}
+              inputProps={{
+                "aria-label": "checkbox with default color"
+              }}
+              name="preBuiltTemplate"
+              onClick={preBuildTemplatehandler}
+            />
+
+            <span style={{ color: "#817974" }}>Apply</span>
+          </div>
         </div>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "4px"
+        }}
+      >
         <div style={{ width: "30%" }}>
           <StyledLabel>Beds</StyledLabel>
           <StyledInput
             type="number"
             name="beds"
             value={form.beds}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
         <div style={{ width: "30%" }}>
@@ -220,7 +272,7 @@ export default function ProjectForm({
             type="number"
             name="baths"
             value={form.baths}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
         <div style={{ width: "30%" }}>
@@ -229,7 +281,7 @@ export default function ProjectForm({
             type="number"
             name="square_ft"
             value={form.square_ft}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
       </div>
@@ -238,23 +290,29 @@ export default function ProjectForm({
         type="text"
         name="street_address"
         value={form.street_address}
-        onChange={changeHandler}
+        onChange={formChangeHandler}
       />
       <StyledLabel>City</StyledLabel>
       <StyledInput
         type="text"
         name="city"
         value={form.city}
-        onChange={changeHandler}
+        onChange={formChangeHandler}
       />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "4px"
+        }}
+      >
         <div style={{ width: "45%" }}>
           <StyledLabel>State</StyledLabel>
           <StyledInput
             type="text"
             name="state"
             value={form.state}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
         <div style={{ width: "45%" }}>
@@ -263,7 +321,7 @@ export default function ProjectForm({
             type="number"
             name="zip_code"
             value={form.zip_code}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
       </div>
