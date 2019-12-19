@@ -34,16 +34,12 @@ export const XButton = styled.button`
   cursor: pointer;
 `;
 export const TaskI = styled.i`
-  width: 25%;
-  height: 18px;
   font-size: 1.4rem;
   background-color: #fbfaf9;
   outline: none
-  padding: 10px 10px;
   text-align: right;
   text-decoration: none;
-  display: inline-block;
-  margin: 4px 2px;
+  display: flex;
   cursor: pointer;
 `;
 
@@ -57,7 +53,7 @@ export const MeatBalls = styled.i`
   padding: 10px 10px;
   text-align: right;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
   margin: 4px 2px;
   cursor: pointer;
   :hover {
@@ -68,10 +64,10 @@ export const MeatBalls = styled.i`
 `;
 
 export const StyledLi = styled.li`
-  padding: 0px 8px;
+  padding: 0px 10px;
   height: 50px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   text-align: left;
   align-items: center;
   color: #B5AFAB;

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
+
+//axios, moment
 import axios from "axios";
 import moment from "moment";
+
+//components
 import ProjectWeather from "./ProjectWeather";
 import DashboardWeather from "./DashboardWeather";
 import {
@@ -52,19 +56,26 @@ function Weather(props) {
 
   // get the weather data from backend.
   useEffect(() => {
-    if (weatherPosition.latitude !== 0) {
-      axios
+    
+    if (weatherPosition.latitude == 0 || weatherPosition.latitude == undefined) { 
+     console.log("no weather position")
+    }
+  else {
+    axios
         .get(
           ` https://blitzbuild-weather.herokuapp.com/forecast/${weatherPosition.latitude},${weatherPosition.longitude}`
         )
         .then(res => {
           setWeatherData(res.data);
           console.log("get weather data", res.data);
+          
         })
         .catch(err => {
           console.log(err);
         });
-    }
+  }
+      
+    
   }, [weatherPosition]);
 
   // get time

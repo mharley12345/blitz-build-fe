@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
-import styled from "styled-components";
 
-import { ExportToCsv } from "export-to-csv";
-import Global from "../../styles/Global";
-import DelayLogContext from "../../contexts/delayLog/DelayLogContext";
+//components
 import DelayLogButton from "./DelayLogButton";
+
+//contexts
+import DelayLogContext from "../../contexts/delayLog/DelayLogContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
 
+//styles
+import Global from "../../styles/Global";
+import styled from "styled-components";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -16,8 +19,11 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
+
 // pages bar function from global
 import TablePaginationActions from "../global/TablePaginationActions";
+// csv function
+import { ExportToCsv } from "export-to-csv";
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -42,15 +48,11 @@ const StyledTableRow = withStyles(theme => ({
   }
 }))(TableRow);
 
-
-
 const useStyles = makeStyles({
   root: {
     border: "1px solid #DCD9D5"
   },
-  table: {
-    minWidth: "1080px"
-  },
+
   tableHover: {
     "&:hover": {
       border: "3px solid orange"
@@ -60,29 +62,34 @@ const useStyles = makeStyles({
 
 function DelayLog() {
   const { delayLogs } = useContext(DelayLogContext);
-  const classes = useStyles();
   const { searchTerm } = useContext(searchTermContext);
-  const delayLogSearchInput = searchTerm.toLowerCase("");
-const [page, setPage] = React.useState(0);
-const [rowsPerPage, setRowsPerPage] = React.useState(5);
-const [hover, setHover] = useState(false);
-const handleChangePage = (event, newPage) => {
-  setPage(newPage);
-};
 
-const handleChangeRowsPerPage = event => {
-  setRowsPerPage(parseInt(event.target.value, 10));
-  setPage(0);
-};
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [hover, setHover] = useState(false);
+
+  const classes = useStyles();
+
+  const delayLogSearchInput = searchTerm.toLowerCase("");
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
   //console.log(delayLogs)
+
   //return all delayLogs or filtered delayLogs
   const results = delayLogs.filter(
     delayLog =>
       delayLog.task_name.toLowerCase().includes(delayLogSearchInput) ||
       delayLog.reason.toLowerCase().includes(delayLogSearchInput)
   );
-  
 
+  // csv function
   function handleExportCSV() {
     const options = {
       fieldSeparator: ",",
@@ -100,35 +107,34 @@ const handleChangeRowsPerPage = event => {
 
     csvExporter.generateCsv(results);
   }
-
+  // hover function for the button in the top
   const hoverStyle = () => {
-    if(hover === true) {
-      return HoverStyle
+    if (hover === true) {
+      return HoverStyle;
     }
-  }
+  };
 
-const emptyRows =
-  rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
-  
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
+
   console.log("rows in delayLogs table", results);
   return (
     <div>
       <Global />
-      <div onMouseEnter={()=> setHover(true)} onMouseLeave={()=> setHover(false)} >
-      <ButtonI
-            className="ion-ios-add-circle"
-            style={hoverStyle()}
-          />
-        <DelayLogButtons onClick={handleExportCSV} >
-         Export to CSV
+      <div
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+        <ButtonI className="ion-ios-add-circle" style={hoverStyle()} />
+        <DelayLogButtons onClick={handleExportCSV}>
+          Export to CSV
         </DelayLogButtons>
       </div>
-      <p style={{ color: "#817974", paddingBottom: "8px" }}>
-        {" "}
-        Your Delay_Logs List{" "}
+      <p style={{ paddingBottom: "8px", fontWeight: 600 }}>
+        Your DelayLogs List
       </p>
       <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="customized table">
+        <Table aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell>TASK NAME</StyledTableCell>
@@ -147,10 +153,7 @@ const emptyRows =
               : results
             ).map(result => (
               <StyledTableRow key={result.id}>
-
                 <StyledTableCell style={{ maxWidth: 150 }}>
-
-               
                   {result.task_name}
                 </StyledTableCell>
                 <StyledTableCell style={{ maxWidth: 300 }}>
@@ -201,7 +204,6 @@ const emptyRows =
 
 export default DelayLog;
 
-
 const DelayLogButtons = styled.div`
   position: absolute;
   width: 180px;
@@ -211,7 +213,7 @@ const DelayLogButtons = styled.div`
   border: 1px solid;
   box-sizing: border-box;
   border-radius: 3px;
-  padding-top:8px;
+  padding-top: 8px;
   padding-left: 40px;
   font-size: 19px;
   color: #8a827d;
@@ -231,5 +233,4 @@ const ButtonI = styled.i`
 
 const HoverStyle = {
   color: "#DD6B20"
-}
-
+};

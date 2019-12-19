@@ -1,7 +1,6 @@
 import React,{useContext} from "react";
 import styled from "styled-components";
 import DocumentsContext from '../../contexts/documents/DocumentsContext'
-
 import {Table} from 'react-bootstrap'
 import './table.css'
 const  DocumentCard = (props) => {

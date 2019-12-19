@@ -1,28 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 // using zip_code to find latitude and longitude
 import zipcodes from "zipcodes";
 
-//styles
-//import styled from "styled-components";
+// contexts
+import TemplateContext from "../../contexts/templates/TemplateContext";
+import TaskContext from "../../contexts/tasks/TaskContext";
 
+// axios
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
+
+// styles
+//import styled from "styled-components";
 import {
   StyledForm,
   StyledFormHeader,
   StyledLabel,
   StyledInput,
   StyledBtn,
-  XButton
+  XButton,
+  StyledSelect
 } from "../../styles/Form/FormStyles";
-import { orange } from "@material-ui/core/colors";
-import {axiosWithAuth} from '../../utils/auth/axiosWithAuth'
+import Checkbox from "@material-ui/core/Checkbox";
+
 export default function ProjectForm({
   closeModal,
   handleFunction,
   editFields,
   text,
-  
+  imgText
 }) {
   //console.log("task from delayForm", task,editFields)
+    const { templates } = useContext(TemplateContext);
   const [form, setForm] = useState({
     project_name: "",
     beds: null,
@@ -32,9 +40,15 @@ export default function ProjectForm({
     state: "",
     street_address: "",
     zip_code: null
-    
   });
-  useEffect(() => {
+ 
+  const [templateForm, setTemplateForm] = useState({
+    preBuiltTemplate: false,
+    template_id: null
+  });
+  console.log("templateForm", templateForm);
+
+ useEffect(() => {
     if (editFields) {
       console.log("editFields", editFields);
       setForm(editFields);
@@ -43,37 +57,58 @@ export default function ProjectForm({
       setForm(form);
       console.log(form);
     }
-  }, []);
+ }, []); 
+  
+// handle checkBox changing
+  const [checked, setChecked] = React.useState(false);
 
-  const changeHandler = e => {
+  const checkBoxChangeHandler = event => {
+    setChecked(event.target.checked);
+  };
+
+
+  const preBuildTemplatehandler = () => {
+    setTemplateForm({
+      ...templateForm,
+      preBuiltTemplate: !templateForm.preBuiltTemplate
+    });
+  };
+
+  const formChangeHandler = e => {
     setForm({
       ...form,
       [e.target.name]: e.target.value
     });
   };
+  const tampleIdChangeHandler = e => {
+    setTemplateForm({
+      ...templateForm,
+      [e.target.name]: e.target.value
+    });
+  };
   const handleSubmit = e => {
-      e.preventDefault();
-      const gps = zipcodes.lookup(form.zip_code);
+    e.preventDefault();
+    const gps = zipcodes.lookup(form.zip_code);
 
-      form.latitude = gps.latitude;
-      form.longitude = gps.longitude;
+    form.latitude = gps.latitude;
+    form.longitude = gps.longitude;
+
     if (editFields) {
-      handleFunction(form, form.id);
+      handleFunction(form, form.id, templateForm);
     } else {
-        
-      handleFunction(form);
+      handleFunction(form, templateForm);
     }
     setForm({
-    project_name: "",
-    beds: null,
-    baths: null,
-    city: "",
-    square_ft: null,
-    state: "",
-    street_address: "",
-    zip_code: null,
-    template_id:null,
+      project_name: "",
+      beds: null,
+      baths: null,
+      city: "",
+      square_ft: null,
+      state: "",
+      street_address: "",
+      zip_code: null
     });
+
     closeModal();
   };
   const addCustomTemplate = e => {
@@ -98,6 +133,53 @@ export default function ProjectForm({
     console.log("async", customTemplate);
   }
 
+  // const addCustomTemplate = e => {
+  //   if (templateForm.template_id !== null) {
+  //     e.preventDefault();
+  //     const templateID = parseInt(templateForm.template_id);
+  //     const project_id = editFields.id;
+  //     console.log("project_id", project_id);
+  //     console.log("templateID", templateID);
+  //     axiosWithAuth()
+  //       .post(`/templates/addTasks/${project_id}`, { template_id: templateID })
+  //       .then(res => {
+  //         console.log(res);
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       });
+  //   }
+  // };
+  // const add90Day = () => {
+  //   if (templateForm.preBuiltTemplate === true) {
+  //     const project_id = editFields.id;
+  //     console.log(project_id);
+  //     axiosWithAuth()
+  //       .post("/90_day", { project_id })
+  //       .then(res => {
+  //         console.log("90_day post", res);
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       });
+  //   }
+  // };
+
+  // async function submitForm(e) {
+  //   e.preventDefault();
+  //   const originalhandleSubmit = await handleSubmit(e);
+  //   console.log("async", originalhandleSubmit);
+
+  //   const customTemplate = await addCustomTemplate(e);
+  //   console.log("async", customTemplate);
+
+  //   const preBuilt = await add90Day();
+  //   console.log("async", preBuilt);
+
+  //   const projectTasks = await getProjectTasks();
+  //   console.log("async", projectTasks);
+  // }
+
   return (
     <StyledForm onSubmit={submitForm}>
       <StyledFormHeader>
@@ -106,8 +188,14 @@ export default function ProjectForm({
       </StyledFormHeader>
       <div style={{ marginBottom: "16px" }}>
         {" "}
-        <span style={{ marginTop: "24px", color: "orange", cursor: "pointer" }}>
-          Upload a Project Image
+        <span
+          style={{
+            marginTop: "24px",
+            color: "orange",
+            cursor: "pointer"
+          }}
+        >
+          {imgText}
         </span>
         <span> (optional)</span>
       </div>
@@ -116,18 +204,87 @@ export default function ProjectForm({
       <StyledInput
         type="text"
         name="project_name"
-        maxlength="25"
+        maxLength="25"
         value={form.project_name}
-        onChange={changeHandler}
+        onChange={formChangeHandler}
       />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "4px"
+        }}
+      >
+        <div style={{ width: "67%" }}>
+          <StyledLabel>Assign Custom Template</StyledLabel>
+          <StyledSelect
+            style={{
+              background: "#E9E9E9",
+              border: "none",
+              paddingLeft: "10px"
+            }}
+            type="number"
+            name="template_id"
+            value={templateForm.template_id}
+            onChange={tampleIdChangeHandler}
+          >
+            <option>Choose Template</option>
+
+            {templates.map(template => {
+              return (
+                <option key={template.id} value={template.template_id}>
+                  {template.id}
+                </option>
+              );
+            })}
+          </StyledSelect>
+        </div>
+        <div style={{ width: "30%" }}>
+          {" "}
+          <StyledLabel>90 Day Template</StyledLabel>
+          <div
+            style={{
+              width: "100%",
+              height: "16px",
+              padding: "6px 8px",
+              backgroundColor: "#e9e9e9",
+              display: "flex",
+              alignItems: "center",
+              borderRadius: "3px",
+              marginTop: "5px"
+            }}
+          >
+            <Checkbox
+              checked={checked}
+              color="default"
+              value="false"
+              onChange={checkBoxChangeHandler}
+              inputProps={{
+                "aria-label": "checkbox with default color"
+              }}
+              name="preBuiltTemplate"
+              onClick={preBuildTemplatehandler}
+            />
+
+            <span style={{ color: "#817974" }}>Apply</span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "4px"
+        }}
+      >
         <div style={{ width: "30%" }}>
           <StyledLabel>Beds</StyledLabel>
           <StyledInput
             type="number"
             name="beds"
             value={form.beds}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
         <div style={{ width: "30%" }}>
@@ -136,7 +293,7 @@ export default function ProjectForm({
             type="number"
             name="baths"
             value={form.baths}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
         <div style={{ width: "30%" }}>
@@ -145,7 +302,7 @@ export default function ProjectForm({
             type="number"
             name="square_ft"
             value={form.square_ft}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
       </div>
@@ -154,23 +311,29 @@ export default function ProjectForm({
         type="text"
         name="street_address"
         value={form.street_address}
-        onChange={changeHandler}
+        onChange={formChangeHandler}
       />
       <StyledLabel>City</StyledLabel>
       <StyledInput
         type="text"
         name="city"
         value={form.city}
-        onChange={changeHandler}
+        onChange={formChangeHandler}
       />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "4px"
+        }}
+      >
         <div style={{ width: "45%" }}>
           <StyledLabel>State</StyledLabel>
           <StyledInput
             type="text"
             name="state"
             value={form.state}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
         <div style={{ width: "45%" }}>
@@ -179,7 +342,7 @@ export default function ProjectForm({
             type="number"
             name="zip_code"
             value={form.zip_code}
-            onChange={changeHandler}
+            onChange={formChangeHandler}
           />
         </div>
       </div>

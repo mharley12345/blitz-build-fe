@@ -11,9 +11,7 @@ import ProjectForm from "../components/projects/ProjectForm";
 import { NavLink, Link, Redirect } from "react-router-dom";
 import OpenContext from "../contexts/projects/OpenContext";
 import OpenTemplateContext from "../contexts/OpenTemplateContext";
-// import AddProject from  '../components/modal/AddProject'
 import searchTermContext from "../contexts/searching/searchTerm";
-import AddProject from "../components/modal/AddProject";
 import TemplateContext from "../contexts/templates/TemplateContext";
 import TemplateTaskForm from "../components/templates/TemplateTaskForm";
 import TaskContext from "../contexts/tasks/TaskContext";
@@ -211,8 +209,8 @@ const SearchTotal = styled.div`
 `;
 const ButtonSearch = styled.i`
   position: absolute;
-  right: 15px;
-  top: 2px;
+  right: 3%;
+  top: 1%;
   border: none;
   font-size: 30px;
   color: #8a827d;
@@ -220,7 +218,7 @@ const ButtonSearch = styled.i`
 
   z-index: 2;
   width: 20px;
-  hieght: 20px;
+  height: 20px;
 `;
 
 function Header({ pathname }) {
@@ -412,7 +410,7 @@ function Header({ pathname }) {
             />
             <Link to="/tasks">
               {" "}
-              <ButtonSearch className="ion-ios-search" />
+              {/* <ButtonSearch className="ion-ios-search" /> */}
             </Link>
           </SearchTotal>
         </Link>
@@ -497,7 +495,7 @@ function Header({ pathname }) {
         <Modal
           visible={TaskModalStatus}
           dismiss={handleTaskModalClose}
-          client={"40%"}
+          client={"45%"}
           component={
             <TaskForm
               closeModal={handleTaskModalClose}
@@ -528,11 +526,12 @@ function Header({ pathname }) {
               closeModal={handleProjectModalClose}
               handleFunction={addProject}
               text={"Add Project"}
+              imgText={"Upload a Project Image"}
             />
           }
         />
       </ButtonContainer>
-      <AddProject />
+      
     </HeaderContainer>
   );
 }

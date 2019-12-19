@@ -5,14 +5,15 @@ import React, { useEffect, useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import styled from "styled-components";
-import { XButton } from "../../styles/Tasks/tasks";
 import {
   StyledForm,
+  StyledFormHeader,
   StyledLabel,
   StyledInput,
-  StyledSelect,
-  StyledBtn
-} from "../../styles/Tasks/taskForm";
+  StyledTextAreaInput,
+  StyledBtn,
+  XButton
+} from "../../styles/Form/FormStyles";
 
 //hooks
 import { useInput } from "../../customHooks/useInput";
@@ -87,13 +88,17 @@ export default function TaskForm({
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <div style={{ width: "100%", textAlign: "right" }}>
-        <XButton onClick={closeModal}>X</XButton>
-      </div>
-
-      <header>
-        <h1 style={{ fontSize: "3rem", fontFamily: "roboto" }}>{text}</h1>
-      </header>
+      <StyledFormHeader>
+        <h1
+          style={{
+            fontSize: "2rem",
+            margin: 0
+          }}
+        >
+          {text}
+        </h1>
+        <XButton onClick={closeModal}> Close X</XButton>
+      </StyledFormHeader>
 
       <StyledLabel>Task Name</StyledLabel>
       <StyledInput
@@ -102,25 +107,10 @@ export default function TaskForm({
         value={task.task_name}
         onChange={handleChanges}
       />
-
-      <StyledLabel>Task Decription</StyledLabel>
+      <StyledLabel>Due Date</StyledLabel>
       <StyledInput
-        type="text"
-        name="task_description"
-        value={task.task_description}
-        onChange={handleChanges}
-      />
-
-      {/* <StyledLabel>Due Date</StyledLabel>
-      <DatePicker selected={dueDate} onChange={date => setDueDate(date)} /> */}
-
-      <TextField
-        style={{
-          width: "77%",
-          marginTop: "20px"
-        }}
         id="date"
-        label="Due Date"
+        label=""
         type="date"
         name="due_date"
         onChange={handleChanges}
@@ -129,6 +119,17 @@ export default function TaskForm({
           shrink: true
         }}
       />
+      <StyledLabel>Task Decription</StyledLabel>
+      <StyledTextAreaInput
+        rows="8"
+        type="text"
+        name="task_description"
+        value={task.task_description}
+        onChange={handleChanges}
+      />
+
+      {/* <StyledLabel>Due Date</StyledLabel>
+      <DatePicker selected={dueDate} onChange={date => setDueDate(date)} /> */}
 
       {/* <StyledLabel>Due Date</StyledLabel>
       <input
