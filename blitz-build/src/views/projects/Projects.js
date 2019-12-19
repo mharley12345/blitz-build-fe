@@ -17,7 +17,7 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 
 // pages bar function from global
-import TablePaginationActions from "../global/TablePaginationActions";
+import TablePaginationActions from "../../components/global/TablePaginationActions";
 
 const StyledTableCell = withStyles(theme => ({
   head: {

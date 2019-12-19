@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Task from "../dashboard/Task";
-import searchTermContext from "../../contexts/searching/searchTerm";
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
 //mui
