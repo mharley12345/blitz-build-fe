@@ -6,7 +6,8 @@ class Callback extends Component {
   async componentDidMount() {
     await auth0Client.handleAuthentication();
     this.props.history.replace("/dashboard");
-    this.props.location.reload(true);
+
+    window.location.reload(true);
   }
 
   render() {

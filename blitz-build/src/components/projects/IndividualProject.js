@@ -36,6 +36,7 @@ const IndividualProject = props => {
     template_id: null
   });
 
+
   //contexts
   const { getProjectTasks } = useContext(TaskContext);
   const { pathname, setPathname } = useContext(PathnameContext);
@@ -43,13 +44,12 @@ const IndividualProject = props => {
 
   const project_id = props.match.params.id;
 
-  const changeHandler = e => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   useEffect(() => {
     setPathname(window.location.pathname);
     const projectID = props.match.params.id;
+
+    // get single project data
     axiosWithAuth()
       .get(`projects/${projectID}`)
       .then(res => {
@@ -82,10 +82,7 @@ const IndividualProject = props => {
     props.history.push(`/projects`);
   };
 
-  const OpenToggle = e => {
-    e.stopPropagation();
-    setEditModalOpen(true);
-  };
+ 
   return (
     <>
       <Global />
