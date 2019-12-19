@@ -64,27 +64,20 @@ const useStyles = makeStyles({
 });
 
 export default function ProjectTasks (props, {ProjectName}) {
-  const { projectTasks, getProjectTasks } = useContext(taskContext);
-
-  //state
-  const [projectName, setProjectName] = useState("")
+  const { tasks, getTasks } = useContext(taskContext);
+  const projectID = props.match.params.id;
+  const projectTasks = tasks.filter(item => {
+    return `${item.project_id}` === projectID;
+  });
 
   //pagnation
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, projectTasks.length - page * rowsPerPage);
-
   
-  useEffect(() => {
-    const projectID = props.match.params.id;
-    getProjectTasks(projectID)
-    axiosWithAuth()
-    .get(`projects/${projectID}`)
-      .then(res => {
-        setProjectName(res.data[0].project_name)
-      })
-      .catch(err => console.log(err))
-  },[])
+    useEffect(() => {
+      getTasks()
+    },[])
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, projectTasks.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -104,13 +97,13 @@ export default function ProjectTasks (props, {ProjectName}) {
   };
 
   const classes = useStyles();
-
+  console.log('from tasks',tasks)
   return (
     <>
       <InfoContainer>
       <BreadCrumbs>
         <img src={Project_icon} alt="project_icon" />
-        <span>&nbsp;&nbsp;Projects / {projectName} / Tasks</span>
+        <span>&nbsp;&nbsp;Projects / {projectTasks.length === 0 ? <span>...loading</span> : projectTasks[0].project_name} / Tasks</span>
       </BreadCrumbs>
         {/* <SortBtn >
           Active
@@ -128,10 +121,10 @@ export default function ProjectTasks (props, {ProjectName}) {
         >
           <TableHead>
             <TableRow>
-              <StyledTableCell>Task</StyledTableCell>
-              <StyledTableCell>Description</StyledTableCell>
-              <StyledTableCell>Due Date</StyledTableCell>
-              <StyledTableCell>Status</StyledTableCell>
+              <StyledTableCell>TASK</StyledTableCell>
+              <StyledTableCell>DESCRIPTION</StyledTableCell>
+              <StyledTableCell>DUE DATE</StyledTableCell>
+              <StyledTableCell>STATUS</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
