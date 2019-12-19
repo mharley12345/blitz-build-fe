@@ -26,33 +26,26 @@ export default function TaskProvider({ children }) {
       });
   };
 
-  const sortTasks = (condition) => {
-    const user_id = localStorage.getItem("user_id");
-    axiosWithAuth()
-      .get(
-        `/projects/tasks/${user_id}?sortby=isComplete&sortcondition=false&sortdir=desc`
-      )
-      .then(res => {
-        setTasks(res.data.tasks);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+  const toggleCompleteTask = (taskId, boolean) => {
 
-  const completeTask = () => {
-    const user_id = localStorage.getItem("user_id");
-    axiosWithAuth()
-      .get(
-        `/projects/tasks/${user_id}?sortby=isComplete&sortcondition=false&sortdir=desc`
-      )
-      .then(res => {
-        setTasks(res.data.tasks);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+    // axiosWithAuth()
+    //   .put(`projects/tasks/${taskId}`, { isComplete: !boolean })
+    //   .then(res => {
+        
+    //   })
+    //   .catch(err => console.log("from edit task catch", err));
+
+    //   const newTasks = tasks.map(task => {
+    //     if (task.id === taskId) {
+    //       task.isComplete = boolean
+    //       return editedTask;
+    //     } else {
+    //       return task;
+    //     }
+    //   });
+    //   console.log("from editTask newTasks", newTasks);
+    //   setTasks([...newTasks]);
+    }
 
   const getProjectTasks = projectID => {
     axiosWithAuth()
@@ -66,7 +59,6 @@ export default function TaskProvider({ children }) {
   };
 
   const addTask = newTask => {
-    console.log("new task", newTask);
 
     const task = {
       due_date: newTask.due_date,
@@ -75,24 +67,20 @@ export default function TaskProvider({ children }) {
       project_id: newTask.project_id,
       template_id: newTask.template_id
     };
-    console.log("task const from addTask", task);
     axiosWithAuth()
       .post(`/projects/tasks`, task)
       .then(res => {
-        console.log("from addtask in taskProvider", res);
         newTask.id = res.data.taskId[0];
         setTasks([...tasks, newTask]);
         getTasks();
       })
       .catch(err => console.log(err));
-    console.log(newTask);
   };
 
   const deleteTask = deletedTask => {
     axiosWithAuth()
       .delete(`/projects/tasks/${deletedTask.id}`)
       .then(res => {
-        console.log("from delete task", res);
       })
       .catch(err => console.log("from delete task catch", err));
     const newTasks = tasks.filter(task => {
@@ -103,7 +91,6 @@ export default function TaskProvider({ children }) {
   };
 
   const editTask = editedTask => {
-    console.log(editedTask);
     const dbTask = {
       task_name: editedTask.task_name,
       task_description: editedTask.task_description,
@@ -113,8 +100,6 @@ export default function TaskProvider({ children }) {
     axiosWithAuth()
       .put(`projects/tasks/${editedTask.id}`, dbTask)
       .then(res => {
-        console.log("from edit task", editedTask);
-        console.log("from edit task", res);
       })
       .catch(err => console.log("from edit task catch", err));
 
@@ -133,8 +118,7 @@ export default function TaskProvider({ children }) {
       <TaskContext.Provider
         value={{
           getTasks,
-          sortTasks,
-          completeTask,
+          toggleCompleteTask,
           tasks,
           setTasks,
           addTask,

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 
+import CompleteTask from "./CompleteTask";
 import EditTask from "./EditTask";
 import DeleteTask from "./DeleteTask";
 import AddDelayReason from "../delayLog/AddDelayReason";
 import PathnameContext from "../../contexts/PathnameContext";
-import EditTemplateTask from '../templates/EditTemplateTask'
+import EditTemplateTask from "../templates/EditTemplateTask";
 //styles
 import styled from "styled-components";
 import {
@@ -18,10 +19,11 @@ import {
 export default function MeatBallsDrop({ task }) {
   const refContainer = useRef();
   const [dropStatus, setDropStatus] = useState(false);
+  const [completeStatus, setCompleteStatus] = useState(false);
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
-const [delayStatus, setDelayStatus] = useState(false);
-const { pathname, setPathname } = useContext(PathnameContext);
+  const [delayStatus, setDelayStatus] = useState(false);
+  const { pathname, setPathname } = useContext(PathnameContext);
   useEffect(() => {
     setPathname(window.location.pathname);
     document.addEventListener("mousedown", handleClickOutside);
@@ -39,6 +41,16 @@ const { pathname, setPathname } = useContext(PathnameContext);
 
   const closeDrop = e => {
     setDropStatus(false);
+  };
+
+  //complete
+  const handleCompleteOpen = e => {
+    e.stopPropagation();
+    setCompleteStatus(true);
+  };
+  const handleCompleteClose = e => {
+    setCompleteStatus(false);
+    closeDrop();
   };
 
   //edit modal functions
@@ -60,11 +72,10 @@ const { pathname, setPathname } = useContext(PathnameContext);
     setDeleteStatus(false);
     closeDrop();
   };
-//delay modal functions
+  //delay modal functions
   const handleDelayOpen = e => {
     e.stopPropagation();
     setDelayStatus(true);
-    
   };
   const handleDelayClose = e => {
     setDelayStatus(false);
@@ -72,24 +83,22 @@ const { pathname, setPathname } = useContext(PathnameContext);
   };
 
   const hideOnTemplates = () => {
-    if(pathname.includes('/templates')){
-      return Hidden
+    if (pathname.includes("/templates")) {
+      return Hidden;
     }
-    
-  }
+  };
 
   const Hidden = {
-    display: 'none'
-  }
+    display: "none"
+  };
 
   const checkThePage = (editTask, editTemplateTask) => {
-    if (pathname.includes('/templates')) {
-      return editTemplateTask
+    if (pathname.includes("/templates")) {
+      return editTemplateTask;
+    } else {
+      return editTask;
     }
-    else {
-      return editTask
-    }
-  }
+  };
 
   return (
     <>
@@ -104,14 +113,14 @@ const { pathname, setPathname } = useContext(PathnameContext);
             <DropDown>
               {/* <Geo></Geo> */}
               <StyledLi style={hideOnTemplates()}>
-                <DropP>Complete</DropP>
+                <DropP onClick={handleCompleteOpen}>Complete</DropP>
                 <TaskI className="ion-md-checkmark-circle" />
               </StyledLi>
               <StyledLi onClick={handleEditOpen}>
                 <DropP>Edit</DropP>
                 <TaskI className="ion-md-create" />
               </StyledLi>
-              <StyledLi onClick={handleDelayOpen} style= {hideOnTemplates()}>
+              <StyledLi onClick={handleDelayOpen} style={hideOnTemplates()}>
                 <DropP>Delay</DropP>
                 <TaskI className="ion-md-clock" />
               </StyledLi>
@@ -124,18 +133,24 @@ const { pathname, setPathname } = useContext(PathnameContext);
         )}
       </MeatBalls>
       {checkThePage(
-      <EditTask
-        task={task}
-        closeDrop={closeDrop}
-        editStatus={editStatus}
-        handleEditClose={handleEditClose}
-      />,
-      <EditTemplateTask 
-      task={task}
-      closeDrop={closeDrop}
-      editStatus={editStatus}
-      handleEditClose={handleEditClose}
-    />
+        // <CompleteTask
+        //   task={task}
+        //   closeDrop={closeDrop}
+        //   editStatus={completeStatus}
+        //   handleEditClose={handleCompleteClose}
+        // />,
+        <EditTask
+          task={task}
+          closeDrop={closeDrop}
+          editStatus={editStatus}
+          handleEditClose={handleEditClose}
+        />,
+        <EditTemplateTask
+          task={task}
+          closeDrop={closeDrop}
+          editStatus={editStatus}
+          handleEditClose={handleEditClose}
+        />
       )}
       <DeleteTask
         task={task}
