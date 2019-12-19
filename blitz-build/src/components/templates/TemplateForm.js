@@ -24,8 +24,7 @@ export default function TemplateForm({
   editFields,
   text
 }) {
-  //importing state of templates from context and then setting initial local state for projects
-  const { templates } = useContext(TemplateContext);
+  //setting initial local state for template form
   const [form, setForm] = useState({
     template_name: ""
   });
