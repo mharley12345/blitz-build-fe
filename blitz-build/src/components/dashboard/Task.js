@@ -6,49 +6,15 @@ import MeatBallsDrop from "../tasks/MeatBallsDrop";
 
 //styles
 import styled, { css } from "styled-components";
+import {
+  useStyles,
+  StyledTableCell,
+  StyledTableRow
+} from "../../styles/Table/TableStyles";
 
-//mui
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
 
 function Task({ item, children, projectTask }) {
-  const StyledTableRow = withStyles(theme => ({
-    root: {
-      "&:nth-of-type(even)": {
-        background: "#F5F5F5"
-      },
-      marginBottom: "32px"
-    }
-  }))(TableRow);
 
-  const StyledTableCell = withStyles(theme => ({
-    head: {
-      padding: "8px 32px",
-      height: 35,
-      backgroundColor: "#E9E9E9",
-      color: theme.palette.common.black
-    },
-    body: {
-      padding: "8px 32px",
-      fontSize: 16,
-      height: 104
-    }
-  }))(TableCell);
-
-  const useStyles = makeStyles({
-    root: {
-      border: "1px solid #DCD9D5"
-    },
-    table: {
-      minWidth: "1080px"
-    },
-    tableHover: {
-      "&:hover": {
-        border: "3px solid orange"
-      }
-    }
-  });
 
   const classes = useStyles();
 

@@ -19,34 +19,11 @@ import TableBody from "@material-ui/core/TableBody";
 
 //styles
 import { ViewBtn } from "../../styles/ViewBtn";
+import {
+  useStyles,
+  StyledTableCell,
 
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    padding: "8px 32px",
-    height: 35,
-    backgroundColor: "#E9E9E9",
-    color: theme.palette.common.black
-  },
-  body: {
-    padding: "8px 32px",
-    fontSize: 16,
-    height: 104
-  }
-}))(TableCell);
-
-const useStyles = makeStyles({
-  root: {
-    border: "1px solid #DCD9D5"
-  },
-  table: {
-    miWidth: "1080px"
-  },
-  tableHover: {
-    "&:hover": {
-      border: "3px solid orange"
-    }
-  }
-});
+} from "../../styles/Table/TableStyles";
 
 function DashboardTasks({ projectID, numberOfTasks }) {
   const { tasks } = useContext(taskContext);

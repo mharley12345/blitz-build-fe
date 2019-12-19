@@ -6,7 +6,6 @@ import searchTermContext from "../../contexts/searching/searchTerm";
 
 //styles
 import Global from "../../styles/Global";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -15,49 +14,11 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
-
+import {useStyles, StyledTableCell, StyledTableRow} from "../../styles/Table/TableStyles"
 // pages bar function from global
 import TablePaginationActions from "../../components/global/TablePaginationActions";
 
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    padding: "8px 32px",
-    height: 35,
-    backgroundColor: "#E9E9E9",
-    color: theme.palette.common.black
-  },
-  body: {
-    padding: "8px 32px",
-    fontSize: 16,
-    height: 104
-  }
-}))(TableCell);
 
-const StyledTableRow = withStyles(theme => ({
-  root: {
-    "&:nth-of-type(even)": {
-      background: "#F5F5F5"
-    },
-    marginBottom: "32px"
-  }
-}))(TableRow);
-
-const useStyles = makeStyles({
-  root: {
-    border: "1px solid #DCD9D5"
-  },
-  
-  tableHover: {
-    "&:hover": {
-      cursor: "pointer",
-      "& span": {
-        color: "#DD6B20",
-
-        textDecoration: "underline"
-      }
-    }
-  }
-});
 
 const Projects = props => {
   const classes = useStyles();
@@ -142,7 +103,7 @@ const Projects = props => {
 
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
+                <TableCell colSpan={5} />
               </TableRow>
             )}
           </TableBody>
@@ -151,7 +112,7 @@ const Projects = props => {
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={6}
+                colSpan={5}
                 count={results.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
