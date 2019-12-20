@@ -40,7 +40,7 @@ const  DocumentCard = (props) => {
                  <td> 
                  <a href ={documents.doc_url} 
                   rel="noopener noreferrer" target="_blank">
-                  View ></a>
+                  View</a> >
                   </td>
                </tr>
              </tbody>

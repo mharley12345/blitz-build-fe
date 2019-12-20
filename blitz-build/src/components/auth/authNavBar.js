@@ -5,7 +5,7 @@ import auth0Client from "./auth";
 function NavBar(props) {
   const signOut = () => {
     auth0Client.signOut();
-    props.history.replace("/dashboard");
+    props.history.replace("/navbar");
   };
 
   return (
@@ -38,4 +38,3 @@ function NavBar(props) {
 }
 
 export default withRouter(NavBar);
-

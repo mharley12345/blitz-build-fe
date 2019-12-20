@@ -111,6 +111,27 @@ export default function ProjectForm({
 
     closeModal();
   };
+  const addCustomTemplate = e => {
+    e.preventDefault();
+    const templateID = parseInt(form.template_id);
+    const project_id = editFields.id;
+    console.log("project_id", project_id);
+    console.log("templateID", templateID);
+    axiosWithAuth()
+      .post(`/templates/addTasks/${project_id}`, { template_id: templateID })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  async function submitForm() {
+    const originalhandleSubmit = await handleSubmit();
+    console.log("async", originalhandleSubmit);
+    const customTemplate = await addCustomTemplate();
+    console.log("async", customTemplate);
+  }
 
   // const addCustomTemplate = e => {
   //   if (templateForm.template_id !== null) {
@@ -160,7 +181,7 @@ export default function ProjectForm({
   // }
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm onSubmit={submitForm}>
       <StyledFormHeader>
         <h1 style={{ fontSize: "2rem", margin: 0 }}>{text}</h1>
         <XButton onClick={closeModal}>close X</XButton>

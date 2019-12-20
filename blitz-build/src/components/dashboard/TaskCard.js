@@ -26,17 +26,29 @@ const StyledTableCell = withStyles(theme => ({
     height: 104
   }
 }))(TableCell);
-function TaskCard({ projectID, numberOfTasks }) {
-  const { tasks, getTasks } = useContext(taskContext);
+
+function TaskCard({
+  projectID,
+  numberOfTasks,
+  AddTask,
+  results,
+  taskSearchResults
+}) {
+  const {
+    projectTasks,
+    setProjectTasks,
+    getProjectTasks,
+    tasks,
+    setTasks,
+    getTasks
+  } = useContext(taskContext);
   const { searchTerm } = useContext(searchTermContext);
+
   console.log("projectID:", projectID);
   localStorage.setItem("projectID",projectID)
   useEffect(() => {
     getTasks();
   }, []);
-  const projectTasks = tasks.filter(item => {
-    return `${item.project_id}` === projectID;
-  });
   return (
     <Container>
       <Section>
@@ -54,8 +66,10 @@ function TaskCard({ projectID, numberOfTasks }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {projectTasks.slice(0, numberOfTasks).map(item => {
-              return <Task item={item} key={item.id} projectTask={true} />;
+            {tasks.slice(0, numberOfTasks).map(item => {
+              if (JSON.stringify(item.project_id) === projectID) {
+                return <Task item={item} key={item.id} />;
+              }
             })}
           </TableBody>
         </Table>
