@@ -11,11 +11,10 @@ import ProjectForm from "../components/projects/ProjectForm";
 import { NavLink, Link, Redirect } from "react-router-dom";
 import OpenContext from "../contexts/projects/OpenContext";
 import OpenTemplateContext from "../contexts/OpenTemplateContext";
-// import AddProject from  '../components/modal/AddProject'
 import searchTermContext from "../contexts/searching/searchTerm";
-import AddProject from "../components/modal/AddProject";
 import TemplateContext from "../contexts/templates/TemplateContext";
 import TemplateTaskForm from "../components/templates/TemplateTaskForm";
+import TemplateForm from "../components/templates/TemplateForm"
 import TaskContext from "../contexts/tasks/TaskContext";
 import ProjectContext from "../contexts/projects/ProjectContext";
 
@@ -61,8 +60,8 @@ border: 1px solid #8A827D
 `;
 const ButtonDocumentCheck = {
   display: "flex",
-  position: 'absolute',
-  right: '200px',
+  position: "absolute",
+  right: "200px",
   borderRadius: "3px",
   width: "174px",
   height: "48px",
@@ -70,8 +69,8 @@ const ButtonDocumentCheck = {
   alignItems: "center"
 };
 const ButtonTemplateCheck = {
-  position: 'absolute',
-  right: '40px',
+  position: "absolute",
+  right: "40px",
   display: "flex",
   borderRadius: "3px",
   width: "174px",
@@ -81,8 +80,8 @@ const ButtonTemplateCheck = {
   marginLeft: "160px"
 };
 const SoloDocument = {
-  position: 'absolute',
-  right: '40px',
+  position: "absolute",
+  right: "40px",
   display: "flex",
   borderRadius: "3px",
   width: "174px",
@@ -93,8 +92,8 @@ const SoloDocument = {
 };
 
 const SoloTask = {
-  position: 'absolute',
-  right: '40px',
+  position: "absolute",
+  right: "40px",
   display: "flex",
   borderRadius: "3px",
   width: "151px",
@@ -155,8 +154,8 @@ border: 1px solid #8A827D
 `;
 
 const ButtonProjectCheck = {
-  position: 'absolute',
-  right: '40px',
+  position: "absolute",
+  right: "40px",
   display: "flex",
   borderRadius: "3px",
   width: "151px",
@@ -165,8 +164,8 @@ const ButtonProjectCheck = {
   alignItems: "center"
 };
 const ButtonTaskCheck = {
-  position: 'absolute',
-  right: '200px',
+  position: "absolute",
+  right: "200px",
   display: "flex",
   borderRadius: "3px",
   width: "151px",
@@ -234,13 +233,14 @@ function Header({ pathname }) {
   const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext);
   const { addProject } = useContext(ProjectContext);
   const { addTask } = useContext(TasksContext);
-  const { addTemplateTask } = useContext(TemplateContext);
+  const { addTemplateTask, addTemplate } = useContext(TemplateContext);
   const { open, setOpen } = useContext(OpenContext);
   const { TaskModalStatus, setTaskModalStatus } = useContext(TaskContext);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
   const { openUploader, setUploaderOpen } = useContext(OpenUploaderContext);
   const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
+  const [TemplateModalStatus, setTemplateModalStatus] = useState(false);
 
   console.log("this is the handlechange", searchCatch);
   console.log("this is the handlesubmit", searchTerm);
@@ -257,6 +257,12 @@ function Header({ pathname }) {
   };
   const handleProjectModalClose = () => {
     setProjectModalStatus(false);
+  };
+  const handleTemplateModalOpen = () => {
+    setTemplateModalStatus(true);
+  };
+  const handleTemplateModalClose = () => {
+    setTemplateModalStatus(false);
   };
   const handleTemplateTaskModalOpen = () => {
     setTemplateTaskModalStatus(true);
@@ -286,9 +292,8 @@ function Header({ pathname }) {
       pathname.includes("templates") ||
       pathname === "/documents/add" ||
       pathname.includes("/mycalendar") ||
-      pathname === "/"
-      ||
-      pathname ==='/activity-feed'
+      pathname === "/" ||
+      pathname === "/activity-feed"
     ) {
       return HideButton;
     } else {
@@ -305,7 +310,7 @@ function Header({ pathname }) {
       pathname === "/documents/add" ||
       pathname.includes("/mycalendar") ||
       pathname === "/" ||
-      pathname ==='/activity-feed'
+      pathname === "/activity-feed"
     ) {
       return HideButton;
     } else if (pathname === "/documents") {
@@ -343,7 +348,7 @@ function Header({ pathname }) {
       pathname === "/documents/add" ||
       pathname.includes("/mycalendar") ||
       pathname === "/" ||
-      pathname ==='/activity-feed'
+      pathname === "/activity-feed"
     ) {
       return HideButton;
     } else {
@@ -482,7 +487,7 @@ function Header({ pathname }) {
           onMouseEnter={() => setTemplateHover(true)}
           onMouseLeave={() => setTemplateHover(false)}
           style={HideTheTemplateButton(pathname)}
-          onClick={OpenTemplateToggler}
+          onClick={handleTemplateModalOpen}
         >
           {" "}
           <ButtonI
@@ -497,7 +502,7 @@ function Header({ pathname }) {
         <Modal
           visible={TaskModalStatus}
           dismiss={handleTaskModalClose}
-          client={"40%"}
+          client={"45%"}
           component={
             <TaskForm
               closeModal={handleTaskModalClose}
@@ -506,7 +511,18 @@ function Header({ pathname }) {
             />
           }
         />
-
+        <Modal
+          visible={TemplateModalStatus}
+          dismiss={handleTemplateModalClose}
+          client={"50%"}
+          component={
+            <TemplateForm
+              closeModal={handleTemplateModalClose}
+              handleFunction={addTemplate}
+              text={"Add Template"}
+            />
+          }
+        />
         <Modal
           visible={TemplateTaskModalStatus}
           dismiss={handleTemplateTaskModalClose}
@@ -528,11 +544,11 @@ function Header({ pathname }) {
               closeModal={handleProjectModalClose}
               handleFunction={addProject}
               text={"Add Project"}
+              imgText={"Upload a Project Image"}
             />
           }
         />
       </ButtonContainer>
-      <AddProject />
     </HeaderContainer>
   );
 }

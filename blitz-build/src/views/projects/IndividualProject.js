@@ -1,50 +1,50 @@
 import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-import Weather from "../weather/Weather";
-import axios from "axios";
 
-import TaskCard from "../dashboard/TaskCard";
-import styled from "styled-components";
+//components
+import Weather from "../../components/weather/Weather";
+import ProjectTaskCard from "../../components/projects/ProjectsTaskCard";
 import Global from "../../styles/Global";
+import DeleteProject from "../../components/projects/DeleteProject";
+import EditProject from "../../components/projects/EditProject";
+import Documents from "../../components/documents/Documents";
+
+
+//static
 import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
+
+//contexts
 import PathnameContext from "../../contexts/PathnameContext";
-import EditModalContext from "../../contexts/EditModalContext";
-import DeleteProject from "./DeleteProject";
-import EditProject from "./EditProject";
 import TaskContext from "../../contexts/tasks/TaskContext";
-import Documents from "../documents/Documents";
-import searchTermContext from "../../contexts/searching/searchTerm";
 
-import TemplateContext from "../../contexts/templates/TemplateContext";
+//styles
+import styled from "styled-components";
 
-import { StyledLabel, StyledSelect } from "../../styles/Tasks/taskForm";
 
 const IndividualProject = props => {
-  const { templates } = useContext(TemplateContext);
-  const [PreBuiltTemplate, setPreBuiltTemplate] = useState([]);
 
-  const { pathname, setPathname } = useContext(PathnameContext);
+
+  //local states
   const [projectState, setProjectState] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
   const [editProjectStatus, setEditProjectStatus] = useState(false);
-  const { editModalOpen, setEditModalOpen } = useContext(EditModalContext);
+  
 
-  const [form, setForm] = useState({
-    template_id: null
-  });
 
-  const project_id = props.match.params.id;
+  //contexts
   const { getProjectTasks } = useContext(TaskContext);
+  const { pathname, setPathname } = useContext(PathnameContext);
 
-  const changeHandler = e => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
+
+  //this gets the project id and sets it to state so we have a single project getting returned, then we are getting the projectTasks
   useEffect(() => {
     setPathname(window.location.pathname);
     const projectID = props.match.params.id;
+
+    // get single project data
     axiosWithAuth()
       .get(`projects/${projectID}`)
       .then(res => {
@@ -55,49 +55,16 @@ const IndividualProject = props => {
       .catch(err => {
         console.log(err);
       });
-    // axiosWithAuth()
-    //   .get("/90_day")
-    //   .then(res => {
-    //     console.log("90 day res", res);
-    //     // setPreBuiltTemplate()
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    getProjectTasks();
+    //gets the project tasks and sets them to projectTask context
+    getProjectTasks(projectID);
   }, [props]);
-
-  const addPreBuiltTemplate = () => {
-    console.log(project_id);
-    axiosWithAuth()
-      .post("/90_day", { project_id })
-      .then(res => {
-        console.log("90_day post", res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  const addCustomTemplate = e => {
-    e.preventDefault();
-    const templateID = parseInt(form.template_id);
-    console.log("templateID", templateID);
-    axiosWithAuth()
-      .post(`/templates/addTasks/${project_id}`, { template_id: templateID })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
 
   //edit modal functions
   const handleEditProjectOpen = e => {
     e.stopPropagation();
     setEditProjectStatus(true);
   };
+  //handles close
   const handleEditProjectClose = e => {
     setEditProjectStatus(false);
   };
@@ -111,41 +78,10 @@ const IndividualProject = props => {
     props.history.push(`/projects`);
   };
 
-  const OpenToggle = e => {
-    e.stopPropagation();
-    setEditModalOpen(true);
-  };
+ 
   return (
     <>
       <Global />
-      {/* <DisplayFlex>
-        <PreBuiltButton>
-          <button onClick={() => addPreBuiltTemplate()}>
-            {" "}
-            Add 90-Day Template{" "}
-          </button>
-        </PreBuiltButton>
-        <form onSubmit={addCustomTemplate}>
-          <StyledLabel>Assign A Your Own Custom Template</StyledLabel>
-          <StyledSelect
-            type="number"
-            name="template_id"
-            onChange={changeHandler}
-            value={form.template_id}
-          >
-            <option>Choose Template</option>
-
-            {templates.map(template => {
-              return (
-                <option key={template.id} value={template.template_id}>
-                  {template.id}
-                </option>
-              );
-            })}
-          </StyledSelect>
-          <button type="submit">Add Template</button>
-        </form>
-      </DisplayFlex> */}
       <IndividualProjectTitleContainer>
         <img src={Project_icon} alt="project_icon" />
         <span>&nbsp;&nbsp;Projects / {projectState.project_name}</span>
@@ -231,7 +167,7 @@ const IndividualProject = props => {
         </Right>
       </Top>
       <TasksContainer>
-        <TaskCard projectID={props.match.params.id} numberOfTasks={3} />
+        <ProjectTaskCard projectID={props.match.params.id} numberOfTasks={3} />
       </TasksContainer>
       <DeleteProject
         project={projectState}
@@ -248,11 +184,6 @@ const IndividualProject = props => {
 };
 
 export default withRouter(IndividualProject);
-
-const DisplayFlex = styled.div`
-  display: flex;
-  margin: 10px;
-`;
 
 const Top = styled.div`
   width: 1080px;
@@ -375,8 +306,4 @@ const PageI = styled.i`
   background-color: #ffffff;
   color: #8a827d;
   text-decoration: none;
-`;
-
-const PreBuiltButton = styled.div`
-  height: 20px;
 `;
