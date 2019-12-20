@@ -54,7 +54,7 @@ export default function TemplateForm({
   const handleSubmit = e => {
     e.preventDefault();
 
-    // check if user asigns a name to the task
+    // check if user assigns a name to the task
     if (form.template_name == "") {
       setError({
         error: true,

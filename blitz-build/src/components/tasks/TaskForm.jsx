@@ -87,7 +87,7 @@ export default function TaskForm({
       };
       console.log("from taskform submit", task);
 
-      // check if user asigns a name to the task
+      // check if user assigns a name to the task
       if (newTask.task_name == "") {
         setError({
           error: true,
