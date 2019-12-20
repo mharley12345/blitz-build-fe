@@ -43,11 +43,13 @@ const IndividualProject = props => {
   useEffect(() => {
     setPathname(window.location.pathname);
     const projectID = props.match.params.id;
-
+        
     // get single project data
     axiosWithAuth()
       .get(`projects/${projectID}`)
       .then(res => {
+        let name = res.data[0].project_name
+        localStorage.setItem('project_name',name)
         console.log("get single project: ", res.data);
 
         setProjectState(res.data[0]);

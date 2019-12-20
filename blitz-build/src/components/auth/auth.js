@@ -9,7 +9,7 @@ class Auth {
     domain: "gannondarcy2.auth0.com",
     audience: "https://gannondarcy2.auth0.com/userinfo",
     clientID: "OzMg1e7JDNF7DogxPEPvGzpG7fvvDHNe",
-    redirectUri: "http://localhost:3000/callback",
+    redirectUri: "https://blitz-build-dev.netlify.com/callback",
     responseType: "id_token",
     scope: "openid profile"
   });

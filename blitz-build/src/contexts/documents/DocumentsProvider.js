@@ -11,6 +11,7 @@ export default function DocumentsProvider({ children }){
      .get('/docs/url')
       .then(res =>{
           console.log("get Documents",res.data)
+          
           setDocuments(res.data)
       })
        .catch(err =>{
