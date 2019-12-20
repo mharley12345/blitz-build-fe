@@ -30,7 +30,7 @@ const Projects = props => {
 
   //this tracks which page you are on for projects and sets the intial state of how many rows there are
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   //sets new page
   const handleChangePage = (event, newPage) => {
