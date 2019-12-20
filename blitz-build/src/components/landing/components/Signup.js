@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Link, withRouter } from "react-router-dom";
-import auth0Client from "../../auth/auth";
-
 const Signup = () => {
   let today = new Date();
   return (
@@ -11,7 +8,7 @@ const Signup = () => {
       <Inner>
         <Title>Sign Up Today</Title>
         <P>Set up a free acount and take ownership of your projects.</P>
-        <Button onClick={auth0Client.signIn}>Sign up</Button>
+        <Button>Sign up</Button>
       </Inner>
       <footer>
         {today.getFullYear()} © BlitzBuild, Inc. All Rights Reserved.

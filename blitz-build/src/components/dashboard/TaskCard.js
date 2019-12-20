@@ -1,6 +1,8 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
-import Task from "../dashboard/Task";
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
+import Task from "./Task";
+import searchTermContext from "../../contexts/searching/searchTerm";
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
 //mui
@@ -11,13 +13,6 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
-
-//router
-import { Link } from 'react-router-dom'
-
-//styles
-import { ViewBtn } from "../../styles/ViewBtn";
-
 const StyledTableCell = withStyles(theme => ({
   head: {
     padding: "8px 32px",
@@ -31,9 +26,13 @@ const StyledTableCell = withStyles(theme => ({
     height: 104
   }
 }))(TableCell);
-function ProjectTaskCard({ projectID, numberOfTasks }) {
-  const { tasks } = useContext(taskContext);
-
+function TaskCard({ projectID, numberOfTasks }) {
+  const { tasks, getTasks } = useContext(taskContext);
+  const { searchTerm } = useContext(searchTermContext);
+  console.log("projectID:", projectID);
+  useEffect(() => {
+    getTasks();
+  }, []);
   const projectTasks = tasks.filter(item => {
     return `${item.project_id}` === projectID;
   });
@@ -41,9 +40,7 @@ function ProjectTaskCard({ projectID, numberOfTasks }) {
     <Container>
       <Section>
         <p>Your Task List</p>
-        <Link to= {`/projects/${projectID}/tasks`}>
-          <ViewBtn>View All</ViewBtn>
-        </Link>
+        <p>View All</p>
       </Section>
       <Paper>
         <Table>
@@ -65,7 +62,7 @@ function ProjectTaskCard({ projectID, numberOfTasks }) {
     </Container>
   );
 }
-export default ProjectTaskCard;
+export default TaskCard;
 const Section = styled.div`
   width: 100%;
   display: flex;

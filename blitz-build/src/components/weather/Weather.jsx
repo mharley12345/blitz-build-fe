@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-
-//axios, moment
 import axios from "axios";
 import moment from "moment";
-
-//components
 import ProjectWeather from "./ProjectWeather";
 import DashboardWeather from "./DashboardWeather";
 import {
@@ -34,18 +30,15 @@ function Weather(props) {
   });
   useEffect(() => {
     // get the latitude and longitude from the project page or navigator.geolocation.
-
-    // if props.usage equals to "project", get position data from individualProject.js
     if (props.usage === "project") {
       setWeatherPosition({
         latitude: props.latitude,
         longitude: props.longitude
       });
-     // if props.usage equals to "dashboard", get position data from navigator.geolocation
     } else if (props.usage === "dashboard") {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
-          
+          console.log(position);
           setWeatherPosition({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
@@ -59,27 +52,19 @@ function Weather(props) {
 
   // get the weather data from backend.
   useEffect(() => {
-    
-    if (weatherPosition.latitude == 0 || weatherPosition.latitude == undefined) { 
-     console.log("no weather position")
-    }
-    // If latitude and longitude are not 0 or undefined, call weather endpoint and get weather data.
-  else {
-    axios
+    if (weatherPosition.latitude !== 0) {
+      axios
         .get(
           ` https://blitzbuild-weather.herokuapp.com/forecast/${weatherPosition.latitude},${weatherPosition.longitude}`
         )
         .then(res => {
           setWeatherData(res.data);
-          //console.log("get weather data", res.data);
-          
+          console.log("get weather data", res.data);
         })
         .catch(err => {
           console.log(err);
         });
-  }
-      
-    
+    }
   }, [weatherPosition]);
 
   // get time
@@ -87,7 +72,7 @@ function Weather(props) {
     return `${moment().format("dddd")}, ${moment().format("LT")}`;
   }
 
-  // convert weather info to weather icon 
+  // convert weather info to weather icon - not finish!
   function getWeatherIcon() {
     var weatherIcon = null;
 

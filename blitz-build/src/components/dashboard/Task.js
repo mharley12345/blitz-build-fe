@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import moment from "moment";
 
 //components
@@ -67,6 +67,7 @@ function Task({ item, children, projectTask }) {
     }
   }
   
+  console.log(!project_date)
   const status = DateCalc(today, item.due_date);
 
   const todayDate = new window.Date(today);

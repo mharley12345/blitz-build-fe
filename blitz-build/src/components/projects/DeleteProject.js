@@ -13,10 +13,7 @@ export default function DeleteProject({
     handleDeleteClose
  
 }) {
-  //import the function that deletes a project
   const { deleteProject } = useContext(ProjectsContext);
-
-  //returns a modal to confirm you have to delete a project
   return (
     <>
       <Modal
