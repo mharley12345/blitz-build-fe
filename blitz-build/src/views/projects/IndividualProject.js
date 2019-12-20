@@ -1,41 +1,45 @@
 import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
-
-//styles
-import styled from "styled-components";
-import Global from "../../styles/Global";
-
-//axios
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 //components
-import Weather from "../weather/Weather";
-import TaskCard from "../dashboard/TaskCard";
+import Weather from "../../components/weather/Weather";
+import ProjectTaskCard from "../../components/projects/ProjectsTaskCard";
+import Global from "../../styles/Global";
+import DeleteProject from "../../components/projects/DeleteProject";
+import EditProject from "../../components/projects/EditProject";
+import Documents from "../../components/documents/Documents";
+
+
+//static
 import Project_icon from "../../styles/icons_project/project_icon.png";
 import Project_img from "../../styles/icons_project/project_img.png";
-import DeleteProject from "./DeleteProject";
-import EditProject from "./EditProject";
-import Documents from "../documents/Documents";
 
-//context
+//contexts
 import PathnameContext from "../../contexts/PathnameContext";
 import TaskContext from "../../contexts/tasks/TaskContext";
-// import searchTermContext from "../../contexts/searching/searchTerm";
-// import TemplateContext from "../../contexts/templates/TemplateContext";
+
+//styles
+import styled from "styled-components";
 
 
 const IndividualProject = props => {
 
-  const { pathname, setPathname } = useContext(PathnameContext);
+
+  //local states
   const [projectState, setProjectState] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
   const [editProjectStatus, setEditProjectStatus] = useState(false);
+  
 
 
-  const project_id = props.match.params.id;
+  //contexts
   const { getProjectTasks } = useContext(TaskContext);
+  const { pathname, setPathname } = useContext(PathnameContext);
 
 
+
+  //this gets the project id and sets it to state so we have a single project getting returned, then we are getting the projectTasks
   useEffect(() => {
     setPathname(window.location.pathname);
     const projectID = props.match.params.id;
@@ -51,17 +55,16 @@ const IndividualProject = props => {
       .catch(err => {
         console.log(err);
       });
-    
-    getProjectTasks();
+    //gets the project tasks and sets them to projectTask context
+    getProjectTasks(projectID);
   }, [props]);
-
-  
 
   //edit modal functions
   const handleEditProjectOpen = e => {
     e.stopPropagation();
     setEditProjectStatus(true);
   };
+  //handles close
   const handleEditProjectClose = e => {
     setEditProjectStatus(false);
   };
@@ -79,7 +82,6 @@ const IndividualProject = props => {
   return (
     <>
       <Global />
-     
       <IndividualProjectTitleContainer>
         <img src={Project_icon} alt="project_icon" />
         <span>&nbsp;&nbsp;Projects / {projectState.project_name}</span>
@@ -165,7 +167,7 @@ const IndividualProject = props => {
         </Right>
       </Top>
       <TasksContainer>
-        <TaskCard projectID={props.match.params.id} numberOfTasks={3} />
+        <ProjectTaskCard projectID={props.match.params.id} numberOfTasks={3} />
       </TasksContainer>
       <DeleteProject
         project={projectState}
@@ -182,8 +184,6 @@ const IndividualProject = props => {
 };
 
 export default withRouter(IndividualProject);
-
-
 
 const Top = styled.div`
   width: 1080px;
@@ -307,5 +307,3 @@ const PageI = styled.i`
   color: #8a827d;
   text-decoration: none;
 `;
-
-

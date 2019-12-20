@@ -6,7 +6,6 @@ import searchTermContext from "../../contexts/searching/searchTerm";
 
 //styles
 import Global from "../../styles/Global";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -15,64 +14,30 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
-
+import {useStyles, StyledTableCell, StyledTableRow} from "../../styles/Table/TableStyles"
 // pages bar function from global
-import TablePaginationActions from "../global/TablePaginationActions";
+import TablePaginationActions from "../../components/global/TablePaginationActions";
 
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    padding: "8px 32px",
-    height: 35,
-    backgroundColor: "#E9E9E9",
-    color: theme.palette.common.black
-  },
-  body: {
-    padding: "8px 32px",
-    fontSize: 16,
-    height: 104
-  }
-}))(TableCell);
 
-const StyledTableRow = withStyles(theme => ({
-  root: {
-    "&:nth-of-type(even)": {
-      background: "#F5F5F5"
-    },
-    marginBottom: "32px"
-  }
-}))(TableRow);
-
-const useStyles = makeStyles({
-  root: {
-    border: "1px solid #DCD9D5"
-  },
-  
-  tableHover: {
-    "&:hover": {
-      cursor: "pointer",
-      "& span": {
-        color: "#DD6B20",
-
-        textDecoration: "underline"
-      }
-    }
-  }
-});
 
 const Projects = props => {
   const classes = useStyles();
 
+  //importing state of projects, and search term from context
   const { projects } = useContext(projectContext);
   const { searchTerm } = useContext(searchTermContext);
   const projectSearchInput = searchTerm.toLowerCase("");
 
+  //this tracks which page you are on for projects and sets the intial state of how many rows there are
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  //sets new page
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
+  //this handles the changes the user makes to how many rows they want
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -86,8 +51,7 @@ const Projects = props => {
       project.street_address.toLowerCase().includes(projectSearchInput)
   );
 
-  console.log("rows in projects table", results);
-
+  
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
 
@@ -117,9 +81,9 @@ const Projects = props => {
               <StyledTableRow
                 className={classes.tableHover}
                 key={result.id}
-                to={`/project/${result.id}`}
+                to={`/projects/${result.id}`}
                 onClick={() => {
-                  props.history.push(`/project/${result.id}`);
+                  props.history.push(`/projects/${result.id}`);
                 }}
               >
                 <StyledTableCell>
@@ -139,7 +103,7 @@ const Projects = props => {
 
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
+                <TableCell colSpan={5} />
               </TableRow>
             )}
           </TableBody>
@@ -148,7 +112,7 @@ const Projects = props => {
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={6}
+                colSpan={5}
                 count={results.length}
                 rowsPerPage={rowsPerPage}
                 page={page}

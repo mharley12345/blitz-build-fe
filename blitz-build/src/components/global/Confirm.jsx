@@ -2,7 +2,6 @@ import React from 'react'
 
 import styled from "styled-components";
 import { XButton } from "../../styles/Tasks/tasks";
-import TaskContext from '../../contexts/tasks/TaskContext';
 
 const ConfirmStyle = styled.div`
   padding-left: 30px;
@@ -16,7 +15,7 @@ justify-content: flex-start;
 
 const H1 = styled.h1`
 text-align: left; 
-height: 50px
+
 `
 
 const ConfirmBtn = styled.button`
@@ -45,7 +44,7 @@ export default function Confirm({ closeModal, text, deleteFunction, deleteItem }
                 <XButton onClick={ closeModal }>close X</XButton>
             </div>
 
-            <H1 style={{fontSize: '30px', fontWeight: 600}}>Delete {text}</H1>
+            <H1 style={{fontSize: '30px', fontWeight: 600, marginBottom:"15px"}}>Delete {text}</H1>
 
             <p>Are you sure you want to delete?</p>
             <BtnDiv>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
 //components
-import DelayLogButton from "./DelayLogButton";
+import DelayLogButton from "../../components/delayLog/DelayLogButton";
 
 //contexts
 import DelayLogContext from "../../contexts/delayLog/DelayLogContext";
@@ -19,46 +19,17 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
-
+import {
+  useStyles,
+  StyledTableCell,
+  StyledTableRow
+} from "../../styles/Table/TableStyles";
 // pages bar function from global
-import TablePaginationActions from "../global/TablePaginationActions";
+import TablePaginationActions from "../../components/global/TablePaginationActions";
 // csv function
 import { ExportToCsv } from "export-to-csv";
 
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    padding: "8px 32px",
-    height: 35,
-    backgroundColor: "#E9E9E9",
-    color: theme.palette.common.black
-  },
-  body: {
-    padding: "8px 32px",
-    fontSize: 16,
-    height: 104
-  }
-}))(TableCell);
 
-const StyledTableRow = withStyles(theme => ({
-  root: {
-    "&:nth-of-type(even)": {
-      background: "#F5F5F5"
-    },
-    marginBottom: "32px"
-  }
-}))(TableRow);
-
-const useStyles = makeStyles({
-  root: {
-    border: "1px solid #DCD9D5"
-  },
-
-  tableHover: {
-    "&:hover": {
-      border: "3px solid orange"
-    }
-  }
-});
 
 function DelayLog() {
   const { delayLogs } = useContext(DelayLogContext);
@@ -213,7 +184,7 @@ const DelayLogButtons = styled.div`
   border: 1px solid;
   box-sizing: border-box;
   border-radius: 3px;
-  padding-top: 8px;
+  padding-top: 10px;
   padding-left: 40px;
   font-size: 19px;
   color: #8a827d;

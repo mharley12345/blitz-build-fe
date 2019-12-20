@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-import Task from "./Task";
-import searchTermContext from "../../contexts/searching/searchTerm";
+import Task from "../dashboard/Task";
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
 //mui
@@ -13,6 +11,13 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
+
+//router
+import { Link } from 'react-router-dom'
+
+//styles
+import { ViewBtn } from "../../styles/ViewBtn";
+
 const StyledTableCell = withStyles(theme => ({
   head: {
     padding: "8px 32px",
@@ -26,34 +31,19 @@ const StyledTableCell = withStyles(theme => ({
     height: 104
   }
 }))(TableCell);
+function ProjectTaskCard({ projectID, numberOfTasks }) {
+  const { tasks } = useContext(taskContext);
 
-function TaskCard({
-  projectID,
-  numberOfTasks,
-  AddTask,
-  results,
-  taskSearchResults
-}) {
-  const {
-    projectTasks,
-    setProjectTasks,
-    getProjectTasks,
-    tasks,
-    setTasks,
-    getTasks
-  } = useContext(taskContext);
-  const { searchTerm } = useContext(searchTermContext);
-
-  console.log("projectID:", projectID);
-  localStorage.setItem("projectID",projectID)
-  useEffect(() => {
-    getTasks();
-  }, []);
+  const projectTasks = tasks.filter(item => {
+    return `${item.project_id}` === projectID;
+  });
   return (
     <Container>
       <Section>
         <p>Your Task List</p>
-        <p>View All</p>
+        <Link to= {`/projects/${projectID}/tasks`}>
+          <ViewBtn>View All</ViewBtn>
+        </Link>
       </Section>
       <Paper>
         <Table>
@@ -77,7 +67,7 @@ function TaskCard({
     </Container>
   );
 }
-export default TaskCard;
+export default ProjectTaskCard;
 const Section = styled.div`
   width: 100%;
   display: flex;

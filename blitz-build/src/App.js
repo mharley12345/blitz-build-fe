@@ -9,25 +9,28 @@ import jwtDecode from "jwt-decode";
 // import Layout from "./components/dashboard/Layout";
 // import Dashboard from "./components/dashboard/index";
 // import Dashboard from "./components/dashboard/Dashboard";
+
+//task views
 import Tasks from "./views/tasks/Tasks";
+import ProjectTasks from "./views/tasks/ProjectTasks";
+
 import Templates from "./components/templates/templates";
 import IndividualTemplate from "./components/templates/IndividualTemplate";
 import NinetyDayTemplate from "./components/templates/90DayTemplate";
-import Projects from "./components/projects/Projects";
-import IndividualProject from "./components/projects/IndividualProject";
+import Projects from "./views/projects/Projects";
+import IndividualProject from "./views/projects/IndividualProject";
 import Logout from "./components/auth/Logout";
 import Layout from "./layouts/Layout";
 import Dashboard from "./components/dashboard/Dashboard";
-import DelayLog from "./components/delayLog/DelayLog";
+import DelayLog from "./views/delayLog/DelayLog";
 import OpenTemplateContext from "./contexts/OpenTemplateContext";
-import AddTemplate from "./components/modal/AddTemplate";
 
 import Documents from "./components/documents/Documents";
 import OpenUploaderContext from "./contexts/documents/OpenUploaderContext";
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 import ActivityViewAll from "./components/activityFeed/ActivityViewAll";
 
-import Landing from "./components/landing/pages/Landing"
+import Landing from "./components/landing/pages/Landing";
 
 //context
 import UserContext from "./contexts/UserContext";
@@ -41,6 +44,7 @@ import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 import EditModalContext from "./contexts/EditModalContext";
 import TemplateProvider from "./contexts/templates/TemplateProvider";
 import SearchProvider from "./contexts/searching/searchTermProvider";
+
 //AUTH0
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
@@ -71,17 +75,14 @@ function App() {
       setUserInfo(jwtDecode(localStorage.getItem("id_token")));
     }
   }, []);
-  
 
-const LandingPage = (component) => {
-  if(pathname === '/' ) {
-    return (
-      null
-    )}
-    else {
-      return component
+  const LandingPage = component => {
+    if (pathname === "/") {
+      return null;
+    } else {
+      return component;
     }
-  }
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -151,6 +152,7 @@ const LandingPage = (component) => {
                     <SearchProvider>
                       <OpenContext.Provider value={{ open, setOpen }}>
                         <EditModalContext.Provider
+
                           value={{ editModalOpen, setEditModalOpen }}
                         >
                           <PathnameContext.Provider
@@ -159,101 +161,107 @@ const LandingPage = (component) => {
                             <UserContext.Provider
                               value={{ userInfo, setUserInfo }}
                             >
-                              <NavBar
-                                setPathname={setPathname}
-                                navLinks={navLinks}
-                              />
-                              {/* <AuthNavBar> */}
-                              <Auth0NavBar>
-                                <Layout pathname={pathname}>
-                                  <Switch>
-                                    <Route
-                                      exact
-                                      path="/auth"
-                                      component={Auth}
-                                    />
-                                    {/* <Route
-                                      exact
-                                      path="/navbar"
-                                      component={AuthNavBar}
-                                    /> */}
-                                    <Route
-                                      exact
-                                      path="/callback"
-                                      component={Callback}
-                                    />
+                              {LandingPage(
+                                <NavBar
+                                  setPathname={setPathname}
+                                  navLinks={navLinks}
+                                />
+                              )}
+                              <Layout pathname={pathname}>
+                                <Switch>
+                                  <Route exact path="/auth" component={Auth} />
+                                  <Route exact path="/" component={Landing} />
 
-                                    {/* <Route exact path="/signup" component={Signup} /> */}
-                                    <Route
-                                      exact
-                                      path="/log-out"
-                                      component={Logout}
-                                    />
-                                    {/*   */}
-                                    <Route
-                                      exact
-                                      path="/dashboard"
-                                      component={Dashboard}
-                                    />
-                                    <Route
-                                      exact
-                                      path="/tasks"
-                                      component={Tasks}
-                                    />
-                                    <Route
-                                      exact
-                                      path="/projects"
-                                      component={Projects}
-                                    />
-                                    <Route
-                                      exact
-                                      path="/project/:id"
-                                      component={IndividualProject}
-                                    />
-                                    <Route
-                                      exact
-                                      path="/templates"
-                                      component={Templates}
-                                    />
-                                    <Route
-                                      exact
-                                      path="/templates/:id"
-                                      component={IndividualTemplate}
-                                    />
-                                    <Route
-                                      exact
-                                      path="/90_Day"
-                                      component={NinetyDayTemplate}
-                                    />
-                                    <Route
-                                      exact
-                                      path="/delay-log"
-                                      component={DelayLog}
-                                    />
-                                    <Route
-                                      exact
-                                      path="/documents"
-                                      component={Documents}
-                                    />
-                                    <Route
-                                      exact
-                                      path="/documents/add"
-                                      component={Uploader}
-                                    />
-                                    <Route
-                                      exact
-                                      path="/mycalendar"
-                                      component={MyCalendar}
-                                    />
-                                    <Route
-                                      exact
-                                      path="/profile"
-                                      component={Profile}
-                                    />
-                                  </Switch>
-                                </Layout>
-                              </Auth0NavBar>
-                              {/* </AuthNavBar> */}
+                                  <Route
+                                    exact
+                                    path="/navbar"
+                                    component={AuthNavBar}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/callback"
+                                    component={Callback}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/activity-feed"
+                                    component={ActivityViewAll}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/login"
+                                    // component={Login}
+                                  />
+
+                                  {/* <Route exact path="/signup" component={Signup} /> */}
+                                  <Route
+                                    exact
+                                    path="/log-out"
+                                    component={Logout}
+                                  />
+                                  {/*   */}
+                                  <Route
+                                    exact
+                                    path="/dashboard"
+                                    component={Dashboard}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/tasks"
+                                    component={Tasks}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/projects"
+                                    component={Projects}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/projects/:id"
+                                    component={IndividualProject}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/projects/:id/tasks"
+                                    component={ProjectTasks}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/templates"
+                                    component={Templates}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/templates/:id"
+                                    component={IndividualTemplate}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/90_Day"
+                                    component={NinetyDayTemplate}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/delay-log"
+                                    component={DelayLog}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/documents"
+                                    component={Documents}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/documents/add"
+                                    component={Uploader}
+                                  />
+                                  <Route
+                                    exact
+                                    path="/mycalendar"
+                                    component={MyCalendar}
+                                  />
+                                </Switch>
+                              </Layout>
                             </UserContext.Provider>
                           </PathnameContext.Provider>
                         </EditModalContext.Provider>
@@ -271,3 +279,4 @@ const LandingPage = (component) => {
 }
 
 export default App;
+ 
