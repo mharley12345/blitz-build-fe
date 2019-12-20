@@ -1,61 +1,83 @@
-.App{
-  max-width: 1200px;
+#root > div > div > div > div.sc-iujRgT.ceqzZL > div.sc-GMQeP.flNFui > div.sc-bsbRJL.dRrxiP > div.sc-cMhqgX.bzCyvT > div.sc-jTzLTM.gqQXXs > div.sc-fjdhpX.QJAZL{
+
+width: 604px;
+height: 493px;
+left: 418px;
+top: 96px;
 }
-.upload-btn-wrapper {
+#root > div > div > div > div.sc-iujRgT.ceqzZL > div.sc-GMQeP.flNFui > div.sc-bsbRJL.dRrxiP > div.sc-cMhqgX.bzCyvT > div.sc-jTzLTM.gqQXXs > div.sc-fjdhpX.QJAZL > div > h1{
 
-  overflow: hidden;
+width: 490px;
+height: 38px;
+left: 474px;
+top: 144px;
+
+/* Heading 2 */
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 32px;
+line-height: 37px;
+/* identical to box height */
+
+
+/* 600 Gray */
+
+color: #232323;
+
 
 }
-.upload-btn-wrapper input[type=file] {
-  font-size: 100px;
-
-  left: 0;
-  top: 0;
-  opacity: 0;
-}
-
-#root > div > div > div > div.sc-fYiAbW.lbFfTk > div.sc-fOKMvo.hTslYO > div.sc-dUjcNx.kcgtTF > div{
-  max-width: 700px;
-
-}
-#root > div > div > div > div.sc-fYiAbW.lbFfTk > div.sc-fOKMvo.hTslYO > div.sc-bAeIUo.jmnQXo > div.sc-GMQeP.khcyzT > div.sc-jTzLTM.gqQXXs > div.sc-fjdhpX.efXAWx{
-  position: absoulte;
-}
-/* Dropzone */
-.Uploader {
-
-  position: absolute;
-  width: 604px;
-
-  /* white */
+#root > div > div > div > div.sc-iujRgT.ceqzZL > div.sc-GMQeP.flNFui > div.sc-bsbRJL.dRrxiP > div.sc-cMhqgX.bzCyvT > div.sc-jTzLTM.gqQXXs > div.sc-fjdhpX.QJAZL > div > div > h1{
   
-  background: #FFFFFF;
+
+width: 492px;
+height: 57px;
+left: 474px;
+top: 301px;
+}
+#root > div > div > div > div.sc-iujRgT.ceqzZL > div.sc-GMQeP.flNFui > div.sc-bsbRJL.dRrxiP > div.sc-cMhqgX.bzCyvT > div.sc-jTzLTM.gqQXXs > div.sc-fjdhpX.QJAZL > div > div{
+
+width: 492px;
+height: 231px;
+left: 474px;
+top: 214px;
+
+/* 400 Gray */
+
+border: 1px dashed #817974;
+box-sizing: border-box;
+}
+#root > div > div > div > div.sc-iujRgT.ceqzZL > div.sc-GMQeP.flNFui > div.sc-bsbRJL.dRrxiP > div.sc-cMhqgX.bzCyvT > div.sc-jTzLTM.gqQXXs > div.sc-fjdhpX.QJAZL > div > div > button{
+
+
+  width: 200px;
+  height: 48px;
+  left: 620px;
+  top: 493px;
+  margin-bottom: auto;
+  
+  /* 600 Orange */
+  
+  background: #DD6B20;
   border-radius: 3px;
-   
 }
+#root > div > div > div > div.sc-iujRgT.ceqzZL > div.sc-GMQeP.flNFui > div.sc-bsbRJL.dRrxiP > div.sc-cMhqgX.bzCyvT > div.sc-jTzLTM.gqQXXs > div.sc-fjdhpX.QJAZL{
+width: 80%;
+height: auto;
+left: 0px;
+top: 0px;
 
 
-#root > div > div > div > div.sc-daURTG.hxkjcn > div.sc-bXGyLb.iNsoYH > div.sc-lkqHmb.bEWeYB > div > button{
-   background-attachment: fixed;
-}
-root > div > div > div > div.sc-daURTG.hxkjcn > div.sc-bXGyLb.iNsoYH > div.sc-lkqHmb.bEWeYB > div > input[type=file]{ 
-  height: 30vh;
-  width: 128vh;
 
-  outline: none;
-  cursor: pointer;
 
 }
+#root > div > div > div > div.sc-iujRgT.ceqzZL > div.sc-GMQeP.flNFui > div.sc-bsbRJL.dRrxiP > div.sc-cMhqgX.bzCyvT > div.sc-jTzLTM.gqQXXs > div.sc-fjdhpX.QJAZL > div > div > div > input[type=file]{
+
+    font-size: 100px;
   
-#root > div > div > div > div.sc-daURTG.hxkjcn > div.sc-bXGyLb.iNsoYH > div.sc-lkqHmb.bEWeYB > div > input[type=file]:hover { 
-  background-color: #3B3B3B;
-  border: 5px dashed #DD6B20;
-  }
-/* #root > div > div.sc-fYiAbW.lbFfTk > div.sc-fOKMvo.cWpzSY > div.sc-dUjcNx.jaTPyW > div > center > input[type=file]{
-  display: none
-} */
-
-
-#root > div > div > div > div.sc-daURTG.hxkjcn > div.sc-bXGyLb.iNsoYH > div.sc-lkqHmb.bEWeYB{  text-align: center;
-  font-size: larger;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  
 }
