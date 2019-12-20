@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from '../App';
-import { DelayLog } from "../components/delayLog/DelayLog"
+
+import  DelayLog  from "../components/delayLog/DelayLog"
 
 
 
@@ -14,4 +14,3 @@ describe("Dashboard", () => {
      shallow(<DelayLog />)
    });
  });
- 

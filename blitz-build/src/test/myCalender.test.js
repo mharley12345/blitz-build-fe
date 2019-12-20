@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from '../App';
-import { MyCalendar } from '../components/documents/Documents'
+
+import  MyCalendar  from '../components/documents/Documents'
 
 
 

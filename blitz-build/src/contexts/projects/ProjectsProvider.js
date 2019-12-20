@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 //context
@@ -6,7 +6,9 @@ import ProjectContext from "./ProjectContext";
 
 export default function ProjectsProvider({ children }) {
   const [projects, setProjects] = useState([]);
+  
 
+  
   useEffect(() => {
 
     getProject();
@@ -138,7 +140,7 @@ export default function ProjectsProvider({ children }) {
         addProject,
         deleteProject,
         editProject,
-        getProject
+        getProject,
         
       }}
     >

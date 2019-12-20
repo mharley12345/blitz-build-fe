@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 // context
-import projectContext from "../../contexts/projects/ProjectContext";
+import { useProjectContext } from "../../contexts/projects/ProjectContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
 
 //styles
@@ -62,9 +62,8 @@ const useStyles = makeStyles({
 const Projects = props => {
   const classes = useStyles();
 
-  const { projects } = useContext(projectContext);
-  const { searchTerm } = useContext(searchTermContext);
-  const projectSearchInput = searchTerm.toLowerCase("");
+  const { projects } = useProjectContext();
+
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -80,16 +79,12 @@ const Projects = props => {
 
   //return all projects or filtered projects
 
-  const results = projects.filter(
-    project =>
-      project.project_name.toLowerCase().includes(projectSearchInput) ||
-      project.street_address.toLowerCase().includes(projectSearchInput)
-  );
 
-  console.log("rows in projects table", results);
+
+  
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
+    rowsPerPage - Math.min(rowsPerPage);
 
   return (
     <>
@@ -108,29 +103,29 @@ const Projects = props => {
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? results.slice(
+              ? projects.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
-              : results
-            ).map(result => (
+              : projects
+            ).map(projects => (
               <StyledTableRow
                 className={classes.tableHover}
-                key={result.id}
-                to={`/project/${result.id}`}
+                key={projects.id}
+                to={`/project/${projects.id}`}
                 onClick={() => {
-                  props.history.push(`/project/${result.id}`);
+                  props.history.push(`/project/${projects.id}`);
                 }}
               >
                 <StyledTableCell>
-                  <p style={{ marginBottom: 0 }}>{result.street_address}</p>
+                  <p style={{ marginBottom: 0 }}>{projects.street_address}</p>
                   <p
                     style={{ marginBottom: 0 }}
-                  >{`${result.city}, ${result.state} ${result.zip_code}`}</p>
+                  >{`${projects.city}, ${projects.state} ${projects.zip_code}`}</p>
                 </StyledTableCell>
-                <StyledTableCell>{result.project_name}</StyledTableCell>
-                <StyledTableCell>{result.status}</StyledTableCell>
-                <StyledTableCell>{result.createdAt}</StyledTableCell>
+                <StyledTableCell>{projects.project_name}</StyledTableCell>
+                <StyledTableCell>{projects.status}</StyledTableCell>
+                <StyledTableCell>{projects.createdAt}</StyledTableCell>
                 <StyledTableCell>
                   <span>View Project ></span>
                 </StyledTableCell>
@@ -149,7 +144,7 @@ const Projects = props => {
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={6}
-                count={results.length}
+                count={projects.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{

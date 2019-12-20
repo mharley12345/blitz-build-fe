@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from '../App';
-import { Templates } from '../components/templates/templates'
+
+import Templates  from '../components/templates/templates'
 
 
 
@@ -11,6 +11,6 @@ it('renders without crashing', () => {
 
 describe("Tasks", () => {
    it("renders", () => {
-     shallow(<Tasks />)
+     shallow(<Templates />)
    });
  });
