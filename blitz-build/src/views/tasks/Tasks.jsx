@@ -1,5 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 
+//a package for parsing query strings
+import queryString from "query-string";
+
+import { Link } from "react-router-dom";
+
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
@@ -24,7 +29,7 @@ import TableFooter from "@material-ui/core/TableFooter";
 //styles
 import styled from "styled-components";
 import { SortBtn } from "../../styles/SortBtn";
-
+import * as color from "../../styles/color";
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -47,6 +52,13 @@ const InfoContainer = styled.div`
   align-items: center;
   margin-bottom: 10px;
 `;
+
+const SortDiv = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
 const useStyles = makeStyles({
   root: {
     border: "1px solid #DCD9D5"
@@ -60,31 +72,28 @@ const useStyles = makeStyles({
     }
   }
 });
-// const MainFailContainer = styled.div`
-//   postion: relative;
-//   width: 900px;
-//   height: 200px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin-left: 250px;
-// `;
 
-// const failedContainer = styled.div`
-//   margin-top: 80px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `;
-// const failText = styled.div`
-//   font-size: 50px;
-// `;
-
-export default function Tasks() {
+export default function Tasks(props) {
   const { tasks, getTasks } = useContext(taskContext);
+
   const { searchTerm, results, taskSearchResults } = useContext(
     searchTermContext
   );
+
+  //filter logic
+
+  //gets the query from the url and parses it to a object
+  const queryValues = queryString.parse(props.location.search);
+  
+  const [btnStyle, setBtnStyle] = useState(queryValues.filter === 'ACTIVE');
+  useEffect(() => {
+    getTasks(`FILTER_BY_${queryValues.filter}`)
+    console.log("query from Tasks.jsx useEffect", queryValues.filter);
+  }, [btnStyle]);
+
+
+
+  
 
   console.log("taskSearchResults", taskSearchResults);
 
@@ -119,28 +128,46 @@ export default function Tasks() {
         </p>
       );
     } else {
-      return <p style={{ fontWeight: 600 }}>Your Task List</p>;
+      return (
+        <p style={{ fontWeight: 600, color: color.grey400 }}>Your Task List</p>
+      );
     }
   };
 
   const classes = useStyles();
 
-  useEffect(() => {}, []);
-
   return (
     <>
       <InfoContainer>
         {failedSearch()}
-        <SortBtn >
-          Active
-        </SortBtn>
-        <SortBtn>
-          Complete
-        </SortBtn>
+        <SortDiv>
+          <Link to='/tasks?filter=ACTIVE'>
+            <SortBtn 
+            active={btnStyle}
+            onClick={() => {
+              setBtnStyle(true)
+              console.log(btnStyle)
+            }}
+            >Active</SortBtn>
+          </Link>
+          <span style={{ fontWeight: 600, color: color.grey400 }}>|</span>
+          <Link to='/tasks?filter=COMPLETE'>
+            <SortBtn 
+            active={!btnStyle}
+            onClick={() => {
+              setBtnStyle(false)
+            }}
+            >Complete</SortBtn>
+          </Link>
+        </SortDiv>
       </InfoContainer>
 
       <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="customized table"  style = {{minHeight: '500px'}}>
+        <Table
+          className={classes.table}
+          aria-label="customized table"
+          style={{ minHeight: "500px" }}
+        >
           <TableHead>
             <TableRow>
               <StyledTableCell>PROJECT NAME</StyledTableCell>
@@ -161,7 +188,7 @@ export default function Tasks() {
               if (results.length === 0 && searchTerm.length === 0) {
                 return <Task item={task} key={task.id} />;
               } else if (results.length > 0) {
-                return <></>
+                return <></>;
               }
             })}
 
@@ -178,7 +205,7 @@ export default function Tasks() {
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TablePagination 
+              <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={5}
                 count={itemCounter()}
