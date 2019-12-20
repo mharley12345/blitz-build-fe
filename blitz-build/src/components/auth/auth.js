@@ -9,7 +9,7 @@ class Auth {
     domain: "gannondarcy2.auth0.com",
     audience: "https://gannondarcy2.auth0.com/userinfo",
     clientID: "OzMg1e7JDNF7DogxPEPvGzpG7fvvDHNe",
-    redirectUri: "http://localhost:3000/callback",
+    redirectUri: process.env.REACT_APP_REDIRECT_URL,
     responseType: "id_token",
     scope: "openid profile"
   });

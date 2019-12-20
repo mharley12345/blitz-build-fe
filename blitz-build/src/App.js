@@ -49,11 +49,6 @@ import SearchProvider from "./contexts/searching/searchTermProvider";
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
-//AUTH0 2.O
-import Auth0NavBar from "./components/auth0/navbar-auth0";
-import { useAuth0 } from "./components/auth0/auth0-spa";
-import Profile from "./components/auth0/profile";
-import history from "./utils/auth/history";
 
 import TemplatesProvider from "./contexts/templates/TemplateProvider";
 import Uploader from "./components/documents/Uploader";
@@ -67,7 +62,6 @@ function App() {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [openUploader, setOpenUploader] = useState(false);
 
-  const { loading } = useAuth0();
 
   // getting userInfo from id_token in localStorage.
   useEffect(() => {
@@ -84,9 +78,7 @@ function App() {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  
 
   // console.log("userInfo", userInfo);
   console.log("pathname", pathname);
@@ -139,7 +131,7 @@ function App() {
   ];
 
   return (
-    <Router history={history}>
+    <Router >
       <TemplatesProvider>
         <OpenTemplateContext.Provider value={{ openTemplate, setOpenTemplate }}>
           <ProjectsProvider>
@@ -169,7 +161,6 @@ function App() {
                               )}
                               <Layout pathname={pathname}>
                                 <Switch>
-                                  <Route exact path="/auth" component={Auth} />
                                   <Route exact path="/" component={Landing} />
 
                                   <Route
