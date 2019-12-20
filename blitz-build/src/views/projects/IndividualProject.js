@@ -8,7 +8,7 @@ import ProjectTaskCard from "../../components/projects/ProjectsTaskCard";
 import Global from "../../styles/Global";
 import DeleteProject from "../../components/projects/DeleteProject";
 import EditProject from "../../components/projects/EditProject";
-import Documents from "../../components/documents/Documents";
+import DocumentCard from "../../components/documents/Documents";
 
 
 //static
@@ -30,8 +30,8 @@ const IndividualProject = props => {
   const [projectState, setProjectState] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
   const [editProjectStatus, setEditProjectStatus] = useState(false);
-  
 
+ 
 
   //contexts
   const { getProjectTasks } = useContext(TaskContext);
@@ -55,6 +55,8 @@ const IndividualProject = props => {
       .catch(err => {
         console.log(err);
       });
+      
+ 
     //gets the project tasks and sets them to projectTask context
     getProjectTasks(projectID);
   }, [props]);
@@ -163,8 +165,9 @@ const IndividualProject = props => {
           >
             Your Documents
           </p>
-          <DocumentsContainer></DocumentsContainer>
-        </Right>
+      
+          <DocumentsContainer><DocumentCard/></DocumentsContainer>
+              </Right>
       </Top>
       <TasksContainer>
         <ProjectTaskCard projectID={props.match.params.id} numberOfTasks={3} />
