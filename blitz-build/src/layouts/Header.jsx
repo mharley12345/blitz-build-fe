@@ -567,7 +567,7 @@ function Header({ pathname }) {
             component={
               <Uploader
                  closeModal={handleDocumentModalClose}
-                 handleFunction={addDocument}
+                 handleFunction={this.addDocument}
             />
             }
             />
