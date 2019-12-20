@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { axiosWithAuth } from '../../utils/auth/axiosWithAuth'
 
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
-import searchTermContext from "../../contexts/searching/searchTerm";
 
 //components
 import Task from "../../components/dashboard/Task";
@@ -20,14 +20,15 @@ import TableBody from "@material-ui/core/TableBody";
 import TablePaginationActions from "../../components/global/TablePaginationActions";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableFooter from "@material-ui/core/TableFooter";
-
+import {
+  StyledTableCell,
+} from "../../styles/Table/TableStyles";
 //styles
 import styled from "styled-components";
 import { SortBtn } from "../../styles/SortBtn";
-import {
-  useStyles,
-  StyledTableCell
-} from "../../styles/Table/TableStyles";
+
+//static
+import Project_icon from "../../styles/icons_project/project_icon.png";
 
 const InfoContainer = styled.div`
   width: 100%;
@@ -36,41 +37,35 @@ const InfoContainer = styled.div`
   align-items: center;
   margin-bottom: 10px;
 `;
+const useStyles = makeStyles({
+  root: {
+    border: "1px solid #DCD9D5"
+  },
+  table: {
+    // minWidth: "1080px"
+  },
+  tableHover: {
+    "&:hover": {
+      border: "3px solid orange"
+    }
+  }
+});
 
-// const MainFailContainer = styled.div`
-//   postion: relative;
-//   width: 900px;
-//   height: 200px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin-left: 250px;
-// `;
-
-// const failedContainer = styled.div`
-//   margin-top: 80px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `;
-// const failText = styled.div`
-//   font-size: 50px;
-// `;
-
-export default function Tasks() {
+export default function ProjectTasks (props, {ProjectName}) {
   const { tasks, getTasks } = useContext(taskContext);
-  const { searchTerm, results, taskSearchResults } = useContext(
-    searchTermContext
-  );
+  const projectID = props.match.params.id;
+  const projectTasks = tasks.filter(item => {
+    return `${item.project_id}` === projectID;
+  });
 
-  console.log("taskSearchResults", taskSearchResults);
-
-  console.log("RESULTS:", results);
   //pagnation
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, tasks.length - page * rowsPerPage);
+  
+    useEffect(() => {
+      getTasks()
+    },[])
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, projectTasks.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -82,45 +77,38 @@ export default function Tasks() {
   };
 
   const itemCounter = () => {
-    if (results.length > 0) {
-      return results.length;
+    if (projectTasks.length > 0) {
+      return projectTasks.length;
     } else {
-      return tasks.length;
-    }
-  };
-  const failedSearch = () => {
-    if (searchTerm.length > 0 && results.length === 0) {
-      return (
-        <p style={{ fontWeight: 600 }}>
-          There doesn't seem to be any tasks with that name
-        </p>
-      );
-    } else {
-      return <p style={{ fontWeight: 600 }}>Your Task List</p>;
+      return projectTasks.length;
     }
   };
 
   const classes = useStyles();
-
-  useEffect(() => {}, []);
-
+  console.log('from tasks',tasks)
   return (
     <>
       <InfoContainer>
-        {failedSearch()}
-        <SortBtn >
+      <BreadCrumbs>
+        <img src={Project_icon} alt="project_icon" />
+        <span>&nbsp;&nbsp;Projects / {projectTasks.length === 0 ? <span>...loading</span> : projectTasks[0].project_name} / Tasks</span>
+      </BreadCrumbs>
+        {/* <SortBtn >
           Active
         </SortBtn>
         <SortBtn>
           Complete
-        </SortBtn>
+        </SortBtn> */}
       </InfoContainer>
 
       <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="customized table"  style = {{minHeight: '500px'}}>
+        <Table
+          className={classes.table}
+          aria-label="customized table"
+          style={{ minHeight: "500px" }}
+        >
           <TableHead>
             <TableRow>
-              <StyledTableCell>PROJECT NAME</StyledTableCell>
               <StyledTableCell>TASK</StyledTableCell>
               <StyledTableCell>DESCRIPTION</StyledTableCell>
               <StyledTableCell>DUE DATE</StyledTableCell>
@@ -129,30 +117,15 @@ export default function Tasks() {
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? tasks.slice(
+              ? projectTasks.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
-              : tasks
+              : projectTasks
             ).map(task => {
-              if (results.length === 0 && searchTerm.length === 0) {
-                return <Task item={task} key={task.id} />;
-              } else if (results.length > 0) {
-                return <></>
-              }
+              return <Task item={task} key={task.id} projectTask={true} />;
             })}
 
-            {results.length > 0 ? (   (rowsPerPage > 0
-              ? results.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-              : results
-            )
-              .map(result => <Task item={result} key={result.id}></Task>)
-            ) : (
-              <></>
-            )}
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
                 <TableCell colSpan={5} />
@@ -161,7 +134,7 @@ export default function Tasks() {
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TablePagination 
+              <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={5}
                 count={itemCounter()}
@@ -182,3 +155,13 @@ export default function Tasks() {
     </>
   );
 }
+
+const BreadCrumbs = styled.div`
+  display: flex;
+  min-width: 530px;
+  height: 24px;
+  span {
+    font-size: 16px;
+    color: #8a827d;
+  }
+`;

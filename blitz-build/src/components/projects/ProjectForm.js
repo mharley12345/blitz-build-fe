@@ -22,6 +22,7 @@ import {
 } from "../../styles/Form/FormStyles";
 import Checkbox from "@material-ui/core/Checkbox";
 
+//importing functions and objects from context
 export default function ProjectForm({
   closeModal,
   handleFunction,
@@ -29,8 +30,8 @@ export default function ProjectForm({
   text,
   imgText
 }) {
-  //console.log("task from delayForm", task,editFields)
-    const { templates } = useContext(TemplateContext);
+  //importing state of templates from context and then setting initial local state for projects
+  const { templates } = useContext(TemplateContext);
   const [form, setForm] = useState({
     project_name: "",
     beds: null,
@@ -41,12 +42,12 @@ export default function ProjectForm({
     street_address: "",
     zip_code: null
   });
- 
+  
+  //making another form specifically for templates because we are hitting multiple endpoints for templates (prebuilt and custom)
   const [templateForm, setTemplateForm] = useState({
     preBuiltTemplate: false,
     template_id: null
   });
-  console.log("templateForm", templateForm);
 
  useEffect(() => {
     if (editFields) {
@@ -62,11 +63,12 @@ export default function ProjectForm({
 // handle checkBox changing
   const [checked, setChecked] = React.useState(false);
 
+  //setting state of the checked box
   const checkBoxChangeHandler = event => {
     setChecked(event.target.checked);
   };
 
-
+  //This toggle's the state of the checkmark between true and false
   const preBuildTemplatehandler = () => {
     setTemplateForm({
       ...templateForm,
@@ -74,18 +76,23 @@ export default function ProjectForm({
     });
   };
 
+  //change handler for project form
   const formChangeHandler = e => {
     setForm({
       ...form,
       [e.target.name]: e.target.value
     });
   };
-  const tampleIdChangeHandler = e => {
+
+  //changes the state of the templateID
+  const templateIdChangeHandler = e => {
     setTemplateForm({
       ...templateForm,
       [e.target.name]: e.target.value
     });
   };
+
+  //handles submit for project form
   const handleSubmit = e => {
     e.preventDefault();
     const gps = zipcodes.lookup(form.zip_code);
@@ -111,6 +118,27 @@ export default function ProjectForm({
 
     closeModal();
   };
+  const addCustomTemplate = e => {
+    e.preventDefault();
+    const templateID = parseInt(form.template_id);
+    const project_id = editFields.id;
+    console.log("project_id", project_id);
+    console.log("templateID", templateID);
+    axiosWithAuth()
+      .post(`/templates/addTasks/${project_id}`, { template_id: templateID })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  async function submitForm() {
+    const originalhandleSubmit = await handleSubmit();
+    console.log("async", originalhandleSubmit);
+    const customTemplate = await addCustomTemplate();
+    console.log("async", customTemplate);
+  }
 
   // const addCustomTemplate = e => {
   //   if (templateForm.template_id !== null) {
@@ -160,7 +188,7 @@ export default function ProjectForm({
   // }
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm onSubmit={submitForm}>
       <StyledFormHeader>
         <h1 style={{ fontSize: "2rem", margin: 0 }}>{text}</h1>
         <XButton onClick={closeModal}>close X</XButton>
@@ -205,7 +233,7 @@ export default function ProjectForm({
             type="number"
             name="template_id"
             value={templateForm.template_id}
-            onChange={tampleIdChangeHandler}
+            onChange={templateIdChangeHandler}
           >
             <option>Choose Template</option>
 

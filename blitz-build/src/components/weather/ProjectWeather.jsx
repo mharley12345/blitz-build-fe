@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+// for project page import <Weather usage="project" city={} latitude={} longitude={} />
 
 function ProjectWeather({ weatherData, time, icon,city }) {
            

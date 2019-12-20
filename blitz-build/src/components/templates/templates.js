@@ -4,7 +4,6 @@ import PathnameContext from "../../contexts/PathnameContext";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import templateContext from "../../contexts/templates/TemplateContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
-import AddTemplate from "../modal/AddTemplate";
 import styled, { css } from "styled-components";
 import TemplateMeatBallsDrop from "./TemplateMeatBalls";
 const Templates = props => {
@@ -66,7 +65,7 @@ console.log(templates);
           <Container>
             <Link style={LinkStyle}
               to={`/templates/${template.id}`}
-              onClick={() => localStorage.setItem("template_id", template.id)}
+              onClick={() => localStorage.setItem("template_id", template.id,"template_name",template.name)}
             >
               <Name>{template.template_name}</Name>
             </Link>
@@ -75,7 +74,6 @@ console.log(templates);
         );
       })}
 
-      <AddTemplate />
     </div>
   );
 };
