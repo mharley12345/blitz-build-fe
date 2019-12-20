@@ -66,7 +66,7 @@ export default function TaskForm({
     if (task.project_name == "") {
       setError({
         error: true,
-        error_text: "Please asign a project to this task!"
+        error_text: "Please assign a project to this task!"
       });
     } else {
       //finds the the project that the user picked
@@ -91,10 +91,13 @@ export default function TaskForm({
       if (newTask.task_name == "") {
         setError({
           error: true,
-          error_text: "Please asign a name to this task!"
+          error_text: "Please assign a name to this task!"
         });
       } else {
+        // submit newTask to addTask or editTask funciton
         handleFunction(newTask);
+
+        //reset task form and error to initial state
         setTask({
           task_name: "",
           task_description: "",
@@ -191,7 +194,7 @@ export default function TaskForm({
       {error.error && error.error_text ? (
         <ErrorMessage errorMessage={error.error_text} />
       ) : null}
-      <StyledBtn style={{ marginBottom: "30px" }}>{text}</StyledBtn>
+      <StyledBtn >{text}</StyledBtn>
     </StyledForm>
   );
 }
