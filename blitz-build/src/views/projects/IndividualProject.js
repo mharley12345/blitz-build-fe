@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-
+import './index.scss'
 //components
 import Weather from "../../components/weather/Weather";
 import ProjectTaskCard from "../../components/projects/ProjectsTaskCard";
@@ -163,10 +163,10 @@ const IndividualProject = props => {
               color: "#817974"
             }}
           >
-            Your Documents
+          
           </p>
       
-          <DocumentsContainer><DocumentCard/></DocumentsContainer>
+          <DocumentsContainer><DocumentCard className="solo" value="true" /></DocumentsContainer>
               </Right>
       </Top>
       <TasksContainer>
