@@ -10,28 +10,25 @@ import jwtDecode from "jwt-decode";
 // import Layout from "./components/dashboard/Layout";
 // import Dashboard from "./components/dashboard/index";
 // import Dashboard from "./components/dashboard/Dashboard";
-
-//task views
 import Tasks from "./views/tasks/Tasks";
-import ProjectTasks from "./views/tasks/ProjectTasks";
-
 import Templates from "./components/templates/templates";
 import IndividualTemplate from "./components/templates/IndividualTemplate";
 import NinetyDayTemplate from "./components/templates/90DayTemplate";
-import Projects from "./views/projects/Projects";
-import IndividualProject from "./views/projects/IndividualProject";
+import Projects from "./components/projects/Projects";
+import IndividualProject from "./components/projects/IndividualProject";
 import Logout from "./components/auth/Logout";
 import Layout from "./layouts/Layout";
 import Dashboard from "./components/dashboard/Dashboard";
-import DelayLog from "./views/delayLog/DelayLog";
+import DelayLog from "./components/delayLog/DelayLog";
 import OpenTemplateContext from "./contexts/OpenTemplateContext";
+import AddTemplate from "./components/modal/AddTemplate";
 
 import Documents from "./components/documents/Documents";
 import OpenUploaderContext from "./contexts/documents/OpenUploaderContext";
 //SWITCH INDEX TO DASHBOARD AFTER LC CHANGES HIS FILE NAME
 import ActivityViewAll from "./components/activityFeed/ActivityViewAll";
 
-import Landing from "./components/landing/pages/Landing";
+import Landing from "./components/landing/pages/Landing"
 
 //context
 import UserContext from "./contexts/UserContext";
@@ -45,7 +42,6 @@ import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 import EditModalContext from "./contexts/EditModalContext";
 import TemplateProvider from "./contexts/templates/TemplateProvider";
 import SearchProvider from "./contexts/searching/searchTermProvider";
-
 //AUTH0
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
@@ -67,14 +63,17 @@ function App() {
       setUserInfo(jwtDecode(localStorage.getItem("id_token")));
     }
   }, []);
+  
 
-  const LandingPage = component => {
-    if (pathname === "/") {
-      return null;
-    } else {
-      return component;
+const LandingPage = (component) => {
+  if(pathname === '/' ) {
+    return (
+      null
+    )}
+    else {
+      return component
     }
-  };
+  }
 
   // console.log("userInfo", userInfo);
   console.log("pathname", pathname);
@@ -140,7 +139,6 @@ function App() {
                     <SearchProvider>
                       <OpenContext.Provider value={{ open, setOpen }}>
                         <EditModalContext.Provider
-
                           value={{ editModalOpen, setEditModalOpen }}
                         >
                           <PathnameContext.Provider
@@ -149,17 +147,19 @@ function App() {
                             <UserContext.Provider
                               value={{ userInfo, setUserInfo }}
                             >
-                              {LandingPage(
-                                <NavBar
-                                  setPathname={setPathname}
-                                  navLinks={navLinks}
-                                />
-                              )}
+                            {LandingPage(<NavBar
+                                setPathname={setPathname}
+                                navLinks={navLinks}
+                              />)}  
                               <Layout pathname={pathname}>
                                 <Switch>
                                   <Route exact path="/auth" component={Auth} />
-                                  <Route exact path="/" component={Landing} />
-
+                                  <Route
+                                    exact
+                                    path="/"
+                                    component={Landing}
+                                  />
+                                  
                                   <Route
                                     exact
                                     path="/navbar"
@@ -205,13 +205,8 @@ function App() {
                                   />
                                   <Route
                                     exact
-                                    path="/projects/:id"
+                                    path="/project/:id"
                                     component={IndividualProject}
-                                  />
-                                  <Route
-                                    exact
-                                    path="/projects/:id/tasks"
-                                    component={ProjectTasks}
                                   />
                                   <Route
                                     exact
@@ -267,4 +262,3 @@ function App() {
 }
 
 export default App;
- 

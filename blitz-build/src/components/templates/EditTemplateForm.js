@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 // import DatePicker from "react-datepicker";
 
 //styles
@@ -20,8 +20,6 @@ import { useInput } from "../../customHooks/useInput";
 //axios
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
-import tasksContext from "../../contexts/tasks/TaskContext";
-
 const useStyles = makeStyles(theme => ({
   container: {
     display: "flex",
@@ -36,55 +34,49 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function TaskForm({
+export default function EditTemplateForm({
   closeModal,
   handleFunction,
   editFields,
   text
 }) {
-  const [templates, setTemplates] = useState([]);
-
-  const template_id = localStorage.getItem("template_id");
-  const [task, setTask, handleChanges] = useInput({
-    task_name: "",
-    task_description: "",
-    due_date: "",
-    template_id: template_id
+ 
+  const [templates, setTemplates] = useState([])
+  const [template, setTemplate, handleChanges] = useInput({
+    template_name: ''
   });
 
   useEffect(() => {
+   
+   
     if (editFields) {
-      console.log("editFields", editFields);
-      setTask(editFields);
+      console.log('editFields', editFields)
+      setTemplate(editFields);
+      console.log('project_name', )
     }
-  }, []);
+  },[]);
 
   //sets the fields if the editFields prop is passed down
   //else they are empty
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    //asigns the project id to the new task
-    const newTask = {
-      id: task.id,
-      task_name: task.task_name,
-      task_description: task.task_description,
-      due_date: task.due_date,
-      template_id: task.template_id
-    };
-
-    console.log("from taskform submit", task);
-    handleFunction(newTask);
-    setTask({
-      task_name: "",
-      task_description: "",
-      due_date: "",
-      template_id: template_id
+    const newTemplate = {
+       template_name: template.template_name,
+       id: template.id,
+      };
+    handleFunction(newTemplate, newTemplate);
+    setTemplate({
+      template_name:''
     });
     closeModal();
-  };
+  }
+    //finds the the project that the user picked
+   
+    // console.log("from handleSubmit in TaskForm", chosenProject);
 
+    //asigns the project id to the new task
+    
   return (
     <StyledForm onSubmit={handleSubmit}>
       <div style={{ width: "100%", textAlign: "right" }}>
@@ -95,40 +87,19 @@ export default function TaskForm({
         <h1 style={{ fontSize: "3rem", fontFamily: "roboto" }}>{text}</h1>
       </header>
 
-      <StyledLabel>Task Name</StyledLabel>
+      <StyledLabel>Template Name</StyledLabel>
       <StyledInput
         type="text"
-        name="task_name"
-        value={task.task_name}
+        name="template_name"
+        value={template.template_name}
         onChange={handleChanges}
       />
 
-      <StyledLabel>Task Decription</StyledLabel>
-      <StyledInput
-        type="text"
-        name="task_description"
-        value={task.task_description}
-        onChange={handleChanges}
-      />
-
+      
       {/* <StyledLabel>Due Date</StyledLabel>
       <DatePicker selected={dueDate} onChange={date => setDueDate(date)} /> */}
 
-      <TextField
-        style={{
-          width: "77%",
-          marginTop: "20px"
-        }}
-        id="date"
-        label="Due Date"
-        type="date"
-        name="due_date"
-        onChange={handleChanges}
-        value={task.due_date}
-        InputLabelProps={{
-          shrink: true
-        }}
-      />
+     
 
       {/* <StyledLabel>Due Date</StyledLabel>
       <input
@@ -138,6 +109,8 @@ export default function TaskForm({
         onChange={handleChanges}
       /> */}
 
+       
+     
       <StyledBtn>Save</StyledBtn>
     </StyledForm>
   );
