@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 //components
 import Modal from "../global/Modal";
-import Confirm from "../global/Confirm";
+import ConfirmComplete from "./ConfirmComplete";
 
 //context
 import TasksContext from "../../contexts/tasks/TaskContext";
@@ -17,10 +17,11 @@ export default function CompleteTask({ task, completeStatus, handleCompleteClose
         dismiss={ handleCompleteClose }
         client={'50%'}
         component={
-          <Confirm
+          <ConfirmComplete
             closeModal={ handleCompleteClose }
-            handleFunction={ toggleCompleteTask }
+            confirmFunction={ toggleCompleteTask }
             text={ 'Edit Task' }
+            task={task}
           />
         }
       />

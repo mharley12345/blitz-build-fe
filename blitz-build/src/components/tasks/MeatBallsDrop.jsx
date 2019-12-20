@@ -7,7 +7,6 @@ import AddDelayReason from "../delayLog/AddDelayReason";
 import PathnameContext from "../../contexts/PathnameContext";
 import EditTemplateTask from "../templates/EditTemplateTask";
 //styles
-import styled from "styled-components";
 import {
   TaskI,
   StyledLi,
@@ -92,11 +91,11 @@ export default function MeatBallsDrop({ task }) {
     display: "none"
   };
 
-  const checkThePage = (editTask, editTemplateTask) => {
+  const checkThePage = (editTask, editTemplateTask, completeTask) => {
     if (pathname.includes("/templates")) {
       return editTemplateTask;
     } else {
-      return editTask;
+    return  <>{editTask} {completeTask}</>;
     }
   };
 
@@ -109,9 +108,7 @@ export default function MeatBallsDrop({ task }) {
       >
         {dropStatus && (
           <>
-            {/* <Geo></Geo> */}
             <DropDown>
-              {/* <Geo></Geo> */}
               <StyledLi style={hideOnTemplates()}>
                 <DropP onClick={handleCompleteOpen}>Complete</DropP>
                 <TaskI className="ion-md-checkmark-circle" />
@@ -133,23 +130,23 @@ export default function MeatBallsDrop({ task }) {
         )}
       </MeatBalls>
       {checkThePage(
-        // <CompleteTask
-        //   task={task}
-        //   closeDrop={closeDrop}
-        //   editStatus={completeStatus}
-        //   handleEditClose={handleCompleteClose}
-        // />,
         <EditTask
-          task={task}
-          closeDrop={closeDrop}
-          editStatus={editStatus}
-          handleEditClose={handleEditClose}
+        task={task}
+        closeDrop={closeDrop}
+        editStatus={editStatus}
+        handleEditClose={handleEditClose}
         />,
         <EditTemplateTask
+        task={task}
+        closeDrop={closeDrop}
+        editStatus={editStatus}
+        handleEditClose={handleEditClose}
+        />,
+        <CompleteTask
           task={task}
           closeDrop={closeDrop}
-          editStatus={editStatus}
-          handleEditClose={handleEditClose}
+          completeStatus={completeStatus}
+          handleCompleteClose={handleCompleteClose}
         />
       )}
       <DeleteTask
