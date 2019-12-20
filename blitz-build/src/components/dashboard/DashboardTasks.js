@@ -69,7 +69,7 @@ function DashboardTasks({ projectID, numberOfTasks }) {
     <Container>
       <Section>
         <p>Your Task List</p>
-        <Link to="/tasks">
+        <Link to="/tasks?filter=ACTIVE">
           <ViewBtn>View All</ViewBtn>
         </Link>
       </Section>
