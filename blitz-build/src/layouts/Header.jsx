@@ -231,6 +231,7 @@ function Header({ pathname }) {
   const [DocumentHover, setDocumentHover] = useState(false);
   const [TemplateHover, setTemplateHover] = useState(false);
   const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext);
+  const  {addDocument} = useContext(DocumentsContext)
   const { addProject } = useContext(ProjectContext);
   const { addTask } = useContext(TasksContext);
   const { addTemplateTask, addTemplate } = useContext(TemplateContext);
@@ -567,7 +568,7 @@ function Header({ pathname }) {
             component={
               <Uploader
                  closeModal={handleDocumentModalClose}
-                 handleFunction={this.addDocument}
+                 handleFunction={addDocument}
             />
             }
             />
