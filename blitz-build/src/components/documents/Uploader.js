@@ -1,6 +1,6 @@
 import React from 'react';
 import {axiosWithAuth} from '../../utils/auth/axiosWithAuth';
-
+import moment from 'moment'
 import './DropZone.css'
 import styled from 'styled-components'
 let user_id = localStorage.getItem("user_id")
@@ -18,7 +18,7 @@ class Uploader extends React.Component {
       project_name:project_name,
       project_id:projectID,
       
-      createdAt: Date.now()
+      createdAt: moment().format('l')
     }
     let Success = this.state.success
   }
@@ -65,10 +65,12 @@ class Uploader extends React.Component {
  
       axiosWithAuth().post('docs/url',{
         doc_url : this.state.doc_url,
+        createdAt: this.state.createdAt,
+        project_name:this.state.project_id,
       user_id: this.state.user_id,
       file_name: this.state.file_name,
       project_id:this.state.project_id}))
-      
+      console.log(this.state)
       .catch(error => {
          console.log("ERROR ",error)
       })
