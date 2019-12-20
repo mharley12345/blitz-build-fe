@@ -222,7 +222,7 @@ export default function ProjectForm({
           marginTop: "4px"
         }}
       >
-        <div style={{ width: "67%" }}>
+        <div style={{ width: "45%" }}>
           <StyledLabel>Assign Custom Template</StyledLabel>
           <StyledSelect
             style={{
@@ -246,7 +246,7 @@ export default function ProjectForm({
             })}
           </StyledSelect>
         </div>
-        <div style={{ width: "30%" }}>
+        <div style={{ width: "45%" }}>
           {" "}
           <StyledLabel>90 Day Template</StyledLabel>
           <div
