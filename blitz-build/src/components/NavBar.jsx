@@ -175,7 +175,6 @@ function NavBar({
   const [navOpen, setNavOpen] = useState(false);
   const { userInfo, setUserInfo } = useContext(UserContext);
   const {
-    getTasks,
     tasks,
     setTasks,
     TaskModalStatus,

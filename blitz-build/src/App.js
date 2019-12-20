@@ -92,7 +92,7 @@ function App() {
     },
     {
       text: "Tasks",
-      path: "/tasks",
+      path: "/tasks?filter=ACTIVE",
       icon: "ion-ios-notifications"
     },
     {
