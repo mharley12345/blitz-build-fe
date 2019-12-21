@@ -40,6 +40,7 @@ export default function TaskForm({
   editFields,
   text
 }) {
+  //local state
   const [projects, setProjects] = useState([]);
   const [task, setTask, handleChanges] = useInput({
     task_name: "",

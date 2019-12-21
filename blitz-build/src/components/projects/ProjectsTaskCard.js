@@ -13,7 +13,7 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 
 //router
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 //styles
 import { ViewBtn } from "../../styles/ViewBtn";
@@ -32,8 +32,10 @@ const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 function ProjectTaskCard({ projectID, numberOfTasks }) {
+  //imports tasks from context
   const { tasks } = useContext(taskContext);
 
+  //variable that filters through all the tasks and brings back the tasks associated with the specific project id
   const projectTasks = tasks.filter(item => {
     return `${item.project_id}` === projectID;
   });
@@ -41,7 +43,7 @@ function ProjectTaskCard({ projectID, numberOfTasks }) {
     <Container>
       <Section>
         <p>Your Task List</p>
-        <Link to= {`/projects/${projectID}/tasks`}>
+        <Link to={`/projects/${projectID}/tasks`}>
           <ViewBtn>View All</ViewBtn>
         </Link>
       </Section>

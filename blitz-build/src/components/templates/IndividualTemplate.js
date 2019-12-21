@@ -8,9 +8,12 @@ import styled, { css } from "styled-components";
 import MeatBallsDrop from "../tasks/MeatBallsDrop";
 import { set } from "date-fns";
 const IndividualTemplate = props => {
+
+  //getting info for templates and template tasks from context
   const { templateTask, setTemplatesTask, getTemplateTasks } = useContext(
     TemplateContext
   );
+  //getting pathname from contexxt
   const { pathname, setPathname } = useContext(PathnameContext);
 
   console.log(templateTask);
@@ -19,6 +22,7 @@ const IndividualTemplate = props => {
     getTemplateTasks();
   }, []);
 
+  //this shows the tasks for an indvidual template
   return (
     <div>
       <Section>{/* <h1>individual template</h1> */}</Section>

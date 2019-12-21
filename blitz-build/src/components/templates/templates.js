@@ -7,14 +7,20 @@ import searchTermContext from "../../contexts/searching/searchTerm";
 import styled, { css } from "styled-components";
 import TemplateMeatBallsDrop from "./TemplateMeatBalls";
 const Templates = props => {
+  //importing custom templates, searchTerm, and pathname from context
   const { templates } = useContext(templateContext);
-  const [NinetyDayBuild, setNinetyDayBuild] = useState();
-
   const { searchTerm } = useContext(searchTermContext);
-  const templatesSearchInput = searchTerm.toLowerCase();
-  const [templatesSearchResults, settemplateSearchResults] = useState([]);
   const { pathname, setPathname } = useContext(PathnameContext);
+  
+  //local state
+  const templatesSearchInput = searchTerm.toLowerCase();
+  const [NinetyDayBuild, setNinetyDayBuild] = useState();
+  const [templatesSearchResults, settemplateSearchResults] = useState([]);
 
+
+
+
+  //this function gets the template name of the pre built template for all users
   const seedData = () => {
     setPathname(window.location.pathname);
     axiosWithAuth()
