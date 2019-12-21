@@ -1,37 +1,41 @@
-import React,{useState,useEffect, useRef, useContext} from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import styled, { css } from "styled-components";
-import MeatBallsDrop from "../tasks/MeatBallsDrop"
+import MeatBallsDrop from "../tasks/MeatBallsDrop";
 import projectContext from "../../contexts/projects/ProjectContext";
 import { NavLink } from "react-router-dom";
 
-
 function NewTask({ item, children }) {
-  
-
+  //imports state of projects from context
   const { projects } = useContext(projectContext);
 
-  const projectID = projects.map( project =>{
+  //returns project.id's that are associated with project id's of items that were created
+  const projectID = projects.map(project => {
     if (project.id === item.project_id) {
-      return project.id
+      return project.id;
     }
-  }
-    )
+  });
+
+  //returns project street address that are associated with project id's of tasks items created
   const TaskAddress = projects.map(project => {
     if (project.id === item.project_id) {
-      return project.street_address
+      return project.street_address;
     }
-    
-  })
+  });
+
+  //returns project name that are associated with project id's of tasks items created
   const TaskProjectName = projects.map(project => {
-      if (project.id === item.project_id) {
-        return project.project_name
-      }
-    })
+    if (project.id === item.project_id) {
+      return project.project_name;
+    }
+  });
+
+  //gets the current day
   const today = new window.Date().toISOString().slice(0, 10);
-// This value is hardcoded now because the server don't send back a date
-// It should be {item.due_date}
+  // This value is hardcoded now because the server don't send back a date
+  // It should be {item.due_date}
   const project_date = item.due_date;
-   
+
+  //this function returns the status of the project depending on the due date of the project
   function DateCalc(today, project_date) {
     if (today === project_date) {
       return "Pending";
@@ -42,26 +46,28 @@ function NewTask({ item, children }) {
     }
   }
 
+  //This function checks if its a completed task or a new task then returns it according to what it is.
   const checkCondition = () => {
-    if(item.isComplete === true) {
-      return (
-        <TitleText>Completed Task</TitleText>
-      )}
-      else {
-        return (
-          <TitleText>  Added Task </TitleText>
-        )
-      }
-    
-  }
+    if (item.isComplete === true) {
+      return <TitleText>Completed Task</TitleText>;
+    } else {
+      return <TitleText> Added Task </TitleText>;
+    }
+  };
+
+  //creating a variable where the different between two dates will be calculated
   const status = DateCalc(today, item);
 
+  //creating varible that grabs current day's date
   const todayDate = new window.Date(today);
+  //creating variable that gets the due date of an item
   const projectDate = new window.Date(item.due_date);
+  //variable that is one day calculated
   const oneDay = 24 * 60 * 60 * 1000;
 
   const diffDays = Math.round(Math.abs((todayDate - item.due_date) / oneDay));
 
+  //depending on the difference of the dates, different status's are returned for tasks.
   function DueDateLogic(diff, status) {
     if (status === "Pending") {
       return "Due today";
@@ -75,50 +81,35 @@ function NewTask({ item, children }) {
   const dueDateText = DueDateLogic(diffDays, status);
 
   return (
-    <Container>  
-       <NavLink to={`/project/${projectID}`} style = {NavLinkStyle}>
-  
-     
-      <InnerContainer>
-      
-        
+    <Container>
+      <NavLink to={`/project/${projectID}`} style={NavLinkStyle}>
+        <InnerContainer>
           {checkCondition()}
- <NameText>{item.task_name}  </NameText>
+          <NameText>{item.task_name} </NameText>
 
-      <Spacer> / </Spacer>
+          <Spacer> / </Spacer>
 
-      <AddressText> {TaskAddress} </AddressText>
-      <ProjectName>{TaskProjectName} </ProjectName> 
-     
+          <AddressText> {TaskAddress} </AddressText>
+          <ProjectName>{TaskProjectName} </ProjectName>
         </InnerContainer>
-       
-     
-       </NavLink>
+      </NavLink>
     </Container>
-
-
-
   );
-   
 }
 
 export default NewTask;
 
 const NavLinkStyle = {
-  textDecoration: 'none',
-  display: 'flex',
-  height: '100%',
-  width:'100%',
- 
-
- 
-} ;
+  textDecoration: "none",
+  display: "flex",
+  height: "100%",
+  width: "100%"
+};
 const Spacer = styled.div`
-display: flex;
-flex-direction: column;
-width: 2%;
-
-`
+  display: flex;
+  flex-direction: column;
+  width: 2%;
+`;
 const Container = styled.div`
   width: 100%;
   height: 100px;
@@ -127,22 +118,23 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   :nth-child(odd) {
     background: #fbfaf9;
   }
 `;
 
 const InnerContainer = styled.div`
-width: 98%;
-display: flex;
-justify-content: space-around;
-align-items: center;
-cursor: pointer;
+  width: 98%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
 
   p {
     font-weight: 500;
-  font-size: 14px;
+    font-size: 14px;
     line-height: 16px;
     font-family: "Roboto";
     color: #3f3a36;
@@ -168,12 +160,11 @@ const NameText = styled.p`
   font-family: "Roboto";
   color: #3f3a36;
   margin-bottom: 8px;
- 
 `;
 const AddressText = styled.p`
-display: flex;
-flex-direction: column;
-width: 25%;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
@@ -181,9 +172,8 @@ width: 25%;
   margin-bottom: 8px;
 `;
 const ProjectName = styled.p`
-
-display: flex;
-justify-content: end;
+  display: flex;
+  justify-content: end;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";

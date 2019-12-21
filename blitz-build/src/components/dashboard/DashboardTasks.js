@@ -19,11 +19,7 @@ import TableBody from "@material-ui/core/TableBody";
 
 //styles
 import { ViewBtn } from "../../styles/ViewBtn";
-import {
-  useStyles,
-  StyledTableCell,
-
-} from "../../styles/Table/TableStyles";
+import { useStyles, StyledTableCell } from "../../styles/Table/TableStyles";
 
 function DashboardTasks({ projectID, numberOfTasks }) {
   const { tasks } = useContext(taskContext);
@@ -63,11 +59,8 @@ function DashboardTasks({ projectID, numberOfTasks }) {
           </TableHead>
           <TableBody>
             {tasks.slice(0, numberOfTasks).map(item => {
-            
-                return <Task item={item} key={item.id} />;
-              }
-            )}
-            
+              return <Task item={item} key={item.id} />;
+            })}
           </TableBody>
         </Table>
       </Paper>

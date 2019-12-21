@@ -38,6 +38,8 @@ export const ModalBg = styled.div`
 visible: boolean,
 dismiss: function on click on Close.
 */
+
+//customizable modal
 export default class ModalSetup extends Component {
   //  static propTypes = {
   //      visible: PropTypes.bool.isRequired,

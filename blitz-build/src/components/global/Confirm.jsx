@@ -37,6 +37,7 @@ margin-top:36px;
 `
 
 
+//confirm modal
 export default function Confirm({ closeModal, text, deleteFunction, deleteItem }) {
     return (
         <ConfirmStyle>

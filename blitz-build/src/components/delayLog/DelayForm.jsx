@@ -11,6 +11,7 @@ import {
   XButton
 } from "../../styles/Form/FormStyles";
 
+//importing function, function, state, state, and specific text
 export default function DelayForm({
   closeModal,
   handleFunction,
@@ -18,10 +19,12 @@ export default function DelayForm({
   editFields,
   text
 }) {
-  //console.log("task from delayForm", task,editFields)
+  //sets initial state of form
   const [form, setForm] = useState({
     reason: ""
   });
+
+  //what they clicked on to add to the delay log will fill the form
   useEffect(() => {
     if (editFields) {
       //console.log("editFields", editFields);
@@ -33,9 +36,12 @@ export default function DelayForm({
     }
   },[]);
 
+  //handles changes in form
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  //handles the submittion of the form
   const handleSubmit = e => {
     
     e.preventDefault();
