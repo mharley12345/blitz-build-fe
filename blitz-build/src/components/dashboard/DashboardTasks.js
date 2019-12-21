@@ -22,7 +22,7 @@ import { ViewBtn } from "../../styles/ViewBtn";
 import {
   useStyles,
   StyledTableCell,
-
+  StyledTableHeadRow
 } from "../../styles/Table/TableStyles";
 
 function DashboardTasks({ projectID, numberOfTasks }) {
@@ -53,21 +53,18 @@ function DashboardTasks({ projectID, numberOfTasks }) {
       <Paper className={classes.root}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
-            <TableRow>
+            <StyledTableHeadRow>
               <StyledTableCell>PROJECT</StyledTableCell>
               <StyledTableCell>NAME</StyledTableCell>
               <StyledTableCell>TASK</StyledTableCell>
               <StyledTableCell>DUE DATE</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
-            </TableRow>
+            </StyledTableHeadRow>
           </TableHead>
           <TableBody>
             {tasks.slice(0, numberOfTasks).map(item => {
-            
-                return <Task item={item} key={item.id} />;
-              }
-            )}
-            
+              return <Task item={item} key={item.id} />;
+            })}
           </TableBody>
         </Table>
       </Paper>

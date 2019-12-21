@@ -26,7 +26,8 @@ import styled from "styled-components";
 import { SortBtn } from "../../styles/SortBtn";
 import {
   useStyles,
-  StyledTableCell
+  StyledTableCell,
+  StyledTableHeadRow
 } from "../../styles/Table/TableStyles";
 
 const InfoContainer = styled.div`
@@ -108,24 +109,24 @@ export default function Tasks() {
     <>
       <InfoContainer>
         {failedSearch()}
-        <SortBtn >
-          Active
-        </SortBtn>
-        <SortBtn>
-          Complete
-        </SortBtn>
+        <SortBtn>Active</SortBtn>
+        <SortBtn>Complete</SortBtn>
       </InfoContainer>
 
       <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="customized table"  style = {{minHeight: '500px'}}>
+        <Table
+          className={classes.table}
+          aria-label="customized table"
+          style={{ minHeight: "500px" }}
+        >
           <TableHead>
-            <TableRow>
+            <StyledTableHeadRow>
               <StyledTableCell>PROJECT NAME</StyledTableCell>
               <StyledTableCell>TASK</StyledTableCell>
               <StyledTableCell>DESCRIPTION</StyledTableCell>
               <StyledTableCell>DUE DATE</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
-            </TableRow>
+            </StyledTableHeadRow>
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
@@ -138,7 +139,7 @@ export default function Tasks() {
               if (results.length === 0 && searchTerm.length === 0) {
                 return <Task item={task} key={task.id} />;
               } else if (results.length > 0) {
-                return <></>
+                return <></>;
               }
             })}
 
@@ -155,7 +156,7 @@ export default function Tasks() {
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TablePagination 
+              <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={5}
                 count={itemCounter()}

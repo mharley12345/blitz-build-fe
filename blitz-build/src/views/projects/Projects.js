@@ -14,7 +14,12 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
-import {useStyles, StyledTableCell, StyledTableRow} from "../../styles/Table/TableStyles"
+import {
+  useStyles,
+  StyledTableCell,
+  StyledTableRow,
+  StyledTableHeadRow
+} from "../../styles/Table/TableStyles";
 // pages bar function from global
 import TablePaginationActions from "../../components/global/TablePaginationActions";
 
@@ -60,15 +65,15 @@ const Projects = props => {
       <Global />
       <p style={{ paddingBottom: "8px", fontWeight: 600 }}>Your Project List</p>
       <Paper className={classes.root}>
-        <Table  aria-label="customized table">
+        <Table aria-label="customized table">
           <TableHead>
-            <TableRow>
+            <StyledTableHeadRow>
               <StyledTableCell>ADDRESS</StyledTableCell>
               <StyledTableCell>NAME</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
               <StyledTableCell>CREATED</StyledTableCell>
               <StyledTableCell>VIEW</StyledTableCell>
-            </TableRow>
+            </StyledTableHeadRow>
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
