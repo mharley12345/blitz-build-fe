@@ -3,11 +3,11 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import axios from "axios";
 import styled from "styled-components";
-import { height } from "@material-ui/system";
-import auth0Client from "./auth";
+// import DialogTitle from "@material-ui/core/DialogTitle";
+// import axios from "axios";
+// import { height } from "@material-ui/system";
+// import auth0Client from "./auth";
 
 const ModalContainer = styled.div`
   width: 450px;
@@ -20,13 +20,13 @@ const ModalTitle = styled.div`
   font-weight: 500;
   color: #3B3B3B;
   justify-content: center;
-  border-bottom: 1px solid #3B3B3B
+  border-bottom: 1px solid #3B3B3B;
 `;
 
 const H3 = styled.div`
   font-size: 2.5em;
-  display:flex
-  justify-content:center
+  display: flex;
+  justify-content: center;
   height: 50px;
 `;
 
@@ -35,6 +35,7 @@ const ButtonStyles = styled.div`
   justify-content: center;
   height: 90px;
 `;
+
 const ButtonStyle = {
   cursor: "pointer",
   backgroundColor: "#DA552F",
@@ -43,6 +44,7 @@ const ButtonStyle = {
   width: "30px",
   height: "35px"
 };
+
 const Pstyle = styled.p`
   font-size: 25px;
   margin: 25px 0 0 40px;
@@ -58,11 +60,10 @@ const Logout = props => {
     // e.preventDefault();
     // localStorage.removeItem("token");
     // localStorage.removeItem("uid");
-    console.log("im here");
     localStorage.removeItem("access_token");
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
-    props.history.push("/navbar");
+    props.history.push("/");
   };
 
   return (

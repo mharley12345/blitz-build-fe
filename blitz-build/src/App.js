@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Signup from "./components/auth/Signup";
-import PrivateRoute from "./components/auth/PrivateRoute";
+// import Login from "./components/auth/Login";
+// import Signup from "./components/auth/Signup";
+// import PrivateRoute from "./components/auth/PrivateRoute";
 import NavBar from "./components/NavBar";
-import axios from "axios";
 import jwtDecode from "jwt-decode";
 // import Layout from "./components/dashboard/Layout";
 // import Dashboard from "./components/dashboard/index";
@@ -35,26 +35,22 @@ import Landing from "./components/landing/pages/Landing";
 
 //context
 import UserContext from "./contexts/UserContext";
-import SearchTermContext from "./contexts/searching/searchTerm";
 import TaskProvider from "./contexts/tasks/TaskProvider";
 import DelayLogProvider from "./contexts/delayLog/DelayLogProvider";
 import OpenContext from "./contexts/projects/OpenContext";
 import PathnameContext from "./contexts/PathnameContext";
 import ProjectsProvider from "./contexts/projects/ProjectsProvider";
-import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 import EditModalContext from "./contexts/EditModalContext";
-import TemplateProvider from "./contexts/templates/TemplateProvider";
 import SearchProvider from "./contexts/searching/searchTermProvider";
+// import SearchTermContext from "./contexts/searching/searchTerm";
+// import TemplateProvider from "./contexts/templates/TemplateProvider";
+// import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 
 //AUTH0
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
-//AUTH0 2.O
-import Auth0NavBar from "./components/auth0/navbar-auth0";
-import { useAuth0 } from "./components/auth0/auth0-spa";
-import Profile from "./components/auth0/profile";
-import history from "./utils/auth/history";
+
 
 import TemplatesProvider from "./contexts/templates/TemplateProvider";
 import Uploader from "./components/documents/Uploader";
@@ -68,7 +64,6 @@ function App() {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [openUploader, setOpenUploader] = useState(false);
 
-  const { loading } = useAuth0();
 
   // getting userInfo from id_token in localStorage.
   useEffect(() => {
@@ -85,9 +80,6 @@ function App() {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   // console.log("userInfo", userInfo);
   console.log("pathname", pathname);
@@ -140,7 +132,7 @@ function App() {
   ];
 
   return (
-    <Router history={history}>
+    <Router>
       <TemplatesProvider>
         <OpenTemplateContext.Provider value={{ openTemplate, setOpenTemplate }}>
           <ProjectsProvider>

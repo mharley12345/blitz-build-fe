@@ -8,6 +8,7 @@ const Signup = () => {
   let today = new Date();
   return (
     <Container>
+      {console.log("process.env  ---> signup",process.env)}
       <Inner>
         <Title>Sign Up Today</Title>
         <P>Set up a free acount and take ownership of your projects.</P>
