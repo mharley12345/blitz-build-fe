@@ -71,13 +71,9 @@ class Uploader extends React.Component {
       file_name: this.state.file_name,
       project_id:this.state.project_id}))
       console.log(this.state)
-      .catch(error => {
-         console.log("ERROR ",error)
-      })
+    
     })
-    .catch(error => {
-      console.log("ERROR",error);
-    })
+   
   };
  
  

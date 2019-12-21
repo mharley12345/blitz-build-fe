@@ -1,10 +1,11 @@
+//notes
 import React, { useState, useEffect } from "react";
 import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Signup from "./components/auth/Signup";
-import PrivateRoute from "./components/auth/PrivateRoute";
+// import Login from "./components/auth/Login";
+// import Signup from "./components/auth/Signup";
+// import PrivateRoute from "./components/auth/PrivateRoute";
 import NavBar from "./components/NavBar";
-import axios from "axios";
 import jwtDecode from "jwt-decode";
 // import Layout from "./components/dashboard/Layout";
 // import Dashboard from "./components/dashboard/index";
@@ -34,16 +35,16 @@ import Landing from "./components/landing/pages/Landing";
 
 //context
 import UserContext from "./contexts/UserContext";
-import SearchTermContext from "./contexts/searching/searchTerm";
 import TaskProvider from "./contexts/tasks/TaskProvider";
 import DelayLogProvider from "./contexts/delayLog/DelayLogProvider";
 import OpenContext from "./contexts/projects/OpenContext";
 import PathnameContext from "./contexts/PathnameContext";
 import ProjectsProvider from "./contexts/projects/ProjectsProvider";
-import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 import EditModalContext from "./contexts/EditModalContext";
-import TemplateProvider from "./contexts/templates/TemplateProvider";
 import SearchProvider from "./contexts/searching/searchTermProvider";
+// import SearchTermContext from "./contexts/searching/searchTerm";
+// import TemplateProvider from "./contexts/templates/TemplateProvider";
+// import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 
 //AUTH0
 import Auth from "./components/auth/auth";
@@ -78,7 +79,6 @@ function App() {
     }
   };
 
-  
 
   // console.log("userInfo", userInfo);
   console.log("pathname", pathname);
@@ -131,7 +131,7 @@ function App() {
   ];
 
   return (
-    <Router >
+    <Router>
       <TemplatesProvider>
         <OpenTemplateContext.Provider value={{ openTemplate, setOpenTemplate }}>
           <ProjectsProvider>

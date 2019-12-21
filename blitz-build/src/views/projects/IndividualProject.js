@@ -163,10 +163,10 @@ const IndividualProject = props => {
               color: "#817974"
             }}
           >
-            Your Documents
+          
           </p>
       
-          <DocumentsContainer><DocumentCard/></DocumentsContainer>
+          <DocumentsContainer><DocumentCard className="solo" value="true" /></DocumentsContainer>
               </Right>
       </Top>
       <TasksContainer>
