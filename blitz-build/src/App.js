@@ -51,7 +51,6 @@ import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
 
-
 import TemplatesProvider from "./contexts/templates/TemplateProvider";
 import Uploader from "./components/documents/Uploader";
 import MyCalendar from "./components/calendar/MyCalender";
@@ -162,7 +161,6 @@ function App() {
                               )}
                               <Layout pathname={pathname}>
                                 <Switch>
-                                  <Route exact path="/auth" component={Auth} />
                                   <Route exact path="/" component={Landing} />
 
                                   <Route
