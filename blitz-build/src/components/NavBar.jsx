@@ -15,7 +15,7 @@ const NavBarContainer = styled.div`
     background-color: red;
     position: fixed;
     width: 296px;
-    height: 800px;
+    height: 100vh;
     left: 0;
     top: 0;
     background: #3B3B3B;
@@ -143,8 +143,7 @@ const NavBarContainer = styled.div`
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      align-items: center;
-      width:60%;
+      width: 58%;
       @media only screen and (max-width: 1500px) {
       
 
@@ -164,7 +163,7 @@ const NavBarContainer = styled.div`
       const UserName = styled.p`
       font-size: 16px;
       color: #FFFFFF;
-      margin-bottom: 5px;
+      margin-bottom: 0px;
       @media only screen and (max-width: 1500px) {
       
              display: none; 
@@ -185,12 +184,13 @@ const NavBarContainer = styled.div`
         width: 48px;
         border-radius: 100px;
         border: 1px solid #FFFFFF;
-        
+
        `
        const imgStyle = {
          maxWidth: '100%',
          maxHeight: '100%',
-         borderRadius: '100px'
+         borderRadius: '100px',
+        
        }
       
    

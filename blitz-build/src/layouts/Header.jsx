@@ -18,6 +18,7 @@ import TemplateForm from "../components/templates/TemplateForm"
 import TaskContext from "../contexts/tasks/TaskContext";
 import ProjectContext from "../contexts/projects/ProjectContext";
 import DocumentsContext from '../contexts/documents/DocumentsContext'
+
 const HeaderContainer = styled.div`
   background: #fff;
   width: 100%;
@@ -210,8 +211,8 @@ const SearchTotal = styled.div`
 `;
 const ButtonSearch = styled.i`
   position: absolute;
-  left: 98%;
-  top: 25%;
+  left: 93%;
+  top: 5%;
   border: none;
   font-size: 30px;
   color: #8a827d;
@@ -409,6 +410,7 @@ function Header({ pathname }) {
     }
    
   }
+  
   //// search function
 
   const handleChange = e => {
@@ -419,7 +421,7 @@ function Header({ pathname }) {
   return (
     <HeaderContainer>
       <SearchContainer  onMouseEnter={() => setSearchHover(true)}
-          onMouseLeave={() => setSearchHover(false)}>
+          onMouseLeave={() => setSearchHover(false)} >
         <Link to="/tasks">
           <SearchTotal >
             <SearchInput
@@ -427,7 +429,7 @@ function Header({ pathname }) {
               placeholder="Search Tasks"
               value={searchTerm}
               onChange={handleChange}
-              style={{ outline: 'none'}}
+              style={ {outline: "none"}}
             />
             <Link to="/tasks">
               {" "}

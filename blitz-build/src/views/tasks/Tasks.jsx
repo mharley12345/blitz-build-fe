@@ -91,7 +91,7 @@ export default function Tasks() {
   const failedSearch = () => {
     if (searchTerm.length > 0 && results.length === 0) {
       return (
-        <p style={{ fontWeight: 600 }}>
+        <p>
           There doesn't seem to be any tasks with that name
         </p>
       );

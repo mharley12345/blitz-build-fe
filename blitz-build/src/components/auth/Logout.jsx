@@ -46,6 +46,8 @@ const ButtonStyle = {
 const Pstyle = styled.p`
   font-size: 25px;
   margin: 25px 0 0 40px;
+  color: #212529;
+    font-weight: 600;
 `;
 
 const Logout = props => {
