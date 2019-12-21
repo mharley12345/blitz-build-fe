@@ -33,77 +33,60 @@
 
  [UX Design files](https://www.figma.com/file/zcyEae0BYNzuFkSBGhS98d/Blitz-Build_Chariton_Graham)
  
-Blitz Build is web app built on a PostgreSQL database. The front-end is built on React and using context api for state management. While utilizing the following API's:  Auth0 for authentication. 
+ Create a product that is simple and easy to use for non tech savvy user, with less noise than the competitors.
 
 
-### 4️⃣ Key Features
+###  Key Features
 
--    feature one
--    feature two
--    feature three
--    feature four
--    feature five
+-    Dashboard To View Projects,Tasks,Documents and Weather
+-    Calendar To Remind You Of Important Tasks
+-    Premade Template To Get You Started
+-    Ability To Create Your Own Template
+-    Document Center To Upload and Store Important Documents
 
-## 1️⃣ Tech Stack
+##  Tech Stack
 
 ### Front end built using:
+        React / Bootstrap
 
-#### _Front end framework goes here_
 
-🚫 Why did you choose this framework?
 
--    point one
--    point two
--    point three
--    point four
+ Why did you choose this framework?
+-    Created for UI
+-    Easily Manage State
+-    Works for Web and Mobile
+-    Huge Dev Following and Support
+-    It's What We've Been Using For the last 7 + months
 
-🚫List the rest of the front end features and libraries in the same format as the framework above.
 
-#### Front end deployed to `🚫insert service here`
 
-#### [Back end](🚫link to back end repo here) built using:
+#### Front end deployed to [netlify](https://blitz-build.netlify.com)
 
-#### 🚫 back end framework goes here
+#### [Back end](https://github.com/Lambda-School-Labs/blitz-build-be) built using: NodeJs
 
--    point one
--    point two
--    point three
+####  back end framework goes here
 
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
+-    Express
+-    PostgreSQL
+-    AWS
+
+
+
 
 # APIs
 
-## 2️⃣ Authentication API here
+##       AUTH0
+    
 
-🚫Replace text below with a description of the API
+AUTH0 makes user registration and login easy. They handle all the work
+and send a jwt back to the frontend. They also store all user data.
 
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
 
-## 2️⃣ Payment API here
+## Weather API 
 
-🚫Replace text below with a description of the API
 
-This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
 
-## 3️⃣ Misc API here
-
-🚫Replace text below with a description of the API
-
-You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
-
-## 3️⃣ Misc API here
-
-🚫Replace text below with a description of the API
-
-When you do it your way you can go anywhere you choose. Let your heart take you to wherever you want to be. If I paint something, I don't want to have to explain what it is. A tree needs to be your friend if you're going to paint him. That's a son of a gun of a cloud. Even the worst thing we can do here is good.
-
-## 3️⃣ Misc API here
-
-🚫Replace text below with a description of the API
-
-Volunteering your time; it pays you and your whole community fantastic dividends. Maybe there's a happy little waterfall happening over here. You can spend all day playing with mountains. We don't have to be committed. We are just playing here. You have freedom here. The only guide is your heart. It's cold, but it's beautiful.
-
-# 3️⃣ Environment Variables
+#  Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
@@ -120,28 +103,31 @@ In order for the app to function correctly, the user must set up their own envir
     *  REACT_APP_clientid - this is the Stripe_connect clientID, generated in Stripe_connect settings
     *  REACT_APP_stripe_plan - this is the ID for a second Stripe subscription plan, generated under Stripe products
 
-# 5️⃣ Content Licenses
+#  Content Licenses
 
-🚫For all content - images, icons, etc, use this table to document permission of use. Remove the two placeholders and add you content to this table
+For all content - images, icons, etc, use this table to document permission of use. Remove the two placeholders and add you content to this table
 
 | Image Filename | Source / Creator | License                                                                      |
 | -------------- | ---------------- | ---------------------------------------------------------------------------- |
 | doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
 | rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                             |
 
-# 4️⃣ Testing
+#  Testing
 
-🚫Document what you used for testing and why
+Document what you used for testing and why
 
-# 4️⃣ Installation Instructions
+#  Installation Instructions
 
-🚫explain how to install the required dependencies to get this project up and running with yarn and NPM
+`git clone`to download this repo :octocat:
+`cd`into `blitz-build-fe`
+`run yarn`:cat:or`npm install`to install the dependencies.
+then `npm run start` or :cat:`yarn start` to start up the dev server.
+
 
 ## Other Scripts
 
-🚫replace these examples with your own
 
-    * typecheck - runs the TypeScript compiler
+
     * build - creates a build of the application
     * start - starts the production server after a build is created
     * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
@@ -184,4 +170,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](🚫_link to your backend readme here_) for details on the backend of our project.
+See [Backend Documentation](https://github.com/Lambda-School-Labs/blitz-build-be/blob/master/README.md) for details on the backend of our project.
