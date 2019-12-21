@@ -10,7 +10,7 @@ const file_name = localStorage.getItem("file_name")
 const  DocumentCard = (props) => {
   const {document} =
   useContext(DocumentsContext)
-console.log(user_id,file_name,"DKDKDKDKDKDKDKDK")
+console.log(user_id,file_name,"TESTING DOCS")
  const handleDelete = (ev) =>{
 
 
