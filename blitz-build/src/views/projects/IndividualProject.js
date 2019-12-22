@@ -30,7 +30,7 @@ const IndividualProject = props => {
   const [projectState, setProjectState] = useState({});
   const [deleteStatus, setDeleteStatus] = useState(false);
   const [editProjectStatus, setEditProjectStatus] = useState(false);
-
+  localStorage.setItem("project_name",projectState.project_name)
  
 
   //contexts
@@ -51,6 +51,7 @@ const IndividualProject = props => {
         console.log("get single project: ", res.data);
 
         setProjectState(res.data[0]);
+   
       })
       .catch(err => {
         console.log(err);

@@ -8,7 +8,7 @@ import './table.css'
 const user_id = localStorage.getItem("user_id")
 const file_name = localStorage.getItem("file_name")
 const  DocumentCard = (props) => {
-  const {document} =
+  const { document } =
   useContext(DocumentsContext)
 console.log(user_id,file_name,"TESTING DOCS")
 //  const handleDelete = (ev) =>{

@@ -4,7 +4,7 @@ import moment from 'moment'
 import styled from 'styled-components'
 import { CloseButton } from 'react-bootstrap';
 let user_id = localStorage.getItem("user_id")
-let project_name = localStorage.getItem("project_name")
+let project_Name = localStorage.getItem("project_name")
 let projectID = localStorage.getItem("projectID")
 class Uploader extends React.Component {
   constructor(props) {
@@ -15,12 +15,12 @@ class Uploader extends React.Component {
       doc_url: "",
       user_id: user_id,
       file_name: '',
-      project_name: project_name,
-      project_id: projectID,
+      project_name: '',
+      project_id: '',
 
       createdAt: moment().format('l')
     }
-    let Success = this.state.success
+ 
   }
 
   handleUpload = (ev) => {
@@ -43,7 +43,7 @@ class Uploader extends React.Component {
         var returnData = response.data.data.returnData;
         var signedRequest = returnData.signedRequest;
         var url = returnData.url;
-        this.setState({ ...this.state, doc_url: url, file_name: fileName, sucess: true })
+        this.setState({ ...this.state, doc_url: url, file_name: fileName, success: true ,project_id:projectID,project_name:project_Name})
         console.log("Recieved a signed request " + signedRequest);
 
         // Put the fileType in the headers for the upload
@@ -56,8 +56,8 @@ class Uploader extends React.Component {
         axiosWithAuth().put(signedRequest, file, options)
 
           .then(result => {
-            let Successful = this.setState({ success: true })
-            console.log("Response from s3", result, Successful)
+           
+            console.log("Response from s3", result)
 
           })
 
