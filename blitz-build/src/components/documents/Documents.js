@@ -1,91 +1,135 @@
-import React,{useContext,useState} from "react";
-import styled from "styled-components";
+import React, { useContext, useState } from "react";
 import DocumentsContext from '../../contexts/documents/DocumentsContext'
-import {Table} from 'react-bootstrap'
+import searchTermContext from '../../contexts/searching/searchTerm'
+import TableHead from "@material-ui/core/TableHead";
+import TableCell from "@material-ui/core/TableCell";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import Global from '../../styles/Global';
+import {SortBtn} from '../../styles/SortBtn'
+import TablePaginationActions from "../../components/global/TablePaginationActions";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableFooter from "@material-ui/core/TableFooter";
+import Sortv from '../../styles/Sort/Sortv.png'
 
 
-import './table.css'
-const user_id = localStorage.getItem("user_id")
-const file_name = localStorage.getItem("file_name")
-const  DocumentCard = (props) => {
+import {
+  StyledTableRow,
+  useStyles,
+  StyledTableCell
+} from "../../styles/Table/TableStyles";
+
+
+// import './table.css'
+
+const DocumentCard = (props) => {
   const { document } =
-  useContext(DocumentsContext)
-console.log(user_id,file_name,"TESTING DOCS")
-//  const handleDelete = (ev) =>{
+    useContext(DocumentsContext)
+  const { searchTerm } = useContext(searchTermContext)
+  const documentSearchInput = searchTerm.toLowerCase("")
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const classes = useStyles();
 
-
-//      axiosWithAuth().delete(`/docs/url/${file_name}`,user_id)
-   
-     
-//  }
-
-
-  return (
-    <>
-
-   <div className='tbl-container'>
-  <Theader>Your Documents</Theader>
-
- <Table responsive>
-
-       <thead>
-             <tr>
-               <th>Name</th>
-               <th className="hide" value="false">Project</th>
-               <th className="hide" value="false">Created</th>
-               <th>View</th>
-               
-             </tr>
-             </thead>
-   {document.map((documents)=>{
-    return(
-         
-            
-            
-             <tbody  >
-               <tr>
-                 <td >{documents.file_name}</td>
-                 <td className="hide" value="false">{documents.project_name}</td>
-                 <td className="hide" value="false">{documents.createdAt}</td>
-                 <td> 
-                 <a href ={documents.doc_url} 
-                  rel="noopener noreferrer" target="_blank">
-                  View</a> >
-                  </td>
-             
-               </tr>
-             </tbody>
-      )}
-         
-   )
-   }
-   </Table>
-   </div>
-   </>
-
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage)
+  }
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0)
+  }
+  const results = document.filter(
+    documents =>
+      documents.file_name.toLowerCase().includes(documentSearchInput) ||
+      documents.project_name.toLowerCase().includes(documentSearchInput)
 
   )
-  }
+
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage)
+  return (
+
+
+
+    <>
+      <Global />
+      <p style={{  fontWeight: 600 }}>Your Documents</p>  <SortBtn style={{textDecoration:"none"}}>Sort <img src={Sortv} alt=""/></SortBtn>
+    
+      <Paper className={classes.root}>
+        <Table aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>NAME</StyledTableCell>
+              <StyledTableCell>PROJECT</StyledTableCell>
+              <StyledTableCell>CREATED</StyledTableCell>
+              <StyledTableCell>VIEW</StyledTableCell>
+
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {(rowsPerPage > 0
+              ? results.slice(
+                page * rowsPerPage,
+                page * rowsPerPage + rowsPerPage
+              )
+              : results
+            ).map(result => (
+
+
+              <StyledTableRow
+                className={classes.tableHover}
+                key={result.id}
+              >
+                <StyledTableCell>{result.file_name}</StyledTableCell>
+                <StyledTableCell>{result.project_name}</StyledTableCell>
+                <StyledTableCell>{result.createdAt}</StyledTableCell>
+                <StyledTableCell>
+                  <a href={result.doc_url}
+                    rel="noopener noreferrer" target="_blank">
+                    View</a> >
+                  </StyledTableCell>
+
+              </StyledTableRow>
+            ))}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={4} />
+              </TableRow>
+            )}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                colSpan={5}
+                count={results.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  inputProps: { "aria-label": "rows per page" },
+                  native: false
+                }}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
+            </TableRow>
+          </TableFooter>
+        </Table>
+      </Paper>
+    </>
+
+  )
+}
+
+
+
+
+
+
+
 export default DocumentCard;
 
 
-const Theader = styled.div `
-
-width: 255px;
-height: 19px;
-left: 32px;
-top: 32px;
-
-font-family: Roboto;
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 19px;
-/* identical to box height */
-
-letter-spacing: 0.04em;
-
-/* 400 Gray */
-
-color: #817974;
-`
