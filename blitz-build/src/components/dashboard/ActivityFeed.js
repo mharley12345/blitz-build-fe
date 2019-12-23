@@ -75,11 +75,11 @@ const newdate = year + "-" + month + "-" + changeTheDay(day);
     margin-bottom: 8px;
   
     p {
-      font-family: "Roboto";
+     
       font-size: 16px;
       line-height: 19px;
-      color: #8a827d;
-      font-weight: 500;
+      color: #212529;
+      font-weight: 600;
     }
   `;
   
