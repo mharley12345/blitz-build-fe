@@ -22,7 +22,7 @@ import {
 } from "../../styles/Table/TableStyles";
 
 
-// import './table.css'
+
 
 const DocumentCard = (props) => {
   const { document } =

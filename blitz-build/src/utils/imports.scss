@@ -1,2 +1,24 @@
 
-@import url('https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css')
+$break-largeDesktop: 2600px;
+$break-desktop: 1900px;
+$break-largeLaptop: 1680px;
+$break-laptop:1440px;
+$break-largeTablet:1024px;
+$break-largeMobile:600px;
+$break-mobile:400px ;
+
+@import url('https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css');
+
+#root{
+    @media screen and (max-width: $break-laptop){
+         max-width: 95%;
+         height: auto;
+    }
+}
+#root > div > div > div > div.sc-bdVaJa.gbXoHq{
+    @media screen and (max-width: $break-laptop){
+        display: flex;
+        width: 150px;
+        height: 600px;
+    }
+}

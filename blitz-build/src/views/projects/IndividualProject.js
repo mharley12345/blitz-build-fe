@@ -18,7 +18,8 @@ import Project_img from "../../styles/icons_project/project_img.png";
 //contexts
 import PathnameContext from "../../contexts/PathnameContext";
 import TaskContext from "../../contexts/tasks/TaskContext";
-
+import DocumentsContext from '../../contexts/documents/DocumentsContext'
+import SingleProjectDocCard from '../../components/documents/SingleProjectDocCard'
 //styles
 import styled from "styled-components";
 
@@ -36,7 +37,7 @@ const IndividualProject = props => {
   //contexts
   const { getProjectTasks } = useContext(TaskContext);
   const { pathname, setPathname } = useContext(PathnameContext);
-
+  
 
 
   //this gets the project id and sets it to state so we have a single project getting returned, then we are getting the projectTasks
@@ -167,7 +168,7 @@ const IndividualProject = props => {
           
           </p>
       
-          <DocumentsContainer><DocumentCard className="solo" value="true" /></DocumentsContainer>
+          <DocumentsContainer><SingleProjectDocCard/></DocumentsContainer>
               </Right>
       </Top>
       <TasksContainer>
@@ -278,9 +279,11 @@ const DeleteIcon = styled.div`
   cursor: pointer;
 `;
 const DocumentsContainer = styled.div`
-  margin-top: 8px;
-  width: 530px;
-  height: 288px;
+
+width: 524px;
+height: 288px;
+left: 588px;
+top: 357px;
   border: 1px solid #dcd9d5;
   border-radius: 3px;
 `;
