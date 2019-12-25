@@ -100,13 +100,23 @@ export default function ProjectForm({
   const handleSubmit = e => {
     e.preventDefault();
     // check if user enters a valid zip_code
-    if (form.zip_code == null || form.project_name=="" || form.street_address=="" || form.city=="" || form.state =="") {
+    if (
+      form.zip_code == null ||
+      form.project_name == "" ||
+      form.street_address == "" ||
+      form.city == "" ||
+      form.state == ""
+    ) {
       setError({
         error: true,
-        error_text: "Please enter a project_name, and/or a project address, and/or a valid zip_code!"
+        error_text:
+          "Please enter a project_name, and/or a project address, and/or a valid zip_code!"
       });
     } else {
+      // get latitude and longitude from zipcodes
+
       const gps = zipcodes.lookup(form.zip_code);
+
       // check if the zip_code is valid.
 
       if (gps == undefined) {
@@ -115,14 +125,21 @@ export default function ProjectForm({
           error_text: "The zip_code is invalid!"
         });
       } else {
+
+        // add latitude and longitude to form
+
         form.latitude = gps.latitude;
         form.longitude = gps.longitude;
+
+        // submit to addProject or editProject funciton
 
         if (editFields) {
           handleFunction(form, form.id, templateForm);
         } else {
           handleFunction(form, templateForm);
         }
+        //reset forms and error to initial state
+
         setForm({
           project_name: "",
           beds: null,
@@ -138,6 +155,7 @@ export default function ProjectForm({
           template_id: null
         });
         setError({ error: false, error_text: null });
+        
         closeModal();
       }
     }
