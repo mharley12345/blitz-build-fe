@@ -2,12 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 // using zip_code to find latitude and longitude
 import zipcodes from "zipcodes";
 
+// components
+import ErrorMessage from "../../components/global/ErrorMessage";
+
 // contexts
 import TemplateContext from "../../contexts/templates/TemplateContext";
-import TaskContext from "../../contexts/tasks/TaskContext";
-
-// axios
-import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 // styles
 //import styled from "styled-components";
@@ -42,14 +41,19 @@ export default function ProjectForm({
     street_address: "",
     zip_code: null
   });
-  
+
   //making another form specifically for templates because we are hitting multiple endpoints for templates (prebuilt and custom)
   const [templateForm, setTemplateForm] = useState({
     preBuiltTemplate: false,
     template_id: null
   });
 
- useEffect(() => {
+  const [error, setError] = useState({
+    error: false,
+    error_text: null
+  });
+
+  useEffect(() => {
     if (editFields) {
       console.log("editFields", editFields);
       setForm(editFields);
@@ -58,9 +62,9 @@ export default function ProjectForm({
       setForm(form);
       console.log(form);
     }
- }, []); 
-  
-// handle checkBox changing
+  }, []);
+
+  // handle checkBox changing
   const [checked, setChecked] = React.useState(false);
 
   //setting state of the checked box
@@ -95,28 +99,48 @@ export default function ProjectForm({
   //handles submit for project form
   const handleSubmit = e => {
     e.preventDefault();
-    const gps = zipcodes.lookup(form.zip_code);
-
-    form.latitude = gps.latitude;
-    form.longitude = gps.longitude;
-
-    if (editFields) {
-      handleFunction(form, form.id, templateForm);
+    // check if user enters a valid zip_code
+    if (form.zip_code == null || form.project_name=="" || form.street_address=="" || form.city=="" || form.state =="") {
+      setError({
+        error: true,
+        error_text: "Please enter a project_name, and/or a project address, and/or a valid zip_code!"
+      });
     } else {
-      handleFunction(form, templateForm);
-    }
-    setForm({
-      project_name: "",
-      beds: null,
-      baths: null,
-      city: "",
-      square_ft: null,
-      state: "",
-      street_address: "",
-      zip_code: null
-    });
+      const gps = zipcodes.lookup(form.zip_code);
+      // check if the zip_code is valid.
 
-    closeModal();
+      if (gps == undefined) {
+        setError({
+          error: true,
+          error_text: "The zip_code is invalid!"
+        });
+      } else {
+        form.latitude = gps.latitude;
+        form.longitude = gps.longitude;
+
+        if (editFields) {
+          handleFunction(form, form.id, templateForm);
+        } else {
+          handleFunction(form, templateForm);
+        }
+        setForm({
+          project_name: "",
+          beds: null,
+          baths: null,
+          city: "",
+          square_ft: null,
+          state: "",
+          street_address: "",
+          zip_code: null
+        });
+        setTemplateForm({
+          preBuiltTemplate: false,
+          template_id: null
+        });
+        setError({ error: false, error_text: null });
+        closeModal();
+      }
+    }
   };
   // const addCustomTemplate = e => {
   //   e.preventDefault();
@@ -353,6 +377,9 @@ export default function ProjectForm({
           />
         </div>
       </div>
+      {error.error && error.error_text ? (
+        <ErrorMessage errorMessage={error.error_text} />
+      ) : null}
       <StyledBtn>{text}</StyledBtn>
     </StyledForm>
   );

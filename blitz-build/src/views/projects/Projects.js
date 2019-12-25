@@ -81,9 +81,9 @@ const Projects = props => {
               <StyledTableRow
                 className={classes.tableHover}
                 key={projects.id}
-                to={`/project/${projects.id}`}
+                
                 onClick={() => {
-                  props.history.push(`/project/${projects.id}`);
+                  props.history.push(`/projects/${projects.id}`);
                 }}
               >
                 <StyledTableCell>
