@@ -103,7 +103,7 @@ function DelayLog() {
         </DelayLogButtons>
       </div>
       <p style={{ paddingBottom: "8px", fontWeight: 600 }}>
-        Your DelayLogs List
+        Your Delay Log List
       </p>
       <Paper className={classes.root}>
         <Table aria-label="customized table">

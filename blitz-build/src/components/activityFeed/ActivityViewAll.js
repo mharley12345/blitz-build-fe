@@ -15,7 +15,7 @@ const ActivityViewAll = () => {
 
 
 const { tasks } = useContext(taskContext);
-const [projectTasks, setProjectTasks] = useState([]);
+
 
 const dateObj = new Date();
 const month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -97,11 +97,10 @@ const Section = styled.div`
   margin-bottom: 8px;
 
   p {
-    font-family: "Roboto";
     font-size: 16px;
     line-height: 19px;
-    color: #8a827d;
-    font-weight: 500;
+    color: #212529;
+    font-weight: 600;
   }
 `;
 
@@ -136,7 +135,7 @@ const Name = styled.p`
 display: flex;
 color: rgba(0, 0, 0, 0.87);
 background-color: #E9E9E9
-width: 28%;
+width: 27%;
 flex-direction: column;
 font-weight: 500;
 `
@@ -151,7 +150,7 @@ font-weight: 500;
 const Address = styled.p`
 color: rgba(0, 0, 0, 0.87);
 background-color: #E9E9E9
-width: 26%;
+width: 25%;
 flex-direction: column;
 display: flex;
 font-weight: 500;
@@ -161,14 +160,14 @@ const Project = styled.p`
 color: rgba(0, 0, 0, 0.87);
 background-color: #E9E9E9
 flex-direction: column;
-width: 7.5%;
+width: 6%;
 display: flex;
 font-weight: 500;
 
 `
 
 const TableHead = styled.div`
- width: 95%;
+ width: 100%;
  display: flex;
  justify-content: space-around;
  align-items: center;

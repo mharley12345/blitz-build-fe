@@ -1,9 +1,17 @@
-import React from "react";
+import React , { useEffect, useContext }from "react";
 import styled from "styled-components";
 import DashboardTasks from './DashboardTasks'
 import Weather from "../weather/Weather.jsx";
 import ActivityFeed from './ActivityFeed';
+import PathnameContext from '../../contexts/PathnameContext'
 function Dashboard() {
+  const {pathname, setPathname } = useContext(PathnameContext)
+  useEffect(() => {
+
+    setPathname(window.location.pathname)
+
+  }, []);
+  
   return (
     <Container> 
     <WeatherAndFeedContainer> 

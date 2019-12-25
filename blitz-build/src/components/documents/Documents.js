@@ -30,10 +30,11 @@ console.log(user_id,file_name,"DKDKDKDKDKDKDKDK")
 
        <thead>
              <tr>
-               <th>Name</th>
-               <th className="hide" value="false">Project</th>
-               <th className="hide" value="false">Created</th>
-               <th>View</th>
+          
+               <th>NAME</th>
+               <th className="hide" value="false">PROJECT</th>
+               <th className="hide" value="false">CREATED</th>
+               <th>VIEW</th>
                
              </tr>
              </thead>
@@ -76,9 +77,10 @@ height: 19px;
 left: 32px;
 top: 32px;
 
-font-family: Roboto;
+
 font-style: normal;
-font-weight: 500;
+color: #212529;
+font-weight: 600;
 font-size: 16px;
 line-height: 19px;
 /* identical to box height */
@@ -87,5 +89,5 @@ letter-spacing: 0.04em;
 
 /* 400 Gray */
 
-color: #817974;
+
 `
