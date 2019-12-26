@@ -97,9 +97,10 @@ class Uploader extends React.Component {
 
           {this.state.success ? <SuccessMessage /> : null}
           <DropZone>
-            <Title>Add A New Document</Title>
+          <CloseButton onClick={this.props.closeModal}>X</CloseButton>
+            <Title>Add A Document</Title>
 
-            <CloseButton onClick={this.props.closeModal} />
+           
             <Message>Drag and drop a file</Message>
             <DrpZnWrapper>
               <BtnWrap>

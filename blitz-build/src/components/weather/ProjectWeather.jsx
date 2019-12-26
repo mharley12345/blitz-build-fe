@@ -7,7 +7,7 @@ function ProjectWeather({ weatherData, time, icon,city }) {
            
   return (
     <>
-      <WeatherContainerP>
+      <WeatherContainerP id="$break-laptop">
         <CityInfo>
           <p
             style={{

@@ -21,7 +21,7 @@ const SingleProjectDocCard = () =>{
         return(
             <>
             <Global/>
-             <p style={{  fontWeight: 600 }}>Your Documents</p><ViewAll href="/documents">View All</ViewAll>
+             <p style={{  fontWeight:800 }}>Your Documents</p><a href="/documents">View All</a>
              {document.map(documents=>{
                if (documents.project_name === project_name){
                  return(
@@ -40,25 +40,3 @@ const SingleProjectDocCard = () =>{
 }
 
 export default SingleProjectDocCard
-
-const ViewAll = styled.a `
-
-width: 255px;
-height: 19px;
-left: 857px;
-top: 322px;
-
-font-family: Roboto;
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 19px;
-
-
-text-align: right;
-letter-spacing: 0.04em;
-
-
-
-color: #817974;
-`

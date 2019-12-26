@@ -150,8 +150,8 @@ const IndividualProject = props => {
               Weather
             </p>
           </div>
-          <WeatherContainer>
-            <Weather
+          <WeatherContainer id="$break-laptop">
+            <Weather 
               usage="project"
               city={`${projectState.city}, ${projectState.state}`}
               latitude={projectState.latitude}
