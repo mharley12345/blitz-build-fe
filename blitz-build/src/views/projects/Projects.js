@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 // context
-import projectContext from "../../contexts/projects/ProjectContext";
+import { useProjectContext } from "../../contexts/projects/ProjectContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
 
 //styles
@@ -22,11 +22,11 @@ import TablePaginationActions from "../../components/global/TablePaginationActio
 
 const Projects = props => {
   const classes = useStyles();
+  //importing state of projects
+  const { projects } = useProjectContext();
 
-  //importing state of projects, and search term from context
-  const { projects } = useContext(projectContext);
-  const { searchTerm } = useContext(searchTermContext);
-  const projectSearchInput = searchTerm.toLowerCase("");
+
+  
 
   //this tracks which page you are on for projects and sets the intial state of how many rows there are
   const [page, setPage] = React.useState(0);
@@ -45,15 +45,10 @@ const Projects = props => {
 
   //return all projects or filtered projects
 
-  const results = projects.filter(
-    project =>
-      project.project_name.toLowerCase().includes(projectSearchInput) ||
-      project.street_address.toLowerCase().includes(projectSearchInput)
-  );
 
   
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, results.length - page * rowsPerPage);
+    rowsPerPage - Math.min(rowsPerPage);
 
   return (
     <>
@@ -72,29 +67,29 @@ const Projects = props => {
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? results.slice(
+              ? projects.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
-              : results
-            ).map(result => (
+              : projects
+            ).map(projects => (
               <StyledTableRow
                 className={classes.tableHover}
-                key={result.id}
-                to={`/projects/${result.id}`}
+                key={projects.id}
+                to={`/project/${projects.id}`}
                 onClick={() => {
-                  props.history.push(`/projects/${result.id}`);
+                  props.history.push(`/project/${projects.id}`);
                 }}
               >
                 <StyledTableCell>
-                  <p style={{ marginBottom: 0 }}>{result.street_address}</p>
+                  <p style={{ marginBottom: 0 }}>{projects.street_address}</p>
                   <p
                     style={{ marginBottom: 0 }}
-                  >{`${result.city}, ${result.state} ${result.zip_code}`}</p>
+                  >{`${projects.city}, ${projects.state} ${projects.zip_code}`}</p>
                 </StyledTableCell>
-                <StyledTableCell>{result.project_name}</StyledTableCell>
-                <StyledTableCell>{result.status}</StyledTableCell>
-                <StyledTableCell>{result.createdAt}</StyledTableCell>
+                <StyledTableCell>{projects.project_name}</StyledTableCell>
+                <StyledTableCell>{projects.status}</StyledTableCell>
+                <StyledTableCell>{projects.createdAt}</StyledTableCell>
                 <StyledTableCell>
                   <span>View Project ></span>
                 </StyledTableCell>
@@ -112,8 +107,8 @@ const Projects = props => {
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={5}
-                count={results.length}
+                colSpan={6}
+                count={projects.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{

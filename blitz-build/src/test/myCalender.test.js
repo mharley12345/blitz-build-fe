@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import  Documents  from '../components/documents/Documents'
+import  MyCalendar  from '../components/documents/Documents'
 
 
 
@@ -9,9 +9,9 @@ it('renders without crashing', () => {
    expect(1).toBe(1);
 });
 
-describe("Documents", () => {
+describe("MyCalender", () => {
    it("renders", () => {
-     shallow(<Documents />)
+     shallow(<MyCalendar />)
    });
  });
  

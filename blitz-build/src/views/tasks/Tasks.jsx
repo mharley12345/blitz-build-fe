@@ -91,7 +91,7 @@ export default function Tasks() {
   const failedSearch = () => {
     if (searchTerm.length > 0 && results.length === 0) {
       return (
-        <p style={{ fontWeight: 600 }}>
+        <p>
           There doesn't seem to be any tasks with that name
         </p>
       );
@@ -142,8 +142,14 @@ export default function Tasks() {
               }
             })}
 
-            {results.length > 0 ? (
-              results.map(result => <Task item={result} key={result.id}></Task>)
+            {results.length > 0 ? (   (rowsPerPage > 0
+              ? results.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : results
+            )
+              .map(result => <Task item={result} key={result.id}></Task>)
             ) : (
               <></>
             )}
