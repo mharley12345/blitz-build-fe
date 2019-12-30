@@ -39,7 +39,7 @@ class Uploader extends React.Component {
       user_id: this.state.user_id
     })
       .then(response => {
-        console.log("RESPONSE", response)
+        console.log("S3 RESPONSE", response)
         var returnData = response.data.data.returnData;
         var signedRequest = returnData.signedRequest;
         var url = returnData.url;

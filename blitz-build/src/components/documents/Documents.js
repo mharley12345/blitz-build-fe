@@ -13,7 +13,7 @@ import TablePaginationActions from "../../components/global/TablePaginationActio
 import TablePagination from "@material-ui/core/TablePagination";
 import TableFooter from "@material-ui/core/TableFooter";
 import Sortv from '../../styles/Sort/Sortv.png'
-
+import DocumentMeatBalls from './DocumentsMeatBalls'
 
 import {
   StyledTableRow,
@@ -25,7 +25,7 @@ import {
 
 
 const DocumentCard = (props) => {
-  const { document } =
+  const { documents } =
     useContext(DocumentsContext)
   const { searchTerm } = useContext(searchTermContext)
   const documentSearchInput = searchTerm.toLowerCase("")
@@ -40,10 +40,10 @@ const DocumentCard = (props) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0)
   }
-  const results = document.filter(
-    documents =>
-      documents.file_name.toLowerCase().includes(documentSearchInput) ||
-      documents.project_name.toLowerCase().includes(documentSearchInput)
+  const results = documents.filter(
+    document =>
+      document.file_name.toLowerCase().includes(documentSearchInput) ||
+      document.project_name.toLowerCase().includes(documentSearchInput)
 
   )
 
@@ -86,9 +86,10 @@ const DocumentCard = (props) => {
                 <StyledTableCell>{result.project_name}</StyledTableCell>
                 <StyledTableCell>{result.createdAt}</StyledTableCell>
                 <StyledTableCell>
-                  <a href={result.doc_url}
+                <DocumentMeatBalls document={result}/>
+                  {/* <a href={result.doc_url}
                     rel="noopener noreferrer" target="_blank">
-                    View</a> >
+                    View</a> > */}
                   </StyledTableCell>
 
               </StyledTableRow>
