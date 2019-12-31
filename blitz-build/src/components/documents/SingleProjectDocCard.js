@@ -15,22 +15,22 @@ import {
 
 const project_name = localStorage.getItem('project_name')
 const SingleProjectDocCard = () =>{
-    const {document} = useContext(DocumentsContext)
+    const {documents} = useContext(DocumentsContext)
 
     
         return(
             <>
             <Global/>
              <p style={{  fontWeight:800 }}>Your Documents</p><a href="/documents">View All</a>
-             {document.map(documents=>{
-               if (documents.project_name === project_name){
+             {documents.map(document=>{
+               if (document.project_name === project_name){
                  return(
               <TableBody>
                   <StyledTableRow>
-                      <StyledTableCell>{documents.file_name}</StyledTableCell>
+                      <StyledTableCell>{document.file_name}</StyledTableCell>
                       
-                      <StyledTableCell>{documents.createdAt}</StyledTableCell>
-                      <StyledTableCell><a href={documents.doc_url}>View</a>></StyledTableCell>
+                      <StyledTableCell>{document.createdAt}</StyledTableCell>
+                      <StyledTableCell><a href={document.doc_url}>View</a>></StyledTableCell>
                   </StyledTableRow>
               </TableBody>
                  )}})}

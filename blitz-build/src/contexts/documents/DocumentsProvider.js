@@ -6,7 +6,8 @@ import DocumentsContext from './DocumentsContext'
 
 export default function DocumentsProvider({ children }){
     const [documents, setDocuments] = useState([])
-
+    const user_id = localStorage.getItem('user_id')
+    const file_name = localStorage.getItem('file_name')
     useEffect(() => {
         getDocuments();
     }, [])
@@ -21,22 +22,14 @@ export default function DocumentsProvider({ children }){
            console.log('Documents Error',err);
        })
     }
-    const viewDocument = () =>{
-       return (
-           <a href={documents.doc_url}
-           target="_self"/>
-       )
-    }
-    const deleteDocument = deletedDocument => {
-        getDocuments();
-        console.log("deletedDocument",deletedDocument)
-         let  file_name = deletedDocument.file_name
-        axiosWithAuth()
-        .delete(`docs/url/${file_name}`)
+ 
+     const handleDelete = (ev) => {
+         axiosWithAuth().delete(`docs/url/${file_name}`,user_id)
+  
         .then(res => {
             console.log("document was deleted", res)
             const newDocumentList = documents.filter(document =>{
-                return document.file_name !== deletedDocument.id
+                return document.file_name !== documents.id
             })
             setDocuments(newDocumentList);
             window.location.reload(true)
@@ -61,10 +54,10 @@ export default function DocumentsProvider({ children }){
              <DocumentsContext.Provider value={{
               documents,
               setDocuments,
-              deleteDocument,
-              viewDocument,
-              printDocument,
-              downloadDocument
+              handleDelete
+              
+            //   printDocument,
+            //   downloadDocument
               }}
               >
              {children}

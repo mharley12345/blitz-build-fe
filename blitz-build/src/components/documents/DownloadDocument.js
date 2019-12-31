@@ -5,7 +5,7 @@ import Confirm from "../global/Confirm"
 
 import DocumentContext from '../../contexts/documents/DocumentsContext'
 
-export default function DownloadDocument({document,downloadStatus,handleDownloadClose}){
+export default function DownloadDocument({documents,downloadStatus,handleDownloadClose}){
     const { downloadDocument } = useContext(DocumentContext);
     return (
         <>
@@ -17,8 +17,8 @@ export default function DownloadDocument({document,downloadStatus,handleDownload
             <Confirm
             closeModal={handleDownloadClose}
             downloadFunction={downloadDocument}
-            downloadItem={document}
-            text={`${document.file_name} document`}
+            downloadItem={documents}
+            text={`${documents} document`}
             />
         }
         />

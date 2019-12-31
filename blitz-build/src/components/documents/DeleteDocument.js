@@ -6,7 +6,7 @@ import Confirm from "../global/Confirm"
 import DocumentContext from '../../contexts/documents/DocumentsContext'
 
 export default function DeleteDocument({documents,deleteStatus,handleDeleteClose}){
-    const { deleteDocument } = useContext(DocumentContext);
+    const { handleDelete } = useContext(DocumentContext);
  
     return (
         <>
@@ -18,9 +18,9 @@ export default function DeleteDocument({documents,deleteStatus,handleDeleteClose
         component={
             <Confirm
             closeModal={handleDeleteClose}
-            deleteFunction={deleteDocument}
+            deleteFunction={handleDelete}
             deleteItem={documents}
-            text={`${documents.file_name} document`}
+            text={`${documents} document`}
             />
         }
         />

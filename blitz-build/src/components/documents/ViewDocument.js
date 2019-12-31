@@ -1,7 +1,7 @@
 import React, {useContext} from "react"
 
 import Modal from "../global/Modal"
-import Confirm from "../global/Confirm"
+
 
 import DocumentContext from '../../contexts/documents/DocumentsContext'
 
@@ -13,15 +13,9 @@ export default function ViewDocument({documents,viewStatus,handleViewClose}){
         visible={viewStatus}
         dismiss={handleViewClose}
         client={"40%"}
-        component={
-            <Confirm
-            closeModal={handleViewClose}
-            viewFunction={viewDocument}
-            viewItem={documents}
-            text={`${documents.file_name} document`}
-            />
-        }
+        href={viewDocument.doc_url}
         />
+   
         </>
     )
 }

@@ -1,9 +1,10 @@
 import React,{useContext, useState, useEffect, useRef} from 'react';
 import PrintDocument from "./PrintDocument";
 import DeleteDocument from "./DeleteDocument";
-import ViewDocument from './ViewDocument'
+
 import DownloadDocument from './DownloadDocument'
 import PathnameContext from '../../contexts/PathnameContext'
+import Link from 'react-router-dom'
 import {
     TaskI,
     StyledLi,
@@ -17,7 +18,7 @@ export default function DocumentsMeatballsDrop ({ documents }) {
    const [dropStatus, setDropStatus] = useState(false);
    const [printStatus, setPrintStatus] = useState(false);
    const [deleteStatus, setDeleteStatus] = useState(false);
-   const [viewStatus, setViewStatus] = useState(false)
+ 
    const [downloadStatus, setDownloadStatus ] =useState(false)
    const { pathname, setPathname } = useContext(PathnameContext) 
      useEffect(() => {
@@ -62,14 +63,7 @@ export default function DocumentsMeatballsDrop ({ documents }) {
         setPrintStatus(false);
         closeDrop();
       };
-      const handleViewOpen = e => {
-        e.stopPropagation();
-        setViewStatus(true);
-      };
-      const handleViewClose = e => {
-        setViewStatus(false);
-        closeDrop();
-      };
+    
      return (
          <>
           <MeatBalls
@@ -83,10 +77,7 @@ export default function DocumentsMeatballsDrop ({ documents }) {
                     <DropDown>
                      {/*<Geo></Geo>*/}
                
-                    <StyledLi onClick={handleViewOpen}>
-                        <DropP>View</DropP>
-                        <TaskI className="ion-md-eye"/>
-                    </StyledLi>
+                   
                     <StyledLi onClick={handleDownloadOpen}>
                         <DropP>Download</DropP>
                         <TaskI className="ion-md-cloud"/>
@@ -110,12 +101,7 @@ export default function DocumentsMeatballsDrop ({ documents }) {
             printStatus={printStatus}
             handlePrintClose={handlePrintClose}
             />
-            <ViewDocument
-            documents={documents}
-            closeDrop={closeDrop}
-            viewStatus={viewStatus}
-            handleViewClose={handleViewClose}
-            />
+         
             <DownloadDocument 
             documents={documents}
             closeDrop={closeDrop}

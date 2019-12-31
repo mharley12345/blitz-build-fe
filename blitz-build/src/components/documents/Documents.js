@@ -14,7 +14,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableFooter from "@material-ui/core/TableFooter";
 import Sortv from '../../styles/Sort/Sortv.png'
 import DocumentMeatBalls from './DocumentsMeatBalls'
-
+import Link from 'react-router-dom'
 import {
   StyledTableRow,
   useStyles,
@@ -86,10 +86,10 @@ const DocumentCard = (props) => {
                 <StyledTableCell>{result.project_name}</StyledTableCell>
                 <StyledTableCell>{result.createdAt}</StyledTableCell>
                 <StyledTableCell>
-                <DocumentMeatBalls document={result}/>
-                  {/* <a href={result.doc_url}
+               
+                  <a href={result.doc_url}
                     rel="noopener noreferrer" target="_blank">
-                    View</a> > */}
+                    View</a><DocumentMeatBalls document={result}/>
                   </StyledTableCell>
 
               </StyledTableRow>

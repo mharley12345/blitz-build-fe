@@ -7,7 +7,7 @@ import DocumentContext from '../../contexts/documents/DocumentsContext'
 
 export default function PrintDocument({documents,printStatus,handlePrintClose}){
     const { printDocument } = useContext(DocumentContext);
-    const file_name = documents.file_name
+ 
     return (
         <>
         <Modal
@@ -19,7 +19,7 @@ export default function PrintDocument({documents,printStatus,handlePrintClose}){
             closeModal={handlePrintClose}
             printFunction={printDocument}
             printItem={documents}
-            text={`${file_name} document`}
+            text={`${documents} document`}
             />
         }
         />
