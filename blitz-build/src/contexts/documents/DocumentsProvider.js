@@ -8,22 +8,28 @@ export default function DocumentsProvider({ children }){
     const [documents, setDocuments] = useState([])
     const user_id = localStorage.getItem('user_id')
     const file_name = localStorage.getItem('file_name')
+   
     useEffect(() => {
         getDocuments();
+  
     }, [])
     const getDocuments = () =>{
+ 
         axiosWithAuth()
      .get('/docs/url')
       .then(res =>{
-          console.log("get Documents",res.data)
-          setDocuments(res.data)
+        let docs = res.data
+        return   setDocuments(docs)
+          
       })
        .catch(err =>{
            console.log('Documents Error',err);
        })
     }
- 
-     const handleDelete = (ev) => {
+ console.log(documents)
+     const handleDelete = (event) => {
+         console.log(event)
+         const file_name = event.file_name
          axiosWithAuth().delete(`docs/url/${file_name}`,user_id)
   
         .then(res => {

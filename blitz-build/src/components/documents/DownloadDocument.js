@@ -13,14 +13,7 @@ export default function DownloadDocument({documents,downloadStatus,handleDownloa
         visible={downloadStatus}
         dismiss={handleDownloadClose}
         client={"40%"}
-        component={
-            <Confirm
-            closeModal={handleDownloadClose}
-            downloadFunction={downloadDocument}
-            downloadItem={documents}
-            text={`${documents} document`}
-            />
-        }
+    
         />
         </>
     )

@@ -16,13 +16,13 @@ import {
 const project_name = localStorage.getItem('project_name')
 const SingleProjectDocCard = () =>{
     const {documents} = useContext(DocumentsContext)
-
+    
     
         return(
             <>
             <Global/>
              <p style={{  fontWeight:800 }}>Your Documents</p><a href="/documents">View All</a>
-             {documents.map(document=>{
+             {documents.map((document) =>{
                if (document.project_name === project_name){
                  return(
               <TableBody>
@@ -33,7 +33,7 @@ const SingleProjectDocCard = () =>{
                       <StyledTableCell><a href={document.doc_url}>View</a>></StyledTableCell>
                   </StyledTableRow>
               </TableBody>
-                 )}})}
+             )}})}
              </>
         )
   

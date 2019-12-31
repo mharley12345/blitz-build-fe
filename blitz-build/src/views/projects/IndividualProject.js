@@ -279,7 +279,6 @@ const DeleteIcon = styled.div`
   cursor: pointer;
 `;
 const DocumentsContainer = styled.div`
-
 width: 524px;
 height: 288px;
 left: 588px;
