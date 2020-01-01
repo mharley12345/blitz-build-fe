@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 
 //context
-import taskContext from "../../contexts/tasks/TaskContext";
-import searchTermContext from "../../contexts/searching/searchTerm";
+import { useTaskContext } from "../../contexts/tasks/TaskContext";
+import { useSearchTermContext } from "../../contexts/searching/searchTerm";
 
 //components
 import Task from "../../components/dashboard/Task";
@@ -58,12 +58,10 @@ const InfoContainer = styled.div`
 // `;
 
 export default function Tasks() {
-  const { tasks, getTasks } = useContext(taskContext);
-  const { searchTerm, results, taskSearchResults } = useContext(
-    searchTermContext
-  );
+  const { tasks, getTasks } = useTaskContext();
+  const { searchTerm, results } = useSearchTermContext();
+  
 
-  console.log("taskSearchResults", taskSearchResults);
 
   console.log("RESULTS:", results);
   //pagnation
