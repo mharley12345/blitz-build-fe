@@ -13,12 +13,12 @@ const IndividualTemplate = props => {
   );
   const { pathname, setPathname } = useContext(PathnameContext);
 
-  console.log(templateTask);
+  
   useEffect(() => {
     setPathname(window.location.pathname);
-    getTemplateTasks();
+ 
   }, []);
-
+console.log(templateTask);
   return (
     <div>
       <Section>{/* <h1>individual template</h1> */}</Section>
