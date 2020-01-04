@@ -30,7 +30,7 @@ const SingleProjectDocCard = () =>{
                       <StyledTableCell>{document.file_name}</StyledTableCell>
                       
                       <StyledTableCell>{document.createdAt}</StyledTableCell>
-                      <StyledTableCell><a href={document.doc_url}>View</a>></StyledTableCell>
+                      <StyledTableCell><a href={document.doc_url} target="_blank">View</a>></StyledTableCell>
                   </StyledTableRow>
               </TableBody>
              )}})}
