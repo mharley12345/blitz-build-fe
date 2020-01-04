@@ -19,7 +19,7 @@ export default function PrintDocument({documents,printStatus,handlePrintClose}){
             closeModal={handlePrintClose}
             printFunction={printDocument}
             printItem={documents}
-            text={`${documents} document`}
+            text={"Click To Print The Document"}
             />
         }
         />

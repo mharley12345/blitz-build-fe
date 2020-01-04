@@ -24,7 +24,7 @@ import SingleProjectDocCard from '../../components/documents/SingleProjectDocCar
 import styled from "styled-components";
 
 
-const IndividualProject = props => {
+ export const IndividualProject = (props) => {
 
 
   //local states
@@ -150,7 +150,7 @@ const IndividualProject = props => {
               Weather
             </p>
           </div>
-          <WeatherContainer id="$break-laptop">
+          <WeatherContainer>
             <Weather 
               usage="project"
               city={`${projectState.city}, ${projectState.state}`}

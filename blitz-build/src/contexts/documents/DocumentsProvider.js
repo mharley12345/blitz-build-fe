@@ -10,8 +10,8 @@ export default function DocumentsProvider({ children }){
     const file_name = localStorage.getItem('file_name')
    
     useEffect(() => {
-        getDocuments();
-  
+        getDocuments(res => setDocuments(res));
+        
     }, [])
     const getDocuments = () =>{
  
@@ -29,7 +29,8 @@ export default function DocumentsProvider({ children }){
  console.log(documents)
      const handleDelete = (event) => {
          console.log(event)
-         const file_name = event.file_name
+       const file_name= event.file_name
+       const user_id = event.user_id
          axiosWithAuth().delete(`docs/url/${file_name}`,user_id)
   
         .then(res => {
@@ -47,12 +48,16 @@ export default function DocumentsProvider({ children }){
         })
     }
 
-    const printDocument = ()=>{
-        return console.log("Hello")
+    const printDocument = (event)=>{
+      const file_name = event.file_name
     }
        
-  const downloadDocument = () => {
-      return console.log("Hello")
+  const downloadDocument = (event) => {
+    const file_name = event.file_name
+    axiosWithAuth().post('/docs/download',file_name)
+    .then(data => {
+        console.log("GOT DATA")
+    })
   }
 
      return (
@@ -60,7 +65,8 @@ export default function DocumentsProvider({ children }){
              <DocumentsContext.Provider value={{
               documents,
               setDocuments,
-              handleDelete
+              handleDelete,
+              downloadDocument
               
             //   printDocument,
             //   downloadDocument

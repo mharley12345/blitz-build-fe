@@ -86,12 +86,13 @@ const DocumentCard = (props) => {
                 <StyledTableCell>{result.project_name}</StyledTableCell>
                 <StyledTableCell>{result.createdAt}</StyledTableCell>
                 <StyledTableCell>
-               
+                  {/** */}
                   <a href={result.doc_url}
-                    rel="noopener noreferrer" target="_blank">
+                    rel="noopener" target="_Blank">
+
                     View</a><DocumentMeatBalls document={result}/>
                   </StyledTableCell>
-
+                   {/** */}
               </StyledTableRow>
             ))}
             {emptyRows > 0 && (

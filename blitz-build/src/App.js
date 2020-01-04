@@ -208,12 +208,12 @@ function App() {
                                   />
                                   <Route
                                     exact
-                                    path="/projects/:id"
+                                    path="/project/:id"
                                     component={IndividualProject}
                                   />
                                   <Route
                                     exact
-                                    path="/projects/:id/tasks"
+                                    path="/project/:id/tasks"
                                     component={ProjectTasks}
                                   />
                                   <Route
