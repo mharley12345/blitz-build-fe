@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { useHistory} from 'react-router-dom'
 import styled from "styled-components";
 import { XButton } from "../../styles/Tasks/tasks";
 
@@ -20,9 +20,9 @@ text-align: left;
 
 const ConfirmBtn = styled.button`
 background: ${props =>
-    props.delete ? '#FF4D4F' : 'white'};
+    props.print ? '#FF4D4F' : 'white'};
 color: ${props =>
-    props.delete ? 'white': '#FF4D4F'};
+    props.print ? 'white': '#FF4D4F'};
 display: flex;
 border-radius: 3px;
 border: 1px solid #FF4D4F
@@ -38,22 +38,28 @@ margin-top:36px;
 
 
 export default function Confirm(props) {
-    const  {closeModal, text, deleteFunction, deleteItem } =props
-    return (
+ const { closeModal, text, printFunction, printDo,doc_url }= props;
+ const history = useHistory();
+ const handleClick = ()=> {
+
+ const path = doc_url
+  history.push(path)
+ }
+     return (
         <ConfirmStyle>
             <div style={{textAlign: 'right', height: '50px'}}>
                 <XButton onClick={ closeModal }>close X</XButton>
             </div>
 
-            <H1 style={{fontSize: '30px', fontWeight: 600, marginBottom:"15px"}}>Delete {text}</H1>
+            <H1 style={{fontSize: '30px', fontWeight: 600, marginBottom:"15px"}}>{text}</H1>
 
-            <p>Are you sure you want to delete?</p>
+            <p>Please submit continue to proceed?</p>
             <BtnDiv>
                 <ConfirmBtn onClick={ closeModal }>Cancel</ConfirmBtn>
-                <ConfirmBtn delete onClick={ () => {
-                    deleteFunction()
+                <ConfirmBtn view onClick={ () => {
+                      handleClick()
                     closeModal()
-                } }>Delete</ConfirmBtn>
+                } }>View</ConfirmBtn>
             </BtnDiv>
         </ConfirmStyle>
     )

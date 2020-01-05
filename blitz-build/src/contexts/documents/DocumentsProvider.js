@@ -53,6 +53,7 @@ export default function DocumentsProvider({ children }){
     }
        
   const downloadDocument = (event) => {
+    console.log(event.target)
     const file_name = event.file_name
     axiosWithAuth().post('/docs/download',file_name)
     .then(data => {

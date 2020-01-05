@@ -1,7 +1,6 @@
 import React,{useContext, useState, useEffect, useRef} from 'react';
 import PrintDocument from "./PrintDocument";
 import DeleteDocument from "./DeleteDocument";
-
 import DownloadDocument from './DownloadDocument'
 import PathnameContext from '../../contexts/PathnameContext'
 import Link from 'react-router-dom'
@@ -13,7 +12,9 @@ import {
     DropP
 } from '../../styles/Table/TableStyles';
 
-export default function DocumentsMeatballsDrop ({ documents }) {
+export default function DocumentsMeatballsDrop (props) {
+  const { documents,docs_url,url } = props
+  console.log(props)
    const refContainer = useRef();
    const [dropStatus, setDropStatus] = useState(false);
    const [printStatus, setPrintStatus] = useState(false);
@@ -97,6 +98,7 @@ export default function DocumentsMeatballsDrop ({ documents }) {
             </MeatBalls>
             <PrintDocument
             documents={documents}
+            docs_url={docs_url}
             closeDrop={closeDrop}
             printStatus={printStatus}
             handlePrintClose={handlePrintClose}
@@ -104,6 +106,7 @@ export default function DocumentsMeatballsDrop ({ documents }) {
          
             <DownloadDocument 
             documents={documents}
+            docs_url={docs_url}
             closeDrop={closeDrop}
             downloadStatus={downloadStatus}
             handleDownloadClose={handleDownloadClose}
@@ -111,11 +114,13 @@ export default function DocumentsMeatballsDrop ({ documents }) {
 
             <DeleteDocument
             documents={documents}
+          docs_url ={docs_url}
             closeDrop={closeDrop}
             deleteStatus={deleteStatus}
             handleDeleteClose={handleDeleteClose}
 
             />
+       
             </>
      )
 }

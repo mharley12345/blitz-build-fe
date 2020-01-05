@@ -87,8 +87,8 @@ const DocumentCard = (props) => {
                 <StyledTableCell>{result.createdAt}</StyledTableCell>
                 <StyledTableCell>
                   {/** */}
-                  <a href={result.doc_url}
-                    rel="noopener" target="_Blank">
+                  <a href={`/documents/view/${result.file_name}`}
+                    rel="noopener" doc_url={result.doc_url} document={result} target="_Self">
 
                     View</a><DocumentMeatBalls document={result}/>
                   </StyledTableCell>

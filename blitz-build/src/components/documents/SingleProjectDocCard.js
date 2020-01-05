@@ -14,9 +14,10 @@ import {
 } from "../../styles/Table/TableStyles";
 
 const project_name = localStorage.getItem('project_name')
-const SingleProjectDocCard = () =>{
+
+const SingleProjectDocCard = (props) =>{
     const {documents} = useContext(DocumentsContext)
-    
+ 
     
         return(
             <>

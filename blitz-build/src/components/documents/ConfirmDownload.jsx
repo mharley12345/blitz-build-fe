@@ -3,6 +3,7 @@ import React from 'react'
 import styled from "styled-components";
 import { XButton } from "../../styles/Tasks/tasks";
 
+
 const ConfirmStyle = styled.div`
   padding-left: 30px;
   padding-bottom: 30px;
@@ -20,9 +21,9 @@ text-align: left;
 
 const ConfirmBtn = styled.button`
 background: ${props =>
-    props.delete ? '#FF4D4F' : 'white'};
+    props.download ? 'green' : 'white'};
 color: ${props =>
-    props.delete ? 'white': '#FF4D4F'};
+    props.download ? 'white': 'green'};
 display: flex;
 border-radius: 3px;
 border: 1px solid #FF4D4F
@@ -37,23 +38,24 @@ margin-top:36px;
 `
 
 
-export default function Confirm(props) {
-    const  {closeModal, text, deleteFunction, deleteItem } =props
+export default function Confirm(props ) {
+   const   {  file_name, closeModal, text, downloadFunction,DownloadDocument } = props
     return (
         <ConfirmStyle>
             <div style={{textAlign: 'right', height: '50px'}}>
                 <XButton onClick={ closeModal }>close X</XButton>
             </div>
 
-            <H1 style={{fontSize: '30px', fontWeight: 600, marginBottom:"15px"}}>Delete {text}</H1>
+            <H1 style={{fontSize: '30px', fontWeight: 600, marginBottom:"15px"}}>Download {text}</H1>
 
-            <p>Are you sure you want to delete?</p>
+            <p>Are you sure you want to download?</p>
             <BtnDiv>
                 <ConfirmBtn onClick={ closeModal }>Cancel</ConfirmBtn>
-                <ConfirmBtn delete onClick={ () => {
-                    deleteFunction()
+                <ConfirmBtn download onClick={ () => {
+                    downloadFunction(DownloadDocument)
+                    localStorage.setItem('file_name',`${file_name}`)
                     closeModal()
-                } }>Delete</ConfirmBtn>
+                } }>Download</ConfirmBtn>
             </BtnDiv>
         </ConfirmStyle>
     )

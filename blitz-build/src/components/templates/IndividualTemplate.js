@@ -6,7 +6,7 @@ import TemplateContext from "../../contexts/templates/TemplateContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
 import styled, { css } from "styled-components";
 import MeatBallsDrop from "../tasks/MeatBallsDrop";
-import { set } from "date-fns";
+
 const IndividualTemplate = props => {
   const { templateTask, setTemplatesTask, getTemplateTasks } = useContext(
     TemplateContext
