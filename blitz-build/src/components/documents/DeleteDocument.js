@@ -21,7 +21,7 @@ export default function DeleteDocument(props){
             closeModal={handleDeleteClose}
             deleteFunction={handleDelete}
             deleteItem={documents}
-            text={`${this.document.file_name}` }
+            text={`${document.file_name}` }
             />
         }
         />

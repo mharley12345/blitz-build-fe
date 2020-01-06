@@ -1,10 +1,10 @@
-import React ,{useContext} from 'react'
-import DocumentsContext from '../contexts/documents/DocumentsContext'
+import React ,{useContext} from 'react';
+import DocumentsContext from '../../contexts/documents/DocumentsContext';
 import styled from  'styled-components'
 
-import  {useHistory} from 'react=router=dom'
+import  {useHistory} from 'react-router-dom'
 import { XButton } from "../../styles/Tasks/tasks";
-const {handleDelete, handleDeleteOpen} =useContext(DocumentsContext)
+// const {handleDelete, handleDeleteOpen} =useContext(DocumentsContext)
 const ConfirmStyle = styled.div`
   padding-left: 30px;
   padding-bottom: 30px;
