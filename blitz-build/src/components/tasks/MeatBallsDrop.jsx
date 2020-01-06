@@ -18,11 +18,13 @@ import {
 
 export default function MeatBallsDrop({ task }) {
   const refContainer = useRef();
+  //local state
   const [dropStatus, setDropStatus] = useState(false);
   const [completeStatus, setCompleteStatus] = useState(false);
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
   const [delayStatus, setDelayStatus] = useState(false);
+  //state of pathname from context
   const { pathname, setPathname } = useContext(PathnameContext);
   useEffect(() => {
     setPathname(window.location.pathname);
@@ -34,11 +36,13 @@ export default function MeatBallsDrop({ task }) {
       closeDrop();
     }
   };
+  //toggles the meatballs dropdown
   const toggleDrop = e => {
     e.stopPropagation();
     setDropStatus(!dropStatus);
   };
 
+  //closes meatballs dropdwon
   const closeDrop = e => {
     setDropStatus(false);
   };
@@ -82,6 +86,7 @@ export default function MeatBallsDrop({ task }) {
     closeDrop();
   };
 
+  //function that hides certain options for templates
   const hideOnTemplates = () => {
     if (pathname.includes("/templates")) {
       return Hidden;
@@ -92,6 +97,7 @@ export default function MeatBallsDrop({ task }) {
     display: "none"
   };
 
+  //returns specific options for templates
   const checkThePage = (editTask, editTemplateTask) => {
     if (pathname.includes("/templates")) {
       return editTemplateTask;

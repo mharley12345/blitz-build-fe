@@ -12,14 +12,16 @@ import {  Link } from "react-router-dom";
 
 const ActivityViewAll = () => {
 
-
+//importing tasks from context
 const { tasks } = useContext(taskContext);
 
 
+//gets the date, then gets the month and day for each date.
 const dateObj = new Date();
 const month = dateObj.getUTCMonth() + 1; //months from 1-12
 const day = JSON.stringify(dateObj.getUTCDate());
 
+//changes the day
 const changeTheDay = (day) => {
     if(day.length === 1)
     return `0${day}`
@@ -33,6 +35,8 @@ const year = dateObj.getUTCFullYear();
 const newdate = year + "-" + month + "-" + changeTheDay(day);
 
 console.log(newdate);
+
+//filters if something was created today
 const wasMadeToday= (createdAt) => {
    if (createdAt) {
        return true

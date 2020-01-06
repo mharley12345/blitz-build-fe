@@ -8,10 +8,16 @@ import styled, { css } from "styled-components";
 import MeatBallsDrop from "../tasks/MeatBallsDrop";
 
 const IndividualTemplate = props => {
-  const { templateTask, setTemplatesTask, getTemplateTasks } = useTemplateContext();
-  const {  setPathname } = usePathnameContext();
+  //getting info for templates and template tasks from context
+  const {
+    templateTask,
+    setTemplatesTask,
+    getTemplateTasks
+  } = useTemplateContext();
 
-  
+  //getting pathname from contexxt
+  const { setPathname } = usePathnameContext();
+
   useEffect(() => {
     setPathname(window.location.pathname);
     getTemplateTasks();

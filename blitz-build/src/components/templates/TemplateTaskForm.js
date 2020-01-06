@@ -29,6 +29,8 @@ export default function TaskForm({
     error: false,
     error_text: null
   });
+
+  //gets the local storage template_id which will be the template id the user is currently on
   const template_id = localStorage.getItem("template_id");
   const [task, setTask, handleChanges] = useInput({
     task_name: "",
@@ -47,6 +49,7 @@ export default function TaskForm({
   //sets the fields if the editFields prop is passed down
   //else they are empty
 
+  //handles submit by setting the input to a variable called newTask and then sends that through the handle function then resets the form to blank as before.
   const handleSubmit = e => {
     e.preventDefault();
 

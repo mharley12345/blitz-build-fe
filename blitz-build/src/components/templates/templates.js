@@ -7,10 +7,14 @@ import { useTemplateContext } from "../../contexts/templates/TemplateContext";
 import styled, { css } from "styled-components";
 import TemplateMeatBallsDrop from "./TemplateMeatBalls";
 const Templates = props => {
-  const { templates } = useTemplateContext();
+  //local state
   const [NinetyDayBuild, setNinetyDayBuild] = useState();
-  const { setPathname } = usePathnameContext();
 
+  //importing custom templates and pathname from context
+  const { setPathname } = usePathnameContext();
+  const { templates } = useTemplateContext();
+
+  //this function gets the template name of the pre built template for all users
   const seedData = () => {
     setPathname(window.location.pathname);
     axiosWithAuth()
@@ -26,15 +30,18 @@ const Templates = props => {
   seedData();
 
   useEffect(() => {
-    axiosWithAuth().post('/90_day').then(templates =>{
-      console.log(templates)
-    // const results = templates.filter((template =>
-    //   template.template_name.toLowerCase().includes(templatesSearchInput)
-    // ));
-    // console.log("RESULTS:", results);
-    // settemplateSearchResults(results);
-  })}, []);
-console.log("these are the tempaltes: ", templates);
+    axiosWithAuth()
+      .post("/90_day")
+      .then(templates => {
+        console.log(templates);
+        // const results = templates.filter((template =>
+        //   template.template_name.toLowerCase().includes(templatesSearchInput)
+        // ));
+        // console.log("RESULTS:", results);
+        // settemplateSearchResults(results);
+      });
+  }, []);
+  console.log("these are the tempaltes: ", templates);
   return (
     <div>
       <Section>
@@ -59,9 +66,17 @@ console.log("these are the tempaltes: ", templates);
           //   </Container>
           // </div>
           <Container>
-            <Link style={LinkStyle}
+            <Link
+              style={LinkStyle}
               to={`/templates/${template.id}`}
-              onClick={() => localStorage.setItem("template_id", template.id,"template_name",template.name)}
+              onClick={() =>
+                localStorage.setItem(
+                  "template_id",
+                  template.id,
+                  "template_name",
+                  template.name
+                )
+              }
             >
               <Name>{template.template_name}</Name>
             </Link>
@@ -69,7 +84,6 @@ console.log("these are the tempaltes: ", templates);
           </Container>
         );
       })}
-
     </div>
   );
 };
@@ -77,10 +91,9 @@ console.log("these are the tempaltes: ", templates);
 export default Templates;
 
 const LinkStyle = {
-  textDecoration: 'none',
-  
-  }
- 
+  textDecoration: "none"
+};
+
 const Section = styled.div`
   width: 100%;
   display: flex;
@@ -88,7 +101,6 @@ const Section = styled.div`
   margin-bottom: 8px;
 
   p {
-
     font-size: 16px;
     line-height: 19px;
     color: #212529;
