@@ -15,6 +15,7 @@ import auth0Client from "./auth";
 // }
 
 const Callback = props => {
+  //an async function that authenticates, and while the user is waiting to get taken to the dashboard, they have a loading screen
   useEffect(() => {
     async function authentication() {
       const auth = await auth0Client.handleAuthentication();

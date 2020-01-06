@@ -8,6 +8,7 @@ import TemplateTaskForm from "./TemplateTaskForm";
 import TasksContext from "../../contexts/tasks/TaskContext";
 
 export default function EditTask({ task, editStatus, handleEditClose }) {
+  //imports editTask function from tasks which will allows the custom template tasks to be edited
   const { editTask } = useContext(TasksContext);
 
   return (

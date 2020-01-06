@@ -8,6 +8,8 @@ import Confirm from "../global/Confirm";
 import TasksContext from "../../contexts/tasks/TaskContext";
 
 export default function DeleteTask({ task, closeDrop, deleteStatus, handleDeleteClose}) {
+
+  //imports deleteTask function from tasks context
   const { deleteTask } = useContext(TasksContext);
   return (
     <>

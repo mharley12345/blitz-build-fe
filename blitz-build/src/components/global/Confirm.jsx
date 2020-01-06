@@ -1,8 +1,7 @@
-import React from  "react"
+import React from "react";
 
 import styled from "styled-components";
 import { XButton } from "../../styles/Tasks/tasks";
-
 
 const ConfirmStyle = styled.div`
   padding-left: 30px;
@@ -10,14 +9,13 @@ const ConfirmStyle = styled.div`
 `;
 
 const BtnDiv = styled.div`
-display: flex;
-justify-content: flex-start;
-`
+  display: flex;
+  justify-content: flex-start;
+`;
 
 const H1 = styled.h1`
-text-align: left; 
-
-`
+  text-align: left;
+`;
 
 const ConfirmBtn = styled.button`
 background: ${props => (props.delete ? "#FF4D4F" : "white")};
@@ -64,3 +62,4 @@ export default function Confirm(props) {
       </ConfirmStyle>
     );
 }
+

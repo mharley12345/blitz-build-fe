@@ -33,6 +33,7 @@ import {
 // for project page import <Weather usage="project" city={} latitude={} longitude={} />
 
 function Weather(props) {
+  //local state
   const [weatherData, setWeatherData] = useState();
   const [weatherPosition, setWeatherPosition] = useState({
     latitude: 0,
@@ -47,11 +48,10 @@ function Weather(props) {
         latitude: props.latitude,
         longitude: props.longitude
       });
-     // if props.usage equals to "dashboard", get position data from navigator.geolocation
+      // if props.usage equals to "dashboard", get position data from navigator.geolocation
     } else if (props.usage === "dashboard") {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
-          
           setWeatherPosition({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
@@ -65,27 +65,26 @@ function Weather(props) {
 
   // get the weather data from backend.
   useEffect(() => {
-    
-    if (weatherPosition.latitude == 0 || weatherPosition.latitude == undefined) { 
-     console.log("no weather position")
+    if (
+      weatherPosition.latitude == 0 ||
+      weatherPosition.latitude == undefined
+    ) {
+      console.log("no weather position");
     }
     // If latitude and longitude are not 0 or undefined, call weather endpoint and get weather data.
-  else {
-    axios
+    else {
+      axios
         .get(
           ` https://blitzbuild-weather.herokuapp.com/forecast/${weatherPosition.latitude},${weatherPosition.longitude}`
         )
         .then(res => {
           setWeatherData(res.data);
           //console.log("get weather data", res.data);
-          
         })
         .catch(err => {
           console.log(err);
         });
-  }
-      
-    
+    }
   }, [weatherPosition]);
 
   // get time
@@ -93,7 +92,7 @@ function Weather(props) {
     return `${moment().format("dddd")}, ${moment().format("LT")}`;
   }
 
-  // convert weather info to weather icon 
+  // convert weather info to weather icon
   function getWeatherIcon() {
     var weatherIcon = null;
 

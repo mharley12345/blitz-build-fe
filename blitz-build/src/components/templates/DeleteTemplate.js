@@ -8,6 +8,8 @@ import Confirm from "../global/Confirm";
 import TemplateContext from "../../contexts/templates/TemplateContext";
 
 export default function DeleteTemplate({ template, closeDrop, deleteStatus, handleDeleteClose}) {
+
+  //import deleteTemplate function from template context
   const { deleteTemplate } = useContext(TemplateContext);
   return (
     <>
