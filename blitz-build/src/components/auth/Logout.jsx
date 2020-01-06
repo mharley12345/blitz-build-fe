@@ -53,21 +53,24 @@ const Pstyle = styled.p`
 `;
 
 const Logout = props => {
+  //sets state of the modal that confirms your logout
   const [open, setOpen] = useState(true);
+
+  //handles close of modal
   const handleClose = () => {
     setOpen(false);
     props.history.push("/projects");
   };
+
+  //function for logging out
   const SignOut = e => {
-    // e.preventDefault();
-    // localStorage.removeItem("token");
-    // localStorage.removeItem("uid");
     localStorage.removeItem("access_token");
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
     props.history.push("/");
   };
 
+  //returns modal to confirm you want to logout
   return (
     <Dialog
       open={open}

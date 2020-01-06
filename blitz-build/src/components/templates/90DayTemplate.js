@@ -4,9 +4,12 @@ import PathnameContext from "../../contexts/PathnameContext";
 import styled, { css } from "styled-components";
 
 const NinetyDayTemplate = props => {
+  //local state
   const [templateTasks, setTemplateTasks] = useState([]);
+  //state of pathname from context
   const { pathname, setPathname } = useContext(PathnameContext);
 
+  //this grabs the pre built template, 90_day and then grabs all the tasks from it.
   useEffect(() => {
     setPathname(window.location.pathname);
     axiosWithAuth()

@@ -13,15 +13,17 @@ import {
   StyledTableHeadRow
 } from "../../styles/Table/TableStyles";
 //router
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 //styles
 import { ViewBtn } from "../../styles/ViewBtn";
 
 
 function ProjectTaskCard({ projectID, numberOfTasks }) {
+  //imports tasks from context
   const { tasks } = useContext(taskContext);
 
+  //variable that filters through all the tasks and brings back the tasks associated with the specific project id
   const projectTasks = tasks.filter(item => {
     return `${item.project_id}` === projectID;
   });

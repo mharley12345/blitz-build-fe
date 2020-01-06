@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
+//currently not being used
 function Signup() {
   return (
     <div>
@@ -18,8 +19,9 @@ function Signup() {
         <input placeholder="••••••••" />
         <label>Confirm password</label>
         <input placeholder="••••••••" />
-        <label>Phone
-        <input type="text" placeholder="Phone"/>
+        <label>
+          Phone
+          <input type="text" placeholder="Phone" />
         </label>
         <button>Sign up</button>
       </form>
