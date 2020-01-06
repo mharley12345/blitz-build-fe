@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import styled from "styled-components";
+import PathnameContext from '../../contexts/PathnameContext'
+
+
 // import DialogTitle from "@material-ui/core/DialogTitle";
 // import axios from "axios";
 // import { height } from "@material-ui/system";
@@ -53,13 +56,14 @@ const Pstyle = styled.p`
 `;
 
 const Logout = props => {
+  const { setPathname } = useContext(PathnameContext)
   //sets state of the modal that confirms your logout
   const [open, setOpen] = useState(true);
 
   //handles close of modal
   const handleClose = () => {
     setOpen(false);
-    props.history.push("/projects");
+    props.history.push("/dashboard");
   };
 
   //function for logging out
@@ -68,6 +72,7 @@ const Logout = props => {
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
     props.history.push("/");
+    setPathname('/')
   };
 
   //returns modal to confirm you want to logout
