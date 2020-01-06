@@ -25,16 +25,12 @@ export default function TaskForm({
   editFields,
   text
 }) {
-<<<<<<< HEAD
-  const [templates, setTemplates] = useState([]);
-
-  //gets the local storage template_id which will be the template id the user is currently on
-=======
   const [error, setError] = useState({
     error: false,
     error_text: null
   });
->>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6
+
+  //gets the local storage template_id which will be the template id the user is currently on
   const template_id = localStorage.getItem("template_id");
   const [task, setTask, handleChanges] = useInput({
     task_name: "",

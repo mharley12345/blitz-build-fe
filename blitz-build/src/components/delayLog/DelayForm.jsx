@@ -26,15 +26,10 @@ export default function DelayForm({
   const [form, setForm] = useState({
     reason: ""
   });
-<<<<<<< HEAD
-
-  //what they clicked on to add to the delay log will fill the form
-=======
   const [error, setError] = useState({
     error: false,
     error_text: null
   });
->>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6
   useEffect(() => {
     if (editFields) {
       //console.log("editFields", editFields);
@@ -44,7 +39,7 @@ export default function DelayForm({
       setForm({ ...form, project_id: task.project_id, task_id: task.id });
       //console.log(form);
     }
-  },[]);
+  }, []);
 
   //handles changes in form
   const changeHandler = e => {
@@ -53,7 +48,6 @@ export default function DelayForm({
 
   //handles the submittion of the form
   const handleSubmit = e => {
-    
     e.preventDefault();
     // check if user assigns a name to the delay_log
     if (form.reason == "") {

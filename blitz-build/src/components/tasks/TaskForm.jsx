@@ -28,15 +28,12 @@ export default function TaskForm({
   editFields,
   text
 }) {
-<<<<<<< HEAD
   //local state
-=======
   const [error, setError] = useState({
     error: false,
     error_text: null
   });
 
->>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6
   const [projects, setProjects] = useState([]);
   const [task, setTask, handleChanges] = useInput({
     task_name: "",
@@ -198,7 +195,7 @@ export default function TaskForm({
       {error.error && error.error_text ? (
         <ErrorMessage errorMessage={error.error_text} />
       ) : null}
-      <StyledBtn >{text}</StyledBtn>
+      <StyledBtn>{text}</StyledBtn>
     </StyledForm>
   );
 }

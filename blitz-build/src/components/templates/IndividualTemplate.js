@@ -8,30 +8,21 @@ import styled, { css } from "styled-components";
 import MeatBallsDrop from "../tasks/MeatBallsDrop";
 
 const IndividualTemplate = props => {
-<<<<<<< HEAD
-
   //getting info for templates and template tasks from context
-  const { templateTask, setTemplatesTask, getTemplateTasks } = useContext(
-    TemplateContext
-  );
-  //getting pathname from contexxt
-  const { pathname, setPathname } = useContext(PathnameContext);
-=======
-  const { templateTask, setTemplatesTask, getTemplateTasks } = useTemplateContext();
-  const {  setPathname } = usePathnameContext();
->>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6
+  const {
+    templateTask,
+    setTemplatesTask,
+    getTemplateTasks
+  } = useTemplateContext();
 
-  
+  //getting pathname from contexxt
+  const { setPathname } = usePathnameContext();
+
   useEffect(() => {
     setPathname(window.location.pathname);
-   getTemplateTasks();
+    getTemplateTasks();
   }, []);
-<<<<<<< HEAD
 
-  //this shows the tasks for an indvidual template
-=======
-console.log(templateTask);
->>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6
   return (
     <div>
       <Section>{/* <h1>individual template</h1> */}</Section>

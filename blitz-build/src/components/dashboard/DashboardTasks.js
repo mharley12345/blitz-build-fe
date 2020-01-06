@@ -19,15 +19,11 @@ import TableBody from "@material-ui/core/TableBody";
 
 //styles
 import { ViewBtn } from "../../styles/ViewBtn";
-<<<<<<< HEAD
-import { useStyles, StyledTableCell } from "../../styles/Table/TableStyles";
-=======
 import {
   useStyles,
   StyledTableCell,
   StyledTableHeadRow
 } from "../../styles/Table/TableStyles";
->>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6
 
 function DashboardTasks({ projectID, numberOfTasks }) {
   const { tasks } = useContext(taskContext);
@@ -85,7 +81,6 @@ const Section = styled.div`
   margin-bottom: 8px;
 
   p {
-   
     font-size: 16px;
     line-height: 19px;
     color: #212529;
