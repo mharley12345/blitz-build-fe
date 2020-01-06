@@ -20,7 +20,7 @@ export default function ActivateTask({ task, activateStatus, handleActivateClose
           <ConfirmComplete
             closeModal={ handleActivateClose }
             confirmFunction={ activateTask }
-            text={ 'Are you sure you want to as undo complete?' }
+            text={ 'Are you sure you want to undo complete?' }
             task={task}
             btnText={'Undo'}
           />
