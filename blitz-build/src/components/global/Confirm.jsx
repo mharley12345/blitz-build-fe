@@ -31,31 +31,36 @@ justify-content: center;
 align-items: center;
 margin-right: 10px;
 margin-top:36px;
-  cursor: pointer;
-
-:hover{
+cursor: pointer;
 `;
 
 
 export default function Confirm(props) {
 
-    const  {closeModal, text} =props
+    const { closeModal, text, deleteFunction, deleteItem } = props;
     return (
-        <ConfirmStyle>
-            <div style={{textAlign: 'right', height: '50px'}}>
-                <XButton onClick={ closeModal }>close X</XButton>
-            </div>
+      <ConfirmStyle>
+        <div style={{ textAlign: "right", height: "50px" }}>
+          <XButton onClick={closeModal}>close X</XButton>
+        </div>
 
-            <H1 style={{fontSize: '30px', fontWeight: 600, marginBottom:"15px"}}>Delete {text}</H1>
+        <H1 style={{ fontSize: "30px", fontWeight: 600, marginBottom: "15px" }}>
+          Delete {text}
+        </H1>
 
-            <p>Are you sure you want to delete?</p>
-            <BtnDiv>
-                <ConfirmBtn onClick={ closeModal }>Cancel</ConfirmBtn>
-                <ConfirmBtn delete onClick={ () => {
-                                                 
-                          
-                } }>Delete</ConfirmBtn>
-            </BtnDiv>
-        </ConfirmStyle>
-    )
+        <p>Are you sure you want to delete?</p>
+        <BtnDiv>
+          <ConfirmBtn onClick={closeModal}>Cancel</ConfirmBtn>
+          <ConfirmBtn
+            delete
+            onClick={() => {
+              deleteFunction(deleteItem);
+              closeModal();
+            }}
+          >
+            Delete
+          </ConfirmBtn>
+        </BtnDiv>
+      </ConfirmStyle>
+    );
 }
