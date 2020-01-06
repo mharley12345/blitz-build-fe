@@ -94,7 +94,7 @@ return (
 export default ActivityViewAll
 
 const Section = styled.div`
-  width: 95%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
@@ -114,7 +114,7 @@ const Container = styled.p`
   
 `;
 const ContainerContent = styled.div`
-width: 95%
+width: 100%
 margin-top: 20px;
 margin-bottom: 48px;
 box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
@@ -171,7 +171,7 @@ font-weight: 500;
 `
 
 const TableHead = styled.div`
- width: 100%;
+ width: 95%;
  display: flex;
  justify-content: space-around;
  align-items: center;

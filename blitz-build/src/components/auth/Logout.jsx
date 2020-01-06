@@ -27,7 +27,7 @@ const ModalTitle = styled.div`
 `;
 
 const H3 = styled.div`
-  font-size: 2.5em;
+  font-size: 2.2em;
   display: flex;
   justify-content: center;
   height: 50px;
@@ -49,10 +49,10 @@ const ButtonStyle = {
 };
 
 const Pstyle = styled.p`
-  font-size: 25px;
+  font-size: 22px;
   margin: 25px 0 0 40px;
   color: #212529;
-    font-weight: 600;
+   
 `;
 
 const Logout = props => {
