@@ -1,3 +1,9 @@
+/*
+The weather API is Dark Sky API - https://darksky.net/dev/docs
+We follow Darksky API Wrapper Instruction to deploy to Heroku. - https://github.com/satansdeer/weather-api
+If you want to change the API key, you need to go to darksky.net to get your own key. After that, go to heroku blitz-bulid/blitzbuild-weather/settings/config Vars to change the DARKSKY_API_KEY.
+*/
+
 import React, { useState, useEffect } from "react";
 
 //axios, moment
