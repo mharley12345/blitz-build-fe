@@ -177,9 +177,11 @@ width: 25%;
   margin-bottom: 8px;
 `;
 const ProjectName = styled.p`
-width:5%;
+width: 5%;
+overflow-wrap: normal;
 display: flex;
 justify-content: end;
+
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
