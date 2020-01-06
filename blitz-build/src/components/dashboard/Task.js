@@ -5,6 +5,7 @@ import moment from "moment";
 import MeatBallsDrop from "../tasks/MeatBallsDrop";
 
 //styles
+
 import styled, { css } from "styled-components";
 import {
   useStyles,
@@ -111,7 +112,7 @@ const Address = styled.div`
   }
 `;
 
-const Text = styled.p`
+export const Text = styled.p`
   font-size: 1.2rem;
   line-height: 20px;
   font-family: "Roboto";

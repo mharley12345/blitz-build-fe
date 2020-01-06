@@ -290,6 +290,7 @@ function Header({ pathname }) {
 
   const HideTheProjectButton = pathname => {
     if (
+     
       pathname === "/documents" ||
       pathname === "/delay-log" ||
       pathname === `/help` ||
