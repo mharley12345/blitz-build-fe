@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import PathnameContext from "../../contexts/PathnameContext";
+import { usePathnameContext } from "../../contexts/PathnameContext";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-import templateContext from "../../contexts/templates/TemplateContext";
-import searchTermContext from "../../contexts/searching/searchTerm";
+import { useTemplateContext } from "../../contexts/templates/TemplateContext";
+
 import styled, { css } from "styled-components";
 import TemplateMeatBallsDrop from "./TemplateMeatBalls";
 const Templates = props => {
+<<<<<<< HEAD
   //importing custom templates, searchTerm, and pathname from context
   const { templates } = useContext(templateContext);
   const { searchTerm } = useContext(searchTermContext);
@@ -16,6 +17,11 @@ const Templates = props => {
   const templatesSearchInput = searchTerm.toLowerCase();
   const [NinetyDayBuild, setNinetyDayBuild] = useState();
   const [templatesSearchResults, settemplateSearchResults] = useState([]);
+=======
+  const { templates } = useTemplateContext();
+  const [NinetyDayBuild, setNinetyDayBuild] = useState();
+  const { setPathname } = usePathnameContext();
+>>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6
 
 
 
@@ -43,8 +49,8 @@ const Templates = props => {
     // ));
     // console.log("RESULTS:", results);
     // settemplateSearchResults(results);
-  })}, [templatesSearchInput]);
-console.log(templates);
+  })}, []);
+console.log("these are the tempaltes: ", templates);
   return (
     <div>
       <Section>
@@ -98,11 +104,11 @@ const Section = styled.div`
   margin-bottom: 8px;
 
   p {
-    font-family: "Roboto";
+
     font-size: 16px;
     line-height: 19px;
-    color: #8a827d;
-    font-weight: 500;
+    color: #212529;
+    font-weight: 600;
   }
 `;
 
@@ -120,7 +126,7 @@ const Container = styled.div`
   }
   cursor: pointer;
 `;
-const Name = styled.div`
+export const Name = styled.div`
   /* Heading 4 */
   width: 500px;
   font-family: Roboto;

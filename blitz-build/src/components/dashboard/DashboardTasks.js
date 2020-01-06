@@ -19,7 +19,15 @@ import TableBody from "@material-ui/core/TableBody";
 
 //styles
 import { ViewBtn } from "../../styles/ViewBtn";
+<<<<<<< HEAD
 import { useStyles, StyledTableCell } from "../../styles/Table/TableStyles";
+=======
+import {
+  useStyles,
+  StyledTableCell,
+  StyledTableHeadRow
+} from "../../styles/Table/TableStyles";
+>>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6
 
 function DashboardTasks({ projectID, numberOfTasks }) {
   const { tasks } = useContext(taskContext);
@@ -41,7 +49,7 @@ function DashboardTasks({ projectID, numberOfTasks }) {
   return (
     <Container>
       <Section>
-        <p>Your Task List</p>
+        <p> Your Task List</p>
         <Link to="/tasks">
           <ViewBtn>View All</ViewBtn>
         </Link>
@@ -49,13 +57,13 @@ function DashboardTasks({ projectID, numberOfTasks }) {
       <Paper className={classes.root}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
-            <TableRow>
+            <StyledTableHeadRow>
               <StyledTableCell>PROJECT</StyledTableCell>
               <StyledTableCell>NAME</StyledTableCell>
               <StyledTableCell>TASK</StyledTableCell>
               <StyledTableCell>DUE DATE</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
-            </TableRow>
+            </StyledTableHeadRow>
           </TableHead>
           <TableBody>
             {tasks.slice(0, numberOfTasks).map(item => {
@@ -77,11 +85,11 @@ const Section = styled.div`
   margin-bottom: 8px;
 
   p {
-    font-family: "Roboto";
+   
     font-size: 16px;
     line-height: 19px;
-    color: #8a827d;
-    font-weight: 500;
+    color: #212529;
+    font-weight: 600;
   }
 `;
 

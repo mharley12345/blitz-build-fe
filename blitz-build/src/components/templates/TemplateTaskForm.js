@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 // import DatePicker from "react-datepicker";
 
+// components
+import ErrorMessage from "../../components/global/ErrorMessage";
+
 //styles
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import styled from "styled-components";
+//import styled from "styled-components";
 import {
   StyledForm,
   StyledFormHeader,
@@ -18,34 +19,22 @@ import {
 //hooks
 import { useInput } from "../../customHooks/useInput";
 
-//axios
-import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-
-import tasksContext from "../../contexts/tasks/TaskContext";
-
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-    width: "75%"
-  },
-  textField: {
-    width: "75%",
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200
-  }
-}));
-
 export default function TaskForm({
   closeModal,
   handleFunction,
   editFields,
   text
 }) {
+<<<<<<< HEAD
   const [templates, setTemplates] = useState([]);
 
   //gets the local storage template_id which will be the template id the user is currently on
+=======
+  const [error, setError] = useState({
+    error: false,
+    error_text: null
+  });
+>>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6
   const template_id = localStorage.getItem("template_id");
   const [task, setTask, handleChanges] = useInput({
     task_name: "",
@@ -68,7 +57,6 @@ export default function TaskForm({
   const handleSubmit = e => {
     e.preventDefault();
 
-    //asigns the project id to the new task
     const newTask = {
       id: task.id,
       task_name: task.task_name,
@@ -78,14 +66,27 @@ export default function TaskForm({
     };
 
     console.log("from taskform submit", task);
-    handleFunction(newTask);
-    setTask({
-      task_name: "",
-      task_description: "",
-      due_date: "",
-      template_id: template_id
-    });
-    closeModal();
+    if (newTask.task_name == "") {
+      setError({
+        error: true,
+        error_text: "Please assign a name to this task!"
+      });
+    } else {
+      // submit newTask to addTask or editTask funciton
+      handleFunction(newTask);
+
+      //reset task form and error to initial state
+
+      setTask({
+        task_name: "",
+        task_description: "",
+        due_date: "",
+        template_id: template_id
+      });
+      setError({ error: false, error_text: null });
+
+      closeModal();
+    }
   };
 
   return (
@@ -141,7 +142,10 @@ export default function TaskForm({
         onChange={handleChanges}
       /> */}
 
-      <StyledBtn>Save</StyledBtn>
+      {error.error && error.error_text ? (
+        <ErrorMessage errorMessage={error.error_text} />
+      ) : null}
+      <StyledBtn>{text}</StyledBtn>
     </StyledForm>
   );
 }

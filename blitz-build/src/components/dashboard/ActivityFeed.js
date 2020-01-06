@@ -2,11 +2,22 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Task from "./Task";
+<<<<<<< HEAD
 import CompletedTask from "./CompletedTask";
 import NewTask from "./NewTask";
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
 import { Link } from "react-router-dom";
+=======
+
+import ActivityFeedTask from './ActivityFeedTask'
+//context 
+import taskContext from '../../contexts/tasks/TaskContext'
+import {  Link } from "react-router-dom";
+
+
+
+>>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6
 
 function ActivityFeed({ projectID, numberOfTasks }) {
   //importing state of tasks, project tasks, and search results from context
@@ -63,11 +74,22 @@ function ActivityFeed({ projectID, numberOfTasks }) {
 
 export default ActivityFeed;
 
+<<<<<<< HEAD
 const Section = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
+=======
+          
+           }
+           else if (wasMadeToday(item.createdAt) || item.isComplete === true  ) {
+             return (
+              <ActivityFeedTask item={item} key={item.id} />
+             )
+           }
+             })}
+>>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6
 
   p {
     font-family: "Roboto";
@@ -76,9 +98,31 @@ const Section = styled.div`
     color: #8a827d;
     font-weight: 500;
   }
+<<<<<<< HEAD
 `;
 
 const Container = styled.div`
+=======
+  
+  export default ActivityFeed;
+  
+  const Section = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  
+    p {
+     
+      font-size: 16px;
+      line-height: 19px;
+      color: #212529;
+      font-weight: 600;
+    }
+  `;
+  
+  const Container = styled.div`
+>>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6
   width: 65%;
   margin-top: 20px;
   margin-right: 20px;

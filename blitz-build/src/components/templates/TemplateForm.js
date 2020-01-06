@@ -1,10 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 
-
-// contexts
-import TemplateContext from "../../contexts/templates/TemplateContext";
-import TaskContext from "../../contexts/tasks/TaskContext";
-
+// components
+import ErrorMessage from "../../components/global/ErrorMessage";
 
 // styles
 //import styled from "styled-components";
@@ -29,6 +26,10 @@ export default function TemplateForm({
     template_name: ""
   });
 
+  const [error, setError] = useState({
+    error: false,
+    error_text: null
+  });
 
   useEffect(() => {
     if (editFields) {
@@ -41,9 +42,6 @@ export default function TemplateForm({
     }
   }, []);
 
- 
-
-
   //change handler for template form
   const formChangeHandler = e => {
     setForm({
@@ -52,24 +50,34 @@ export default function TemplateForm({
     });
   };
 
-
   //handles submit for template form
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (editFields) {
-      handleFunction(form, form.id);
+    // check if user assigns a name to the task
+    if (form.template_name == "") {
+      setError({
+        error: true,
+        error_text: "Please assign a name to this template!"
+      });
     } else {
-      handleFunction(form);
-    }
-    setForm({
-      template_name: ""
-    });
+      if (editFields) {
+        // submit form and id to editTemplate function
+        handleFunction(form, form.id);
+      } else {
+        // submit form to addTemplate function
+        handleFunction(form);
+      }
+      //reset form and error to initial state
+      setForm({
+        template_name: ""
+      });
+      setError({ error: false, error_text: null });
 
-    closeModal();
+      closeModal(); 
+    }
   };
 
-  
   return (
     <StyledForm onSubmit={handleSubmit}>
       <StyledFormHeader>
@@ -77,15 +85,17 @@ export default function TemplateForm({
         <XButton onClick={closeModal}>close X</XButton>
       </StyledFormHeader>
 
-      <StyledLabel style={{marginTop:"30px"}}>Template Name</StyledLabel>
+      <StyledLabel style={{ marginTop: "30px" }}>Template Name</StyledLabel>
       <StyledInput
         type="text"
         name="template_name"
         value={form.template_name}
         onChange={formChangeHandler}
       />
-
-      <StyledBtn>{text}</StyledBtn>
+      {error.error && error.error_text ? (
+        <ErrorMessage errorMessage={error.error_text} />
+      ) : null}
+      <StyledBtn >{text}</StyledBtn>
     </StyledForm>
   );
 }

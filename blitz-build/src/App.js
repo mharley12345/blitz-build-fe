@@ -159,7 +159,6 @@ function App() {
                               )}
                               <Layout pathname={pathname}>
                                 <Switch>
-                                  <Route exact path="/auth" component={Auth} />
                                   <Route exact path="/" component={Landing} />
 
                                   <Route

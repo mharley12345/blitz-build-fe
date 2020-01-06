@@ -4,6 +4,7 @@ import MeatBallsDrop from "../tasks/MeatBallsDrop";
 import projectContext from "../../contexts/projects/ProjectContext";
 import { NavLink } from "react-router-dom";
 
+<<<<<<< HEAD:blitz-build/src/components/dashboard/NewTask.js
 function NewTask({ item, children }) {
   //imports state of projects from context
   const { projects } = useContext(projectContext);
@@ -16,6 +17,27 @@ function NewTask({ item, children }) {
   });
 
   //returns project street address that are associated with project id's of tasks items created
+=======
+
+
+function ActivityFeedTask({ item, children, props }) {
+  
+
+  const { projects } = useContext(projectContext);
+
+
+   const projectID = []
+
+  const checkProjectID = () => projects.map( project =>{
+    if (project.id === item.project_id) {
+        projectID.push(project.id)
+    }
+  }
+    )
+
+    checkProjectID()
+
+>>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6:blitz-build/src/components/dashboard/ActivityFeedTask.js
   const TaskAddress = projects.map(project => {
     if (project.id === item.project_id) {
       return project.street_address;
@@ -67,6 +89,7 @@ function NewTask({ item, children }) {
 
   const diffDays = Math.round(Math.abs((todayDate - item.due_date) / oneDay));
 
+<<<<<<< HEAD:blitz-build/src/components/dashboard/NewTask.js
   //depending on the difference of the dates, different status's are returned for tasks.
   function DueDateLogic(diff, status) {
     if (status === "Pending") {
@@ -84,6 +107,17 @@ function NewTask({ item, children }) {
     <Container>
       <NavLink to={`/project/${projectID}`} style={NavLinkStyle}>
         <InnerContainer>
+=======
+ console.log('project id on activity feed :', projectID)
+  return (
+    <Container>  
+       <NavLink to={`/projects/${projectID}`} style = {NavLinkStyle}>
+  
+     
+      <InnerContainer>
+      
+        
+>>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6:blitz-build/src/components/dashboard/ActivityFeedTask.js
           {checkCondition()}
           <NameText>{item.task_name} </NameText>
 
@@ -97,7 +131,7 @@ function NewTask({ item, children }) {
   );
 }
 
-export default NewTask;
+export default ActivityFeedTask;
 
 const NavLinkStyle = {
   textDecoration: "none",
@@ -172,8 +206,14 @@ const AddressText = styled.p`
   margin-bottom: 8px;
 `;
 const ProjectName = styled.p`
+<<<<<<< HEAD:blitz-build/src/components/dashboard/NewTask.js
   display: flex;
   justify-content: end;
+=======
+width:5%;
+display: flex;
+justify-content: end;
+>>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6:blitz-build/src/components/dashboard/ActivityFeedTask.js
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";

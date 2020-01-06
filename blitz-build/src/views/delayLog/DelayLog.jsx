@@ -22,7 +22,8 @@ import TablePagination from "@material-ui/core/TablePagination";
 import {
   useStyles,
   StyledTableCell,
-  StyledTableRow
+  StyledTableRow,
+  StyledTableHeadRow
 } from "../../styles/Table/TableStyles";
 // pages bar function from global
 import TablePaginationActions from "../../components/global/TablePaginationActions";
@@ -102,18 +103,18 @@ function DelayLog() {
         </DelayLogButtons>
       </div>
       <p style={{ paddingBottom: "8px", fontWeight: 600 }}>
-        Your DelayLogs List
+        Your Delay Log List
       </p>
       <Paper className={classes.root}>
         <Table aria-label="customized table">
           <TableHead>
-            <TableRow>
+            <StyledTableHeadRow>
               <StyledTableCell>TASK NAME</StyledTableCell>
               <StyledTableCell>REASON</StyledTableCell>
               <StyledTableCell>CREATED</StyledTableCell>
               <StyledTableCell>UPDATED</StyledTableCell>
               <StyledTableCell>{"    "}</StyledTableCell>
-            </TableRow>
+            </StyledTableHeadRow>
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0

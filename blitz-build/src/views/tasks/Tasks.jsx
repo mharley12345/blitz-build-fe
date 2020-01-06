@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 
 //context
-import taskContext from "../../contexts/tasks/TaskContext";
-import searchTermContext from "../../contexts/searching/searchTerm";
+import { useTaskContext } from "../../contexts/tasks/TaskContext";
+import { useSearchTermContext } from "../../contexts/searching/searchTerm";
 
 //components
 import Task from "../../components/dashboard/Task";
@@ -26,7 +26,8 @@ import styled from "styled-components";
 import { SortBtn } from "../../styles/SortBtn";
 import {
   useStyles,
-  StyledTableCell
+  StyledTableCell,
+  StyledTableHeadRow
 } from "../../styles/Table/TableStyles";
 
 const InfoContainer = styled.div`
@@ -58,12 +59,10 @@ const InfoContainer = styled.div`
 // `;
 
 export default function Tasks() {
-  const { tasks, getTasks } = useContext(taskContext);
-  const { searchTerm, results, taskSearchResults } = useContext(
-    searchTermContext
-  );
+  const { tasks, getTasks } = useTaskContext();
+  const { searchTerm, results } = useSearchTermContext();
+  
 
-  console.log("taskSearchResults", taskSearchResults);
 
   console.log("RESULTS:", results);
   //pagnation
@@ -91,7 +90,7 @@ export default function Tasks() {
   const failedSearch = () => {
     if (searchTerm.length > 0 && results.length === 0) {
       return (
-        <p style={{ fontWeight: 600 }}>
+        <p>
           There doesn't seem to be any tasks with that name
         </p>
       );
@@ -108,24 +107,24 @@ export default function Tasks() {
     <>
       <InfoContainer>
         {failedSearch()}
-        <SortBtn >
-          Active
-        </SortBtn>
-        <SortBtn>
-          Complete
-        </SortBtn>
+        <SortBtn>Active</SortBtn>
+        <SortBtn>Complete</SortBtn>
       </InfoContainer>
 
       <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="customized table"  style = {{minHeight: '500px'}}>
+        <Table
+          className={classes.table}
+          aria-label="customized table"
+          style={{ minHeight: "500px" }}
+        >
           <TableHead>
-            <TableRow>
+            <StyledTableHeadRow>
               <StyledTableCell>PROJECT NAME</StyledTableCell>
               <StyledTableCell>TASK</StyledTableCell>
               <StyledTableCell>DESCRIPTION</StyledTableCell>
               <StyledTableCell>DUE DATE</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
-            </TableRow>
+            </StyledTableHeadRow>
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
@@ -138,12 +137,18 @@ export default function Tasks() {
               if (results.length === 0 && searchTerm.length === 0) {
                 return <Task item={task} key={task.id} />;
               } else if (results.length > 0) {
-                return <></>
+                return <></>;
               }
             })}
 
-            {results.length > 0 ? (
-              results.map(result => <Task item={result} key={result.id}></Task>)
+            {results.length > 0 ? (   (rowsPerPage > 0
+              ? results.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : results
+            )
+              .map(result => <Task item={result} key={result.id}></Task>)
             ) : (
               <></>
             )}
@@ -155,7 +160,7 @@ export default function Tasks() {
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TablePagination 
+              <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={5}
                 count={itemCounter()}
