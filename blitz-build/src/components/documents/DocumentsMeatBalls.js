@@ -92,11 +92,9 @@ export default function DocumentsMeatballsDrop(props) {
                 <DropP>Print</DropP>
                 <TaskI className="ion-md-print" />
               </StyledLi>
-
             </DropDown>
           </>
         )}
-
       </MeatBalls>
       <PrintDocument
         documents={documents}
@@ -110,22 +108,18 @@ export default function DocumentsMeatballsDrop(props) {
         documents={documents}
         docs_url={docs_url}
         closeDrop={closeDrop}
-
         downloadStatus={downloadStatus}
         handleDownloadClose={handleDownloadClose}
       />
 
       <DeleteDocument
-        documents={documents}
+        documents={props}
         docs_url={docs_url}
-
         closeDrop={closeDrop}
         deleteStatus={deleteStatus}
         handleDeleteClose={handleDeleteClose}
         handleDelete={handleDelete}
-
       />
-
     </>
-  )
+  );
 }

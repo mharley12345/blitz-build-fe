@@ -90,11 +90,10 @@ const getTemplateTasks = () => {
       .then(res => {
         console.log("template was deleted", res);
         const newTemplateList = templates.filter(template => {
-          return template.id !== deleteTemplate.id;
+          return template.id !== deletedTemplate.id;
         });
+     
         setTemplates(newTemplateList);
-
-        window.location.reload(true);
 
       })
       .catch(err => {
