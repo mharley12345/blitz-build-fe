@@ -24,7 +24,6 @@ export default function TaskProvider({ children }) {
           .catch(err => {
             console.log(err);
           });
-
       case "FILTER_BY_ACTIVE":
         return axiosWithAuth()
           .get(
@@ -50,24 +49,28 @@ export default function TaskProvider({ children }) {
     }
   };
 
-  const toggleCompleteTask = toggledTask => {
+  const completeTask = (completedTask) => {
+
     axiosWithAuth()
-      .put(`projects/tasks/${toggledTask.id}`, {
-        isComplete: !toggledTask.isComplete
+      .put(`projects/tasks/${completedTask.id}`, {
+        isComplete: true
       })
       .then(res => {})
       .catch(err => console.log("from edit task catch", err));
 
-    const newTasks = tasks.map(task => {
-      if (toggledTask.id === task.id) {
-        task.isComplete = !toggledTask.isComplete;
-        return task;
-      } else {
-        return task;
-      }
-    });
-    console.log("from toggle complete newTasks", newTasks);
-    setTasks([...newTasks]);
+    getTasks("FILTER_BY_ACTIVE");
+  };
+
+  const activateTask = (activatedTask) => {
+
+    axiosWithAuth()
+      .put(`projects/tasks/${activatedTask.id}`, {
+        isComplete: false
+      })
+      .then(res => {})
+      .catch(err => console.log("from edit task catch", err));
+
+    getTasks('FILTER_BY_COMPLETE');
   };
 
   const getProjectTasks = projectID => {
@@ -138,7 +141,8 @@ export default function TaskProvider({ children }) {
       <TaskContext.Provider
         value={{
           getTasks,
-          toggleCompleteTask,
+          completeTask,
+          activateTask,
           tasks,
           setTasks,
           addTask,
