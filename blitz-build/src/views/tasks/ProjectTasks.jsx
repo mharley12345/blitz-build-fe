@@ -22,6 +22,8 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableFooter from "@material-ui/core/TableFooter";
 import {
   StyledTableCell,
+  StyledTableHeadRow,
+  useStyles
 } from "../../styles/Table/TableStyles";
 //styles
 import styled from "styled-components";
@@ -37,19 +39,7 @@ const InfoContainer = styled.div`
   align-items: center;
   margin-bottom: 10px;
 `;
-const useStyles = makeStyles({
-  root: {
-    border: "1px solid #DCD9D5"
-  },
-  table: {
-    // minWidth: "1080px"
-  },
-  tableHover: {
-    "&:hover": {
-      border: "3px solid orange"
-    }
-  }
-});
+
 
 export default function ProjectTasks (props, {ProjectName}) {
   const { tasks, getTasks } = useContext(taskContext);
@@ -89,10 +79,18 @@ export default function ProjectTasks (props, {ProjectName}) {
   return (
     <>
       <InfoContainer>
-      <BreadCrumbs>
-        <img src={Project_icon} alt="project_icon" />
-        <span>&nbsp;&nbsp;Projects / {projectTasks.length === 0 ? <span>...loading</span> : projectTasks[0].project_name} / Tasks</span>
-      </BreadCrumbs>
+        <BreadCrumbs>
+          <img src={Project_icon} alt="project_icon" />
+          <span>
+            &nbsp;&nbsp;Projects /{" "}
+            {projectTasks.length === 0 ? (
+              <span>...loading</span>
+            ) : (
+              projectTasks[0].project_name
+            )}{" "}
+            / Tasks
+          </span>
+        </BreadCrumbs>
         {/* <SortBtn >
           Active
         </SortBtn>
@@ -108,12 +106,12 @@ export default function ProjectTasks (props, {ProjectName}) {
           style={{ minHeight: "500px" }}
         >
           <TableHead>
-            <TableRow>
+            <StyledTableHeadRow>
               <StyledTableCell>TASK</StyledTableCell>
               <StyledTableCell>DESCRIPTION</StyledTableCell>
               <StyledTableCell>DUE DATE</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
-            </TableRow>
+            </StyledTableHeadRow>
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
