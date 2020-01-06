@@ -1,8 +1,8 @@
 import React from 'react'
-
+import DocumentContext from '../../contexts/documents/DocumentsContext'
 import styled from "styled-components";
 import { XButton } from "../../styles/Tasks/tasks";
-
+import download from 'save-filejs'
 
 const ConfirmStyle = styled.div`
   padding-left: 30px;
@@ -33,13 +33,13 @@ justify-content: center;
 align-items: center;
 margin-right: 10px;
 margin-top:36px;
-:hover {
+:hover 
 
 `
 
 
 export default function Confirm(props ) {
-   const   {  file_name, closeModal, text, downloadFunction,DownloadDocument } = props
+   const   {  file_name, closeModal, text, DownloadDocument } = props
     return (
         <ConfirmStyle>
             <div style={{textAlign: 'right', height: '50px'}}>
@@ -52,7 +52,7 @@ export default function Confirm(props ) {
             <BtnDiv>
                 <ConfirmBtn onClick={ closeModal }>Cancel</ConfirmBtn>
                 <ConfirmBtn download onClick={ () => {
-                    downloadFunction(DownloadDocument)
+                            DownloadDocument()
                     localStorage.setItem('file_name',`${file_name}`)
                     closeModal()
                 } }>Download</ConfirmBtn>

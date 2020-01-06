@@ -1,13 +1,14 @@
 import React, {useState,useEffect} from 'react';
 import { axiosWithAuth } from '../../utils/auth/axiosWithAuth';
+import filesaver from  'filesaverjs'
+import Download from '@axetroy/react-download';
 
 //context
 import DocumentsContext from './DocumentsContext'
 
 export default function DocumentsProvider({ children }){
     const [documents, setDocuments] = useState([])
-    const user_id = localStorage.getItem('user_id')
-    const file_name = localStorage.getItem('file_name')
+  
    
     useEffect(() => {
         getDocuments(res => setDocuments(res));
@@ -27,11 +28,12 @@ export default function DocumentsProvider({ children }){
        })
     }
  console.log(documents)
-     const handleDelete = (event) => {
-         console.log(event)
-       const file_name= event.file_name
-       const user_id = event.user_id
-         axiosWithAuth().delete(`docs/url/${file_name}`,user_id)
+     const handleDelete = (documents) => {
+         
+         console.log(documents)
+       const file_name = documents.file_name
+       const user_id = documents.user_id
+         axiosWithAuth().delete(`/docs/url/${file_name}`,user_id)
   
         .then(res => {
             console.log("document was deleted", res)
@@ -48,16 +50,18 @@ export default function DocumentsProvider({ children }){
         })
     }
 
-    const printDocument = (event)=>{
-      const file_name = event.file_name
-    }
+    // const printDocument = (event)=>{
+    //   const file_name = event.file_name
+    // }
        
-  const downloadDocument = (event) => {
-    console.log(event.target)
-    const file_name = event.file_name
-    axiosWithAuth().post('/docs/download',file_name)
+  const downloadDocument = props => {
+
+   const file_name = documents.file_name
+    axiosWithAuth().get(`/docs/download/${file_name}/bucket`)
     .then(data => {
-        console.log("GOT DATA")
+      if (data)       
+          console.log("stream")
+          Download(data,'blitz-build.jpg')
     })
   }
 
@@ -77,4 +81,4 @@ export default function DocumentsProvider({ children }){
              </DocumentsContext.Provider>
          </div>
      )
-}
+            }

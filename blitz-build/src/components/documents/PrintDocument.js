@@ -5,8 +5,9 @@ import Confirm from "./confirmPrint"
 
 import DocumentContext from '../../contexts/documents/DocumentsContext'
 
-export default function PrintDocument({documents,printStatus,handlePrintClose}){
+export default function PrintDocument(props){
     const { printDocument } = useContext(DocumentContext);
+    const {documents,printStatus,handlePrintClose} =props
  const handlePrint =(e)=> {
     
      window.print()
