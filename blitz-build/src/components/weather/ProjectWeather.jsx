@@ -7,7 +7,7 @@ function ProjectWeather({ weatherData, time, icon, city }) {
   //returns the weather of where the project is based on the zip code that they provide.
   return (
     <>
-      <WeatherContainerP>
+      <WeatherContainerP id="$break-laptop">
         <CityInfo>
           <p
             style={{

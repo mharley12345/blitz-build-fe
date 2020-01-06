@@ -1,9 +1,10 @@
-import React from  "react"
+import React ,{useContext} from 'react';
+import DocumentsContext from '../../contexts/documents/DocumentsContext';
+import styled from  'styled-components'
 
-import styled from "styled-components";
+import  {useHistory} from 'react-router-dom'
 import { XButton } from "../../styles/Tasks/tasks";
-
-
+// const {handleDelete, handleDeleteOpen} =useContext(DocumentsContext)
 const ConfirmStyle = styled.div`
   padding-left: 30px;
   padding-bottom: 30px;
@@ -21,9 +22,9 @@ text-align: left;
 
 const ConfirmBtn = styled.button`
 background: ${props =>
-    props.delete ? '#FF4D4F' : 'white'};
+    props.print ? '#FF4D4F' : 'white'};
 color: ${props =>
-    props.delete ? 'white': '#FF4D4F'};
+    props.print ? 'white': '#FF4D4F'};
 display: flex;
 border-radius: 3px;
 border: 1px solid #FF4D4F
@@ -33,32 +34,33 @@ justify-content: center;
 align-items: center;
 margin-right: 10px;
 margin-top:36px;
-:hover{
+:hover {
+
 `
 
 
-<<<<<<< HEAD
-//confirm modal
-export default function Confirm({ closeModal, text, deleteFunction, deleteItem }) {
-=======
 export default function Confirm(props) {
+ const { closeModal, text, printFunction, printDo,doc_url }= props;
+ const history = useHistory();
+ const handleClick = ()=> {
 
-    const  {closeModal, text} =props
->>>>>>> 3e97d5c63d2d964b3dc60fd1152fa7e70700546e
-    return (
+ const path = doc_url
+  history.push(path)
+ }
+     return (
         <ConfirmStyle>
             <div style={{textAlign: 'right', height: '50px'}}>
                 <XButton onClick={ closeModal }>close X</XButton>
             </div>
 
-            <H1 style={{fontSize: '30px', fontWeight: 600, marginBottom:"15px"}}>Delete {text}</H1>
+            <H1 style={{fontSize: '30px', fontWeight: 600, marginBottom:"15px"}}>{text}</H1>
 
-            <p>Are you sure you want to delete?</p>
+            <p>Please submit continue to proceed?</p>
             <BtnDiv>
                 <ConfirmBtn onClick={ closeModal }>Cancel</ConfirmBtn>
                 <ConfirmBtn delete onClick={ () => {
-                                                 
-                          
+                        { /* handleDelete(); */}
+                    closeModal()
                 } }>Delete</ConfirmBtn>
             </BtnDiv>
         </ConfirmStyle>

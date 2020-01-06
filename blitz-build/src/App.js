@@ -45,12 +45,12 @@ import SearchProvider from "./contexts/searching/searchTermProvider";
 // import SearchTermContext from "./contexts/searching/searchTerm";
 // import TemplateProvider from "./contexts/templates/TemplateProvider";
 // import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
-
+import ComponentToPrint from './components/documents/PrintDocument'
 //AUTH0
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
-
+import ViewDocument from './components/documents/ViewDocument'
 import TemplatesProvider from "./contexts/templates/TemplateProvider";
 import Uploader from "./components/documents/Uploader";
 import MyCalendar from "./components/calendar/MyCalender";
@@ -206,12 +206,12 @@ function App() {
                                   />
                                   <Route
                                     exact
-                                    path="/projects/:id"
+                                    path="/project/:id"
                                     component={IndividualProject}
                                   />
                                   <Route
                                     exact
-                                    path="/projects/:id/tasks"
+                                    path="/project/:id/tasks"
                                     component={ProjectTasks}
                                   />
                                   <Route
@@ -244,6 +244,16 @@ function App() {
                                     path="/documents/add"
                                     component={Uploader}
                                   />
+                                  <Route
+                                   exact
+                                   path="/documents/view/:file_name"
+                                   component={ViewDocument}
+                                   />
+                                   <Route 
+                                   exact
+                                   path="/documents/print"
+                                   component={ComponentToPrint}
+                                   />
                                   <Route
                                     exact
                                     path="/mycalendar"
