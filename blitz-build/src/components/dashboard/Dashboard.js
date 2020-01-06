@@ -4,10 +4,20 @@ import DashboardTasks from './DashboardTasks'
 import Weather from "../weather/Weather.jsx";
 import ActivityFeed from './ActivityFeed';
 import PathnameContext from '../../contexts/PathnameContext'
+import UserContext from '../../contexts/UserContext'
+import jwtDecode from "jwt-decode";
 function Dashboard() {
-  const {pathname, setPathname } = useContext(PathnameContext)
-  useEffect(() => {
 
+  const {pathname, setPathname } = useContext(PathnameContext)
+  const { setUserInfo } = useContext(UserContext)
+
+  useEffect(() => {
+   
+      if (localStorage.getItem("id_token")) {
+        setUserInfo(jwtDecode(localStorage.getItem("id_token")));
+      }
+   
+  
     setPathname(window.location.pathname)
 
   }, []);

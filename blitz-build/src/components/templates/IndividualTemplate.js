@@ -14,9 +14,9 @@ const IndividualTemplate = props => {
   
   useEffect(() => {
     setPathname(window.location.pathname);
-   getTemplateTasks();
+    getTemplateTasks();
   }, []);
-console.log(templateTask);
+console.log('these are the templateTasks:', templateTask);
   return (
     <div>
       <Section>{/* <h1>individual template</h1> */}</Section>

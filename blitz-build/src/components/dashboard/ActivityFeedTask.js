@@ -177,7 +177,7 @@ width: 25%;
   margin-bottom: 8px;
 `;
 const ProjectName = styled.p`
-width: 5%;
+width: 10%;
 overflow-wrap: normal;
 display: flex;
 justify-content: end;

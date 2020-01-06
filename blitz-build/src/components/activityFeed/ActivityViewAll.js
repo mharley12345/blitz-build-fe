@@ -160,7 +160,7 @@ const Project = styled.p`
 color: rgba(0, 0, 0, 0.87);
 background-color: #E9E9E9
 flex-direction: column;
-width: 6%;
+width: 11%;
 display: flex;
 font-weight: 500;
 

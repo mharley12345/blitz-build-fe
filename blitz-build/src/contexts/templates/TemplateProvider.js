@@ -11,7 +11,7 @@ export default function TemplatesProvider({ children }) {
 
   useEffect(() => {
    getTemplates();
-
+   getTemplateTasks();
   }, []);
 
 const getTemplates = () => {
@@ -76,7 +76,6 @@ const getTemplateTasks = () => {
         console.log("from addTemplateTask in templateProvider", res);
         newTask.id = res.data.taskId[0];
         setTemplatesTask([...tasks, newTask]);
-        getTemplateTasks();
       })
       .catch(err => console.log(err));
     console.log(newTask);
