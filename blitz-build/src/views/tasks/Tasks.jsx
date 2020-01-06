@@ -13,7 +13,6 @@ import searchTermContext from "../../contexts/searching/searchTerm";
 import Task from "../../components/dashboard/Task";
 
 //mui
-import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TableHead from "@material-ui/core/TableHead";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
@@ -97,10 +96,11 @@ export default function Tasks(props) {
   //gets the query from the url and parses it to a object
   const queryValues = queryString.parse(props.location.search);
   
-  const [btnStyle, setBtnStyle] = useState(queryValues.filter === 'ACTIVE');
+  const [btnStatus, setBtnStatus] = useState(queryValues.filter === 'ACTIVE');
+  
   useEffect(() => {
-    getTasks(`FILTER_BY_${queryValues.filter}`)
-  }, [btnStyle]);
+    getTasks()
+  }, [btnStatus]);
 
   //pagnation
   const [page, setPage] = React.useState(0);
@@ -118,10 +118,18 @@ export default function Tasks(props) {
   };
 
   const itemCounter = () => {
+    console.log('from counter',  tasks.length)
     if (results.length > 0) {
       return results.length;
     } else {
-      return tasks.length;
+      return tasks.filter(task => {
+        if(queryValues.filter === 'ACTIVE'){
+          return task.isComplete === false
+        } 
+        else if(queryValues.filter === 'COMPLETE'){
+          return task.isComplete === true
+        }
+      }).length;
     }
   };
   const failedSearch = () => {
@@ -147,19 +155,19 @@ export default function Tasks(props) {
         <SortDiv>
           <Link to='/tasks?filter=ACTIVE'>
             <SortBtn 
-            active={btnStyle}
+            active={btnStatus}
             onClick={() => {
-              setBtnStyle(true)
-              console.log(btnStyle)
+              setBtnStatus(true)
+              console.log(btnStatus)
             }}
             >Active</SortBtn>
           </Link>
           <span style={{ fontWeight: 600, color: color.grey400 }}>|</span>
           <Link to='/tasks?filter=COMPLETE'>
             <SortBtn 
-            active={!btnStyle}
+            active={!btnStatus}
             onClick={() => {
-              setBtnStyle(false)
+              setBtnStatus(false)
             }}
             >Complete</SortBtn>
           </Link>
@@ -183,7 +191,14 @@ export default function Tasks(props) {
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? tasks.slice(
+              ? tasks.filter(task => {
+                if(queryValues.filter === 'ACTIVE'){
+                  return task.isComplete === false
+                } 
+                else if(queryValues.filter === 'COMPLETE'){
+                  return task.isComplete === true
+                }
+              }).slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )

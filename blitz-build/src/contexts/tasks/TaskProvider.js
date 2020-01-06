@@ -9,68 +9,57 @@ export default function TaskProvider({ children }) {
   const [TaskModalStatus, setTaskModalStatus] = useState(false);
   const [projectTasks, setProjectTasks] = useState([]);
   useEffect(() => {
-    getTasks("FILTER_BY_ACTIVE");
+    getTasks();
   }, []);
 
-  const getTasks = switchCaseArg => {
+  const getTasks = () => {
     const user_id = localStorage.getItem("user_id");
-    switch (switchCaseArg) {
-      case "ALL":
-        return axiosWithAuth()
-          .get(`/projects/tasks/${user_id}?sortdir=desc&orderby=id`)
-          .then(res => {
-            setTasks(res.data.tasks);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      case "FILTER_BY_ACTIVE":
-        return axiosWithAuth()
-          .get(
-            `/projects/tasks/${user_id}?sortby=isComplete&sortcondition=false&sortdir=desc`
-          )
-          .then(res => {
-            setTasks(res.data.tasks);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      case "FILTER_BY_COMPLETE":
-        return axiosWithAuth()
-          .get(
-            `/projects/tasks/${user_id}?sortby=isComplete&sortcondition=true&sortdir=desc`
-          )
-          .then(res => {
-            setTasks(res.data.tasks);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-    }
+
+    axiosWithAuth()
+      .get(`/projects/tasks/${user_id}?sortdir=desc&orderby=id`)
+      .then(res => {
+        setTasks(res.data.tasks);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
-  const completeTask = (completedTask) => {
-
+  const completeTask = completedTask => {
     axiosWithAuth()
       .put(`projects/tasks/${completedTask.id}`, {
         isComplete: true
       })
-      .then(res => {})
-      .catch(err => console.log("from edit task catch", err));
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log("from completeTask catch", err));
 
-    getTasks("FILTER_BY_ACTIVE");
+    const newTasksArr = tasks.map(task => {
+      if (task.id === completedTask.id) {
+        task.isComplete = true;
+        return task;
+      } else return task;
+    });
+
+    setTasks(newTasksArr);
   };
 
-  const activateTask = (activatedTask) => {
-
+  const activateTask = activatedTask => {
     axiosWithAuth()
       .put(`projects/tasks/${activatedTask.id}`, {
         isComplete: false
       })
       .then(res => {})
-      .catch(err => console.log("from edit task catch", err));
+      .catch(err => console.log("from activateTask catch", err));
 
-    getTasks('FILTER_BY_COMPLETE');
+    const newTasksArr = tasks.map(task => {
+      if (task.id === activatedTask.id) {
+        task.isComplete = false;
+        return task;
+      } else return task;
+    });
+    setTasks(newTasksArr);
   };
 
   const getProjectTasks = projectID => {
