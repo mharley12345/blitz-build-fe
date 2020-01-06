@@ -20,10 +20,8 @@ text-align: left;
 `
 
 const ConfirmBtn = styled.button`
-background: ${props =>
-    props.delete ? '#FF4D4F' : 'white'};
-color: ${props =>
-    props.delete ? 'white': '#FF4D4F'};
+background: ${props => (props.delete ? "#FF4D4F" : "white")};
+color: ${props => (props.delete ? "white" : "#FF4D4F")};
 display: flex;
 border-radius: 3px;
 border: 1px solid #FF4D4F
@@ -33,8 +31,10 @@ justify-content: center;
 align-items: center;
 margin-right: 10px;
 margin-top:36px;
+  cursor: pointer;
+
 :hover{
-`
+`;
 
 
 export default function Confirm(props) {
