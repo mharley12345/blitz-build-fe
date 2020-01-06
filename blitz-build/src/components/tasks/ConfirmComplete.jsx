@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
 import styled from "styled-components";
-import * as color from "../../styles/color"
+import * as color from "../../styles/color";
 
 import { XButton } from "../../styles/Tasks/tasks";
 
@@ -11,21 +11,19 @@ const ConfirmStyle = styled.div`
 `;
 
 const BtnDiv = styled.div`
-display: flex;
-justify-content: flex-start;
-`
+  display: flex;
+  justify-content: flex-start;
+`;
 
 const H1 = styled.h1`
-text-align: left; 
-height: 50px
-`
+  text-align: left;
+  height: 50px;
+`;
 
 const ConfirmBtn = styled.button`
 cursor: pointer;
-background: ${props =>
-    props.complete ? color.primaryColor : 'white'};
-color: ${props =>
-    props.complete ? 'white': color.primaryColor};
+background: ${props => (props.complete ? color.primaryColor : "white")};
+color: ${props => (props.complete ? "white" : color.primaryColor)};
 display: flex;
 border-radius: 3px;
 border: 1px solid #FF4D4F
@@ -37,26 +35,36 @@ margin-right: 10px;
 margin-top:36px;
 :hover {
 
-`
+`;
 
+export default function ConfirmComplete({
+  task,
+  closeModal,
+  confirmFunction,
+  text,
+  btnText
+}) {
+  return (
+    <ConfirmStyle>
+      <div style={{ textAlign: "right", height: "50px" }}>
+        <XButton onClick={closeModal}>close X</XButton>
+      </div>
 
-export default function ConfirmComplete({ task, closeModal, confirmFunction }) {
-    return (
-        <ConfirmStyle>
-            <div style={{textAlign: 'right', height: '50px'}}>
-                <XButton onClick={ closeModal }>close X</XButton>
-            </div>
+      <H1 style={{ fontSize: "30px", fontWeight: 600 }}>{task.task_name}.</H1>
 
-            <H1 style={{fontSize: '30px', fontWeight: 600}}>Mark {task.task_name} as complete.</H1>
-
-            <p>Are you sure you want to mark as completed?</p>
-            <BtnDiv>
-                <ConfirmBtn onClick={ closeModal }>Cancel</ConfirmBtn>
-                <ConfirmBtn complete onClick={ () => {
-                    confirmFunction(task)
-                    closeModal()
-                } }>Complete</ConfirmBtn>
-            </BtnDiv>
-        </ConfirmStyle>
-    )
+      <p>{text}</p>
+      <BtnDiv>
+        <ConfirmBtn onClick={closeModal}>Cancel</ConfirmBtn>
+        <ConfirmBtn
+          complete
+          onClick={() => {
+            confirmFunction(task);
+            closeModal();
+          }}
+        >
+          {btnText}
+        </ConfirmBtn>
+      </BtnDiv>
+    </ConfirmStyle>
+  );
 }

@@ -8,7 +8,7 @@ import ConfirmComplete from "./ConfirmComplete";
 import TasksContext from "../../contexts/tasks/TaskContext";
 
 export default function CompleteTask({ task, completeStatus, handleCompleteClose }) {
-  const { toggleCompleteTask } = useContext(TasksContext);
+  const { completeTask } = useContext(TasksContext);
 
   return (
     <>
@@ -19,9 +19,10 @@ export default function CompleteTask({ task, completeStatus, handleCompleteClose
         component={
           <ConfirmComplete
             closeModal={ handleCompleteClose }
-            confirmFunction={ toggleCompleteTask }
-            text={ 'Edit Task' }
+            confirmFunction={ completeTask }
+            text={ 'Are you sure you want to mark as completed?' }
             task={task}
+            btnText={'Complete'}
           />
         }
       />
