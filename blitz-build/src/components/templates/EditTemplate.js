@@ -8,6 +8,7 @@ import TemplateForm from "./TemplateForm";
 import TemplateContext from "../../contexts/templates/TemplateContext";
 
 export default function EditTask({ template , editStatus, handleEditClose }) {
+  //import editTemplate function from template context
   const { editTemplate } = useContext(TemplateContext);
 
   return (

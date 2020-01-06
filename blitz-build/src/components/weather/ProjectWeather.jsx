@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 // for project page import <Weather usage="project" city={} latitude={} longitude={} />
 
-function ProjectWeather({ weatherData, time, icon,city }) {
-           
+function ProjectWeather({ weatherData, time, icon, city }) {
+  //returns the weather of where the project is based on the zip code that they provide.
   return (
     <>
       <WeatherContainerP id="$break-laptop">
@@ -73,10 +73,9 @@ function ProjectWeather({ weatherData, time, icon,city }) {
 
 export default ProjectWeather;
 
-
 // css of the weather container in the project page
 const WeatherContainerP = styled.div`
-  min-width:530px;
+  min-width: 530px;
   height: 172px;
   display: flex;
 `;
@@ -88,7 +87,7 @@ const WeatherInfo = styled.div`
   width: 50%;
   height: 172px;
   display: flex;
-  align-items:center
+  align-items: center;
 `;
 const WeatherData = styled.div`
   text-align: center;
@@ -96,5 +95,5 @@ const WeatherData = styled.div`
 
 const WeatherIcon = styled.div`
   text-align: center;
-  margin-left:10px
+  margin-left: 10px;
 `;

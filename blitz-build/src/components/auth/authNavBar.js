@@ -3,11 +3,13 @@ import { Link, withRouter } from "react-router-dom";
 import auth0Client from "./auth";
 
 function NavBar(props) {
+  //if you sign out using this then you are signing out with auth0. Right now this is an option, but we are using our own function in Logout.jsx
   const signOut = () => {
     auth0Client.signOut();
     props.history.replace("/dashboard");
   };
 
+  //returns login button
   return (
     <nav className="navbar navbar-dark bg-primary fixed-top">
       {/* <Link className="navbar-brand" to="/">
