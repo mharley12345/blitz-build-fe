@@ -2,30 +2,38 @@ import React,{useState,useEffect, useRef, useContext} from "react";
 import styled, { css } from "styled-components";
 import MeatBallsDrop from "../tasks/MeatBallsDrop"
 import projectContext from "../../contexts/projects/ProjectContext";
+import { NavLink } from "react-router-dom";
 
 
 
-function CompletedTask({ item, children }) {
+function ActivityFeedTask({ item, children, props }) {
   
 
   const { projects } = useContext(projectContext);
 
-  const projectID = projects.map( project =>{
+
+   const projectID = []
+
+  const checkProjectID = () => projects.map( project =>{
     if (project.id === item.project_id) {
-      return project.id
+        projectID.push(project.id)
     }
   }
     )
-    const TaskProjectName = projects.map(project => {
-      if (project.id === item.project_id) {
-        return project.project_name
-      }
-    })
+
+    checkProjectID()
+
   const TaskAddress = projects.map(project => {
     if (project.id === item.project_id) {
       return project.street_address
     }
+    
   })
+  const TaskProjectName = projects.map(project => {
+      if (project.id === item.project_id) {
+        return project.project_name
+      }
+    })
   const today = new window.Date().toISOString().slice(0, 10);
 // This value is hardcoded now because the server don't send back a date
 // It should be {item.due_date}
@@ -41,6 +49,18 @@ function CompletedTask({ item, children }) {
     }
   }
 
+  const checkCondition = () => {
+    if(item.isComplete === true) {
+      return (
+        <TitleText>Completed Task</TitleText>
+      )}
+      else {
+        return (
+          <TitleText>  Added Task </TitleText>
+        )
+      }
+    
+  }
   const status = DateCalc(today, item);
 
   const todayDate = new window.Date(today);
@@ -49,39 +69,36 @@ function CompletedTask({ item, children }) {
 
   const diffDays = Math.round(Math.abs((todayDate - item.due_date) / oneDay));
 
-  function DueDateLogic(diff, status) {
-    if (status === "Pending") {
-      return "Due today";
-    } else if (status === "Overdue") {
-      return `${diff} days past due`;
-    } else if (status === "Upcoming") {
-      return `Due in ${diff} days`;
-    }
-  }
-
-  const dueDateText = DueDateLogic(diffDays, status);
-
+ console.log('project id on activity feed :', projectID)
   return (
-    <Container>
-      <Inner>
-      <Address>
-          
-          <TitleText>  Completed Task </TitleText>
+    <Container>  
+       <NavLink to={`/projects/${projectID}`} style = {NavLinkStyle}>
+  
+     
+      <InnerContainer>
+      
+        
+          {checkCondition()}
  <NameText>{item.task_name}  </NameText>
 
       <Spacer> / </Spacer>
 
       <AddressText> {TaskAddress} </AddressText>
       <ProjectName>{TaskProjectName} </ProjectName> 
-        </Address>
-       </Inner>
+     
+        </InnerContainer>
+       
+     
+       </NavLink>
     </Container>
+
+
+
   );
    
 }
 
-export default CompletedTask;
-
+export default ActivityFeedTask;
 
 const NavLinkStyle = {
   textDecoration: 'none',
@@ -93,8 +110,10 @@ const NavLinkStyle = {
  
 } ;
 const Spacer = styled.div`
-
+display: flex;
+flex-direction: column;
 width: 2%;
+
 `
 const Container = styled.div`
   width: 100%;
@@ -104,21 +123,22 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
   :nth-child(odd) {
     background: #fbfaf9;
   }
 `;
 
-const Address = styled.div`
-width: 80%;
+const InnerContainer = styled.div`
+width: 98%;
 display: flex;
+justify-content: space-around;
 align-items: center;
-
+cursor: pointer;
 
   p {
     font-weight: 500;
-  font-size: 18px;
+  font-size: 14px;
     line-height: 16px;
     font-family: "Roboto";
     color: #3f3a36;
@@ -126,25 +146,30 @@ align-items: center;
 `;
 
 const TitleText = styled.p`
-width: 20%;
+  display: flex;
+  flex-direction: column;
+  width: 15%;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
-  color: #3f3a36;
   margin-bottom: 8px;
 `;
 
 const NameText = styled.p`
-width: 40%;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
   color: #3f3a36;
   margin-bottom: 8px;
+ 
 `;
 const AddressText = styled.p`
-width: 40%;
-margin-left: 10%;
+display: flex;
+flex-direction: column;
+width: 25%;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
@@ -153,9 +178,10 @@ margin-left: 10%;
 `;
 const ProjectName = styled.p`
 width: 5%;
+overflow-wrap: normal;
 display: flex;
 justify-content: end;
-margin-left: 50px;
+
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";

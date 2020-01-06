@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import Task from "./Task";
-import CompletedTask from './CompletedTask'
-import NewTask from './NewTask'
+
+import ActivityFeedTask from './ActivityFeedTask'
 //context 
 import taskContext from '../../contexts/tasks/TaskContext'
 import {  Link } from "react-router-dom";
@@ -56,7 +56,7 @@ const newdate = year + "-" + month + "-" + changeTheDay(day);
            }
            else if (wasMadeToday(item.createdAt) || item.isComplete === true  ) {
              return (
-              <NewTask item={item} key={item.id} />
+              <ActivityFeedTask item={item} key={item.id} />
              )
            }
              })}

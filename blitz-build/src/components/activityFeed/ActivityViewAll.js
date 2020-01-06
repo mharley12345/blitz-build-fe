@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 
-import NewTask from '../dashboard/NewTask'
+import ActivityFeedTask from '../dashboard/ActivityFeedTask'
 
 //context 
 import taskContext from '../../contexts/tasks/TaskContext'
 import {  Link } from "react-router-dom";
-
 
 
 
@@ -67,7 +66,7 @@ return (
            }
            else if (wasMadeToday(item.createdAt) || item.isComplete === true  ) {
              return (
-              <NewTask item={item} key={item.id} />
+              <ActivityFeedTask item={item} key={item.id} />
              )
            }
              })}
@@ -99,6 +98,7 @@ const Section = styled.div`
   p {
     font-size: 16px;
     line-height: 19px;
+    margin: 0;
     color: #212529;
     font-weight: 600;
   }
@@ -174,7 +174,8 @@ const TableHead = styled.div`
  height: 72px;
  color: rgba(0, 0, 0, 0.87);
  background-color: #E9E9E9
- padding: 0 2.5%;
+ padding: 16px 32px;
+ padding-right: 45px;
  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
 border-radius: 3px;
 border: 1px solid #dcd9d5;

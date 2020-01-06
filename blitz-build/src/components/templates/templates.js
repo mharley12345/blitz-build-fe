@@ -1,19 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import PathnameContext from "../../contexts/PathnameContext";
+import { usePathnameContext } from "../../contexts/PathnameContext";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-import templateContext from "../../contexts/templates/TemplateContext";
-import searchTermContext from "../../contexts/searching/searchTerm";
+import { useTemplateContext } from "../../contexts/templates/TemplateContext";
+
 import styled, { css } from "styled-components";
 import TemplateMeatBallsDrop from "./TemplateMeatBalls";
 const Templates = props => {
-  const { templates } = useContext(templateContext);
+  const { templates } = useTemplateContext();
   const [NinetyDayBuild, setNinetyDayBuild] = useState();
-
-  const { searchTerm } = useContext(searchTermContext);
-  const templatesSearchInput = searchTerm.toLowerCase();
-  const [templatesSearchResults, settemplateSearchResults] = useState([]);
-  const { pathname, setPathname } = useContext(PathnameContext);
+  const { setPathname } = usePathnameContext();
 
   const seedData = () => {
     setPathname(window.location.pathname);
@@ -37,8 +33,8 @@ const Templates = props => {
     // ));
     // console.log("RESULTS:", results);
     // settemplateSearchResults(results);
-  })}, [templatesSearchInput]);
-console.log(templates);
+  })}, []);
+console.log("these are the tempaltes: ", templates);
   return (
     <div>
       <Section>
@@ -114,7 +110,7 @@ const Container = styled.div`
   }
   cursor: pointer;
 `;
-const Name = styled.div`
+export const Name = styled.div`
   /* Heading 4 */
   width: 500px;
   font-family: Roboto;
