@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useEffect } from "react";
 import styled from "styled-components";
 import Task from "../dashboard/Task";
 //context
@@ -32,7 +32,11 @@ const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 function ProjectTaskCard({ projectID, numberOfTasks }) {
-  const { tasks } = useContext(taskContext);
+  const { tasks, getTasks } = useContext(taskContext);
+
+  useEffect(() => {
+    getTasks('ALL')
+  }, [])
 
   const projectTasks = tasks.filter(item => {
     return `${item.project_id}` === projectID;
