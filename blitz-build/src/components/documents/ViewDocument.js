@@ -1,5 +1,5 @@
 import React,{useContext} from "react"
-import DocumentContext from  'C:/blitz-build-fe/blitz-build/src/contexts/documents/DocumentsContext.js'
+import DocumentContext from  '../../contexts/documents/DocumentsContext.js'
 
 import {axiosWithAuth} from '../../utils/auth/axiosWithAuth'
 import styled from  'styled-components'
