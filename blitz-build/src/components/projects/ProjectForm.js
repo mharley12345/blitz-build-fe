@@ -102,10 +102,10 @@ export default function ProjectForm({
     // check if user enters a valid zip_code
     if (
       form.zip_code == null ||
-      form.project_name == "" ||
-      form.street_address == "" ||
-      form.city == "" ||
-      form.state == ""
+      form.project_name === "" ||
+      form.street_address === "" ||
+      form.city === "" ||
+      form.state === ""
     ) {
       setError({
         error: true,
@@ -119,7 +119,7 @@ export default function ProjectForm({
 
       // check if the zip_code is valid.
 
-      if (gps == undefined) {
+      if (gps === undefined) {
         setError({
           error: true,
           error_text: "The zip_code is invalid!"
