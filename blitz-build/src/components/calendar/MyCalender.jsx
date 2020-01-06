@@ -18,7 +18,7 @@ const MyCalendar = props => {
     const [myEventsList, setMyEventsList]=useState([])
     const { projects } = useProjectContext();
     const { tasks } = useTaskContext();
-  const [eventTitles, setEventTitles] = useState([]);
+
     useEffect(() => {
 
    
@@ -44,16 +44,13 @@ const MyCalendar = props => {
         // const eventsList = tasksEvents.concat(projectsEvents);
         setMyEventsList(tasksEvents); 
         
-       myEventsList.map(events => {
-           setEventTitles(events.title)
-       })
+      
    
 
     }, [tasks,projects]);
 
     
-  
-  console.log(eventTitles)
+
     return (
       
         <div>  {console.log(myEventsList)}

@@ -5,6 +5,7 @@ import * as ProjectContext from '../contexts/projects/ProjectContext'
 import  MyCalendar  from '../components/calendar/MyCalender'
 import { newtask } from  '../contexts/tasks/TaskContext'
 import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
 
 describe('<MyCalender />', () => {
   test('it should mock the context', () => {
@@ -68,44 +69,15 @@ describe('<MyCalender />', () => {
 
       }
       ], 
-      tasks: [{
-      project_name: "TacomaEdit",
-      id: 3885,
-      user_id: "google-oauth2|117345694816613292954",
-      task_name: "Rough Install Electrical",
-      task_description: "",
-      due_date: "",
-      start_date: null,
-      createdAt: "2019-12-16T00:00:00.000Z",
-      isComplete: false,
-      project_id: 2,
-      template_id: null,
-      template_name: "90_day",
-    },
-    {
-      project_name: "TacomaEdit",
-      id: 3909,
-      user_id: "google-oauth2|117345694816613292954",
-      task_name: "Electrical Trim",
-      task_description: "",
-      due_date: "",
-      start_date: null,
-      createdAt: "2019-12-16T00:00:00.000Z",
-      isComplete: false,
-      project_id: 2,
-      template_id: null,
-      template_name: "90_day",
     
-  }],
-
    tasks: [{
       project_name: "Tacoma",
       id: 10075,
       user_id: "google-oauth2|117345694816613292954",
       task_name: "Electrical Meter",
       task_description: "",
-      due_date: "",
-      start_date: null,
+      due_date: 12/15/2020,
+      start_date: 12/2/2020,
       createdAt: "2019-12-17T00:00:00.000Z",
       isComplete: false,
       project_id: 55,
@@ -151,10 +123,23 @@ describe('<MyCalender />', () => {
     jest
       .spyOn(ProjectContext, 'useProjectContext')
       .mockImplementation(() => contextValues);
+     
     const Wrapper = shallow(<MyCalendar project={contextValues.projects[0]} task = {contextValues.tasks[0]} eventTitles={contextValues.tasks[0].task_name}/>);
-    const TextFind = Wrapper.find('p').at(0)   
+
+    //Accessing react lifecyle methods
+    //Accessing component state
+    const recievingTasks = newtask(contextValues.tasks[0])
+
+    expect(recievingTasks).toStrictEqual({
+       allDay: true,
+       start:new Date(moment(12/15/2020).format("L")),
+       end: new Date(moment(12/15/2020).format("L")) ,
+       title: "Electrical Meter (Tacoma)"
+    })
+    
+
  
- 
+
 
 
 
