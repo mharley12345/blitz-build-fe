@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 
+// components
+import ErrorMessage from "../../components/global/ErrorMessage";
+
 //styles
 //import styled from "styled-components";
 import {
@@ -22,6 +25,10 @@ export default function DelayForm({
   const [form, setForm] = useState({
     reason: ""
   });
+  const [error, setError] = useState({
+    error: false,
+    error_text: null
+  });
   useEffect(() => {
     if (editFields) {
       //console.log("editFields", editFields);
@@ -39,20 +46,29 @@ export default function DelayForm({
   const handleSubmit = e => {
     
     e.preventDefault();
-    if (editFields) {
-      handleFunction(form, form.id);
+    // check if user assigns a name to the delay_log
+    if (form.reason == "") {
+      setError({
+        error: true,
+        error_text: "Please add delay reason!"
+      });
     } else {
-      handleFunction(form, task.project_name, task.task_name);
+      if (editFields) {
+        handleFunction(form, form.id);
+      } else {
+        handleFunction(form, task.project_name, task.task_name);
+      }
+      setForm({
+        reason: ""
+      });
+      setError({ error: false, error_text: null });
+      closeModal();
     }
-    setForm({
-      reason: ""
-    });
-    closeModal();
   };
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <StyledFormHeader style={{marginBottom:"20px"}}>
+      <StyledFormHeader style={{ marginBottom: "20px" }}>
         <h1 style={{ fontSize: "2rem", margin: 0 }}>{text}</h1>
         <XButton onClick={closeModal}>close X</XButton>
       </StyledFormHeader>
@@ -64,7 +80,9 @@ export default function DelayForm({
         value={form.reason}
         onChange={changeHandler}
       />
-
+      {error.error && error.error_text ? (
+        <ErrorMessage errorMessage={error.error_text} />
+      ) : null}
       <StyledBtn>Publish to delay log</StyledBtn>
     </StyledForm>
   );

@@ -54,7 +54,7 @@ export default function ProjectsProvider({ children }) {
         }
 
         //adding pre-build 90 days template
-        if (templateForm.preBuiltTemplate === true) {
+        if (templateForm.preBuiltTemplate ) {
           console.log("im here");
           axiosWithAuth()
             .post("/90_day", {
@@ -109,7 +109,7 @@ export default function ProjectsProvider({ children }) {
         }
         //adding pre-build 90 days template
 
-        if (templateForm.preBuiltTemplate === true) {
+        if (templateForm.preBuiltTemplate) {
           console.log("im here in edit");
           console.log("edited project id", editedProjectId);
           axiosWithAuth()
