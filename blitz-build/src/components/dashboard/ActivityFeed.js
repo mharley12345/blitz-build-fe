@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 function ActivityFeed({ projectID, numberOfTasks }) {
   //importing state of tasks from context
   const { tasks } = useContext(taskContext);
-
   //getting a date and then assigning separate variables for months and days
   const dateObj = new Date();
   const month = dateObj.getUTCMonth() + 1; //months from 1-12

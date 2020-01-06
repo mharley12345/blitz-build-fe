@@ -20,7 +20,6 @@ import { NavLink } from "react-router-dom";
 function ActivityFeedTask({ item, children, props }) {
   //imports state of projects from context
   const { projects } = useContext(projectContext);
-
   const projectID = [];
 
   //checks if the project id is equal to the item's project_id in the activity feed then it pushes it to an array called projectID
@@ -43,6 +42,7 @@ function ActivityFeedTask({ item, children, props }) {
   const TaskProjectName = projects.map(project => {
     if (project.id === item.project_id) {
       return project.project_name;
+      
     }
   });
 
@@ -194,22 +194,13 @@ const AddressText = styled.p`
   margin-bottom: 8px;
 `;
 const ProjectName = styled.p`
-<<<<<<< HEAD
-<<<<<<< HEAD:blitz-build/src/components/dashboard/NewTask.js
+
+width: 10%;
   display: flex;
   justify-content: end;
-=======
-width:5%;
-display: flex;
-justify-content: end;
->>>>>>> 2938c251e78f2535b3ec6e2a65e58c2b102468f6:blitz-build/src/components/dashboard/ActivityFeedTask.js
-=======
-width: 5%;
 overflow-wrap: normal;
 display: flex;
 justify-content: end;
-
->>>>>>> c4fe8a5fdab6e0feabf78bd5018b3fc48a3a2059
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";

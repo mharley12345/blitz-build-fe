@@ -22,7 +22,7 @@ const IndividualTemplate = props => {
     setPathname(window.location.pathname);
     getTemplateTasks();
   }, []);
-
+console.log('these are the templateTasks:', templateTask);
   return (
     <div>
       <Section>{/* <h1>individual template</h1> */}</Section>

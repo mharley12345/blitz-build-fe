@@ -2,13 +2,24 @@ import React, { useEffect, useContext } from "react";
 import styled from "styled-components";
 import DashboardTasks from "./DashboardTasks";
 import Weather from "../weather/Weather.jsx";
-import ActivityFeed from "./ActivityFeed";
-import PathnameContext from "../../contexts/PathnameContext";
+import ActivityFeed from './ActivityFeed';
+import PathnameContext from '../../contexts/PathnameContext'
+import UserContext from '../../contexts/UserContext'
+import jwtDecode from "jwt-decode";
 function Dashboard() {
-  //returns the dashboard view by importing all the components needed
-  const { pathname, setPathname } = useContext(PathnameContext);
+
+  const {pathname, setPathname } = useContext(PathnameContext)
+  const { setUserInfo } = useContext(UserContext)
+
   useEffect(() => {
-    setPathname(window.location.pathname);
+   
+      if (localStorage.getItem("id_token")) {
+        setUserInfo(jwtDecode(localStorage.getItem("id_token")));
+      }
+   
+  
+    setPathname(window.location.pathname)
+
   }, []);
 
   return (
