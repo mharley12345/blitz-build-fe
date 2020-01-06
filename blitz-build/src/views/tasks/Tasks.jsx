@@ -88,16 +88,8 @@ export default function Tasks(props) {
   const [btnStyle, setBtnStyle] = useState(queryValues.filter === 'ACTIVE');
   useEffect(() => {
     getTasks(`FILTER_BY_${queryValues.filter}`)
-    console.log("query from Tasks.jsx useEffect", queryValues.filter);
   }, [btnStyle]);
 
-
-
-  
-
-  console.log("taskSearchResults", taskSearchResults);
-
-  console.log("RESULTS:", results);
   //pagnation
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
