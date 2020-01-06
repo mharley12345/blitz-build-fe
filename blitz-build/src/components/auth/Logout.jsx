@@ -43,7 +43,8 @@ const ButtonStyle = {
   cursor: "pointer",
   backgroundColor: "#DA552F",
   color: "white",
-  borderRadius: "1px",
+  borderRadius: "3px",
+  border: "1px solid #8a827d",
   width: "30px",
   height: "35px"
 };
@@ -90,7 +91,7 @@ const Logout = props => {
 
         <DialogContent>
           {" "}
-          <Pstyle> Are you sure you want to logout?</Pstyle>
+          <Pstyle> Are you sure you want to log out?</Pstyle>
         </DialogContent>
 
         <ButtonStyles>
