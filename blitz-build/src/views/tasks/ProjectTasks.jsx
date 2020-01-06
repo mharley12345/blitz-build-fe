@@ -20,27 +20,17 @@ import TableBody from "@material-ui/core/TableBody";
 import TablePaginationActions from "../../components/global/TablePaginationActions";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableFooter from "@material-ui/core/TableFooter";
-
+import {
+  StyledTableCell,
+  StyledTableHeadRow,
+  useStyles
+} from "../../styles/Table/TableStyles";
 //styles
 import styled from "styled-components";
 import { SortBtn } from "../../styles/SortBtn";
 
 //static
 import Project_icon from "../../styles/icons_project/project_icon.png";
-
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    padding: "8px 32px",
-    height: 35,
-    backgroundColor: "#E9E9E9",
-    color: theme.palette.common.black
-  },
-  body: {
-    padding: "8px 32px",
-    fontSize: 16,
-    height: 104
-  }
-}))(TableCell);
 
 const InfoContainer = styled.div`
   width: 100%;
@@ -49,19 +39,7 @@ const InfoContainer = styled.div`
   align-items: center;
   margin-bottom: 10px;
 `;
-const useStyles = makeStyles({
-  root: {
-    border: "1px solid #DCD9D5"
-  },
-  table: {
-    // minWidth: "1080px"
-  },
-  tableHover: {
-    "&:hover": {
-      border: "3px solid orange"
-    }
-  }
-});
+
 
 export default function ProjectTasks (props, {ProjectName}) {
   const { tasks, getTasks } = useContext(taskContext);
@@ -101,10 +79,18 @@ export default function ProjectTasks (props, {ProjectName}) {
   return (
     <>
       <InfoContainer>
-      <BreadCrumbs>
-        <img src={Project_icon} alt="project_icon" />
-        <span>&nbsp;&nbsp;Projects / {projectTasks.length === 0 ? <span>...loading</span> : projectTasks[0].project_name} / Tasks</span>
-      </BreadCrumbs>
+        <BreadCrumbs>
+          <img src={Project_icon} alt="project_icon" />
+          <span>
+            &nbsp;&nbsp;Projects /{" "}
+            {projectTasks.length === 0 ? (
+              <span>...loading</span>
+            ) : (
+              projectTasks[0].project_name
+            )}{" "}
+            / Tasks
+          </span>
+        </BreadCrumbs>
         {/* <SortBtn >
           Active
         </SortBtn>
@@ -120,12 +106,12 @@ export default function ProjectTasks (props, {ProjectName}) {
           style={{ minHeight: "500px" }}
         >
           <TableHead>
-            <TableRow>
+            <StyledTableHeadRow>
               <StyledTableCell>TASK</StyledTableCell>
               <StyledTableCell>DESCRIPTION</StyledTableCell>
               <StyledTableCell>DUE DATE</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
-            </TableRow>
+            </StyledTableHeadRow>
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0

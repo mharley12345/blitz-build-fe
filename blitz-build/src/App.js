@@ -1,11 +1,11 @@
+//notes
 import React, { useState, useEffect } from "react";
 import { Switch } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Login from "./components/auth/Login";
-import Signup from "./components/auth/Signup";
-import PrivateRoute from "./components/auth/PrivateRoute";
+// import Login from "./components/auth/Login";
+// import Signup from "./components/auth/Signup";
+// import PrivateRoute from "./components/auth/PrivateRoute";
 import NavBar from "./components/NavBar";
-import axios from "axios";
 import jwtDecode from "jwt-decode";
 // import Layout from "./components/dashboard/Layout";
 // import Dashboard from "./components/dashboard/index";
@@ -25,7 +25,6 @@ import Layout from "./layouts/Layout";
 import Dashboard from "./components/dashboard/Dashboard";
 import DelayLog from "./views/delayLog/DelayLog";
 import OpenTemplateContext from "./contexts/OpenTemplateContext";
-import AddTemplate from "./components/modal/AddTemplate";
 
 import Documents from "./components/documents/Documents";
 import OpenUploaderContext from "./contexts/documents/OpenUploaderContext";
@@ -36,21 +35,22 @@ import Landing from "./components/landing/pages/Landing";
 
 //context
 import UserContext from "./contexts/UserContext";
-import SearchTermContext from "./contexts/searching/searchTerm";
 import TaskProvider from "./contexts/tasks/TaskProvider";
 import DelayLogProvider from "./contexts/delayLog/DelayLogProvider";
 import OpenContext from "./contexts/projects/OpenContext";
 import PathnameContext from "./contexts/PathnameContext";
 import ProjectsProvider from "./contexts/projects/ProjectsProvider";
-import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 import EditModalContext from "./contexts/EditModalContext";
-import TemplateProvider from "./contexts/templates/TemplateProvider";
 import SearchProvider from "./contexts/searching/searchTermProvider";
+// import SearchTermContext from "./contexts/searching/searchTerm";
+// import TemplateProvider from "./contexts/templates/TemplateProvider";
+// import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
 
 //AUTH0
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
+
 import TemplatesProvider from "./contexts/templates/TemplateProvider";
 import Uploader from "./components/documents/Uploader";
 import MyCalendar from "./components/calendar/MyCalender";
@@ -62,6 +62,8 @@ function App() {
   const [userInfo, setUserInfo] = useState([]);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [openUploader, setOpenUploader] = useState(false);
+
+
   // getting userInfo from id_token in localStorage.
   useEffect(() => {
     if (localStorage.getItem("id_token")) {
@@ -76,6 +78,7 @@ function App() {
       return component;
     }
   };
+
 
   // console.log("userInfo", userInfo);
   console.log("pathname", pathname);
@@ -158,7 +161,6 @@ function App() {
                               )}
                               <Layout pathname={pathname}>
                                 <Switch>
-                                  <Route exact path="/auth" component={Auth} />
                                   <Route exact path="/" component={Landing} />
 
                                   <Route
@@ -179,7 +181,7 @@ function App() {
                                   <Route
                                     exact
                                     path="/login"
-                                    component={Login}
+                                    // component={Login}
                                   />
 
                                   {/* <Route exact path="/signup" component={Signup} /> */}

@@ -31,19 +31,11 @@ import styled from "styled-components";
 import { SortBtn } from "../../styles/SortBtn";
 import * as color from "../../styles/color";
 
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    padding: "8px 32px",
-    height: 35,
-    backgroundColor: "#E9E9E9",
-    color: theme.palette.common.black
-  },
-  body: {
-    padding: "8px 32px",
-    fontSize: 16,
-    height: 104
-  }
-}))(TableCell);
+import {
+  useStyles,
+  StyledTableCell,
+  StyledTableHeadRow
+} from "../../styles/Table/TableStyles";
 
 const InfoContainer = styled.div`
   width: 100%;
@@ -59,21 +51,41 @@ const SortDiv = styled.div`
   align-items: center;
 `;
 
-const useStyles = makeStyles({
-  root: {
-    border: "1px solid #DCD9D5"
-  },
-  table: {
-    // minWidth: "1080px"
-  },
-  tableHover: {
-    "&:hover": {
-      border: "3px solid orange"
-    }
-  }
-});
+// const useStyles = makeStyles({
+//   root: {
+//     border: "1px solid #DCD9D5"
+//   },
+//   table: {
+//     // minWidth: "1080px"
+//   },
+//   tableHover: {
+//     "&:hover": {
+//       border: "3px solid orange"
+//     }
+//   }
+// });
 
 export default function Tasks(props) {
+// const MainFailContainer = styled.div`
+//   postion: relative;
+//   width: 900px;
+//   height: 200px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin-left: 250px;
+// `;
+
+// const failedContainer = styled.div`
+//   margin-top: 80px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
+// const failText = styled.div`
+//   font-size: 50px;
+// `;
+
   const { tasks, getTasks } = useContext(taskContext);
 
   const { searchTerm, results, taskSearchResults } = useContext(
@@ -115,7 +127,7 @@ export default function Tasks(props) {
   const failedSearch = () => {
     if (searchTerm.length > 0 && results.length === 0) {
       return (
-        <p style={{ fontWeight: 600 }}>
+        <p>
           There doesn't seem to be any tasks with that name
         </p>
       );
@@ -161,13 +173,13 @@ export default function Tasks(props) {
           style={{ minHeight: "500px" }}
         >
           <TableHead>
-            <TableRow>
+            <StyledTableHeadRow>
               <StyledTableCell>PROJECT NAME</StyledTableCell>
               <StyledTableCell>TASK</StyledTableCell>
               <StyledTableCell>DESCRIPTION</StyledTableCell>
               <StyledTableCell>DUE DATE</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
-            </TableRow>
+            </StyledTableHeadRow>
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
@@ -184,8 +196,14 @@ export default function Tasks(props) {
               }
             })}
 
-            {results.length > 0 ? (
-              results.map(result => <Task item={result} key={result.id}></Task>)
+            {results.length > 0 ? (   (rowsPerPage > 0
+              ? results.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : results
+            )
+              .map(result => <Task item={result} key={result.id}></Task>)
             ) : (
               <></>
             )}

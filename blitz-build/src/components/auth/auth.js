@@ -19,40 +19,16 @@ class Auth {
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
     this.signIn = this.signIn.bind(this);
-    // this.signOut = this.signOut.bind(this);
   }
-
-  // getProfile() {
-  //   return this.profile;
-  // }
 
   getIdToken() {
     return this.idToken;
   }
 
-  // isAuthenticated() {
-  //   return new Date().getTime() < this.expiresAt;
-  // }
-
   signIn() {
     this.auth0.authorize();
   }
 
-  // handleAuthentication() {
-  //   return new Promise((resolve, reject) => {
-  //     this.auth0.parseHash((err, authResult) => {
-  //       if (err) return reject(err);
-  //       if (!authResult || !authResult.idToken) {
-  //         return reject(err);
-  //       }
-  //       this.idToken = authResult.idToken;
-  //       this.profile = authResult.idTokenPayload;
-  //       // set the time that the id token will expire at
-  //       this.expiresAt = authResult.idTokenPayload.exp * 1000;
-  //       resolve();
-  //     });
-  //   });
-  // }
 
   handleAuthentication() {
     this.auth0.parseHash((err, authResults) => {
@@ -75,14 +51,6 @@ class Auth {
   isAuthenticated() {
     let expiresAt = JSON.parse(localStorage.getItem("expires_at"));
     return new Date().getTime() < expiresAt;
-  }
-
-  // doing this function in the logout component
-  signOut() {
-    // clear id token, profile, and expiration
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("id_token");
-    localStorage.removeItem("expires_at");
   }
 
   getProfile() {

@@ -58,14 +58,15 @@ export const StyledSelect = styled.select`
        `;
 
 export const StyledBtn = styled.button`
-  margin: 30px auto 0 auto;
-  padding: 10px 30px;
-  border-radius: 3px;
-  border: 1px solid #8a827d;
-  background: #da552f;
-  color: white;
-  text-align: center;
-`;
+         margin: 20px auto 20px auto;
+         padding: 10px 30px;
+         border-radius: 3px;
+         border: 1px solid #8a827d;
+         background: #da552f;
+         color: white;
+         text-align: center;
+         cursor: pointer;
+       `;
 export const XButton = styled.button`
   font-size: 25px;
   background-color: white;

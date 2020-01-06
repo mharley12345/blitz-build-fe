@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 //context
@@ -7,6 +7,7 @@ import ProjectContext from "./ProjectContext";
 export default function ProjectsProvider({ children }) {
   //sets state of projects throughout the app
   const [projects, setProjects] = useState([]);
+  
 
   //this is getting all projects
   useEffect(() => {
@@ -53,7 +54,7 @@ export default function ProjectsProvider({ children }) {
         }
 
         //adding pre-build 90 days template
-        if (templateForm.preBuiltTemplate === true) {
+        if (templateForm.preBuiltTemplate ) {
           console.log("im here");
           axiosWithAuth()
             .post("/90_day", {
@@ -108,7 +109,7 @@ export default function ProjectsProvider({ children }) {
         }
         //adding pre-build 90 days template
 
-        if (templateForm.preBuiltTemplate === true) {
+        if (templateForm.preBuiltTemplate) {
           console.log("im here in edit");
           console.log("edited project id", editedProjectId);
           axiosWithAuth()
@@ -120,7 +121,7 @@ export default function ProjectsProvider({ children }) {
               console.log(err);
             });
         }
-        getProject();
+        window.location.reload(true);
       })
       .catch(err => console.log(err));
     const newProjectsList = projects.map(project => {
@@ -141,7 +142,7 @@ export default function ProjectsProvider({ children }) {
         addProject,
         deleteProject,
         editProject,
-        getProject
+        getProject,
         
       }}
     >

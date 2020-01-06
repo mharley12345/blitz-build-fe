@@ -19,34 +19,11 @@ import TableBody from "@material-ui/core/TableBody";
 
 //styles
 import { ViewBtn } from "../../styles/ViewBtn";
-
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    padding: "8px 32px",
-    height: 35,
-    backgroundColor: "#E9E9E9",
-    color: theme.palette.common.black
-  },
-  body: {
-    padding: "8px 32px",
-    fontSize: 16,
-    height: 104
-  }
-}))(TableCell);
-
-const useStyles = makeStyles({
-  root: {
-    border: "1px solid #DCD9D5"
-  },
-  table: {
-    miWidth: "1080px"
-  },
-  tableHover: {
-    "&:hover": {
-      border: "3px solid orange"
-    }
-  }
-});
+import {
+  useStyles,
+  StyledTableCell,
+  StyledTableHeadRow
+} from "../../styles/Table/TableStyles";
 
 function DashboardTasks({ projectID, numberOfTasks }) {
   const { tasks } = useContext(taskContext);
@@ -76,21 +53,18 @@ function DashboardTasks({ projectID, numberOfTasks }) {
       <Paper className={classes.root}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
-            <TableRow>
+            <StyledTableHeadRow>
               <StyledTableCell>PROJECT</StyledTableCell>
               <StyledTableCell>NAME</StyledTableCell>
               <StyledTableCell>TASK</StyledTableCell>
               <StyledTableCell>DUE DATE</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
-            </TableRow>
+            </StyledTableHeadRow>
           </TableHead>
           <TableBody>
             {tasks.slice(0, numberOfTasks).map(item => {
-            
-                return <Task item={item} key={item.id} />;
-              }
-            )}
-            
+              return <Task item={item} key={item.id} />;
+            })}
           </TableBody>
         </Table>
       </Paper>
@@ -107,11 +81,11 @@ const Section = styled.div`
   margin-bottom: 8px;
 
   p {
-    font-family: "Roboto";
+   
     font-size: 16px;
     line-height: 19px;
-    color: #8a827d;
-    font-weight: 500;
+    color: #212529;
+    font-weight: 600;
   }
 `;
 
