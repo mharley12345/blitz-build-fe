@@ -28,20 +28,20 @@ export default function DocumentsProvider({ children }){
        })
     }
  console.log(documents)
-     const handleDelete = (documents) => {
+     const handleDelete = (document) => {
          
-         console.log(documents)
-       const file_name = documents.file_name
-       const user_id = documents.user_id
+         console.log(document)
+       const file_name = document.file_name
+       const user_id = document.user_id
          axiosWithAuth().delete(`/docs/url/${file_name}`,user_id)
   
         .then(res => {
             console.log("document was deleted", res)
-            const newDocumentList = documents.filter(document =>{
-                return document.file_name !== documents.id
+            const newDocumentList = documents.filter(d =>{
+                return d.id !== document.id
             })
             setDocuments(newDocumentList);
-            window.location.reload(true)
+           
 
         })
         .catch(err =>{

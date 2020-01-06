@@ -15,7 +15,7 @@ export default function DeleteTemplate({ template, closeDrop, deleteStatus, hand
         visible={deleteStatus}
         dismiss={handleDeleteClose}
         client={"40%"}
-        component={
+        component={ 
           <Confirm
             closeModal={handleDeleteClose}
             deleteFunction={deleteTemplate}

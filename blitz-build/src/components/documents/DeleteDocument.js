@@ -1,30 +1,29 @@
 import React, {useContext} from "react"
 
 import Modal from "../global/Modal"
-import Confirm from "./ConfirmDelete"
+import Confirm from "../global/Confirm"
 
 import DocumentContext from '../../contexts/documents/DocumentsContext'
 
-export default function DeleteDocument(props){
+export default function DeleteDocument({deleteStatus,handleDeleteClose,documents}){
    
-       const {file_name ,handleDelete, deleteStatus,handleDeleteClose,documents} =useContext(DocumentContext)
-      console.log(file_name)
+       const {handleDelete} =useContext(DocumentContext)
+     console.log(documents);
     return (
-        <>
+      <>
         <Modal
-        visible={deleteStatus}
-        dismiss={handleDeleteClose}
- 
-        client={"40%"}
-        component={
+          visible={deleteStatus}
+          dismiss={handleDeleteClose}
+          client={"40%"}
+          component={
             <Confirm
-            closeModal={handleDeleteClose}
-            deleteFunction={handleDelete}
-            deleteItem={documents}
-            text={`${document.file_name}` }
+              closeModal={handleDeleteClose}
+              deleteFunction={handleDelete}
+              deleteItem={documents.document}
+              text={`${documents.document.file_name}`}
             />
-        }
+          }
         />
-        </>
-    )
+      </>
+    );
 }
