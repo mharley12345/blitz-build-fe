@@ -1,5 +1,5 @@
-import React ,{useContext} from 'react'
-import DocumentContext from '../../contexts/documents/DocumentsContext'
+import React from  "react"
+
 import styled from "styled-components";
 import { XButton } from "../../styles/Tasks/tasks";
 
@@ -33,12 +33,12 @@ justify-content: center;
 align-items: center;
 margin-right: 10px;
 margin-top:36px;
-:hover
+:hover{
 `
 
 
 export default function Confirm(props) {
-    const { handleDelete } =useContext(DocumentContext)
+
     const  {closeModal, text} =props
     return (
         <ConfirmStyle>
@@ -52,9 +52,8 @@ export default function Confirm(props) {
             <BtnDiv>
                 <ConfirmBtn onClick={ closeModal }>Cancel</ConfirmBtn>
                 <ConfirmBtn delete onClick={ () => {
-                                         handleDelete()                        
+                                                 
                           
-                                              closeModal()
                 } }>Delete</ConfirmBtn>
             </BtnDiv>
         </ConfirmStyle>

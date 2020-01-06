@@ -1,8 +1,10 @@
-import React from 'react'
+import React ,{useContext} from 'react'
+import DocumentsContext from '../contexts/documents/DocumentsContext'
+import styled from  'styled-components'
 
-import styled from "styled-components";
+import  {useHistory} from 'react=router=dom'
 import { XButton } from "../../styles/Tasks/tasks";
-
+const {handleDelete, handleDeleteOpen} =useContext(DocumentsContext)
 const ConfirmStyle = styled.div`
   padding-left: 30px;
   padding-bottom: 30px;
@@ -20,9 +22,9 @@ text-align: left;
 
 const ConfirmBtn = styled.button`
 background: ${props =>
-    props.print ? 'green' : 'white'};
+    props.print ? '#FF4D4F' : 'white'};
 color: ${props =>
-    props.print ? 'white': 'green'};
+    props.print ? 'white': '#FF4D4F'};
 display: flex;
 border-radius: 3px;
 border: 1px solid #FF4D4F
@@ -37,8 +39,15 @@ margin-top:36px;
 `
 
 
-export default function Confirm({ closeModal, text, printFunction, printDoc ,handlePrint}) {
-    return (
+export default function Confirm(props) {
+ const { closeModal, text, printFunction, printDo,doc_url }= props;
+ const history = useHistory();
+ const handleClick = ()=> {
+
+ const path = doc_url
+  history.push(path)
+ }
+     return (
         <ConfirmStyle>
             <div style={{textAlign: 'right', height: '50px'}}>
                 <XButton onClick={ closeModal }>close X</XButton>
@@ -49,10 +58,10 @@ export default function Confirm({ closeModal, text, printFunction, printDoc ,han
             <p>Please submit continue to proceed?</p>
             <BtnDiv>
                 <ConfirmBtn onClick={ closeModal }>Cancel</ConfirmBtn>
-                <ConfirmBtn print onClick={ () => {
-                     printFunction(handlePrint)
+                <ConfirmBtn delete onClick={ () => {
+                        { /* handleDelete(); */}
                     closeModal()
-                } }>Submit</ConfirmBtn>
+                } }>Delete</ConfirmBtn>
             </BtnDiv>
         </ConfirmStyle>
     )

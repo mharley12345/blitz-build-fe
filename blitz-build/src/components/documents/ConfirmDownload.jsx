@@ -1,5 +1,5 @@
 import React from 'react'
-import DocumentContext from '../../contexts/documents/DocumentsContext'
+
 import styled from "styled-components";
 import { XButton } from "../../styles/Tasks/tasks";
 import download from 'save-filejs'

@@ -8,7 +8,7 @@ import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import Global from '../../styles/Global';
-import {SortBtn} from '../../styles/SortBtn'
+import { SortBtn } from '../../styles/SortBtn'
 import TablePaginationActions from "../../components/global/TablePaginationActions";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableFooter from "@material-ui/core/TableFooter";
@@ -17,6 +17,7 @@ import DocumentMeatBalls from './DocumentsMeatBalls'
 import Link from 'react-router-dom'
 import {
   StyledTableRow,
+  
   useStyles,
   StyledTableCell
 } from "../../styles/Table/TableStyles";
@@ -55,8 +56,8 @@ const DocumentCard = (props) => {
 
     <>
       <Global />
-      <p style={{  fontWeight: 600 }}>Your Documents</p>  <SortBtn style={{textDecoration:"none"}}>Sort <img src={Sortv} alt=""/></SortBtn>
-    
+      <p style={{ fontWeight: 600 }}>Your Documents</p>  <SortBtn style={{ textDecoration: "none" }}>Sort <img src={Sortv} alt="" /></SortBtn>
+
       <Paper className={classes.root}>
         <Table aria-label="customized table">
           <TableHead>
@@ -90,9 +91,9 @@ const DocumentCard = (props) => {
                   <a href={`/documents/view/${result.file_name}`}
                     rel="noopener" doc_url={result.doc_url} document={result} target="_Self">
 
-                    View</a><DocumentMeatBalls document={result}/>
-                  </StyledTableCell>
-                   {/** */}
+                    View</a><DocumentMeatBalls document={result} />
+                </StyledTableCell>
+                {/** */}
               </StyledTableRow>
             ))}
             {emptyRows > 0 && (

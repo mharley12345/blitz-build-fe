@@ -1,7 +1,7 @@
 import React, {useContext} from "react"
 
 import Modal from "../global/Modal"
-import Confirm from "../global/Confirm"
+import Confirm from "./ConfirmDelete"
 
 import DocumentContext from '../../contexts/documents/DocumentsContext'
 
@@ -21,7 +21,7 @@ export default function DeleteDocument(props){
             closeModal={handleDeleteClose}
             deleteFunction={handleDelete}
             deleteItem={documents}
-            text={`${documents} document`}
+            text={`${this.document.file_name}` }
             />
         }
         />

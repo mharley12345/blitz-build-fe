@@ -80,7 +80,10 @@ export default function DocumentsMeatballsDrop(props) {
             <DropDown>
               {/*<Geo></Geo>*/}
 
-
+              <StyledLi onClick={handleDeleteOpen}>
+                <DropP>Delete</DropP>
+                <TaskI className="ion-md-trash" />
+              </StyledLi>
               <StyledLi onClick={handleDownloadOpen}>
                 <DropP>Download</DropP>
                 <TaskI className="ion-md-cloud" />
@@ -89,10 +92,7 @@ export default function DocumentsMeatballsDrop(props) {
                 <DropP>Print</DropP>
                 <TaskI className="ion-md-print" />
               </StyledLi>
-              <StyledLi onClick={handleDeleteOpen}>
-                <DropP>Delete</DropP>
-                <TaskI className="ion-md-trash" />
-              </StyledLi>
+
             </DropDown>
           </>
         )}
