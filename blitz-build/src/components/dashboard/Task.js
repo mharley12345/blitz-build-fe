@@ -58,7 +58,7 @@ function Task({ item, children, projectTask }) {
 
   const checkIfComplete = () => {
     if(item.isComplete === true) {
-      return <p>Complete</p>
+      return <p>Completed</p>
     }
     else {
       return <p>{status}</p>
