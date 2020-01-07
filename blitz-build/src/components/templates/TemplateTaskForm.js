@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import TemplateContext from '../../contexts/templates/TemplateContext'
 // import DatePicker from "react-datepicker";
 
 // components
@@ -32,6 +33,7 @@ export default function TaskForm({
 
   //gets the local storage template_id which will be the template id the user is currently on
   const template_id = localStorage.getItem("template_id");
+  const { getTemplateTasks } = useContext(TemplateContext)
   const [task, setTask, handleChanges] = useInput({
     task_name: "",
     task_description: "",
@@ -43,6 +45,7 @@ export default function TaskForm({
     if (editFields) {
       console.log("editFields", editFields);
       setTask(editFields);
+     
     }
   }, []);
 
@@ -52,6 +55,7 @@ export default function TaskForm({
   //handles submit by setting the input to a variable called newTask and then sends that through the handle function then resets the form to blank as before.
   const handleSubmit = e => {
     e.preventDefault();
+    
 
     const newTask = {
       id: task.id,
@@ -80,7 +84,7 @@ export default function TaskForm({
         template_id: template_id
       });
       setError({ error: false, error_text: null });
-
+     
       closeModal();
     }
   };
