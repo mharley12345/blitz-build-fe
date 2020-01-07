@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 //a package for parsing query strings
 import queryString from "query-string";
 
+//router
 import { Link } from "react-router-dom";
 
 //context
@@ -106,7 +107,14 @@ export default function Tasks(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, tasks.length - page * rowsPerPage);
+    rowsPerPage - Math.min(rowsPerPage, tasks.filter(task => {
+      if(queryValues.filter === 'ACTIVE'){
+        return task.isComplete === false
+      } 
+      else if(queryValues.filter === 'COMPLETE'){
+        return task.isComplete === true
+      }
+    }).length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
