@@ -72,6 +72,7 @@ export default function ProjectTasks (props, {ProjectName}) {
     useEffect(() => {
       getTasks()
     },[])
+    
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, projectTasks.filter(task => {
     if(queryValues.filter === 'ACTIVE'){
       return task.isComplete === false

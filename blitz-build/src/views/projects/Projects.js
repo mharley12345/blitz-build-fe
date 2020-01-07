@@ -85,7 +85,7 @@ const Projects = props => {
                 key={projects.id}
                 
                 onClick={() => {
-                  props.history.push(`/project/${projects.id}`);
+                  props.history.push(`/projects/${projects.id}`);
                 }}
               >
                 <StyledTableCell>
