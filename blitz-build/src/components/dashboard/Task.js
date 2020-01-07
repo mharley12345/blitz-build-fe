@@ -53,9 +53,17 @@ function Task({ item, children, projectTask }) {
     } else if (status === "Upcoming") {
       return `Due in ${diff} days`;
     }
+   
   }
 
-  const dueDateText = DueDateLogic(diffDays, status);
+  const checkIfComplete = () => {
+    if(item.isComplete === true) {
+      return <p>Complete</p>
+    }
+    else {
+      return <p>{status}</p>
+    }
+  }
   return (
     <>
       <StyledTableRow>
@@ -79,7 +87,7 @@ function Task({ item, children, projectTask }) {
         <StyledTableCell>
           <Inner>
             <Status status={status}>
-              <p>{status}</p>
+             {checkIfComplete()}
             </Status>
             <MeatBallsDrop task={item} />
           </Inner>
