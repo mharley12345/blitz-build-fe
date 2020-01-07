@@ -128,7 +128,7 @@ const DrpZnWrapper = styled.div`
 border:3px dashed black;
 `
 const BtnWrap = styled.div`
- font-size: 100px;
+ font-size: 0px;
 
   left: 0;
   top: 0;
