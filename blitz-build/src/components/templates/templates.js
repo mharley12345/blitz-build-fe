@@ -41,7 +41,7 @@ const Templates = props => {
         // settemplateSearchResults(results);
       });
   }, []);
-  console.log("these are the tempaltes: ", templates);
+  console.log("these are the templates: ", templates);
   return (
     <div>
       <Section>
