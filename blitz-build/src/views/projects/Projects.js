@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
-
 // context
 import { useProjectContext } from "../../contexts/projects/ProjectContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
-
 //styles
 import Global from "../../styles/Global";
 import Table from "@material-ui/core/Table";
@@ -14,56 +12,45 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
-import {useStyles, StyledTableCell, StyledTableRow} from "../../styles/Table/TableStyles"
+import   { useStyles ,StyledTableCell ,StyledTableRow
+} from "../../styles/Table/TableStyles"
 // pages bar function from global
 import TablePaginationActions from "../../components/global/TablePaginationActions";
-
-
-
 const Projects = props => {
   const classes = useStyles();
   //importing state of projects
   const { projects } = useProjectContext();
-
-
   
-
   //this tracks which page you are on for projects and sets the intial state of how many rows there are
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
   //sets new page
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
   //this handles the changes the user makes to how many rows they want
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
   //return all projects or filtered projects
-
-
   
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage);
-
   return (
     <>
       <Global />
       <p style={{ paddingBottom: "8px", fontWeight: 600 }}>Your Project List</p>
       <Paper className={classes.root}>
-        <Table  aria-label="customized table">
+        <Table aria-label="customized table">
           <TableHead>
-            <TableRow>
+            <header>
               <StyledTableCell>ADDRESS</StyledTableCell>
               <StyledTableCell>NAME</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
               <StyledTableCell>CREATED</StyledTableCell>
               <StyledTableCell>VIEW</StyledTableCell>
-            </TableRow>
+            </header>
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
@@ -76,7 +63,7 @@ const Projects = props => {
               <StyledTableRow
                 className={classes.tableHover}
                 key={projects.id}
-                to={`/project/${projects.id}`}
+                
                 onClick={() => {
                   props.history.push(`/project/${projects.id}`);
                 }}
@@ -95,14 +82,12 @@ const Projects = props => {
                 </StyledTableCell>
               </StyledTableRow>
             ))}
-
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
                 <TableCell colSpan={5} />
               </TableRow>
             )}
           </TableBody>
-
           <TableFooter>
             <TableRow>
               <TablePagination
@@ -126,5 +111,4 @@ const Projects = props => {
     </>
   );
 };
-
 export default Projects;
