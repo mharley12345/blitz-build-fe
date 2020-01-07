@@ -1,6 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { axiosWithAuth } from '../../utils/auth/axiosWithAuth'
 
+//a package for parsing query strings
+import queryString from "query-string";
+
+//router
+import { Link } from "react-router-dom";
+
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
 
@@ -8,7 +14,6 @@ import taskContext from "../../contexts/tasks/TaskContext";
 import Task from "../../components/dashboard/Task";
 
 //mui
-import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TableHead from "@material-ui/core/TableHead";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
@@ -25,9 +30,11 @@ import {
   StyledTableHeadRow,
   useStyles
 } from "../../styles/Table/TableStyles";
+
 //styles
 import styled from "styled-components";
 import { SortBtn } from "../../styles/SortBtn";
+import * as color from "../../styles/color";
 
 //static
 import Project_icon from "../../styles/icons_project/project_icon.png";
@@ -38,6 +45,12 @@ const InfoContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+`;
+
+const SortDiv = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 
@@ -51,11 +64,22 @@ export default function ProjectTasks (props, {ProjectName}) {
   //pagnation
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  //status filter 
+  const queryValues = queryString.parse(props.location.search);
+  const [btnStatus, setBtnStatus] = useState(queryValues.filter === 'ACTIVE');
   
     useEffect(() => {
       getTasks()
     },[])
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, projectTasks.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, projectTasks.filter(task => {
+    if(queryValues.filter === 'ACTIVE'){
+      return task.isComplete === false
+    } 
+    else if(queryValues.filter === 'COMPLETE'){
+      return task.isComplete === true
+    }
+  }).length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -68,11 +92,18 @@ export default function ProjectTasks (props, {ProjectName}) {
 
   const itemCounter = () => {
     if (projectTasks.length > 0) {
-      return projectTasks.length;
-    } else {
-      return projectTasks.length;
-    }
+      return projectTasks.filter(task => {
+        if(queryValues.filter === 'ACTIVE'){
+          return task.isComplete === false
+        } 
+        else if(queryValues.filter === 'COMPLETE'){
+          return task.isComplete === true
+        }
+      }).length;
+    } 
   };
+  //gets the query from the url and parses it to a object
+
 
   const classes = useStyles();
   console.log('from tasks',tasks)
@@ -91,12 +122,26 @@ export default function ProjectTasks (props, {ProjectName}) {
             / Tasks
           </span>
         </BreadCrumbs>
-        {/* <SortBtn >
-          Active
-        </SortBtn>
-        <SortBtn>
-          Complete
-        </SortBtn> */}
+        <SortDiv>
+          <Link to={`/projects/${projectID}/tasks?filter=ACTIVE`}>
+            <SortBtn 
+            active={btnStatus}
+            onClick={() => {
+              setBtnStatus(true)
+              console.log(btnStatus)
+            }}
+            >Active</SortBtn>
+          </Link>
+          <span style={{ fontWeight: 600, color: color.grey400 }}>|</span>
+          <Link to={`/projects/${projectID}/tasks?filter=COMPLETE`}>
+            <SortBtn 
+            active={!btnStatus}
+            onClick={() => {
+              setBtnStatus(false)
+            }}
+            >Complete</SortBtn>
+          </Link>
+        </SortDiv>
       </InfoContainer>
 
       <Paper className={classes.root}>
@@ -115,7 +160,14 @@ export default function ProjectTasks (props, {ProjectName}) {
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? projectTasks.slice(
+              ? projectTasks.filter(task => {
+                if(queryValues.filter === 'ACTIVE'){
+                  return task.isComplete === false
+                } 
+                else if(queryValues.filter === 'COMPLETE'){
+                  return task.isComplete === true
+                }
+              }).slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )

@@ -23,7 +23,7 @@ function ProjectTaskCard({ projectID, numberOfTasks }) {
   const { tasks, getTasks } = useContext(taskContext);
 
   useEffect(() => {
-    getTasks('ALL')
+    getTasks()
   }, [])
 
   const projectTasks = tasks.filter(item => {
@@ -33,7 +33,7 @@ function ProjectTaskCard({ projectID, numberOfTasks }) {
     <Container>
       <Section>
         <p>Your Task List</p>
-        <Link to={`/projects/${projectID}/tasks`}>
+        <Link to={`/projects/${projectID}/tasks?filter=ACTIVE`}>
           <ViewBtn>View All</ViewBtn>
         </Link>
       </Section>
@@ -48,9 +48,9 @@ function ProjectTaskCard({ projectID, numberOfTasks }) {
             </StyledTableHeadRow>
           </TableHead>
           <TableBody>
-            {tasks.slice(0, numberOfTasks).map(item => {
+            {projectTasks.slice(0, numberOfTasks).map(item => {
               if (JSON.stringify(item.project_id) === projectID) {
-                return <Task item={item} key={item.id} />;
+                return <Task item={item} key={item.id} projectTask={true} />;
               }
             })}
           </TableBody>
