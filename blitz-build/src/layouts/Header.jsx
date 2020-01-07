@@ -211,8 +211,8 @@ const SearchTotal = styled.div`
 `;
 const ButtonSearch = styled.i`
   position: absolute;
-  left: 93%;
-  top: 5%;
+  left: 100%;
+  top: 20%;
   border: none;
   font-size: 30px;
   color: #8a827d;
