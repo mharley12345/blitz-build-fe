@@ -104,6 +104,7 @@ export default function TaskProvider({ children }) {
   };
 
   const editTask = editedTask => {
+
     const dbTask = {
       task_name: editedTask.task_name,
       task_description: editedTask.task_description,
@@ -117,6 +118,7 @@ export default function TaskProvider({ children }) {
 
     const newTasks = tasks.map(task => {
       if (task.id === editedTask.id) {
+        console.log('editedTask from provider',editedTask)
         return editedTask;
       } else {
         return task;
