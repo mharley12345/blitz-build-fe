@@ -146,7 +146,7 @@ export default function Tasks(props) {
       return <p>There doesn't seem to be any tasks with that name</p>;
     } else {
       return (
-        <p style={{ fontWeight: 600, color: color.grey400 }}>Your Task List</p>
+        <p style={{ fontWeight: 600}}>Your Task List</p>
       );
     }
   };

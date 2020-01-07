@@ -16,6 +16,7 @@ import DeleteTask from "./DeleteTask";
 import AddDelayReason from "../delayLog/AddDelayReason";
 import PathnameContext from "../../contexts/PathnameContext";
 import EditTemplateTask from "../templates/EditTemplateTask";
+
 //styles
 import {
   TaskI,
@@ -31,7 +32,7 @@ export default function MeatBallsDrop({ task }) {
   const [dropStatus, setDropStatus] = useState(false);
   const [completeStatus, setCompleteStatus] = useState(false);
   const [activateStatus, setActivateStatus] = useState(false);
-
+  
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
   const [delayStatus, setDelayStatus] = useState(false);
@@ -86,6 +87,7 @@ export default function MeatBallsDrop({ task }) {
   const handleEditClose = e => {
     setEditStatus(false);
     closeDrop();
+ 
   };
 
   //delete modal functions
@@ -96,6 +98,7 @@ export default function MeatBallsDrop({ task }) {
   const handleDeleteClose = e => {
     setDeleteStatus(false);
     closeDrop();
+  
   };
   //delay modal functions
   const handleDelayOpen = e => {
@@ -154,6 +157,7 @@ const Hidden = {
       );
     }
   };
+  
 const pageCheck = (complete, undo, edit, delay, deleated) => {
   const queryValues = queryString.parse(window.location.search);
      if (pathname.includes('/templates')) {

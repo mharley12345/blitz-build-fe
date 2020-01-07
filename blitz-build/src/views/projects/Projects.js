@@ -46,7 +46,7 @@ const Projects = props => {
   return (
     <>
       <Global />
-      <p style={{ paddingBottom: "8px", fontWeight: 600, color: color.grey400 }}>Your Project List</p>
+      <p style={{ paddingBottom: "15px", fontWeight: 600 }}>Your Project List</p>
       <Paper className={classes.root}>
         <Table aria-label="customized table">
           <TableHead>

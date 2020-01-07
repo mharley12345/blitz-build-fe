@@ -205,11 +205,20 @@ function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, link
    console.log("the user info:", userInfo)
    const {getTasks, tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks} = useContext(TaskContext);
 //    console.log(navLinks, background, hoverBackground, linkColor, logo)
+
 const pictureOrNot = () => {
   if(userInfo.length === 0) {
     return <div></div>
   }
-  else {
+  else if (userInfo.picture.length === 0) {
+    return (
+    <UserProfile>
+       <UserInfoContainer>
+              <UserName> {userInfo.name}</UserName>
+              <UserTitle>  Super Intendent  </UserTitle>
+              </UserInfoContainer>
+      </UserProfile> )
+  } else {
     return (  
     <UserProfile>
      <UserImg> <img src={userInfo.picture} style = {imgStyle}/></UserImg>
