@@ -137,7 +137,7 @@ export default function MeatBallsDrop({ task }) {
   //returns specific options for templates
   const checkThePage = (editTask, editTemplateTask, completeTask, activateTask) => {
     if (pathname.includes("/templates")) {
-      return editTemplateTask;
+      return (<>{editTemplateTask}</>);
     } else {
       return (
         <>
@@ -146,6 +146,8 @@ export default function MeatBallsDrop({ task }) {
       );
     }
   };
+
+  const checkThePageOptions = (complete, undo, )
 
   return (
     <>
@@ -156,6 +158,7 @@ export default function MeatBallsDrop({ task }) {
       >
         {dropStatus && (
           <>
+
             <DropDown>
               <StyledLi style={hideOnTemplates(),hideOnComplete()}>
                 <DropP onClick={handleCompleteOpen}>Complete</DropP>
