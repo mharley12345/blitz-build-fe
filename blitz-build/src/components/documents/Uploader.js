@@ -105,7 +105,7 @@ class Uploader extends React.Component {
             <DrpZnWrapper>
               <BtnWrap>
 
-                <input name="upload" onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file" />
+                <Input name="upload" onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file" />
 
               </BtnWrap>
               <H3>or choose a file</H3>
@@ -120,7 +120,10 @@ class Uploader extends React.Component {
     );
   }
 }
-
+const Input = styled.input `
+width: 596px;
+    height: 170px
+`
 const DrpZnWrapper = styled.div`
 border:3px dashed black;
 `
@@ -138,7 +141,7 @@ width: 492px;
 height: 21px;
 left: 474px;
 top: 337px;
-padding-top: 4rem;
+padding-top: 0;
     padding-left: 11rem;
 font-family: Roboto;
 font-style: normal;
