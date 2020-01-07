@@ -154,6 +154,7 @@ const Hidden = {
       );
     }
   };
+  
 const pageCheck = (complete, undo, edit, delay, deleated) => {
   const queryValues = queryString.parse(window.location.search);
      if (pathname.includes('/templates')) {
