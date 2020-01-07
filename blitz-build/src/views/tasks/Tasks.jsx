@@ -7,8 +7,8 @@ import queryString from "query-string";
 import { Link } from "react-router-dom";
 
 //context
-import taskContext from "../../contexts/tasks/TaskContext";
-import searchTermContext from "../../contexts/searching/searchTerm";
+import { useTaskContext } from "../../contexts/tasks/TaskContext";
+import { useSearchTermContext } from "../../contexts/searching/searchTerm";
 
 //components
 import Task from "../../components/dashboard/Task";
@@ -66,55 +66,57 @@ const SortDiv = styled.div`
 // });
 
 export default function Tasks(props) {
-// const MainFailContainer = styled.div`
-//   postion: relative;
-//   width: 900px;
-//   height: 200px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin-left: 250px;
-// `;
+  // const MainFailContainer = styled.div`
+  //   postion: relative;
+  //   width: 900px;
+  //   height: 200px;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   margin-left: 250px;
+  // `;
 
-// const failedContainer = styled.div`
-//   margin-top: 80px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `;
-// const failText = styled.div`
-//   font-size: 50px;
-// `;
+  // const failedContainer = styled.div`
+  //   margin-top: 80px;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  // `;
+  // const failText = styled.div`
+  //   font-size: 50px;
+  // `;
 
-  const { tasks, getTasks } = useContext(taskContext);
+  const { tasks, getTasks } = useTaskContext();
 
-  const { searchTerm, results, taskSearchResults } = useContext(
-    searchTermContext
-  );
+  const { searchTerm, results } = useSearchTermContext();
 
   //filter logic
 
   //gets the query from the url and parses it to a object
   const queryValues = queryString.parse(props.location.search);
-  
-  const [btnStatus, setBtnStatus] = useState(queryValues.filter === 'ACTIVE');
-  
+
+  const [btnStatus, setBtnStatus] = useState(queryValues.filter === "ACTIVE");
+
   useEffect(() => {
-    getTasks()
+    getTasks();
   }, [btnStatus]);
 
   //pagnation
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, tasks.filter(task => {
-      if(queryValues.filter === 'ACTIVE'){
-        return task.isComplete === false
-      } 
-      else if(queryValues.filter === 'COMPLETE'){
-        return task.isComplete === true
-      }
-    }).length - page * rowsPerPage);
+    rowsPerPage -
+    Math.min(
+      rowsPerPage,
+      tasks.filter(task => {
+        if (queryValues.filter === "ACTIVE") {
+          return task.isComplete === false;
+        } else if (queryValues.filter === "COMPLETE") {
+          return task.isComplete === true;
+        }
+      }).length -
+        page * rowsPerPage
+    );
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -126,27 +128,22 @@ export default function Tasks(props) {
   };
 
   const itemCounter = () => {
-    console.log('from counter',  tasks.length)
+    console.log("from counter", tasks.length);
     if (results.length > 0) {
       return results.length;
     } else {
       return tasks.filter(task => {
-        if(queryValues.filter === 'ACTIVE'){
-          return task.isComplete === false
-        } 
-        else if(queryValues.filter === 'COMPLETE'){
-          return task.isComplete === true
+        if (queryValues.filter === "ACTIVE") {
+          return task.isComplete === false;
+        } else if (queryValues.filter === "COMPLETE") {
+          return task.isComplete === true;
         }
       }).length;
     }
   };
   const failedSearch = () => {
     if (searchTerm.length > 0 && results.length === 0) {
-      return (
-        <p>
-          There doesn't seem to be any tasks with that name
-        </p>
-      );
+      return <p>There doesn't seem to be any tasks with that name</p>;
     } else {
       return (
         <p style={{ fontWeight: 600, color: color.grey400 }}>Your Task List</p>
@@ -161,23 +158,27 @@ export default function Tasks(props) {
       <InfoContainer>
         {failedSearch()}
         <SortDiv>
-          <Link to='/tasks?filter=ACTIVE'>
-            <SortBtn 
-            active={btnStatus}
-            onClick={() => {
-              setBtnStatus(true)
-              console.log(btnStatus)
-            }}
-            >Active</SortBtn>
+          <Link to="/tasks?filter=ACTIVE">
+            <SortBtn
+              active={btnStatus}
+              onClick={() => {
+                setBtnStatus(true);
+                console.log(btnStatus);
+              }}
+            >
+              Active
+            </SortBtn>
           </Link>
           <span style={{ fontWeight: 600, color: color.grey400 }}>|</span>
-          <Link to='/tasks?filter=COMPLETE'>
-            <SortBtn 
-            active={!btnStatus}
-            onClick={() => {
-              setBtnStatus(false)
-            }}
-            >Complete</SortBtn>
+          <Link to="/tasks?filter=COMPLETE">
+            <SortBtn
+              active={!btnStatus}
+              onClick={() => {
+                setBtnStatus(false);
+              }}
+            >
+              Complete
+            </SortBtn>
           </Link>
         </SortDiv>
       </InfoContainer>
@@ -199,17 +200,15 @@ export default function Tasks(props) {
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? tasks.filter(task => {
-                if(queryValues.filter === 'ACTIVE'){
-                  return task.isComplete === false
-                } 
-                else if(queryValues.filter === 'COMPLETE'){
-                  return task.isComplete === true
-                }
-              }).slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
+              ? tasks
+                  .filter(task => {
+                    if (queryValues.filter === "ACTIVE") {
+                      return task.isComplete === false;
+                    } else if (queryValues.filter === "COMPLETE") {
+                      return task.isComplete === true;
+                    }
+                  })
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : tasks
             ).map(task => {
               if (results.length === 0 && searchTerm.length === 0) {
@@ -219,14 +218,14 @@ export default function Tasks(props) {
               }
             })}
 
-            {results.length > 0 ? (   (rowsPerPage > 0
-              ? results.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-              : results
-            )
-              .map(result => <Task item={result} key={result.id}></Task>)
+            {results.length > 0 ? (
+              (rowsPerPage > 0
+                ? results.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                : results
+              ).map(result => <Task item={result} key={result.id}></Task>)
             ) : (
               <></>
             )}

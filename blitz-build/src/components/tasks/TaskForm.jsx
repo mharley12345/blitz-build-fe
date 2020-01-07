@@ -28,6 +28,7 @@ export default function TaskForm({
   editFields,
   text
 }) {
+  //local state
   const [error, setError] = useState({
     error: false,
     error_text: null
@@ -194,7 +195,7 @@ export default function TaskForm({
       {error.error && error.error_text ? (
         <ErrorMessage errorMessage={error.error_text} />
       ) : null}
-      <StyledBtn >{text}</StyledBtn>
+      <StyledBtn>{text}</StyledBtn>
     </StyledForm>
   );
 }

@@ -1,24 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
 import TemplatesProvider from "../../contexts/templates/TemplateProvider";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-import PathnameContext from "../../contexts/PathnameContext";
-import TemplateContext from "../../contexts/templates/TemplateContext";
+import { usePathnameContext } from "../../contexts/PathnameContext";
+import { useTemplateContext } from "../../contexts/templates/TemplateContext";
 import searchTermContext from "../../contexts/searching/searchTerm";
 import styled, { css } from "styled-components";
 import MeatBallsDrop from "../tasks/MeatBallsDrop";
-import { set } from "date-fns";
-const IndividualTemplate = props => {
-  const { templateTask, setTemplatesTask, getTemplateTasks } = useContext(
-    TemplateContext
-  );
-  const { pathname, setPathname } = useContext(PathnameContext);
 
-  console.log(templateTask);
+const IndividualTemplate = props => {
+  //getting info for templates and template tasks from context
+  const {
+    templateTask,
+    setTemplatesTask,
+    getTemplateTasks
+  } = useTemplateContext();
+
+  //getting pathname from contexxt
+  const { setPathname } = usePathnameContext();
+
   useEffect(() => {
     setPathname(window.location.pathname);
     getTemplateTasks();
   }, []);
-
+console.log('these are the templateTasks:', templateTask);
   return (
     <div>
       <Section>{/* <h1>individual template</h1> */}</Section>
@@ -38,7 +42,7 @@ const IndividualTemplate = props => {
 
 export default IndividualTemplate;
 
-const TitleText = styled.p`
+export const TitleText = styled.p`
   width: 200px;
 
   font-size: 14px;

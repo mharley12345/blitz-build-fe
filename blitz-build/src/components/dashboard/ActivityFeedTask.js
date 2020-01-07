@@ -2,28 +2,47 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import styled, { css } from "styled-components";
 import MeatBallsDrop from "../tasks/MeatBallsDrop";
 import projectContext from "../../contexts/projects/ProjectContext";
+import { NavLink } from "react-router-dom";
 
-function CompletedTask({ item, children }) {
-  //importing state of projects from context
+// function NewTask({ item, children }) {
+//   //imports state of projects from context
+//   const { projects } = useContext(projectContext);
+
+//   //returns project.id's that are associated with project id's of items that were created
+//   const projectID = projects.map(project => {
+//     if (project.id === item.project_id) {
+//       return project.id;
+//     }
+//   });
+
+//   //returns project street address that are associated with project id's of tasks items created
+
+function ActivityFeedTask({ item, children, props }) {
+  //imports state of projects from context
   const { projects } = useContext(projectContext);
+  const projectID = [];
 
-  const projectID = projects.map(project => {
-    //returns project.id's that are associated with project id's of items that were completed
-    if (project.id === item.project_id) {
-      return project.id;
-    }
-  });
-  //returns project name that are associated with project id's of tasks completed
-  const TaskProjectName = projects.map(project => {
-    if (project.id === item.project_id) {
-      return project.project_name;
-    }
-  });
+  //checks if the project id is equal to the item's project_id in the activity feed then it pushes it to an array called projectID
+  const checkProjectID = () =>
+    projects.map(project => {
+      if (project.id === item.project_id) {
+        projectID.push(project.id);
+      }
+    });
 
-  //returns project address that are associated with the project id's of tasks completed
+  checkProjectID();
+
   const TaskAddress = projects.map(project => {
     if (project.id === item.project_id) {
       return project.street_address;
+    }
+  });
+
+  //returns project name that are associated with project id's of tasks items created
+  const TaskProjectName = projects.map(project => {
+    if (project.id === item.project_id) {
+      return project.project_name;
+      
     }
   });
 
@@ -44,6 +63,15 @@ function CompletedTask({ item, children }) {
     }
   }
 
+  //This function checks if its a completed task or a new task then returns it according to what it is.
+  const checkCondition = () => {
+    if (item.isComplete === true) {
+      return <TitleText>Completed Task</TitleText>;
+    } else {
+      return <TitleText> Added Task </TitleText>;
+    }
+  };
+
   //creating a variable where the different between two dates will be calculated
   const status = DateCalc(today, item);
 
@@ -56,37 +84,42 @@ function CompletedTask({ item, children }) {
 
   const diffDays = Math.round(Math.abs((todayDate - item.due_date) / oneDay));
 
-  //depending on the difference of the dates, different status's are returned for tasks.
-  function DueDateLogic(diff, status) {
-    if (status === "Pending") {
-      return "Due today";
-    } else if (status === "Overdue") {
-      return `${diff} days past due`;
-    } else if (status === "Upcoming") {
-      return `Due in ${diff} days`;
-    }
-  }
+  // //depending on the difference of the dates, different status's are returned for tasks.
+  // function DueDateLogic(diff, status) {
+  //   if (status === "Pending") {
+  //     return "Due today";
+  //   } else if (status === "Overdue") {
+  //     return `${diff} days past due`;
+  //   } else if (status === "Upcoming") {
+  //     return `Due in ${diff} days`;
+  //   }
+  // }
 
-  const dueDateText = DueDateLogic(diffDays, status);
+  // const dueDateText = DueDateLogic(diffDays, status);
 
+  // return (
+  //   <Container>
+  //     <NavLink to={`/project/${projectID}`} style={NavLinkStyle}>
+  //       <InnerContainer>
+  //  console.log('project id on activity feed :', projectID)
   return (
     <Container>
-      <Inner>
-        <Address>
-          <TitleText> Completed Task </TitleText>
+      <NavLink to={`/projects/${projectID}`} style={NavLinkStyle}>
+        <InnerContainer>
+          {checkCondition()}
           <NameText>{item.task_name} </NameText>
 
           <Spacer> / </Spacer>
 
           <AddressText> {TaskAddress} </AddressText>
           <ProjectName>{TaskProjectName} </ProjectName>
-        </Address>
-      </Inner>
+        </InnerContainer>
+      </NavLink>
     </Container>
   );
 }
 
-export default CompletedTask;
+export default ActivityFeedTask;
 
 const NavLinkStyle = {
   textDecoration: "none",
@@ -95,6 +128,8 @@ const NavLinkStyle = {
   width: "100%"
 };
 const Spacer = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 2%;
 `;
 const Container = styled.div`
@@ -105,20 +140,23 @@ const Container = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   :nth-child(odd) {
     background: #fbfaf9;
   }
 `;
 
-const Address = styled.div`
-  width: 80%;
+const InnerContainer = styled.div`
+  width: 98%;
   display: flex;
+  justify-content: space-around;
   align-items: center;
+  cursor: pointer;
 
   p {
     font-weight: 500;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 16px;
     font-family: "Roboto";
     color: #3f3a36;
@@ -126,16 +164,19 @@ const Address = styled.div`
 `;
 
 const TitleText = styled.p`
-  width: 20%;
+  display: flex;
+  flex-direction: column;
+  width: 15%;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
-  color: #3f3a36;
   margin-bottom: 8px;
 `;
 
 const NameText = styled.p`
-  width: 40%;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
@@ -143,8 +184,9 @@ const NameText = styled.p`
   margin-bottom: 8px;
 `;
 const AddressText = styled.p`
-  width: 40%;
-  margin-left: 10%;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
@@ -152,10 +194,13 @@ const AddressText = styled.p`
   margin-bottom: 8px;
 `;
 const ProjectName = styled.p`
-  width: 5%;
+
+width: 10%;
   display: flex;
   justify-content: end;
-  margin-left: 50px;
+overflow-wrap: normal;
+display: flex;
+justify-content: end;
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";

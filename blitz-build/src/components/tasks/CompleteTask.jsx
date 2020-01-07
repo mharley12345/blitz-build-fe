@@ -8,8 +8,10 @@ import ConfirmComplete from "./ConfirmComplete";
 import TasksContext from "../../contexts/tasks/TaskContext";
 
 export default function CompleteTask({ task, completeStatus, handleCompleteClose }) {
+  //shows the complete task in the dropdown for tasks
   const { completeTask } = useContext(TasksContext);
 
+  //modal that lets you confirm a task is complete
   return (
     <>
       <Modal

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//https://staging-blitz-build.herokuapp.com
+//https://blitz-build-production.herokuapp.com
 export const axiosWithAuth = () => {
 
     return axios.create({
@@ -8,7 +8,7 @@ export const axiosWithAuth = () => {
         headers: {
             user_id: localStorage.getItem("user_id"),
             id_token: localStorage.getItem("id_token"),
-           
+            project_name:localStorage.getItem("project_name")
         }
     })
 };

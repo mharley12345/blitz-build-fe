@@ -81,7 +81,6 @@ const Section = styled.div`
   margin-bottom: 8px;
 
   p {
-   
     font-size: 16px;
     line-height: 19px;
     color: #212529;

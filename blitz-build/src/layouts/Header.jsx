@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Search from "../styles/Search/Search.png";
 import Uploader from "../components/documents/Uploader";
-import OpenUploaderContext from "../contexts/documents/OpenUploaderContext";
+
 
 import TasksContext from "../contexts/tasks/TaskContext";
 import Modal from "../components/global/Modal";
@@ -57,7 +57,7 @@ border: 1px solid #8A827D
   cursor: pointer;
 }
   
-}
+
 `;
 const ButtonDocumentCheck = {
   display: "flex",
@@ -117,7 +117,7 @@ border: 1px solid #8A827D
   color: #DD6B20;
   cursor: pointer;
 } 
-}
+
 `;
 const ButtonTemplate = styled.div`
 display: flex;
@@ -244,7 +244,7 @@ function Header({ pathname }) {
   const { TaskModalStatus, setTaskModalStatus } = useContext(TaskContext);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
-  const { openUploader, setUploaderOpen } = useContext(OpenUploaderContext);
+
   const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
   const [TemplateModalStatus, setTemplateModalStatus] = useState(false);
 
@@ -290,6 +290,7 @@ function Header({ pathname }) {
 
   const HideTheProjectButton = pathname => {
     if (
+     
       pathname === "/documents" ||
       pathname === "/delay-log" ||
       pathname === `/help` ||
@@ -396,13 +397,7 @@ function Header({ pathname }) {
       setOpenTemplate(true);
     }
   };
-  const OpenUploaderContextToggler = () => {
-    if (openUploader !== false) {
-      setUploaderOpen(false);
-    } else if (openUploader === false) {
-      setOpenTemplate(true);
-    }
-  };
+
 
   const searchOnHover = () => {
     if(searchTerm.length > 0) {
@@ -568,18 +563,8 @@ function Header({ pathname }) {
            <Modal 
             visible={DocumentModalStatus}
             dismiss={handleProjectModalClose}
-            client={"80%"}
-            style={{
-            "position": "absolute",
-             "width": "604px",
-            "height": "493px",
-            "left": "418px",
-            "top": "96px",
-
-
-
-           "background": "#FFFFFF",
-           "border-radius": "3px"}}
+            client={"50%"}
+       
             component={
               <Uploader
                  closeModal={handleDocumentModalClose}

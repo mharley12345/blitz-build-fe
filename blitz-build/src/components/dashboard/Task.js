@@ -5,6 +5,7 @@ import moment from "moment";
 import MeatBallsDrop from "../tasks/MeatBallsDrop";
 
 //styles
+
 import styled, { css } from "styled-components";
 import {
   useStyles,
@@ -12,34 +13,38 @@ import {
   StyledTableRow
 } from "../../styles/Table/TableStyles";
 
-
 function Task({ item, children, projectTask }) {
-
-
   const classes = useStyles();
 
+  //variable that gets the current day
   const today = new window.Date().toISOString().slice(0, 10);
   const project_date = item.due_date;
 
+  //depending on the difference of the dates, different status's are returned for tasks.
   function DateCalc(today, project_date) {
     if (today === project_date) {
       return "Pending";
     } else if (!project_date) {
-      return "Unavailable"
+      return "Unavailable";
     } else if (today > project_date) {
       return "Overdue";
     } else if (today < project_date) {
       return "Upcoming";
     }
   }
-  
+
+  //this function returns the status of the project depending on the due date of the project
   const status = DateCalc(today, item.due_date);
 
+  //creating varible that grabs current day's date
   const todayDate = new window.Date(today);
+
+  //variable that is one day calculated
   const oneDay = 24 * 60 * 60 * 1000;
 
   const diffDays = Math.round(Math.abs((todayDate - item.due_date) / oneDay));
 
+  //depending on the difference of the dates, different status's are returned for tasks.
   function DueDateLogic(diff, status) {
     if (status === "Pending") {
       return "Due today";
@@ -111,7 +116,7 @@ const Address = styled.div`
   }
 `;
 
-const Text = styled.p`
+export const Text = styled.p`
   font-size: 1.2rem;
   line-height: 20px;
   font-family: "Roboto";
@@ -171,5 +176,5 @@ const Status = styled.div`
 
 const Inner = styled.div`
   display: flex;
-  align-items: center
+  align-items: center;
 `;
