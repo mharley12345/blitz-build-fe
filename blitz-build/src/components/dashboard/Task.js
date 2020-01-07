@@ -64,6 +64,7 @@ function Task({ item, children, projectTask }) {
       return <p>{status}</p>
     }
   }
+  
   return (
     <>
       <StyledTableRow>
