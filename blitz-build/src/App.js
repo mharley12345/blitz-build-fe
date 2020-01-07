@@ -94,7 +94,7 @@ function App() {
     },
     {
       text: "Tasks",
-      path: "/tasks",
+      path: "/tasks?filter=ACTIVE",
       icon: "ion-ios-notifications"
     },
     {
@@ -206,12 +206,12 @@ function App() {
                                   />
                                   <Route
                                     exact
-                                    path="/project/:id"
+                                    path="/projects/:id"
                                     component={IndividualProject}
                                   />
                                   <Route
                                     exact
-                                    path="/project/:id/tasks"
+                                    path="/projects/:id/tasks"
                                     component={ProjectTasks}
                                   />
                                   <Route
