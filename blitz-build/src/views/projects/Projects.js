@@ -12,8 +12,14 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
-import   { useStyles ,StyledTableCell ,StyledTableRow
-} from "../../styles/Table/TableStyles"
+import * as color from "../../styles/color"
+
+import {
+  useStyles,
+  StyledTableCell,
+  StyledTableRow,
+  StyledTableHeadRow
+} from "../../styles/Table/TableStyles";
 // pages bar function from global
 import TablePaginationActions from "../../components/global/TablePaginationActions";
 const Projects = props => {
@@ -40,17 +46,17 @@ const Projects = props => {
   return (
     <>
       <Global />
-      <p style={{ paddingBottom: "8px", fontWeight: 600 }}>Your Project List</p>
+      <p style={{ paddingBottom: "8px", fontWeight: 600, color: color.grey400 }}>Your Project List</p>
       <Paper className={classes.root}>
         <Table aria-label="customized table">
           <TableHead>
-            <header>
+            <StyledTableHeadRow>
               <StyledTableCell>ADDRESS</StyledTableCell>
               <StyledTableCell>NAME</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
               <StyledTableCell>CREATED</StyledTableCell>
               <StyledTableCell>VIEW</StyledTableCell>
-            </header>
+            </StyledTableHeadRow>
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
@@ -65,7 +71,7 @@ const Projects = props => {
                 key={projects.id}
                 
                 onClick={() => {
-                  props.history.push(`/project/${projects.id}`);
+                  props.history.push(`/projects/${projects.id}`);
                 }}
               >
                 <StyledTableCell>

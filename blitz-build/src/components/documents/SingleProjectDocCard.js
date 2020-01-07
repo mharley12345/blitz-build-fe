@@ -1,43 +1,58 @@
 import React, { useContext} from "react";
 import DocumentsContext from '../../contexts/documents/DocumentsContext'
-
-
-
-import TableBody from "@material-ui/core/TableBody";
+//styles
+import styled from "styled-components";
 import Global from '../../styles/Global';
 
-
-import {
-  StyledTableRow,
-
-  StyledTableCell
-} from "../../styles/Table/TableStyles";
-
-const project_name = localStorage.getItem('project_name')
 
 const SingleProjectDocCard = (props) =>{
     const {documents} = useContext(DocumentsContext)
  
-    
-        return(
-            <>
-            <Global/>
-             <p style={{  fontWeight:800 }}>Your Documents</p><a href="/documents">View All</a>
-             {documents.map((document) =>{
-               if (document.project_name === project_name){
-                 return(
-              <TableBody>
-                  <StyledTableRow>
-                      <StyledTableCell>{document.file_name}</StyledTableCell>
-                      
-                      <StyledTableCell>{document.createdAt}</StyledTableCell>
-                      <StyledTableCell><a href={document.doc_url} target="_blank">View</a>></StyledTableCell>
-                  </StyledTableRow>
-              </TableBody>
-             )}})}
-             </>
-        )
+  var newDocumentList = documents.filter(document => {
+      return document.project_name === props.project_name;
+  })
+        return (
+          <>
+            <Global />
+
+            {newDocumentList.slice(0, 4).map(document => {
+             
+                return (
+                  <Container>
+                    <Name>
+                      <p>{document.file_name}</p>
+                    </Name>
+                    <Date>
+                      <p>{document.createdAt}</p>
+                    </Date>
+                    <a href={document.doc_url} target="_blank">
+                      View
+                    </a>
+                    >
+                  </Container>
+                );
+              
+            })}
+          </>
+        );
   
 }
 
 export default SingleProjectDocCard
+
+
+const Container = styled.div`
+  padding: 0 15px;
+  height: 25%;
+  display: flex;
+  align-items: center;
+  :nth-child(odd) {
+    background: #f5f5f5;
+  }
+`;
+const Name = styled.div`
+width:55%;
+`;
+const Date = styled.div`
+  width: 30%;
+`;

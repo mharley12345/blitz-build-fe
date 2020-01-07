@@ -63,7 +63,6 @@ function App() {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [openUploader, setOpenUploader] = useState(false);
 
-
   // getting userInfo from id_token in localStorage.
   useEffect(() => {
     if (localStorage.getItem("id_token")) {
@@ -71,6 +70,7 @@ function App() {
     }
   }, []);
 
+  //function that checks the path to see if it should return the marketing page
   const LandingPage = component => {
     if (pathname === "/") {
       return null;
@@ -78,7 +78,6 @@ function App() {
       return component;
     }
   };
-
 
   // console.log("userInfo", userInfo);
   console.log("pathname", pathname);
@@ -95,7 +94,7 @@ function App() {
     },
     {
       text: "Tasks",
-      path: "/tasks",
+      path: "/tasks?filter=ACTIVE",
       icon: "ion-ios-notifications"
     },
     {
@@ -144,7 +143,6 @@ function App() {
                     <SearchProvider>
                       <OpenContext.Provider value={{ open, setOpen }}>
                         <EditModalContext.Provider
-
                           value={{ editModalOpen, setEditModalOpen }}
                         >
                           <PathnameContext.Provider
@@ -208,12 +206,12 @@ function App() {
                                   />
                                   <Route
                                     exact
-                                    path="/project/:id"
+                                    path="/projects/:id"
                                     component={IndividualProject}
                                   />
                                   <Route
                                     exact
-                                    path="/project/:id/tasks"
+                                    path="/projects/:id/tasks"
                                     component={ProjectTasks}
                                   />
                                   <Route
@@ -280,4 +278,3 @@ function App() {
 }
 
 export default App;
- 

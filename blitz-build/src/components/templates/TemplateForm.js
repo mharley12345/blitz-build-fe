@@ -74,7 +74,7 @@ export default function TemplateForm({
       });
       setError({ error: false, error_text: null });
 
-      closeModal();
+      closeModal(); 
     }
   };
 

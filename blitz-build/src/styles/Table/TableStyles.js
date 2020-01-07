@@ -85,6 +85,12 @@ export const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
+export const StyledTableHeadRow = withStyles(theme => ({
+  root: {
+    height:"40px"
+  }
+}))(TableRow);
+
 export const StyledTableRow = withStyles(theme => ({
   root: {
     "&:nth-of-type(even)": {
@@ -94,18 +100,18 @@ export const StyledTableRow = withStyles(theme => ({
 }))(TableRow);
 
 export const useStyles = makeStyles({
-  root: {
-    border: "1px solid #DCD9D5"
-  },
+         root: {
+           border: "1px solid #DCD9D5",
+          
+         },
+         tableHover: {
+           "&:hover": {
+             cursor: "pointer",
+             "& span": {
+               color: "#DD6B20",
 
-  tableHover: {
-    "&:hover": {
-      cursor: "pointer",
-      "& span": {
-        color: "#DD6B20",
-
-        textDecoration: "underline"
-      }
-    }
-  }
-});
+               textDecoration: "underline"
+             }
+           }
+         }
+       });

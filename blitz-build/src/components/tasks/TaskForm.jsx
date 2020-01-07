@@ -28,6 +28,7 @@ export default function TaskForm({
   editFields,
   text
 }) {
+  //local state
   const [error, setError] = useState({
     error: false,
     error_text: null
@@ -83,7 +84,9 @@ export default function TaskForm({
         task_name: task.task_name,
         task_description: task.task_description,
         due_date: task.due_date,
-        project_id: chosenProject[0].id
+        project_id: chosenProject[0].id,
+        isComplete: task.isComplete
+        
       };
       console.log("from taskform submit", task);
 
@@ -194,7 +197,7 @@ export default function TaskForm({
       {error.error && error.error_text ? (
         <ErrorMessage errorMessage={error.error_text} />
       ) : null}
-      <StyledBtn >{text}</StyledBtn>
+      <StyledBtn>{text}</StyledBtn>
     </StyledForm>
   );
 }

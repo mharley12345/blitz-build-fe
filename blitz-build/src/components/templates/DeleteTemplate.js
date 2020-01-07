@@ -8,6 +8,8 @@ import Confirm from "../global/Confirm";
 import TemplateContext from "../../contexts/templates/TemplateContext";
 
 export default function DeleteTemplate({ template, closeDrop, deleteStatus, handleDeleteClose}) {
+
+  //import deleteTemplate function from template context
   const { deleteTemplate } = useContext(TemplateContext);
   return (
     <>
@@ -15,7 +17,7 @@ export default function DeleteTemplate({ template, closeDrop, deleteStatus, hand
         visible={deleteStatus}
         dismiss={handleDeleteClose}
         client={"40%"}
-        component={
+        component={ 
           <Confirm
             closeModal={handleDeleteClose}
             deleteFunction={deleteTemplate}

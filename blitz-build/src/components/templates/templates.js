@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import PathnameContext from "../../contexts/PathnameContext";
+import { usePathnameContext } from "../../contexts/PathnameContext";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-import templateContext from "../../contexts/templates/TemplateContext";
-import searchTermContext from "../../contexts/searching/searchTerm";
+import { useTemplateContext } from "../../contexts/templates/TemplateContext";
+
 import styled, { css } from "styled-components";
 import TemplateMeatBallsDrop from "./TemplateMeatBalls";
 const Templates = props => {
-  const { templates } = useContext(templateContext);
+  //local state
   const [NinetyDayBuild, setNinetyDayBuild] = useState();
 
-  const { searchTerm } = useContext(searchTermContext);
-  const templatesSearchInput = searchTerm.toLowerCase();
-  const [templatesSearchResults, settemplateSearchResults] = useState([]);
-  const { pathname, setPathname } = useContext(PathnameContext);
+  //importing custom templates and pathname from context
+  const { setPathname } = usePathnameContext();
+  const { templates } = useTemplateContext();
 
+  //this function gets the template name of the pre built template for all users
   const seedData = () => {
     setPathname(window.location.pathname);
     axiosWithAuth()
@@ -30,15 +30,18 @@ const Templates = props => {
   seedData();
 
   useEffect(() => {
-    axiosWithAuth().post('/90_day').then(templates =>{
-      console.log(templates)
-    // const results = templates.filter((template =>
-    //   template.template_name.toLowerCase().includes(templatesSearchInput)
-    // ));
-    // console.log("RESULTS:", results);
-    // settemplateSearchResults(results);
-  })}, [templatesSearchInput]);
-console.log(templates);
+    axiosWithAuth()
+      .post("/90_day")
+      .then(templates => {
+        console.log(templates);
+        // const results = templates.filter((template =>
+        //   template.template_name.toLowerCase().includes(templatesSearchInput)
+        // ));
+        // console.log("RESULTS:", results);
+        // settemplateSearchResults(results);
+      });
+  }, []);
+  console.log("these are the templates: ", templates);
   return (
     <div>
       <Section>
@@ -63,9 +66,17 @@ console.log(templates);
           //   </Container>
           // </div>
           <Container>
-            <Link style={LinkStyle}
+            <Link
+              style={LinkStyle}
               to={`/templates/${template.id}`}
-              onClick={() => localStorage.setItem("template_id", template.id,"template_name",template.name)}
+              onClick={() =>
+                localStorage.setItem(
+                  "template_id",
+                  template.id,
+                  "template_name",
+                  template.name
+                )
+              }
             >
               <Name>{template.template_name}</Name>
             </Link>
@@ -73,7 +84,6 @@ console.log(templates);
           </Container>
         );
       })}
-
     </div>
   );
 };
@@ -81,10 +91,9 @@ console.log(templates);
 export default Templates;
 
 const LinkStyle = {
-  textDecoration: 'none',
-  
-  }
- 
+  textDecoration: "none"
+};
+
 const Section = styled.div`
   width: 100%;
   display: flex;
@@ -92,7 +101,6 @@ const Section = styled.div`
   margin-bottom: 8px;
 
   p {
-
     font-size: 16px;
     line-height: 19px;
     color: #212529;
@@ -114,7 +122,7 @@ const Container = styled.div`
   }
   cursor: pointer;
 `;
-const Name = styled.div`
+export const Name = styled.div`
   /* Heading 4 */
   width: 500px;
   font-family: Roboto;

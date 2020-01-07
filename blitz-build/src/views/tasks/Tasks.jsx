@@ -1,14 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
 
+//a package for parsing query strings
+import queryString from "query-string";
+
+//router
+import { Link } from "react-router-dom";
+
 //context
-import taskContext from "../../contexts/tasks/TaskContext";
-import searchTermContext from "../../contexts/searching/searchTerm";
+import { useTaskContext } from "../../contexts/tasks/TaskContext";
+import { useSearchTermContext } from "../../contexts/searching/searchTerm";
 
 //components
 import Task from "../../components/dashboard/Task";
 
 //mui
-import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TableHead from "@material-ui/core/TableHead";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
@@ -24,9 +29,12 @@ import TableFooter from "@material-ui/core/TableFooter";
 //styles
 import styled from "styled-components";
 import { SortBtn } from "../../styles/SortBtn";
+import * as color from "../../styles/color";
+
 import {
   useStyles,
-  StyledTableCell
+  StyledTableCell,
+  StyledTableHeadRow
 } from "../../styles/Table/TableStyles";
 
 const InfoContainer = styled.div`
@@ -37,40 +45,78 @@ const InfoContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-// const MainFailContainer = styled.div`
-//   postion: relative;
-//   width: 900px;
-//   height: 200px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin-left: 250px;
-// `;
+const SortDiv = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
 
-// const failedContainer = styled.div`
-//   margin-top: 80px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `;
-// const failText = styled.div`
-//   font-size: 50px;
-// `;
+// const useStyles = makeStyles({
+//   root: {
+//     border: "1px solid #DCD9D5"
+//   },
+//   table: {
+//     // minWidth: "1080px"
+//   },
+//   tableHover: {
+//     "&:hover": {
+//       border: "3px solid orange"
+//     }
+//   }
+// });
 
-export default function Tasks() {
-  const { tasks, getTasks } = useContext(taskContext);
-  const { searchTerm, results, taskSearchResults } = useContext(
-    searchTermContext
-  );
+export default function Tasks(props) {
+  // const MainFailContainer = styled.div`
+  //   postion: relative;
+  //   width: 900px;
+  //   height: 200px;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   margin-left: 250px;
+  // `;
 
-  console.log("taskSearchResults", taskSearchResults);
+  // const failedContainer = styled.div`
+  //   margin-top: 80px;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  // `;
+  // const failText = styled.div`
+  //   font-size: 50px;
+  // `;
 
-  console.log("RESULTS:", results);
+  const { tasks, getTasks } = useTaskContext();
+
+  const { searchTerm, results } = useSearchTermContext();
+
+  //filter logic
+
+  //gets the query from the url and parses it to a object
+  const queryValues = queryString.parse(props.location.search);
+
+  const [btnStatus, setBtnStatus] = useState(queryValues.filter === "ACTIVE");
+
+  useEffect(() => {
+    getTasks();
+  }, [btnStatus]);
+
   //pagnation
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, tasks.length - page * rowsPerPage);
+    rowsPerPage -
+    Math.min(
+      rowsPerPage,
+      tasks.filter(task => {
+        if (queryValues.filter === "ACTIVE") {
+          return task.isComplete === false;
+        } else if (queryValues.filter === "COMPLETE") {
+          return task.isComplete === true;
+        }
+      }).length -
+        page * rowsPerPage
+    );
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -82,74 +128,104 @@ export default function Tasks() {
   };
 
   const itemCounter = () => {
+    console.log("from counter", tasks.length);
     if (results.length > 0) {
       return results.length;
     } else {
-      return tasks.length;
+      return tasks.filter(task => {
+        if (queryValues.filter === "ACTIVE") {
+          return task.isComplete === false;
+        } else if (queryValues.filter === "COMPLETE") {
+          return task.isComplete === true;
+        }
+      }).length;
     }
   };
   const failedSearch = () => {
     if (searchTerm.length > 0 && results.length === 0) {
-      return (
-        <p>
-          There doesn't seem to be any tasks with that name
-        </p>
-      );
+      return <p>There doesn't seem to be any tasks with that name</p>;
     } else {
-      return <p style={{ fontWeight: 600 }}>Your Task List</p>;
+      return (
+        <p style={{ fontWeight: 600, color: color.grey400 }}>Your Task List</p>
+      );
     }
   };
 
   const classes = useStyles();
 
-  useEffect(() => {}, []);
-
   return (
     <>
       <InfoContainer>
         {failedSearch()}
-        <SortBtn >
-          Active
-        </SortBtn>
-        <SortBtn>
-          Complete
-        </SortBtn>
+        <SortDiv>
+          <Link to="/tasks?filter=ACTIVE">
+            <SortBtn
+              active={btnStatus}
+              onClick={() => {
+                setBtnStatus(true);
+                console.log(btnStatus);
+              }}
+            >
+              Active
+            </SortBtn>
+          </Link>
+          <span style={{ fontWeight: 600, color: color.grey400 }}>|</span>
+          <Link to="/tasks?filter=COMPLETE">
+            <SortBtn
+              active={!btnStatus}
+              onClick={() => {
+                setBtnStatus(false);
+              }}
+            >
+              Complete
+            </SortBtn>
+          </Link>
+        </SortDiv>
       </InfoContainer>
 
       <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="customized table"  style = {{minHeight: '500px'}}>
+        <Table
+          className={classes.table}
+          aria-label="customized table"
+          style={{ minHeight: "500px" }}
+        >
           <TableHead>
-            <TableRow>
+            <StyledTableHeadRow>
               <StyledTableCell>PROJECT NAME</StyledTableCell>
               <StyledTableCell>TASK</StyledTableCell>
               <StyledTableCell>DESCRIPTION</StyledTableCell>
               <StyledTableCell>DUE DATE</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
-            </TableRow>
+            </StyledTableHeadRow>
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? tasks.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
+              ? tasks
+                  .filter(task => {
+                    if (queryValues.filter === "ACTIVE") {
+                      return task.isComplete === false;
+                    } else if (queryValues.filter === "COMPLETE") {
+                      return task.isComplete === true;
+                    }
+                  })
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : tasks
             ).map(task => {
               if (results.length === 0 && searchTerm.length === 0) {
                 return <Task item={task} key={task.id} />;
               } else if (results.length > 0) {
-                return <></>
+                return <></>;
               }
             })}
 
-            {results.length > 0 ? (   (rowsPerPage > 0
-              ? results.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-              : results
-            )
-              .map(result => <Task item={result} key={result.id}></Task>)
+            {results.length > 0 ? (
+              (rowsPerPage > 0
+                ? results.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                : results
+              ).map(result => <Task item={result} key={result.id}></Task>)
             ) : (
               <></>
             )}
@@ -161,7 +237,7 @@ export default function Tasks() {
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TablePagination 
+              <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={5}
                 count={itemCounter()}
