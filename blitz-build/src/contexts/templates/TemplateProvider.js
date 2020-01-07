@@ -31,7 +31,7 @@ const getTemplates = () => {
 
 const getTemplateTasks = () => {
    const templateID = localStorage.getItem('template_id');
-
+  console.log(" this is the templateID: ", templateID)
   axiosWithAuth()
       .get(`/projects/tasks/template/${templateID}`)
       .then(res => {
