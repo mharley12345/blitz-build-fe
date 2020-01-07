@@ -14,6 +14,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
+import * as color from "../../styles/color"
+
 import {
   useStyles,
   StyledTableCell,
@@ -58,7 +60,7 @@ const Projects = props => {
   return (
     <>
       <Global />
-      <p style={{ paddingBottom: "8px", fontWeight: 600 }}>Your Project List</p>
+      <p style={{ paddingBottom: "8px", fontWeight: 600, color: color.grey400 }}>Your Project List</p>
       <Paper className={classes.root}>
         <Table aria-label="customized table">
           <TableHead>
@@ -83,7 +85,7 @@ const Projects = props => {
                 key={projects.id}
                 
                 onClick={() => {
-                  props.history.push(`/project/${projects.id}`);
+                  props.history.push(`/projects/${projects.id}`);
                 }}
               >
                 <StyledTableCell>

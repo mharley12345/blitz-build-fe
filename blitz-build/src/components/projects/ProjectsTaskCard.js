@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useEffect } from "react";
 import styled from "styled-components";
 import Task from "../dashboard/Task";
 //context
@@ -21,7 +21,11 @@ import { ViewBtn } from "../../styles/ViewBtn";
 
 function ProjectTaskCard({ projectID, numberOfTasks }) {
   //imports tasks from context
-  const { tasks } = useContext(taskContext);
+  const { tasks, getTasks } = useContext(taskContext);
+
+  useEffect(() => {
+    getTasks()
+  }, [])
 
   //variable that filters through all the tasks and brings back the tasks associated with the specific project id
   const projectTasks = tasks.filter(item => {
@@ -31,7 +35,7 @@ function ProjectTaskCard({ projectID, numberOfTasks }) {
     <Container>
       <Section>
         <p>Your Task List</p>
-        <Link to={`/projects/${projectID}/tasks`}>
+        <Link to={`/projects/${projectID}/tasks?filter=ACTIVE`}>
           <ViewBtn>View All</ViewBtn>
         </Link>
       </Section>
@@ -46,9 +50,9 @@ function ProjectTaskCard({ projectID, numberOfTasks }) {
             </StyledTableHeadRow>
           </TableHead>
           <TableBody>
-            {tasks.slice(0, numberOfTasks).map(item => {
+            {projectTasks.slice(0, numberOfTasks).map(item => {
               if (JSON.stringify(item.project_id) === projectID) {
-                return <Task item={item} key={item.id} />;
+                return <Task item={item} key={item.id} projectTask={true} />;
               }
             })}
           </TableBody>

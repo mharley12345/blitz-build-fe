@@ -9,6 +9,8 @@ export const grey = '#8A827D'
 export const greyLightest = '#E9E9E9'
 export const greyLight = '#DCD9D5'
 export const offWhite = '#FAFAFA'
+
+export const grey400 = '#817974'
   
 // Misc
 
