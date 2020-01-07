@@ -133,6 +133,7 @@ width: 16%;
 flex-direction: column;
 display: flex;
 font-weight: 500;
+margin-left: 3%;
 
 `
 const Name = styled.p`
@@ -164,22 +165,20 @@ const Project = styled.p`
 color: rgba(0, 0, 0, 0.87);
 background-color: #E9E9E9
 flex-direction: column;
-width: 11%;
+width: 14%;
 display: flex;
 font-weight: 500;
 
 `
 
 const TableHead = styled.div`
- width: 95%;
+ width: 100%;
  display: flex;
  justify-content: space-around;
  align-items: center;
  height: 72px;
  color: rgba(0, 0, 0, 0.87);
  background-color: #E9E9E9
- padding: 16px 32px;
- padding-right: 45px;
  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
 border-radius: 3px;
 border: 1px solid #dcd9d5;

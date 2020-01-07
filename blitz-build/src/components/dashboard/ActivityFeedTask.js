@@ -197,10 +197,9 @@ const ProjectName = styled.p`
 
 width: 10%;
   display: flex;
+  flex-direction: column;
   justify-content: end;
-overflow-wrap: normal;
-display: flex;
-justify-content: end;
+  word-break: break-all
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";
