@@ -39,7 +39,7 @@ margin-top:36px;
 
 export default function Confirm(props) {
 
-    const  {closeModal, text} =props
+    const  {deleteFunction,handleDelete,closeModal, text} =props
     return (
         <ConfirmStyle>
             <div style={{textAlign: 'right', height: '50px'}}>
@@ -52,9 +52,9 @@ export default function Confirm(props) {
             <BtnDiv>
                 <ConfirmBtn onClick={ closeModal }>Cancel</ConfirmBtn>
                 <ConfirmBtn delete onClick={ () => {
-                                                 
-                          
-                } }>Delete</ConfirmBtn>
+                                  deleteFunction(handleDelete)               
+                           closeModal()
+                } }>Delete</ConfirmBtn>item
             </BtnDiv>
         </ConfirmStyle>
     )

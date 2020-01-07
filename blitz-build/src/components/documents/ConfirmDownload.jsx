@@ -52,7 +52,7 @@ export default function Confirm(props ) {
             <BtnDiv>
                 <ConfirmBtn onClick={ closeModal }>Cancel</ConfirmBtn>
                 <ConfirmBtn download onClick={ () => {
-                            DownloadDocument()
+                            DownloadDocument(props)
                     localStorage.setItem('file_name',`${file_name}`)
                     closeModal()
                 } }>Download</ConfirmBtn>
