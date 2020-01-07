@@ -109,8 +109,16 @@ export default function MeatBallsDrop({ task }) {
 
   //function that hides certain options for templates
   const hideOnTemplates = () => {
+    const queryValues = queryString.parse(window.location.search);
     if (pathname.includes("/templates")) {
       return Hidden;
+    }
+    else if(queryValues.filter === "COMPLETE" && pathname.includes('/templates') ) {
+      return Hidden;
+    }
+    else if(queryValues.filter === "ACTIVE" || pathname.includes("/dashboard"))
+    {
+      return Hidden
     }
   };
 
@@ -120,7 +128,9 @@ export default function MeatBallsDrop({ task }) {
       return Hidden;
     }
   };
-
+const Hidden = {
+    display: "none"
+  };
   const hideOnActive = () => {
     const queryValues = queryString.parse(window.location.search);
     if (queryValues.filter === "ACTIVE" || pathname.includes("/dashboard")) {
@@ -130,14 +140,12 @@ export default function MeatBallsDrop({ task }) {
 
   };
 
-  const Hidden = {
-    display: "none"
-  };
+  
 
   //returns specific options for templates
   const checkThePage = (editTask, editTemplateTask, completeTask, activateTask) => {
     if (pathname.includes("/templates")) {
-      return editTemplateTask;
+      return (<>{editTemplateTask}</>);
     } else {
       return (
         <>
@@ -146,6 +154,24 @@ export default function MeatBallsDrop({ task }) {
       );
     }
   };
+const pageCheck = (complete, undo, edit, delay, deleated) => {
+  const queryValues = queryString.parse(window.location.search);
+     if (pathname.includes('/templates')) {
+     return <>{edit}{deleated}</>
+     }
+     else if(queryValues.filter === "ACTIVE" || pathname.includes("/dashboard")) {
+       return <>{complete}{edit}{delay}{deleated} </>
+     }
+     else if(queryValues.filter === "COMPLETE") {
+     return <>{undo}{deleated}</>
+     }
+     else if(pathname.includes('projects')) {
+      return <>{complete}{edit}{delay}{deleated} </>
+     }
+  }
+  
+
+  // const checkThePageOptions = (complete, undo, edit, delay, delete )
 
   return (
     <>
@@ -156,27 +182,29 @@ export default function MeatBallsDrop({ task }) {
       >
         {dropStatus && (
           <>
+
             <DropDown>
-              <StyledLi style={hideOnTemplates(),hideOnComplete()}>
+             {pageCheck(
+              <StyledLi>
                 <DropP onClick={handleCompleteOpen}>Complete</DropP>
                 <TaskI className="ion-md-checkmark-circle" />
-              </StyledLi>
-              <StyledLi style={hideOnTemplates(), hideOnActive()}>
+              </StyledLi>,
+              <StyledLi >
                 <DropP onClick={handleActivateOpen}>Undo</DropP>
                 <TaskI className="ion-md-undo" />
-              </StyledLi >
-              <StyledLi onClick={handleEditOpen}  style={hideOnComplete()}>
+              </StyledLi >,
+              <StyledLi onClick={handleEditOpen} >
                 <DropP>Edit</DropP>
                 <TaskI className="ion-md-create" />
-              </StyledLi>
-              <StyledLi onClick={handleDelayOpen} style={hideOnTemplates(),hideOnComplete()}>
+              </StyledLi>,
+              <StyledLi onClick={handleDelayOpen}>
                 <DropP>Delay</DropP>
                 <TaskI className="ion-md-clock" />
-              </StyledLi>
+              </StyledLi>,
               <StyledLi onClick={handleDeleteOpen}>
                 <DropP>Delete</DropP>
                 <TaskI className="ion-md-trash" />
-              </StyledLi>
+              </StyledLi>,)} 
             </DropDown>
           </>
         )}
