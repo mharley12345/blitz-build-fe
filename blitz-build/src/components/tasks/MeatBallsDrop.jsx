@@ -123,7 +123,7 @@ export default function MeatBallsDrop({ task }) {
 
   const hideOnActive = () => {
     const queryValues = queryString.parse(window.location.search);
-    if (queryValues.filter === "ACTIVE" || pathname.includes("/dashboard") ||pathname.includes("/projects")) {
+    if (queryValues.filter === "ACTIVE" || pathname.includes("/dashboard") ) {
       return Hidden;
     }
 
