@@ -84,7 +84,9 @@ export default function TaskForm({
         task_name: task.task_name,
         task_description: task.task_description,
         due_date: task.due_date,
-        project_id: chosenProject[0].id
+        project_id: chosenProject[0].id,
+        isComplete: task.isComplete
+        
       };
       console.log("from taskform submit", task);
 
