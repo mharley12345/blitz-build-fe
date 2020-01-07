@@ -26,7 +26,6 @@ const getTemplates = () => {
       .catch(err => {
         console.log(err);
       });
-
   }
 
 const getTemplateTasks = () => {
@@ -99,7 +98,6 @@ const getTemplateTasks = () => {
       .catch(err => {
         console.log(err);
       }); 
-     
   };
 
   const editTemplate = (editedTemplate, editedTemplateId) => {
