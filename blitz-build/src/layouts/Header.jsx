@@ -211,8 +211,8 @@ const SearchTotal = styled.div`
 `;
 const ButtonSearch = styled.i`
   position: absolute;
-  left: 93%;
-  top: 5%;
+  left: 100%;
+  top: 20%;
   border: none;
   font-size: 30px;
   color: #8a827d;
@@ -269,6 +269,7 @@ function Header({ pathname }) {
   };
   const handleTemplateModalClose = () => {
     setTemplateModalStatus(false);
+   
   };
   const handleTemplateTaskModalOpen = () => {
     setTemplateTaskModalStatus(true);
@@ -352,7 +353,7 @@ function Header({ pathname }) {
       pathname === "/delay-log" ||
       pathname === `/help` ||
       pathname === "/log-out" ||
-      pathname === "/documents/add" ||
+      pathname.includes("/documents") ||
       pathname.includes("/mycalendar") ||
       pathname === "/" ||
       pathname === "/activity-feed"

@@ -151,7 +151,7 @@ import styled from "styled-components";
             </p>
           </div>
           <WeatherContainer>
-            <Weather 
+            <Weather
               usage="project"
               city={`${projectState.city}, ${projectState.state}`}
               latitude={projectState.latitude}
@@ -164,12 +164,42 @@ import styled from "styled-components";
               marginTop: "35px",
               color: "#817974"
             }}
+          ></p>
+          <div
+            style={{
+              width: "530px",
+              height: "19px",
+              marginBottom: "8px",
+              display: "flex",
+              justifyContent: "space-between"
+            }}
           >
-          
-          </p>
-      
-          <DocumentsContainer><SingleProjectDocCard/></DocumentsContainer>
-              </Right>
+            <p
+              style={{
+                fontSize: "16px",
+
+                color: "#817974"
+              }}
+            >
+              Documents
+            </p>
+            <p
+              style={{
+                fontSize: "16px",
+                cursor: "pointer",
+                color: "#817974"
+              }}
+              onClick={() => {
+                props.history.push(`/documents`);
+              }}
+            >
+              View All
+            </p>
+          </div>
+          <DocumentsContainer>
+            <SingleProjectDocCard project_name={projectState.project_name} />
+          </DocumentsContainer>
+        </Right>
       </Top>
       <TasksContainer>
         <ProjectTaskCard projectID={props.match.params.id} numberOfTasks={3} />

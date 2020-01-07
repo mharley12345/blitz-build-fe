@@ -11,7 +11,7 @@ export default function TemplatesProvider({ children }) {
 
   useEffect(() => {
    getTemplates();
-   getTemplateTasks();
+ 
   }, []);
 
 const getTemplates = () => {
@@ -30,7 +30,7 @@ const getTemplates = () => {
 
 const getTemplateTasks = () => {
    const templateID = localStorage.getItem('template_id');
-
+  console.log(" this is the templateID: ", templateID)
   axiosWithAuth()
       .get(`/projects/tasks/template/${templateID}`)
       .then(res => {
@@ -75,6 +75,7 @@ const getTemplateTasks = () => {
         console.log("from addTemplateTask in templateProvider", res);
         newTask.id = res.data.taskId[0];
         setTemplatesTask([...tasks, newTask]);
+        getTemplateTasks();
       })
       .catch(err => console.log(err));
     console.log(newTask);

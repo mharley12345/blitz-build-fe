@@ -20,6 +20,7 @@ import { NavLink } from "react-router-dom";
 function ActivityFeedTask({ item, children, props }) {
   //imports state of projects from context
   const { projects } = useContext(projectContext);
+  
   const projectID = [];
 
   //checks if the project id is equal to the item's project_id in the activity feed then it pushes it to an array called projectID
@@ -197,10 +198,9 @@ const ProjectName = styled.p`
 
 width: 10%;
   display: flex;
+  flex-direction: column;
   justify-content: end;
-overflow-wrap: normal;
-display: flex;
-justify-content: end;
+  word-break: break-all
   font-size: 14px;
   line-height: 16px;
   font-family: "Roboto";

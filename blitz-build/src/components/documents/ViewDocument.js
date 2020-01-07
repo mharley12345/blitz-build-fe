@@ -47,7 +47,6 @@ console.log(params,props,document)
           </Print>
          </ImgContainer>
         </NoPrint>
-
       <NoPrint>
       <div className="button-container">
   <input type='button' value="Print" onClick={handlePrint}/>
