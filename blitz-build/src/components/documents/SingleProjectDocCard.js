@@ -42,11 +42,13 @@ export default SingleProjectDocCard
 
 
 const Container = styled.div`
-padding: 0 15px;
-border-bottom:1px solid lightgrey
- height:25%;
- display:flex;
- align-items:center;
+  padding: 0 15px;
+  height: 25%;
+  display: flex;
+  align-items: center;
+  :nth-child(odd) {
+    background: #f5f5f5;
+  }
 `;
 const Name = styled.div`
 width:55%;
