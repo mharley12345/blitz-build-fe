@@ -49,10 +49,14 @@ export default function DocumentsProvider({ children }){
         
         })
     }
-
-    // const printDocument = (event)=>{
-    //   const file_name = event.file_name
-    // }
+/** TODO
+ *  window.print needs to be replaced with the callback provided by 
+ *  react-easy-print package
+ */
+      const printDocument = () =>{
+     
+         window.print()
+     }
        
   const downloadDocument = props => {
 
@@ -72,10 +76,10 @@ export default function DocumentsProvider({ children }){
               documents,
               setDocuments,
               handleDelete,
-              downloadDocument
+              downloadDocument,
               
-            //   printDocument,
-            //   downloadDocument
+               printDocument
+         
               }}
               >
              {children}

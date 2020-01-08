@@ -6,7 +6,12 @@ import styled from  'styled-components'
 import PrintProvider, { Print, NoPrint } from 'react-easy-print';
 import Download from '@axetroy/react-download';
 
-
+/**TODO
+ *  react-easy-print is  imported and <print> / <noprint> tags are placed 
+ *  in proper postion but it still prints the everything on the screen.
+ *  Please see /contexts/documents/DocumentsProvider.js, ./PrintDocument.js  
+ *   and  ./confirmPrint.js to see the flow of the print function
+ */
 const  ViewDocument =  (props) =>{
 
    const { handleDownload } = useContext(DocumentContext)

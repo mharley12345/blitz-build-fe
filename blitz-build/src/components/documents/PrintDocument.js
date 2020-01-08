@@ -4,14 +4,17 @@ import Modal from "../global/Modal"
 import Confirm from "./confirmPrint"
 
 import DocumentContext from '../../contexts/documents/DocumentsContext'
-
+/** TODO
+ *    React Easy Print is installed but not working properly 
+ *    The click function works but it will print the entire screen
+ *     The objective is to print only the image or document
+ *     Need to remove window.print on line 17 and replace it with the 
+ *      Print function provided by react-easy-print. 
+ *      Docs can be found @ https://www.npmjs.com/package/react-easy-print */
 export default function PrintDocument(props){
     const { printDocument } = useContext(DocumentContext);
-    const {printItem,documents,printStatus,handlePrintClose} =props
- const handlePrint =(e)=> {
-    
-     window.print()
- }
+    const {documents,printStatus,handlePrintClose} =props
+
     return (
         <>
         <Modal
