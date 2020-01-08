@@ -4,7 +4,7 @@ import DeleteDocument from "./DeleteDocument";
 import DownloadDocument from './DownloadDocument'
 import PathnameContext from '../../contexts/PathnameContext'
 import DocumentsContext from '../../contexts/documents/DocumentsContext'
-import Link from 'react-router-dom'
+
 import {
   TaskI,
   StyledLi,
@@ -12,7 +12,11 @@ import {
   DropDown,
   DropP
 } from '../../styles/Table/TableStyles';
-
+/** DocumentsMeatBalls.js
+ *  This displays the 3 ... in the Documents.js component
+ *  onClick of the ... opens a dropdown which displays print,delete,or download 
+ *  options
+ */
 export default function DocumentsMeatballsDrop(props) {
   const { documents, docs_url } = props
   const { handleDelete } = useContext(DocumentsContext)

@@ -1,14 +1,16 @@
-import React, {useContext} from "react"
+import React from "react"
 
 import Modal from "../global/Modal"
 import Confirm from "../global/Confirm"
 
-
-import {saveAs} from 'file-saver'
+/**TODO
+ *  Currently the DownloadDocument component will force a download but 
+ *  it downloads a txt file with the correct filename that contains the 
+ *  word img.
+ */
 export default function DownloadDocument(props){
-    const {downloadStatus,handleDownloadClose,docs_url,DownloadDocument,documents,file_name} =props     
-    console.log(docs_url,documents,localStorage.getItem('file_name'))
-     
+    const {downloadStatus,handleDownloadClose,file_name} =props     
+         
     return (
         <>
         <Modal
