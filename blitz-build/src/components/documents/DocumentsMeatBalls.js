@@ -46,10 +46,14 @@ export default function DocumentsMeatballsDrop(props) {
   const closeDrop = e => {
     setDropStatus(false);
   };
-  const handleDownloadOpen = e => {
-    e.stopPropagation();
-    setDownloadStatus(true);
-  };
+  /** TODO 
+   *  Download function not working as expected 
+   *  hidden from view 
+   */
+  // const handleDownloadOpen = e => {
+  //   e.stopPropagation();
+  //   setDownloadStatus(true);
+  // };
   const handleDownloadClose = e => {
     setDownloadStatus(false);
     closeDrop();
@@ -88,10 +92,12 @@ export default function DocumentsMeatballsDrop(props) {
                 <DropP>Delete</DropP>
                 <TaskI className="ion-md-trash" />
               </StyledLi>
-              <StyledLi onClick={handleDownloadOpen}>
+              {/** Download function not working as expected hidden from
+                view */}
+              {/* <StyledLi onClick={handleDownloadOpen}>
                 <DropP>Download</DropP>
                 <TaskI className="ion-md-cloud" />
-              </StyledLi>
+              </StyledLi> */}
               <StyledLi onClick={handlePrintOpen}>
                 <DropP>Print</DropP>
                 <TaskI className="ion-md-print" />
