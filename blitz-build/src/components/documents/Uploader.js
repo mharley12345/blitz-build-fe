@@ -6,6 +6,14 @@ import { CloseButton } from 'react-bootstrap';
 let user_id = localStorage.getItem("user_id")
 let project_Name = localStorage.getItem("project_name")
 let projectID = localStorage.getItem("projectID")
+
+/** Uploader component
+ *  The uploader component takes a file either by drag and drop or select.
+ *  Calls the BE and receives a signed url for the aws bucket.
+ *  Then uploads the file to the signed url
+ *  Then calls the BE again adding the file information to the doc_url table 
+ *  
+ */
 class Uploader extends React.Component {
   constructor(props) {
     super(props);
@@ -60,7 +68,7 @@ class Uploader extends React.Component {
             console.log("Response from s3", result)
 
           })
-
+           // Second call to the BE adding the file info to the docs_url table
           .then(
 
             axiosWithAuth().post('docs/url', {
@@ -71,7 +79,7 @@ class Uploader extends React.Component {
               file_name: this.state.file_name,
               project_id: this.state.project_id
             }))
-        console.log(this.state)
+       
 
       })
 
