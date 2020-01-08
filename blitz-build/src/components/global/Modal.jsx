@@ -18,7 +18,7 @@ export const ModalBoxSetup = styled.div`
   left: 0;
   right: 0;
   width: ${props => props.width};
-  padding: 16px;
+  padding: 16px 50px;
   margin: 50px auto;
   box-sizing: border-box;
   z-index: 1;
@@ -38,6 +38,8 @@ export const ModalBg = styled.div`
 visible: boolean,
 dismiss: function on click on Close.
 */
+
+//customizable modal
 export default class ModalSetup extends Component {
   //  static propTypes = {
   //      visible: PropTypes.bool.isRequired,

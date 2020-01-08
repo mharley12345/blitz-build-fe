@@ -1,62 +1,31 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
+import moment from "moment";
+
+//components
 import MeatBallsDrop from "../tasks/MeatBallsDrop";
 
 //styles
+
 import styled, { css } from "styled-components";
-//mui
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
+import {
+  useStyles,
+  StyledTableCell,
+  StyledTableRow
+} from "../../styles/Table/TableStyles";
 
-function Task({ item, children }) {
-  const StyledTableRow = withStyles(theme => ({
-    root: {
-      "&:nth-of-type(even)": {
-        background: "#F5F5F5"
-      },
-      marginBottom: "32px"
-    }
-  }))(TableRow);
-
-  const StyledTableCell = withStyles(theme => ({
-    head: {
-
-      padding: "8px 32px",
-      height: 35,
-      backgroundColor: "#E9E9E9",
-      color: theme.palette.common.black
-    },
-    body: {
-      padding: "8px 32px",
-      fontSize: 16,
-      height: 104
-    }
-  }))(TableCell);
-
-  const useStyles = makeStyles({
-    root: {
-      border: "1px solid #DCD9D5"
-    },
-    table: {
-      minWidth: "1080px"
-    },
-    tableHover: {
-      "&:hover": {
-        border: "3px solid orange"
-      }
-    }
-  });
-
+function Task({ item, children, projectTask }) {
   const classes = useStyles();
 
+  //variable that gets the current day
   const today = new window.Date().toISOString().slice(0, 10);
-  // This value is hardcoded now because the server don't send back a date
-  // It should be {item.due_date}
   const project_date = item.due_date;
 
+  //depending on the difference of the dates, different status's are returned for tasks.
   function DateCalc(today, project_date) {
     if (today === project_date) {
       return "Pending";
+    } else if (!project_date) {
+      return "Unavailable";
     } else if (today > project_date) {
       return "Overdue";
     } else if (today < project_date) {
@@ -64,14 +33,18 @@ function Task({ item, children }) {
     }
   }
 
-  const status = DateCalc(today, item);
+  //this function returns the status of the project depending on the due date of the project
+  const status = DateCalc(today, item.due_date);
 
+  //creating varible that grabs current day's date
   const todayDate = new window.Date(today);
-  const projectDate = new window.Date(item.due_date);
+
+  //variable that is one day calculated
   const oneDay = 24 * 60 * 60 * 1000;
 
   const diffDays = Math.round(Math.abs((todayDate - item.due_date) / oneDay));
 
+  //depending on the difference of the dates, different status's are returned for tasks.
   function DueDateLogic(diff, status) {
     if (status === "Pending") {
       return "Due today";
@@ -80,29 +53,42 @@ function Task({ item, children }) {
     } else if (status === "Upcoming") {
       return `Due in ${diff} days`;
     }
+   
   }
 
-  const dueDateText = DueDateLogic(diffDays, status);
+  const checkIfComplete = () => {
+    if(item.isComplete === true) {
+      return <p>Completed</p>
+    }
+    else {
+      return <p>{status}</p>
+    }
+  }
+  
   return (
     <>
       <StyledTableRow>
-        <StyledTableCell>
-          <Text>{item.project_name}</Text>
-        </StyledTableCell>
+        {!projectTask && (
+          <StyledTableCell>
+            <Text>{item.project_name}</Text>
+          </StyledTableCell>
+        )}
         <StyledTableCell>
           <Text>{item.task_name}</Text>
         </StyledTableCell>
 
-        <StyledTableCell>
+        <StyledTableCell style={{ maxWidth: 200 }}>
           <Text>{item.task_description}</Text>
         </StyledTableCell>
         <StyledTableCell>
-          <Date>{item.due_date}</Date>
+          <Date>
+            {!item.due_date ? "" : moment(item.due_date).format("MM-DD-YYYY")}
+          </Date>
         </StyledTableCell>
         <StyledTableCell>
           <Inner>
             <Status status={status}>
-              <p>{status}</p>
+             {checkIfComplete()}
             </Status>
             <MeatBallsDrop task={item} />
           </Inner>
@@ -139,9 +125,9 @@ const Address = styled.div`
   }
 `;
 
-const Text = styled.p`
-  font-size: 14px;
-  line-height: 16px;
+export const Text = styled.p`
+  font-size: 1.2rem;
+  line-height: 20px;
   font-family: "Roboto";
   color: #3f3a36;
   margin-bottom: 8px;
@@ -158,11 +144,14 @@ const Date = styled.p`
 `;
 
 const Status = styled.div`
-  padding: 5px 16px 3px;
+  padding: 3px 8px 3px;
+  height: 26px;
+  width: 79px;
   background-color: grey;
   color: black;
   border-radius: 30px;
   display: flex;
+  justify-content: center;
   align-items: center;
 
   p {
@@ -196,27 +185,5 @@ const Status = styled.div`
 
 const Inner = styled.div`
   display: flex;
+  align-items: center;
 `;
-
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    padding: "8px 32px",
-    height: 35,
-    backgroundColor: "#E9E9E9",
-    color: theme.palette.common.black
-  },
-  body: {
-    padding: "8px 32px",
-    fontSize: 16,
-    height: 104
-  }
-}))(TableCell);
-
-const StyledTableRow = withStyles(theme => ({
-  root: {
-    "&:nth-of-type(even)": {
-      background: "#F5F5F5"
-    },
-    marginBottom: "32px"
-  }
-}))(TableRow);

@@ -7,22 +7,27 @@ import DelayForm from "./DelayForm";
 //context
 import DelayLogContext from "../../contexts/delayLog/DelayLogContext";
 
-export default function AddDelayReason({ task, delayStatus, handleDelayClose }) {
+export default function AddDelayReason({
+  task,
+  delayStatus,
+  handleDelayClose
+}) {
+  //importing a function for adding to the delaylog from context
   const { addDelayLog } = useContext(DelayLogContext);
 
+  //returns modal that allows you to add something to the delay log
   return (
     <>
       <Modal
         visible={delayStatus}
         dismiss={handleDelayClose}
-        client={"60%"}
+        client={"40%"}
         component={
           <DelayForm
             closeModal={handleDelayClose}
             handleFunction={addDelayLog}
             task={task}
-            text={"What is the reason for the Delay?"}
-           
+            text={"Delay Project"}
           />
         }
       />

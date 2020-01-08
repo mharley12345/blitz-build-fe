@@ -11,7 +11,7 @@ export default function TemplatesProvider({ children }) {
 
   useEffect(() => {
    getTemplates();
-
+ 
   }, []);
 
 const getTemplates = () => {
@@ -31,7 +31,7 @@ const getTemplates = () => {
 
 const getTemplateTasks = () => {
    const templateID = localStorage.getItem('template_id');
-
+  console.log(" this is the templateID: ", templateID)
   axiosWithAuth()
       .get(`/projects/tasks/template/${templateID}`)
       .then(res => {
@@ -91,9 +91,11 @@ const getTemplateTasks = () => {
       .then(res => {
         console.log("template was deleted", res);
         const newTemplateList = templates.filter(template => {
-          return template.id !== deleteTemplate.id;
+          return template.id !== deletedTemplate.id;
         });
+     
         setTemplates(newTemplateList);
+
       })
       .catch(err => {
         console.log(err);
@@ -108,14 +110,14 @@ const getTemplateTasks = () => {
         console.log("template was edited", res);
         const newTemplatesList = templates.map(template => {
           if (template.id === editedTemplateId) {
-            return res.data.editedTemplate[0];
+            return editedTemplate;
           } else {
             return template;
           }
         });
         setTemplates([...newTemplatesList]);
 
-        window.location.reload(true);
+        
       })
       .catch(err => {
         console.log(err);

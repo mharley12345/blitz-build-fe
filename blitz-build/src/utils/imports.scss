@@ -1,2 +1,108 @@
 
-@import url('https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css')
+$break-largeDesktop: 2600px;
+$break-desktop: 1900px;
+$break-largeLaptop: 1680px;
+$break-laptop:1440px;
+$break-largeTablet:1024px;
+$break-largeMobile:600px;
+$break-mobile:400px ;
+
+@import url('https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css');
+
+#root{
+    @media screen and (max-width: $break-laptop){
+         max-width: 1490px;
+         height: auto;
+    }
+}
+#root > div > div > div > div.sc-bdVaJa.gbXoHq{
+    @media screen and (max-width: $break-laptop){
+        display: flex;
+        
+        height: 600px;
+    }
+}
+#root > div > div > div > div.sc-exAgwC.exZdhu > div.sc-cQFLBn.cqEzkJ{
+    @media screen and (max-width:$break-laptop) {
+        width:80%;
+        height: auto;
+    }
+}
+#root > div > div > div > div.sc-exAgwC.exZdhu > div.sc-cQFLBn.cqEzkJ > div.sc-gojNiO.imMlyz > div.sc-cIShpX.kNPzwz > div.sc-kafWEX.exZsxS > div.sc-dfVpRl.VOkcy{
+    @media screen and(max-width:$break-laptop) {
+        width:80%;
+        height: auto;
+    }
+}#root > div > div > div > div.sc-exAgwC.exZdhu > div.sc-cQFLBn.cqEzkJ > div.sc-gojNiO.imMlyz > div.sc-cIShpX.kNPzwz > div.sc-kafWEX.exZsxS{
+    @media screen and(max-width:$break-laptop) {
+        width:80%;
+        height: auto;
+    }
+}
+#root > div > div > div > div.sc-exAgwC.exZdhu > div.sc-cQFLBn.cqEzkJ > div.sc-gojNiO.imMlyz > div.sc-iyvyFf.gyjftr > div > div.MuiPaper-root.MuiPaper-elevation1.MuiPaper-rounded{
+    @media screen and(max-width:$break-laptop) {
+        width:91%;
+        height: auto;
+    }
+}
+#root > div > div > div > div.sc-exAgwC.exZdhu > div.sc-cQFLBn.cqEzkJ > div.sc-gojNiO.imMlyz > div.sc-iyvyFf.gyjftr > div > div.sc-fYxtnH.kLAbke{
+    @media screen and(max-width:$break-laptop) {
+        width:91%;
+        height: auto;
+    }
+}
+#root > div > div > div > div.sc-exAgwC.exZdhu > div.sc-cQFLBn.cqEzkJ > div.sc-gojNiO.imMlyz > div.sc-cIShpX.kNPzwz > div.sc-kafWEX.exZsxS > div.sc-gzOgki.bToTCm{    
+    @media screen and(max-width:$break-laptop) {
+        width:80% !important;
+        height: auto;
+    }
+}
+    #root > div > div > div > div.sc-exAgwC.exZdhu > div.sc-cQFLBn.cqEzkJ > div.sc-gojNiO.imMlyz > div.sc-cIShpX.kNPzwz > div.sc-kafWEX.exZsxS > div:nth-child(1){
+        @media screen and(max-width:$break-laptop) {
+            width:80% !important;
+            height: auto;
+        }
+    }
+    #root > div > div > div > div.sc-exAgwC.exZdhu > div.sc-cQFLBn.cqEzkJ > div.sc-gojNiO.imMlyz > div.sc-cIShpX.kNPzwz > div.sc-kafWEX.exZsxS > div:nth-child(1){
+        @media screen and(max-width:$break-laptop) {
+            width:80% !important;
+            height: auto;
+        }
+    }
+
+    #root > div > div > div > div.sc-exAgwC.exZdhu > div.sc-cQFLBn.cqEzkJ > div.sc-gojNiO.imMlyz > div.sc-cIShpX.kNPzwz > div.sc-kafWEX.exZsxS > div.sc-gzOgki.bToTCm > div > div.sc-hmzhuo.cJZXMk{
+        @media screen and(max-width:$break-laptop) {
+            width:40% !important;
+            height: auto;
+        }  
+    }
+    #root > div > div > div > div.sc-exAgwC.exZdhu > div.sc-cQFLBn.cqEzkJ > div.sc-gojNiO.imMlyz > div.sc-cIShpX.kNPzwz > div.sc-kafWEX.exZsxS > div.sc-gzOgki.bToTCm > div > div.sc-ksYbfQ.hoewPS{
+        @media screen and(max-width:$break-laptop) {
+            width:40% !important;
+            height: auto;
+        }
+    }
+    #\$break-laptop{
+        @media screen and(max-width:$break-laptop) {
+            width:80% !important;
+            height: auto;
+        }
+    }
+    #root > div > div > div > div.sc-GMQeP.eUJCdM > div.sc-exAgwC.hsUrsc > div.sc-hZSUBg.eAkAnq > div.sc-iuJeZd.oSzNJ > div.sc-jTzLTM.gqQXXs > div.sc-fjdhpX.exyUdY > div > div {
+        margin-left: 2rem;
+        margin-top: 3rem;
+    }
+
+    #root > div > div > div > div.sc-GMQeP.eUJCdM > div.sc-exAgwC.hsUrsc > div.sc-hZSUBg.eAkAnq > div.sc-iuJeZd.oSzNJ > div.sc-jTzLTM.gqQXXs > div.sc-fjdhpX.exyUdY > div > div > button.close{
+       margin-left:34rem;
+
+    }
+    #root > div > div > div > div.sc-GMQeP.eUJCdM > div.sc-exAgwC.hsUrsc > div.sc-hZSUBg.eAkAnq > div.sc-iuJeZd.oSzNJ > div.sc-jTzLTM.gqQXXs > div.sc-fjdhpX.exyUdY > div > div > h1.sc-iQNlJl.fZTIWR{
+        text-align:center;
+    }
+
+#root > div > div > div > div.sc-GMQeP.eUJCdM > div.sc-exAgwC.hsUrsc > div.sc-hZSUBg.eAkAnq > div.sc-iuJeZd.oSzNJ > div.sc-jTzLTM.gqQXXs > div.sc-fjdhpX.exyUdY > div > div > div > div > input[type=file] {
+    width: 100%;
+    height: 8rem;
+}
+

@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import axios from "axios";
 import styled from "styled-components";
-import { height } from "@material-ui/system";
-import auth0Client from "./auth";
+import PathnameContext from '../../contexts/PathnameContext'
+
+
+// import DialogTitle from "@material-ui/core/DialogTitle";
+// import axios from "axios";
+// import { height } from "@material-ui/system";
+// import auth0Client from "./auth";
 
 const ModalContainer = styled.div`
   width: 450px;
@@ -20,13 +23,13 @@ const ModalTitle = styled.div`
   font-weight: 500;
   color: #3B3B3B;
   justify-content: center;
-  border-bottom: 1px solid #3B3B3B
+  border-bottom: 1px solid #3B3B3B;
 `;
 
 const H3 = styled.div`
-  font-size: 2.5em;
-  display:flex
-  justify-content:center
+  font-size: 2.2em;
+  display: flex;
+  justify-content: center;
   height: 50px;
 `;
 
@@ -35,36 +38,45 @@ const ButtonStyles = styled.div`
   justify-content: center;
   height: 90px;
 `;
+
 const ButtonStyle = {
   cursor: "pointer",
   backgroundColor: "#DA552F",
   color: "white",
-  borderRadius: "1px",
+  borderRadius: "3px",
+  border: "1px solid #8a827d",
   width: "30px",
   height: "35px"
 };
+
 const Pstyle = styled.p`
-  font-size: 25px;
+  font-size: 22px;
   margin: 25px 0 0 40px;
+  color: #212529;
+   
 `;
 
 const Logout = props => {
+  const { setPathname } = useContext(PathnameContext)
+  //sets state of the modal that confirms your logout
   const [open, setOpen] = useState(true);
+
+  //handles close of modal
   const handleClose = () => {
     setOpen(false);
-    props.history.push("/projects");
+    props.history.push("/dashboard");
   };
+
+  //function for logging out
   const SignOut = e => {
-    // e.preventDefault();
-    // localStorage.removeItem("token");
-    // localStorage.removeItem("uid");
-    console.log("im here");
     localStorage.removeItem("access_token");
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
-    props.history.push("/navbar");
+    props.history.push("/");
+    setPathname('/')
   };
 
+  //returns modal to confirm you want to logout
   return (
     <Dialog
       open={open}
@@ -79,7 +91,7 @@ const Logout = props => {
 
         <DialogContent>
           {" "}
-          <Pstyle> Are you sure you want to logout?</Pstyle>
+          <Pstyle> Are you sure you want to log out?</Pstyle>
         </DialogContent>
 
         <ButtonStyles>

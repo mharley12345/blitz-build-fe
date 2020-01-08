@@ -4,12 +4,15 @@ import jwtDecode from "jwt-decode";
 import { Link } from "react-router-dom";
 
 class Auth {
+  //all the configurations of the Blitz Build auth0 dashboard/settings.
+
   auth0 = new auth0.WebAuth({
     // the following three lines MUST be updated
     domain: "gannondarcy2.auth0.com",
     audience: "https://gannondarcy2.auth0.com/userinfo",
     clientID: "OzMg1e7JDNF7DogxPEPvGzpG7fvvDHNe",
-    redirectUri: "http://localhost:3000/callback",
+    //redirect is an environment variable
+    redirectUri: process.env.REACT_APP_REDIRECT_URL,
     responseType: "id_token",
     scope: "openid profile"
   });
@@ -19,41 +22,19 @@ class Auth {
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
     this.signIn = this.signIn.bind(this);
-    // this.signOut = this.signOut.bind(this);
   }
 
-  // getProfile() {
-  //   return this.profile;
-  // }
-
+  //gets id token
   getIdToken() {
     return this.idToken;
   }
 
-  // isAuthenticated() {
-  //   return new Date().getTime() < this.expiresAt;
-  // }
-
+  //allows you to login based on auth0 credentials
   signIn() {
     this.auth0.authorize();
   }
 
-  // handleAuthentication() {
-  //   return new Promise((resolve, reject) => {
-  //     this.auth0.parseHash((err, authResult) => {
-  //       if (err) return reject(err);
-  //       if (!authResult || !authResult.idToken) {
-  //         return reject(err);
-  //       }
-  //       this.idToken = authResult.idToken;
-  //       this.profile = authResult.idTokenPayload;
-  //       // set the time that the id token will expire at
-  //       this.expiresAt = authResult.idTokenPayload.exp * 1000;
-  //       resolve();
-  //     });
-  //   });
-  // }
-
+  //this handles the authentication and then sends local storage certain results that auth0 sends back after authenticating
   handleAuthentication() {
     this.auth0.parseHash((err, authResults) => {
       console.log(authResults);
@@ -72,19 +53,13 @@ class Auth {
     });
   }
 
+  //this makes sure the user continues to be authenticated
   isAuthenticated() {
     let expiresAt = JSON.parse(localStorage.getItem("expires_at"));
     return new Date().getTime() < expiresAt;
   }
 
-  //doing this function in the logout component
-  // signOut() {
-  //   // clear id token, profile, and expiration
-  //   localStorage.removeItem("access_token");
-  //   localStorage.removeItem("id_token");
-  //   localStorage.removeItem("expires_at");
-  // }
-
+  //gets the profile based on the id token in local storage (might not be in affect). Could be handling this in our own backend
   getProfile() {
     if (localStorage.getItem("id_token")) {
       return jwtDecode(localStorage.setItem("id_token"));

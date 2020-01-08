@@ -8,6 +8,8 @@ import TaskForm from "./TaskForm";
 import TasksContext from "../../contexts/tasks/TaskContext";
 
 export default function EditTask({ task, editStatus, handleEditClose }) {
+
+  //imports editTask function from tasks contexts
   const { editTask } = useContext(TasksContext);
 
   return (
@@ -15,7 +17,7 @@ export default function EditTask({ task, editStatus, handleEditClose }) {
       <Modal
         visible={ editStatus }
         dismiss={ handleEditClose }
-        client={'50%'}
+        client={'45%'}
         component={
           <TaskForm
             closeModal={ handleEditClose }

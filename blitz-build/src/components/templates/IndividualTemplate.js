@@ -1,45 +1,49 @@
 import React, { useContext, useEffect, useState } from "react";
 import TemplatesProvider from "../../contexts/templates/TemplateProvider";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-import PathnameContext from "../../contexts/PathnameContext";
-import TemplateContext from '../../contexts/templates/TemplateContext'
-import searchTermContext from '../../contexts/searching/searchTerm'
+import { usePathnameContext } from "../../contexts/PathnameContext";
+import { useTemplateContext } from "../../contexts/templates/TemplateContext";
+import searchTermContext from "../../contexts/searching/searchTerm";
 import styled, { css } from "styled-components";
-import MeatBallsDrop from '../tasks/MeatBallsDrop'
-import { set } from "date-fns";
-const IndividualTemplate = props => {
-  const {templateTask, setTemplatesTask, getTemplateTasks} = useContext(TemplateContext);
-  const { pathname, setPathname } = useContext(PathnameContext);
+import MeatBallsDrop from "../tasks/MeatBallsDrop";
 
-  
-  console.log(templateTask)
+const IndividualTemplate = props => {
+  //getting info for templates and template tasks from context
+  const {
+    templateTask,
+    setTemplatesTask,
+    getTemplateTasks
+  } = useTemplateContext();
+
+  //getting pathname from contexxt
+  const { setPathname } = usePathnameContext();
+
   useEffect(() => {
-  
     setPathname(window.location.pathname);
     getTemplateTasks();
   }, []);
-
+console.log('these are the templateTasks:', templateTask);
   return (
-   <div>
-      <Section>
-      <h1>individual template</h1>
-      </Section>
-     
+    <div>
+      <Section>{/* <h1>individual template</h1> */}</Section>
+
       {templateTask.map(task => {
-        
-        return  <Container> <TitleText>{task.task_name}</TitleText> <MeatBallsDrop task={task}/> </Container>;
-      }
-      )}
-       
-   </div>
-   
+        return (
+          <Container>
+            {" "}
+            <TitleText>{task.task_name}</TitleText>{" "}
+            <MeatBallsDrop task={task} />{" "}
+          </Container>
+        );
+      })}
+    </div>
   );
 };
 
 export default IndividualTemplate;
 
-const TitleText = styled.p`
-width: 200px;
+export const TitleText = styled.p`
+  width: 200px;
 
   font-size: 14px;
   line-height: 16px;
@@ -64,17 +68,17 @@ const Section = styled.div`
 `;
 
 const Container = styled.div`
-width: 100%;
-height: 100px;
-background: white;
-padding: 16px 32px 32px 32px;
-box-sizing: border-box;
-display: flex;
-justify-content: space-between;
+  width: 100%;
+  height: 100px;
+  background: white;
+  padding: 16px 32px 32px 32px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
 
-:nth-child(odd) {
-  background: #fbfaf9;
-}
+  :nth-child(odd) {
+    background: #fbfaf9;
+  }
 `;
 
 const Card = styled.div`

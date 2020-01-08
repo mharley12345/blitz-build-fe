@@ -8,14 +8,18 @@ import IconButton from "@material-ui/core/IconButton";
 const useStyles1 = makeStyles(theme => ({
   root: {
     flexShrink: 0,
-    marginLeft: theme.spacing(2.5)
+    marginLeft: theme.spacing(2.5),
+    
   }
 }));
+
+//allows for page pagination
 function TablePaginationActions(props) {
   const classes = useStyles1();
-  const theme = useTheme();
+  const theme = useTheme()
   const { count, page, rowsPerPage, onChangePage } = props;
 
+  //these functions handle what page they are on and moving to different pages as well as how many rows on a page
   const handleFirstPageButtonClick = event => {
     onChangePage(event, 0);
   };

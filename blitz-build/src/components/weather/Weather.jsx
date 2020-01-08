@@ -1,6 +1,16 @@
+/*
+The weather API is Dark Sky API - https://darksky.net/dev/docs
+We follow Darksky API Wrapper Instruction to deploy to Heroku. - https://github.com/satansdeer/weather-api
+If you want to change the API key, you need to go to darksky.net to get your own key. After that, go to heroku blitz-bulid/blitzbuild-weather/settings/config Vars to change the DARKSKY_API_KEY.
+*/
+
 import React, { useState, useEffect } from "react";
+
+//axios, moment
 import axios from "axios";
 import moment from "moment";
+
+//components
 import ProjectWeather from "./ProjectWeather";
 import DashboardWeather from "./DashboardWeather";
 import {
@@ -23,6 +33,7 @@ import {
 // for project page import <Weather usage="project" city={} latitude={} longitude={} />
 
 function Weather(props) {
+  //local state
   const [weatherData, setWeatherData] = useState();
   const [weatherPosition, setWeatherPosition] = useState({
     latitude: 0,
@@ -30,15 +41,17 @@ function Weather(props) {
   });
   useEffect(() => {
     // get the latitude and longitude from the project page or navigator.geolocation.
+
+    // if props.usage equals to "project", get position data from individualProject.js
     if (props.usage === "project") {
       setWeatherPosition({
         latitude: props.latitude,
         longitude: props.longitude
       });
+      // if props.usage equals to "dashboard", get position data from navigator.geolocation
     } else if (props.usage === "dashboard") {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
-          console.log(position);
           setWeatherPosition({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
@@ -52,14 +65,21 @@ function Weather(props) {
 
   // get the weather data from backend.
   useEffect(() => {
-    if (weatherPosition.latitude !== 0) {
+    if (
+      weatherPosition.latitude == 0 ||
+      weatherPosition.latitude == undefined
+    ) {
+      console.log("no weather position");
+    }
+    // If latitude and longitude are not 0 or undefined, call weather endpoint and get weather data.
+    else {
       axios
         .get(
           ` https://blitzbuild-weather.herokuapp.com/forecast/${weatherPosition.latitude},${weatherPosition.longitude}`
         )
         .then(res => {
           setWeatherData(res.data);
-          console.log("get weather data", res.data);
+          //console.log("get weather data", res.data);
         })
         .catch(err => {
           console.log(err);
@@ -72,7 +92,7 @@ function Weather(props) {
     return `${moment().format("dddd")}, ${moment().format("LT")}`;
   }
 
-  // convert weather info to weather icon - not finish!
+  // convert weather info to weather icon
   function getWeatherIcon() {
     var weatherIcon = null;
 

@@ -2,20 +2,23 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Search from "../styles/Search/Search.png";
 import Uploader from "../components/documents/Uploader";
-import OpenUploaderContext from '../contexts/documents/OpenUploaderContext'
+
 
 import TasksContext from "../contexts/tasks/TaskContext";
 import Modal from "../components/global/Modal";
 import TaskForm from "../components/tasks/TaskForm";
+import ProjectForm from "../components/projects/ProjectForm";
 import { NavLink, Link, Redirect } from "react-router-dom";
 import OpenContext from "../contexts/projects/OpenContext";
 import OpenTemplateContext from "../contexts/OpenTemplateContext";
-// import AddProject from  '../components/modal/AddProject'
 import searchTermContext from "../contexts/searching/searchTerm";
-import AddProject from "../components/modal/AddProject";
 import TemplateContext from "../contexts/templates/TemplateContext";
 import TemplateTaskForm from "../components/templates/TemplateTaskForm";
-import TaskContext from '../contexts/tasks/TaskContext'
+import TemplateForm from "../components/templates/TemplateForm"
+import TaskContext from "../contexts/tasks/TaskContext";
+import ProjectContext from "../contexts/projects/ProjectContext";
+import DocumentsContext from '../contexts/documents/DocumentsContext'
+
 const HeaderContainer = styled.div`
   background: #fff;
   width: 100%;
@@ -54,10 +57,12 @@ border: 1px solid #8A827D
   cursor: pointer;
 }
   
-}
+
 `;
 const ButtonDocumentCheck = {
   display: "flex",
+  position: "absolute",
+  right: "200px",
   borderRadius: "3px",
   width: "174px",
   height: "48px",
@@ -65,6 +70,8 @@ const ButtonDocumentCheck = {
   alignItems: "center"
 };
 const ButtonTemplateCheck = {
+  position: "absolute",
+  right: "40px",
   display: "flex",
   borderRadius: "3px",
   width: "174px",
@@ -74,6 +81,8 @@ const ButtonTemplateCheck = {
   marginLeft: "160px"
 };
 const SoloDocument = {
+  position: "absolute",
+  right: "40px",
   display: "flex",
   borderRadius: "3px",
   width: "174px",
@@ -84,6 +93,8 @@ const SoloDocument = {
 };
 
 const SoloTask = {
+  position: "absolute",
+  right: "40px",
   display: "flex",
   borderRadius: "3px",
   width: "151px",
@@ -106,7 +117,7 @@ border: 1px solid #8A827D
   color: #DD6B20;
   cursor: pointer;
 } 
-}
+
 `;
 const ButtonTemplate = styled.div`
 display: flex;
@@ -125,6 +136,8 @@ border: 1px solid #8A827D
 }
 `;
 const ButtonTask = styled.div`
+
+
 display: flex;
 border-radius: 3px;
 border: 1px solid #8A827D
@@ -142,6 +155,18 @@ border: 1px solid #8A827D
 `;
 
 const ButtonProjectCheck = {
+  position: "absolute",
+  right: "40px",
+  display: "flex",
+  borderRadius: "3px",
+  width: "151px",
+  height: "48px",
+  justifyContent: "center",
+  alignItems: "center"
+};
+const ButtonTaskCheck = {
+  position: "absolute",
+  right: "200px",
   display: "flex",
   borderRadius: "3px",
   width: "151px",
@@ -182,43 +207,49 @@ const SearchInput = styled.input`
   }
 `;
 const SearchTotal = styled.div`
-position: relative;
- 
-`
+  position: relative;
+`;
 const ButtonSearch = styled.i`
-position: absolute;
-right: 15px;
-top: 2px;
-border:none;
-font-size: 30px;
-color: #8a827d;
-text-align:center;
+  position: absolute;
+  left: 100%;
+  top: 20%;
+  border: none;
+  font-size: 30px;
+  color: #8a827d;
+  text-align: center;
 
-z-index: 2;
-width: 20px;
-hieght: 20px;
-
-`
+  z-index: 2;
+  width: 20px;
+  height: 20px;
+`;
+const SearchHoverStyle = {
+  color: "#DD6B20"
+}
 
 function Header({ pathname }) {
- 
-  const { searchTerm, setSearchTerm, searchCatch, setSearchCatch  } = useContext(searchTermContext);
+  const { searchTerm, setSearchTerm, searchCatch, setSearchCatch } = useContext(
+    searchTermContext
+  );
   const [TaskHover, setTaskHover] = useState(false);
   const [ProjectHover, setProjectHover] = useState(false);
+  const [searchHover, setSearchHover ] = useState(false)
   const [DocumentHover, setDocumentHover] = useState(false);
   const [TemplateHover, setTemplateHover] = useState(false);
   const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext);
+  const  {addDocument} = useContext(DocumentsContext)
+  const { addProject } = useContext(ProjectContext);
   const { addTask } = useContext(TasksContext);
-  const { addTemplateTask } = useContext(TemplateContext);
+  const { addTemplateTask, addTemplate } = useContext(TemplateContext);
   const { open, setOpen } = useContext(OpenContext);
-  const {TaskModalStatus, setTaskModalStatus} = useContext(TaskContext);
+  const { TaskModalStatus, setTaskModalStatus } = useContext(TaskContext);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
-  const {openUploader,setUploaderOpen}= useContext(OpenUploaderContext)
-  const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
 
-  console.log("this is the handlechange", searchCatch)
-  console.log("this is the handlesubmit", searchTerm)
+  const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
+  const [TemplateModalStatus, setTemplateModalStatus] = useState(false);
+
+  console.log("this is the handlechange", searchCatch);
+  console.log("this is the handlesubmit", searchTerm);
   // const { addTemplate } = useContext(TemplateContext)
 
   const handleTaskModalOpen = () => {
@@ -227,9 +258,21 @@ function Header({ pathname }) {
   const handleTaskModalClose = () => {
     setTaskModalStatus(false);
   };
+  const handleProjectModalOpen = () => {
+    setProjectModalStatus(true);
+  };
+  const handleProjectModalClose = () => {
+    setProjectModalStatus(false);
+  };
+  const handleTemplateModalOpen = () => {
+    setTemplateModalStatus(true);
+  };
+  const handleTemplateModalClose = () => {
+    setTemplateModalStatus(false);
+   
+  };
   const handleTemplateTaskModalOpen = () => {
     setTemplateTaskModalStatus(true);
-  
   };
   const handleTemplateTaskModalClose = () => {
     setTemplateTaskModalStatus(false);
@@ -248,15 +291,17 @@ function Header({ pathname }) {
 
   const HideTheProjectButton = pathname => {
     if (
+     
       pathname === "/documents" ||
       pathname === "/delay-log" ||
       pathname === `/help` ||
       pathname === "/log-out" ||
       pathname === "/90_Day" ||
       pathname.includes("templates") ||
-      pathname === '/documents/add' ||
-      pathname.includes('/mycalendar') ||
-      pathname === ('/')
+      pathname === "/documents/add" ||
+      pathname.includes("/mycalendar") ||
+      pathname === "/" ||
+      pathname === "/activity-feed"
     ) {
       return HideButton;
     } else {
@@ -265,13 +310,15 @@ function Header({ pathname }) {
   };
   const HideTheDocumentButton = pathname => {
     if (
+      pathname === "/log-out" ||
       pathname === "/delay-log" ||
       pathname === "/tasks" ||
       pathname === "/90_Day" ||
       pathname.includes("templates") ||
       pathname === "/documents/add" ||
       pathname.includes("/mycalendar") ||
-      pathname === "/"
+      pathname === "/" ||
+      pathname === "/activity-feed"
     ) {
       return HideButton;
     } else if (pathname === "/documents") {
@@ -282,7 +329,7 @@ function Header({ pathname }) {
   };
   const HideTheTaskButton = pathname => {
     if (pathname === "/tasks") {
-      return ButtonProjectCheck;
+      return ButtonTaskCheck;
     } else {
       return HideButton;
     }
@@ -306,9 +353,10 @@ function Header({ pathname }) {
       pathname === "/delay-log" ||
       pathname === `/help` ||
       pathname === "/log-out" ||
-      pathname === "/documents/add" ||
+      pathname.includes("/documents") ||
       pathname.includes("/mycalendar") ||
-      pathname === "/"
+      pathname === "/" ||
+      pathname === "/activity-feed"
     ) {
       return HideButton;
     } else {
@@ -350,54 +398,54 @@ function Header({ pathname }) {
       setOpenTemplate(true);
     }
   };
-  const OpenUploaderContextToggler = () =>{
-    if (openUploader !== false){
-      setUploaderOpen(false);
-      } else if (openUploader === false) {
-        setOpenTemplate(true);
-      }
-  }
-  //// search function
 
- 
+
+  const searchOnHover = () => {
+    if(searchTerm.length > 0) {
+     return SearchHoverStyle
+    }
+   
+  }
+  
+  //// search function
 
   const handleChange = e => {
     setSearchTerm(e.target.value);
     // console.log("search term", searchTerm);
   };
 
-
- 
-
   return (
-    
     <HeaderContainer>
-      <SearchContainer>
-        <Link to= '/tasks'>
-          <SearchTotal>
-          <SearchInput
-            type="text"
-            placeholder="Search Tasks" 
-            value={searchTerm}
-            onChange={handleChange}
-          />
-         <Link to= '/tasks'> <ButtonSearch className="ion-ios-search" /></Link>
-       </SearchTotal>
+      <SearchContainer  onMouseEnter={() => setSearchHover(true)}
+          onMouseLeave={() => setSearchHover(false)} >
+        <Link to="/tasks">
+          <SearchTotal >
+            <SearchInput
+              type="text" 
+              placeholder="Search Tasks"
+              value={searchTerm}
+              onChange={handleChange}
+              style={ {outline: "none"}}
+            />
+            <Link to="/tasks">
+              {" "}
+              <ButtonSearch className="ion-ios-search" style={searchOnHover()} />
+            </Link>
+          </SearchTotal>
         </Link>
       </SearchContainer>
       <ButtonContainer>
-      <ButtonDocument
+        <ButtonDocument
           onMouseEnter={() => setDocumentHover(true)}
           onMouseLeave={() => setDocumentHover(false)}
           style={HideTheDocumentButton(pathname)}
-          onClick={OpenUploaderContext}
+          onClick={handleDocumentModalOpen}
         >
           {" "}
-        
           <ButtonI
             className="ion-ios-add-circle"
             style={HoverDocumentStyleFunction()}
-            onClick={handleDocumentModalClose}
+  
           />{" "}
           <ButtonText style={HoverDocumentStyleFunction()}>
             Add Document
@@ -436,7 +484,7 @@ function Header({ pathname }) {
           onMouseEnter={() => setProjectHover(true)}
           onMouseLeave={() => setProjectHover(false)}
           style={HideTheProjectButton(pathname)}
-          onClick={OpenToggler}
+          onClick={handleProjectModalOpen}
         >
           {" "}
           <ButtonI
@@ -451,7 +499,7 @@ function Header({ pathname }) {
           onMouseEnter={() => setTemplateHover(true)}
           onMouseLeave={() => setTemplateHover(false)}
           style={HideTheTemplateButton(pathname)}
-          onClick={OpenTemplateToggler}
+          onClick={handleTemplateModalOpen}
         >
           {" "}
           <ButtonI
@@ -466,7 +514,7 @@ function Header({ pathname }) {
         <Modal
           visible={TaskModalStatus}
           dismiss={handleTaskModalClose}
-          client={"50%"}
+          client={"45%"}
           component={
             <TaskForm
               closeModal={handleTaskModalClose}
@@ -475,7 +523,18 @@ function Header({ pathname }) {
             />
           }
         />
-
+        <Modal
+          visible={TemplateModalStatus}
+          dismiss={handleTemplateModalClose}
+          client={"50%"}
+          component={
+            <TemplateForm
+              closeModal={handleTemplateModalClose}
+              handleFunction={addTemplate}
+              text={"Add Template"}
+            />
+          }
+        />
         <Modal
           visible={TemplateTaskModalStatus}
           dismiss={handleTemplateTaskModalClose}
@@ -488,8 +547,33 @@ function Header({ pathname }) {
             />
           }
         />
+        <Modal
+          visible={ProjectModalStatus}
+          dismiss={handleProjectModalClose}
+          client={"40%"}
+          component={
+            <ProjectForm
+              closeModal={handleProjectModalClose}
+              handleFunction={addProject}
+              text={"Add Project"}
+              imgText={"Upload a Project Image"}
+            />
+          
+          }
+        />
+           <Modal 
+            visible={DocumentModalStatus}
+            dismiss={handleProjectModalClose}
+            client={"50%"}
+       
+            component={
+              <Uploader
+                 closeModal={handleDocumentModalClose}
+                 handleFunction={addDocument}
+            />
+            }
+            />
       </ButtonContainer>
-      <AddProject />
     </HeaderContainer>
   );
 }

@@ -12,6 +12,8 @@ export default function EditDelayReason({
   handleEditClose,
   delayReason
 }) {
+
+  //importing edit delay log function from context
   const { editDelayLog } = useContext(DelayLogContext);
 //console.log(delayReason)
   return (
@@ -19,12 +21,12 @@ export default function EditDelayReason({
       <Modal
         visible={editStatus}
         dismiss={handleEditClose}
-        client={"60%"}
+        client={"40%"}
         component={
           <DelayForm
             closeModal={handleEditClose}
             handleFunction={editDelayLog}
-            text={"Edit the reason for the Delay"}
+            text={"Edit Delay Reason"}
             editFields={delayReason}
           />
         }

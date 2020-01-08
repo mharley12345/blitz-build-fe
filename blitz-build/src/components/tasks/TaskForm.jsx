@@ -1,19 +1,20 @@
 import React, { useEffect, useState, useContext } from "react";
 // import DatePicker from "react-datepicker";
 
+// components
+import ErrorMessage from "../../components/global/ErrorMessage";
+
 //styles
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import styled from "styled-components";
-import { XButton } from "../../styles/Tasks/tasks";
-import TaskContext from '../../contexts/tasks/TaskContext'
 import {
   StyledForm,
+  StyledFormHeader,
   StyledLabel,
   StyledInput,
   StyledSelect,
-  StyledBtn
-} from "../../styles/Tasks/taskForm";
+  StyledTextAreaInput,
+  StyledBtn,
+  XButton
+} from "../../styles/Form/FormStyles";
 
 //hooks
 import { useInput } from "../../customHooks/useInput";
@@ -21,28 +22,19 @@ import { useInput } from "../../customHooks/useInput";
 //axios
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-    width: "75%"
-  },
-  textField: {
-    width: "75%",
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200
-  }
-}));
-
 export default function TaskForm({
   closeModal,
   handleFunction,
   editFields,
   text
 }) {
+  //local state
+  const [error, setError] = useState({
+    error: false,
+    error_text: null
+  });
+
   const [projects, setProjects] = useState([]);
-  const {getTasks, tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks} = useContext(TaskContext);
   const [task, setTask, handleChanges] = useInput({
     task_name: "",
     task_description: "",
@@ -51,62 +43,89 @@ export default function TaskForm({
   });
 
   useEffect(() => {
-    getTasks();
     axiosWithAuth()
       .get(`/projects`)
       .then(res => {
-        console.log('from taskForm',res)
+        console.log("from taskForm", res);
         setProjects(res.data);
       })
       .catch(err => console.log(err));
     if (editFields) {
-      console.log('editFields', editFields)
+      console.log("editFields", editFields);
       setTask(editFields);
-      console.log('project_name', )
+      console.log("project_name");
     }
-  },[]);
+  }, []);
 
   //sets the fields if the editFields prop is passed down
   //else they are empty
 
   const handleSubmit = e => {
     e.preventDefault();
-  
-    //finds the the project that the user picked
-    const chosenProject = projects.filter(project => {
-      return project.project_name === task.project_name;
-    });
-    // console.log("from handleSubmit in TaskForm", chosenProject);
 
-    //asigns the project id to the new task
-    const newTask = {
-      project_name: chosenProject[0].project_name,
-      id: task.id,
-      task_name: task.task_name,
-      task_description: task.task_description,
-      due_date: task.due_date,
-      project_id: chosenProject[0].id
-    };
-    console.log("from taskform submit", task);
-    handleFunction(newTask);
-    setTask({
-      task_name: "",
-      task_description: "",
-      due_date: "",
-      project_name: ""
-    });
-    closeModal();
+    // check if user asigns a project to the task
+    if (task.project_name == "") {
+      setError({
+        error: true,
+        error_text: "Please assign a project to this task!"
+      });
+    } else {
+      //finds the the project that the user picked
+      const chosenProject = projects.filter(project => {
+        return project.project_name === task.project_name;
+      });
+
+      // console.log("from handleSubmit in TaskForm", chosenProject);
+
+      //asigns the project id to the new task
+      const newTask = {
+        project_name: chosenProject[0].project_name,
+        id: task.id,
+        task_name: task.task_name,
+        task_description: task.task_description,
+        due_date: task.due_date,
+        project_id: chosenProject[0].id,
+        isComplete: task.isComplete
+        
+      };
+      console.log("from taskform submit", task);
+
+      // check if user assigns a name to the task
+      if (newTask.task_name == "") {
+        setError({
+          error: true,
+          error_text: "Please assign a name to this task!"
+        });
+      } else {
+        // submit newTask to addTask or editTask funciton
+        handleFunction(newTask);
+
+        //reset task form and error to initial state
+        setTask({
+          task_name: "",
+          task_description: "",
+          due_date: "",
+          project_name: ""
+        });
+        setError({ error: false, error_text: null });
+        closeModal();
+      }
+    }
   };
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <div style={{ width: "100%", textAlign: "right" }}>
-        <XButton onClick={closeModal}>X</XButton>
-      </div>
-
-      <header>
-        <h1 style={{ fontSize: "3rem", fontFamily: "roboto" }}>{text}</h1>
-      </header>
+      <StyledFormHeader>
+        <h1
+          style={{
+            fontSize: "2rem",
+            margin: 0
+          }}
+        >
+          {text}
+        </h1>
+        <XButton onClick={closeModal}> Close X</XButton>
+      </StyledFormHeader>
 
       <StyledLabel>Task Name</StyledLabel>
       <StyledInput
@@ -115,34 +134,51 @@ export default function TaskForm({
         value={task.task_name}
         onChange={handleChanges}
       />
-
-      <StyledLabel>Task Decription</StyledLabel>
-      <StyledInput
-        type="text"
-        name="task_description"
-        value={task.task_description}
-        onChange={handleChanges}
-      />
-
-      {/* <StyledLabel>Due Date</StyledLabel>
-      <DatePicker selected={dueDate} onChange={date => setDueDate(date)} /> */}
-
-      <TextField
+      <div
         style={{
-          width: "77%",
-          marginTop: "20px"
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "4px"
         }}
-        id="date"
-        label="Due Date"
-        type="date"
-        name="due_date"
-        onChange={handleChanges}
-        value={task.due_date}
-        InputLabelProps={{
-          shrink: true
-        }}
-      />
+      >
+        <div style={{ width: "62%" }}>
+          <StyledLabel>Assign Project</StyledLabel>
+          <StyledSelect
+            style={{
+              background: "#E9E9E9",
+              border: "none",
+              paddingLeft: "10px"
+            }}
+            name="project_name"
+            onChange={handleChanges}
+            value={task.project_name}
+          >
+            <option>Choose Project</option>
 
+            {projects.map(project => {
+              return (
+                <option key={project.id} value={project.project_name}>
+                  {project.project_name}
+                </option>
+              );
+            })}
+          </StyledSelect>
+        </div>
+        <div style={{ width: "35%" }}>
+          <StyledLabel>Due Date</StyledLabel>
+          <StyledInput
+            id="date"
+            label=""
+            type="date"
+            name="due_date"
+            onChange={handleChanges}
+            value={task.due_date}
+            InputLabelProps={{
+              shrink: true
+            }}
+          />
+        </div>
+      </div>
       {/* <StyledLabel>Due Date</StyledLabel>
       <input
         type="text"
@@ -150,24 +186,18 @@ export default function TaskForm({
         value={task.dueDate}
         onChange={handleChanges}
       /> */}
-
-      <StyledLabel>Assign Project</StyledLabel>
-      <StyledSelect
-        name="project_name"
+      <StyledLabel>Task Decription</StyledLabel>
+      <StyledTextAreaInput
+        rows="8"
+        type="text"
+        name="task_description"
+        value={task.task_description}
         onChange={handleChanges}
-        value={task.project_name}
-      >
-        <option>Choose Project</option>
-
-        {projects.map(project => {
-          return (
-            <option key={project.id} value={project.project_name}>
-              {project.project_name}
-            </option>
-          );
-        })}
-      </StyledSelect>
-      <StyledBtn>Save</StyledBtn>
+      />
+      {error.error && error.error_text ? (
+        <ErrorMessage errorMessage={error.error_text} />
+      ) : null}
+      <StyledBtn>{text}</StyledBtn>
     </StyledForm>
   );
 }

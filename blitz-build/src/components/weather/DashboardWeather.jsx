@@ -3,9 +3,9 @@ import styled from "styled-components";
 import reverseGeocode from "reverse-geocode";
 
 // for dashboard import <Weather usage="dashboard"/>
-// for project page import <Weather usage="project" city={} latitude={} longitude={} />
 
 function DashboardWeather({ weatherData, time, icon, weatherPosition }) {
+  //variable that grabs the latitude and longitude of the user if they give permission
   const cityInfo = reverseGeocode.lookup(
     weatherPosition.latitude,
     weatherPosition.longitude,

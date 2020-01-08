@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-// import DatePicker from "react-datepicker";
+
+// components
+import ErrorMessage from "../../components/global/ErrorMessage";
 
 //styles
 //import styled from "styled-components";
-import { XButton } from "../../styles/Tasks/tasks";
 import {
   StyledForm,
+  StyledFormHeader,
   StyledLabel,
   StyledTextAreaInput,
-  StyledBtn
-} from "../../styles/Tasks/taskForm";
+  StyledBtn,
+  XButton
+} from "../../styles/Form/FormStyles";
 
+//importing function, function, state, state, and specific text
 export default function DelayForm({
   closeModal,
   handleFunction,
@@ -18,9 +22,13 @@ export default function DelayForm({
   editFields,
   text
 }) {
-  //console.log("task from delayForm", task,editFields)
+  //sets initial state of form
   const [form, setForm] = useState({
     reason: ""
+  });
+  const [error, setError] = useState({
+    error: false,
+    error_text: null
   });
   useEffect(() => {
     if (editFields) {
@@ -31,38 +39,43 @@ export default function DelayForm({
       setForm({ ...form, project_id: task.project_id, task_id: task.id });
       //console.log(form);
     }
-  },[]);
+  }, []);
 
+  //handles changes in form
   const changeHandler = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  //handles the submittion of the form
   const handleSubmit = e => {
-    
     e.preventDefault();
-    if (editFields) {
-      handleFunction(form, form.id);
+    // check if user assigns a name to the delay_log
+    if (form.reason == "") {
+      setError({
+        error: true,
+        error_text: "Please add delay reason!"
+      });
     } else {
-      handleFunction(form, task.project_name, task.task_name);
+      if (editFields) {
+        handleFunction(form, form.id);
+      } else {
+        handleFunction(form, task.project_name, task.task_name);
+      }
+      setForm({
+        reason: ""
+      });
+      setError({ error: false, error_text: null });
+      closeModal();
     }
-    setForm({
-      reason: ""
-    });
-    closeModal();
   };
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <div style={{ width: "100%", textAlign: "right" }}>
+      <StyledFormHeader style={{ marginBottom: "20px" }}>
+        <h1 style={{ fontSize: "2rem", margin: 0 }}>{text}</h1>
         <XButton onClick={closeModal}>close X</XButton>
-      </div>
-
-      <header style={{ fontFamily: "roboto", textAlign: "center" }}>
-        <h1 style={{ fontSize: "2.5rem", fontFamily: "roboto" }}>{text}</h1>
-        <p style={{ margin: "8px 0 38px 0" }}>
-          Please document all delays to publish and save in the Delay Log.
-        </p>
-      </header>
-
+      </StyledFormHeader>
+      <StyledLabel>Reason for delay</StyledLabel>
       <StyledTextAreaInput
         rows="8"
         type="text"
@@ -70,8 +83,10 @@ export default function DelayForm({
         value={form.reason}
         onChange={changeHandler}
       />
-
-      <StyledBtn>Save</StyledBtn>
+      {error.error && error.error_text ? (
+        <ErrorMessage errorMessage={error.error_text} />
+      ) : null}
+      <StyledBtn>Publish to delay log</StyledBtn>
     </StyledForm>
   );
 }
