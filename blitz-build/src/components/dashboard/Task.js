@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import moment from "moment";
 
 //components
@@ -32,8 +32,13 @@ function Task({ item, children, projectTask }) {
       return "Upcoming";
     }
   }
+<<<<<<< HEAD
 
   //this function returns the status of the project depending on the due date of the project
+=======
+  
+  console.log(!project_date)
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
   const status = DateCalc(today, item.due_date);
 
   //creating varible that grabs current day's date

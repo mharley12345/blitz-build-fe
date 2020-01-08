@@ -12,10 +12,11 @@ export default function EditProject({
   handleEditClose,
   project
 }) {
+<<<<<<< HEAD
   //import the function that edits projects from context
+=======
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
   const { editProject } = useContext(ProjectContext);
-
-  //returns a modal that lets you edit the project through the same form you made it with
   return (
     <>
       <Modal
@@ -27,7 +28,6 @@ export default function EditProject({
             closeModal={handleEditClose}
             handleFunction={editProject}
             text={"Edit Project"}
-            imgText={"Change Project Image"}
             editFields={project}
           />
         }

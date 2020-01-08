@@ -3,6 +3,10 @@ import styled from "styled-components";
 import reverseGeocode from "reverse-geocode";
 
 // for dashboard import <Weather usage="dashboard"/>
+<<<<<<< HEAD
+=======
+// for project page import <Weather usage="project" city={} latitude={} longitude={} />
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
 
 function DashboardWeather({ weatherData, time, icon, weatherPosition }) {
   //variable that grabs the latitude and longitude of the user if they give permission

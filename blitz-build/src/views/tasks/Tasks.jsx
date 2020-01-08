@@ -157,6 +157,7 @@ export default function Tasks(props) {
     <>
       <InfoContainer>
         {failedSearch()}
+<<<<<<< HEAD
         <SortDiv>
           <Link to="/tasks?filter=ACTIVE">
             <SortBtn
@@ -181,6 +182,14 @@ export default function Tasks(props) {
             </SortBtn>
           </Link>
         </SortDiv>
+=======
+        {/* <SortBtn >
+          Active
+        </SortBtn>
+        <SortBtn>
+          Complete
+        </SortBtn> */}
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
       </InfoContainer>
 
       <Paper className={classes.root}>
@@ -190,6 +199,7 @@ export default function Tasks(props) {
           style={{ minHeight: "500px" }}
         >
           <TableHead>
+<<<<<<< HEAD
             <StyledTableHeadRow>
               <StyledTableCell>PROJECT NAME</StyledTableCell>
               <StyledTableCell>TASK</StyledTableCell>
@@ -197,6 +207,15 @@ export default function Tasks(props) {
               <StyledTableCell>DUE DATE</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
             </StyledTableHeadRow>
+=======
+            <TableRow>
+              <StyledTableCell>Poject Name</StyledTableCell>
+              <StyledTableCell>Task</StyledTableCell>
+              <StyledTableCell>Description</StyledTableCell>
+              <StyledTableCell>Due Date</StyledTableCell>
+              <StyledTableCell>Status</StyledTableCell>
+            </TableRow>
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+// import DatePicker from "react-datepicker";
 
 // components
 import ErrorMessage from "../../components/global/ErrorMessage";
@@ -71,7 +72,11 @@ export default function DelayForm({
 
   return (
     <StyledForm onSubmit={handleSubmit}>
+<<<<<<< HEAD
       <StyledFormHeader style={{ marginBottom: "20px" }}>
+=======
+      <StyledFormHeader style={{marginBottom:"32px"}}>
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
         <h1 style={{ fontSize: "2rem", margin: 0 }}>{text}</h1>
         <XButton onClick={closeModal}>close X</XButton>
       </StyledFormHeader>

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 //components
 import Modal from "../global/Modal";
-import TemplateForm from "./TemplateForm";
+import EditTemplateForm from "./EditTemplateForm";
 
 //context
 import TemplateContext from "../../contexts/templates/TemplateContext";
@@ -14,15 +14,15 @@ export default function EditTask({ template , editStatus, handleEditClose }) {
   return (
     <>
       <Modal
-        visible={editStatus}
-        dismiss={handleEditClose}
-        client={"50%"}
+        visible={ editStatus }
+        dismiss={ handleEditClose }
+        client={'50%'}
         component={
-          <TemplateForm
-            closeModal={handleEditClose}
-            handleFunction={editTemplate}
-            editFields={template}
-            text={`Edit template`}
+          <EditTemplateForm
+            closeModal={ handleEditClose }
+            handleFunction={ editTemplate }
+            editFields={ template }
+            text={ `Edit ${template.template_name} template` }
           />
         }
       />

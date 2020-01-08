@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-
-//styles
 import styled from "styled-components";
-
-//components
 import EditDelayReason from "./EditDelayReason";
 import DeleteDelayReason from "./DeleteDelayReason";
 

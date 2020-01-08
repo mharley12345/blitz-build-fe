@@ -1,6 +1,12 @@
+<<<<<<< HEAD:blitz-build/src/components/projects/ProjectsTaskCard.js
 import React, { useContext,useEffect } from "react";
+=======
+import React, { useEffect, useState, useContext } from "react";
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee:blitz-build/src/components/dashboard/TaskCard.js
 import styled from "styled-components";
-import Task from "../dashboard/Task";
+import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
+import Task from "./Task";
+import searchTermContext from "../../contexts/searching/searchTerm";
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
 //mui
@@ -8,6 +14,7 @@ import TableHead from "@material-ui/core/TableHead";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
+<<<<<<< HEAD:blitz-build/src/components/projects/ProjectsTaskCard.js
 import {
   StyledTableCell,
   StyledTableHeadRow
@@ -28,6 +35,28 @@ function ProjectTaskCard({ projectID, numberOfTasks }) {
   }, [])
 
   //variable that filters through all the tasks and brings back the tasks associated with the specific project id
+=======
+const StyledTableCell = withStyles(theme => ({
+  head: {
+    padding: "8px 32px",
+    height: 35,
+    backgroundColor: "#E9E9E9",
+    color: theme.palette.common.black
+  },
+  body: {
+    padding: "8px 32px",
+    fontSize: 16,
+    height: 104
+  }
+}))(TableCell);
+function TaskCard({ projectID, numberOfTasks }) {
+  const { tasks, getTasks } = useContext(taskContext);
+  const { searchTerm } = useContext(searchTermContext);
+  console.log("projectID:", projectID);
+  useEffect(() => {
+    getTasks();
+  }, []);
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee:blitz-build/src/components/dashboard/TaskCard.js
   const projectTasks = tasks.filter(item => {
     return `${item.project_id}` === projectID;
   });
@@ -35,9 +64,13 @@ function ProjectTaskCard({ projectID, numberOfTasks }) {
     <Container>
       <Section>
         <p>Your Task List</p>
+<<<<<<< HEAD:blitz-build/src/components/projects/ProjectsTaskCard.js
         <Link to={`/projects/${projectID}/tasks?filter=ACTIVE`}>
           <ViewBtn>View All</ViewBtn>
         </Link>
+=======
+        <p>View All</p>
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee:blitz-build/src/components/dashboard/TaskCard.js
       </Section>
       <Paper>
         <Table>
@@ -61,7 +94,7 @@ function ProjectTaskCard({ projectID, numberOfTasks }) {
     </Container>
   );
 }
-export default ProjectTaskCard;
+export default TaskCard;
 const Section = styled.div`
   width: 100%;
   display: flex;

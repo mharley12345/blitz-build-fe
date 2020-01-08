@@ -27,6 +27,7 @@ export default function TaskProvider({ children }) {
       });
   };
 
+<<<<<<< HEAD
   const completeTask = completedTask => {
     axiosWithAuth()
       .put(`projects/tasks/${completedTask.id}`, {
@@ -62,6 +63,34 @@ export default function TaskProvider({ children }) {
       } else return task;
     });
     setTasks(newTasksArr);
+=======
+  const sortTasks = (condition) => {
+    const user_id = localStorage.getItem("user_id");
+    axiosWithAuth()
+      .get(
+        `/projects/tasks/${user_id}?sortby=isComplete&sortcondition=false&sortdir=desc`
+      )
+      .then(res => {
+        setTasks(res.data.tasks);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const completeTask = () => {
+    const user_id = localStorage.getItem("user_id");
+    axiosWithAuth()
+      .get(
+        `/projects/tasks/${user_id}?sortby=isComplete&sortcondition=false&sortdir=desc`
+      )
+      .then(res => {
+        setTasks(res.data.tasks);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
   };
 
   const getProjectTasks = projectID => {
@@ -76,6 +105,11 @@ export default function TaskProvider({ children }) {
   };
 
   const addTask = newTask => {
+<<<<<<< HEAD
+=======
+    console.log("new task", newTask);
+
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
     const task = {
       due_date: newTask.due_date,
       task_name: newTask.task_name,
@@ -83,21 +117,30 @@ export default function TaskProvider({ children }) {
       project_id: newTask.project_id,
       template_id: newTask.template_id
     };
+    console.log("task const from addTask", task);
     axiosWithAuth()
       .post(`/projects/tasks`, task)
       .then(res => {
+        console.log("from addtask in taskProvider", res);
         newTask.id = res.data.taskId[0];
         setTasks([...tasks, newTask]);
         getTasks();
        
       })
       .catch(err => console.log(err));
+    console.log(newTask);
   };
 
   const deleteTask = deletedTask => {
     axiosWithAuth()
       .delete(`/projects/tasks/${deletedTask.id}`)
+<<<<<<< HEAD
       .then(res => { getTemplateTasks();})
+=======
+      .then(res => {
+        console.log("from delete task", res);
+      })
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
       .catch(err => console.log("from delete task catch", err));
     const newTasks = tasks.filter(task => {
       return task.id != deletedTask.id;
@@ -107,7 +150,11 @@ export default function TaskProvider({ children }) {
   };
 
   const editTask = editedTask => {
+<<<<<<< HEAD
     
+=======
+    console.log(editedTask);
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
     const dbTask = {
       task_name: editedTask.task_name,
       task_description: editedTask.task_description,
@@ -116,8 +163,15 @@ export default function TaskProvider({ children }) {
     };
     axiosWithAuth()
       .put(`projects/tasks/${editedTask.id}`, dbTask)
+<<<<<<< HEAD
       .then(res => { getTemplateTasks();})  
      
+=======
+      .then(res => {
+        console.log("from edit task", editedTask);
+        console.log("from edit task", res);
+      })
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
       .catch(err => console.log("from edit task catch", err));
     
     const newTasks = tasks.map(task => {
@@ -137,8 +191,13 @@ export default function TaskProvider({ children }) {
       <TaskContext.Provider
         value={{
           getTasks,
+<<<<<<< HEAD
           completeTask,
           activateTask,
+=======
+          sortTasks,
+          completeTask,
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
           tasks,
           setTasks,
           addTask,

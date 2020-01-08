@@ -134,14 +134,8 @@ export default function TaskForm({
         value={task.task_name}
         onChange={handleChanges}
       />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginTop: "4px"
-        }}
-      >
-        <div style={{ width: "62%" }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ width: "70%" }}>
           <StyledLabel>Assign Project</StyledLabel>
           <StyledSelect
             style={{
@@ -164,7 +158,7 @@ export default function TaskForm({
             })}
           </StyledSelect>
         </div>
-        <div style={{ width: "35%" }}>
+        <div style={{ width: "25%" }}>
           <StyledLabel>Due Date</StyledLabel>
           <StyledInput
             id="date"

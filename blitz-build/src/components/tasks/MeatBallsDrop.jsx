@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 
+<<<<<<< HEAD
 /*
 MeatBallsDrop is a multi use dropdown that is used inside the Task.js
 component. Its contents will change depending on the url it is 
@@ -11,12 +12,18 @@ import queryString from "query-string";
 
 import CompleteTask from "./CompleteTask";
 import ActivateTask from "./ActivateTask"
+=======
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
 import EditTask from "./EditTask";
 import DeleteTask from "./DeleteTask";
 import AddDelayReason from "../delayLog/AddDelayReason";
 import PathnameContext from "../../contexts/PathnameContext";
+<<<<<<< HEAD
 import EditTemplateTask from "../templates/EditTemplateTask";
 
+=======
+import EditTemplateTask from '../templates/EditTemplateTask'
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
 //styles
 import {
   TaskI,
@@ -30,6 +37,7 @@ export default function MeatBallsDrop({ task }) {
   const refContainer = useRef();
   //local state
   const [dropStatus, setDropStatus] = useState(false);
+<<<<<<< HEAD
   const [completeStatus, setCompleteStatus] = useState(false);
   const [activateStatus, setActivateStatus] = useState(false);
   
@@ -38,6 +46,12 @@ export default function MeatBallsDrop({ task }) {
   const [delayStatus, setDelayStatus] = useState(false);
   //state of pathname from context
   const { pathname, setPathname } = useContext(PathnameContext);
+=======
+  const [editStatus, setEditStatus] = useState(false);
+  const [deleteStatus, setDeleteStatus] = useState(false);
+const [delayStatus, setDelayStatus] = useState(false);
+const { pathname, setPathname } = useContext(PathnameContext);
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
   useEffect(() => {
     setPathname(window.location.pathname);
     document.addEventListener("mousedown", handleClickOutside);
@@ -59,6 +73,7 @@ export default function MeatBallsDrop({ task }) {
     setDropStatus(false);
   };
 
+<<<<<<< HEAD
   //complete task
   const handleCompleteOpen = e => {
     e.stopPropagation();
@@ -79,6 +94,8 @@ export default function MeatBallsDrop({ task }) {
     closeDrop();
   };
 
+=======
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
   //edit modal functions
   const handleEditOpen = e => {
     e.stopPropagation();
@@ -100,10 +117,11 @@ export default function MeatBallsDrop({ task }) {
     closeDrop();
   
   };
-  //delay modal functions
+//delay modal functions
   const handleDelayOpen = e => {
     e.stopPropagation();
     setDelayStatus(true);
+    
   };
   const handleDelayClose = e => {
     setDelayStatus(false);
@@ -112,6 +130,7 @@ export default function MeatBallsDrop({ task }) {
 
   //function that hides certain options for templates
   const hideOnTemplates = () => {
+<<<<<<< HEAD
     const queryValues = queryString.parse(window.location.search);
     if (pathname.includes("/templates")) {
       return Hidden;
@@ -176,6 +195,26 @@ const pageCheck = (complete, undo, edit, delay, deleated) => {
   
 
   // const checkThePageOptions = (complete, undo, edit, delay, delete )
+=======
+    if(pathname.includes('/templates')){
+      return Hidden
+    }
+    
+  }
+
+  const Hidden = {
+    display: 'none'
+  }
+
+  const checkThePage = (editTask, editTemplateTask) => {
+    if (pathname.includes('/templates')) {
+      return editTemplateTask
+    }
+    else {
+      return editTask
+    }
+  }
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
 
   return (
     <>
@@ -188,9 +227,15 @@ const pageCheck = (complete, undo, edit, delay, deleated) => {
           <>
 
             <DropDown>
+<<<<<<< HEAD
              {pageCheck(
               <StyledLi>
                 <DropP onClick={handleCompleteOpen}>Complete</DropP>
+=======
+              {/* <Geo></Geo> */}
+              <StyledLi style={hideOnTemplates()}>
+                <DropP>Complete</DropP>
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
                 <TaskI className="ion-md-checkmark-circle" />
               </StyledLi>,
               <StyledLi >
@@ -200,8 +245,13 @@ const pageCheck = (complete, undo, edit, delay, deleated) => {
               <StyledLi onClick={handleEditOpen} >
                 <DropP>Edit</DropP>
                 <TaskI className="ion-md-create" />
+<<<<<<< HEAD
               </StyledLi>,
               <StyledLi onClick={handleDelayOpen}>
+=======
+              </StyledLi>
+              <StyledLi onClick={handleDelayOpen} style= {hideOnTemplates()}>
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
                 <DropP>Delay</DropP>
                 <TaskI className="ion-md-clock" />
               </StyledLi>,
@@ -214,6 +264,7 @@ const pageCheck = (complete, undo, edit, delay, deleated) => {
         )}
       </MeatBalls>
       {checkThePage(
+<<<<<<< HEAD
         <EditTask
           task={task}
           closeDrop={closeDrop}
@@ -238,6 +289,20 @@ const pageCheck = (complete, undo, edit, delay, deleated) => {
           activateStatus={activateStatus}
           handleActivateClose={handleActivateClose}
         />
+=======
+      <EditTask
+        task={task}
+        closeDrop={closeDrop}
+        editStatus={editStatus}
+        handleEditClose={handleEditClose}
+      />,
+      <EditTemplateTask 
+      task={task}
+      closeDrop={closeDrop}
+      editStatus={editStatus}
+      handleEditClose={handleEditClose}
+    />
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
       )}
       <DeleteTask
         task={task}

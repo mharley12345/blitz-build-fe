@@ -4,32 +4,30 @@ export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
 `;
-export const StyledFormHeader = styled.div`
+export const StyledFormHeader = styled.form`
 margin-top:10px;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 `;
 export const StyledLabel = styled.label`
-         margin-top: 8px;
-         margin-bottom: 4px;
-
-         width: 75%;
-       `;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  width: 75%;
+`;
 
 export const StyledInput = styled.input`
-         width: 100%;
-         margin-bottom: 8px;
-         margin-top: 4px;
-         font-size: 14px;
-         padding: 6px 8px;
-         background: #e9e9e9;
-         border-width: 1px;
-         border-style: solid;
-         border-radius: 3px;
-         border-color: ${props => (props.error ? "red" : " #e9e9e9")};
-         box-shadow: none;
-       `;
+  width: 100%;
+  margin-bottom: 8px;
+  font-size: 14px;
+  padding: 6px 8px;
+  background: #e9e9e9;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 3px;
+  border-color: ${props => (props.error ? "red" : " #e9e9e9")};
+  box-shadow: none;
+`;
 export const StyledTextAreaInput = styled.textarea`
          width: 100%;
         
@@ -41,21 +39,20 @@ export const StyledTextAreaInput = styled.textarea`
          border-radius: 3px;
        `;
 export const StyledSelect = styled.select`
-         width: 100%;
-         font-size: 14px;
-         padding: 6px 8px;
-         text-decoration: none;
-         border-radius: 3px;
-         margin-bottom: 8px;
-         margin-top: 4px;
+  width: 100%;
+  font-size: 14px;
+  padding: 6px 8px;
+  text-decoration: none;
+  border-radius: 3px;
+  margin-bottom: 5px;
 
-         outline: none;
-         border-color: ${props => (props.error ? "red" : "null")};
+  outline: none;
+  border-color: ${props => (props.error ? "red" : "null")};
 
-         background: "#E9E9E9";
-         border: "none";
-         paddingleft: "10px";
-       `;
+  background: "#E9E9E9";
+  border: "none";
+  paddingleft: "10px";
+`;
 
 export const StyledBtn = styled.button`
          margin: 20px auto 20px auto;

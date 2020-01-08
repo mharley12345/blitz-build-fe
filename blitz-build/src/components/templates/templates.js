@@ -2,8 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { usePathnameContext } from "../../contexts/PathnameContext";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
+<<<<<<< HEAD
 import { useTemplateContext } from "../../contexts/templates/TemplateContext";
 
+=======
+import templateContext from "../../contexts/templates/TemplateContext";
+import searchTermContext from "../../contexts/searching/searchTerm";
+import AddTemplate from "../modal/AddTemplate";
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
 import styled, { css } from "styled-components";
 import TemplateMeatBallsDrop from "./TemplateMeatBalls";
 const Templates = props => {
@@ -84,6 +90,11 @@ const Templates = props => {
           </Container>
         );
       })}
+<<<<<<< HEAD
+=======
+
+      <AddTemplate />
+>>>>>>> d7b64ebe440e023da043a7c8a33f9330ba1142ee
     </div>
   );
 };
