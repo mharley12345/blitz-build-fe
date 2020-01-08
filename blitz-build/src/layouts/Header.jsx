@@ -269,6 +269,7 @@ function Header({ pathname }) {
   };
   const handleTemplateModalClose = () => {
     setTemplateModalStatus(false);
+   
   };
   const handleTemplateTaskModalOpen = () => {
     setTemplateTaskModalStatus(true);
@@ -352,7 +353,7 @@ function Header({ pathname }) {
       pathname === "/delay-log" ||
       pathname === `/help` ||
       pathname === "/log-out" ||
-      pathname === "/documents/add" ||
+      pathname.includes("/documents") ||
       pathname.includes("/mycalendar") ||
       pathname === "/" ||
       pathname === "/activity-feed"

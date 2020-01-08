@@ -14,7 +14,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableFooter from "@material-ui/core/TableFooter";
 import Sortv from '../../styles/Sort/Sortv.png'
 import DocumentMeatBalls from './DocumentsMeatBalls'
-import Link from 'react-router-dom'
+
 import {
   StyledTableRow,
   
@@ -23,7 +23,15 @@ import {
 } from "../../styles/Table/TableStyles";
 
 
-
+/** Document.js
+ *  This is the main component for the Document Center
+ *  It imports the documents from the DocumentsContext hook
+ *  runs the filter function then displays each document on it's own 
+ *  line
+ *  ****TODO**** Fix search input!!
+ *  It displays a search input at the top but that does not actually allow you to 
+ *  search the documents it will search through the tasks.
+ */
 
 const DocumentCard = (props) => {
   const { documents } =
@@ -89,7 +97,7 @@ const DocumentCard = (props) => {
                 <StyledTableCell>
                   {/** */}
                   <a href={`/documents/view/${result.file_name}`}
-                    rel="noopener" doc_url={result.doc_url} document={result} target="_Self">
+                     doc_url={result.doc_url} document={result} target="_Self">
 
                     View</a><DocumentMeatBalls document={result} />
                 </StyledTableCell>

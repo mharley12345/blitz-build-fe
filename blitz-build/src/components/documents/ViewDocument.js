@@ -6,7 +6,12 @@ import styled from  'styled-components'
 import PrintProvider, { Print, NoPrint } from 'react-easy-print';
 import Download from '@axetroy/react-download';
 
-
+/**TODO
+ *  react-easy-print is  imported and <print> / <noprint> tags are placed 
+ *  in proper postion but it still prints the everything on the screen.
+ *  Please see /contexts/documents/DocumentsProvider.js, ./PrintDocument.js  
+ *   and  ./confirmPrint.js to see the flow of the print function
+ */
 const  ViewDocument =  (props) =>{
 
    const { handleDownload } = useContext(DocumentContext)
@@ -26,9 +31,10 @@ console.log(params,props,document)
     }
 
     function DownloadDocument() {
-      axiosWithAuth().get(`/docs/download/${fileName}/bucket`)
+    
+      axiosWithAuth().get(URL)
       .then(response =>{
-        console.log(response)
+         return response
       })
     }
 
@@ -37,24 +43,25 @@ console.log(params,props,document)
 <PrintProvider>
 <NoPrint>
       <DocViewer>
+    
      <NoPrint>
      <Print>
        <header>{`File Name:${fileName}`}</header>
        </Print>
+         <Print>
           <ImgContainer>
-          <Print>
+        
           <img  src={URL}  alt=""/>
-          </Print>
+          
          </ImgContainer>
-        </NoPrint>
-
-      <NoPrint>
+        </Print>
+      
       <div className="button-container">
   <input type='button' value="Print" onClick={handlePrint}/>
 
   </div>
   <Download file={fileName} content={"img"}>
-          <button type="button">Download</button>
+          <button type="button" value="Download" onclick={DownloadDocument}>Download</button>
           </Download>
   </NoPrint>
   </DocViewer>

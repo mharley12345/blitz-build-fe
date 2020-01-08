@@ -1,15 +1,16 @@
-import React, {useContext} from "react"
+import React from "react"
 
 import Modal from "../global/Modal"
 import Confirm from "../global/Confirm"
 
-import DocumentContext from '../../contexts/documents/DocumentsContext'
-
+/**TODO
+ *  Currently the DownloadDocument component will force a download but 
+ *  it downloads a txt file with the correct filename that contains the 
+ *  word img.
+ */
 export default function DownloadDocument(props){
-    const {downloadStatus,handleDownloadClose,docs_url} =props
-    const { downloadDocument, documents,} = useContext(DocumentContext);
-
-     
+    const {downloadStatus,handleDownloadClose,file_name} =props     
+         
     return (
         <>
         <Modal
@@ -19,9 +20,9 @@ export default function DownloadDocument(props){
         component={
             <Confirm
             closeModal={handleDownloadClose}
-             downloadFunction={downloadDocument}
-            downloadItem={docs_url}
-            text={`${documents} document`}
+        
+            downloadItem={file_name}
+            text={`${file_name} document`}
             />
         }
         />

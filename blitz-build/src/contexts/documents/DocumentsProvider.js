@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import { axiosWithAuth } from '../../utils/auth/axiosWithAuth';
-import filesaver from  'filesaverjs'
+
 import Download from '@axetroy/react-download';
 
 //context
@@ -9,11 +9,19 @@ import DocumentsContext from './DocumentsContext'
 export default function DocumentsProvider({ children }){
     const [documents, setDocuments] = useState([])
   
-   
+   /**getDocuments
+    * updates state when changes are made to documents
+    * 
+    */
     useEffect(() => {
         getDocuments(res => setDocuments(res));
         
     }, [])
+
+    /**
+     * Calls the BE to get a list of documents per user 
+     * and sets them to state
+     */
     const getDocuments = () =>{
  
         axiosWithAuth()
@@ -28,6 +36,16 @@ export default function DocumentsProvider({ children }){
        })
     }
  console.log(documents)
+
+ /** handleDelete
+  *   Calls the BE delete endpoint which fires off a BE function
+  *   that deletes the document from the S3 bucket,removes the record
+  *   from the doc_url table and  returns a status of 204.
+  *   Then it takes the response and updates state removing the deleted 
+  *   document from state.
+  *   
+  * 
+  */
      const handleDelete = (document) => {
          
          console.log(document)
@@ -49,19 +67,28 @@ export default function DocumentsProvider({ children }){
         
         })
     }
-
-    // const printDocument = (event)=>{
-    //   const file_name = event.file_name
-    // }
-       
+/** TODO
+ *  window.print needs to be replaced with the callback provided by 
+ *  react-easy-print package
+ */
+      const printDocument = () =>{
+     
+         window.print()
+     }
+/** TODO 
+ *  downloadDocument should save the current document to the users local.
+ *  It will save a txt file with the document name as the file name containing 
+ *  the word img. This is not what is expected.
+ */
   const downloadDocument = props => {
 
-   const file_name = documents.file_name
+   const file_name = props.file_name
+
     axiosWithAuth().get(`/docs/download/${file_name}/bucket`)
     .then(data => {
       if (data)       
-          console.log("stream")
-          Download(data,'blitz-build.jpg')
+          
+          Download(data,file_name)
     })
   }
 
@@ -71,10 +98,10 @@ export default function DocumentsProvider({ children }){
               documents,
               setDocuments,
               handleDelete,
-              downloadDocument
+              downloadDocument,
               
-            //   printDocument,
-            //   downloadDocument
+               printDocument
+         
               }}
               >
              {children}
