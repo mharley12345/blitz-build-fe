@@ -60,9 +60,11 @@ console.log(params,props,document)
   <input type='button' value="Print" onClick={handlePrint}/>
 
   </div>
-  <Download file={fileName} content={"img"}>
+  {/* Not working as expected hidden from view. It should save the loaded 
+   document to the users local. It does download a txt file with the correct}
+  {/* <Download file={fileName} content={"img"}>
           <button type="button" value="Download" onclick={DownloadDocument}>Download</button>
-          </Download>
+          </Download> */}
   </NoPrint>
   </DocViewer>
  </NoPrint>
