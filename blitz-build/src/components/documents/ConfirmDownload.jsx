@@ -2,7 +2,7 @@ import React from 'react'
 
 import styled from "styled-components";
 import { XButton } from "../../styles/Tasks/tasks";
-import download from 'save-filejs'
+
 
 const ConfirmStyle = styled.div`
   padding-left: 30px;

@@ -46,7 +46,7 @@ export default function Confirm({ closeModal, text, printFunction, printDoc ,han
 
             <H1 style={{fontSize: '30px', fontWeight: 600, marginBottom:"15px"}}>{text}</H1>
 
-            <p>Please submit continue to proceed?</p>
+            <p>Please press submit to continue!</p>
             <BtnDiv>
                 <ConfirmBtn onClick={ closeModal }>Cancel</ConfirmBtn>
                 <ConfirmBtn print onClick={ () => {
