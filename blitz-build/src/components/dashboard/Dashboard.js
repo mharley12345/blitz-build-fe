@@ -1,11 +1,18 @@
 import React, { useEffect, useContext } from "react";
-import styled from "styled-components";
+import jwtDecode from "jwt-decode";
+//components
+
 import DashboardTasks from "./DashboardTasks";
 import Weather from "../weather/Weather.jsx";
 import ActivityFeed from './ActivityFeed';
+
+// contexts
 import PathnameContext from '../../contexts/PathnameContext'
 import UserContext from '../../contexts/UserContext'
-import jwtDecode from "jwt-decode";
+
+// styles
+import styled from "styled-components";
+
 function Dashboard() {
 
   const {pathname, setPathname } = useContext(PathnameContext)
