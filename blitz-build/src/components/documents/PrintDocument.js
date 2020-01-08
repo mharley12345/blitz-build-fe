@@ -7,7 +7,7 @@ import DocumentContext from '../../contexts/documents/DocumentsContext'
 
 export default function PrintDocument(props){
     const { printDocument } = useContext(DocumentContext);
-    const {documents,printStatus,handlePrintClose} =props
+    const {printItem,documents,printStatus,handlePrintClose} =props
  const handlePrint =(e)=> {
     
      window.print()
@@ -21,7 +21,7 @@ export default function PrintDocument(props){
         component={
             <Confirm
             closeModal={handlePrintClose}
-            printFunction={handlePrint}
+            printFunction={printDocument}
             printItem={documents}
             text={"Click To Print The Document"}
             />

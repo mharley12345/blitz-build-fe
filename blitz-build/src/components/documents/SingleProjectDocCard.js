@@ -25,7 +25,7 @@ const SingleProjectDocCard = (props) =>{
                     <Date>
                       <p>{document.createdAt}</p>
                     </Date>
-                    <a href={document.doc_url} target="_blank">
+                    <a href={document.doc_url} target="_Blank">
                       View
                     </a>
                     >

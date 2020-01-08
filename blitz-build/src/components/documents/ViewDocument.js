@@ -26,9 +26,10 @@ console.log(params,props,document)
     }
 
     function DownloadDocument() {
-      axiosWithAuth().get(`/docs/download/${fileName}/bucket`)
+    
+      axiosWithAuth().get(URL)
       .then(response =>{
-        console.log(response)
+         return response
       })
     }
 
@@ -37,23 +38,25 @@ console.log(params,props,document)
 <PrintProvider>
 <NoPrint>
       <DocViewer>
+    
      <NoPrint>
      <Print>
        <header>{`File Name:${fileName}`}</header>
        </Print>
+         <Print>
           <ImgContainer>
-          <Print>
+        
           <img  src={URL}  alt=""/>
-          </Print>
+          
          </ImgContainer>
-        </NoPrint>
-      <NoPrint>
+        </Print>
+      
       <div className="button-container">
   <input type='button' value="Print" onClick={handlePrint}/>
 
   </div>
   <Download file={fileName} content={"img"}>
-          <button type="button">Download</button>
+          <button type="button" value="Download" onclick={DownloadDocument}>Download</button>
           </Download>
   </NoPrint>
   </DocViewer>

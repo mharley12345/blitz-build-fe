@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import { axiosWithAuth } from '../../utils/auth/axiosWithAuth';
-import filesaver from  'filesaverjs'
+import filesaver from  'file-saver'
 import Download from '@axetroy/react-download';
 
 //context
@@ -56,12 +56,13 @@ export default function DocumentsProvider({ children }){
        
   const downloadDocument = props => {
 
-   const file_name = documents.file_name
+   const file_name = props.file_name
+
     axiosWithAuth().get(`/docs/download/${file_name}/bucket`)
     .then(data => {
       if (data)       
           console.log("stream")
-          Download(data,'blitz-build.jpg')
+          Download(data,file_name)
     })
   }
 
