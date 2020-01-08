@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-import media from '../styles/sizes'
 import Logo from '../styles/Logo/Logo.png'
-import Avatar from '../styles/Avatar/Avatar.png'
 import UserContext from '../contexts/UserContext'
-import userContext from '../contexts/UserContext'
 import TaskContext from '../contexts/tasks/TaskContext'
+
+
+// styled components
 
 const NavBarContainer = styled.div`
    margin-top: 20px;
@@ -100,6 +100,9 @@ const NavBarContainer = styled.div`
         
            
           } ;
+
+          // checking for change in "hover state" so as to change styling appropriately
+
        const NavLinkHover = (hoverIndex, index) => {
            if(hoverIndex === index)
            return HoverStyles
@@ -115,6 +118,7 @@ const NavBarContainer = styled.div`
           backgroundColor: '#4a4a4a',
           width: '80px'
         }
+
             const NavBarP = styled.p`
                 width: 80px;
                 margin-left: 15px;
@@ -199,12 +203,13 @@ const NavBarContainer = styled.div`
        
        `
 function NavBar ({ MenuDividedLinks, navLinks, background, hoverBackground, linkColor, logo, setPathname }) {
-   const [ hoverIndex, setHoverIndex ] = useState(0)
-   const [navOpen, setNavOpen ] = useState(false)
-   const {userInfo, setUserInfo} = useContext(UserContext)
+   const [ hoverIndex, setHoverIndex ] = useState(0) // used for changing hover state
+   const [navOpen, setNavOpen ] = useState(false) // not currently being used, would be for creating a click event to open/close the navbar
+   const {userInfo, setUserInfo} = useContext(UserContext) // bringing in the user info of the signed in user in order to display it accordingly
    console.log("the user info:", userInfo)
-   const {getTasks, tasks, setTasks, TaskModalStatus, setTaskModalStatus, getProjectTasks} = useContext(TaskContext);
-//    console.log(navLinks, background, hoverBackground, linkColor, logo)
+
+
+// checks to see if any user info is availible; if not, it doesnt display anything.
 
 const pictureOrNot = () => {
   if(userInfo.length === 0) {
@@ -230,6 +235,7 @@ const pictureOrNot = () => {
     )
   }
 }
+// returning the top portion of the nav bar, where user info is displayed
    return (
        <NavBarContainer 
        style={{ background }}>
@@ -254,7 +260,8 @@ const pictureOrNot = () => {
                    {navLinks.map((link, index) => 
 
          //// links recieve their text and icons through app.js          
- 
+        // pathname is set to change when you click the different tabs, assisting with the appropriate change of buttons in the header
+        // mouse enters and leaves, effecting the hover state so as to effect styling changes. 
      <NavBarLi onClick={()=> (setPathname(window.location.pathname))}
                        onMouseEnter={() => setHoverIndex(index)}
                        onMouseLeave={() => setHoverIndex(-1)}
