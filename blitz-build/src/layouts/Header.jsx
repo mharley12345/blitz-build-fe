@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Search from "../styles/Search/Search.png";
 import Uploader from "../components/documents/Uploader";
-import OpenUploaderContext from "../contexts/documents/OpenUploaderContext";
+
 
 import TasksContext from "../contexts/tasks/TaskContext";
 import Modal from "../components/global/Modal";
@@ -18,6 +18,7 @@ import TemplateForm from "../components/templates/TemplateForm"
 import TaskContext from "../contexts/tasks/TaskContext";
 import ProjectContext from "../contexts/projects/ProjectContext";
 import DocumentsContext from '../contexts/documents/DocumentsContext'
+
 const HeaderContainer = styled.div`
   background: #fff;
   width: 100%;
@@ -56,7 +57,7 @@ border: 1px solid #8A827D
   cursor: pointer;
 }
   
-}
+
 `;
 const ButtonDocumentCheck = {
   display: "flex",
@@ -116,7 +117,7 @@ border: 1px solid #8A827D
   color: #DD6B20;
   cursor: pointer;
 } 
-}
+
 `;
 const ButtonTemplate = styled.div`
 display: flex;
@@ -210,8 +211,8 @@ const SearchTotal = styled.div`
 `;
 const ButtonSearch = styled.i`
   position: absolute;
-  right: 3%;
-  top: 1%;
+  left: 100%;
+  top: 20%;
   border: none;
   font-size: 30px;
   color: #8a827d;
@@ -221,6 +222,9 @@ const ButtonSearch = styled.i`
   width: 20px;
   height: 20px;
 `;
+const SearchHoverStyle = {
+  color: "#DD6B20"
+}
 
 function Header({ pathname }) {
   const { searchTerm, setSearchTerm, searchCatch, setSearchCatch } = useContext(
@@ -228,6 +232,7 @@ function Header({ pathname }) {
   );
   const [TaskHover, setTaskHover] = useState(false);
   const [ProjectHover, setProjectHover] = useState(false);
+  const [searchHover, setSearchHover ] = useState(false)
   const [DocumentHover, setDocumentHover] = useState(false);
   const [TemplateHover, setTemplateHover] = useState(false);
   const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext);
@@ -239,7 +244,7 @@ function Header({ pathname }) {
   const { TaskModalStatus, setTaskModalStatus } = useContext(TaskContext);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
-  const { openUploader, setUploaderOpen } = useContext(OpenUploaderContext);
+
   const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
   const [TemplateModalStatus, setTemplateModalStatus] = useState(false);
 
@@ -264,6 +269,7 @@ function Header({ pathname }) {
   };
   const handleTemplateModalClose = () => {
     setTemplateModalStatus(false);
+   
   };
   const handleTemplateTaskModalOpen = () => {
     setTemplateTaskModalStatus(true);
@@ -285,6 +291,7 @@ function Header({ pathname }) {
 
   const HideTheProjectButton = pathname => {
     if (
+     
       pathname === "/documents" ||
       pathname === "/delay-log" ||
       pathname === `/help` ||
@@ -346,7 +353,7 @@ function Header({ pathname }) {
       pathname === "/delay-log" ||
       pathname === `/help` ||
       pathname === "/log-out" ||
-      pathname === "/documents/add" ||
+      pathname.includes("/documents") ||
       pathname.includes("/mycalendar") ||
       pathname === "/" ||
       pathname === "/activity-feed"
@@ -391,13 +398,15 @@ function Header({ pathname }) {
       setOpenTemplate(true);
     }
   };
-  const OpenUploaderContextToggler = () => {
-    if (openUploader !== false) {
-      setUploaderOpen(false);
-    } else if (openUploader === false) {
-      setOpenTemplate(true);
+
+
+  const searchOnHover = () => {
+    if(searchTerm.length > 0) {
+     return SearchHoverStyle
     }
-  };
+   
+  }
+  
   //// search function
 
   const handleChange = e => {
@@ -407,18 +416,20 @@ function Header({ pathname }) {
 
   return (
     <HeaderContainer>
-      <SearchContainer>
+      <SearchContainer  onMouseEnter={() => setSearchHover(true)}
+          onMouseLeave={() => setSearchHover(false)} >
         <Link to="/tasks">
-          <SearchTotal>
+          <SearchTotal >
             <SearchInput
-              type="text"
+              type="text" 
               placeholder="Search Tasks"
               value={searchTerm}
               onChange={handleChange}
+              style={ {outline: "none"}}
             />
             <Link to="/tasks">
               {" "}
-              {/* <ButtonSearch className="ion-ios-search" /> */}
+              <ButtonSearch className="ion-ios-search" style={searchOnHover()} />
             </Link>
           </SearchTotal>
         </Link>
@@ -553,18 +564,8 @@ function Header({ pathname }) {
            <Modal 
             visible={DocumentModalStatus}
             dismiss={handleProjectModalClose}
-            client={"80%"}
-            style={{
-            "position": "absolute",
-             "width": "604px",
-            "height": "493px",
-            "left": "418px",
-            "top": "96px",
-
-
-
-           "background": "#FFFFFF",
-           "border-radius": "3px"}}
+            client={"50%"}
+       
             component={
               <Uploader
                  closeModal={handleDocumentModalClose}

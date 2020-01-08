@@ -45,13 +45,12 @@ import SearchProvider from "./contexts/searching/searchTermProvider";
 // import SearchTermContext from "./contexts/searching/searchTerm";
 // import TemplateProvider from "./contexts/templates/TemplateProvider";
 // import { axiosWithAuth } from "./utils/auth/axiosWithAuth";
-
+import ComponentToPrint from './components/documents/PrintDocument'
 //AUTH0
 import Auth from "./components/auth/auth";
 import AuthNavBar from "./components/auth/authNavBar";
 import Callback from "./components/auth/callback";
-
-
+import ViewDocument from './components/documents/ViewDocument'
 import TemplatesProvider from "./contexts/templates/TemplateProvider";
 import Uploader from "./components/documents/Uploader";
 import MyCalendar from "./components/calendar/MyCalender";
@@ -64,7 +63,6 @@ function App() {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [openUploader, setOpenUploader] = useState(false);
 
-
   // getting userInfo from id_token in localStorage.
   useEffect(() => {
     if (localStorage.getItem("id_token")) {
@@ -72,6 +70,7 @@ function App() {
     }
   }, []);
 
+  //function that checks the path to see if it should return the marketing page
   const LandingPage = component => {
     if (pathname === "/") {
       return null;
@@ -79,7 +78,6 @@ function App() {
       return component;
     }
   };
-
 
   // console.log("userInfo", userInfo);
   console.log("pathname", pathname);
@@ -96,7 +94,7 @@ function App() {
     },
     {
       text: "Tasks",
-      path: "/tasks",
+      path: "/tasks?filter=ACTIVE",
       icon: "ion-ios-notifications"
     },
     {
@@ -145,7 +143,6 @@ function App() {
                     <SearchProvider>
                       <OpenContext.Provider value={{ open, setOpen }}>
                         <EditModalContext.Provider
-
                           value={{ editModalOpen, setEditModalOpen }}
                         >
                           <PathnameContext.Provider
@@ -162,7 +159,6 @@ function App() {
                               )}
                               <Layout pathname={pathname}>
                                 <Switch>
-                                  <Route exact path="/auth" component={Auth} />
                                   <Route exact path="/" component={Landing} />
 
                                   <Route
@@ -249,6 +245,16 @@ function App() {
                                     component={Uploader}
                                   />
                                   <Route
+                                   exact
+                                   path="/documents/view/:file_name"
+                                   component={ViewDocument}
+                                   />
+                                   <Route 
+                                   exact
+                                   path="/documents/print"
+                                   component={ComponentToPrint}
+                                   />
+                                  <Route
                                     exact
                                     path="/mycalendar"
                                     component={MyCalendar}
@@ -272,4 +278,3 @@ function App() {
 }
 
 export default App;
- 

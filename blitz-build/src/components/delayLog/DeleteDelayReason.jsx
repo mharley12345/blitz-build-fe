@@ -12,6 +12,8 @@ export default function DeleteDelayReason({
   deleteStatus,
   handleDeleteClose
 }) {
+
+  //importings delete function function for delay logs from context
   const { deleteReason } = useContext(DelayLogContext);
   //console.log(delayReason);
   return (

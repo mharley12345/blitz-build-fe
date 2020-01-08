@@ -9,6 +9,8 @@ import DeleteDelayReason from "./DeleteDelayReason";
 
 function DelayLogButton(delayLog) {
   //console.log(delayLog);
+
+  //setting local state
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
 

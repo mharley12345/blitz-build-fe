@@ -22,7 +22,7 @@ import { ViewBtn } from "../../styles/ViewBtn";
 import {
   useStyles,
   StyledTableCell,
-
+  StyledTableHeadRow
 } from "../../styles/Table/TableStyles";
 
 function DashboardTasks({ projectID, numberOfTasks }) {
@@ -46,28 +46,25 @@ function DashboardTasks({ projectID, numberOfTasks }) {
     <Container>
       <Section>
         <p>Your Task List</p>
-        <Link to="/tasks">
+        <Link to="/tasks?filter=ACTIVE">
           <ViewBtn>View All</ViewBtn>
         </Link>
       </Section>
       <Paper className={classes.root}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
-            <TableRow>
+            <StyledTableHeadRow>
               <StyledTableCell>PROJECT</StyledTableCell>
               <StyledTableCell>NAME</StyledTableCell>
               <StyledTableCell>TASK</StyledTableCell>
               <StyledTableCell>DUE DATE</StyledTableCell>
               <StyledTableCell>STATUS</StyledTableCell>
-            </TableRow>
+            </StyledTableHeadRow>
           </TableHead>
           <TableBody>
             {tasks.slice(0, numberOfTasks).map(item => {
-            
-                return <Task item={item} key={item.id} />;
-              }
-            )}
-            
+              return <Task item={item} key={item.id} />;
+            })}
           </TableBody>
         </Table>
       </Paper>
@@ -84,11 +81,10 @@ const Section = styled.div`
   margin-bottom: 8px;
 
   p {
-    font-family: "Roboto";
     font-size: 16px;
     line-height: 19px;
-    color: #8a827d;
-    font-weight: 500;
+    color: #212529;
+    font-weight: 600;
   }
 `;
 
