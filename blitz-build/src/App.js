@@ -141,7 +141,7 @@ function App() {
                 <TaskProvider>
                   <DelayLogProvider>
                     <SearchProvider>
-                      <OpenContext.Provider value={{ open, setOpen }}>
+                      {/* <OpenContext.Provider value={{ open, setOpen }}> */}
                         <EditModalContext.Provider
                           value={{ editModalOpen, setEditModalOpen }}
                         >
@@ -264,7 +264,7 @@ function App() {
                             </UserContext.Provider>
                           </PathnameContext.Provider>
                         </EditModalContext.Provider>
-                      </OpenContext.Provider>
+                      {/* </OpenContext.Provider> */}
                     </SearchProvider>
                   </DelayLogProvider>
                 </TaskProvider>

@@ -239,7 +239,7 @@ function Header({ pathname }) {
   const { addProject } = useContext(ProjectContext); // state for add project button
   const { addTask } = useContext(TasksContext); // state for add task button
   const { addTemplateTask, addTemplate } = useContext(TemplateContext); // state used for the add template task modal
-  const { open, setOpen } = useContext(OpenContext); // state got context based toggle, not currently being used
+  // const { open, setOpen } = useContext(OpenContext); // state got context based toggle, not currently being used
   const { TaskModalStatus, setTaskModalStatus } = useContext(TaskContext); // state used for task modal
   const [ProjectModalStatus, setProjectModalStatus] = useState(false); // state used for project modal
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false); // state used for document modal
@@ -378,7 +378,7 @@ function Header({ pathname }) {
     }
   };
   const HoverProjectStyleFunction = () => {
-    if (ProjectHover === true || open === true) {
+    if (ProjectHover === true ) {
       return HoverStyle;
     }
   };
