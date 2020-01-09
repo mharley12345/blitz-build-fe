@@ -1,5 +1,8 @@
 import React from "react";
+
+//styles
 import styled from "styled-components";
+import * as color from "../../../styles/color"
 
 import { Link, withRouter } from "react-router-dom";
 import auth0Client from "../../auth/auth";
@@ -25,7 +28,7 @@ export default Signup;
 
 const Container = styled.div`
   height: 450px;
-  background: #3b3b3b;
+  background: ${color.greyDark};
   padding: 96px 0px 32px 0px;
   display: flex;
   justify-content: space-between;
@@ -70,7 +73,7 @@ const P = styled.p`
 
 const Button = styled.button`
   border-radius: 3px;
-  background: #dd6b20;
+  background: ${color.orange};
   padding: 14px 57px;
   color: #fff;
   font-family: "Roboto";

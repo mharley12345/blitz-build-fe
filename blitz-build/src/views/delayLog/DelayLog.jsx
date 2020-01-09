@@ -25,6 +25,8 @@ import {
   StyledTableRow,
   StyledTableHeadRow
 } from "../../styles/Table/TableStyles";
+import * as color from "../../styles/color"
+
 // pages bar function from global
 import TablePaginationActions from "../../components/global/TablePaginationActions";
 // csv function
@@ -188,10 +190,10 @@ const DelayLogButtons = styled.div`
   padding-top: 10px;
   padding-left: 40px;
   font-size: 19px;
-  color: #8a827d;
+  color: ${color.grey};
   cursor: pointer;
   &:hover {
-    color: #dd6b20;
+    color: ${color.orange};
   }
 `;
 
@@ -200,9 +202,9 @@ const ButtonI = styled.i`
   top: 33px;
   right: 192px
   font-size: 21px;
-  color: #8a827d;
+  color: ${color.grey};
 `;
 
 const HoverStyle = {
-  color: "#DD6B20"
+  color: color.orange
 };

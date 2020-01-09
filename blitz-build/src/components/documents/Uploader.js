@@ -1,8 +1,13 @@
 import React from 'react';
 import { axiosWithAuth } from '../../utils/auth/axiosWithAuth';
 import moment from 'moment'
-import styled from 'styled-components'
 import { CloseButton } from 'react-bootstrap';
+
+//styles
+import styled from 'styled-components'
+import * as color from "../../styles/color"
+
+
 let user_id = localStorage.getItem("user_id")
 let project_Name = localStorage.getItem("project_name")
 let projectID = localStorage.getItem("projectID")
@@ -166,7 +171,7 @@ text-align: center;
 
 /* 600 Orange */
 
-color: #DD6B20;
+color: ${color.orange};
   `
 
 const Button = styled.button`
@@ -180,7 +185,7 @@ top: 493px;
 
 /* 600 Orange */
 
-background: #DD6B20;
+background: ${color.orange};
 border-radius: 3px;
   
   `

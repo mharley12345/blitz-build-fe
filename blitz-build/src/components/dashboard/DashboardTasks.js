@@ -19,6 +19,9 @@ import TableBody from "@material-ui/core/TableBody";
 
 //styles
 import { ViewBtn } from "../../styles/ViewBtn";
+import * as color from "../../styles/color"
+
+
 import {
   useStyles,
   StyledTableCell,
@@ -95,5 +98,5 @@ const Container = styled.div`
 `;
 
 const Card = styled.div`
-  border: 1px solid #dcd9d5;
+  border: 1px solid ${color.greyLight};
 `;

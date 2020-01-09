@@ -1,5 +1,8 @@
 import React from "react";
+
+//styles
 import styled, { css } from "styled-components";
+import * as color from "../../../styles/color"
 
 import { media, mediaDown } from "../styles/media"
 
@@ -73,7 +76,7 @@ const Subheader = styled.p`
 
 const Button = styled.button`
   border-radius: 3px;
-  background: #dd6b20;
+  background: ${color.orange};
   padding: 14px 57px;
   color: #fff;
   font-family: "Roboto";
@@ -97,8 +100,8 @@ const Button = styled.button`
     props.secondary &&
     css`
       background: none;
-      border: 2px solid #dd6b20;
-      color: #dd6b20;
+      border: 2px solid ${color.orange};
+      color: ${color.orange};
       box-sizing: border-box;
     `};
 `;

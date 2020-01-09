@@ -22,7 +22,7 @@ import DocumentsContext from '../../contexts/documents/DocumentsContext'
 import SingleProjectDocCard from '../../components/documents/SingleProjectDocCard'
 //styles
 import styled from "styled-components";
-
+import * as color from "../../styles/color"
 
  export const IndividualProject = (props) => {
 
@@ -144,7 +144,7 @@ import styled from "styled-components";
               style={{
                 fontSize: "16px",
 
-                color: "#817974"
+                color: color.grey400
               }}
             >
               Weather
@@ -162,7 +162,7 @@ import styled from "styled-components";
             style={{
               fontSize: "16px",
               marginTop: "35px",
-              color: "#817974"
+              color: color.grey400
             }}
           ></p>
           <div
@@ -178,7 +178,7 @@ import styled from "styled-components";
               style={{
                 fontSize: "16px",
 
-                color: "#817974"
+                color: color.grey400
               }}
             >
               Documents
@@ -187,7 +187,7 @@ import styled from "styled-components";
               style={{
                 fontSize: "16px",
                 cursor: "pointer",
-                color: "#817974"
+                color: color.grey400
               }}
               onClick={() => {
                 props.history.push(`/documents`);
@@ -227,7 +227,7 @@ const Top = styled.div`
   p {
     font-size: 16px;
     line-height: 24px;
-    color: #8a827d;
+    color: ${color.grey};
     margin-bottom: 0;
   }
 `;
@@ -249,7 +249,7 @@ const IndividualProjectTitleContainer = styled.div`
   height: 24px;
   span {
     font-size: 16px;
-    color: #8a827d;
+    color: ${color.grey};
   }
 `;
 const IndividualProjectImgContainer = styled.div`
@@ -263,14 +263,14 @@ const IndividualProjectcontentContainer = styled.div`
   justify-content: space-between;
   padding: 24px 32px 5px 32px;
   height: 219px;
-  border: 1px solid #dcd9d5;
+  border: 1px solid ${color.greyLight};
   border-radius: 3px;
   background: #ffffff;
 `;
 const Contenth2 = styled.h2`
   font-size: 36px;
   font-weight: bold;
-  color: #3b3b3b;
+  color: ${color.greyDark};
 `;
 const ContentInfo = styled.div`
   display: flex;
@@ -313,13 +313,13 @@ width: 524px;
 height: 288px;
 left: 588px;
 top: 357px;
-  border: 1px solid #dcd9d5;
+  border: 1px solid ${color.greyLight};
   border-radius: 3px;
 `;
 const WeatherContainer = styled.div`
   min-width: 530px;
   height: 172px;
-  border: 1px solid #dcd9d5;
+  border: 1px solid ${color.greyLight};
   border-radius: 3px;
 `;
 
@@ -332,7 +332,7 @@ const ProjectI = styled.i`
   height: 18px;
   font-size: 1.4rem;
   background-color: #ffffff;
-  color: #8a827d;
+  color: ${color.grey};
   text-align: right;
   text-decoration: none;
 `;
@@ -340,6 +340,6 @@ const PageI = styled.i`
   height: 18px;
   font-size: 1.4rem;
   background-color: #ffffff;
-  color: #8a827d;
+  color: ${color.grey};
   text-decoration: none;
 `;

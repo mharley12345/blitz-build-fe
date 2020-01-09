@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
 //styles
 import styled from "styled-components";
+import * as color from "../../styles/color"
 
 //components
 import EditDelayReason from "./EditDelayReason";
 import DeleteDelayReason from "./DeleteDelayReason";
 
 function DelayLogButton(delayLog) {
-  //console.log(delayLog);
 
   //setting local state
   const [editStatus, setEditStatus] = useState(false);
@@ -85,7 +85,7 @@ const ProjectI = styled.i`
   height: 18px;
   font-size: 1.4rem;
   background-color: #ffffff;
-  color: #8a827d;
+  color: ${color.grey};
   text-align: right;
   text-decoration: none;
 `;

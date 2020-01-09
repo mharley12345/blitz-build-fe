@@ -1,16 +1,20 @@
 import React, { useState, useContext } from "react";
+
+//context
+import PathnameContext from '../../contexts/PathnameContext'
+
+//material ui
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+
+//styles
 import styled from "styled-components";
-import PathnameContext from '../../contexts/PathnameContext'
+import * as color from '../../styles/color'
 
 
-// import DialogTitle from "@material-ui/core/DialogTitle";
-// import axios from "axios";
-// import { height } from "@material-ui/system";
-// import auth0Client from "./auth";
+
 
 const ModalContainer = styled.div`
   width: 450px;
@@ -21,9 +25,9 @@ const ModalTitle = styled.div`
   display: flex
   padding: 16px 24px;
   font-weight: 500;
-  color: #3B3B3B;
+  color: ${color.greyDark};
   justify-content: center;
-  border-bottom: 1px solid #3B3B3B;
+  border-bottom: 1px solid ${color.greyDark};
 `;
 
 const H3 = styled.div`
@@ -41,10 +45,10 @@ const ButtonStyles = styled.div`
 
 const ButtonStyle = {
   cursor: "pointer",
-  backgroundColor: "#DA552F",
+  backgroundColor: color.orange,
   color: "white",
   borderRadius: "3px",
-  border: "1px solid #8a827d",
+  border: `1px solid ${color.grey}`,
   width: "30px",
   height: "35px"
 };

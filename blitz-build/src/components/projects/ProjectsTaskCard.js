@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 
 //styles
 import { ViewBtn } from "../../styles/ViewBtn";
+import * as color from "../../styles/color"
 
 
 function ProjectTaskCard({ projectID, numberOfTasks }) {
@@ -71,14 +72,11 @@ const Section = styled.div`
     font-family: "Roboto";
     font-size: 16px;
     line-height: 19px;
-    color: #8a827d;
+    color: ${color.grey};
     font-weight: 500;
   }
 `;
 const Container = styled.div`
   margin-top: 20px;
   margin-bottom: 48px;
-`;
-const Card = styled.div`
-  border: 1px solid #dcd9d5;
 `;

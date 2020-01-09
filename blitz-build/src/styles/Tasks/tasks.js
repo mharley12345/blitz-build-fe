@@ -1,5 +1,6 @@
 //styles
 import styled from "styled-components";
+import * as color from "../color"
 
 
 export const SortButton = styled.button`
@@ -57,7 +58,7 @@ export const MeatBalls = styled.i`
   margin: 4px 2px;
   cursor: pointer;
   :hover {
-    color: #DD6B20;
+    color: ${color.orange};
     cursor: pointer;
   }
 
@@ -74,8 +75,8 @@ export const StyledLi = styled.li`
   border: 1px solid #B5AFAB;
   border-top: 0
   :hover {
-    border: 1px solid #DD6B20 ;
-    color: #DD6B20;
+    border: 1px solid ${color.orange} ;
+    color: ${color.orange};
     cursor: pointer;
   }
 
@@ -96,13 +97,3 @@ z-index: 2;
 export const DropP = styled.p`
 width: 75%;
 `
-
-// const ButtonDiv = styled.div`
-//   background: #fbfaf9;
-//   width: 100px;
-//   display: flex;
-//   flex-wrap: wrap-reverse;
-//   justify-content: flex-end;
-//   aStyledLign-content: flex-end
-//   aStyledLign-items: flex-end;
-// `;
