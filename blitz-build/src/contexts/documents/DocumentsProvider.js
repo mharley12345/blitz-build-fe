@@ -35,7 +35,7 @@ export default function DocumentsProvider({ children }){
            console.log('Documents Error',err);
        })
     }
- console.log(documents)
+
 
  /** handleDelete
   *   Calls the BE delete endpoint which fires off a BE function
@@ -54,7 +54,7 @@ export default function DocumentsProvider({ children }){
          axiosWithAuth().delete(`/docs/url/${file_name}`,user_id)
   
         .then(res => {
-            console.log("document was deleted", res)
+       
             const newDocumentList = documents.filter(d =>{
                 return d.id !== document.id
             })
