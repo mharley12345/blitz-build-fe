@@ -1,7 +1,9 @@
 import React from 'react'
+
+//styles
 import styled from 'styled-components'
-import Logo from '../styles/Logo/Logo.png'
-import Avatar from '../styles/Avatar/Avatar.png'
+import * as color from "../styles/color"
+
 
 function Nav() {
     return (
@@ -25,7 +27,7 @@ const Container = styled.div`
  
  
   min-width: 296px;
-  background:  #3B3B3B;
+  background:  ${color.greyDark};
   display: flex;
   flex-direction: column;
   align-items: center;

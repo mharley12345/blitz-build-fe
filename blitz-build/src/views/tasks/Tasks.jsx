@@ -51,41 +51,7 @@ const SortDiv = styled.div`
   align-items: center;
 `;
 
-// const useStyles = makeStyles({
-//   root: {
-//     border: "1px solid #DCD9D5"
-//   },
-//   table: {
-//     // minWidth: "1080px"
-//   },
-//   tableHover: {
-//     "&:hover": {
-//       border: "3px solid orange"
-//     }
-//   }
-// });
-
 export default function Tasks(props) {
-  // const MainFailContainer = styled.div`
-  //   postion: relative;
-  //   width: 900px;
-  //   height: 200px;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   margin-left: 250px;
-  // `;
-
-  // const failedContainer = styled.div`
-  //   margin-top: 80px;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  // `;
-  // const failText = styled.div`
-  //   font-size: 50px;
-  // `;
-
   const { tasks, getTasks } = useTaskContext();
 
   const { searchTerm, results } = useSearchTermContext();
@@ -145,9 +111,7 @@ export default function Tasks(props) {
     if (searchTerm.length > 0 && results.length === 0) {
       return <p>There doesn't seem to be any tasks with that name</p>;
     } else {
-      return (
-        <p style={{ fontWeight: 600}}>Your Task List</p>
-      );
+      return <p style={{ fontWeight: 600 }}>Your Task List</p>;
     }
   };
 
@@ -201,6 +165,8 @@ export default function Tasks(props) {
           <TableBody>
             {(rowsPerPage > 0
               ? tasks
+
+                  //filters tasks based on the queryValues in the url
                   .filter(task => {
                     if (queryValues.filter === "ACTIVE") {
                       return task.isComplete === false;
@@ -208,7 +174,10 @@ export default function Tasks(props) {
                       return task.isComplete === true;
                     }
                   })
+
+                  //slices the tasks to match the pangnation
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+
               : tasks
             ).map(task => {
               if (results.length === 0 && searchTerm.length === 0) {
@@ -218,6 +187,7 @@ export default function Tasks(props) {
               }
             })}
 
+            {/* maps through tasks based on the search input */}
             {results.length > 0 ? (
               (rowsPerPage > 0
                 ? results.slice(
@@ -229,6 +199,8 @@ export default function Tasks(props) {
             ) : (
               <></>
             )}
+            
+            {/* makes empty rows for pagnation  */}
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
                 <TableCell colSpan={5} />

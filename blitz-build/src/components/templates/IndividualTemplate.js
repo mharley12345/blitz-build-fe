@@ -86,5 +86,5 @@ const Container = styled.div`
 `;
 
 const Card = styled.div`
-  border: 1px solid #dcd9d5;
+  border: 1px solid ${color.greyLight};
 `;

@@ -10,7 +10,7 @@ export const StyledLabel = styled.label`
   margin-top: 20px;
   margin-bottom: 4px;
   width: 75%;
-  color: #3B3B3B;
+  color: ${color.greyDark};
 `;
 
 export const StyledInput = styled.input`
@@ -21,7 +21,7 @@ export const StyledInput = styled.input`
   background: ${color.greyLightest};
   border-radius: 3px;
   box-shadow: none;
-  color: #3B3B3B;
+  color: ${color.greyDark};
   
 `;
 export const StyledTextAreaInput = styled.textarea`

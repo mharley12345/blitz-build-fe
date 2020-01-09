@@ -144,7 +144,7 @@ import * as color from "../../styles/color"
               style={{
                 fontSize: "16px",
 
-                color: "#817974"
+                color: color.grey400
               }}
             >
               Weather
@@ -162,7 +162,7 @@ import * as color from "../../styles/color"
             style={{
               fontSize: "16px",
               marginTop: "35px",
-              color: "#817974"
+              color: color.grey400
             }}
           ></p>
           <div
@@ -178,7 +178,7 @@ import * as color from "../../styles/color"
               style={{
                 fontSize: "16px",
 
-                color: "#817974"
+                color: color.grey400
               }}
             >
               Documents
@@ -187,7 +187,7 @@ import * as color from "../../styles/color"
               style={{
                 fontSize: "16px",
                 cursor: "pointer",
-                color: "#817974"
+                color: color.grey400
               }}
               onClick={() => {
                 props.history.push(`/documents`);
@@ -263,14 +263,14 @@ const IndividualProjectcontentContainer = styled.div`
   justify-content: space-between;
   padding: 24px 32px 5px 32px;
   height: 219px;
-  border: 1px solid #dcd9d5;
+  border: 1px solid ${color.greyLight};
   border-radius: 3px;
   background: #ffffff;
 `;
 const Contenth2 = styled.h2`
   font-size: 36px;
   font-weight: bold;
-  color: #3b3b3b;
+  color: ${color.greyDark};
 `;
 const ContentInfo = styled.div`
   display: flex;
@@ -313,13 +313,13 @@ width: 524px;
 height: 288px;
 left: 588px;
 top: 357px;
-  border: 1px solid #dcd9d5;
+  border: 1px solid ${color.greyLight};
   border-radius: 3px;
 `;
 const WeatherContainer = styled.div`
   min-width: 530px;
   height: 172px;
-  border: 1px solid #dcd9d5;
+  border: 1px solid ${color.greyLight};
   border-radius: 3px;
 `;
 

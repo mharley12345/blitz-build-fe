@@ -51,8 +51,8 @@ border: 1px solid ${color.grey}
  justify-content: center;
  align-items: center;
  :hover {
-  border: 1px solid #DD6B20 ;
-  color: #DD6B20;
+  border: 1px solid ${color.orange} ;
+  color: ${color.orange};
   cursor: pointer;
 }
   
@@ -112,8 +112,8 @@ border: 1px solid ${color.grey}
  align-items: center;
  margin-left: 10px;
  :hover {
-  border: 1px solid #DD6B20 ;
-  color: #DD6B20;
+  border: 1px solid ${color.orange} ;
+  color: ${color.orange};
   cursor: pointer;
 } 
 
@@ -128,8 +128,8 @@ border: 1px solid ${color.grey}
  align-items: center;
  margin-left: 10px;
  :hover {
-  border: 1px solid #DD6B20 ;
-  color: #DD6B20;
+  border: 1px solid ${color.orange} ;
+  color: ${color.orange};
   cursor: pointer;
 }
 }
@@ -146,8 +146,8 @@ border: 1px solid ${color.grey}
  align-items: center;
  margin-left: 10px;
 :hover {
-  border: 1px solid #DD6B20 ;
-  color: #DD6B20;
+  border: 1px solid ${color.orange} ;
+  color: ${color.orange};
   cursor: pointer;
 }
 
@@ -190,16 +190,16 @@ const HideButton = {
 };
 
 const HoverStyle = {
-  color: "#DD6B20"
+  color: "${color.orange}"
 };
 
 const SearchInput = styled.input`
   height: 48px;
   width: 100%;
   padding-left: 30px;
-  border: 1px solid #dcd9d5;
+  border: 1px solid ${color.greyLight};
   border-radius: 3px;
-  background: #fafafa;
+  background: ${color.offWhite};
   ::placeholder {
     font-size: 16px;
     color: #b0b0b0;
@@ -222,7 +222,7 @@ const ButtonSearch = styled.i`
   height: 20px;
 `;
 const SearchHoverStyle = {
-  color: "#DD6B20"
+  color: "${color.orange}"
 };
 
 function Header({ pathname }) {

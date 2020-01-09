@@ -32,8 +32,8 @@ export const StyledLi = styled.li`
   border: 1px solid #B5AFAB;
   border-top: 0
   :hover {
-    border: 1px solid #DD6B20 ;
-    color: #DD6B20;
+    border: 1px solid ${color.orange} ;
+    color: ${color.orange};
     cursor: pointer;
   }
 
@@ -58,7 +58,7 @@ export const MeatBalls = styled.i`
   margin: 4px 2px;
   cursor: pointer;
   :hover {
-    color: #DD6B20;
+    color: ${color.orange};
     cursor: pointer;
   }
 `;
@@ -103,14 +103,14 @@ export const StyledTableRow = withStyles(theme => ({
 
 export const useStyles = makeStyles({
          root: {
-           border: "1px solid #DCD9D5",
+           border: `1px solid ${color.greyLight} `,
           
          },
          tableHover: {
            "&:hover": {
              cursor: "pointer",
              "& span": {
-               color: "#DD6B20",
+               color: "${color.orange}",
 
                textDecoration: "underline"
              }

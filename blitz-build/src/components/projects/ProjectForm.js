@@ -315,7 +315,7 @@ export default function ProjectForm({
               onClick={preBuildTemplatehandler}
             />
 
-            <span style={{ color: "#817974" }}>Apply</span>
+            <span style={{ color: color.grey400 }}>Apply</span>
           </div>
         </div>
       </div>

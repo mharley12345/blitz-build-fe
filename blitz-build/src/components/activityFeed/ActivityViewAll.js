@@ -46,7 +46,7 @@ const ActivityViewAll = () => {
       <Section>
         <p>Your Recent Activity</p>
         <Link to={"/dashboard"} style={{ textDecoration: "none" }}>
-          <p style={{ color: " #DD6B20" }}>Home</p>
+          <p style={{ color: color.orange }}>Home</p>
         </Link>
       </Section>
       <ContainerContent>

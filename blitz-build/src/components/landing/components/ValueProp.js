@@ -1,5 +1,8 @@
 import React from "react"
+
+//styles
 import styled from "styled-components"
+import * as color from "../../../styles/color"
 
 import { media, mediaDown } from "../styles/media"
 
@@ -61,7 +64,7 @@ const Subtitle = styled.h1`
 
 const Line = styled.div`
   height: 2px;
-  background: #dcd9d5;
+  background: ${color.greyLight};
   margin-bottom: 32px;
 `
 
@@ -71,7 +74,7 @@ const P = styled.p`
   line-height: 32px;
   color: black;
   margin-bottom: 24px;
-  color: #3b3b3b;
+  color: ${color.greyDark};
 `
 
 const ValueProp = () => {

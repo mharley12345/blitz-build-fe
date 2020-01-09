@@ -46,7 +46,7 @@ function ActivityFeed({ projectID, numberOfTasks }) {
       <Section>
         <p>Your Recent Activites</p>
         <Link to={"/activity-feed"} style={{ textDecoration: "none" }}>
-          <p style={{ color: "#DD6B20" }}>View All</p>
+          <p style={{ color: color.orange }}>View All</p>
         </Link>
       </Section>
       <Card>

@@ -51,7 +51,7 @@ const WeatherContainerD = styled.div`
   background: #ffffff;
   /* 250 - Borders */
 
-  border: 1px solid #dcd9d5;
+  border: 1px solid ${color.greyLight};
   box-sizing: border-box;
   border-radius: 3px;
 `;
@@ -90,7 +90,7 @@ const WeatherData = styled.div`
     font-size: 16px;
     /*500 Gray */
 
-    color: #3b3b3b;
+    color: ${color.greyDark};
   }
 `;
 const WeatherTem = styled.div`
