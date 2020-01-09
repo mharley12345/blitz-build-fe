@@ -3,7 +3,6 @@ import * as color from "../styles/color"
 import styled from "styled-components";
 import Search from "../styles/Search/Search.png";
 import Uploader from "../components/documents/Uploader";
-
 import TasksContext from "../contexts/tasks/TaskContext";
 import Modal from "../components/global/Modal";
 import TaskForm from "../components/tasks/TaskForm";
@@ -18,6 +17,7 @@ import TaskContext from "../contexts/tasks/TaskContext";
 import ProjectContext from "../contexts/projects/ProjectContext";
 import DocumentsContext from "../contexts/documents/DocumentsContext";
 
+// styled components, css variables are sometimes used when passed through functions
 const HeaderContainer = styled.div`
   background: #fff;
   width: 100%;
@@ -227,7 +227,7 @@ const SearchHoverStyle = {
 
 function Header({ pathname }) {
   const { searchTerm, setSearchTerm, searchCatch, setSearchCatch } = useContext(
-    searchTermContext
+    searchTermContext  // state for searching
   );
   const [TaskHover, setTaskHover] = useState(false);
   const [ProjectHover, setProjectHover] = useState(false);
@@ -250,6 +250,7 @@ function Header({ pathname }) {
   console.log("this is the handlesubmit", searchTerm);
   // const { addTemplate } = useContext(TemplateContext)
 
+// functions for opening modals
   const handleTaskModalOpen = () => {
     setTaskModalStatus(true);
   };
@@ -281,10 +282,7 @@ function Header({ pathname }) {
     setDocumentModalStatus(false);
   };
 
-  const id = [];
-  for (var i = 1; i <= 100; i++) {
-    id.push(i);
-  }
+// function controling when the add project button is hidden or visable
 
   const HideTheProjectButton = pathname => {
     if (
@@ -304,6 +302,9 @@ function Header({ pathname }) {
       return ButtonProjectCheck;
     }
   };
+
+  // function controling when the add document button is hidden or visable
+
   const HideTheDocumentButton = pathname => {
     if (
       pathname === "/log-out" ||
@@ -323,6 +324,9 @@ function Header({ pathname }) {
       return ButtonDocumentCheck;
     }
   };
+
+  // function controling when the add task button is hidden or visable
+
   const HideTheTaskButton = pathname => {
     if (pathname === "/tasks") {
       return ButtonTaskCheck;
@@ -331,6 +335,8 @@ function Header({ pathname }) {
     }
   };
 
+  // function controling when the add template button is hidden or visable
+
   const HideTheTemplateButton = pathname => {
     if (pathname === "/templates") {
       return ButtonTemplateCheck;
@@ -338,6 +344,9 @@ function Header({ pathname }) {
       return HideButton;
     }
   };
+
+  // function controling when the add tempalte task button is hidden or visable
+
   const HideTheTemplateTaskButton = pathname => {
     if (
       pathname.includes("project") ||
@@ -359,13 +368,16 @@ function Header({ pathname }) {
       return SoloTask;
     }
   };
+  
+  // functions controlling styling  changes on hover
+
   const HoverTaskStyleFunction = () => {
     if (TaskHover === true || TaskModalStatus === true) {
       return HoverStyle;
     }
   };
   const HoverProjectStyleFunction = () => {
-    if (ProjectHover === true) {
+    if (ProjectHover === true ) {
       return HoverStyle;
     }
   };
@@ -380,14 +392,7 @@ function Header({ pathname }) {
     }
   };
 
-  const OpenTemplateToggler = () => {
-    if (openTemplate !== false) {
-      setOpenTemplate(false);
-    } else if (openTemplate === false) {
-      setOpenTemplate(true);
-    }
-  };
-
+// function for changing styling of search bar when being used
   const searchOnHover = () => {
     if (searchTerm.length > 0) {
       return SearchHoverStyle;
@@ -403,10 +408,8 @@ function Header({ pathname }) {
 
   return (
     <HeaderContainer>
-      <SearchContainer
-        onMouseEnter={() => setSearchHover(true)}
-        onMouseLeave={() => setSearchHover(false)}
-      >
+      <SearchContainer  onMouseEnter={() => setSearchHover(true)} // search bar divs and input with link to task page
+          onMouseLeave={() => setSearchHover(false)} >
         <Link to="/tasks">
           <SearchTotal>
             <SearchInput
@@ -414,20 +417,17 @@ function Header({ pathname }) {
               placeholder="Search Tasks"
               value={searchTerm}
               onChange={handleChange}
-              style={{ outline: "none" }}
-            />
-            <Link to="/tasks">
-              {" "}
-              <ButtonSearch
-                className="ion-ios-search"
-                style={searchOnHover()}
-              />
+              style={ {outline: "none"}}
+            /> 
+            <Link to="/tasks"> 
+              {" "}  
+              <ButtonSearch className="ion-ios-search" style={searchOnHover()} />
             </Link>
           </SearchTotal>
         </Link>
       </SearchContainer>
-      <ButtonContainer>
-        <ButtonDocument
+      <ButtonContainer> 
+        <ButtonDocument  // add document button
           onMouseEnter={() => setDocumentHover(true)}
           onMouseLeave={() => setDocumentHover(false)}
           style={HideTheDocumentButton(pathname)}
@@ -443,7 +443,7 @@ function Header({ pathname }) {
           </ButtonText>
         </ButtonDocument>
 
-        <ButtonTask
+        <ButtonTask // add task button
           onMouseEnter={() => setTaskHover(true)}
           onMouseLeave={() => setTaskHover(false)}
           style={HideTheTaskButton(pathname)}
@@ -457,7 +457,7 @@ function Header({ pathname }) {
           <ButtonText style={HoverTaskStyleFunction()}>New Task</ButtonText>
         </ButtonTask>
 
-        <ButtonTask
+        <ButtonTask  // add template task button
           onMouseEnter={() => setTaskHover(true)}
           onMouseLeave={() => setTaskHover(false)}
           style={HideTheTemplateTaskButton(pathname)}
@@ -471,7 +471,7 @@ function Header({ pathname }) {
           <ButtonText style={HoverTaskStyleFunction()}>New Task</ButtonText>
         </ButtonTask>
 
-        <ButtonProject
+        <ButtonProject  // add project button
           onMouseEnter={() => setProjectHover(true)}
           onMouseLeave={() => setProjectHover(false)}
           style={HideTheProjectButton(pathname)}
@@ -486,7 +486,7 @@ function Header({ pathname }) {
             New Project
           </ButtonText>
         </ButtonProject>
-        <ButtonTemplate
+        <ButtonTemplate  // add template button
           onMouseEnter={() => setTemplateHover(true)}
           onMouseLeave={() => setTemplateHover(false)}
           style={HideTheTemplateButton(pathname)}
@@ -501,8 +501,8 @@ function Header({ pathname }) {
             New Template
           </ButtonText>
         </ButtonTemplate>
-
-        <Modal
+  
+        <Modal  /////////////////////////////// modals which are called through the header
           visible={TaskModalStatus}
           dismiss={handleTaskModalClose}
           client={"45%"}
