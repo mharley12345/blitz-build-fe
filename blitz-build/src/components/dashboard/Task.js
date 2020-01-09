@@ -179,7 +179,7 @@ const Status = styled.div`
     props.status === "Upcoming" &&
     css`
       background-color: #d2fac4;
-      color: ${color.lightYellow};
+      color: #326021;
     `};
 `;
 
