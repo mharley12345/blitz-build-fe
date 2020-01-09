@@ -5,13 +5,13 @@ import moment from "moment";
 import MeatBallsDrop from "../tasks/MeatBallsDrop";
 
 //styles
-
 import styled, { css } from "styled-components";
 import {
   useStyles,
   StyledTableCell,
   StyledTableRow
 } from "../../styles/Table/TableStyles";
+import * as color from "../../styles/color"
 
 function Task({ item, children, projectTask }) {
   const classes = useStyles();
@@ -164,15 +164,15 @@ const Status = styled.div`
   ${props =>
     props.status === "Overdue" &&
     css`
-      background-color: #ffbfbf;
-      color: #9c0e0e;
+      background-color: ${color.lightRed};
+      color: ${color.red};
     `};
 
   ${props =>
     props.status === "Pending" &&
     css`
-      background-color: #fff3b3;
-      color: #8b4708;
+      background-color: ${color.lightYellow};
+      color: ${color.brown};
     `};
 
   ${props =>

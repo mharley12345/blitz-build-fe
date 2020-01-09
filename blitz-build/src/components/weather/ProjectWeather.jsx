@@ -1,5 +1,8 @@
 import React from "react";
+
+//styles
 import styled from "styled-components";
+import * as color from "../../styles/color"
 
 // for project page import <Weather usage="project" city={} latitude={} longitude={} />
 
@@ -16,7 +19,7 @@ function ProjectWeather({ weatherData, time, icon, city }) {
               marginTop: "59px",
               marginLeft: "32px",
               marginBottom: 0,
-              color: "#3B3B3B",
+              color: color.greyDark,
               lineHeiht: "28px"
             }}
           >
@@ -28,7 +31,7 @@ function ProjectWeather({ weatherData, time, icon, city }) {
               marginTop: "2px",
               marginLeft: "32px",
               marginBottom: 0,
-              color: "#3B3B3B",
+              color: color.greyDark,
               lineHeiht: "24px"
             }}
           >
@@ -44,7 +47,7 @@ function ProjectWeather({ weatherData, time, icon, city }) {
                 fontWeight: 500,
                 marginBottom: 0,
                 marginLeft: "32px",
-                color: "#3B3B3B",
+                color: color.greyDark,
                 lineHeiht: "28px"
               }}
             >
@@ -57,7 +60,7 @@ function ProjectWeather({ weatherData, time, icon, city }) {
                 marginTop: "2px",
                 marginLeft: "32px",
                 marginBottom: 0,
-                color: "#817974",
+                color: color.grey400,
                 lineHeiht: "24px"
               }}
             >

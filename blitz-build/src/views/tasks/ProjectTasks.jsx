@@ -213,6 +213,6 @@ const BreadCrumbs = styled.div`
   height: 24px;
   span {
     font-size: 16px;
-    color: #8a827d;
+    color: ${color.grey};
   }
 `;

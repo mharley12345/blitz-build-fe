@@ -1,6 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 import reverseGeocode from "reverse-geocode";
+
+//styles
+import styled from "styled-components";
+import * as color from "../../styles/color"
 
 // for dashboard import <Weather usage="dashboard"/>
 
@@ -48,7 +51,7 @@ const WeatherContainerD = styled.div`
   background: #ffffff;
   /* 250 - Borders */
 
-  border: 1px solid #dcd9d5;
+  border: 1px solid ${color.greyLight};
   box-sizing: border-box;
   border-radius: 3px;
 `;
@@ -87,7 +90,7 @@ const WeatherData = styled.div`
     font-size: 16px;
     /*500 Gray */
 
-    color: #3b3b3b;
+    color: ${color.greyDark};
   }
 `;
 const WeatherTem = styled.div`
@@ -100,5 +103,5 @@ const WeatherIcon = styled.div`
 const Title = styled.div`
   font-size: 16px;
 
-  color: #8a827d;
+  color: ${color.grey};
 `;

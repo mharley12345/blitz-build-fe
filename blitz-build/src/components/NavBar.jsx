@@ -5,8 +5,8 @@ import Logo from '../styles/Logo/Logo.png'
 import UserContext from '../contexts/UserContext'
 import TaskContext from '../contexts/tasks/TaskContext'
 
-
-// styled components
+//styles 
+import * as color from "../styles/color"
 
 const NavBarContainer = styled.div`
    margin-top: 20px;
@@ -18,7 +18,7 @@ const NavBarContainer = styled.div`
     height: 100vh;
     left: 0;
     top: 0;
-    background: #3B3B3B;
+    background: ${color.greyDark};
     @media only screen and (max-height: 900px) {
       overflow: scroll;
        ::-webkit-scrollbar { 
@@ -35,7 +35,7 @@ const NavBarContainer = styled.div`
 `;
     const NavBarUl = styled.ul`
         
-        background: #3B3B3B;
+        background: ${color.greyDark};
         display: flex;
         margin-block-start: 0;
         margin-block-end: 0;
@@ -258,7 +258,7 @@ const pictureOrNot = () => {
 
             </NavBarFigure>
                    {navLinks.map((link, index) => 
-
+                    
          //// links recieve their text and icons through app.js          
         // pathname is set to change when you click the different tabs, assisting with the appropriate change of buttons in the header
         // mouse enters and leaves, effecting the hover state so as to effect styling changes. 
@@ -271,7 +271,7 @@ const pictureOrNot = () => {
                            
                           <NavLink to={link.path}  activeStyle={{ backgroundColor: '#232323',
            borderRadius: '3px', 
-           borderLeft: ' 4px solid #DD6B20', marginLeft: '-4px'
+           borderLeft:  `4px solid ${color.orange}`, marginLeft: '-4px'
   }} style = {NavBarLink}  > 
                               <NavBarP>
                             { link.text } 

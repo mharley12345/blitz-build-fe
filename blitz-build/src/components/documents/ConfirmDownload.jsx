@@ -2,7 +2,7 @@ import React from 'react'
 
 import styled from "styled-components";
 import { XButton } from "../../styles/Tasks/tasks";
-import download from 'save-filejs'
+
 
 const ConfirmStyle = styled.div`
   padding-left: 30px;
@@ -52,7 +52,7 @@ export default function Confirm(props ) {
             <BtnDiv>
                 <ConfirmBtn onClick={ closeModal }>Cancel</ConfirmBtn>
                 <ConfirmBtn download onClick={ () => {
-                            DownloadDocument()
+                            DownloadDocument(props)
                     localStorage.setItem('file_name',`${file_name}`)
                     closeModal()
                 } }>Download</ConfirmBtn>

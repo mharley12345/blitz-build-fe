@@ -1,10 +1,14 @@
-import PropTypes from "prop-types";
 import React from "react";
-import styled from "styled-components";
-import Logo from "../images/Logo.svg";
-
 import { Link, withRouter } from "react-router-dom";
+
+
+import PropTypes from "prop-types";
+import Logo from "../images/Logo.svg";
 import auth0Client from "../../auth/auth";
+
+//styles
+import styled from "styled-components";
+import * as color from "../../../styles/color"
 
 import { media, mediaDown } from "../styles/media";
 
@@ -25,7 +29,7 @@ const Header = ({ siteTitle }) => {
 const Container = styled.div`
   background: white;
   max-width: 100%;
-  box-shadow: 0px 1px 4px #dcd9d5;
+  box-shadow: 0px 1px 4px ${color.greyLight};
   padding: 16px 20px;
   display: flex;
   justify-content: space-between;
@@ -56,7 +60,7 @@ const LinkGroup = styled.div`
   margin: 0px;
 
   :nth-child(2) {
-    color: #dd6b20;
+    color: ${color.orange};
   }
 
   ${media.medium`
@@ -76,12 +80,12 @@ const Auth0Link = styled(Link)`
   font-family: "Roboto";
   font-size: 24px;
   line-height: 28px;
-  color: #3b3b3b;
+  color: ${color.greyDark};
   margin-left: 64px;
   text-decoration: none;
 
   :nth-child(2) {
-    color: #dd6b20;
+    color: ${color.orange};
   }
 `;
 

@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import MeatBallsDrop from "../tasks/MeatBallsDrop";
 import projectContext from "../../contexts/projects/ProjectContext";
 import { NavLink } from "react-router-dom";
+import * as color from "../../styles/color"
 
 // function NewTask({ item, children }) {
 //   //imports state of projects from context
@@ -233,22 +234,22 @@ const Status = styled.div`
   ${props =>
     props.status === "Overdue" &&
     css`
-      background-color: #ffbfbf;
-      color: #9c0e0e;
+      background-color: ${color.lightRed};
+      color: ${color.red};
     `};
 
   ${props =>
     props.status === "Pending" &&
     css`
-      background-color: #fff3b3;
-      color: #8b4708;
+      background-color: ${color.lightYellow};
+      color: ${color.brown};
     `};
 
   ${props =>
     props.status === "Upcoming" &&
     css`
       background-color: #d2fac4;
-      color: #326021;
+      color: ${color.lightYellow};
     `};
 `;
 

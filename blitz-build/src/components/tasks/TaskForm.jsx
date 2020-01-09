@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
-// import DatePicker from "react-datepicker";
+import React, { useEffect, useState } from "react";
 
 // components
 import ErrorMessage from "../../components/global/ErrorMessage";
@@ -15,6 +14,7 @@ import {
   StyledBtn,
   XButton
 } from "../../styles/Form/FormStyles";
+import * as color from "../../styles/color"
 
 //hooks
 import { useInput } from "../../customHooks/useInput";
@@ -75,7 +75,6 @@ export default function TaskForm({
         return project.project_name === task.project_name;
       });
 
-      // console.log("from handleSubmit in TaskForm", chosenProject);
 
       //asigns the project id to the new task
       const newTask = {
@@ -145,7 +144,7 @@ export default function TaskForm({
           <StyledLabel>Assign Project</StyledLabel>
           <StyledSelect
             style={{
-              background: "#E9E9E9",
+              background: color.greyLightest,
               border: "none",
               paddingLeft: "10px"
             }}
@@ -179,13 +178,6 @@ export default function TaskForm({
           />
         </div>
       </div>
-      {/* <StyledLabel>Due Date</StyledLabel>
-      <input
-        type="text"
-        name="dueDate"
-        value={task.dueDate}
-        onChange={handleChanges}
-      /> */}
       <StyledLabel>Task Decription</StyledLabel>
       <StyledTextAreaInput
         rows="8"

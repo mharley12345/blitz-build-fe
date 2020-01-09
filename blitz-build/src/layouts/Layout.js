@@ -1,49 +1,44 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
 
+//styles
+import styled from "styled-components";
+import * as color from "../styles/color"
+
+//components
 import Global from "./Global";
 import Nav from "./Nav";
-import Header from "./Header.jsx"
-
-
-
+import Header from "./Header.jsx";
 
 
 
 function Layout({ children, pathname }) {
-
-
-
-
-const LandingPage = (component) => {
- if(pathname === '/') {
-   return (
-     <div></div>
-   )}
-   else {
-     return component
-   }
- }
- const checkForLanding = () => {
-  if(pathname ==='/') {
-    return LandingContentStyle
-  }
-  else {
-    return ContentStyle
-  }
- }
-
+  const LandingPage = component => {
+    if (pathname === "/") {
+      return <div></div>;
+    } else {
+      return component;
+    }
+  };
+  const checkForLanding = () => {
+    if (pathname === "/") {
+      return LandingContentStyle;
+    } else {
+      return ContentStyle;
+    }
+  };
 
   return (
     <Container>
       <Global />
-      {LandingPage(<Nav /> )}
+      {LandingPage(<Nav />)}
       <Main>
-      {LandingPage( <Header pathname = {pathname} /> )} 
-       <Content style={checkForLanding()}>{children}</Content>
-       {LandingPage(   <Footer>
-          <p>2019 © BlitzBuild, Inc. All Rights Reserved.</p>
-        </Footer>)}
+        {LandingPage(<Header pathname={pathname} />)}
+        <Content style={checkForLanding()}>{children}</Content>
+        {LandingPage(
+          <Footer>
+            <p>2019 © BlitzBuild, Inc. All Rights Reserved.</p>
+          </Footer>
+        )}
       </Main>
     </Container>
   );
@@ -51,12 +46,10 @@ const LandingPage = (component) => {
 
 export default Layout;
 
-
 const Container = styled.div`
   max-width: 100%;
   display: flex;
 `;
-
 
 const Main = styled.div`
   display: flex;
@@ -65,25 +58,21 @@ const Main = styled.div`
   width: 100%;
 `;
 
-
-
-const Content = styled.div`
-  
-`;
+const Content = styled.div``;
 
 const ContentStyle = {
-background: '#ffffff',
-  height: '100%',
-  padding: '32px',
-  display: 'flex',
-  flexDirection: 'column',
-}
+  background: "#ffffff",
+  height: "100%",
+  padding: "32px",
+  display: "flex",
+  flexDirection: "column"
+};
 const LandingContentStyle = {
-  background: '#ffffff',
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-}
+  background: "#ffffff",
+  height: "100%",
+  display: "flex",
+  flexDirection: "column"
+};
 
 const Footer = styled.div`
   padding: 16px 32px;
@@ -91,7 +80,7 @@ const Footer = styled.div`
   background: white;
 
   p {
-    color: #8a827d;
+    color: ${color.grey};
     font-family: "Roboto";
     font-size: 14px;
     line-height: 16px;

@@ -1,10 +1,12 @@
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
+
+//material ui
 import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+
+//styles
 import styled from 'styled-components'
+import * as color from "../color"
 
 
 
@@ -30,8 +32,8 @@ export const StyledLi = styled.li`
   border: 1px solid #B5AFAB;
   border-top: 0
   :hover {
-    border: 1px solid #DD6B20 ;
-    color: #DD6B20;
+    border: 1px solid ${color.orange} ;
+    color: ${color.orange};
     cursor: pointer;
   }
 
@@ -56,7 +58,7 @@ export const MeatBalls = styled.i`
   margin: 4px 2px;
   cursor: pointer;
   :hover {
-    color: #DD6B20;
+    color: ${color.orange};
     cursor: pointer;
   }
 `;
@@ -75,7 +77,7 @@ export const StyledTableCell = withStyles(theme => ({
   head: {
     padding: "4px 32px",
     height: 25,
-    backgroundColor: "#E9E9E9",
+    backgroundColor: color.greyLightest,
     color: theme.palette.common.black
   },
   body: {
@@ -101,14 +103,14 @@ export const StyledTableRow = withStyles(theme => ({
 
 export const useStyles = makeStyles({
          root: {
-           border: "1px solid #DCD9D5",
+           border: `1px solid ${color.greyLight} `,
           
          },
          tableHover: {
            "&:hover": {
              cursor: "pointer",
              "& span": {
-               color: "#DD6B20",
+               color: "${color.orange}",
 
                textDecoration: "underline"
              }

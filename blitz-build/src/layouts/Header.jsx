@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import * as color from "../styles/color"
 import styled from "styled-components";
 import Search from "../styles/Search/Search.png";
 import Uploader from "../components/documents/Uploader";
@@ -7,22 +8,21 @@ import Modal from "../components/global/Modal";
 import TaskForm from "../components/tasks/TaskForm";
 import ProjectForm from "../components/projects/ProjectForm";
 import { NavLink, Link, Redirect } from "react-router-dom";
-import OpenContext from "../contexts/projects/OpenContext";
 import OpenTemplateContext from "../contexts/OpenTemplateContext";
 import searchTermContext from "../contexts/searching/searchTerm";
 import TemplateContext from "../contexts/templates/TemplateContext";
 import TemplateTaskForm from "../components/templates/TemplateTaskForm";
-import TemplateForm from "../components/templates/TemplateForm"
+import TemplateForm from "../components/templates/TemplateForm";
 import TaskContext from "../contexts/tasks/TaskContext";
 import ProjectContext from "../contexts/projects/ProjectContext";
-import DocumentsContext from '../contexts/documents/DocumentsContext'
+import DocumentsContext from "../contexts/documents/DocumentsContext";
 
 // styled components, css variables are sometimes used when passed through functions
 const HeaderContainer = styled.div`
   background: #fff;
   width: 100%;
   height: 96px;
-  border-bottom: 2px solid #E9E9E9
+  border-bottom: 2px solid ${color.greyLightest}
   display: flex;
   justify-content: space-between;
   position: sticky;
@@ -45,14 +45,14 @@ const ButtonContainer = styled.div`
 const ButtonDocument = styled.div`
 display: flex;
 border-radius: 3px;
-border: 1px solid #8A827D
+border: 1px solid ${color.grey}
  width: 174px;
  height: 48px;
  justify-content: center;
  align-items: center;
  :hover {
-  border: 1px solid #DD6B20 ;
-  color: #DD6B20;
+  border: 1px solid ${color.orange} ;
+  color: ${color.orange};
   cursor: pointer;
 }
   
@@ -105,15 +105,15 @@ const SoloTask = {
 const ButtonProject = styled.div`
 display: flex;
 border-radius: 3px;
-border: 1px solid #8A827D
+border: 1px solid ${color.grey}
  width: 151px;
  height: 48px;
  justify-content: center;
  align-items: center;
  margin-left: 10px;
  :hover {
-  border: 1px solid #DD6B20 ;
-  color: #DD6B20;
+  border: 1px solid ${color.orange} ;
+  color: ${color.orange};
   cursor: pointer;
 } 
 
@@ -121,15 +121,15 @@ border: 1px solid #8A827D
 const ButtonTemplate = styled.div`
 display: flex;
 border-radius: 3px;
-border: 1px solid #8A827D
+border: 1px solid ${color.grey}
  width: 151px;
  height: 48px;
  justify-content: center;
  align-items: center;
  margin-left: 10px;
  :hover {
-  border: 1px solid #DD6B20 ;
-  color: #DD6B20;
+  border: 1px solid ${color.orange} ;
+  color: ${color.orange};
   cursor: pointer;
 }
 }
@@ -139,15 +139,15 @@ const ButtonTask = styled.div`
 
 display: flex;
 border-radius: 3px;
-border: 1px solid #8A827D
+border: 1px solid ${color.grey}
  width: 151px;
  height: 48px;
  justify-content: center;
  align-items: center;
  margin-left: 10px;
 :hover {
-  border: 1px solid #DD6B20 ;
-  color: #DD6B20;
+  border: 1px solid ${color.orange} ;
+  color: ${color.orange};
   cursor: pointer;
 }
 
@@ -177,12 +177,12 @@ const ButtonTaskCheck = {
 const ButtonI = styled.i`
   margin-top: 3px;
   font-size: 21px;
-  color: #8a827d;
+  color: ${color.grey};
 `;
 const ButtonText = styled.p`
   font-size: 19px;
   margin-left: 10px;
-  color: #8a827d;
+  color: ${color.grey};
   margin-bottom: 0rem;
 `;
 const HideButton = {
@@ -190,16 +190,16 @@ const HideButton = {
 };
 
 const HoverStyle = {
-  color: "#DD6B20"
+  color: "${color.orange}"
 };
 
 const SearchInput = styled.input`
   height: 48px;
   width: 100%;
   padding-left: 30px;
-  border: 1px solid #dcd9d5;
+  border: 1px solid ${color.greyLight};
   border-radius: 3px;
-  background: #fafafa;
+  background: ${color.offWhite};
   ::placeholder {
     font-size: 16px;
     color: #b0b0b0;
@@ -214,7 +214,7 @@ const ButtonSearch = styled.i`
   top: 20%;
   border: none;
   font-size: 30px;
-  color: #8a827d;
+  color: ${color.grey};
   text-align: center;
 
   z-index: 2;
@@ -222,32 +222,33 @@ const ButtonSearch = styled.i`
   height: 20px;
 `;
 const SearchHoverStyle = {
-  color: "#DD6B20"
-}
+  color: "${color.orange}"
+};
 
 function Header({ pathname }) {
   const { searchTerm, setSearchTerm, searchCatch, setSearchCatch } = useContext(
     searchTermContext  // state for searching
   );
-  const [TaskHover, setTaskHover] = useState(false); // state for hover styling on tasks button
-  const [ProjectHover, setProjectHover] = useState(false); // state for hover styling on projects
-  const [searchHover, setSearchHover ] = useState(false) // state for hover styling on search
-  const [DocumentHover, setDocumentHover] = useState(false); // state for hover styling on documents
-  const [TemplateHover, setTemplateHover] = useState(false); // state for hover styling on templates
-  const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext); // state to open the add template modal
-  const  {addDocument} = useContext(DocumentsContext) // state used for add document button
-  const { addProject } = useContext(ProjectContext); // state for add project button
-  const { addTask } = useContext(TasksContext); // state for add task button
-  const { addTemplateTask, addTemplate } = useContext(TemplateContext); // state used for the add template task modal
-  // const { open, setOpen } = useContext(OpenContext); // state got context based toggle, not currently being used
-  const { TaskModalStatus, setTaskModalStatus } = useContext(TaskContext); // state used for task modal
-  const [ProjectModalStatus, setProjectModalStatus] = useState(false); // state used for project modal
-  const [DocumentModalStatus, setDocumentModalStatus] = useState(false); // state used for document modal
+  const [TaskHover, setTaskHover] = useState(false);
+  const [ProjectHover, setProjectHover] = useState(false);
+  const [searchHover, setSearchHover] = useState(false);
+  const [DocumentHover, setDocumentHover] = useState(false);
+  const [TemplateHover, setTemplateHover] = useState(false);
+  const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext);
+  const { addDocument } = useContext(DocumentsContext);
+  const { addProject } = useContext(ProjectContext);
+  const { addTask } = useContext(TasksContext);
+  const { addTemplateTask, addTemplate } = useContext(TemplateContext);
+  const { TaskModalStatus, setTaskModalStatus } = useContext(TaskContext);
+  const [ProjectModalStatus, setProjectModalStatus] = useState(false);
+  const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
 
-  const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false); // state used for template task modal
-  const [TemplateModalStatus, setTemplateModalStatus] = useState(false); // state used for template modal
+  const [TemplateTaskModalStatus, setTemplateTaskModalStatus] = useState(false);
+  const [TemplateModalStatus, setTemplateModalStatus] = useState(false);
 
-  
+  console.log("this is the handlechange", searchCatch);
+  console.log("this is the handlesubmit", searchTerm);
+  // const { addTemplate } = useContext(TemplateContext)
 
 // functions for opening modals
   const handleTaskModalOpen = () => {
@@ -267,7 +268,6 @@ function Header({ pathname }) {
   };
   const handleTemplateModalClose = () => {
     setTemplateModalStatus(false);
-   
   };
   const handleTemplateTaskModalOpen = () => {
     setTemplateTaskModalStatus(true);
@@ -286,7 +286,6 @@ function Header({ pathname }) {
 
   const HideTheProjectButton = pathname => {
     if (
-     
       pathname === "/documents" ||
       pathname === "/delay-log" ||
       pathname === `/help` ||
@@ -395,12 +394,11 @@ function Header({ pathname }) {
 
 // function for changing styling of search bar when being used
   const searchOnHover = () => {
-    if(searchTerm.length > 0) {
-     return SearchHoverStyle
+    if (searchTerm.length > 0) {
+      return SearchHoverStyle;
     }
-   
-  }
-  
+  };
+
   //// search function
 
   const handleChange = e => {
@@ -413,9 +411,9 @@ function Header({ pathname }) {
       <SearchContainer  onMouseEnter={() => setSearchHover(true)} // search bar divs and input with link to task page
           onMouseLeave={() => setSearchHover(false)} >
         <Link to="/tasks">
-          <SearchTotal >
+          <SearchTotal>
             <SearchInput
-              type="text" 
+              type="text"
               placeholder="Search Tasks"
               value={searchTerm}
               onChange={handleChange}
@@ -439,7 +437,6 @@ function Header({ pathname }) {
           <ButtonI
             className="ion-ios-add-circle"
             style={HoverDocumentStyleFunction()}
-  
           />{" "}
           <ButtonText style={HoverDocumentStyleFunction()}>
             Add Document
@@ -552,21 +549,19 @@ function Header({ pathname }) {
               text={"Add Project"}
               imgText={"Upload a Project Image"}
             />
-          
           }
         />
-           <Modal 
-            visible={DocumentModalStatus}
-            dismiss={handleProjectModalClose}
-            client={"50%"}
-       
-            component={
-              <Uploader
-                 closeModal={handleDocumentModalClose}
-                 handleFunction={addDocument}
+        <Modal
+          visible={DocumentModalStatus}
+          dismiss={handleProjectModalClose}
+          client={"50%"}
+          component={
+            <Uploader
+              closeModal={handleDocumentModalClose}
+              handleFunction={addDocument}
             />
-            }
-            />
+          }
+        />
       </ButtonContainer>
     </HeaderContainer>
   );

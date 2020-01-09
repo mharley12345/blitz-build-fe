@@ -1,22 +1,24 @@
-import React,{useContext} from "react"
-import DocumentContext from  '../../contexts/documents/DocumentsContext.js'
+import React from "react"
+
 
 import {axiosWithAuth} from '../../utils/auth/axiosWithAuth'
 import styled from  'styled-components'
 import PrintProvider, { Print, NoPrint } from 'react-easy-print';
-import Download from '@axetroy/react-download';
+// import Download from '@axetroy/react-download';
 
-
+/**TODO
+ *  react-easy-print is  imported and <print> / <noprint> tags are placed 
+ *  in proper postion but it still prints  everything on the screen.
+ *  Please see /contexts/documents/DocumentsProvider.js, ./PrintDocument.js  
+ *   and  ./confirmPrint.js to see the flow of the print function
+ */
 const  ViewDocument =  (props) =>{
 
-   const { handleDownload } = useContext(DocumentContext)
-   const {params,document} = props
- console.log(handleDownload)
-console.log(params,props,document)
+  
+
   const user_id = localStorage.getItem("user_id")
   const fileName = props.match.params.file_name
-   console.log(window)
-   console.log(fileName,user_id)
+  
    const URL = `https://blitz-build.s3.amazonaws.com/${user_id}/${fileName}`
    
     const handlePrint =(e) =>{
@@ -24,38 +26,44 @@ console.log(params,props,document)
       window.print();
  
     }
-
-    function DownloadDocument() {
-      axiosWithAuth().get(`/docs/download/${fileName}/bucket`)
-      .then(response =>{
-        console.log(response)
-      })
-    }
+   
+    // function DownloadDocument() {
+    
+    //   axiosWithAuth().get(URL)
+    //   .then(response =>{
+    //      return response
+    //   })
+    // }
 
     return (
     
 <PrintProvider>
 <NoPrint>
       <DocViewer>
+    
      <NoPrint>
      <Print>
        <header>{`File Name:${fileName}`}</header>
        </Print>
+         <Print>
           <ImgContainer>
-          <Print>
+        
           <img  src={URL}  alt=""/>
-          </Print>
+          
          </ImgContainer>
-        </NoPrint>
-
-      <NoPrint>
+        </Print>
+      
       <div className="button-container">
   <input type='button' value="Print" onClick={handlePrint}/>
 
   </div>
-  <Download file={fileName} content={"img"}>
-          <button type="button">Download</button>
+   {/* Download Function Not Workiing as expected It should download the loaded
+     document / image. It downloads a .txt file with the URL inside. The content needs to be changed 
+     to the actual file content that is being downloaded 
+  <Download file={fileName} content={URL}>
+          <button type="button" value="Download" onclick={DownloadDocument}>Download</button>
           </Download>
+ */}
   </NoPrint>
   </DocViewer>
  </NoPrint>
