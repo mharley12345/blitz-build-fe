@@ -14,7 +14,7 @@ import DocumentContext from '../../contexts/documents/DocumentsContext'
 export default function DeleteDocument({deleteStatus,handleDeleteClose,documents}){
    
        const {handleDelete} =useContext(DocumentContext)
-     console.log(documents);
+
     return (
       <>
         <Modal

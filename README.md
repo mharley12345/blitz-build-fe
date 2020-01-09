@@ -94,18 +94,6 @@ In order for the app to function correctly, the user must set up their own envir
 
     *  REACT_APP_REDIRECT_URL - This is the approved callback domain setup thur Auth0. This needs to be added when in developemnet to work on local
      
-
-#  Content Licenses
-
-For all content - images, icons, etc, use this table to document permission of use. Remove the two placeholders and add you content to this table
-
-| Image Filename | Source / Creator | License                                                                      |
-| -------------- | ---------------- | ---------------------------------------------------------------------------- |
-| doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
-| rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                             |
-
-
-
 #  Installation Instructions
 
 `git clone`to download this repo :octocat:

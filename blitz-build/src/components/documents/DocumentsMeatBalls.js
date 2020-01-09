@@ -20,7 +20,7 @@ import {
 export default function DocumentsMeatballsDrop(props) {
   const { documents, docs_url } = props
   const { handleDelete } = useContext(DocumentsContext)
-  console.log(props)
+  
   const refContainer = useRef();
   const [dropStatus, setDropStatus] = useState(false);
   const [printStatus, setPrintStatus] = useState(false);
