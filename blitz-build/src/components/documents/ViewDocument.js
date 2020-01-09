@@ -60,9 +60,12 @@ console.log(params,props,document)
   <input type='button' value="Print" onClick={handlePrint}/>
 
   </div>
+  {/* Hides Download Button Not Workiing as expected It should download the loaded
+     document / image. It downloads an .txt file with the word img inside
   <Download file={fileName} content={"img"}>
           <button type="button" value="Download" onclick={DownloadDocument}>Download</button>
           </Download>
+  */}
   </NoPrint>
   </DocViewer>
  </NoPrint>
