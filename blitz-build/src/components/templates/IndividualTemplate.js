@@ -1,11 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-import TemplatesProvider from "../../contexts/templates/TemplateProvider";
-import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
+import React, { useEffect } from "react";
+
+//contexts
 import { usePathnameContext } from "../../contexts/PathnameContext";
 import { useTemplateContext } from "../../contexts/templates/TemplateContext";
-import searchTermContext from "../../contexts/searching/searchTerm";
-import styled, { css } from "styled-components";
+
+//components
 import MeatBallsDrop from "../tasks/MeatBallsDrop";
+
+//styles
+import styled, { css } from "styled-components";
+import * as color from "../../styles/color"
 
 const IndividualTemplate = props => {
   //getting info for templates and template tasks from context
@@ -62,7 +66,7 @@ const Section = styled.div`
     font-family: "Roboto";
     font-size: 16px;
     line-height: 19px;
-    color: #8a827d;
+    color: ${color.grey};
     font-weight: 500;
   }
 `;

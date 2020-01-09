@@ -22,7 +22,7 @@ import DocumentsContext from '../../contexts/documents/DocumentsContext'
 import SingleProjectDocCard from '../../components/documents/SingleProjectDocCard'
 //styles
 import styled from "styled-components";
-
+import * as color from "../../styles/color"
 
  export const IndividualProject = (props) => {
 
@@ -227,7 +227,7 @@ const Top = styled.div`
   p {
     font-size: 16px;
     line-height: 24px;
-    color: #8a827d;
+    color: ${color.grey};
     margin-bottom: 0;
   }
 `;
@@ -249,7 +249,7 @@ const IndividualProjectTitleContainer = styled.div`
   height: 24px;
   span {
     font-size: 16px;
-    color: #8a827d;
+    color: ${color.grey};
   }
 `;
 const IndividualProjectImgContainer = styled.div`
@@ -332,7 +332,7 @@ const ProjectI = styled.i`
   height: 18px;
   font-size: 1.4rem;
   background-color: #ffffff;
-  color: #8a827d;
+  color: ${color.grey};
   text-align: right;
   text-decoration: none;
 `;
@@ -340,6 +340,6 @@ const PageI = styled.i`
   height: 18px;
   font-size: 1.4rem;
   background-color: #ffffff;
-  color: #8a827d;
+  color: ${color.grey};
   text-decoration: none;
 `;

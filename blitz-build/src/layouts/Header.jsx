@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import * as color from "../styles/color"
 import styled from "styled-components";
 import Search from "../styles/Search/Search.png";
 import Uploader from "../components/documents/Uploader";
@@ -21,7 +22,7 @@ const HeaderContainer = styled.div`
   background: #fff;
   width: 100%;
   height: 96px;
-  border-bottom: 2px solid #E9E9E9
+  border-bottom: 2px solid ${color.greyLightest}
   display: flex;
   justify-content: space-between;
   position: sticky;
@@ -44,7 +45,7 @@ const ButtonContainer = styled.div`
 const ButtonDocument = styled.div`
 display: flex;
 border-radius: 3px;
-border: 1px solid #8A827D
+border: 1px solid ${color.grey}
  width: 174px;
  height: 48px;
  justify-content: center;
@@ -104,7 +105,7 @@ const SoloTask = {
 const ButtonProject = styled.div`
 display: flex;
 border-radius: 3px;
-border: 1px solid #8A827D
+border: 1px solid ${color.grey}
  width: 151px;
  height: 48px;
  justify-content: center;
@@ -120,7 +121,7 @@ border: 1px solid #8A827D
 const ButtonTemplate = styled.div`
 display: flex;
 border-radius: 3px;
-border: 1px solid #8A827D
+border: 1px solid ${color.grey}
  width: 151px;
  height: 48px;
  justify-content: center;
@@ -138,7 +139,7 @@ const ButtonTask = styled.div`
 
 display: flex;
 border-radius: 3px;
-border: 1px solid #8A827D
+border: 1px solid ${color.grey}
  width: 151px;
  height: 48px;
  justify-content: center;
@@ -176,12 +177,12 @@ const ButtonTaskCheck = {
 const ButtonI = styled.i`
   margin-top: 3px;
   font-size: 21px;
-  color: #8a827d;
+  color: ${color.grey};
 `;
 const ButtonText = styled.p`
   font-size: 19px;
   margin-left: 10px;
-  color: #8a827d;
+  color: ${color.grey};
   margin-bottom: 0rem;
 `;
 const HideButton = {
@@ -213,7 +214,7 @@ const ButtonSearch = styled.i`
   top: 20%;
   border: none;
   font-size: 30px;
-  color: #8a827d;
+  color: ${color.grey};
   text-align: center;
 
   z-index: 2;

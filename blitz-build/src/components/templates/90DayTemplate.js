@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import PathnameContext from "../../contexts/PathnameContext";
+
+
+// styles
 import styled, { css } from "styled-components";
+import * as color from "../../styles/color"
 
 const NinetyDayTemplate = props => {
   //local state
@@ -60,7 +64,7 @@ const Section = styled.div`
     font-family: "Roboto";
     font-size: 16px;
     line-height: 19px;
-    color: #8a827d;
+    color: ${color.grey};
     font-weight: 500;
   }
 `;

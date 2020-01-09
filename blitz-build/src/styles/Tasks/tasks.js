@@ -96,13 +96,3 @@ z-index: 2;
 export const DropP = styled.p`
 width: 75%;
 `
-
-// const ButtonDiv = styled.div`
-//   background: #fbfaf9;
-//   width: 100px;
-//   display: flex;
-//   flex-wrap: wrap-reverse;
-//   justify-content: flex-end;
-//   aStyledLign-content: flex-end
-//   aStyledLign-items: flex-end;
-// `;

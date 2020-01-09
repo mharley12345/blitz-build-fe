@@ -14,6 +14,7 @@ import {
   StyledBtn,
   XButton
 } from "../../styles/Form/FormStyles";
+import * as color from "../../styles/color"
 
 //hooks
 import { useInput } from "../../customHooks/useInput";
@@ -143,7 +144,7 @@ export default function TaskForm({
           <StyledLabel>Assign Project</StyledLabel>
           <StyledSelect
             style={{
-              background: "#E9E9E9",
+              background: color.greyLightest,
               border: "none",
               paddingLeft: "10px"
             }}

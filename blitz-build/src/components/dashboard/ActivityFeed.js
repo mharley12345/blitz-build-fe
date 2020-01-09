@@ -1,9 +1,13 @@
-import React, { useEffect, useState, useContext } from "react";
-import styled from "styled-components";
-import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
-import Task from "./Task";
+import React, { useContext } from "react";
 
+//styles
+import styled from "styled-components";
+import * as color from "../../styles/color"
+
+//components
+import Task from "./Task";
 import ActivityFeedTask from "./ActivityFeedTask";
+
 //context
 import taskContext from "../../contexts/tasks/TaskContext";
 import { Link } from "react-router-dom";
@@ -78,6 +82,6 @@ const Container = styled.div`
   margin-bottom: 48px;
 `;
 const Card = styled.div`
-  border: 1px solid #dcd9d5;
+  border: 1px solid ${color.greyLight};
   border-radius: 3px;
 `;

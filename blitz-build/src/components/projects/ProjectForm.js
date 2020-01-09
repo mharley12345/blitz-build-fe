@@ -9,7 +9,6 @@ import ErrorMessage from "../../components/global/ErrorMessage";
 import TemplateContext from "../../contexts/templates/TemplateContext";
 
 // styles
-//import styled from "styled-components";
 import {
   StyledForm,
   StyledFormHeader,
@@ -20,6 +19,7 @@ import {
   StyledSelect
 } from "../../styles/Form/FormStyles";
 import Checkbox from "@material-ui/core/Checkbox";
+import * as color from "../../styles/color"
 
 //importing functions and objects from context
 export default function ProjectForm({
@@ -268,7 +268,7 @@ export default function ProjectForm({
           <StyledLabel>Assign Custom Template</StyledLabel>
           <StyledSelect
             style={{
-              background: "#E9E9E9",
+              background: color.greyLightest,
               border: "none",
               paddingLeft: "10px"
             }}
@@ -296,7 +296,7 @@ export default function ProjectForm({
               width: "100%",
               height: "32px",
               padding: "6px 8px",
-              backgroundColor: "#e9e9e9",
+              backgroundColor: color.greyLightest,
               display: "flex",
               alignItems: "center",
               borderRadius: "3px",

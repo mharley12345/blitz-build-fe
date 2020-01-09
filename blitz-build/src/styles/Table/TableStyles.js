@@ -1,10 +1,12 @@
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
+
+//material ui
 import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+
+//styles
 import styled from 'styled-components'
+import * as color from "../color"
 
 
 
@@ -75,7 +77,7 @@ export const StyledTableCell = withStyles(theme => ({
   head: {
     padding: "4px 32px",
     height: 25,
-    backgroundColor: "#E9E9E9",
+    backgroundColor: color.greyLightest,
     color: theme.palette.common.black
   },
   body: {

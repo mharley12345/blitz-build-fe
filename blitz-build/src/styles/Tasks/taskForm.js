@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import * as color from "../color"
 
 export const StyledForm = styled.form`
   display: flex;
@@ -17,7 +18,7 @@ export const StyledInput = styled.input`
   height: 48px;
   margin: 0;
   font-size: 14px;
-  background: #E9E9E9;
+  background: ${color.greyLightest};
   border-radius: 3px;
   box-shadow: none;
   color: #3B3B3B;
@@ -43,7 +44,7 @@ export const StyledSelect = styled.select`
   border-top: none;
   border-left: none;
   border-right: none;
-  background: #E9E9E9;
+  background: ${color.greyLightest};
   outline: none;
   margin: 0;
 `;
@@ -52,7 +53,7 @@ export const StyledBtn = styled.button`
   margin-top: 73px;
   padding: 10px 50px;
   border-radius: 3px;
-  border: 1px solid #8a827d;
+  border: 1px solid ${color.grey};
   background: #da552f;
   color: white;
 `;

@@ -1,6 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 import reverseGeocode from "reverse-geocode";
+
+//styles
+import styled from "styled-components";
+import * as color from "../../styles/color"
 
 // for dashboard import <Weather usage="dashboard"/>
 
@@ -100,5 +103,5 @@ const WeatherIcon = styled.div`
 const Title = styled.div`
   font-size: 16px;
 
-  color: #8a827d;
+  color: ${color.grey};
 `;

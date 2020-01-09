@@ -6,8 +6,10 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 import TaskContext from "./TaskContext";
 
 /*
+
 TaskProvider isa component that provides the task 
 context to all the children components it is wrapped around  
+
 */
 
 export default function TaskProvider({ children }) {
