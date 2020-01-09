@@ -3,21 +3,19 @@ import styled from "styled-components";
 import Search from "../styles/Search/Search.png";
 import Uploader from "../components/documents/Uploader";
 
-
 import TasksContext from "../contexts/tasks/TaskContext";
 import Modal from "../components/global/Modal";
 import TaskForm from "../components/tasks/TaskForm";
 import ProjectForm from "../components/projects/ProjectForm";
 import { NavLink, Link, Redirect } from "react-router-dom";
-import OpenContext from "../contexts/projects/OpenContext";
 import OpenTemplateContext from "../contexts/OpenTemplateContext";
 import searchTermContext from "../contexts/searching/searchTerm";
 import TemplateContext from "../contexts/templates/TemplateContext";
 import TemplateTaskForm from "../components/templates/TemplateTaskForm";
-import TemplateForm from "../components/templates/TemplateForm"
+import TemplateForm from "../components/templates/TemplateForm";
 import TaskContext from "../contexts/tasks/TaskContext";
 import ProjectContext from "../contexts/projects/ProjectContext";
-import DocumentsContext from '../contexts/documents/DocumentsContext'
+import DocumentsContext from "../contexts/documents/DocumentsContext";
 
 const HeaderContainer = styled.div`
   background: #fff;
@@ -224,7 +222,7 @@ const ButtonSearch = styled.i`
 `;
 const SearchHoverStyle = {
   color: "#DD6B20"
-}
+};
 
 function Header({ pathname }) {
   const { searchTerm, setSearchTerm, searchCatch, setSearchCatch } = useContext(
@@ -232,15 +230,14 @@ function Header({ pathname }) {
   );
   const [TaskHover, setTaskHover] = useState(false);
   const [ProjectHover, setProjectHover] = useState(false);
-  const [searchHover, setSearchHover ] = useState(false)
+  const [searchHover, setSearchHover] = useState(false);
   const [DocumentHover, setDocumentHover] = useState(false);
   const [TemplateHover, setTemplateHover] = useState(false);
   const { openTemplate, setOpenTemplate } = useContext(OpenTemplateContext);
-  const  {addDocument} = useContext(DocumentsContext)
+  const { addDocument } = useContext(DocumentsContext);
   const { addProject } = useContext(ProjectContext);
   const { addTask } = useContext(TasksContext);
   const { addTemplateTask, addTemplate } = useContext(TemplateContext);
-  const { open, setOpen } = useContext(OpenContext);
   const { TaskModalStatus, setTaskModalStatus } = useContext(TaskContext);
   const [ProjectModalStatus, setProjectModalStatus] = useState(false);
   const [DocumentModalStatus, setDocumentModalStatus] = useState(false);
@@ -269,7 +266,6 @@ function Header({ pathname }) {
   };
   const handleTemplateModalClose = () => {
     setTemplateModalStatus(false);
-   
   };
   const handleTemplateTaskModalOpen = () => {
     setTemplateTaskModalStatus(true);
@@ -291,7 +287,6 @@ function Header({ pathname }) {
 
   const HideTheProjectButton = pathname => {
     if (
-     
       pathname === "/documents" ||
       pathname === "/delay-log" ||
       pathname === `/help` ||
@@ -369,7 +364,7 @@ function Header({ pathname }) {
     }
   };
   const HoverProjectStyleFunction = () => {
-    if (ProjectHover === true || open === true) {
+    if (ProjectHover === true) {
       return HoverStyle;
     }
   };
@@ -384,13 +379,6 @@ function Header({ pathname }) {
     }
   };
 
-  const OpenToggler = () => {
-    if (open !== false) {
-      setOpen(false);
-    } else if (open === false) {
-      setOpen(true);
-    }
-  };
   const OpenTemplateToggler = () => {
     if (openTemplate !== false) {
       setOpenTemplate(false);
@@ -399,14 +387,12 @@ function Header({ pathname }) {
     }
   };
 
-
   const searchOnHover = () => {
-    if(searchTerm.length > 0) {
-     return SearchHoverStyle
+    if (searchTerm.length > 0) {
+      return SearchHoverStyle;
     }
-   
-  }
-  
+  };
+
   //// search function
 
   const handleChange = e => {
@@ -416,20 +402,25 @@ function Header({ pathname }) {
 
   return (
     <HeaderContainer>
-      <SearchContainer  onMouseEnter={() => setSearchHover(true)}
-          onMouseLeave={() => setSearchHover(false)} >
+      <SearchContainer
+        onMouseEnter={() => setSearchHover(true)}
+        onMouseLeave={() => setSearchHover(false)}
+      >
         <Link to="/tasks">
-          <SearchTotal >
+          <SearchTotal>
             <SearchInput
-              type="text" 
+              type="text"
               placeholder="Search Tasks"
               value={searchTerm}
               onChange={handleChange}
-              style={ {outline: "none"}}
+              style={{ outline: "none" }}
             />
             <Link to="/tasks">
               {" "}
-              <ButtonSearch className="ion-ios-search" style={searchOnHover()} />
+              <ButtonSearch
+                className="ion-ios-search"
+                style={searchOnHover()}
+              />
             </Link>
           </SearchTotal>
         </Link>
@@ -445,7 +436,6 @@ function Header({ pathname }) {
           <ButtonI
             className="ion-ios-add-circle"
             style={HoverDocumentStyleFunction()}
-  
           />{" "}
           <ButtonText style={HoverDocumentStyleFunction()}>
             Add Document
@@ -558,21 +548,19 @@ function Header({ pathname }) {
               text={"Add Project"}
               imgText={"Upload a Project Image"}
             />
-          
           }
         />
-           <Modal 
-            visible={DocumentModalStatus}
-            dismiss={handleProjectModalClose}
-            client={"50%"}
-       
-            component={
-              <Uploader
-                 closeModal={handleDocumentModalClose}
-                 handleFunction={addDocument}
+        <Modal
+          visible={DocumentModalStatus}
+          dismiss={handleProjectModalClose}
+          client={"50%"}
+          component={
+            <Uploader
+              closeModal={handleDocumentModalClose}
+              handleFunction={addDocument}
             />
-            }
-            />
+          }
+        />
       </ButtonContainer>
     </HeaderContainer>
   );
