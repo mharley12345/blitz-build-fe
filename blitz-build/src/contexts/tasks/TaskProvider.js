@@ -4,16 +4,29 @@ import { axiosWithAuth } from "../../utils/auth/axiosWithAuth";
 
 //context
 import TaskContext from "./TaskContext";
+
+/*
+TaskProvider isa component that provides the task 
+context to all the children components it is wrapped around  
+*/
+
 export default function TaskProvider({ children }) {
+  
+  //imports templateContext
+  const { getTemplateTasks } = useContext(TemplateContext)
+
+  //state
   const [tasks, setTasks] = useState([]);
   const [TaskModalStatus, setTaskModalStatus] = useState(false);
   const [projectTasks, setProjectTasks] = useState([]);
-  const { getTemplateTasks } = useContext(TemplateContext)
+
+  //gets all the tasks on app load
   useEffect(() => {
     getTasks();
     
   }, []);
 
+  //gets all the tasks by user id
   const getTasks = () => {
     const user_id = localStorage.getItem("user_id");
 
@@ -27,6 +40,7 @@ export default function TaskProvider({ children }) {
       });
   };
 
+  //sets task.isComplete to true and adds the change to local state  
   const completeTask = completedTask => {
     axiosWithAuth()
       .put(`projects/tasks/${completedTask.id}`, {
@@ -47,6 +61,7 @@ export default function TaskProvider({ children }) {
     setTasks(newTasksArr);
   };
 
+  //sets task.isComplete to false and adds the change to local state  
   const activateTask = activatedTask => {
     axiosWithAuth()
       .put(`projects/tasks/${activatedTask.id}`, {
@@ -64,6 +79,7 @@ export default function TaskProvider({ children }) {
     setTasks(newTasksArr);
   };
 
+  //gets all tasks by project id
   const getProjectTasks = projectID => {
     axiosWithAuth()
       .get(`projects/tasks/byProject/${projectID}`)
@@ -75,6 +91,7 @@ export default function TaskProvider({ children }) {
       });
   };
 
+  //adds a task to BE and local state
   const addTask = newTask => {
     const task = {
       due_date: newTask.due_date,
@@ -94,6 +111,7 @@ export default function TaskProvider({ children }) {
       .catch(err => console.log(err));
   };
 
+  //deletes a task by id in the BE and local state 
   const deleteTask = deletedTask => {
     axiosWithAuth()
       .delete(`/projects/tasks/${deletedTask.id}`)
@@ -106,6 +124,7 @@ export default function TaskProvider({ children }) {
     // getTasks();
   };
 
+  //edits a task by id in the BE and local state 
   const editTask = editedTask => {
     
     const dbTask = {
@@ -133,7 +152,7 @@ export default function TaskProvider({ children }) {
     
   };
   return (
-    <div>
+    <>
       <TaskContext.Provider
         value={{
           getTasks,
@@ -153,6 +172,6 @@ export default function TaskProvider({ children }) {
       >
         {children}
       </TaskContext.Provider>
-    </div>
+    </>
   );
 }
