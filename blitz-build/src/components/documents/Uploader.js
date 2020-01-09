@@ -28,7 +28,7 @@ class Uploader extends React.Component {
 
       createdAt: moment().format('l')
     }
- 
+
   }
 
   handleUpload = (ev) => {
@@ -51,7 +51,8 @@ class Uploader extends React.Component {
         var returnData = response.data.data.returnData;
         var signedRequest = returnData.signedRequest;
         var url = returnData.url;
-        this.setState({ ...this.state, doc_url: url, file_name: fileName, success: true ,project_id:projectID,project_name:project_Name})
+        this.setState({ ...this.state, doc_url: url, file_name: fileName, success: true, project_id: projectID, project_name: project_Name })
+
         console.log("Recieved a signed request " + signedRequest);
 
         // Put the fileType in the headers for the upload
@@ -64,11 +65,11 @@ class Uploader extends React.Component {
         axiosWithAuth().put(signedRequest, file, options)
 
           .then(result => {
-           
+
             console.log("Response from s3", result)
 
           })
-           // Second call to the BE adding the file info to the docs_url table
+          // Second call to the BE adding the file info to the docs_url table
           .then(
 
             axiosWithAuth().post('docs/url', {
@@ -79,7 +80,7 @@ class Uploader extends React.Component {
               file_name: this.state.file_name,
               project_id: this.state.project_id
             }))
-       
+
 
       })
 
@@ -97,18 +98,19 @@ class Uploader extends React.Component {
         <a href={this.state.doc_url}>Access the file here</a>
         <br />
       </div>
-    )
+    );
+ 
     return (
       <>
 
         <Uploaders>
-
+   
           {this.state.success ? <SuccessMessage /> : null}
           <DropZone>
-          <CloseButton onClick={this.props.closeModal}>X</CloseButton>
+            <CloseButton onClick={this.props.closeModal}>X</CloseButton>
             <Title>Add A Document</Title>
 
-           
+
             <Message>Drag and drop a file</Message>
             <DrpZnWrapper>
               <BtnWrap>
@@ -128,7 +130,7 @@ class Uploader extends React.Component {
     );
   }
 }
-const Input = styled.input `
+const Input = styled.input`
 width: 596px;
     height: 170px
 `
