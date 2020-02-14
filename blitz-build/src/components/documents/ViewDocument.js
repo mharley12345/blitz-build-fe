@@ -37,21 +37,22 @@ const  ViewDocument =  (props) =>{
 
     return (
     
-<PrintProvider>
-<NoPrint>
+
+
       <DocViewer>
     
-     <NoPrint>
+    <PrintProvider>
      <Print>
        <header>{`File Name:${fileName}`}</header>
        </Print>
-         <Print>
+     
           <ImgContainer>
-        
+          <Print>
           <img  src={URL}  alt=""/>
-          
-         </ImgContainer>
         </Print>
+
+         </ImgContainer>
+         </PrintProvider>
       
       <div className="button-container">
   <input type='button' value="Print" onClick={handlePrint}/>
@@ -64,10 +65,10 @@ const  ViewDocument =  (props) =>{
           <button type="button" value="Download" onclick={DownloadDocument}>Download</button>
           </Download>
  */}
-  </NoPrint>
+ 
   </DocViewer>
- </NoPrint>
- </PrintProvider>
+
+
   
     )
 }

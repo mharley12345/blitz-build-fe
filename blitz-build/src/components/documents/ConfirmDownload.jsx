@@ -26,7 +26,7 @@ color: ${props =>
     props.download ? 'white': 'green'};
 display: flex;
 border-radius: 3px;
-border: 1px solid #FF4D4F
+border: 1px solid #FF4D4F;
 width: 125px;
 height: 40px;
 justify-content: center;

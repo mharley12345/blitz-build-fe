@@ -42,7 +42,7 @@ const LandingPage = (component) => {
       {LandingPage( <Header pathname = {pathname} /> )} 
        <Content style={checkForLanding()}>{children}</Content>
        {LandingPage(   <Footer>
-          <p>2019 © BlitzBuild, Inc. All Rights Reserved.</p>
+          <p>&copy;{new Date().getFullYear()}BlitzBuild, Inc. All Rights Reserved.</p>
         </Footer>)}
       </Main>
     </Container>
