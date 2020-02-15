@@ -82,10 +82,24 @@ class Uploader extends React.Component {
             }))
 
 
+
+.then(
+ 
+      axiosWithAuth().post('docs/url',{
+        doc_url : this.state.doc_url,
+        createdAt: this.state.createdAt,
+        project_name:this.state.project_id,
+      user_id: this.state.user_id,
+      file_name: this.state.file_name,
+      project_id:this.state.project_id}))
+      console.log(this.state)
+
+      .catch(error => {
+         console.log("ERROR ",error)
       })
-
-  };
-
+    })
+    
+  }
 
 
 
