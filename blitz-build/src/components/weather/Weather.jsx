@@ -75,9 +75,10 @@ function Weather(props) {
     else {
       axios
         .post(
-          ` http://localhost:5000/weather/forecast`
+          ` http://44.233.184.65:3334/weather/forecast`
         ,{'latitude':weatherPosition.latitude,'longitude':weatherPosition.longitude})
         .then(res => {
+          console.log(res)
           setWeatherData(res.data);
           //console.log("get weather data", res.data);
         })
