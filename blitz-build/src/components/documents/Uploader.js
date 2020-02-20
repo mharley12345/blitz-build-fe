@@ -1,8 +1,7 @@
 import React from 'react';
 import { axiosWithAuth } from '../../utils/auth/axiosWithAuth';
 import moment from 'moment'
-import styled from 'styled-components'
-import { CloseButton } from 'react-bootstrap';
+import styled from 'styled-components',
 let user_id = localStorage.getItem("user_id")
 let project_Name = localStorage.getItem("project_name")
 let projectID = localStorage.getItem("projectID")
@@ -121,7 +120,7 @@ class Uploader extends React.Component {
    
           {this.state.success ? <SuccessMessage /> : null}
           <DropZone>
-            <CloseButton onClick={this.props.closeModal}>X</CloseButton>
+            <button onClick={this.props.closeModal}>X</button>
             <Title>Add A Document</Title>
 
 
